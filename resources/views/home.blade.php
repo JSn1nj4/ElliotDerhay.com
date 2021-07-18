@@ -25,7 +25,7 @@
 			</p>
 
 			<p class="mb-4">
-				Lastly, I love being a Linux user. I run Kubuntu on my personal laptop, and I run Ubuntu via WSL on my work laptop so I can access my favorite Linux tools.
+				Lastly, I love being a Linux user. I run Pop!_OS on my personal laptop and Ubuntu via WSL on my work laptop so I can use my favorite Linux tools on both.
 			</p>
 		</x-column>
 	</x-row>
