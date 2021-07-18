@@ -2,7 +2,7 @@
 
 @section('content')
 
-	<x-row class="bg-laptop-light -mt-4">
+	<x-row class="bg-laptop-dark -mt-4">
 
 		<div class="flex md:order-2 md:w-1/2 lg:w-5/12 xl:w-1/3">
 			<div class="px-2">
