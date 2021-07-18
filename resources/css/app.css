@@ -1,5 +1,6 @@
 @import "_variables.css";
 @import url('https://fonts.googleapis.com/css?family=Source+Code+Pro:200,400,700');
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;400;700&display=swap');
 
 /**
  * This injects Tailwind's base styles, which is a combination of
