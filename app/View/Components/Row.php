@@ -6,17 +6,15 @@ use Illuminate\View\Component;
 
 class Row extends Component
 {
-	public string $class;
-
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct(string $class = '')
-    {
-        $this->class = $class;
-    }
+    public function __construct(
+		public string $class = '',
+		public bool $flex = true,
+	) {}
 
     /**
      * Get the view / contents that represent the component.

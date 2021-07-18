@@ -6,17 +6,14 @@ use Illuminate\View\Component;
 
 class Column extends Component
 {
-	public string $class;
-
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct(string $class = '')
-    {
-        $this->class = $class;
-    }
+    public function __construct(
+		public string $class = '',
+	) {}
 
     /**
      * Get the view / contents that represent the component.
