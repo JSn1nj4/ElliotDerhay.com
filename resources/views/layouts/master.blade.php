@@ -32,7 +32,7 @@
 			gtag('config', 'UA-165049241-1');
 		</script>
 	</head>
-	<body class="bg-gray-900 text-white font-mono flex flex-col {{ $bodyClasses }}">
+	<body class="bg-gray-900 text-white font-sans flex flex-col {{ $bodyClasses }}">
 		@yield('body')
 
 		@yield('footer-extras')
