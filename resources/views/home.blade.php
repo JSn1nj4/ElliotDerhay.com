@@ -9,41 +9,63 @@
 
 		<x-column class="md:order-1 md:w-1/2 lg:w-7/12 xl:w-2/3">
 			<h1 class="content-title text-4xl pt-6 mt-4 md:mt-0 md:pt-0 text-center md:text-left">
-				About Me
+				Who I Am
 			</h1>
 
 			<p class="mb-4">
-				I am a web developer experienced in building WordPress websites. I primarily use CSS and PHP on these projects, but I do occasionally need to write some JavaScript.
+				I'm a fairly simple guy who loves web development and design. I love learning new software and web development concepts; but I also love learning about science and other technologies, and even learning more generally.
 			</p>
 
 			<p class="mb-4">
-				My PHP experience is mostly a mix of vanilla PHP and WordPress's framework, though I also have some experience with Laravel—and I love every minute I get to work with it.
-			</p>
-
-			<p class="mb-4">
-				My JavaScript experience is mostly vanilla JS and jQuery. Other experience includes a few months worth of MeteorJS with Blaze, and some Vue between a few other projects.
-			</p>
-
-			<p class="mb-4">
-				Lastly, I love being a Linux user. I run Pop!_OS on my personal laptop and Ubuntu via WSL on my work laptop so I can use my favorite Linux tools on both.
+				When I'm not spending time learning something new, you can probably find me reading tech news and current events, watching videos by channels like Veritasium and SmarterEveryDay, reading comics like Dilbert and xkcd, playing card games, or playing sudoku.
 			</p>
 		</x-column>
 	</x-row>
 
-	<x-row>
-		<x-column class="block md:w-1/2">
-			<h2 class="content-title text-2xl pt-6 mt-4 text-center">Latest Tweet</h2>
-			<section id="twitter_timeline-home">
-				<x-twitter-timeline count="1"/>
-			</section>
+	<x-row :flex="false">
+		<x-column>
+			<h2 class="content-title text-4xl pt-6 mt-5 md:mt-0 md:pt-0">
+				What I Do
+			</h2>
+
+			<p class="mb-4">
+				I primarily work on WordPress projects, but I love working with Laravel. My primary side project is this website. I use it as both a personal profile and a sandbox for learning new concepts. @unless ($projects->isEmpty()) Below are some projects I maintain or contribute to, as well as some I have worked on in the past. @endunless
+			</p>
 		</x-column>
 
-		<x-column class="block md:w-1/2">
-			<h2 class="content-title text-2xl pt-6 mt-4 text-center">GitHub Activity</h2>
-			<section id="github_events_feed-home">
-				<x-github-events-feed count="3"/>
-			</section>
+		@unless ($projects->isEmpty())
+			<div class="block md:flex flex-wrap projects-list pb-4">
+				@each('partials.project-card', $projects, 'project')
+			</div>
+		@endunless
+	</x-row>
+
+	<x-row :flex="false">
+		<x-column class="block w-full">
+			<h2 class="content-title text-4xl pt-6 mt-5 md:mt-0 md:pt-0">
+				What I'm Up To
+			</h2>
+
+			<p class="mb-4">
+				I can usually be found on Twitter and GitHub. I've also been known to occasionally write and comment on <a href="https://dev.to/jsn1nj4" target="_blank">dev.to</a> articles.
+			</p>
 		</x-column>
+
+		<div class="block md:flex">
+			<x-column class="block md:w-1/2">
+				<h2 class="content-title text-2xl pt-6 mt-4 text-center">Latest Tweet</h2>
+				<section id="twitter_timeline-home">
+					<x-twitter-timeline count="1"/>
+				</section>
+			</x-column>
+
+			<x-column class="block md:w-1/2">
+				<h2 class="content-title text-2xl pt-6 mt-4 text-center">GitHub Activity</h2>
+				<section id="github_events_feed-home">
+					<x-github-events-feed count="3"/>
+				</section>
+			</x-column>
+		</div>
 	</x-row>
 
 @endsection
