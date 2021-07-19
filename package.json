@@ -4,7 +4,7 @@
     "description": "My personal website",
     "license": "SEE LICENSE IN LICENSE.md",
     "engines": {
-        "node": "14.16.x",
+        "node": "14.17.x",
         "yarn": "1.22.x"
     },
     "repository": {
