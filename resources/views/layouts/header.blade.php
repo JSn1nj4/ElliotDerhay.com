@@ -1,6 +1,6 @@
 <header id="header" class="flex-initial">
 	<div class="container-flexible-large m-auto ">
-		<nav class="flex items-center justify-between flex-wrap bg-gray-900 relative">
+		<nav class="flex items-center justify-between flex-wrap bg-gray-900 relative border-b-4 border-solid border-sea-green-500">
 
 			<div class="flex items-center flex-shrink-0 text-white">
 				<a href="/" class="text-white p-2">

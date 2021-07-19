@@ -2,9 +2,9 @@
 
 @section('content')
 
-	<x-row class="bg-laptop-dark -mt-4">
+	<x-row class="bg-laptop-dark">
 		<x-column class="flex md:order-2 md:w-1/2 lg:w-5/12 xl:w-1/3">
-			<img src="https://s3.amazonaws.com/elliotderhay-com/Elliot.Color2-hd-v2-square.jpg" title="Elliot Derhay" alt="Photo of Elliot Derhay" class="border-white border-4 rounded-full box-glow">
+			<img src="https://s3.amazonaws.com/elliotderhay-com/Elliot.Color2-hd-v2-square.jpg" title="Elliot Derhay" alt="Photo of Elliot Derhay" class="border-white border-2 border-opacity-40 rounded-full">
 		</x-column>
 
 		<x-column class="md:order-1 md:w-1/2 lg:w-7/12 xl:w-2/3">
@@ -40,7 +40,7 @@
 		@endunless
 	</x-row>
 
-	<x-row :flex="false">
+	<x-row :flex="false" class="bg-sea-green-500 bg-opacity-10">
 		<x-column class="block w-full">
 			<h2 class="content-title text-4xl pt-6 mt-5 md:mt-0 md:pt-0">
 				What I'm Up To

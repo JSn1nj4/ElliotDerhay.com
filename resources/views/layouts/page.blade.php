@@ -23,7 +23,7 @@
 
 	@include('layouts.header', $menuItems)
 
-	<main class="bg-gray-800 layer-shadow pt-4 pb-6 flex-grow">
+	<main class="bg-black layer-shadow flex-grow">
 		@yield('content')
 	</main>
 
