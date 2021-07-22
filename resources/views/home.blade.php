@@ -40,7 +40,7 @@
 		@endunless
 	</x-row>
 
-	<x-row :flex="false" class="bg-sea-green-500 bg-opacity-10">
+	<x-row :flex="false" class="bg-sea-green-400 bg-opacity-20">
 		<x-column class="block w-full">
 			<h2 class="content-title text-4xl pt-6 mt-5 md:mt-0 md:pt-0">
 				What I'm Up To
