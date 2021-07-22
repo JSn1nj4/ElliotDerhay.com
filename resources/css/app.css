@@ -138,6 +138,27 @@ a {
 	}
 }
 
+#dark-mode-toggle + #dark-mode-toggle-button {
+	& #light-mode {
+		display: block;
+	}
+
+	& #dark-mode {
+		display: none;
+	}
+}
+
+#dark-mode-toggle:checked + #dark-mode-toggle-button {
+	& #light-mode {
+		display: none;
+	}
+
+	& #dark-mode {
+		display: block;
+	}
+}
+
+
 .banner-section {
 	background-size: cover;
 	background-position: center top;
