@@ -140,21 +140,21 @@ a {
 
 #dark-mode-toggle + #dark-mode-toggle-button {
 	& #light-mode {
-		display: block;
+		display: none;
 	}
 
 	& #dark-mode {
-		display: none;
+		display: block;
 	}
 }
 
 #dark-mode-toggle:checked + #dark-mode-toggle-button {
 	& #light-mode {
-		display: none;
+		display: block;
 	}
 
 	& #dark-mode {
-		display: block;
+		display: none;
 	}
 }
 
