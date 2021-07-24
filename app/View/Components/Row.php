@@ -12,6 +12,7 @@ class Row extends Component
      * @return void
      */
     public function __construct(
+		public ?string $id = null,
 		public string $class = '',
 		public bool $flex = true,
 	) {}

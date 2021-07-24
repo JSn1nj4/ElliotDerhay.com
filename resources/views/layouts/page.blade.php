@@ -8,11 +8,12 @@
 
 	@php
 		$menuItems = [
-			(object) ['name' => 'home', 'label' => 'Home', 'icon' => 'fas fa-home'],
+			(object) ['name' => 'home', 'label' => 'About', 'scrollTo' => 'about'],
+			(object) ['name' => 'home', 'label' => 'Work', 'scrollTo' => 'projects'],
+			(object) ['name' => 'home', 'label' => 'Connect', 'scrollTo' => 'connect'],
 		];
 
 		$optionalMenuItems = [
-			(object) ['name' => 'projects', 'label' => 'Projects'],
 			(object) ['name' => 'updates', 'label' => 'Updates'],
 		];
 
