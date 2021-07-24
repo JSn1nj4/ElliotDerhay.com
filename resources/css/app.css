@@ -138,23 +138,23 @@ a {
 	}
 }
 
-#dark-mode-toggle + #dark-mode-toggle-button {
-	& #light-mode {
+#theme-toggle-button {
+	.system-icon,
+	.light-mode-icon,
+	.dark-mode-icon {
 		display: none;
 	}
 
-	& #dark-mode {
-		display: block;
-	}
-}
-
-#dark-mode-toggle:checked + #dark-mode-toggle-button {
-	& #light-mode {
+	html[color-theme="system"] & .system-icon {
 		display: block;
 	}
 
-	& #dark-mode {
-		display: none;
+	html[color-theme="light"] & .light-mode-icon {
+		display: block;
+	}
+
+	html[color-theme="dark"] & .dark-mode-icon {
+		display: block;
 	}
 }
 
