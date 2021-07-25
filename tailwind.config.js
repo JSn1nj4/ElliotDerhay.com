@@ -73,13 +73,13 @@ module.exports = {
 			"green-200": "#a2f5bf",
 			"green-100": "#e3fcec",
 
-			"sea-green-900": "#002C02",
-			"sea-green-800": "#00572D",
-			"sea-green-600": "#00A87E",
+			"sea-green-900": "#002e24",
+			"sea-green-800": "#005442",
+			"sea-green-600": "#00a682",
 			"sea-green-500": "#00C49A",
-			"sea-green-400": "#26EAC0",
-			"sea-green-200": "#8BFFFF",
-			"sea-green-100": "#CAFFFF",
+			"sea-green-400": "#00e8b6",
+			"sea-green-200": "#00f7c2",
+			"sea-green-100": "#00ffc8",
 
 			"teal-900": "#0d3331",
 			"teal-800": "#20504f",
@@ -89,6 +89,8 @@ module.exports = {
 			"teal-200": "#a0f0ed",
 			"teal-100": "#e8fffe"
 		},
+
+		darkMode: "class",
 
 		spacing: {
 			px: "1px",
