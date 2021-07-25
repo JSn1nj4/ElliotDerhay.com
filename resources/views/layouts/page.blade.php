@@ -1,9 +1,5 @@
 @extends('layouts.master', ['bodyClasses' => $bodyClasses ?? ''])
 
-@section('head-extras')
-	@yield('head-extras-pass-thru')
-@endsection
-
 @section('body')
 
 	@php
@@ -32,14 +28,12 @@
 
 @endsection
 
-@section('footer-extras')
+@push('footer-extras')
 	<div id="ga-request-popup" style="display: none;"></div>
 
 	<script src="{{ mix('/js/manifest.js') }}"></script>
 	<script src="{{ mix('/js/vendor.js') }}"></script>
 	<script src="{{ mix('/js/app.js') }}"></script>
-
-	@yield('footer-extras-pass-thru')
 
 	<script src="{{ mix('/js/GAPopup.js') }}" charset="utf-8"></script>
 
@@ -109,4 +103,4 @@
 
 		updateTheme();
 	</script>
-@endsection
+@endpush

@@ -13,7 +13,7 @@
 
 		<link rel="shortcut icon" href="https://s3.amazonaws.com/elliotderhay-com/favicon.png">
 
-		@yield('head-extras')
+		@stack('head-extras')
 
 		<script type="application/javascript">
 			// Enable or disable GA tracking
@@ -35,6 +35,6 @@
 	<body class="bg-black text-white font-sans flex flex-col {{ $bodyClasses }}">
 		@yield('body')
 
-		@yield('footer-extras')
+		@stack('footer-extras')
 	</body>
 </html>
