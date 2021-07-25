@@ -4,13 +4,22 @@
 
 	@php
 		$menuItems = [
-			(object) ['name' => 'home', 'label' => 'About', 'scrollTo' => 'about'],
-			(object) ['name' => 'home', 'label' => 'Work', 'scrollTo' => 'projects'],
-			(object) ['name' => 'home', 'label' => 'Connect', 'scrollTo' => 'connect'],
+			(object) [
+				'name' => 'home',
+				'label' => 'Home',
+				'icon' => 'fas fa-home',
+			],
 		];
 
 		$optionalMenuItems = [
-			(object) ['name' => 'updates', 'label' => 'Updates'],
+			(object) [
+				'name' => 'projects',
+				'label' => 'Projects',
+			],
+			(object) [
+				'name' => 'updates',
+				'label' => 'Updates',
+			],
 		];
 
 		foreach($optionalMenuItems as $item) {
@@ -18,7 +27,7 @@
 		}
 	@endphp
 
-	@include('layouts.header', $menuItems)
+	@include('layouts.header')
 
 	<main class="bg-black layer-shadow flex-grow">
 		@yield('content')
