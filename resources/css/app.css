@@ -72,50 +72,67 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-	&.content-title {
-		@mixin textGlow 5;
+	/* &.content-title {
+		@mixin textGlow 5, theme('colors.gray-600');
 	}
+
+	.dark &.content-title {
+		@mixin textGlow 5;
+	} */
 
 	&.banner-title {
 		@apply text-3xl font-normal;
-		@mixin textGlow 3, #fff;
+		/* @mixin textGlow 3, #fff; */
 	}
 }
 
 h2, h3 {
-	&.content-title {
+	/* &.content-title {
 		@mixin textGlow 4;
-	}
+	} */
 }
 
 h4, h5 {
-	&.content-title {
+	/* &.content-title {
 		@mixin textGlow 3;
-	}
+	} */
 }
 
 h6 {
-	&.content-title {
+	/* &.content-title {
 		@mixin textGlow 2;
-	}
+	} */
 }
 
 p {
 	&.banner-paragraph {
 		@apply text-base;
-		@mixin textGlow 2, #fff;
+		/* @mixin textGlow 2, #fff; */
 	}
 }
 
 a {
-	@apply text-sea-green-500 trans-color;
+	@apply text-sea-green-600 trans-color;
+
+	.dark & {
+		@apply text-sea-green-500 trans-color;
+	}
 
 	&:hover,
 	&.active {
+		@apply text-sea-green-800;
+	}
+
+	.dark &:hover,
+	.dark &.active {
 		@apply text-white;
 	}
 
 	&.active {
+		@mixin textGlow 3, theme('colors.gray-500');
+	}
+
+	.dark &.active {
 		@mixin textGlow 4;
 	}
 }
@@ -249,11 +266,11 @@ a {
 }
 
 .trans-color {
-	@mixin transitions color $default-speed;
+	@mixin transitions color, $default-speed;
 }
 
 .trans-border-color {
-	@mixin transitions border-color $default-speed;
+	@mixin transitions border-color, $default-speed;
 }
 
 .box-glow {
@@ -262,4 +279,15 @@ a {
 
 .layer-shadow {
 	box-shadow: 0px 2px 4px #000;
+}
+
+@layer utilities {
+	@variants dark {
+		.bg-laptop-light {
+			background-image: url("https://s3.amazonaws.com/elliotderhay-com/banners/pexels-lukas-574073-scaled-light.jpg");
+		}
+		.bg-laptop-dark {
+			background-image: url("https://s3.amazonaws.com/elliotderhay-com/banners/pexels-lukas-574073-scaled-dark.jpg");
+		}
+	}
 }

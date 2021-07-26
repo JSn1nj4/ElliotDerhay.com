@@ -29,7 +29,7 @@
 
 	@include('layouts.header')
 
-	<main class="bg-black layer-shadow flex-grow">
+	<main class="bg-white dark:bg-black layer-shadow flex-grow">
 		@yield('content')
 	</main>
 

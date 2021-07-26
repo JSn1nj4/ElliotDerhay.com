@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta name="theme-color" content="#090909">
+		<meta name="theme-color" content="#002e24">
 
 		<title>ElliotDerhay.com</title>
 
@@ -32,7 +32,7 @@
 			gtag('config', 'UA-165049241-1');
 		</script>
 	</head>
-	<body class="bg-black text-white font-sans flex flex-col {{ $bodyClasses }}">
+	<body class="bg-white dark:bg-black text-black dark:text-white font-sans flex flex-col {{ $bodyClasses }}">
 		@yield('body')
 
 		@stack('footer-extras')

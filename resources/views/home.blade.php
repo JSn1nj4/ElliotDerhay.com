@@ -2,9 +2,9 @@
 
 @section('content')
 
-	<x-row class="bg-laptop-dark" id="about">
+	<x-row class="bg-laptop-light dark:bg-laptop-dark" id="about">
 		<x-column class="flex md:order-2 md:w-1/2 lg:w-5/12 xl:w-1/3">
-			<img src="https://s3.amazonaws.com/elliotderhay-com/Elliot.Color2-hd-v2-square.jpg" title="Elliot Derhay" alt="Photo of Elliot Derhay" class="border-white border-2 border-opacity-40 rounded-full">
+			<img src="https://s3.amazonaws.com/elliotderhay-com/Elliot.Color2-hd-v2-square.jpg" title="Elliot Derhay" alt="Photo of Elliot Derhay" class="border-black dark:border-white border-2 border-opacity-40 rounded-full">
 		</x-column>
 
 		<x-column class="md:order-1 md:w-1/2 lg:w-7/12 xl:w-2/3">

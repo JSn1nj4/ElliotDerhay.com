@@ -1,8 +1,8 @@
 <div class="flex flex-row relative">
-	<div class="text-gray-500 text-center flex-none {{ $icon }}" style="width: 2rem; font-size: 22px;"></div>
+	<div class="text-gray-800 dark:text-gray-500 text-center flex-none {{ $icon }}" style="width: 2rem; font-size: 22px;"></div>
 
 	<div class="pl-4 flex-grow relative">
-		<p class="text-gray-500">
+		<p class="text-gray-800 dark:text-gray-500">
 			{{ $timeElapsed }}
 		</p>
 
@@ -14,7 +14,7 @@
 
 				{{ $action }}
 
-				<span class="text-sea-green-800">
+				<span class="text-sea-green-600 dark:text-sea-green-800">
 					{{ $refName }}
 				</span>
 

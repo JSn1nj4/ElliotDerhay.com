@@ -90,8 +90,6 @@ module.exports = {
 			"teal-100": "#e8fffe"
 		},
 
-		darkMode: "class",
-
 		spacing: {
 			px: "1px",
 			"0": "0",
@@ -211,5 +209,7 @@ module.exports = {
 					'url("https://s3.amazonaws.com/elliotderhay-com/banners/pexels-lukas-574073-scaled-dark.jpg")'
 			})
 		}
-	}
+	},
+
+	darkMode: "class"
 };
