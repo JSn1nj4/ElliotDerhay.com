@@ -143,11 +143,16 @@ a {
 
 .mobile-menu {
 	top: 100%;
-	@apply bg-gray-900;
+	@apply bg-white;
 	z-index: 50;
 	visibility: hidden;
 	opacity: 0;
-	@mixin transitions $default-speed ease;
+
+	.dark & {
+		@apply bg-gray-900;
+	}
+
+	/* @mixin transitions $default-speed ease; */
 
 	#menu-toggle:checked + & {
 		visibility: visible;
@@ -279,15 +284,4 @@ a {
 
 .layer-shadow {
 	box-shadow: 0px 2px 4px #000;
-}
-
-@layer utilities {
-	@variants dark {
-		.bg-laptop-light {
-			background-image: url("https://s3.amazonaws.com/elliotderhay-com/banners/pexels-lukas-574073-scaled-light.jpg");
-		}
-		.bg-laptop-dark {
-			background-image: url("https://s3.amazonaws.com/elliotderhay-com/banners/pexels-lukas-574073-scaled-dark.jpg");
-		}
-	}
 }

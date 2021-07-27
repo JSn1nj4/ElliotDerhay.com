@@ -2,7 +2,7 @@
 
 @section('content')
 
-	<x-row class="bg-laptop-light dark:bg-laptop-dark" id="about">
+	<x-row class="bg-laptop" id="about" overlay-classes="bg-sea-green-100 bg-opacity-50 dark:bg-sea-green-800 dark:bg-opacity-75">
 		<x-column class="flex md:order-2 md:w-1/2 lg:w-5/12 xl:w-1/3">
 			<img src="https://s3.amazonaws.com/elliotderhay-com/Elliot.Color2-hd-v2-square.jpg" title="Elliot Derhay" alt="Photo of Elliot Derhay" class="border-black dark:border-white border-2 border-opacity-40 rounded-full">
 		</x-column>
@@ -36,7 +36,7 @@
 		</x-column>
 	</x-row>
 
-	<x-row :flex="false" class="bg-sea-green-100 dark:bg-sea-green-500 bg-opacity-20 dark:bg-opacity-25" id="connect">
+	<x-row :flex="false" class="bg-sea-green-200 dark:bg-sea-green-500 bg-opacity-40 dark:bg-opacity-25" id="connect">
 		<x-column class="block w-full">
 			<h2 class="content-title text-4xl pt-6 mt-5 md:mt-0 md:pt-0">
 				What I'm Up To

@@ -77,9 +77,9 @@ module.exports = {
 			"sea-green-800": "#005442",
 			"sea-green-600": "#00a682",
 			"sea-green-500": "#00C49A",
-			"sea-green-400": "#00e8b6",
-			"sea-green-200": "#00f7c2",
-			"sea-green-100": "#00ffc8",
+			"sea-green-400": "#00ffc8",
+			"sea-green-200": "#6effe0",
+			"sea-green-100": "#bbfff0",
 
 			"teal-900": "#0d3331",
 			"teal-800": "#20504f",
@@ -203,10 +203,8 @@ module.exports = {
 
 		extend: {
 			backgroundImage: theme => ({
-				"laptop-light":
-					'url("https://s3.amazonaws.com/elliotderhay-com/banners/pexels-lukas-574073-scaled-light.jpg")',
-				"laptop-dark":
-					'url("https://s3.amazonaws.com/elliotderhay-com/banners/pexels-lukas-574073-scaled-dark.jpg")'
+				"laptop":
+					'url("https://s3.amazonaws.com/elliotderhay-com/banners/pexels-lukas-574073-scaled.jpg")',
 			})
 		}
 	},
