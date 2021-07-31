@@ -2,8 +2,8 @@
 
 @section('content')
 
-	<section class="pt-4">
-		<div class="container mx-auto px-4 p-6">
+	<x-row :flex="false">
+		<x-column class="block w-full">
 			<h1 class="content-title text-4xl">Privacy Policy</h1>
 
 			<p class="font-bold mb-4">Last updated August 18, 2020</p>
@@ -20,7 +20,7 @@
 
 			<h2 class="content-title text-3xl pt-6">Cookies</h2>
 			<p class="mb-4">Currently, the only way this Website uses cookies directly is to allow or disallow Website visitor tracking via the third party services listed above. These services may set their own cookies to propertly function. Please see their respective privacy policies to determine whether you're comfortable with how they use cookies.</p>
-		</div>
-	</section>
+		</x-column>
+	</x-row>
 
 @endsection
