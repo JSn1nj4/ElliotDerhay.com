@@ -2,38 +2,13 @@
 
 @section('body')
 
-	@php
-		$menuItems = [
-			(object) [
-				'name' => 'home',
-				'label' => 'Home',
-				'icon' => 'fas fa-home',
-			],
-		];
-
-		$optionalMenuItems = [
-			(object) [
-				'name' => 'projects',
-				'label' => 'Projects',
-			],
-			(object) [
-				'name' => 'updates',
-				'label' => 'Updates',
-			],
-		];
-
-		foreach($optionalMenuItems as $item) {
-			if(config("app.enable-" . $item->name)) $menuItems[] = $item;
-		}
-	@endphp
-
-	@include('layouts.header')
+	@include('partials.header')
 
 	<main class="bg-white dark:bg-black layer-shadow flex-grow">
 		@yield('content')
 	</main>
 
-	@include('layouts.footer')
+	@include('partials.footer')
 
 @endsection
 
