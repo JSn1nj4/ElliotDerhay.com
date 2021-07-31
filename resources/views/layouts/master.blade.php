@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="{{ app()->getLocale() }}">
+<html lang="{{ app()->getLocale() }}" color-theme="system">
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta name="theme-color" content="#090909">
+		<meta name="theme-color" content="#002e24">
 
 		<title>ElliotDerhay.com</title>
 
@@ -13,7 +13,7 @@
 
 		<link rel="shortcut icon" href="https://s3.amazonaws.com/elliotderhay-com/favicon.png">
 
-		@yield('head-extras')
+		@stack('head-extras')
 
 		<script type="application/javascript">
 			// Enable or disable GA tracking
@@ -32,9 +32,9 @@
 			gtag('config', 'UA-165049241-1');
 		</script>
 	</head>
-	<body class="bg-gray-900 text-white font-mono flex flex-col {{ $bodyClasses }}">
+	<body class="bg-white dark:bg-black text-black dark:text-white font-sans flex flex-col {{ $bodyClasses }}">
 		@yield('body')
 
-		@yield('footer-extras')
+		@stack('footer-extras')
 	</body>
 </html>

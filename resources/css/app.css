@@ -1,5 +1,6 @@
 @import "_variables.css";
 @import url('https://fonts.googleapis.com/css?family=Source+Code+Pro:200,400,700');
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;400;700&display=swap');
 
 /**
  * This injects Tailwind's base styles, which is a combination of
@@ -71,50 +72,67 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-	&.content-title {
-		@mixin textGlow 5;
+	/* &.content-title {
+		@mixin textGlow 5, theme('colors.gray-600');
 	}
+
+	.dark &.content-title {
+		@mixin textGlow 5;
+	} */
 
 	&.banner-title {
 		@apply text-3xl font-normal;
-		@mixin textGlow 3, #fff;
+		/* @mixin textGlow 3, #fff; */
 	}
 }
 
 h2, h3 {
-	&.content-title {
+	/* &.content-title {
 		@mixin textGlow 4;
-	}
+	} */
 }
 
 h4, h5 {
-	&.content-title {
+	/* &.content-title {
 		@mixin textGlow 3;
-	}
+	} */
 }
 
 h6 {
-	&.content-title {
+	/* &.content-title {
 		@mixin textGlow 2;
-	}
+	} */
 }
 
 p {
 	&.banner-paragraph {
 		@apply text-base;
-		@mixin textGlow 2, #fff;
+		/* @mixin textGlow 2, #fff; */
 	}
 }
 
 a {
-	@apply text-sea-green-500 trans-color;
+	@apply text-sea-green-600 trans-color;
+
+	.dark & {
+		@apply text-sea-green-500 trans-color;
+	}
 
 	&:hover,
 	&.active {
+		@apply text-sea-green-800;
+	}
+
+	.dark &:hover,
+	.dark &.active {
 		@apply text-white;
 	}
 
 	&.active {
+		@mixin textGlow 3, theme('colors.gray-500');
+	}
+
+	.dark &.active {
 		@mixin textGlow 4;
 	}
 }
@@ -125,17 +143,43 @@ a {
 
 .mobile-menu {
 	top: 100%;
-	@apply bg-gray-900;
+	@apply bg-white;
 	z-index: 50;
 	visibility: hidden;
 	opacity: 0;
-	@mixin transitions $default-speed ease;
+
+	.dark & {
+		@apply bg-gray-900;
+	}
+
+	/* @mixin transitions $default-speed ease; */
 
 	#menu-toggle:checked + & {
 		visibility: visible;
 		opacity: 1;
 	}
 }
+
+#theme-toggle-button {
+	.system-icon,
+	.light-mode-icon,
+	.dark-mode-icon {
+		display: none;
+	}
+
+	html[color-theme="system"] & .system-icon {
+		display: block;
+	}
+
+	html[color-theme="light"] & .light-mode-icon {
+		display: block;
+	}
+
+	html[color-theme="dark"] & .dark-mode-icon {
+		display: block;
+	}
+}
+
 
 .banner-section {
 	background-size: cover;
@@ -153,12 +197,6 @@ a {
 
 .twitter-card {
 	font-family: "Helvetica Neue", "Segoe UI", Helvetica, Arial, sans-serif;
-}
-
-.github-event-icon {
-	&:before {
-	  background: #151515;
-	}
 }
 
 @media only screen and (min-width: 600px) {
@@ -233,11 +271,11 @@ a {
 }
 
 .trans-color {
-	@mixin transitions color $default-speed;
+	@mixin transitions color, $default-speed;
 }
 
 .trans-border-color {
-	@mixin transitions border-color $default-speed;
+	@mixin transitions border-color, $default-speed;
 }
 
 .box-glow {

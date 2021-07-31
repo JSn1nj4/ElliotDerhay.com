@@ -4,7 +4,7 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class Row extends Component
+class Column extends Component
 {
     /**
      * Create a new component instance.
@@ -12,10 +12,7 @@ class Row extends Component
      * @return void
      */
     public function __construct(
-			public ?string $id = null,
-			public string $class = '',
-			public bool $flex = true,
-			public ?string $overlayClasses = null,
+		public string $class = '',
 	) {}
 
     /**
@@ -25,6 +22,6 @@ class Row extends Component
      */
     public function render()
     {
-        return view('components.row');
+        return view('components.column');
     }
 }

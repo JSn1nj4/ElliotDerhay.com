@@ -1,6 +1,6 @@
 <div class="md:w-1/2 lg:w-1/3 project">
 	<div class="px-4">
-		@component('partials.card', ['size' => 'md', 'padding' => 'p-0'])
+		<x-card size="md" padding="p-0">
 
 			<a href="{{ $project->demo_link ?? $project->link }}"
 				target="{{ $project->demo_link ? '_self' : '_blank' }}">
@@ -32,6 +32,6 @@
 				@endif
 			</div>
 
-		@endcomponent
+		</x-card>
 	</div>
 </div>
