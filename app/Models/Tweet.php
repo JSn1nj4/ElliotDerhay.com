@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\DataTransferObjects\TweetDTO;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -26,6 +27,16 @@ class Tweet extends Model
 		'sub_tweet_id',
 		'entities',
 	];
+
+	public static function fromDTO(TweetDTO $dto): self
+	{
+		return self::firstOrCreate(['id' => intval($dto->id)], [
+			'user_id' => $dto->user->id,
+			'body' => $dto->body,
+			'date' => $dto->date,
+			'entities' => $dto->entities,
+		]);
+	}
 
 	public function getFormattedBodyAttribute(): string
 	{
