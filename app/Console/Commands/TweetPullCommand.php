@@ -3,10 +3,8 @@
 namespace App\Console\Commands;
 
 use App\Events\TweetsPulledEvent;
-use App\Http\Clients\TwitterClient;
 use App\Models\Tweet;
-use App\Models\TwitterUser;
-use Carbon\Carbon;
+use App\Services\TwitterService;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 
@@ -41,13 +39,15 @@ class TweetPullCommand extends Command
 	 *
 	 * @return int
 	 */
-	public function handle()
+	public function handle(TwitterService $twitter)
 	{
-		$twitter = new TwitterClient;
 		$user = 'jsn1nj4';
 
 		if($this->option('debug')) {
-			dd($twitter->getTweets($user, null, true, 1));
+			dd($twitter->getPosts(
+				username: $user,
+				count: 1
+			));
 		}
 
 		$newest_id = optional(DB::table('tweets')->latest('date')->first())->id;
@@ -58,22 +58,9 @@ class TweetPullCommand extends Command
 
 		// Run the command without actually connecting to the Twitter API
 		if(!$this->option('fake')) {
-			collect($twitter->getTweets($user, $newest_id))->map(function ($tweet_data, $key) {
-				$user_data = $tweet_data['user'];
+			$tweets = $twitter->getPosts($user, $newest_id);
 
-				$user = TwitterUser::firstOrCreate(['id' => $user_data['id']], [
-					'name' => $user_data['name'],
-					'screen_name' => $user_data['screen_name'],
-					'profile_image_url_https' => $user_data['profile_image_url_https'],
-				]);
-
-				Tweet::firstOrCreate(['id' => $tweet_data['id_str']], [
-					'user_id' => $user->id,
-					'body' => $tweet_data['text'],
-					'date' => Carbon::make($tweet_data['created_at'])->format('Y-m-d H:i:s'),
-					'entities' => $tweet_data['entities'],
-				]);
-			});
+			$tweets->each(fn ($tweet) => Tweet::fromDTO($tweet));
 		}
 
 		$this->info('Tweets fetched');

@@ -1,11 +1,15 @@
 <?php
 
-namespace App\Http\Clients;
+namespace App\Services;
 
+use App\Contracts\SocialMediaService;
+use App\DataTransferObjects\TweetDTO;
+use App\DataTransferObjects\TwitterUserDTO;
 use App\Models\Token;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Http;
 
-class TwitterClient
+class TwitterService implements SocialMediaService
 {
 	/**
 	 * The base Twitter API URL
@@ -56,9 +60,9 @@ class TwitterClient
 	public function __construct()
 	{
 		$this->token = Token::whereRaw("LOWER('service') like '%twitter%'")
-						->latest()
-						->valid()
-						->first();
+			->latest()
+			->valid()
+			->first();
 
 		$this->key = config('services.twitter.key', false);
 		$this->secret = config('services.twitter.secret', false);
@@ -96,11 +100,11 @@ class TwitterClient
 
 		$response = Http::asForm()->withHeaders([
 			'Authorization' => "Basic {$auth_hash}",
-		])->post("{$this->api_url}/oauth2/token", [
+		])->post($this->getUrl("oauth2/token"), [
 			'grant_type' => 'client_credentials',
 		]);
 
-		if($response->failed()) {
+		if ($response->failed()) {
 			$response->throw();
 		}
 
@@ -119,43 +123,36 @@ class TwitterClient
 	 * The argument for `$since` must be an ID because this is what the
 	 * Twitter API requires to find tweets after a certain point.
 	 */
-	public function getTweets(string $username, ?string $since = null, bool $retweets = true, ?int $count = null)
+	public function getPosts(string $username, ?string $since = null, bool $reposts = true, ?int $count = null): Collection
 	{
-		$url = "{$this->api_url}/1.1/statuses/user_timeline.json";
-
 		$query = collect([
 			'count' => $count,
-			'include_rts' => $retweets,
+			'include_rts' => $reposts,
 			'screen_name' => $username,
 			'since_id' => $since,
-		])->reject(fn($value, $key) => is_null($value));
+		])->reject(fn ($value, $key) => is_null($value));
 
 		$response = Http::withToken($this->getToken()->value)
-			->get($url, $query->toArray());
-
-		if($response->failed()) {
-			$response->throw();
-		}
-
-		return $response->json();
-	}
-
-	/**
-	 * Get a single tweet by its ID
-	 */
-	public function getSingleTweet(string $tweet_id)
-	{
-		$url = "{$this->api_url}/1.1/statuses/show.json";
-
-		$response = Http::withToken($this->getToken()->value)
-			->get($url, [
-				'id' => $tweet_id,
-			]);
+			->get(
+				$this->getUrl("1.1/statuses/user_timeline.json"), $query->toArray()
+			);
 
 		if ($response->failed()) {
 			$response->throw();
 		}
 
-		return $response->json();
+		return collect($response->json())
+			->transform(fn ($tweet) => new TweetDTO(
+				id: $tweet['id'],
+				user: TwitterUserDTO::fromArray($tweet['user']),
+				body: $tweet['text'],
+				date: TweetDTO::getDate($tweet),
+				entities: $tweet['entities'],
+			));
+	}
+
+	public function getUrl(string $url): string
+	{
+		return "{$this->api_url}/{$url}";
 	}
 }

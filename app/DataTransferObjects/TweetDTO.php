@@ -17,8 +17,8 @@ class TweetDTO extends DataTransferObject
 
 	public array $entities;
 
-	public static function getDate(array $eventData): string
+	public static function getDate(array $tweetData): string
 	{
-		return Carbon::make($eventData['created_at'])->format('Y-m-d H:i:s');
+		return Carbon::make($tweetData['created_at'])->format('Y-m-d H:i:s');
 	}
 }

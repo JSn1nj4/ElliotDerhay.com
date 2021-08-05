@@ -31,7 +31,7 @@ class Tweet extends Model
 	public static function fromDTO(TweetDTO $dto): self
 	{
 		return self::firstOrCreate(['id' => intval($dto->id)], [
-			'user_id' => $dto->user->id,
+			'user_id' => TwitterUser::fromDTO($dto->user)->id,
 			'body' => $dto->body,
 			'date' => $dto->date,
 			'entities' => $dto->entities,
