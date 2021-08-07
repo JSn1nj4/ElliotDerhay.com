@@ -4,8 +4,9 @@ namespace Database\Seeders;
 
 use App\Models\Project;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
-class ProjectsTableSeeder extends Seeder
+class ProjectSeeder extends Seeder
 {
 	/**
 	 * List project data to seed database with
@@ -27,6 +28,10 @@ class ProjectsTableSeeder extends Seeder
 	 */
 	public function run()
 	{
-		collect($this->project_list)->each(fn ($item, $key) => Project::create($item));
+		DB::table((new Project)->getTable())
+			->truncate();
+
+		collect($this->project_list)
+			->each(fn ($item, $key) => Project::create($item));
 	}
 }
