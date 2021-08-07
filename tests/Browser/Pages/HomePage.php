@@ -35,7 +35,9 @@ class HomePage extends Page
     public function elements()
     {
         return [
-			'@banner' => '.home-banner',
+			'@about_section' => '#about',
+			'@projects_section' => '#projects',
+			'@connect_section' => '#connect',
             '@twitter' => '#twitter_timeline-home',
 			'@github' => '#github_events_feed-home',
         ];
