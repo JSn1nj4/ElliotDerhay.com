@@ -6,6 +6,7 @@ use App\Contracts\SocialMediaService;
 use App\DataTransferObjects\TweetDTO;
 use App\DataTransferObjects\TwitterUserDTO;
 use App\Models\Token;
+use Exception;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Http;
 
@@ -66,6 +67,14 @@ class TwitterService implements SocialMediaService
 
 		$this->key = config('services.twitter.key', false);
 		$this->secret = config('services.twitter.secret', false);
+
+		if(!$this->key) {
+			throw new Exception("Config option 'services.twitter.key' not set.");
+		}
+
+		if(!$this->secret) {
+			throw new Exception("Config option 'services.twitter.secret' not set.");
+		}
 	}
 
 	/**
@@ -106,6 +115,10 @@ class TwitterService implements SocialMediaService
 
 		if ($response->failed()) {
 			$response->throw();
+		}
+
+		if ($response["errors"] !== null) {
+			throw new Exception($response["errors"][0]["message"]);
 		}
 
 		// $this->token = $response['access_token'];
