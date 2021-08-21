@@ -5,6 +5,19 @@ use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Http;
 
+function requestHasParams(Request $request, array $params): bool {
+	return collect($params)
+		->every(fn ($value, $key) => (
+			isset($request[$key]) &&
+			$request[$key] === $value
+		));
+}
+
+function requestMissingParams(Request $request, array $params): bool {
+	return collect($params)
+		->every(fn ($value, $key) => !isset($request[$key]));
+}
+
 beforeEach(function (): void {
 	$this->api_base = 'https://api.twitter.com';
 
@@ -70,7 +83,9 @@ it('constructs a correctly-formatted token api request', function(): void {
 				"Content-Type" => "application/x-www-form-urlencoded",
 				"Content-Length" => "29",
 			]) &&
-			$request['grant_type'] === 'client_credentials';
+			requestHasParams($request, [
+				'grant_type' => 'client_credentials',
+			]);
 	});
 });
 
@@ -87,3 +102,74 @@ it('throws an exception if no valid api token is found', function (): void {
 
 	(new TwitterService)->getToken();
 })->throws(Exception::class, "Unable to verify your credentials");
+
+it('constructs a correctly-formatted user timeline api request', function (): void {
+	$requestParams = collect([
+		'count' => $this->faker->randomElement([
+			$this->faker->numberBetween(1, 100),
+			$this->faker->numberBetween(1, 100),
+			$this->faker->numberBetween(1, 100),
+			$this->faker->numberBetween(1, 100),
+			null,
+		]),
+		'include_rts' => false,
+		// 'include_rts' => $this->faker->boolean(),
+		'screen_name' => $this->faker->userName(),
+		'since_id' => $this->faker->randomElement([
+			$this->faker->numerify('##########'),
+			$this->faker->numerify('##########'),
+			$this->faker->numerify('##########'),
+			$this->faker->numerify('##########'),
+			null,
+		]),
+	]);
+
+	[$expectedParams, $unexpectedParams] = $requestParams->partition(
+		fn ($value, $key) => !is_null($value)
+	);
+
+	$token = base64_encode($this->faker->word());
+
+	Http::fake([
+		"api.twitter.com/oauth2/token*" => Http::response(
+			json_encode((object) [
+				"token_type" => "bearer",
+				"access_token" => $token,
+			]),
+		),
+		"*" => Http::response(),
+	]);
+
+	$twitterService = new TwitterService;
+
+	$twitterService->getToken();
+
+	Http::assertSent(fn () => true);
+
+	$twitterService->getPosts(
+		username: $requestParams->get('screen_name'),
+		since: $requestParams->get('since_id'),
+		reposts: $requestParams->get('include_rts'),
+		count: $requestParams->get('count'),
+	);
+
+	Http::assertSent(function (Request $request) use (
+		$expectedParams,
+		$token,
+	) {
+		$requestUrl = "{$this->api_base}/1.1/statuses/user_timeline.json?";
+
+		$requestUrl .= $expectedParams->map(function ($value, $key) {
+			if($key === "include_rts") {
+				return "{$key}=" . (int)$value;
+			}
+
+			return "{$key}={$value}";
+		})->implode('&');
+
+		return $request->url() === $requestUrl &&
+			$request->hasHeaders([
+				"Authorization" => "Bearer {$token}",
+			]);
+	});
+});
