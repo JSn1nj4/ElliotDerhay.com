@@ -138,9 +138,20 @@ class TwitterService implements SocialMediaService
 	 *
 	 * The argument for `$since` must be an ID because this is what the
 	 * Twitter API requires to find tweets after a certain point.
+	 *
+	 * Check these docs for other details:
+	 * https://developer.twitter.com/en/docs/twitter-api/v1/tweets/timelines/api-reference/get-statuses-user_timeline
 	 */
 	public function getPosts(string $username, ?string $since = null, bool $reposts = true, ?int $count = null): Collection
 	{
+		if(is_int($count) && $count < 1) {
+			throw new Exception("'\$count' value cannot be below or equal to 0.");
+		}
+
+		if(is_int($count) && $count > 3200) {
+			throw new Exception("'\$count' value cannot be greater than 3200.");
+		}
+
 		$query = collect([
 			'count' => $count,
 			'include_rts' => $reposts,

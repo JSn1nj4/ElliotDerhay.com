@@ -173,3 +173,25 @@ it('constructs a correctly-formatted user timeline api request', function (): vo
 			]);
 	});
 });
+
+it('throws an exception if requested tweet count is < 1', function (): void {
+	Http::fake();
+
+	(new TwitterService)->getPosts(
+		username: $this->faker->userName(),
+		count: 0,
+	);
+})->throws(Exception::class, "'\$count' value cannot be below or equal to 0.");
+
+/**
+ * Check these docs for the maximum tweets that can be requested
+ * https://developer.twitter.com/en/docs/twitter-api/v1/tweets/timelines/api-reference/get-statuses-user_timeline
+ */
+it('throws an exception if requested tweet count is > 3200', function (): void {
+	Http::fake();
+
+	(new TwitterService)->getPosts(
+		username: $this->faker->userName(),
+		count: 3201,
+	);
+})->throws(Exception::class, "'\$count' value cannot be greater than 3200.");
