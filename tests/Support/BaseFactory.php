@@ -4,6 +4,8 @@ namespace Tests\Support;
 
 abstract class BaseFactory
 {
+	protected string $username;
+
 	protected int $count = 0;
 
 	public function __construct()
@@ -24,4 +26,11 @@ abstract class BaseFactory
 	}
 
 	abstract public function make(): array;
+
+	public function user(string $username): static
+	{
+		$this->username = $username;
+
+		return $this;
+	}
 }

@@ -2,8 +2,10 @@
 
 use App\Services\TwitterService;
 use Illuminate\Http\Client\Request;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Http;
+use Tests\Support\TweetDataFactory;
 
 function requestHasParams(Request $request, array $params): bool {
 	return collect($params)
@@ -53,21 +55,11 @@ it('constructs the correct api url', function (): void {
 it('constructs a correctly-formatted token api request', function(): void {
 	$token = base64_encode($this->faker->word());
 
-	$response = (object) [
-		'body' => (object) [
+	Http::fake([
+		"api.twitter.com/oauth2/token*" => Http::response(json_encode((object) [
 			"token_type" => "bearer",
 			"access_token" => $token,
-		],
-		'status' => 200,
-		'headers' => []
-	];
-
-	Http::fake([
-		"api.twitter.com/oauth2/token*" => Http::response(
-			json_encode($response->body),
-			$response->status,
-			$response->headers
-		),
+		])),
 	]);
 
 	(new TwitterService)->getToken();
@@ -195,3 +187,33 @@ it('throws an exception if requested tweet count is > 3200', function (): void {
 		count: 3201,
 	);
 })->throws(Exception::class, "'\$count' value cannot be greater than 3200.");
+
+it('processes a response from the twitter api user timeline endpoint', function (): void {
+	$user = $this->faker->userName();
+	$tweetCount = $this->faker->numberBetween(1, 3200);
+
+	Http::fake([
+		"api.twitter.com/oauth2/token*" => Http::response(
+			json_encode((object) [
+				"token_type" => "bearer",
+				"access_token" => base64_encode($this->faker->word()),
+			]),
+		),
+		"api.twitter.com/1.1/statuses/user_timeline.json*" => Http::response(json_encode(TweetDataFactory::init()
+			->user($user)
+			->count($tweetCount)
+			->make())),
+		"*" => Http::response(),
+	]);
+
+	$tweets = (new TwitterService)->getPosts(
+		username: $user,
+		count: $tweetCount,
+	);
+
+	expect($tweets)
+		->toBeInstanceOf(Collection::class);
+
+	expect(count($tweets))
+		->toBeLessThanOrEqual($tweetCount);
+});
