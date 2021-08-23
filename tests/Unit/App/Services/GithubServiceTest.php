@@ -26,19 +26,19 @@ it('creates an instance of App\Services\GithubService', function (): void {
 it('throws an exception if no token is found', function (): void {
 	Config::offsetUnset('services.github.token');
 
-	$githubService = new GithubService;
+	new GithubService;
 })->throws(Exception::class, "Config option 'services.github.token' not set.");
 
 it('throws an exception if email recipient name is not set', function (): void {
 	Config::offsetUnset('mail.to.name');
 
-	$githubService = new GithubService;
+	new GithubService;
 })->throws(Exception::class, "Config option 'mail.to.name' not set.");
 
 it('throws an exception if email recipient address is not set', function (): void {
 	Config::offsetUnset('mail.to.address');
 
-	$githubService = new GithubService;
+	new GithubService;
 })->throws(Exception::class, "Config option 'mail.to.address' not set.");
 
 it('constructs the correct api url', function (): void {
@@ -55,17 +55,11 @@ it('constructs a correctly-formatted user event api request', function (): void 
 	$user = $this->faker->userName();
 	$eventCount = $this->faker->numberBetween(1, 100);
 
-	$response = (object) [
-		'body' => GithubEventDataFactory::init()
-			->count($eventCount)
-			->make(),
-		'status' => 200,
-		'headers' => [],
-	];
-
 	Http::fake([
 		"api.github.com/users/{$user}/events/public*" =>
-		Http::response(json_encode($response->body), $response->status, $response->headers),
+		Http::response(json_encode(GithubEventDataFactory::init()
+			->count($eventCount)
+			->make())),
 	]);
 
 	(new GithubService)->getEvents($user, $eventCount);
@@ -96,17 +90,11 @@ it('processes response data received from the github events api', function (): v
 	$user = $this->faker->userName();
 	$eventCount = $this->faker->numberBetween(1, 100);
 
-	$response = (object) [
-		'body' => GithubEventDataFactory::init()
-			->count($eventCount)
-			->make(),
-		'status' => 200,
-		'headers' => [],
-	];
-
 	Http::fake([
 		"api.github.com/users/{$user}/events/public*" =>
-		Http::response(json_encode($response->body), $response->status, $response->headers),
+		Http::response(json_encode(GithubEventDataFactory::init()
+			->count($eventCount)
+			->make())),
 	]);
 
 	Mail::fake();
@@ -124,17 +112,13 @@ it('filters out unsupported types of github events', function (): void {
 	$user = $this->faker->userName();
 	$eventCount = $this->faker->numberBetween(1, 100);
 
-	$response = (object) [
-		'body' => GithubEventDataFactory::init()
+	$responseData = GithubEventDataFactory::init()
 			->count($eventCount)
-			->make(),
-		'status' => 200,
-		'headers' => [],
-	];
+			->make();
 
 	Http::fake([
 		"api.github.com/users/{$user}/events/public*" =>
-		Http::response(json_encode($response->body), $response->status, $response->headers),
+		Http::response(json_encode($responseData)),
 	]);
 
 	Mail::fake();
@@ -147,7 +131,7 @@ it('filters out unsupported types of github events', function (): void {
 		->getProperty('supportedEventTypes');
 
 	// Build and sum lists of supported and unsupported events
-	[$supportedEvents, $unsupportedEvents] = collect($response->body)
+	[$supportedEvents, $unsupportedEvents] = collect($responseData)
 		->partition(function ($event) use ($supportedEventTypes) {
 			return in_array($event['type'], $supportedEventTypes);
 		});
@@ -180,18 +164,12 @@ it('does not dispatch notification if no unsupported event types are found', fun
 		->from($githubService)
 		->getProperty('supportedEventTypes');
 
-	$response = (object) [
-		'body' => GithubEventDataFactory::init()
-			->count($eventCount)
-			->withTypes($supportedEventTypes)
-			->make(),
-		'status' => 200,
-		'headers' => [],
-	];
-
 	Http::fake([
 		"api.github.com/users/{$user}/events/public*" =>
-		Http::response(json_encode($response->body), $response->status, $response->headers),
+		Http::response(json_encode(GithubEventDataFactory::init()
+			->count($eventCount)
+			->withTypes($supportedEventTypes)
+			->make())),
 	]);
 
 	Mail::fake();
@@ -220,18 +198,12 @@ it('dispatches notification if unsupported event types are filtered out', functi
 		->getProperty('supportedEventTypes')
 	);
 
-	$response = (object) [
-		'body' => GithubEventDataFactory::init()
-			->withTypes($unsupportedEventTypes)
-			->count(100)
-			->make(),
-		'status' => 200,
-		'headers' => [],
-	];
-
 	Http::fake([
 		"api.github.com/users/{$user}/events/public*" =>
-		Http::response(json_encode($response->body), $response->status, $response->headers),
+		Http::response(json_encode(GithubEventDataFactory::init()
+			->withTypes($unsupportedEventTypes)
+			->count(100)
+			->make())),
 	]);
 
 	Mail::fake();

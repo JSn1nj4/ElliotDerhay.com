@@ -36,7 +36,7 @@ class GithubEventDataFactory extends BaseFactory
 
 	private function definition(): array
 	{
-		$user = $this->faker->userName();
+		$user = $this->username ?? $this->faker->userName();
 		$type = Arr::random($this->getEventTypes());
 
 		$payload = array_merge([
