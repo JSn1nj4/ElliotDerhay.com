@@ -2,7 +2,7 @@
 
 namespace App\Listeners;
 
-use App\Events\TweetsPulled;
+use App\Events\TweetsPulledEvent;
 use Illuminate\Support\Facades\Artisan;
 
 class PruneOldTweets
@@ -20,10 +20,10 @@ class PruneOldTweets
 	/**
 	 * Handle the event.
 	 *
-	 * @param  \App\Events\TweetsPulled  $event
+	 * @param  \App\Events\TweetsPulledEvent  $event
 	 * @return void
 	 */
-	public function handle(TweetsPulled $event)
+	public function handle(TweetsPulledEvent $event)
 	{
 		Artisan::call('tweet:prune');
 	}

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\DataTransferObjects\TwitterUserDTO;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -15,6 +16,15 @@ class TwitterUser extends Model
 		'screen_name',
 		'profile_image_url_https',
 	];
+
+	public static function fromDTO(TwitterUserDTO $dto): self
+	{
+		return self::firstOrCreate(['id' => $dto->id], [
+			'name' => $dto->name,
+			'screen_name' => $dto->screen_name,
+			'profile_image_url_https' => $dto->profile_image_url_https,
+		]);
+	}
 
 	public function getProfileUrlAttribute(): string
 	{

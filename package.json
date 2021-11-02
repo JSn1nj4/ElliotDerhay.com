@@ -4,7 +4,7 @@
     "description": "My personal website",
     "license": "SEE LICENSE IN LICENSE.md",
     "engines": {
-        "node": "14.16.x",
+        "node": "14.18.x",
         "yarn": "1.22.x"
     },
     "repository": {
@@ -23,14 +23,13 @@
         "production": "mix --production"
     },
     "devDependencies": {
-        "autoprefixer": "^10.2.5",
-        "axios": "^0.21.1",
+        "axios": "^0.24.0",
         "cross-env": "^7.0.2",
-        "eslint": "^7.7.0",
+        "eslint": "^8.1.0",
         "laravel-mix": "^6.0.13",
         "postcss": "^8.2.8",
         "postcss-import": "^14.0.0",
-        "postcss-mixins": "^7.0.3",
+        "postcss-mixins": "^8.1.0",
         "postcss-nested": "^5.0.5",
         "postcss-simple-vars": "^6.0.3",
         "tailwindcss": "^2.0.4",

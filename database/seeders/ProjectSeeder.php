@@ -4,8 +4,9 @@ namespace Database\Seeders;
 
 use App\Models\Project;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
-class ProjectsTableSeeder extends Seeder
+class ProjectSeeder extends Seeder
 {
 	/**
 	 * List project data to seed database with
@@ -15,7 +16,7 @@ class ProjectsTableSeeder extends Seeder
 			'name' => 'ElliotDerhay.com',
 			'link' => 'https://github.com/JSn1nj4/ElliotDerhay.com',
 			'demo_link' => 'http://elliotderhay.com',
-			'thumbnail' => 'https://elliotderhay-com.s3.amazonaws.com/projects/elliotderhay.com.jpg',
+			'thumbnail' => 'https://elliotderhay-com.s3.amazonaws.com/projects/elliotderhay.com-1.10.0-screenshot.jpg',
 			'short_desc' => 'My personal website project built with Laravel, Tailwind CSS, and some Vue.js',
 		],
 	];
@@ -27,6 +28,10 @@ class ProjectsTableSeeder extends Seeder
 	 */
 	public function run()
 	{
-		collect($this->project_list)->each(fn ($item, $key) => Project::create($item));
+		DB::table((new Project)->getTable())
+			->truncate();
+
+		collect($this->project_list)
+			->each(fn ($item, $key) => Project::create($item));
 	}
 }

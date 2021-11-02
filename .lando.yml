@@ -12,8 +12,25 @@ services:
       php: .vscode/php.ini
   node:
     type: node:14
+events:
+  post-start:
+    - appserver: composer install
+    - node: yarn
+    - appserver: php artisan db:seed
+    - appserver: php artisan github:event:pull
+    - appserver: php artisan tweet:pull
+    - node: yarn dev
 tooling:
   node:
     service: node
+  npx:
+    service: node
+  refresh_db:
+    service: appserver
+    description: rebuild database with fresh data
+    cmd:
+      - php artisan migrate:refresh --seed
+      - php artisan github:event:pull
+      - php artisan tweet:pull
   yarn:
     service: node

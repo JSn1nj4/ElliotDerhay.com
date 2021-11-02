@@ -17,7 +17,7 @@ class Card extends Component
 	public string $type;
 
 	public array $typeClasses = [
-		'default' => 'rounded-lg border border-gray-600 trans-border-color hover:border-sea-green-500 bg-gray-900',
+		'default' => 'rounded-lg border border-gray-300 dark:border-gray-600 trans-border-color hover:border-sea-green-600 dark:hover:border-sea-green-500 bg-white dark:bg-gray-900',
 		'transparent' => ''
 	];
 

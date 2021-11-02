@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\DataTransferObjects\GithubEventDTO;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -26,6 +27,18 @@ class GithubEvent extends Model
 		'source',
 		'repo',
 	];
+
+	public static function fromDTO(GithubEventDTO $dto): self
+	{
+		return self::firstOrCreate(['id' => intval($dto->id)], [
+			'type' => $dto->type,
+			'action' => $dto->action,
+			'date' => $dto->date,
+			'user_id' => GithubUser::fromDTO($dto->user)->id,
+			'source' => $dto->source,
+			'repo' => $dto->repo,
+		]);
+	}
 
 	public function user()
 	{

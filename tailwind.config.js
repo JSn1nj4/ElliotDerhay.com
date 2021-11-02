@@ -38,6 +38,7 @@ module.exports = {
 		colors: {
 			transparent: "transparent",
 
+			black: "#000000",
 			"gray-900": "#090909",
 			"gray-800": "#151515",
 			"gray-700": "#606f7b",
@@ -72,13 +73,13 @@ module.exports = {
 			"green-200": "#a2f5bf",
 			"green-100": "#e3fcec",
 
-			"sea-green-900": "#002C02",
-			"sea-green-800": "#00572D",
-			"sea-green-600": "#00A87E",
+			"sea-green-900": "#002e24",
+			"sea-green-800": "#005442",
+			"sea-green-600": "#00a682",
 			"sea-green-500": "#00C49A",
-			"sea-green-400": "#26EAC0",
-			"sea-green-200": "#8BFFFF",
-			"sea-green-100": "#CAFFFF",
+			"sea-green-400": "#00ffc8",
+			"sea-green-200": "#6effe0",
+			"sea-green-100": "#bbfff0",
 
 			"teal-900": "#0d3331",
 			"teal-800": "#20504f",
@@ -121,6 +122,23 @@ module.exports = {
 
 		fontFamily: {
 			...defaultConfig.fontFamily,
+			sans: [
+				"Source Sans Pro",
+				"ui-sans-serif",
+				"system-ui",
+				"-apple-system",
+				"BlinkMacSystemFont",
+				"Segoe UI",
+				"Roboto",
+				"Helvetica Neue",
+				"Arial",
+				"Noto Sans",
+				"sans-serif",
+				"Apple Color Emoji",
+				"Segoe UI Emoji",
+				"Segoe UI Symbol",
+				"Noto Color Emoji"
+			],
 			mono: [
 				"Source Code Pro",
 				"Menlo",
@@ -181,6 +199,15 @@ module.exports = {
 			hash: "# ",
 			asterisk: "* ",
 			at: "@ "
+		},
+
+		extend: {
+			backgroundImage: theme => ({
+				"laptop":
+					'url("https://s3.amazonaws.com/elliotderhay-com/banners/pexels-lukas-574073-scaled.jpg")',
+			})
 		}
-	}
+	},
+
+	darkMode: "class"
 };

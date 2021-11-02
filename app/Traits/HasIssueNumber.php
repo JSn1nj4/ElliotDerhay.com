@@ -8,7 +8,6 @@ trait HasIssueNumber
 
 	protected function setIssueNumberText(string $issueNumber): void
 	{
-		$this->issueNumberText =
-		"Issue #$issueNumber";
+		$this->issueNumberText = "Issue #$issueNumber";
 	}
 }

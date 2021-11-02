@@ -2,6 +2,10 @@
 
 namespace App\Providers;
 
+use App\Contracts\GitHostService;
+use App\Contracts\SocialMediaService;
+use App\Services\GithubService;
+use App\Services\TwitterService;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -13,7 +17,9 @@ class AppServiceProvider extends ServiceProvider
 	 */
 	public function register()
 	{
-		//
+		$this->app->singleton(GitHostService::class, fn($app) => new GithubService);
+
+		$this->app->singleton(SocialMediaService::class, fn($app) => new TwitterService);
 	}
 
 	/**
