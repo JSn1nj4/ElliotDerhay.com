@@ -149,7 +149,7 @@ a {
 	opacity: 0;
 
 	.dark & {
-		@apply bg-gray-900;
+		@apply bg-black;
 	}
 
 	/* @mixin transitions $default-speed ease; */
