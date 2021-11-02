@@ -13,11 +13,11 @@
 			</h1>
 
 			<p class="mb-4 text-xl">
-				I'm a fairly simple guy who loves web development and design. I love learning new software and web development concepts; but I also love learning about science and other technologies, and even learning more generally.
+				I'm a fairly simple guy who loves web development and design. I love learning new software and web development concepts. I like learning in general, but especially about science and technology.
 			</p>
 
 			<p class="mb-4 text-xl">
-				When I'm not spending time learning something new, you can probably find me reading tech news and current events, watching videos by channels like Veritasium and SmarterEveryDay, reading comics like Dilbert and xkcd, playing card games, or playing sudoku.
+				When I'm not spending time learning something new, you can probably find me reading tech news and current events, watching videos by channels like Veritasium and SmarterEveryDay, reading comics like Dilbert and xkcd, playing card games, or playing puzzle games like Sudoku.
 			</p>
 		</x-column>
 	</x-row>
