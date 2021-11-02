@@ -2,13 +2,32 @@
 
 ## Release 1.10.0
 
-### Changes
+### Main Changes
 - Add dev routes
 	- See ["Develop faster by adding dev routes file in a Laravel app"][1_10_0-dev_routes]
 - Add Lando config
 - Update PHP requirement to PHP 8
+- Update all dependencies
+- Update Laravel boilerplate, mostly
+- Replace GithubClient with GithubService + tests
+- Replace TwitterClient with TwitterService + tests
+- Add PrivatePropertyAccessor reflection class for use in testing
+- Add dark/light mode feature
+- Overhaul homepage
+- Convert some Blade partials to Laravel components
+- Replace some nested Blade yields with [stacks][blade_stacks]
+- Update license
+
+### Tweaks
+- Minor privacy policy updates
+- Font changes
+- Add .env.testing (PR #21 by @zach2825)
+- Other initial testing setup tweaks (PR #21 by @zach2825)
+- Reorganize some Blade partials
+- Code cleanup
 
 [1_10_0-dev_routes]: https://freek.dev/1976-develop-faster-by-adding-dev-routes-file-in-a-laravel-app
+[blade_stacks]: https://laravel.com/docs/8.x/blade#stacks
 
 ### Tweaks
 - Force Yaml to use spaces for indentation
