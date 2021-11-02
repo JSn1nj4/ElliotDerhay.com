@@ -11,7 +11,7 @@
 
 @section('status-footer')
 		<p>
-				<a class="text-white hover:text-sea-green-500" href="{{ route('home') }}"><i class="text-sea-green-500 fa fa-caret-square-left"></i> Back to homepage</a>
+				<a class="text-black dark:text-white hover:text-sea-green-500" href="{{ route('home') }}"><i class="text-sea-green-500 fa fa-caret-square-left"></i> Back to homepage</a>
 		</p>
 		<div class="pt-8 font-normal text-gray-500">
 			@include('partials.copyright')
