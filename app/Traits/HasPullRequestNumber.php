@@ -8,7 +8,6 @@ trait HasPullRequestNumber
 
 	protected function setPullRequestNumberText(string $pullRequestNumber): void
 	{
-		$this->pullRequestNumberText =
-		"Pull Request #$pullRequestNumber";
+		$this->pullRequestNumberText = "Pull Request #$pullRequestNumber";
 	}
 }

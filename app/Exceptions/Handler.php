@@ -10,7 +10,7 @@ class Handler extends ExceptionHandler
     /**
      * A list of the exception types that are not reported.
      *
-     * @var array
+     * @var string[]
      */
     protected $dontReport = [
         //
@@ -19,9 +19,10 @@ class Handler extends ExceptionHandler
     /**
      * A list of the inputs that are never flashed for validation exceptions.
      *
-     * @var array
+     * @var string[]
      */
     protected $dontFlash = [
+        'current_password',
         'password',
         'password_confirmation',
     ];
@@ -33,21 +34,23 @@ class Handler extends ExceptionHandler
      */
     public function register()
     {
-        //
-    }
+        $this->reportable(function (Throwable $e) {
+            //
+        });
+	}
 
-    /**
-     * Report or log an exception.
-     *
-     * @param  \Throwable  $e
-     * @return void
-     */
-    public function report(Throwable $exception)
-    {
-        if (app()->bound('sentry') && $this->shouldReport($exception)) {
-            app('sentry')->captureException($exception);
-        }
+	/**
+	 * Report or log an exception.
+	 *
+	 * @param  \Throwable  $e
+	 * @return void
+	 */
+	public function report(Throwable $exception)
+	{
+		if (app()->bound('sentry') && $this->shouldReport($exception)) {
+			app('sentry')->captureException($exception);
+		}
 
-        parent::report($exception);
-    }
+		parent::report($exception);
+	}
 }

@@ -6,31 +6,31 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateProjectsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
-    {
-        Schema::create('projects', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name');
-            $table->string('link');
-            $table->string('demo_link')->nullable();
-            $table->string('thumbnail');
-            $table->string('short_desc');
-            $table->timestamps();
-        });
-    }
+	/**
+	 * Run the migrations.
+	 *
+	 * @return void
+	 */
+	public function up()
+	{
+		Schema::create('projects', function (Blueprint $table) {
+			$table->increments('id');
+			$table->string('name');
+			$table->string('link');
+			$table->string('demo_link')->nullable();
+			$table->string('thumbnail');
+			$table->string('short_desc');
+			$table->timestamps();
+		});
+	}
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        Schema::dropIfExists('projects');
-    }
+	/**
+	 * Reverse the migrations.
+	 *
+	 * @return void
+	 */
+	public function down()
+	{
+		Schema::dropIfExists('projects');
+	}
 }

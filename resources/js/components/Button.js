@@ -1,8 +1,8 @@
 export const ToggleButton = {
-    props: ['clickHandler'],
-    methods: {
-        toggle() {
-            this.clickHandler();
-        }
-    }
+		props: ['clickHandler'],
+		methods: {
+				toggle() {
+						this.clickHandler();
+				}
+		}
 };

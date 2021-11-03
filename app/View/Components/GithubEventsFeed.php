@@ -14,29 +14,29 @@ class GithubEventsFeed extends Component
 
 	public Collection $events;
 
-    /**
-     * Create a new component instance.
-     *
-     * @return void
-     */
-    public function __construct(int $count = 7, string $loaderSize = '40px')
-    {
-        $this->count = $count;
+	/**
+	 * Create a new component instance.
+	 *
+	 * @return void
+	 */
+	public function __construct(int $count = 7, string $loaderSize = '40px')
+	{
+		$this->count = $count;
 		$this->loaderSize = $loaderSize;
-    }
+	}
 
-    /**
-     * Get the view / contents that represent the component.
-     *
-     * @return \Illuminate\Contracts\View\View|\Closure|string
-     */
-    public function render()
-    {
+	/**
+	 * Get the view / contents that represent the component.
+	 *
+	 * @return \Illuminate\Contracts\View\View|\Closure|string
+	 */
+	public function render()
+	{
 		$this->events =	GithubEvent::with('user')
 			->latest('date')
 			->take($this->count)
 			->get();
 
-        return view('components.github-events-feed');
-    }
+		return view('components.github-events-feed');
+	}
 }

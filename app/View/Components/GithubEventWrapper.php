@@ -20,25 +20,25 @@ class GithubEventWrapper extends Component
 	 */
 	public string $type_kebab;
 
-    /**
-     * Create a new component instance.
-     *
-     * @return void
-     */
-    public function __construct(GithubEvent $event)
-    {
-        $this->event = $event;
+	/**
+	 * Create a new component instance.
+	 *
+	 * @return void
+	 */
+	public function __construct(GithubEvent $event)
+	{
+		$this->event = $event;
 		$this->type_kebab = Str::kebab($this->event->type);
 		$this->eventTypeComponent = "github-event-types.{$this->type_kebab}";
-    }
+	}
 
-    /**
-     * Get the view / contents that represent the component.
-     *
-     * @return \Illuminate\Contracts\View\View|\Closure|string
-     */
-    public function render()
-    {
-        return view('components.github-event-wrapper');
-    }
+	/**
+	 * Get the view / contents that represent the component.
+	 *
+	 * @return \Illuminate\Contracts\View\View|\Closure|string
+	 */
+	public function render()
+	{
+		return view('components.github-event-wrapper');
+	}
 }

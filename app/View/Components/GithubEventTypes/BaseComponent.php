@@ -20,36 +20,36 @@ class BaseComponent extends Component
 
 	public string $icon;
 
-    /**
-     * Create a new component instance.
-     *
-     * @return void
-     */
-    public function __construct(string $action, string $icon, GithubEvent $event)
-    {
-        $this->action = $action;
+	/**
+	 * Create a new component instance.
+	 *
+	 * @return void
+	 */
+	public function __construct(string $action, string $icon, GithubEvent $event)
+	{
+		$this->action = $action;
 		$this->icon = $icon;
 		$this->event = $event;
 
 		$this->setTimeElapsedString($this->event->date);
-    }
+	}
 
 	public function profileUrl(): string
 	{
 		return "{$this->baseLink}/{$this->event->user->display_login}";
 	}
 
-    /**
-     * Get the view / contents that represent the component.
-     *
-     * @return \Illuminate\Contracts\View\View|\Closure|string
-     */
-    public function render()
-    {
+	/**
+	 * Get the view / contents that represent the component.
+	 *
+	 * @return \Illuminate\Contracts\View\View|\Closure|string
+	 */
+	public function render()
+	{
 		$reflect = new ReflectionClass($this);
 
-        return view('components.github-event-types.' . Str::kebab($reflect->getShortName()));
-    }
+		return view('components.github-event-types.' . Str::kebab($reflect->getShortName()));
+	}
 
 	public function repoUrl(): string
 	{

@@ -6,6 +6,6 @@
 import GAPopup from './GAPopup.vue';
 
 const GAPopupWidget = new Vue({
-  el: '#ga-request-popup',
-  render: h => h(GAPopup)
+	el: '#ga-request-popup',
+	render: h => h(GAPopup)
 });

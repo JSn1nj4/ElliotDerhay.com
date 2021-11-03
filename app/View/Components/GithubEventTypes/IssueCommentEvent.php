@@ -11,14 +11,14 @@ class IssueCommentEvent extends BaseComponent
 	use HasIssueNumber,
 		HasPreposition;
 
-    /**
-     * Create a new component instance.
-     *
-     * @return void
-     */
-    public function __construct(GithubEvent $event)
-    {
-        parent::__construct(
+	/**
+	 * Create a new component instance.
+	 *
+	 * @return void
+	 */
+	public function __construct(GithubEvent $event)
+	{
+		parent::__construct(
 			$event->action ?? 'comment on',
 			'fas fa-comment',
 			$event
@@ -26,5 +26,5 @@ class IssueCommentEvent extends BaseComponent
 
 		$this->preposition = 'at';
 		$this->setIssueNumberText($this->event->source);
-    }
+	}
 }

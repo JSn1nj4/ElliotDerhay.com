@@ -1,47 +1,27 @@
 @extends('layouts.master', ['bodyClasses' => $bodyClasses ?? ''])
 
-@section('head-extras')
-	@yield('head-extras-pass-thru')
-@endsection
-
 @section('body')
 
-	@php
-		$menuItems = [
-			(object) ['name' => 'home', 'label' => 'Home', 'icon' => 'fas fa-home'],
-		];
+	@include('partials.header')
 
-		$optionalMenuItems = [
-			(object) ['name' => 'projects', 'label' => 'Projects'],
-			(object) ['name' => 'updates', 'label' => 'Updates'],
-		];
-
-		foreach($optionalMenuItems as $item) {
-			if(config("app.enable-" . $item->name)) $menuItems[] = $item;
-		}
-	@endphp
-
-	@include('layouts.header', $menuItems)
-
-	<main class="bg-gray-800 layer-shadow pt-4 pb-6">
+	<main class="bg-white dark:bg-black layer-shadow flex-grow">
 		@yield('content')
 	</main>
 
-	@include('layouts.footer')
+	@include('partials.footer')
 
 @endsection
 
-@section('footer-extras')
+@push('footer-extras')
+	<div id="ga-request-popup" style="display: none;"></div>
+
 	<script src="{{ mix('/js/manifest.js') }}"></script>
 	<script src="{{ mix('/js/vendor.js') }}"></script>
 	<script src="{{ mix('/js/app.js') }}"></script>
 
-	@yield('footer-extras-pass-thru')
-
-	<div id="ga-request-popup" style="display: none;"></div>
 	<script src="{{ mix('/js/GAPopup.js') }}" charset="utf-8"></script>
 
 	<script type="application/javascript">
 		EventBus.$on('allow_tracking', ga_track);
 	</script>
-@endsection
+@endpush

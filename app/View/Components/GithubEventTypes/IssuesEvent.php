@@ -11,14 +11,14 @@ class IssuesEvent extends BaseComponent
 	use HasIssueNumber,
 		HasPreposition;
 
-    /**
-     * Create a new component instance.
-     *
-     * @return void
-     */
-    public function __construct(GithubEvent $event)
-    {
-        $icons = [
+	/**
+	 * Create a new component instance.
+	 *
+	 * @return void
+	 */
+	public function __construct(GithubEvent $event)
+	{
+		$icons = [
 			'opened' => 	'far fa-list-alt',
 			'closed' => 	'fas fa-lock',
 			'reopened' => 	'fas fa-unlock',
@@ -36,5 +36,5 @@ class IssuesEvent extends BaseComponent
 
 		$this->preposition = 'at';
 		$this->setIssueNumberText($this->event->source);
-    }
+	}
 }

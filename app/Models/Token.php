@@ -8,25 +8,25 @@ use Illuminate\Database\Eloquent\Model;
 
 class Token extends Model
 {
-    use HasFactory;
+	use HasFactory;
 
-    protected $dates = [
-        'expires_at',
-    ];
+	protected $dates = [
+		'expires_at',
+	];
 
-    protected $fillable = [
-        'service',
-        'expires_at',
-        'value',
-    ];
+	protected $fillable = [
+		'service',
+		'expires_at',
+		'value',
+	];
 
-    public function scopeExpired($query)
-    {
-        return $query->where('expires_at', '<=', Carbon::today()->toDateTimeString());
-    }
+	public function scopeExpired($query)
+	{
+		return $query->where('expires_at', '<=', Carbon::today()->toDateTimeString());
+	}
 
-    public function scopeValid($query)
-    {
-        return $query->where('expires_at', '>', Carbon::today()->toDateTimeString());
-    }
+	public function scopeValid($query)
+	{
+		return $query->where('expires_at', '>', Carbon::today()->toDateTimeString());
+	}
 }

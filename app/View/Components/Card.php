@@ -17,18 +17,18 @@ class Card extends Component
 	public string $type;
 
 	public array $typeClasses = [
-		'default' => 'rounded-lg border border-gray-600 trans-border-color hover:border-sea-green-500 bg-gray-900',
+		'default' => 'rounded-lg border border-gray-300 dark:border-gray-600 trans-border-color hover:border-sea-green-600 dark:hover:border-sea-green-500 bg-white dark:bg-gray-900',
 		'transparent' => ''
 	];
 
-    /**
-     * Create a new component instance.
-     *
-     * @return void
-     */
-    public function __construct(string $size = 'sm', string $type = 'default', ?string $margin = null, ?string $padding = null)
-    {
-        $this->size = $size;
+	/**
+	 * Create a new component instance.
+	 *
+	 * @return void
+	 */
+	public function __construct(string $size = 'sm', string $type = 'default', ?string $margin = null, ?string $padding = null)
+	{
+		$this->size = $size;
 		$this->type = $type;
 
 		if(isset($margin)) {
@@ -48,15 +48,15 @@ class Card extends Component
 		}
 
 		$this->classes = "relative {$this->margin} max-w-{$this->size} w-full z-30 {$this->padding} {$this->typeClasses[$this->type]}";
-    }
+	}
 
-    /**
-     * Get the view / contents that represent the component.
-     *
-     * @return \Illuminate\Contracts\View\View|\Closure|string
-     */
-    public function render()
-    {
-        return view('components.card');
-    }
+	/**
+	 * Get the view / contents that represent the component.
+	 *
+	 * @return \Illuminate\Contracts\View\View|\Closure|string
+	 */
+	public function render()
+	{
+		return view('components.card');
+	}
 }

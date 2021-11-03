@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\ProjectsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,25 +15,5 @@ use Illuminate\Support\Facades\Route;
 
 // standard views
 Route::view('/', 'home')->name('home');
-Route::get('/projects', [ProjectsController::class, 'index'])->name('projects');
-
-Route::get('/updates', function() {
-    $routeName = Route::currentRouteName();
-
-    if(!config('app.enable-' . $routeName)) {
-        abort(404);
-    }
-
-    return view($routeName);
-})->name('updates');
 
 Route::view('/privacy', 'privacy')->name('privacy');
-
-// error page testing route (only works locally)
-Route::get('/error/{code}', function($code = null) {
-    if(config('app.env') !== 'local') abort(404);
-
-    if(!view()->exists("errors.$code")) abort(404);
-
-    abort($code);
-})->where('code', '[1-5][0-9]{2}');

@@ -1,5 +1,6 @@
 @import "_variables.css";
 @import url('https://fonts.googleapis.com/css?family=Source+Code+Pro:200,400,700');
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;400;700&display=swap');
 
 /**
  * This injects Tailwind's base styles, which is a combination of
@@ -23,20 +24,20 @@ body {
 }
 
 ul {
-    list-style-type: disc;
-    padding-left: theme('padding.4');
+	list-style-type: disc;
+	padding-left: theme('padding.4');
 }
 ol {
-    list-style-type: decimal;
-    padding-left: theme('padding.4');
+	list-style-type: decimal;
+	padding-left: theme('padding.4');
 }
 
 img {
-    height: auto;
+	height: auto;
 }
 
 button {
-    @mixin transitions color $default-speed|border-color $default-speed;
+	@mixin transitions color $default-speed|border-color $default-speed;
 }
 
 /**
@@ -65,137 +66,174 @@ button {
  */
 
 h1, h2, h3, h4, h5, h6 {
-    &.content-title {
-        @apply mb-4 font-normal;
-    }
+	&.content-title {
+		@apply mb-4 font-normal;
+	}
 }
 
 h1 {
-    &.content-title {
-        @mixin textGlow 5;
-    }
+	/* &.content-title {
+		@mixin textGlow 5, theme('colors.gray-600');
+	}
 
-    &.banner-title {
-        @apply text-3xl font-normal;
-        @mixin textGlow 3, #fff;
-    }
+	.dark &.content-title {
+		@mixin textGlow 5;
+	} */
+
+	&.banner-title {
+		@apply text-3xl font-normal;
+		/* @mixin textGlow 3, #fff; */
+	}
 }
 
 h2, h3 {
-    &.content-title {
-        @mixin textGlow 4;
-    }
+	/* &.content-title {
+		@mixin textGlow 4;
+	} */
 }
 
 h4, h5 {
-    &.content-title {
-        @mixin textGlow 3;
-    }
+	/* &.content-title {
+		@mixin textGlow 3;
+	} */
 }
 
 h6 {
-    &.content-title {
-        @mixin textGlow 2;
-    }
+	/* &.content-title {
+		@mixin textGlow 2;
+	} */
 }
 
 p {
-    &.banner-paragraph {
-        @apply text-base;
-        @mixin textGlow 2, #fff;
-    }
+	&.banner-paragraph {
+		@apply text-base;
+		/* @mixin textGlow 2, #fff; */
+	}
 }
 
 a {
-    @apply text-sea-green-500 trans-color;
+	@apply text-sea-green-600 trans-color;
 
-    &:hover,
-    &.active {
-        @apply text-white;
-    }
+	.dark & {
+		@apply text-sea-green-500 trans-color;
+	}
 
-    &.active {
-        @mixin textGlow 4;
-    }
+	&:hover,
+	&.active {
+		@apply text-sea-green-800;
+	}
+
+	.dark &:hover,
+	.dark &.active {
+		@apply text-white;
+	}
+
+	&.active {
+		@mixin textGlow 3, theme('colors.gray-500');
+	}
+
+	.dark &.active {
+		@mixin textGlow 4;
+	}
 }
 
 .container-flexible-large {
-    max-width: 1600px;
+	max-width: 1600px;
 }
 
 .mobile-menu {
-    top: 100%;
-    @apply bg-gray-900;
-    z-index: 50;
-    visibility: hidden;
-    opacity: 0;
-    @mixin transitions $default-speed ease;
+	top: 100%;
+	@apply bg-white;
+	z-index: 50;
+	visibility: hidden;
+	opacity: 0;
 
-    #menu-toggle:checked + & {
-        visibility: visible;
-        opacity: 1;
-    }
+	.dark & {
+		@apply bg-black;
+	}
+
+	/* @mixin transitions $default-speed ease; */
+
+	#menu-toggle:checked + & {
+		visibility: visible;
+		opacity: 1;
+	}
 }
 
+#theme-toggle-button {
+	.system-icon,
+	.light-mode-icon,
+	.dark-mode-icon {
+		display: none;
+	}
+
+	html[color-theme="system"] & .system-icon {
+		display: block;
+	}
+
+	html[color-theme="light"] & .light-mode-icon {
+		display: block;
+	}
+
+	html[color-theme="dark"] & .dark-mode-icon {
+		display: block;
+	}
+}
+
+
 .banner-section {
-    background-size: cover;
-    background-position: center top;
-    box-shadow: 0px 2px 4px #000;
+	background-size: cover;
+	background-position: center top;
+	box-shadow: 0px 2px 4px #000;
 }
 
 .home-banner {
-    background-image: url(https://s3.amazonaws.com/elliotderhay-com/banners/project-code-3.jpg);
+	background-image: url(https://s3.amazonaws.com/elliotderhay-com/banners/project-code-3.jpg);
 }
 
 .banner-content-wrapper {
-    padding-top: 15vw;
+	padding-top: 15vw;
 }
 
 .twitter-card {
-    font-family: "Helvetica Neue", "Segoe UI", Helvetica, Arial, sans-serif;
-}
-
-.github-event-icon {
-    &:before {
-      background: #151515;
-    }
+	font-family: "Helvetica Neue", "Segoe UI", Helvetica, Arial, sans-serif;
 }
 
 @media only screen and (min-width: 600px) {
-    .banner-section {
-        height: 56.25vw;
-        min-height: auto;
-    }
+	.banner-section {
+		height: 56.25vw;
+		min-height: auto;
+	}
 }
 
 @media only screen and (min-width: 768px) {
-    h1.banner-title {
-        @apply text-5xl font-normal;
-    }
+	h1.banner-title {
+		@apply text-5xl font-normal;
+	}
 
-    p.banner-paragraph {
-        @apply text-3xl;
-    }
+	p.banner-paragraph {
+		@apply text-3xl;
+	}
 }
 
 @media only screen and (min-width: 992px) {
-    .mobile-menu {
-        top: auto;
-        @apply bg-transparent h-auto;
-        z-index: 10;
-        visibility: visible;
-        opacity: 1;
-    }
+	.mobile-menu {
+		top: auto;
+		@apply bg-transparent h-auto;
+		z-index: 10;
+		visibility: visible;
+		opacity: 1;
+	}
 
-    .banner-section {
-        height: 46.875vw;
-    }
+	.banner-section {
+		height: 46.875vw;
+	}
 }
 
 @media only screen and (min-width: 1200px) {
-    .banner-section {
-        height: 37.5vw;
-    }
+	.banner-section {
+		height: 37.5vw;
+	}
 }
 
 
@@ -225,25 +263,25 @@ a {
  */
 
 .backlight {
-    background-image: linear-gradient(to top, #00A87E, rgba(0, 168, 126, 0.26666666666666666) 5px, transparent 75%);
+	background-image: linear-gradient(to top, #00A87E, rgba(0, 168, 126, 0.26666666666666666) 5px, transparent 75%);
 }
 
 .construction {
-    background-image: repeating-linear-gradient(45deg, transparent 0px, transparent 50px, rgba(69, 52, 17, 0.8) 50px, rgba(69, 52, 17, 0.8) 100px, transparent 100px);
+	background-image: repeating-linear-gradient(45deg, transparent 0px, transparent 50px, rgba(69, 52, 17, 0.8) 50px, rgba(69, 52, 17, 0.8) 100px, transparent 100px);
 }
 
 .trans-color {
-    @mixin transitions color $default-speed;
+	@mixin transitions color, $default-speed;
 }
 
 .trans-border-color {
-    @mixin transitions border-color $default-speed;
+	@mixin transitions border-color, $default-speed;
 }
 
 .box-glow {
-    box-shadow: 0 0 20px 0 #fff;
+	box-shadow: 0 0 20px 0 #fff;
 }
 
 .layer-shadow {
-    box-shadow: 0px 2px 4px #000;
+	box-shadow: 0px 2px 4px #000;
 }
