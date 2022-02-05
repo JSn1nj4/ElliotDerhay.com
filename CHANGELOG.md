@@ -6,6 +6,7 @@
 - Require PHP 8.1
 - Require Node 16
 - Require Yarn 1.22.5
+- Include ASDF tool versions instead of nodenv config
 - Upgrade Yarn dependencies:
 	- axios@^0.25.0
 	- postcss-mixins@^9.0.1
@@ -18,7 +19,7 @@
     - pestphp/pest-plugin-laravel@^1.2
 
 ### Tweaks
-- Replace old nodenv file with asdf versions file
+- Tweak Tailwind config to be more v3-friendly 
 
 ## Release 1.10.0
 
