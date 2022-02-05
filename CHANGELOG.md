@@ -1,5 +1,10 @@
 # Changelog
 
+## Release 1.11.0
+
+### Main changes
+- Add command to run multiple other artisan commands in bulk
+
 ## Release 1.10.2
 
 ### Tweaks
