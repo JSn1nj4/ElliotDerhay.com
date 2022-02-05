@@ -3,11 +3,21 @@
 ## Release 1.10.1
 
 ### Main Changes
-
-### Tweaks
 - Require PHP 8.1
 - Require Node 16
 - Require Yarn 1.22.5
+- Upgrade Yarn dependencies:
+	- axios@^0.25.0
+	- postcss-mixins@^9.0.1
+	- tailwindcss@^3.0.18
+- Upgrade Composer dependencies:
+	- laravel/framework@^8.82
+	- sentry/sentry-laravel@^2.11
+    - laravel/dusk@^6.22
+    - pestphp/pest@^1.21
+    - pestphp/pest-plugin-laravel@^1.2
+
+### Tweaks
 - Replace old nodenv file with asdf versions file
 
 ## Release 1.10.0
