@@ -1,5 +1,15 @@
 # Changelog
 
+## Release 1.10.1
+
+### Main Changes
+
+### Tweaks
+- Require PHP 8.1
+- Require Node 16
+- Require Yarn 1.22.5
+- Replace old nodenv file with asdf versions file
+
 ## Release 1.10.0
 
 ### Main Changes
