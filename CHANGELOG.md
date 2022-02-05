@@ -1,5 +1,10 @@
 # Changelog
 
+## Release 1.10.2
+
+### Tweaks
+- Attempt to limit automatic migrations only to development environment
+
 ## Release 1.10.1
 
 ### Main Changes
