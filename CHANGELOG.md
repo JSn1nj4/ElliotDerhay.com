@@ -1,5 +1,16 @@
 # Changelog
 
+## Release 1.12.0
+
+### Main changes
+- Upgrade environment dependencies
+	- Node 16.14.0
+	- Yarn 1.22.17
+- Upgrade Yarn dependencies
+	- vue@^3.2.30
+	- vue-loader@^17.0.0
+- Remove vue-template-compiler
+
 ## Release 1.11.0
 
 ### Main changes
