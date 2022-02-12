@@ -4,7 +4,7 @@
     "description": "My personal website",
     "license": "MIT",
     "engines": {
-        "node": "16.13.x",
+        "node": "16.14.x",
         "yarn": "1.22.x"
     },
     "repository": {
