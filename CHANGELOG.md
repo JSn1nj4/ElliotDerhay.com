@@ -10,9 +10,19 @@
 	- vue@^3.2.30
 	- vue-loader@^17.0.0
 - Remove vue-template-compiler
+- Upgrade composer dependencies
+	- fruitcake/laravel-cors@^2.0.5
+	- guzzlehttp/guzzle@^7.2
+	- laravel/framework@^9.0
+	- laravel/tinker@^2.7
+	- nunomaduro/collision@^6.1
+	- phpunit/phpunit@^9.5.10
+- Replace facade/ignition@^2.5 with spatie/laravel-ignition@^1.0
+- Remove fideloper/proxy@^4.4
 
 ### Minor changes
 - Add `lando pull_content` to get latest remote content easily
+- Tweak single "post-install-cmd" script
 
 ## Release 1.11.0
 
