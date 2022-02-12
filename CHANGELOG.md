@@ -2,7 +2,7 @@
 
 ## Release 1.12.0
 
-### Main changes
+### Major changes
 - Upgrade environment dependencies
 	- Node 16.14.0
 	- Yarn 1.22.17
@@ -10,6 +10,9 @@
 	- vue@^3.2.30
 	- vue-loader@^17.0.0
 - Remove vue-template-compiler
+
+### Minor changes
+- Add `lando pull_content` to get latest remote content easily
 
 ## Release 1.11.0
 

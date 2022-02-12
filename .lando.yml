@@ -25,6 +25,12 @@ tooling:
     service: node
   npx:
     service: node
+  pull_content:
+    service: appserver
+    description: pull fresh content from external sources
+    cmd:
+      - php artisan github:event:pull
+      - php artisan tweet:pull
   refresh_db:
     service: appserver
     description: rebuild database with fresh data
