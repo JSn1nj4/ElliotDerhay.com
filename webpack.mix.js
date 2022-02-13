@@ -4,6 +4,7 @@ const tailwindcss = require('tailwindcss');
 const mixins = require('postcss-mixins');
 const simpleVars = require('postcss-simple-vars');
 const nested = require('postcss-nested');
+const autoprefixer = require('autoprefixer');
 
 mix
 	.webpackConfig({
@@ -59,6 +60,7 @@ mix
 		simpleVars(),
 		nested(),
 		tailwindcss(),
+		autoprefixer(),
 	])
 	.options({
 		processCssUrls: false

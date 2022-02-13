@@ -19,6 +19,17 @@
 	- phpunit/phpunit@^9.5.10
 - Replace facade/ignition@^2.5 with spatie/laravel-ignition@^1.0
 - Remove fideloper/proxy@^4.4
+- Remove cross-env@^7.0.2
+- Remove eslint@^8.1.0
+- Add missing peer dependencies
+	- @babel/core@^7.15.8
+	- @babel/plugin-proposal-object-rest-spread@^7.15.6
+	- @babel/plugin-syntax-dynamic-import@^7.8.3
+	- @babel/plugin-transform-runtime@^7.15.8
+	- @babel/preset-env@^7.15.8
+	- autoprefixer@^10.0.2
+	- webpack@^5.60.0
+	- webpack-cli@^4.9.1
 
 ### Minor changes
 - Add `lando pull_content` to get latest remote content easily
