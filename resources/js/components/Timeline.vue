@@ -7,29 +7,23 @@
 
 	</div>
 </template>
-<script>
-export default {
-	name: "timeline",
+<script setup>
+import { computed } from 'vue';
 
-	props: {
-		showLine: {
-			type: Boolean,
-			default: true
-		},
-		showDottedLine: {
-			type: Boolean,
-			default: false
-		},
-		linePositionClass: {
-			type: String,
-			default: 'w-10'
-		}
+const props = defineProps({
+	showLine: {
+		type: Boolean,
+		default: true
 	},
+	showDottedLine: {
+		type: Boolean,
+		default: false
+	},
+	linePositionClass: {
+		type: String,
+		default: 'w-10'
+	}
+})
 
-	computed: {
-		commonClasses() {
-			return `absolute ${this.linePositionClass} border-r border-gray-600`
-		}
-	},
-}
+const commonClasses = computed(() => `absolute ${props.linePositionClass} border-r border-gray-600`)
 </script>

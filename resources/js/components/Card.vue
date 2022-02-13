@@ -3,57 +3,46 @@
 		<slot></slot>
 	</div>
 </template>
-<script>
-export default {
-	name: "card",
+<script setup>
+import { computed, onMounted, ref } from 'vue'
 
-	props: {
-		size: String,
-		url: String,
-		type: {
-			type: String,
-			default: 'default'
-		},
-		margin: String,
-		padding: String,
-	},
+const props = defineProps({
+	size: '',
+	url: '',
+	type: 'default',
+	margin: '',
+	padding: '',
+})
 
-	data: () => ({
-		urlIsSet: false,
-		cursorClass: '',
-		typeClasses: {
-			'default': 'rounded-lg border border-gray-600 trans-border-color hover:border-sea-green-500 bg-gray-900',
-			'transparent': ''
-		},
-		marginVal: '',
-		paddingVal: '',
-	}),
+const urlIsSet = ref(false)
+const cursorClass = ref('')
+const typeClasses = ref({
+	default: 'rounded-lg border border-gray-600 trans-border-color hover:border-sea-green-500 bg-gray-900',
+	transparent: ''
+})
+const marginVal = ref('')
+const paddingVal = ref('')
 
-	computed: {
-		classes() {
-			this.marginVal = (!this.margin && this.type === 'transparent' ? ''
-				: (this.margin || 'my-4'));
+const classes = computed(() => {
+	marginVal.value = (!props.margin && props.type === 'transparent' ? ''
+		: (props.margin || 'my-4'))
 
-			this.paddingVal = (!this.padding && this.type === 'transparent' ? 'px-4'
-				: (this.padding || 'p-4'));
+	paddingVal.value = (!props.padding && props.type === 'transparent' ? 'px-4'
+		: (props.padding || 'p-4'))
 
-			return `relative ${this.marginVal} max-w-${this.size} w-full${this.cursorClass} z-30 ${this.paddingVal} ${this.typeClasses[this.type]}`;
-		},
-	},
+	return `relative ${marginVal.value} max-w-${props.size} w-full${cursorClass.value} z-30 ${paddingVal.value} ${typeClasses.value[props.type]}`
+})
 
-	methods: {
-		click() {
-			if(this.urlIsSet) {
-				open(this.url, '_blank');
-			}
-		}
-	},
-
-	mounted() {
-		if(this.url && this.url.length > 0) {
-			this.cursorClass = ' cursor-pointer';
-			this.urlIsSet = true;
-		}
+function click() {
+	if(urlIsSet.value) {
+		open(this.url, '_blank')
 	}
 }
+
+onMounted(() => {
+	if(props.url && props.url.length > 0) {
+		cursorClass.value = ' cursor-pointer'
+		urlIsSet.value = true
+	}
+})
 </script>
