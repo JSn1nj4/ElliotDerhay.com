@@ -19,8 +19,6 @@
 	<script src="{{ mix('/js/vendor.js') }}"></script>
 	<script src="{{ mix('/js/app.js') }}"></script>
 
-	<script src="{{ mix('/js/GAPopup.js') }}" charset="utf-8"></script>
-
 	<script type="application/javascript">
 		document.addEventListener('allow_tracking', ga_track);
 	</script>

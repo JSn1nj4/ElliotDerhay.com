@@ -1,8 +1,8 @@
-
 /**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
+ * Popup idea inspiration:
+ * - https://kevdees.com/adding-google-analytics-to-your-website-while-respecting-do-not-track/
  */
+import { createApp } from "vue";
+import GAPopup from "./GAPopup.vue";
 
-import './bootstrap';
+createApp(GAPopup).mount("#ga-request-popup");
