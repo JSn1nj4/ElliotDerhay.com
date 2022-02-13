@@ -13,7 +13,7 @@
 @endsection
 
 @push('footer-extras')
-	<div id="ga-request-popup" style="display: none;"></div>
+	<div id="ga-request-popup"></div>
 
 	<script src="{{ mix('/js/manifest.js') }}"></script>
 	<script src="{{ mix('/js/vendor.js') }}"></script>
@@ -22,6 +22,6 @@
 	<script src="{{ mix('/js/GAPopup.js') }}" charset="utf-8"></script>
 
 	<script type="application/javascript">
-		EventBus.$on('allow_tracking', ga_track);
+		document.addEventListener('allow_tracking', ga_track);
 	</script>
 @endpush

@@ -1,6 +1,4 @@
-// import axios from 'axios';
-import Vue from 'vue';
-
+// import axios from '
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
  * to our Laravel back-end. This library automatically handles sending the
@@ -45,6 +43,3 @@ import Vue from 'vue';
 /**
  * Load and configure Vue
  */
-
-window.Vue = Vue;
-window.EventBus = new Vue();
