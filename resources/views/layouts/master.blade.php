@@ -17,7 +17,7 @@
 
 		<script type="application/javascript">
 			// Enable or disable GA tracking
-			function ga_track(track){
+			function ga_track(track) {
 				document.cookie = !track ? 'DNT=1' : 'DNT=0';
 				window['ga-disable-UA-165049241-1'] = !track;
 			}
