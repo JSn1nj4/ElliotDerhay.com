@@ -30,10 +30,13 @@
 	- autoprefixer@^10.0.2
 	- webpack@^5.60.0
 	- webpack-cli@^4.9.1
+- Update some Vue code
+- Remove some unused Vue templates
 
 ### Minor changes
 - Add `lando pull_content` to get latest remote content easily
 - Tweak single "post-install-cmd" script
+- Minor code tweaks
 
 ## Release 1.11.0
 
@@ -64,7 +67,7 @@
     - pestphp/pest-plugin-laravel@^1.2
 
 ### Tweaks
-- Tweak Tailwind config to be more v3-friendly 
+- Tweak Tailwind config to be more v3-friendly
 
 ## Release 1.10.0
 
