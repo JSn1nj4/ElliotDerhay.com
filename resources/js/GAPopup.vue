@@ -32,10 +32,10 @@ function hide() {
 }
 
 onBeforeMount(function() {
-		if(document.cookie.indexOf('GA_POPUP_INTERACTION=1') === -1) return
+	// Popup has been interacted with
+	if(document.cookie.indexOf('GA_POPUP_INTERACTION=1') !== -1) hide()
 
-		if(navigator.doNotTrack !== '1') return
-
-		hide()
+	// "Do Not Track" enabled
+	if(navigator.doNotTrack === '1') hide()
 })
 </script>
