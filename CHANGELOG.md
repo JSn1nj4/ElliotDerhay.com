@@ -37,6 +37,7 @@
 - Add `lando pull_content` to get latest remote content easily
 - Tweak single "post-install-cmd" script
 - Minor code tweaks
+- Add new Dusk testing directory
 
 ## Release 1.11.0
 
