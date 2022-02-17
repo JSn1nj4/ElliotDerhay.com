@@ -1,35 +1,26 @@
 <template>
-	<div class="atom-spinner" :style="`width: ${this.size}; height: ${this.size};`">
+	<div class="atom-spinner" :style="`width: ${size}; height: ${size};`">
 		<div class="spinner-inner">
-			<div class="spinner-line" :style="`border-left-width: calc(${this.size} / 25); border-top-width: calc(${this.size} / 25); border-left-color: ${this.color};`"></div>
-			<div class="spinner-line" :style="`border-left-width: calc(${this.size} / 25); border-top-width: calc(${this.size} / 25); border-left-color: ${this.color};`"></div>
-			<div class="spinner-line" :style="`border-left-width: calc(${this.size} / 25); border-top-width: calc(${this.size} / 25); border-left-color: ${this.color};`"></div>
+			<div class="spinner-line" :style="`border-left-width: calc(${size} / 25); border-top-width: calc(${size} / 25); border-left-color: ${color};`"></div>
+			<div class="spinner-line" :style="`border-left-width: calc(${size} / 25); border-top-width: calc(${size} / 25); border-left-color: ${color};`"></div>
+			<div class="spinner-line" :style="`border-left-width: calc(${size} / 25); border-top-width: calc(${size} / 25); border-left-color: ${color};`"></div>
 			<!--Chrome renders little circles malformed :(-->
-			<div class="spinner-circle" :style="`color: ${this.color}; font-size: calc(${this.size} * 0.24);`">
+			<div class="spinner-circle" :style="`color: ${color}; font-size: calc(${size} * 0.24);`">
 				&#9679;
 			</div>
 		</div>
 	</div>
 </template>
 
-<script>
+<script setup>
 /**
  * Adapted from HTML version of Atom Spinner from "Epic Spinners"
  * spinner collection website: https://epic-spinners.epicmax.co/
  */
-export default {
-	name: "atom-spinner",
-	props: {
-		size: {
-			type: String,
-			default: '60px',
-		},
-		color: {
-			type: String,
-			default: '#00C49A',
-		},
-	},
-}
+const props = defineProps({
+	size: '60px',
+	color: '#00C49A',
+})
 </script>
 
 <style scoped>

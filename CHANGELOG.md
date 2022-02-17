@@ -1,5 +1,44 @@
 # Changelog
 
+## Release 1.12.0
+
+### Major changes
+- Upgrade environment dependencies
+	- Node 16.14.0
+	- Yarn 1.22.17
+- Upgrade Yarn dependencies
+	- vue@^3.2.30
+	- vue-loader@^17.0.0
+- Remove vue-template-compiler
+- Upgrade composer dependencies
+	- fruitcake/laravel-cors@^2.0.5
+	- guzzlehttp/guzzle@^7.2
+	- laravel/framework@^9.0
+	- laravel/tinker@^2.7
+	- nunomaduro/collision@^6.1
+	- phpunit/phpunit@^9.5.10
+- Replace facade/ignition@^2.5 with spatie/laravel-ignition@^1.0
+- Remove fideloper/proxy@^4.4
+- Remove cross-env@^7.0.2
+- Remove eslint@^8.1.0
+- Add missing peer dependencies
+	- @babel/core@^7.15.8
+	- @babel/plugin-proposal-object-rest-spread@^7.15.6
+	- @babel/plugin-syntax-dynamic-import@^7.8.3
+	- @babel/plugin-transform-runtime@^7.15.8
+	- @babel/preset-env@^7.15.8
+	- autoprefixer@^10.0.2
+	- webpack@^5.60.0
+	- webpack-cli@^4.9.1
+- Update some Vue code
+- Remove some unused Vue templates
+
+### Minor changes
+- Add `lando pull_content` to get latest remote content easily
+- Tweak single "post-install-cmd" script
+- Minor code tweaks
+- Add new Dusk testing directory
+
 ## Release 1.11.0
 
 ### Main changes
@@ -29,7 +68,7 @@
     - pestphp/pest-plugin-laravel@^1.2
 
 ### Tweaks
-- Tweak Tailwind config to be more v3-friendly 
+- Tweak Tailwind config to be more v3-friendly
 
 ## Release 1.10.0
 

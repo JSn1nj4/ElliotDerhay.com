@@ -14,25 +14,28 @@
 	</div>
 </template>
 
-<script>
-export default {
-	data: () => ({
-		'btnClasses': 'flex-1 p-4 m-2 font-bold',
-		'boxHeight': 'auto',
-		'displayClass': 'block',
-	}),
-	methods: {
-		allowTracker(allow) {
-			EventBus.$emit('allow_tracking', allow);
-			document.cookie = 'GA_POPUP_INTERACTION=1';
-			this.hide();
-		},
-		hide() {
-			this.displayClass = 'hidden';
-		}
-	},
-	beforeMount() {
-		if(document.cookie.indexOf('GA_POPUP_INTERACTION=1') !== -1 && navigator.doNotTrack === '1') this.hide();
-	},
+<script setup>
+import {ref, onBeforeMount} from 'vue'
+
+const btnClasses = ref('flex-1 p-4 m-2 font-bold')
+const displayClass = ref('block')
+
+function allowTracker(allow) {
+	const event = new CustomEvent('allow_tracking', { detail: allow });
+	document.dispatchEvent(event);
+	document.cookie = 'GA_POPUP_INTERACTION=1'
+	hide()
 }
+
+function hide() {
+	displayClass.value = 'hidden'
+}
+
+onBeforeMount(function() {
+	// Popup has been interacted with
+	if(document.cookie.indexOf('GA_POPUP_INTERACTION=1') !== -1) hide()
+
+	// "Do Not Track" enabled
+	if(navigator.doNotTrack === '1') hide()
+})
 </script>
