@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\Twitter;
 
 use App\Contracts\SocialMediaService;
 use App\DataTransferObjects\TweetDTO;

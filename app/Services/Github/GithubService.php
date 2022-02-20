@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\Github;
 
 use App\Contracts\GitHostService;
 use App\DataTransferObjects\GithubEventDTO;

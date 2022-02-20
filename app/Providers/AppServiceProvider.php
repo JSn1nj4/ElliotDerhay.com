@@ -4,8 +4,8 @@ namespace App\Providers;
 
 use App\Contracts\GitHostService;
 use App\Contracts\SocialMediaService;
-use App\Services\GithubService;
-use App\Services\TwitterService;
+use App\Services\Github\GithubService;
+use App\Services\Twitter\TwitterService;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
