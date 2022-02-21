@@ -3,7 +3,6 @@
 namespace App\Services\Twitter\Endpoints;
 
 use App\Definitions\HttpMethod;
-use Exception;
 
 class TokenEndpoint extends BaseEndpoint
 {
@@ -15,20 +14,12 @@ class TokenEndpoint extends BaseEndpoint
 		'grant_type' => 'client_credentials',
 	];
 
-	public function __construct(array $headers, array $params = [])
+	public function __construct()
 	{
+		parent::__construct();
+
 		$this->endpoint = "oauth2/token";
 
 		$this->method = HttpMethod::POST;
-
-		foreach(array_keys($this->headers) as $key) {
-			if(!isset($headers[$key])) {
-				throw new Exception("Header '{$key}' is required for endpoint '{$this->base}/{$this->endpoint}'");
-			}
-		}
-
-		$this->headers = array_merge($this->headers, $headers);
-
-		$this->params = array_merge($this->params, $params);
 	}
 }

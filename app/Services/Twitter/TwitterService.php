@@ -6,9 +6,13 @@ use App\Contracts\SocialMediaService;
 use App\DataTransferObjects\TweetDTO;
 use App\DataTransferObjects\TwitterUserDTO;
 use App\Models\Token;
+use App\Services\AbstractEndpoint;
+use App\Services\Twitter\Endpoints\TokenEndpoint;
 use Exception;
+use Illuminate\Http\Client\Response;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Str;
 
 class TwitterService implements SocialMediaService
 {
@@ -77,6 +81,16 @@ class TwitterService implements SocialMediaService
 		}
 	}
 
+	public function call(AbstractEndpoint $endpoint): Response
+	{
+		return Http::asForm()
+			->withHeaders($endpoint->headers)
+			->{Str::lower($endpoint->method->value)}(
+				$endpoint->url(),
+				$endpoint->params
+			);
+	}
+
 	/**
 	 * Get the Twitter API token
 	 *
@@ -105,13 +119,9 @@ class TwitterService implements SocialMediaService
 			abort(500);
 		}
 
-		$auth_hash = base64_encode(urlencode($this->key) . ':' . urlencode($this->secret));
-
-		$response = Http::asForm()->withHeaders([
-			'Authorization' => "Basic {$auth_hash}",
-		])->post($this->getUrl("oauth2/token"), [
-			'grant_type' => 'client_credentials',
-		]);
+		$response = $this->call(TokenEndpoint::make()->with([
+			'Authorization' => "Basic " . base64_encode(urlencode($this->key) . ':' . urlencode($this->secret)),
+		]));
 
 		if ($response->failed()) {
 			$response->throw();
