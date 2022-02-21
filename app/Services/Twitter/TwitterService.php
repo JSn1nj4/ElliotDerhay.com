@@ -146,7 +146,7 @@ class TwitterService implements SocialMediaService
 			'since_id' => $since,
 		])->reject(fn ($value, $key) => is_null($value));
 
-		$response = Http::withToken($this->token)
+		$response = Http::withToken($this->token->value)
 			->get(
 				$this->getUrl("1.1/statuses/user_timeline.json"), $query->toArray()
 			);
