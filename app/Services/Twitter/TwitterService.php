@@ -18,35 +18,23 @@ class TwitterService implements SocialMediaService
 {
 	/**
 	 * The base Twitter API URL
-	 *
-	 * @property string         $api_url
-	 * @access private
 	 */
-	private $api_url = 'https://api.twitter.com';
+	private string $api_url = 'https://api.twitter.com';
 
 	/**
 	 * The token used for retrieving tweet information from the Twitter API
-	 *
-	 * @property string         $token
-	 * @access private
 	 */
-	private $token;
+	private ?Token $token;
 
 	/**
 	 * The API key used for generating the token
-	 *
-	 * @property string         $key
-	 * @access private
 	 */
-	private $key;
+	private string|bool $key;
 
 	/**
 	 * The API secret key part used for generating the token
-	 *
-	 * @property string         $secret
-	 * @access private
 	 */
-	private $secret;
+	private string|bool $secret;
 
 	/**
 	 * Create a new instance of the Tweet model
@@ -81,6 +69,15 @@ class TwitterService implements SocialMediaService
 		}
 	}
 
+	/**
+	 * Call a specified Twitter API endpoint
+	 *
+	 * @todo: make this more generic or find way to jump between helper
+	 * methods like Http::asForm() or Http::withToken() as needed,
+	 * otherwise this will become messy. The former may require the
+	 * endpoint classes knowing what encoding or other specific
+	 * request format is required besides request headers and params.
+	 */
 	public function call(AbstractEndpoint $endpoint): Response
 	{
 		return Http::asForm()
@@ -92,24 +89,12 @@ class TwitterService implements SocialMediaService
 	}
 
 	/**
-	 * Get the Twitter API token
+	 * Get the Twitter API token from Twitter
 	 *
-	 * Generate a new one if necessary.
-	 *
-	 * @method                  getToken
-	 * @access public
-	 *
-	 * @return App\Models\Token;
-	 *
-	 * The 'if' in this case has to do with whether Twitter already has a token
-	 * for use. If the token hasn't been generated previously or if the previous
-	 * token was revoked, then this function will be used to ask Twitter for a
-	 * new one.
-	 *
-	 * This method will also only be called if the token doesn't already exist
-	 * in the environment.
+	 * This method is intended to be used only if $this->token isn't
+	 * set.
 	 */
-	public function getToken()
+	private function getToken(): Token
 	{
 		if ($this->token) {
 			return $this->token;
