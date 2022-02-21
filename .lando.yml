@@ -14,12 +14,12 @@ services:
     type: node:16
 events:
   post-start:
-    - appserver: composer install
-    - node: yarn
+    # - appserver: composer install
+    # - node: yarn
     - appserver: php artisan db:seed
     - appserver: php artisan github:event:pull
     - appserver: php artisan tweet:pull
-    - node: yarn dev
+    # - node: yarn dev
 tooling:
   node:
     service: node
