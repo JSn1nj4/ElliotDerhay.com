@@ -52,11 +52,6 @@ class TwitterService implements SocialMediaService
 	 */
 	public function __construct()
 	{
-		$this->token = Token::whereRaw("LOWER('service') like '%twitter%'")
-			->latest()
-			->valid()
-			->first();
-
 		$this->key = config('services.twitter.key', false);
 		$this->secret = config('services.twitter.secret', false);
 
@@ -67,6 +62,12 @@ class TwitterService implements SocialMediaService
 		if(!$this->secret) {
 			throw new Exception("Config option 'services.twitter.secret' not set.");
 		}
+
+		$this->token = Token::whereRaw("LOWER('service') like '%twitter%'")
+			->latest()
+			->valid()
+			->first()
+			?? $this->getToken();
 	}
 
 	/**
@@ -96,17 +97,11 @@ class TwitterService implements SocialMediaService
 	 */
 	private function getToken(): Token
 	{
-		if ($this->token) {
-			return $this->token;
-		}
-
-		if (!$this->key || !$this->secret) {
-			abort(500);
-		}
-
-		$response = $this->call(TokenEndpoint::make()->with([
+		$endpoint = TokenEndpoint::make()->with([
 			'Authorization' => "Basic " . base64_encode(urlencode($this->key) . ':' . urlencode($this->secret)),
-		]));
+		]);
+
+		$response = $this->call($endpoint);
 
 		if ($response->failed()) {
 			$response->throw();
@@ -119,13 +114,10 @@ class TwitterService implements SocialMediaService
 			throw new Exception($response["errors"][0]["message"]);
 		}
 
-		// $this->token = $response['access_token'];
-		$this->token = Token::create([
+		return Token::create([
 			'service' => 'twitter',
 			'value' => $response['access_token'],
 		]);
-
-		return $this->token;
 	}
 
 	/**
@@ -154,7 +146,7 @@ class TwitterService implements SocialMediaService
 			'since_id' => $since,
 		])->reject(fn ($value, $key) => is_null($value));
 
-		$response = Http::withToken($this->getToken()->value)
+		$response = Http::withToken($this->token)
 			->get(
 				$this->getUrl("1.1/statuses/user_timeline.json"), $query->toArray()
 			);
