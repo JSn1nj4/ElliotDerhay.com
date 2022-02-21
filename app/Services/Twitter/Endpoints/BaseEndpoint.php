@@ -4,7 +4,6 @@ namespace App\Services\Twitter\Endpoints;
 
 use App\Services\AbstractEndpoint;
 use Exception;
-use Illuminate\Support\Str;
 
 class BaseEndpoint extends AbstractEndpoint
 {
@@ -34,7 +33,9 @@ class BaseEndpoint extends AbstractEndpoint
 			}
 
 			if (!isset($args[$key])) {
-				throw new Exception(Str::title(Str::singular($field_name)) . " '{$key}' is required for endpoint '{$this->url()}'");
+				throw new Exception(str($field_name)
+					->singular()
+					->title() . " '{$key}' is required for endpoint '{$this->url()}'");
 			}
 		}
 	}

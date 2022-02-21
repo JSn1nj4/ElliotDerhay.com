@@ -14,7 +14,7 @@ abstract class AbstractEndpoint
 
 	public function __get($name)
 	{
-		return $this->{$name};
+		return $this->$name;
 	}
 
 	public static function make(): static
