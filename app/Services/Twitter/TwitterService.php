@@ -8,6 +8,7 @@ use App\DataTransferObjects\TwitterUserDTO;
 use App\Models\Token;
 use App\Services\AbstractEndpoint;
 use App\Services\Twitter\Endpoints\TokenEndpoint;
+use App\Services\Twitter\Endpoints\UserTimelineEndpoint;
 use Exception;
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Collection;
@@ -39,12 +40,7 @@ class TwitterService implements SocialMediaService
 	/**
 	 * Create a new instance of the Tweet model
 	 *
-	 * @method                  __construct
-	 * @access public
-	 *
-	 * @param array             $attributes
-	 *
-	 * @return void
+	 * @todo: need to fix 'valid' issue; 'expires_at' is being set to null
 	 *
 	 * This is necessary to initialize some properties that can't otherwise be
 	 * initialized. Initializing properties outside of a constrctor requires
@@ -65,7 +61,7 @@ class TwitterService implements SocialMediaService
 
 		$this->token = Token::whereRaw("LOWER('service') like '%twitter%'")
 			->latest()
-			->valid()
+			// ->valid()
 			->first()
 			?? $this->getToken();
 	}
@@ -81,9 +77,19 @@ class TwitterService implements SocialMediaService
 	 */
 	public function call(AbstractEndpoint $endpoint): Response
 	{
-		return Http::asForm()
-			->withHeaders($endpoint->headers)
-			->{Str::lower($endpoint->method->value)}(
+		$endpoint_map = [
+			'asForm' => [
+				TokenEndpoint::class,
+			],
+		];
+
+		$pendingRequest = match(true) {
+			in_array(get_class($endpoint), $endpoint_map['asForm']) => Http::asForm()
+				->withHeaders($endpoint->headers),
+			default => Http::withHeaders($endpoint->headers),
+		};
+
+		return $pendingRequest->{Str::lower($endpoint->method->value)}(
 				$endpoint->url(),
 				$endpoint->params
 			);
@@ -97,11 +103,9 @@ class TwitterService implements SocialMediaService
 	 */
 	private function getToken(): Token
 	{
-		$endpoint = TokenEndpoint::make()->with([
+		$response = $this->call(TokenEndpoint::make()->with([
 			'Authorization' => "Basic " . base64_encode(urlencode($this->key) . ':' . urlencode($this->secret)),
-		]);
-
-		$response = $this->call($endpoint);
+		]));
 
 		if ($response->failed()) {
 			$response->throw();
@@ -139,17 +143,18 @@ class TwitterService implements SocialMediaService
 			throw new Exception("'\$count' value cannot be greater than 3200.");
 		}
 
-		$query = collect([
-			'count' => $count,
-			'include_rts' => $reposts,
-			'screen_name' => $username,
-			'since_id' => $since,
-		])->reject(fn ($value, $key) => is_null($value));
-
-		$response = Http::withToken($this->token->value)
-			->get(
-				$this->getUrl("1.1/statuses/user_timeline.json"), $query->toArray()
-			);
+		$response = $this->call(UserTimelineEndpoint::make()->with(
+			headers: [
+				"Authorization" => "Bearer {$this->token->value}",
+			],
+			params: collect([
+				'count' => $count,
+				'include_rts' => $reposts,
+				'screen_name' => $username,
+				'since_id' => $since,
+			])->reject(fn ($value, $key) => is_null($value))
+			->toArray())
+		);
 
 		if ($response->failed()) {
 			$response->throw();
@@ -167,6 +172,8 @@ class TwitterService implements SocialMediaService
 
 	public function getUrl(string $url): string
 	{
+		trigger_error('Method ' . __METHOD__ . ' is deprecated', E_USER_DEPRECATED);
+
 		return "{$this->api_url}/{$url}";
 	}
 }
