@@ -59,7 +59,7 @@ class TwitterService implements SocialMediaService
 			throw new Exception("Config option 'services.twitter.secret' not set.");
 		}
 
-		$this->token = Token::whereRaw("LOWER('service') like '%twitter%'")
+		$this->token = Token::whereRaw("LOWER(service) like '%twitter%'")
 			->latest()
 			// ->valid()
 			->first()
