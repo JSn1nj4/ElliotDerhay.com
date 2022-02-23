@@ -1,5 +1,12 @@
 # Changelog
 
+## Relase 2.0.0
+
+### Bug fixes
+- Fix #47: token "expires_at" issue
+	- Check for `null` value for tokens that don't have an expiration date
+	- Conversely, ensure value is _not_ `null` as part of expiration check
+
 ## Release 1.12.0
 
 ### Major changes

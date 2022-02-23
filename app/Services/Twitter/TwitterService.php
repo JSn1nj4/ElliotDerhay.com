@@ -62,7 +62,7 @@ class TwitterService implements SocialMediaService
 
 		$this->token = Token::whereRaw("LOWER(service) like '%twitter%'")
 			->latest()
-			// ->valid()
+			->valid()
 			->first()
 			?? $this->getToken();
 	}
