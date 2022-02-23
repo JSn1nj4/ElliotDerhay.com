@@ -8,6 +8,7 @@ use App\DataTransferObjects\TwitterUserDTO;
 use App\Models\Token;
 use App\Services\AbstractEndpoint;
 use App\Services\Twitter\Endpoints\TokenEndpoint;
+use App\Services\Twitter\Endpoints\UsersLookupEndpoint;
 use App\Services\Twitter\Endpoints\UserTimelineEndpoint;
 use Exception;
 use Illuminate\Http\Client\PendingRequest;
@@ -98,6 +99,23 @@ class TwitterService implements SocialMediaService
 	}
 
 	/**
+	 * Check HTTP responses for errors
+	 */
+	private function checkForErrors(Response $response): void
+	{
+		if ($response->failed()) {
+			$response->throw();
+		}
+
+		if (
+			isset($response["errors"]) &&
+			count($response["errors"]) >= 1
+		) {
+			throw new Exception($response["errors"][0]["message"]);
+		}
+	}
+
+	/**
 	 * Get the Twitter API token from Twitter
 	 *
 	 * This method is intended to be used only if $this->token isn't
@@ -109,16 +127,7 @@ class TwitterService implements SocialMediaService
 			'Authorization' => "Basic " . base64_encode(urlencode($this->key) . ':' . urlencode($this->secret)),
 		]));
 
-		if ($response->failed()) {
-			$response->throw();
-		}
-
-		if (
-			isset($response["errors"]) &&
-			count($response["errors"]) >= 1
-		) {
-			throw new Exception($response["errors"][0]["message"]);
-		}
+		$this->checkForErrors($response);
 
 		return Token::create([
 			'service' => 'twitter',
@@ -158,9 +167,7 @@ class TwitterService implements SocialMediaService
 			->toArray())
 		);
 
-		if ($response->failed()) {
-			$response->throw();
-		}
+		$this->checkForErrors($response);
 
 		return collect($response->json())
 			->transform(fn ($tweet) => new TweetDTO(
@@ -177,5 +184,27 @@ class TwitterService implements SocialMediaService
 		trigger_error('Method ' . __METHOD__ . ' is deprecated', E_USER_DEPRECATED);
 
 		return "{$this->api_url}/{$url}";
+	}
+
+	public function getUsers(Collection $users): Collection
+	{
+		$response = $this->call(UsersLookupEndpoint::make()->with(
+			headers: [
+				"Authorization" => "Bearer {$this->token->value}",
+			],
+			params: [
+				"screen_name" => $users->implode('screen_name', ','),
+			],
+		));
+
+		$this->checkForErrors($response);
+
+		return collect($response->json())
+			->transform(fn ($user) => new TwitterUserDTO(
+				id: $user['id'],
+				name: $user['name'],
+				screen_name: $user['screen_name'],
+				profile_image_url_https: $user['profile_image_url_https'],
+			));
 	}
 }

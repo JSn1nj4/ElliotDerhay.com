@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\DataTransferObjects\TwitterUserDTO;
+use App\Definitions\CreateMode;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -17,9 +18,9 @@ class TwitterUser extends Model
 		'profile_image_url_https',
 	];
 
-	public static function fromDTO(TwitterUserDTO $dto): self
+	public static function fromDTO(TwitterUserDTO $dto, CreateMode $mode = CreateMode::FirstOrCreate): self
 	{
-		return self::firstOrCreate(['id' => $dto->id], [
+		return self::{$mode->value}(['id' => $dto->id], [
 			'name' => $dto->name,
 			'screen_name' => $dto->screen_name,
 			'profile_image_url_https' => $dto->profile_image_url_https,
