@@ -10,6 +10,7 @@ use App\Services\AbstractEndpoint;
 use App\Services\Twitter\Endpoints\TokenEndpoint;
 use App\Services\Twitter\Endpoints\UserTimelineEndpoint;
 use Exception;
+use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Http;
@@ -83,16 +84,17 @@ class TwitterService implements SocialMediaService
 			],
 		];
 
-		$pendingRequest = match(true) {
-			in_array(get_class($endpoint), $endpoint_map['asForm']) => Http::asForm()
-				->withHeaders($endpoint->headers),
-			default => Http::withHeaders($endpoint->headers),
-		};
-
-		return $pendingRequest->{Str::lower($endpoint->method->value)}(
-				$endpoint->url(),
-				$endpoint->params
-			);
+		return with(
+			Http::withHeaders($endpoint->headers),
+			fn (PendingRequest $pendingRequest): PendingRequest => match(true) {
+				in_array($endpoint::class, $endpoint_map['asForm']) => $pendingRequest->asForm(),
+				default => $pendingRequest,
+			}
+		)
+		->{Str::lower($endpoint->method->value)}(
+			$endpoint->url(),
+			$endpoint->params
+		);
 	}
 
 	/**
