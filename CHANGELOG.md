@@ -17,6 +17,8 @@
 - Restructure `TwitterService` to use dedicated Endpoint classes for API endpoint definitions
 - Deprecate `TwitterService::getUrl()` in favor of `AbstractEndpoint::url()` method directly on endpoints
 - Modify `TwitterUser::fromDTO()` to dynamically choose model create/update methods using `CreateMode` enum
+- Update `TwitterServiceTest`
+- Reorganize "tests/Unit/App/Services" to match "app/Services" folder structure
 
 ### Bug fixes
 - Fix #47: token "expires_at" issue
