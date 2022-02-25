@@ -32,12 +32,12 @@ class TwitterService implements SocialMediaService
 	/**
 	 * The API key used for generating the token
 	 */
-	private string|bool $key;
+	private string $key;
 
 	/**
 	 * The API secret key part used for generating the token
 	 */
-	private string|bool $secret;
+	private string $secret;
 
 	/**
 	 * Create a new instance of the Tweet model
@@ -50,16 +50,8 @@ class TwitterService implements SocialMediaService
 	 */
 	public function __construct()
 	{
-		$this->key = config('services.twitter.key', false);
-		$this->secret = config('services.twitter.secret', false);
-
-		if(!$this->key) {
-			throw new Exception("Config option 'services.twitter.key' not set.");
-		}
-
-		if(!$this->secret) {
-			throw new Exception("Config option 'services.twitter.secret' not set.");
-		}
+		$this->key = config('services.twitter.key');
+		$this->secret = config('services.twitter.secret');
 
 		$this->token = Token::whereRaw("LOWER(service) like '%twitter%'")
 			->latest()
