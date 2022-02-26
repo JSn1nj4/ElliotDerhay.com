@@ -3,7 +3,6 @@
 namespace App\Services\Twitter\Endpoints;
 
 use App\Services\AbstractEndpoint;
-use Exception;
 
 class BaseEndpoint extends AbstractEndpoint
 {

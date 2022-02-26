@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Definitions\HttpMethod;
+use Exception;
 
 abstract class AbstractEndpoint
 {
