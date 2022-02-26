@@ -6,10 +6,14 @@ use App\Contracts\GitHostService;
 use App\DataTransferObjects\GithubEventDTO;
 use App\DataTransferObjects\GithubUserDTO;
 use App\Events\NewGithubEventTypesEvent;
+use App\Services\AbstractEndpoint;
+use App\Services\Github\Endpoints\ListUserPublicEventsEndpoint;
 use Exception;
+use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Str;
 
 class GithubService implements GitHostService
 {
@@ -69,6 +73,45 @@ class GithubService implements GitHostService
 		$this->unsupportedEventTypes = collect([]);
 	}
 
+	/**
+	 * Call a specified GitHub API endpoint
+	 */
+	public function call(AbstractEndpoint $endpoint): Response
+	{
+		$endpoint_map = [
+			'asForm' => [],
+		];
+
+		return with(
+			Http::withHeaders($endpoint->headers),
+			fn (PendingRequest $pendingRequest): PendingRequest => match (true) {
+				in_array($endpoint::class, $endpoint_map['asForm']) => $pendingRequest->asForm(),
+				default => $pendingRequest,
+			}
+		)
+			->{Str::lower($endpoint->method->value)}(
+				$endpoint->url(),
+				$endpoint->params
+			);
+	}
+
+	/**
+	 * Check HTTP responses for errors
+	 */
+	private function checkForErrors(Response $response): void
+	{
+		if ($response->failed()) {
+			$response->throw();
+		}
+
+		if (
+			isset($response["errors"]) &&
+			count($response["errors"]) >= 1
+		) {
+			throw new Exception($response["errors"][0]["message"]);
+		}
+	}
+
 	private function eventTypeSupported(string $type): bool
 	{
 		if (in_array($type, $this->supportedEventTypes)) return true;
@@ -99,8 +142,6 @@ class GithubService implements GitHostService
 
 	/**
 	 * Retrieve raw events
-	 *
-	 * @todo: check for error message
 	 */
 	public function getEvents(string $user, int $count): Collection
 	{
@@ -112,23 +153,20 @@ class GithubService implements GitHostService
 			throw new Exception("'\$count' value must be 100 or less. Value is '{$count}'.");
 		}
 
-		$response = Http::withToken($this->token)
-			->withHeaders([
+		$response = $this->call(ListUserPublicEventsEndpoint::make()
+			->withUser($user)
+			->with([
+				"Authorization" => "Bearer {$this->token}",
 				"Accept" => "application/vnd.github.v3+json",
 				"User-Agent" =>  "Elliot-Derhay-App",
-			])->get($this->getUrl("users/{$user}/events/public"), [
-				'per_page' => $count
-			]);
+			], [
+				'per_page' => $count,
+			])
+		);
+
+		$this->checkForErrors($response);
 
 		return $this->filterEventTypes($response);
-	}
-
-	/**
-	 * Return GitHub API URL
-	 */
-	public function getUrl(string $url): string
-	{
-		return "{$this->api_url}/{$url}";
 	}
 
 	private function sendNewEventTypesNotifications(): void
