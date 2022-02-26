@@ -19,11 +19,6 @@ use Illuminate\Support\Str;
 class GithubService implements GitHostService
 {
 	/**
-	 * The base GitHub API URL
-	 */
-	private string $api_url = 'https://api.github.com';
-
-	/**
 	 * The recipients to notify of new GitHub event types
 	 */
 	private array $alertRecipients = [];
