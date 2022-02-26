@@ -19,6 +19,7 @@
 - Modify `TwitterUser::fromDTO()` to dynamically choose model create/update methods using `CreateMode` enum
 - Update `TwitterServiceTest`
 - Reorganize "tests/Unit/App/Services" to match "app/Services" folder structure
+- Add endpoint tests
 
 ### Bug fixes
 - Fix #47: token "expires_at" issue
