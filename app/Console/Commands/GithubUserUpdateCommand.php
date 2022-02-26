@@ -4,7 +4,7 @@ namespace App\Console\Commands;
 
 use App\DataTransferObjects\GithubUserDTO;
 use App\Definitions\CreateMode;
-use App\Events\TwitterUsersUpdatedEvent;
+use App\Events\GithubUsersUpdatedEvent;
 use App\Models\GithubUser;
 use App\Services\Github\GithubService;
 use Illuminate\Console\Command;
@@ -51,9 +51,9 @@ class GithubUserUpdateCommand extends Command
 		$github->getUsers($users)
 		->each(fn (GithubUserDTO $dto): GithubUser => GithubUser::fromDTO($dto, CreateMode::UpdateOrCreate));
 
-		$this->info("Twitter users updated!");
+		$this->info("GitHub users updated!");
 
-		TwitterUsersUpdatedEvent::dispatch();
+		GithubUsersUpdatedEvent::dispatch();
 
 		return Command::SUCCESS;
     }
