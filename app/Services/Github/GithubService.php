@@ -7,6 +7,7 @@ use App\DataTransferObjects\GithubEventDTO;
 use App\DataTransferObjects\GithubUserDTO;
 use App\Events\NewGithubEventTypesEvent;
 use App\Services\AbstractEndpoint;
+use App\Services\Github\Endpoints\GetUserEndpoint;
 use App\Services\Github\Endpoints\ListUserPublicEventsEndpoint;
 use Exception;
 use Illuminate\Http\Client\PendingRequest;
@@ -157,8 +158,6 @@ class GithubService implements GitHostService
 			->withUser($user)
 			->with([
 				"Authorization" => "Bearer {$this->token}",
-				"Accept" => "application/vnd.github.v3+json",
-				"User-Agent" =>  "Elliot-Derhay-App",
 			], [
 				'per_page' => $count,
 			])
@@ -167,6 +166,28 @@ class GithubService implements GitHostService
 		$this->checkForErrors($response);
 
 		return $this->filterEventTypes($response);
+	}
+
+	/**
+	 * Get GitHub user data
+	 */
+	public function getUsers(Collection $users): Collection
+	{
+		return $users->map(function ($user): GithubUserDTO {
+			$response = $this->call(GetUserEndpoint::make()
+				->withUser($user->login)
+				->with([
+					"Authorization" => "Bearer {$this->token}",
+				])
+			);
+
+			$this->checkForErrors($response);
+
+			return GithubUserDTO::fromArray([
+				'display_login' => $response->json('login'),
+				...$response->json(),
+			]);
+		});
 	}
 
 	private function sendNewEventTypesNotifications(): void
