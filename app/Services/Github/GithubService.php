@@ -183,6 +183,15 @@ class GithubService implements GitHostService
 
 			$this->checkForErrors($response);
 
+			/**
+			 * This is different than when getting GitHub events.
+			 * This is because the "actor" object on a GitHub event
+			 * includes the "display_login" field while the user object
+			 * returned from this endpoint doesn't.
+			 *
+			 * Unfortunately, this means it needs to be faked here for
+			 * consistency.
+			 */
 			return GithubUserDTO::fromArray([
 				'display_login' => $response->json('login'),
 				...$response->json(),
