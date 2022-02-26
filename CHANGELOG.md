@@ -1,5 +1,31 @@
 # Changelog
 
+## Relase 2.0.0
+
+### New features
+- `twitter:user:update` command to get fresh user data
+- New `HttpMethod` enum
+- New `CreateMode` enum to aid in dynamically selecting model create mode
+- New `TwitterService::call()` method for calling endpoints via dedicated enpoint classes
+- New `TwitterService::checkForErrors()` method to check responses for errors
+- New `TwitterService::getUsers()` method to fetch twitter user data directly
+- New `TwitterUsersUpdatedEvent` class
+
+### Refactoring
+- Init `TwitterService::$token` directly in constructor to prune conditionals
+- Use `TwitterService::$token` directly instead of using `TwitterService::getToken()` to check if token is already set
+- Restructure `TwitterService` to use dedicated Endpoint classes for API endpoint definitions
+- Deprecate `TwitterService::getUrl()` in favor of `AbstractEndpoint::url()` method directly on endpoints
+- Modify `TwitterUser::fromDTO()` to dynamically choose model create/update methods using `CreateMode` enum
+- Update `TwitterServiceTest`
+- Reorganize "tests/Unit/App/Services" to match "app/Services" folder structure
+- Add endpoint tests
+
+### Bug fixes
+- Fix #47: token "expires_at" issue
+	- Check for `null` value for tokens that don't have an expiration date
+	- Conversely, ensure value is _not_ `null` as part of expiration check
+
 ## Release 1.12.0
 
 ### Major changes
