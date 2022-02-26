@@ -2,16 +2,18 @@
 
 ## Relase 2.0.0
 
-### New features
-- `twitter:user:update` command to get fresh user data
+### New
+- `twitter:user:update` command to get fresh Twitter user data
 - New `HttpMethod` enum
 - New `CreateMode` enum to aid in dynamically selecting model create mode
 - New `TwitterService::call()` method for calling endpoints via dedicated enpoint classes
 - New `TwitterService::checkForErrors()` method to check responses for errors
 - New `TwitterService::getUsers()` method to fetch twitter user data directly
 - New `TwitterUsersUpdatedEvent` class
+- `github:user:update` command to get fresh GitHub user data
+- New `GithubUsersUpdatedEvent` class
 
-### Refactoring
+### Updates
 - Init `TwitterService::$token` directly in constructor to prune conditionals
 - Use `TwitterService::$token` directly instead of using `TwitterService::getToken()` to check if token is already set
 - Restructure `TwitterService` to use dedicated Endpoint classes for API endpoint definitions
@@ -20,6 +22,7 @@
 - Update `TwitterServiceTest`
 - Reorganize "tests/Unit/App/Services" to match "app/Services" folder structure
 - Add endpoint tests
+- Schedule new user update commands weekly
 
 ### Bug fixes
 - Fix #47: token "expires_at" issue
