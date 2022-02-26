@@ -21,8 +21,6 @@ class ListUserPublicEventsEndpoint extends BaseEndpoint
 
 	public function withUser(string $user): self
 	{
-		$this->endpoint = "users/{$user}/events/public";
-
-		return $this;
+		return tap($this, fn () => $this->endpoint = "users/{$user}/events/public");
 	}
 }
