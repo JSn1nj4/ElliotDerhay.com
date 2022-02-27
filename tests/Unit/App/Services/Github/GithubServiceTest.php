@@ -2,7 +2,6 @@
 
 use App\Events\NewGithubEventTypesEvent;
 use App\Services\Github\GithubService;
-use Illuminate\Http\Client\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Event;
