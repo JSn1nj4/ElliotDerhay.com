@@ -1,7 +1,7 @@
 <?php
 
 use App\Events\NewGithubEventTypesEvent;
-use App\Services\GithubService;
+use App\Services\Github\GithubService;
 use Illuminate\Http\Client\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Config;
@@ -41,43 +41,6 @@ it('throws an exception if email recipient address is not set', function (): voi
 	new GithubService;
 })->throws(Exception::class, "Config option 'mail.to.address' not set.");
 
-it('constructs the correct api url', function (): void {
-	$githubService = new GithubService;
-
-	$api_endpoint = "users/{$this->faker->userName()}/events/public";
-
-	expect($githubService->getUrl($api_endpoint))
-		->toBeString()
-		->toEqual("{$this->api_base}/{$api_endpoint}");
-});
-
-it('constructs a correctly-formatted user event api request', function (): void {
-	$user = $this->faker->userName();
-	$eventCount = $this->faker->numberBetween(1, 100);
-
-	Http::fake([
-		"api.github.com/users/{$user}/events/public*" =>
-		Http::response(json_encode(GithubEventDataFactory::init()
-			->count($eventCount)
-			->make())),
-	]);
-
-	(new GithubService)->getEvents($user, $eventCount);
-
-	Http::assertSent(function (Request $request) use ($user, $eventCount) {
-		$token = config('services.github.token');
-
-		$events_url = "{$this->api_base}/users/{$user}/events/public?per_page={$eventCount}";
-
-		return $request->url() === $events_url &&
-			$request->hasHeaders([
-				'Authorization' => "Bearer {$token}",
-				'Accept' => 'application/vnd.github.v3+json',
-				'User-Agent' => 'Elliot-Derhay-App',
-			]);
-	});
-});
-
 it('throws an exception if requested event count is < 1', function (): void {
 	(new GithubService)->getEvents($this->faker->userName(), 0 - $this->faker->numberBetween());
 })->throws(Exception::class, "'\$count' value must be 1 or higher.");
@@ -102,9 +65,8 @@ it('processes response data received from the github events api', function (): v
 	$events = (new GithubService)->getEvents($user, $eventCount);
 
 	expect($events)
-		->toBeInstanceOf(Collection::class);
-
-	expect(count($events))
+		->toBeInstanceOf(Collection::class)
+		->and(count($events))
 		->toBeLessThanOrEqual($eventCount);
 });
 
