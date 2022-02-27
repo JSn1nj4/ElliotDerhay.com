@@ -4,25 +4,29 @@
 
 ### New
 - `twitter:user:update` command to get fresh Twitter user data
-- New `HttpMethod` enum
-- New `CreateMode` enum to aid in dynamically selecting model create mode
-- New `TwitterService::call()` method for calling endpoints via dedicated enpoint classes
-- New `TwitterService::checkForErrors()` method to check responses for errors
-- New `TwitterService::getUsers()` method to fetch twitter user data directly
-- New `TwitterUsersUpdatedEvent` class
+- `HttpMethod` enum
+- `CreateMode` enum to aid in dynamically selecting model create mode
+- `TwitterService::call()` method for calling endpoints via dedicated enpoint classes
+- `TwitterService::checkForErrors()` method to check responses for errors
+- `TwitterService::getUsers()` method to fetch Twitter user data
+- `TwitterUsersUpdatedEvent` class
 - `github:user:update` command to get fresh GitHub user data
-- New `GithubUsersUpdatedEvent` class
+- `GithubUsersUpdatedEvent` class
+- `GithubService::call()` method for calling endpoints
+- `GithubService::checkforErrors()` method to check responses for errors
+- `GithubService::getUsers()` method to fetch GitHub user data
 
 ### Updates
-- Init `TwitterService::$token` directly in constructor to prune conditionals
-- Use `TwitterService::$token` directly instead of using `TwitterService::getToken()` to check if token is already set
-- Restructure `TwitterService` to use dedicated Endpoint classes for API endpoint definitions
+- Init `TwitterService::$token` in constructor and use directly
+- Restructure `TwitterService` to use dedicated Endpoint classes
 - Deprecate `TwitterService::getUrl()` in favor of `AbstractEndpoint::url()` method directly on endpoints
 - Modify `TwitterUser::fromDTO()` to dynamically choose model create/update methods using `CreateMode` enum
 - Update `TwitterServiceTest`
 - Reorganize "tests/Unit/App/Services" to match "app/Services" folder structure
 - Add endpoint tests
 - Schedule new user update commands weekly
+- Remove `getUrl()` method from `GitHostService` and `SocialMediaService` contracts
+- Restructure `GithubService` a bit to use dedicated Endpoint classes
 
 ### Bug fixes
 - Fix #47: token "expires_at" issue
