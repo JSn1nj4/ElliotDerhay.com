@@ -1,6 +1,8 @@
 <?php
 
+use App\DataTransferObjects\GithubUserDTO;
 use App\Events\NewGithubEventTypesEvent;
+use App\Models\GithubUser;
 use App\Services\Github\GithubService;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Config;
@@ -10,11 +12,8 @@ use Illuminate\Support\Facades\Mail;
 use Tests\Support\GithubEventDataFactory;
 use Tests\Support\PrivateMemberAccessor;
 
-beforeEach(function (): void {
-	$this->api_base = 'https://api.github.com';
-
-	$this->faker = \Faker\Factory::create();
-});
+use function Pest\Faker\faker;
+use function Pest\Laravel\mock;
 
 it('creates an instance of App\Services\GithubService', function (): void {
 	$githubService = new GithubService;
@@ -41,16 +40,16 @@ it('throws an exception if email recipient address is not set', function (): voi
 })->throws(Exception::class, "Config option 'mail.to.address' not set.");
 
 it('throws an exception if requested event count is < 1', function (): void {
-	(new GithubService)->getEvents($this->faker->userName(), 0 - $this->faker->numberBetween());
+	(new GithubService)->getEvents(faker()->userName(), 0 - faker()->numberBetween());
 })->throws(Exception::class, "'\$count' value must be 1 or higher.");
 
 it('throws an exception if requested event count is > 100', function (): void {
-	(new GithubService)->getEvents($this->faker->userName(), $this->faker->numberBetween(101));
+	(new GithubService)->getEvents(faker()->userName(), faker()->numberBetween(101));
 })->throws(Exception::class, "'\$count' value must be 100 or less.");
 
 it('processes response data received from the github events api', function (): void {
-	$user = $this->faker->userName();
-	$eventCount = $this->faker->numberBetween(1, 100);
+	$user = faker()->userName();
+	$eventCount = faker()->numberBetween(1, 100);
 
 	Http::fake([
 		"api.github.com/users/{$user}/events/public*" =>
@@ -70,8 +69,8 @@ it('processes response data received from the github events api', function (): v
 });
 
 it('filters out unsupported types of github events', function (): void {
-	$user = $this->faker->userName();
-	$eventCount = $this->faker->numberBetween(1, 100);
+	$user = faker()->userName();
+	$eventCount = faker()->numberBetween(1, 100);
 
 	$responseData = GithubEventDataFactory::init()
 			->count($eventCount)
@@ -115,8 +114,8 @@ it('filters out unsupported types of github events', function (): void {
 });
 
 it('does not dispatch notification if no unsupported event types are found', function(): void {
-	$user = $this->faker->userName();
-	$eventCount = $this->faker->numberBetween(1, 100);
+	$user = faker()->userName();
+	$eventCount = faker()->numberBetween(1, 100);
 
 	$githubService = new GithubService;
 
@@ -144,8 +143,8 @@ it('does not dispatch notification if no unsupported event types are found', fun
 });
 
 it('dispatches notification if unsupported event types are filtered out', function (): void {
-	$user = $this->faker->userName();
-	$eventCount = $this->faker->numberBetween(1, 100);
+	$user = faker()->userName();
+	$eventCount = faker()->numberBetween(1, 100);
 
 	$githubService = new GithubService;
 
@@ -175,4 +174,24 @@ it('dispatches notification if unsupported event types are filtered out', functi
 	$githubService->getEvents($user, $eventCount);
 
 	Event::assertDispatched(NewGithubEventTypesEvent::class);
+});
+
+it('returns a collection of `GithubUserDTO` from `getUsers()`', function (): void {
+	$github = mock(GithubService::class)->makePartial();
+	$github->shouldReceive('getUser')
+		->andReturn(new GithubUserDTO(
+			id: faker()->randomNumber(7, true),
+			login: faker()->userName(),
+			display_login: faker()->userName(),
+			avatar_url: faker()->imageUrl(),
+		));
+
+	$users = GithubUser::factory()
+		->count(2)
+		->make();
+
+	expect($github->getUsers($users))
+		->toBeInstanceOf(Collection::class)
+		->toHaveCount($users->count())
+		->each->toBeInstanceOf(GithubUserDTO::class);
 });
