@@ -14,7 +14,8 @@
 - `GithubUsersUpdatedEvent` class
 - `GithubService::call()` method for calling endpoints
 - `GithubService::checkforErrors()` method to check responses for errors
-- `GithubService::getUsers()` method to fetch GitHub user data
+- `GithubService::getUser()` method to fetch GitHub user data
+- `GithubService::getUsers()` method to call `GithubService::getUser()` for multiple users
 
 ### Updates
 - Init `TwitterService::$token` in constructor and use directly

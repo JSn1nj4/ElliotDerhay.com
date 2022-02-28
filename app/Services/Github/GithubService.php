@@ -6,6 +6,7 @@ use App\Contracts\GitHostService;
 use App\DataTransferObjects\GithubEventDTO;
 use App\DataTransferObjects\GithubUserDTO;
 use App\Events\NewGithubEventTypesEvent;
+use App\Models\GithubUser;
 use App\Services\AbstractEndpoint;
 use App\Services\Github\Endpoints\GetUserEndpoint;
 use App\Services\Github\Endpoints\ListUserPublicEventsEndpoint;
@@ -164,34 +165,48 @@ class GithubService implements GitHostService
 	}
 
 	/**
-	 * Get GitHub user data
+	 * Get data for a list of GitHub users
+	 *
+	 * This is the primary method because it mimics the GitHub REST
+	 * API's behavior: getting exactly 1 user at a time.
 	 */
-	public function getUsers(Collection $users): Collection
+
+	public function getUser(GithubUser $user): GithubUserDTO
 	{
-		return $users->map(function ($user): GithubUserDTO {
-			$response = $this->call(GetUserEndpoint::make()
+		$response = $this->call(
+			GetUserEndpoint::make()
 				->withUser($user->login)
 				->with([
 					"Authorization" => "Bearer {$this->token}",
 				])
-			);
+		);
 
-			$this->checkForErrors($response);
+		$this->checkForErrors($response);
 
-			/**
-			 * This is different than when getting GitHub events.
-			 * This is because the "actor" object on a GitHub event
-			 * includes the "display_login" field while the user object
-			 * returned from this endpoint doesn't.
-			 *
-			 * Unfortunately, this means it needs to be faked here for
-			 * consistency.
-			 */
-			return GithubUserDTO::fromArray([
-				'display_login' => $response->json('login'),
-				...$response->json(),
-			]);
-		});
+		/**
+		 * This is different than when getting GitHub events.
+		 * This is because the "actor" object on a GitHub event
+		 * includes the "display_login" field while the user object
+		 * returned from this endpoint doesn't.
+		 *
+		 * Unfortunately, this means it needs to be faked here for
+		 * consistency.
+		 */
+		return GithubUserDTO::fromArray([
+			'display_login' => $response->json('login'),
+			...$response->json(),
+		]);
+	}
+
+	/**
+	 * Get data for a group of GitHub users
+	 *
+	 * This is a separate method because GitHub's REST API doesn't
+	 * support retrieving multiple users one a single request.
+	 */
+	public function getUsers(Collection $users): Collection
+	{
+		return $users->map([$this, 'getUser']);
 	}
 
 	private function sendNewEventTypesNotifications(): void
