@@ -90,16 +90,13 @@ class TwitterService implements SocialMediaService
 	 */
 	private function checkForErrors(Response $response): void
 	{
-		if ($response->failed()) {
-			$response->throw();
-		}
+		if ($response->failed()) $response->throw();
 
-		if (
-			isset($response["errors"]) &&
-			count($response["errors"]) >= 1
-		) {
-			throw new Exception($response["errors"][0]["message"]);
-		}
+		if(!isset($response["errors"])) return;
+
+		if(count($response["errors"]) < 1) return;
+
+		throw new Exception($response["errors"][0]["message"]);
 	}
 
 	/**
