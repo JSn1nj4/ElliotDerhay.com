@@ -92,9 +92,9 @@ class TwitterService implements SocialMediaService
 	{
 		if ($response->failed()) $response->throw();
 
-		if(!isset($response["errors"])) return;
+		if (!isset($response["errors"])) return;
 
-		if(count($response["errors"]) < 1) return;
+		if (count($response["errors"]) < 1) return;
 
 		throw new Exception($response["errors"][0]["message"]);
 	}

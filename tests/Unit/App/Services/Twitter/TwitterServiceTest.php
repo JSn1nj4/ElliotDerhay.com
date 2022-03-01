@@ -4,9 +4,11 @@ use App\Models\Token;
 use App\Models\TwitterUser;
 use App\Services\Twitter\TwitterService;
 use Illuminate\Http\Client\Request;
+use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Http;
+use Tests\Support\PrivateMemberAccessor;
 use Tests\Support\TweetDataFactory;
 use Tests\Support\TwitterUserDataFactory;
 
@@ -143,6 +145,47 @@ it('processes a response from the twitter api user timeline endpoint', function 
 	expect(count($tweets))
 		->toBeLessThanOrEqual($tweetCount);
 });
+
+test('`checkForErrors()` does not throw if there are no errors', function (): void {
+	Http::fake();
+
+	Token::factory()->makeOne()->save();
+
+	expect(
+		PrivateMemberAccessor::make()
+			->from(resolve(TwitterService::class))
+			->callMethod('checkForErrors', Http::get('https://example.com'))
+		)
+		->toBeEmpty();
+});
+
+test('`checkForErrors()` throws if there was an issue connecting', function (): void {
+	Http::fake([
+		'*' => Http::response(status: 404),
+	]);
+
+	Token::factory()->makeOne()->save();
+
+	PrivateMemberAccessor::make()
+		->from(resolve(TwitterService::class))
+		->callMethod('checkForErrors', Http::get('https://example.com'));
+})->throws(RequestException::class);
+
+test('`checkForErrors()` throws if an error was found in the response', function (): void {
+	Http::fake([
+		'*' => Http::response([
+			'errors' => [
+				['message' => 'test error message'],
+			],
+		]),
+	]);
+
+	Token::factory()->makeOne()->save();
+
+	PrivateMemberAccessor::make()
+		->from(resolve(TwitterService::class))
+		->callMethod('checkForErrors', Http::get('https://example.com'));
+})->throws(Exception::class, 'test error message');
 
 it('returns a collection of `TwitterUserDTO` objects from `getUsers()` method', function (): void {
 	$users = TwitterUser::factory()

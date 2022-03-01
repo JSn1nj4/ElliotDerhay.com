@@ -32,6 +32,14 @@ class PrivateMemberAccessor
 		return $property->getValue($this->object);
 	}
 
+	public function callMethod(string $methodName, ...$args): mixed
+	{
+		$method = $this->reflector->getMethod($methodName);
+		$method->setAccessible(true);
+
+		return $method->invoke($this->object, ...$args);
+	}
+
 	public static function make(): self
 	{
 		return new self;
