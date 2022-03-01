@@ -16,6 +16,7 @@
 - `GithubService::checkforErrors()` method to check responses for errors
 - `GithubService::getUser()` method to fetch GitHub user data
 - `GithubService::getUsers()` method to call `GithubService::getUser()` for multiple users
+- `GithubUserDataFactory` class to generate data structure similar to GitHub's API
 
 ### Updates
 - Init `TwitterService::$token` in constructor and use directly
@@ -28,6 +29,7 @@
 - Remove `getUrl()` method from `GitHostService` and `SocialMediaService` contracts
 - Restructure `GithubService` a bit to use dedicated Endpoint classes
 - Add endpoint tests
+- Update `GithubServiceTest`
 
 ### Bug fixes
 - Fix #47: token "expires_at" issue
