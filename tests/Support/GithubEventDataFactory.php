@@ -56,12 +56,7 @@ class GithubEventDataFactory extends BaseFactory
 
 		return [
 			'id' => $this->faker->numerify('###########'),
-			'actor' => [
-				'id' => $this->faker->randomNumber(7, true),
-				'login' => $user,
-				'display_login' => $user,
-				'avatar_url' => $this->faker->imageUrl(50, 50, 'cats'),
-			],
+			'actor' => GithubUserDataFactory::init()->withUser($user)->makeOne(),
 			'type' => $type,
 			'created_at' => now()->toDateTimeString(),
 			'repo' => [

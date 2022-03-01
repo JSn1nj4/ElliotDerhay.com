@@ -6,18 +6,19 @@ use App\Contracts\GitHostService;
 use App\DataTransferObjects\GithubEventDTO;
 use App\DataTransferObjects\GithubUserDTO;
 use App\Events\NewGithubEventTypesEvent;
+use App\Models\GithubUser;
+use App\Services\AbstractEndpoint;
+use App\Services\Github\Endpoints\GetUserEndpoint;
+use App\Services\Github\Endpoints\ListUserPublicEventsEndpoint;
 use Exception;
+use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Str;
 
 class GithubService implements GitHostService
 {
-	/**
-	 * The base GitHub API URL
-	 */
-	private string $api_url = 'https://api.github.com';
-
 	/**
 	 * The recipients to notify of new GitHub event types
 	 */
@@ -69,6 +70,45 @@ class GithubService implements GitHostService
 		$this->unsupportedEventTypes = collect([]);
 	}
 
+	/**
+	 * Call a specified GitHub API endpoint
+	 */
+	public function call(AbstractEndpoint $endpoint): Response
+	{
+		$endpoint_map = [
+			'asForm' => [],
+		];
+
+		return with(
+			Http::withHeaders($endpoint->headers),
+			fn (PendingRequest $pendingRequest): PendingRequest => match (true) {
+				in_array($endpoint::class, $endpoint_map['asForm']) => $pendingRequest->asForm(),
+				default => $pendingRequest,
+			}
+		)
+			->{Str::lower($endpoint->method->value)}(
+				$endpoint->url(),
+				$endpoint->params
+			);
+	}
+
+	/**
+	 * Check HTTP responses for errors
+	 */
+	private function checkForErrors(Response $response): void
+	{
+		if ($response->failed()) {
+			$response->throw();
+		}
+
+		if (
+			isset($response["errors"]) &&
+			count($response["errors"]) >= 1
+		) {
+			throw new Exception($response["errors"][0]["message"]);
+		}
+	}
+
 	private function eventTypeSupported(string $type): bool
 	{
 		if (in_array($type, $this->supportedEventTypes)) return true;
@@ -99,8 +139,6 @@ class GithubService implements GitHostService
 
 	/**
 	 * Retrieve raw events
-	 *
-	 * @todo: check for error message
 	 */
 	public function getEvents(string $user, int $count): Collection
 	{
@@ -112,23 +150,63 @@ class GithubService implements GitHostService
 			throw new Exception("'\$count' value must be 100 or less. Value is '{$count}'.");
 		}
 
-		$response = Http::withToken($this->token)
-			->withHeaders([
-				"Accept" => "application/vnd.github.v3+json",
-				"User-Agent" =>  "Elliot-Derhay-App",
-			])->get($this->getUrl("users/{$user}/events/public"), [
-				'per_page' => $count
-			]);
+		$response = $this->call(ListUserPublicEventsEndpoint::make()
+			->withUser($user)
+			->with([
+				"Authorization" => "Bearer {$this->token}",
+			], [
+				'per_page' => $count,
+			])
+		);
+
+		$this->checkForErrors($response);
 
 		return $this->filterEventTypes($response);
 	}
 
 	/**
-	 * Return GitHub API URL
+	 * Get data for a list of GitHub users
+	 *
+	 * This is the primary method because it mimics the GitHub REST
+	 * API's behavior: getting exactly 1 user at a time.
 	 */
-	public function getUrl(string $url): string
+
+	public function getUser(GithubUser $user): GithubUserDTO
 	{
-		return "{$this->api_url}/{$url}";
+		$response = $this->call(
+			GetUserEndpoint::make()
+				->withUser($user->login)
+				->with([
+					"Authorization" => "Bearer {$this->token}",
+				])
+		);
+
+		$this->checkForErrors($response);
+
+		/**
+		 * This is different than when getting GitHub events.
+		 * This is because the "actor" object on a GitHub event
+		 * includes the "display_login" field while the user object
+		 * returned from this endpoint doesn't.
+		 *
+		 * Unfortunately, this means it needs to be faked here for
+		 * consistency.
+		 */
+		return GithubUserDTO::fromArray([
+			'display_login' => $response->json('login'),
+			...$response->json(),
+		]);
+	}
+
+	/**
+	 * Get data for a group of GitHub users
+	 *
+	 * This is a separate method because GitHub's REST API doesn't
+	 * support retrieving multiple users one a single request.
+	 */
+	public function getUsers(Collection $users): Collection
+	{
+		return $users->map([$this, 'getUser']);
 	}
 
 	private function sendNewEventTypesNotifications(): void

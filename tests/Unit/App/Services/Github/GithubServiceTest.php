@@ -1,24 +1,25 @@
 <?php
 
+use App\DataTransferObjects\GithubUserDTO;
 use App\Events\NewGithubEventTypesEvent;
-use App\Services\GithubService;
-use Illuminate\Http\Client\Request;
+use App\Models\GithubUser;
+use App\Services\Github\Endpoints\GetUserEndpoint;
+use App\Services\Github\GithubService;
+use Illuminate\Http\Client\Response;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 use Tests\Support\GithubEventDataFactory;
+use Tests\Support\GithubUserDataFactory;
 use Tests\Support\PrivateMemberAccessor;
 
-beforeEach(function (): void {
-	$this->api_base = 'https://api.github.com';
-
-	$this->faker = \Faker\Factory::create();
-});
+use function Pest\Faker\faker;
+use function Pest\Laravel\mock;
 
 it('creates an instance of App\Services\GithubService', function (): void {
-	$githubService = new GithubService;
+	$githubService = resolve(GithubService::class);
 
 	expect($githubService)->toBeInstanceOf(GithubService::class);
 });
@@ -26,69 +27,38 @@ it('creates an instance of App\Services\GithubService', function (): void {
 it('throws an exception if no token is found', function (): void {
 	Config::offsetUnset('services.github.token');
 
-	new GithubService;
+	resolve(GithubService::class);
 })->throws(Exception::class, "Config option 'services.github.token' not set.");
 
 it('throws an exception if email recipient name is not set', function (): void {
 	Config::offsetUnset('mail.to.name');
 
-	new GithubService;
+	resolve(GithubService::class);
 })->throws(Exception::class, "Config option 'mail.to.name' not set.");
 
 it('throws an exception if email recipient address is not set', function (): void {
 	Config::offsetUnset('mail.to.address');
 
-	new GithubService;
+	resolve(GithubService::class);
 })->throws(Exception::class, "Config option 'mail.to.address' not set.");
 
-it('constructs the correct api url', function (): void {
-	$githubService = new GithubService;
-
-	$api_endpoint = "users/{$this->faker->userName()}/events/public";
-
-	expect($githubService->getUrl($api_endpoint))
-		->toBeString()
-		->toEqual("{$this->api_base}/{$api_endpoint}");
-});
-
-it('constructs a correctly-formatted user event api request', function (): void {
-	$user = $this->faker->userName();
-	$eventCount = $this->faker->numberBetween(1, 100);
-
-	Http::fake([
-		"api.github.com/users/{$user}/events/public*" =>
-		Http::response(json_encode(GithubEventDataFactory::init()
-			->count($eventCount)
-			->make())),
-	]);
-
-	(new GithubService)->getEvents($user, $eventCount);
-
-	Http::assertSent(function (Request $request) use ($user, $eventCount) {
-		$token = config('services.github.token');
-
-		$events_url = "{$this->api_base}/users/{$user}/events/public?per_page={$eventCount}";
-
-		return $request->url() === $events_url &&
-			$request->hasHeaders([
-				'Authorization' => "Bearer {$token}",
-				'Accept' => 'application/vnd.github.v3+json',
-				'User-Agent' => 'Elliot-Derhay-App',
-			]);
-	});
-});
-
 it('throws an exception if requested event count is < 1', function (): void {
-	(new GithubService)->getEvents($this->faker->userName(), 0 - $this->faker->numberBetween());
+	resolve(GithubService::class)->getEvents(
+		faker()->userName(),
+		0 - faker()->numberBetween()
+	);
 })->throws(Exception::class, "'\$count' value must be 1 or higher.");
 
 it('throws an exception if requested event count is > 100', function (): void {
-	(new GithubService)->getEvents($this->faker->userName(), $this->faker->numberBetween(101));
+	resolve(GithubService::class)->getEvents(
+		faker()->userName(),
+		faker()->numberBetween(101)
+	);
 })->throws(Exception::class, "'\$count' value must be 100 or less.");
 
 it('processes response data received from the github events api', function (): void {
-	$user = $this->faker->userName();
-	$eventCount = $this->faker->numberBetween(1, 100);
+	$user = faker()->userName();
+	$eventCount = faker()->numberBetween(1, 100);
 
 	Http::fake([
 		"api.github.com/users/{$user}/events/public*" =>
@@ -99,18 +69,17 @@ it('processes response data received from the github events api', function (): v
 
 	Mail::fake();
 
-	$events = (new GithubService)->getEvents($user, $eventCount);
+	$events = resolve(GithubService::class)->getEvents($user, $eventCount);
 
 	expect($events)
-		->toBeInstanceOf(Collection::class);
-
-	expect(count($events))
+		->toBeInstanceOf(Collection::class)
+		->and(count($events))
 		->toBeLessThanOrEqual($eventCount);
 });
 
 it('filters out unsupported types of github events', function (): void {
-	$user = $this->faker->userName();
-	$eventCount = $this->faker->numberBetween(1, 100);
+	$user = faker()->userName();
+	$eventCount = faker()->numberBetween(1, 100);
 
 	$responseData = GithubEventDataFactory::init()
 			->count($eventCount)
@@ -123,7 +92,7 @@ it('filters out unsupported types of github events', function (): void {
 
 	Mail::fake();
 
-	$githubService = new GithubService;
+	$githubService = resolve(GithubService::class);
 
 	// Make supportedEventTypes list accessible
 	$supportedEventTypes = PrivateMemberAccessor::make()
@@ -154,10 +123,10 @@ it('filters out unsupported types of github events', function (): void {
 });
 
 it('does not dispatch notification if no unsupported event types are found', function(): void {
-	$user = $this->faker->userName();
-	$eventCount = $this->faker->numberBetween(1, 100);
+	$user = faker()->userName();
+	$eventCount = faker()->numberBetween(1, 100);
 
-	$githubService = new GithubService;
+	$githubService = resolve(GithubService::class);
 
 	// Make supportedEventTypes list accessible
 	$supportedEventTypes = PrivateMemberAccessor::make()
@@ -183,10 +152,10 @@ it('does not dispatch notification if no unsupported event types are found', fun
 });
 
 it('dispatches notification if unsupported event types are filtered out', function (): void {
-	$user = $this->faker->userName();
-	$eventCount = $this->faker->numberBetween(1, 100);
+	$user = faker()->userName();
+	$eventCount = faker()->numberBetween(1, 100);
 
-	$githubService = new GithubService;
+	$githubService = resolve(GithubService::class);
 
 	// Force generate only unsupported event types
 	$unsupportedEventTypes = array_diff(
@@ -214,4 +183,53 @@ it('dispatches notification if unsupported event types are filtered out', functi
 	$githubService->getEvents($user, $eventCount);
 
 	Event::assertDispatched(NewGithubEventTypesEvent::class);
+});
+
+it('returns a `Illuminate\Http\Client\Response` instance from the `call()` method', function (): void {
+	Http::fake();
+
+	$endpoint = GetUserEndpoint::make()
+		->withUser(faker()->userName())
+		->with([
+			"Authorization" => "Bearer " . config('services.github.token'),
+		]);
+
+	expect(resolve(GithubService::class)->call($endpoint))
+		->toBeObject()
+		->toBeInstanceOf(Response::class);
+});
+
+it('returns a `GithubUserDTO` from `getUser()`', function (): void {
+	$user = GithubUser::factory()->makeOne();
+
+	Http::fake([
+		"api.github.com/users/{$user->login}*" => Http::response(json_encode(
+			GithubUserDataFactory::init()
+				->withUser($user->login)
+				->makeOne())),
+	]);
+
+	expect(resolve(GithubService::class)->getUser($user))
+		->toBeObject()
+		->toBeInstanceOf(GithubUserDTO::class);
+});
+
+it('returns a collection of `GithubUserDTO` from `getUsers()`', function (): void {
+	$github = mock(GithubService::class)->makePartial();
+	$github->shouldReceive('getUser')
+		->andReturn(new GithubUserDTO(
+			id: faker()->randomNumber(7, true),
+			login: faker()->userName(),
+			display_login: faker()->userName(),
+			avatar_url: faker()->imageUrl(),
+		));
+
+	$users = GithubUser::factory()
+		->count(2)
+		->make();
+
+	expect($github->getUsers($users))
+		->toBeInstanceOf(Collection::class)
+		->toHaveCount($users->count())
+		->each->toBeInstanceOf(GithubUserDTO::class);
 });
