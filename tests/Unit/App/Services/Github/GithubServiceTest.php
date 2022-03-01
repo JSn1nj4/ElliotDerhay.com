@@ -5,6 +5,7 @@ use App\Events\NewGithubEventTypesEvent;
 use App\Models\GithubUser;
 use App\Services\Github\Endpoints\GetUserEndpoint;
 use App\Services\Github\GithubService;
+use Illuminate\Http\Client\RequestException;
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Config;
@@ -198,6 +199,41 @@ it('returns a `Illuminate\Http\Client\Response` instance from the `call()` metho
 		->toBeObject()
 		->toBeInstanceOf(Response::class);
 });
+
+test('`checkForErrors()` does not throw if there are no errors', function (): void {
+	Http::fake();
+
+	expect(
+		PrivateMemberAccessor::make()
+			->from(resolve(GithubService::class))
+			->callMethod('checkForErrors', Http::get('https://example.com'))
+		)
+		->toBeEmpty();
+});
+
+test('`checkForErrors()` throws if there was an issue connecting', function (): void {
+	Http::fake([
+		'*' => Http::response(status: 404),
+	]);
+
+	PrivateMemberAccessor::make()
+		->from(resolve(GithubService::class))
+		->callMethod('checkForErrors', Http::get('https://example.com'));
+})->throws(RequestException::class);
+
+test('`checkForErrors()` throws if an error was found in the response', function (): void {
+	Http::fake([
+		'*' => Http::response([
+			'errors' => [
+				['message' => 'test error message'],
+			],
+		]),
+	]);
+
+	PrivateMemberAccessor::make()
+		->from(resolve(GithubService::class))
+		->callMethod('checkForErrors', Http::get('https://example.com'));
+})->throws(Exception::class, 'test error message');
 
 it('returns a `GithubUserDTO` from `getUser()`', function (): void {
 	$user = GithubUser::factory()->makeOne();
