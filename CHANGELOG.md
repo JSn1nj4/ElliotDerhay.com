@@ -21,7 +21,8 @@
 ### Updates
 - Init `TwitterService::$token` in constructor and use directly
 - Restructure `TwitterService` to use dedicated Endpoint classes
-- Deprecate `TwitterService::getUrl()` in favor of `AbstractEndpoint::url()` method directly on endpoints
+- Remove `TwitterService::getUrl()` in favor of `AbstractEndpoint::url()` method directly on endpoints
+- Remove `TwitterService::$api_url` property
 - Modify `TwitterUser::fromDTO()` to dynamically choose model create/update methods using `CreateMode` enum
 - Update `TwitterServiceTest`
 - Reorganize "tests/Unit/App/Services" to match "app/Services" folder structure

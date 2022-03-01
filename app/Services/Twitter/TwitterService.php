@@ -20,11 +20,6 @@ use Illuminate\Support\Str;
 class TwitterService implements SocialMediaService
 {
 	/**
-	 * The base Twitter API URL
-	 */
-	private string $api_url = 'https://api.twitter.com';
-
-	/**
 	 * The token used for retrieving tweet information from the Twitter API
 	 */
 	private ?Token $token;
@@ -169,13 +164,6 @@ class TwitterService implements SocialMediaService
 				date: TweetDTO::getDate($tweet),
 				entities: $tweet['entities'],
 			));
-	}
-
-	public function getUrl(string $url): string
-	{
-		trigger_error('Method ' . __METHOD__ . ' is deprecated', E_USER_DEPRECATED);
-
-		return "{$this->api_url}/{$url}";
 	}
 
 	public function getUsers(Collection $users): Collection
