@@ -17,12 +17,9 @@ class TweetDataFactory extends BaseFactory
 
 		return [
 			'id' => (int)$this->faker->numerify('####################'),
-			'user' => [
-				'id' => (int)$this->faker->numerify('##########'),
-				'name' => $user,
-				'screen_name' => $user,
-				'profile_image_url_https' => $this->faker->imageUrl(48, 48, 'cat'),
-			],
+			'user' => TwitterUserDataFactory::init()
+				->withUser($user)
+				->makeOne(),
 			'text' => $this->faker->paragraph(),
 			'created_at' => now()->toRfc822String(),
 			'entities' => [],

@@ -17,6 +17,9 @@
 - `GithubService::getUser()` method to fetch GitHub user data
 - `GithubService::getUsers()` method to call `GithubService::getUser()` for multiple users
 - `GithubUserDataFactory` class to generate data structure similar to GitHub's API
+- `TwitterUserDataFactory` to generate Twitter user data similar to data returned by Twitter's API
+- `TwitterUserFactory` to generate fake `TwitterUser` model entities
+- `TokenFactory` to generate fake tokens for testing
 
 ### Updates
 - Init `TwitterService::$token` in constructor and use directly
@@ -31,6 +34,7 @@
 - Restructure `GithubService` a bit to use dedicated Endpoint classes
 - Add endpoint tests
 - Update `GithubServiceTest`
+- Use `faker()` helper in place of using `\Faker\Factory::create()` for every test case
 
 ### Bug fixes
 - Fix #47: token "expires_at" issue

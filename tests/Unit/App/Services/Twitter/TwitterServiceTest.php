@@ -1,11 +1,16 @@
 <?php
 
+use App\Models\Token;
+use App\Models\TwitterUser;
 use App\Services\Twitter\TwitterService;
 use Illuminate\Http\Client\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Http;
 use Tests\Support\TweetDataFactory;
+use Tests\Support\TwitterUserDataFactory;
+
+use function Pest\Faker\faker;
 
 function requestHasParams(Request $request, array $params): bool {
 	return collect($params)
@@ -19,12 +24,6 @@ function requestMissingParams(Request $request, array $params): bool {
 	return collect($params)
 		->every(fn ($value, $key) => !isset($request[$key]));
 }
-
-beforeEach(function (): void {
-	$this->api_base = 'https://api.twitter.com';
-
-	$this->faker = \Faker\Factory::create();
-});
 
 it('creates an instance of App\Services\Twitter\TwitterService', function (): void {
 	Http::fake([
@@ -84,7 +83,7 @@ it('throws an exception if requested tweet count is < 1', function (): void {
 	]);
 
 	(new TwitterService)->getPosts(
-		username: $this->faker->userName(),
+		username: faker()->userName(),
 		count: 0,
 	);
 })->throws(Exception::class, "'\$count' value cannot be below or equal to 0.");
@@ -106,14 +105,14 @@ it('throws an exception if requested tweet count is > 3200', function (): void {
 	]);
 
 	(new TwitterService)->getPosts(
-		username: $this->faker->userName(),
+		username: faker()->userName(),
 		count: 3201,
 	);
 })->throws(Exception::class, "'\$count' value cannot be greater than 3200.");
 
 it('processes a response from the twitter api user timeline endpoint', function (): void {
-	$user = $this->faker->userName();
-	$tweetCount = $this->faker->numberBetween(1, 3200);
+	$user = faker()->userName();
+	$tweetCount = faker()->numberBetween(1, 3200);
 
 	Http::fake([
 		"api.twitter.com/oauth2/token*" => Http::response(
@@ -143,4 +142,30 @@ it('processes a response from the twitter api user timeline endpoint', function 
 
 	expect(count($tweets))
 		->toBeLessThanOrEqual($tweetCount);
+});
+
+it('returns a collection of `TwitterUserDTO` objects from `getUsers()` method', function (): void {
+	$users = TwitterUser::factory()
+		->count(faker()->numberBetween(1, 100))
+		->make();
+
+	/**
+	 * Let the `TwitterService` find a fake token in the testing DB,
+	 * otherwise it'll create a separate API call to Twitter for the
+	 * real thing.
+	 */
+	Token::factory()->makeOne()->save();
+
+	Http::fake([
+		"api.twitter.com/1.1/users/lookup.json*" => Http::response(json_encode(
+			$users->map(fn ($user) => TwitterUserDataFactory::init()
+					->withUser($user->screen_name, $user->name)
+					->makeOne())
+				->toArray()
+		)),
+	]);
+
+	expect(resolve(TwitterService::class)->getUsers($users))
+		->toBeInstanceOf(Collection::class)
+		->toHaveCount($users->count());
 });
