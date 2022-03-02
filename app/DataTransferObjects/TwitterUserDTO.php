@@ -2,6 +2,7 @@
 
 namespace App\DataTransferObjects;
 
+use App\Factories\TwitterUserValidatorFactory;
 use Spatie\DataTransferObject\DataTransferObject;
 
 class TwitterUserDTO extends DataTransferObject
@@ -16,6 +17,8 @@ class TwitterUserDTO extends DataTransferObject
 
 	public static function fromArray(array $userData): self
 	{
+		TwitterUserValidatorFactory::make($userData)->validate();
+
 		return new self(
 			id: $userData['id'],
 			name: $userData['name'],
