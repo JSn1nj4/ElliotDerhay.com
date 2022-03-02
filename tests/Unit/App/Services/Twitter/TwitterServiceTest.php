@@ -34,7 +34,7 @@ it('creates an instance of App\Services\Twitter\TwitterService', function (): vo
 			public string $access_token;
 			public function __construct()
 			{
-				$this->access_token = base64_encode(\Faker\Factory::create()->word());
+				$this->access_token = base64_encode(faker()->word());
 			}
 		})),
 	]);
@@ -54,24 +54,6 @@ it('throws an exception if api secret is not set', function (): void {
 	new TwitterService;
 })->throws(TypeError::class);
 
-it('throws an exception if no valid api token is found', function (): void {
-	Http::fake([
-		"api.twitter.com/oauth2/token*" => Http::response(json_encode(new class {
-			public array $errors = [];
-			public function __construct()
-			{
-				$this->errors[] = new class {
-					public int $code = 99;
-					public string $message = "Unable to verify your credentials";
-					public string $label = "authenticity_token_error";
-				};
-			}
-		})),
-	]);
-
-	new TwitterService;
-})->throws(Exception::class, "Unable to verify your credentials");
-
 it('throws an exception if requested tweet count is < 1', function (): void {
 	Http::fake([
 		"api.twitter.com/oauth2/token*" => Http::response(json_encode(new class {
@@ -79,7 +61,7 @@ it('throws an exception if requested tweet count is < 1', function (): void {
 			public string $access_token;
 			public function __construct()
 			{
-				$this->access_token = base64_encode(\Faker\Factory::create()->word());
+				$this->access_token = base64_encode(faker()->word());
 			}
 		})),
 	]);
@@ -101,7 +83,7 @@ it('throws an exception if requested tweet count is > 3200', function (): void {
 			public string $access_token;
 			public function __construct()
 			{
-				$this->access_token = base64_encode(\Faker\Factory::create()->word());
+				$this->access_token = base64_encode(faker()->word());
 			}
 		})),
 	]);
@@ -123,7 +105,7 @@ it('processes a response from the twitter api user timeline endpoint', function 
 				public string $access_token;
 				public function __construct()
 				{
-					$this->access_token = base64_encode(\Faker\Factory::create()->word());
+					$this->access_token = base64_encode(faker()->word());
 				}
 			}),
 		),
@@ -173,11 +155,17 @@ test('`checkForErrors()` throws if there was an issue connecting', function (): 
 
 test('`checkForErrors()` throws if an error was found in the response', function (): void {
 	Http::fake([
-		'*' => Http::response([
-			'errors' => [
-				['message' => 'test error message'],
-			],
-		]),
+		'*' => Http::response(json_encode(new class {
+			public array $errors = [];
+			public function __construct()
+			{
+				$this->errors[] = new class {
+					public int $code = 99;
+					public string $message = "Unable to verify your credentials";
+					public string $label = "authenticity_token_error";
+				};
+			}
+		})),
 	]);
 
 	Token::factory()->makeOne()->save();
@@ -185,7 +173,7 @@ test('`checkForErrors()` throws if an error was found in the response', function
 	PrivateMemberAccessor::make()
 		->from(resolve(TwitterService::class))
 		->callMethod('checkForErrors', Http::get('https://example.com'));
-})->throws(Exception::class, 'test error message');
+})->throws(Exception::class, 'Unable to verify your credentials');
 
 it('returns a collection of `TwitterUserDTO` objects from `getUsers()` method', function (): void {
 	$users = TwitterUser::factory()
