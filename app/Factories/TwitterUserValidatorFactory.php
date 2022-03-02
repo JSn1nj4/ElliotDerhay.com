@@ -11,10 +11,10 @@ class TwitterUserValidatorFactory extends AbstractValidatorFactory
 	 * Default validation rules for Twitter users
 	 */
 	protected static array $rules = [
-		'id' => '',
-		'name' => '',
-		'screen_name' => '',
-		'profile_image_url_https' => '',
+		'id' => 'required|integer|numeric|digits:10',
+		'name' => 'required|string',
+		'screen_name' => 'required|string',
+		'profile_image_url_https' => 'required|url',
 	];
 
 	/**
