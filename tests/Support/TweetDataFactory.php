@@ -16,7 +16,7 @@ class TweetDataFactory extends BaseFactory
 		$user = $this->username ?? $this->faker->userName();
 
 		return [
-			'id' => (int)$this->faker->numerify('####################'),
+			'id' => (int)$this->faker->regexify('[1-9][0-9]{19}'),
 			'user' => TwitterUserDataFactory::init()
 				->withUser($user)
 				->makeOne(),

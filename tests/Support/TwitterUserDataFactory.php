@@ -23,7 +23,7 @@ class TwitterUserDataFactory extends BaseFactory
 	private function definition(): array
 	{
 		return [
-			'id' => (int)$this->faker->numerify('##########'),
+			'id' => (int)$this->faker->regexify('[1-9][0-9]{9}'),
 			'name' => $this->name,
 			'screen_name' => $this->username,
 			'profile_image_url_https' => $this->faker->imageUrl(48, 48, 'cat'),

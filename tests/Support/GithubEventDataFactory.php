@@ -55,7 +55,7 @@ class GithubEventDataFactory extends BaseFactory
 		});
 
 		return [
-			'id' => $this->faker->numerify('###########'),
+			'id' => $this->faker->regexify('[1-9][0-9]{10}'),
 			'actor' => GithubUserDataFactory::init()->withUser($user)->makeOne(),
 			'type' => $type,
 			'created_at' => now()->toDateTimeString(),
