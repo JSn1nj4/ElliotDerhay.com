@@ -32,7 +32,7 @@ abstract class AbstractValidatorFactory
 	/**
 	 * Method required to be defined by all inheriting factories
 	 */
-	abstract static function make(array $input, array $rules, array $messages): Validator;
+	abstract static function make(array $input, array $rules, array $messages, array $customAttributes): Validator;
 
 	/**
 	 * Return default messages with any overrides
