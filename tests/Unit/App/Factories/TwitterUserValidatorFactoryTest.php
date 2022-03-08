@@ -20,7 +20,7 @@ it('builds the correct rule set', function (): void {
 		];
 		public array $overrides = [
 			'id' => 'integer|numeric',
-			'name' => 'text',
+			'name' => 'string',
 		];
 	};
 
