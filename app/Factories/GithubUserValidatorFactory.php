@@ -14,7 +14,7 @@ class GithubUserValidatorFactory extends AbstractValidatorFactory
 		'avatar_url' => 'required|url',
 	];
 
-	public static function make(array $input, array $rules, array $messages, array $customAttributes): ValidatorContract
+	public static function make(array $input, array $rules = [], array $messages = [], array $customAttributes = []): ValidatorContract
 	{
 		return Validator::make(
 			$input,
