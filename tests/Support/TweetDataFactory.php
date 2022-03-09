@@ -36,4 +36,9 @@ class TweetDataFactory extends BaseFactory
 
 		return $data;
 	}
+
+	public function makeOne(): array
+	{
+		return $this->definition();
+	}
 }
