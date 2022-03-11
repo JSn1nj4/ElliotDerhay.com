@@ -17,8 +17,6 @@ class TwitterUserDTO extends DataTransferObject
 
 	public static function fromArray(array $userData): self
 	{
-		TwitterUserValidatorFactory::make($userData)->validate();
-
 		return new self(
 			id: $userData['id'],
 			name: $userData['name'],
