@@ -2,9 +2,9 @@
 
 namespace App\Services\Twitter;
 
+use App\Actions\CreateTweetDTO;
+use App\Contracts\Actions\CreatesTwitterUserDTO;
 use App\Contracts\SocialMediaService;
-use App\DataTransferObjects\TweetDTO;
-use App\DataTransferObjects\TwitterUserDTO;
 use App\Models\Token;
 use App\Services\AbstractEndpoint;
 use App\Services\Twitter\Endpoints\TokenEndpoint;
@@ -151,19 +151,15 @@ class TwitterService implements SocialMediaService
 			->toArray())
 		);
 
+		$createTweetDTO = new CreateTweetDTO();
+
 		$this->checkForErrors($response);
 
 		return collect($response->json())
-			->transform(fn ($tweet) => new TweetDTO(
-				id: $tweet['id'],
-				user: TwitterUserDTO::fromArray($tweet['user']),
-				body: $tweet['text'],
-				date: TweetDTO::getDate($tweet),
-				entities: $tweet['entities'],
-			));
+			->transform(fn ($tweet) => $createTweetDTO($tweet));
 	}
 
-	public function getUsers(Collection $users): Collection
+	public function getUsers(Collection $users, CreatesTwitterUserDTO $createTwitterUserDTO): Collection
 	{
 		$response = $this->call(UsersLookupEndpoint::make()->with(
 			headers: [
@@ -177,11 +173,6 @@ class TwitterService implements SocialMediaService
 		$this->checkForErrors($response);
 
 		return collect($response->json())
-			->transform(fn ($user) => new TwitterUserDTO(
-				id: $user['id'],
-				name: $user['name'],
-				screen_name: $user['screen_name'],
-				profile_image_url_https: $user['profile_image_url_https'],
-			));
+			->transform(fn ($user) => $createTwitterUserDTO($user));
 	}
 }
