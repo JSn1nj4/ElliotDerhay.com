@@ -1,6 +1,6 @@
 # Changelog
 
-## Relase 2.0.0
+## Release 2.0.0
 
 ### New
 - `twitter:user:update` command to get fresh Twitter user data
@@ -40,6 +40,11 @@
 - Fix #47: token "expires_at" issue
 	- Check for `null` value for tokens that don't have an expiration date
 	- Conversely, ensure value is _not_ `null` as part of expiration check
+
+## Release 1.12.1
+
+### Bug fixes
+- Fix `CreateEvent` and `DeleteEvent` not supporting created/deleted repos
 
 ## Release 1.12.0
 

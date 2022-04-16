@@ -3,13 +3,13 @@
 namespace App\View\Components\GithubEventTypes;
 
 use App\Models\GithubEvent;
-use App\Traits\HasGitRef;
-use App\Traits\HasPreposition;
+use App\Traits\CanHaveGitRef;
+use App\Traits\CanHavePreposition;
 
 class CreateEvent extends BaseComponent
 {
-	use HasGitRef,
-		HasPreposition;
+	use CanHaveGitRef,
+		CanHavePreposition;
 
 	/**
 	 * Create a new component instance.
@@ -24,8 +24,12 @@ class CreateEvent extends BaseComponent
 			$event
 		);
 
-		$this->preposition = 'at';
-		$this->setRefName($this->event->source);
-		$this->setRefUrl($this->repoUrl());
+		$this->hasGitRef = $this->refNotNull($this->event->source);
+
+		if($this->hasGitRef) {
+			$this->preposition = 'at';
+			$this->setRefName($this->event->source);
+			$this->setRefUrl($this->repoUrl());
+		}
 	}
 }

@@ -14,18 +14,19 @@
 
 				{{ $action }}
 
-				<span class="text-sea-green-600 dark:text-sea-green-800">
-					{{ $refName }}
-				</span>
+				{{-- If there's no ref, it's assumed the repo was deleted --}}
+				@if($hasGitRef)
+					<span class="text-sea-green-600 dark:text-sea-green-800">
+						{{ $refName }}
+					</span>
 
-				{{ $preposition }}
+					{{ $preposition }}
+				@endif
 
 				<a href="{{ $repoUrl() }}" target="_blank">
 					{{ $event->repo }}
 				</a>
-
 			</strong>
 		</p>
-
 	</div>
 </div>

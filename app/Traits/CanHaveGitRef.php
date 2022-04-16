@@ -2,11 +2,18 @@
 
 namespace App\Traits;
 
-trait HasGitRef
+trait CanHaveGitRef
 {
-	public string $refName;
+	public bool $hasGitRef = false;
 
-	public string $refUrl;
+	public ?string $refName = null;
+
+	public ?string $refUrl = null;
+
+	protected function refNotNull(?string $refName): bool
+	{
+		return is_string($refName);
+	}
 
 	protected function setRefName(string $ref): void
 	{

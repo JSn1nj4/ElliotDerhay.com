@@ -3,11 +3,11 @@
 namespace App\View\Components\GithubEventTypes;
 
 use App\Models\GithubEvent;
-use App\Traits\HasPreposition;
+use App\Traits\CanHavePreposition;
 
 class ForkEvent extends BaseComponent
 {
-	use HasPreposition;
+	use CanHavePreposition;
 
 	/**
 	 * Create a new component instance.
