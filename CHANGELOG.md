@@ -1,5 +1,10 @@
 # Changelog
 
+## Release 1.12.1
+
+### Bug fixes
+- Fix `CreateEvent` and `DeleteEvent` not supporting created/deleted repos
+
 ## Release 1.12.0
 
 ### Major changes
