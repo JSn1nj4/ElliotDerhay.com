@@ -29,8 +29,8 @@ class Nav extends Component
 				'label' => 'Projects',
 			],
 			(object) [
-				'name' => 'updates',
-				'label' => 'Updates',
+				'name' => 'blog',
+				'label' => 'Blog',
 			],
 		];
 
