@@ -3,12 +3,12 @@
 namespace App\View\Components\GithubEventTypes;
 
 use App\Models\GithubEvent;
-use App\Traits\HasPreposition;
+use App\Traits\CanHavePreposition;
 use App\Traits\HasPullRequestNumber;
 
 class PullRequestEvent extends BaseComponent
 {
-	use HasPreposition,
+	use CanHavePreposition,
 		HasPullRequestNumber;
 
 	/**

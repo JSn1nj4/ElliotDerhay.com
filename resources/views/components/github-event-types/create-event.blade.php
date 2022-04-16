@@ -14,11 +14,14 @@
 
 				{{ $action }}
 
-				<a href="{{ $refUrl }}" target="_blank">
-					{{ $refName }}
-				</a>
+				{{-- If there's no ref, it's assumed a repo was created --}}
+				@if($hasGitRef)
+					<a href="{{ $refUrl }}" target="_blank">
+						{{ $refName }}
+					</a>
 
-				{{ $preposition }}
+					{{ $preposition }}
+				@endif
 
 				<a href="{{ $repoUrl() }}" target="_blank">
 					{{ $event->repo }}

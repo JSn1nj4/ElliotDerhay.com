@@ -3,13 +3,13 @@
 namespace App\View\Components\GithubEventTypes;
 
 use App\Models\GithubEvent;
+use App\Traits\CanHavePreposition;
 use App\Traits\HasIssueNumber;
-use App\Traits\HasPreposition;
 
 class IssueCommentEvent extends BaseComponent
 {
 	use HasIssueNumber,
-		HasPreposition;
+		CanHavePreposition;
 
 	/**
 	 * Create a new component instance.
