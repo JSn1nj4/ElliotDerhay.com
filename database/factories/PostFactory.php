@@ -16,9 +16,14 @@ class PostFactory extends Factory
      */
     public function definition()
     {
-        return [
+		$data = [
 			'title' => $this->faker->realText(60),
+			'slug' => '',
 			'body' => $this->faker->realText(500),
-        ];
+		];
+
+		$data['slug'] = str($data['title'])->slug();
+
+        return $data;
     }
 }

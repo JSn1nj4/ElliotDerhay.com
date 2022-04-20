@@ -22,11 +22,6 @@ class Post extends Model
 		return Attribute::get(fn () => str($this->body)->words(20));
 	}
 
-	public function slug(): Attribute
-	{
-		return Attribute::get(fn () => Str::slug($this->title));
-	}
-
 	public function tags(): BelongsToMany
 	{
 		return $this->belongsToMany(Tag::class);

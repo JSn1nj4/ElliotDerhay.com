@@ -5,7 +5,11 @@ use App\Http\Controllers\ProjectsController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/projects', [ProjectsController::class, 'index'])->name('projects');
-Route::get('/blog', [PostsController::class, 'index'])->name('blog');
+Route::prefix('/blog')->group(function () {
+	Route::get('/', [PostsController::class, 'index'])->name('blog');
+	Route::get('/{page}', [PostsController::class, 'index'])->name('blog.page');
+});
+Route::get('/post/{post:slug}', [PostsController::class, 'show'])->name('blog.show');
 
 // error page testing route (only works locally)
 Route::get('/error/{code}', function ($code = null) {
