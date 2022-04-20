@@ -17,6 +17,11 @@ class Post extends Model
 		return $this->belongsToMany(Category::class);
 	}
 
+	public function excerpt(): Attribute
+	{
+		return Attribute::get(fn () => str($this->body)->words(20));
+	}
+
 	public function slug(): Attribute
 	{
 		return Attribute::get(fn () => Str::slug($this->title));

@@ -4,7 +4,7 @@
   @foreach($posts as $post)
 		<x-card>
 			<h2><a href="/posts/{{ $post->slug }}">{{ $post->title }}</a></h2>
-			<p>{{ $post->body }}</p>
+			<p>{{ $post->excerpt }}</p>
 			<p><a href="/posts/{{ $post->slug }}">Read More</a></p>
 		</x-card>
   @endforeach
