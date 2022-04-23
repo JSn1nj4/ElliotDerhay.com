@@ -1,13 +1,12 @@
 <?php
 
-namespace App\View\Components;
+namespace App\View\Components\Github;
 
 use App\Models\GithubEvent;
 use Illuminate\Support\Str;
 use Illuminate\View\Component;
-use Stringable;
 
-class GithubEventWrapper extends Component
+class EventWrapper extends Component
 {
 	public GithubEvent $event;
 
@@ -29,7 +28,7 @@ class GithubEventWrapper extends Component
 	{
 		$this->event = $event;
 		$this->type_kebab = Str::kebab($this->event->type);
-		$this->eventTypeComponent = "github-event-types.{$this->type_kebab}";
+		$this->eventTypeComponent = "github.event-types.{$this->type_kebab}";
 	}
 
 	/**
@@ -39,6 +38,6 @@ class GithubEventWrapper extends Component
 	 */
 	public function render()
 	{
-		return view('components.github-event-wrapper');
+		return view('components.github.event-wrapper');
 	}
 }

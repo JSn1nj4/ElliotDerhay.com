@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components\GithubEventTypes;
+namespace App\View\Components\Github\EventTypes;
 
 use App\Models\GithubEvent;
 use App\Traits\DisplaysTimeElapsed;
@@ -48,7 +48,7 @@ class BaseComponent extends Component
 	{
 		$reflect = new ReflectionClass($this);
 
-		return view('components.github-event-types.' . Str::kebab($reflect->getShortName()));
+		return view('components.github.event-types.' . Str::kebab($reflect->getShortName()));
 	}
 
 	public function repoUrl(): string

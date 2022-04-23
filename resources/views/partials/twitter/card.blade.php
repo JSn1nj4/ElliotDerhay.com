@@ -1,5 +1,5 @@
 <div class="twitter-card">
-	<x-card size="sm">
+	<x-card.wrapper size="sm">
 
 		<div class="flex flex-row relative">
 			<div>
@@ -46,5 +46,5 @@
 			</div>
 		</div>
 
-	</x-card>
+	</x-card.wrapper>
 </div>

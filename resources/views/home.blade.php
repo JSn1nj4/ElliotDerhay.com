@@ -51,14 +51,14 @@
 			<x-column class="block md:w-1/2">
 				<h2 class="content-title text-2xl pt-6 mt-4 text-center">Latest Tweet</h2>
 				<section id="twitter_timeline-home">
-					<x-twitter-timeline count="1"/>
+					<x-twitter.timeline count="1"/>
 				</section>
 			</x-column>
 
 			<x-column class="block md:w-1/2">
 				<h2 class="content-title text-2xl pt-6 mt-4 text-center">GitHub Activity</h2>
 				<section id="github_events_feed-home" class="font-mono">
-					<x-github-events-feed count="3"/>
+					<x-github.events-feed count="3"/>
 				</section>
 			</x-column>
 		</div>

@@ -1,12 +1,12 @@
 <?php
 
-namespace App\View\Components\GithubEventTypes;
+namespace App\View\Components\Github\EventTypes;
 
 use App\Models\GithubEvent;
 use App\Traits\CanHaveGitRef;
 use App\Traits\CanHavePreposition;
 
-class PushEvent extends BaseComponent
+class DeleteEvent extends BaseComponent
 {
 	use CanHaveGitRef,
 		CanHavePreposition;
@@ -19,12 +19,12 @@ class PushEvent extends BaseComponent
 	public function __construct(GithubEvent $event)
 	{
 		parent::__construct(
-			$event->action ?? 'pushed to',
-			'far fa-arrow-alt-circle-up',
+			$event->action ?? 'deleted',
+			'far fa-trash-alt',
 			$event
 		);
 
-		$this->preposition = 'at';
+		$this->preposition = 'from';
 		$this->setRefName($this->event->source);
 		$this->setRefUrl($this->repoUrl());
 	}

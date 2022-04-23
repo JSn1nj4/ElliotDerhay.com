@@ -1,12 +1,12 @@
 <?php
 
-namespace App\View\Components;
+namespace App\View\Components\Twitter;
 
 use App\Models\Tweet;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\View\Component;
 
-class TwitterTimeline extends Component
+class Timeline extends Component
 {
 	public int $count;
 
@@ -37,6 +37,6 @@ class TwitterTimeline extends Component
 			->take($this->count)
 			->get();
 
-		return view('components.twitter-timeline');
+		return view('components.twitter.timeline');
 	}
 }

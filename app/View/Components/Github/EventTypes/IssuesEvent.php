@@ -1,10 +1,10 @@
 <?php
 
-namespace App\View\Components\GithubEventTypes;
+namespace App\View\Components\Github\EventTypes;
 
 use App\Models\GithubEvent;
-use App\Traits\HasIssueNumber;
 use App\Traits\CanHavePreposition;
+use App\Traits\HasIssueNumber;
 
 class IssuesEvent extends BaseComponent
 {

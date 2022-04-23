@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components\GithubEventTypes;
+namespace App\View\Components\Github\EventTypes;
 
 use App\Models\GithubEvent;
 use App\Traits\CanHavePreposition;

@@ -1,12 +1,12 @@
 <?php
 
-namespace App\View\Components;
+namespace App\View\Components\Github;
 
 use App\Models\GithubEvent;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\View\Component;
 
-class GithubEventsFeed extends Component
+class EventsFeed extends Component
 {
 	public int $count;
 
@@ -37,6 +37,6 @@ class GithubEventsFeed extends Component
 			->take($this->count)
 			->get();
 
-		return view('components.github-events-feed');
+		return view('components.github.events-feed');
 	}
 }

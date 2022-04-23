@@ -1,14 +1,14 @@
 <?php
 
-namespace App\View\Components\GithubEventTypes;
+namespace App\View\Components\Github\EventTypes;
 
 use App\Models\GithubEvent;
+use App\Traits\CanHaveGitRef;
 use App\Traits\CanHavePreposition;
-use App\Traits\HasIssueNumber;
 
-class IssueCommentEvent extends BaseComponent
+class PushEvent extends BaseComponent
 {
-	use HasIssueNumber,
+	use CanHaveGitRef,
 		CanHavePreposition;
 
 	/**
@@ -19,12 +19,13 @@ class IssueCommentEvent extends BaseComponent
 	public function __construct(GithubEvent $event)
 	{
 		parent::__construct(
-			$event->action ?? 'comment on',
-			'fas fa-comment',
+			$event->action ?? 'pushed to',
+			'far fa-arrow-alt-circle-up',
 			$event
 		);
 
 		$this->preposition = 'at';
-		$this->setIssueNumberText($this->event->source);
+		$this->setRefName($this->event->source);
+		$this->setRefUrl($this->repoUrl());
 	}
 }
