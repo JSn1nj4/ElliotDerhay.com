@@ -2,13 +2,15 @@
 	<div class="px-4">
 		<x-card.wrapper size="md" padding="p-0">
 
-			<a href="{{ $project->demo_link ?? $project->link }}"
-				target="{{ $project->demo_link ? '_self' : '_blank' }}">
-				<img src="{{ $project->thumbnail }}" class="block rounded-lg rounded-b-none">
-			</a>
+			<x-card.thumbnail
+				:href="$project->demo_link ?? $project->link"
+				:src="$project->thumbnail"
+				:target="$project->demo_link ? '_self' : '_blank'"/>
 
 			<div class="p-4">
-				<h4><a href="{{ $project->link }}">{{ $project->name }}</a></h4>
+				<x-card.title>
+					<a href="{{ $project->link }}">{{ $project->name }}</a>
+				</x-card.title>
 				<p>{{ $project->short_desc }}</p>
 			</div>
 
