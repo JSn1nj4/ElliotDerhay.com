@@ -3,7 +3,9 @@
 @section('blog')
   @foreach($posts as $post)
 		<x-card.wrapper size="none">
-			<h2><a href="{{ route('blog.show', compact('post')) }}">{{ $post->title }}</a></h2>
+			<x-card.title element="h4">
+				<a href="{{ route('blog.show', compact('post')) }}">{{ $post->title }}</a>
+			</x-card.title>
 			<p>{{ $post->excerpt }}</p>
 			<p><a href="{{ route('blog.show', compact('post')) }}">Read More</a></p>
 		</x-card.wrapper>
@@ -17,4 +19,3 @@
 	<hr>
 	<h3 class="text-xl">Widget 3</h3>
 @endsection
-
