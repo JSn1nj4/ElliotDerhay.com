@@ -17,18 +17,18 @@
 			<div class="flex flex-row pb-4">
 				<div class="relative flex-grow">
 					<p>
-						<a href="{{ $project->link }}"
-							class="no-underline uppercase p-4 rounded-bl-lg" target="_blank"
-							title="Open project repository">Project <i class="fas fa-link"></i></a>
+						<x-project.link :href="$project->link" target="_blank" title="Open project repository">
+							Project <i class="fas fa-link inline"></i>
+						</x-project.link>
 					</p>
 				</div>
 
 				@if (!empty($project->demo_link))
 					<div class="text-right relative">
 						<p>
-							<a href="{{ $project->demo_link }}"
-								class="no-underline uppercase p-4 rounded-br-lg"
-								title="Open project demo">Demo <i class="fas fa-laptop" style="display: inline !important;"></i></a>
+							<x-project.link :href="$project->demo_link" title="Open project demo">
+								Demo <i class="fas fa-laptop inline"></i>
+							</x-project.link>
 						</p>
 					</div>
 				@endif

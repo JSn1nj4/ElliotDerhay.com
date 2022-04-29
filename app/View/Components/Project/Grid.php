@@ -1,12 +1,12 @@
 <?php
 
-namespace App\View\Components;
+namespace App\View\Components\Project;
 
 use App\Models\Project;
 use Illuminate\Database\Eloquent\Collection as ModelCollection;
 use Illuminate\View\Component;
 
-class ProjectGrid extends Component
+class Grid extends Component
 {
 	public ModelCollection $projects;
 
@@ -27,6 +27,6 @@ class ProjectGrid extends Component
      */
     public function render()
     {
-        return view('components.project-grid');
+        return view('components.project.grid');
     }
 }
