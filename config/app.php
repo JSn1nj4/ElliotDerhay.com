@@ -132,7 +132,6 @@ return [
 	|
 	*/
 
-	'enable-projects' => env('ENABLE_PROJECTS', false),
 	'enable-blog' => env('ENABLE_BLOG', false),
 
 	/*
