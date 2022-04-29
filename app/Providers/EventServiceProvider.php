@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use App\Events\NewGithubEventTypesEvent;
-use App\Events\TweetsPulled;
+use App\Events\TweetsPulledEvent;
 use App\Listeners\PruneOldTweets;
 use App\Listeners\SendNewGithubEventTypesEmail;
 use Illuminate\Auth\Events\Registered;
@@ -25,7 +25,7 @@ class EventServiceProvider extends ServiceProvider
 		Registered::class => [
 			SendEmailVerificationNotification::class,
 		],
-		TweetsPulled::class => [
+		TweetsPulledEvent::class => [
 			PruneOldTweets::class,
 		],
 	];
