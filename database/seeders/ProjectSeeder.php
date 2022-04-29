@@ -15,7 +15,7 @@ class ProjectSeeder extends Seeder
 		[
 			'name' => 'ElliotDerhay.com',
 			'link' => 'https://github.com/JSn1nj4/ElliotDerhay.com',
-			'demo_link' => 'http://elliotderhay.com',
+			'demo_link' => 'https://elliotderhay.com',
 			'thumbnail' => 'https://elliotderhay-com.s3.amazonaws.com/projects/elliotderhay.com-1.10.0-screenshot.jpg',
 			'short_desc' => 'My personal website project built with Laravel, Tailwind CSS, and some Vue.js',
 		],
