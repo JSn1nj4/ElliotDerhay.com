@@ -18,6 +18,7 @@ return new class extends Migration
 			$table->tinyText('title');
 			$table->tinyText('slug');
 			$table->longText('body');
+			$table->string('cover_image');
             $table->timestamps();
         });
     }

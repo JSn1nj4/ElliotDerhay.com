@@ -2,7 +2,7 @@
 
 @section('content')
 	<x-row>
-		<x-column id="blog" class="flex-grow">
+		<x-column id="blog" class="flex-1">
 			@yield('blog')
 		</x-column>
 
