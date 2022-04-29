@@ -25,10 +25,6 @@ class Nav extends Component
 
 		$optionalMenuItems = [
 			(object) [
-				'name' => 'projects',
-				'label' => 'Projects',
-			],
-			(object) [
 				'name' => 'updates',
 				'label' => 'Updates',
 			],
