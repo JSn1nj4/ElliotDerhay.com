@@ -1,6 +1,6 @@
 <div class="md:w-1/2 lg:w-1/3 project">
 	<div class="px-4">
-		<x-card size="md" padding="p-0">
+		<x-card.wrapper size="md" padding="p-0">
 
 			<x-card.thumbnail
 				:href="$project->demo_link ?? $project->link"
@@ -34,6 +34,6 @@
 				@endif
 			</div>
 
-		</x-card>
+		</x-card.wrapper>
 	</div>
 </div>
