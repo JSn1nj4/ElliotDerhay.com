@@ -17,7 +17,7 @@ class TagFactory extends Factory
     public function definition()
     {
         return [
-            'title' => $this->faker->realText(15),
+            'title' => $this->faker->unique()->word(),
         ];
     }
 }
