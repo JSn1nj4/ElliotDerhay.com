@@ -10,6 +10,8 @@ services:
     xdebug: true
     config:
       php: .vscode/php.ini
+  database:
+    portforward: 49208
   node:
     type: node:16
 events:
