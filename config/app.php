@@ -132,6 +132,7 @@ return [
 	|
 	*/
 
+	'enable-projects' => env('ENABLE_PROJECTS', false),
 	'enable-updates' => env('ENABLE_UPDATES', false),
 
 	/*
