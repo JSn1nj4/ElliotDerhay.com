@@ -21,9 +21,19 @@
 @endsection
 
 @section('sidebar')
-	<h3 class="text-xl">Widget 1</h3>
-	<hr>
-	<h3 class="text-xl">Widget 2</h3>
-	<hr>
-	<h3 class="text-xl">Widget 3</h3>
+	<x-widget.wrapper title="Categories">
+		<x-widget.blog.categories display="list"/>
+	</x-widget.wrapper>
+
+	<x-widget.wrapper title="Tags">
+		<x-widget.blog.tags sort-by="count" limit="10"/>
+	</x-widget.wrapper>
+
+	<x-widget.wrapper title="Latest Tweet">
+		<x-twitter.timeline count="1"/>
+	</x-widget.wrapper>
+
+	<x-widget.wrapper title="GitHub Activity">
+		<x-github.events-feed count="5"/>
+	</x-widget.wrapper>
 @endsection
