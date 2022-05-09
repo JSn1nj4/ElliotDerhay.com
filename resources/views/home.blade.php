@@ -22,7 +22,7 @@
 		</x-column>
 	</x-row>
 
-	<x-row :flex="false" id="projects">
+	<x-row :flex-class="null" id="projects">
 		<x-column>
 			<h2 class="content-title text-4xl pt-6 mt-5 md:mt-0 md:pt-0">
 				What I Do
@@ -36,7 +36,7 @@
 		</x-column>
 	</x-row>
 
-	<x-row :flex="false" class="bg-sea-green-200 dark:bg-sea-green-500 bg-opacity-40 dark:bg-opacity-25" id="connect">
+	<x-row :flex-class="null" class="bg-sea-green-200 dark:bg-sea-green-500 bg-opacity-40 dark:bg-opacity-25" id="connect">
 		<x-column class="block w-full">
 			<h2 class="content-title text-4xl pt-6 mt-5 md:mt-0 md:pt-0">
 				What I'm Up To
