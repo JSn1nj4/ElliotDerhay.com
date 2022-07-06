@@ -10,8 +10,16 @@ services:
     xdebug: true
     config:
       php: .vscode/php.ini
+#    ports:
+#      - "3000:3000"
+#      - "26789:26789"
   node:
     type: node:16
+    ports:
+      - "3000:3000"
+      - "3001:3001"
+      - "24689:24689"
+      - "24690:24690"
 events:
   post-start:
     # - appserver: composer install
