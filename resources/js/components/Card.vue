@@ -3,10 +3,16 @@
 		<slot></slot>
 	</div>
 </template>
-<script setup>
+<script setup lang="ts">
 import { computed, onMounted, ref } from 'vue'
 
-const props = defineProps({
+const props = withDefaults(defineProps<{
+	size?: string,
+	url?: string,
+	type?: string,
+	margin?: string,
+	padding?: string
+}>(), {
 	size: '',
 	url: '',
 	type: 'default',
