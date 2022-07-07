@@ -14,20 +14,14 @@ services:
     portforward: 49208
   node:
     type: node:16
-#    ssl: "${VITE_SERVER_HTTPS_PORT:-false}"
     ports:
-      - "3000:3000"
-      - "3001:3001"
-      - "24689:24689"
-      - "24690:24690"
+      - '3000:3000'
 events:
   post-start:
-    # - appserver: composer install
-    # - node: yarn
     - appserver: php artisan db:seed
     - appserver: php artisan github:event:pull
     - appserver: php artisan tweet:pull
-    # - node: yarn dev
+    - node: yarn dev
 tooling:
   node:
     service: node

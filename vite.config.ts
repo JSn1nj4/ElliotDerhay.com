@@ -7,7 +7,8 @@ export default defineConfig(({ mode }) => {
 	Object.assign(process.env, loadEnv(mode, process.cwd()))
 	const {
 		VITE_SERVER_HOST,
-		VITE_SERVER_HTTPS
+		VITE_SERVER_HTTPS,
+		VITE_SERVER_PORT
 	} = process.env
 
 	// build hmr config
@@ -18,6 +19,7 @@ export default defineConfig(({ mode }) => {
 	if(Object.keys(hmr).length > 0) server.hmr = hmr
 	if(VITE_SERVER_HOST) server.host = VITE_SERVER_HOST !== 'true' ? VITE_SERVER_HOST : true
 	if(VITE_SERVER_HTTPS) server.https = VITE_SERVER_HTTPS === 'true'
+	if(VITE_SERVER_PORT) server.port = parseInt(VITE_SERVER_PORT)
 
 	// build viteConfig object
 	const viteConfig: UserConfig = {}
