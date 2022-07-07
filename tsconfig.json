@@ -1,0 +1,15 @@
+{
+	"compilerOptions": {
+		"target": "ESNext",
+		"module": "ESNext",
+		"moduleResolution": "Node",
+		"strict": false,
+		"allowJs": true,
+		"allowSyntheticDefaultImports": true,
+		"resolveJsonModule": true,
+		"types": [
+			"node",
+			"vite/client"
+		]
+	}
+}

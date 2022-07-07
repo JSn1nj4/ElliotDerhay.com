@@ -12,12 +12,14 @@
 	</div>
 </template>
 
-<script setup>
-/**
+<script setup lang="ts">/**
  * Adapted from HTML version of Atom Spinner from "Epic Spinners"
  * spinner collection website: https://epic-spinners.epicmax.co/
  */
-const props = defineProps({
+const props = withDefaults(defineProps<{
+	size?: string,
+	color?: string,
+}>(), {
 	size: '60px',
 	color: '#00C49A',
 })
