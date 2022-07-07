@@ -5,7 +5,10 @@ import vuePlugin from "@vitejs/plugin-vue"
 export default defineConfig(({ mode }) => {
 	// setup
 	Object.assign(process.env, loadEnv(mode, process.cwd()))
-	const {VITE_SERVER_HOST, VITE_SERVER_HTTPS} = process.env
+	const {
+		VITE_SERVER_HOST,
+		VITE_SERVER_HTTPS
+	} = process.env
 
 	// build hmr config
 	const hmr: HmrOptions = {}

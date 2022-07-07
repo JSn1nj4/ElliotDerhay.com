@@ -10,11 +10,9 @@ services:
     xdebug: true
     config:
       php: .vscode/php.ini
-#    ports:
-#      - "3000:3000"
-#      - "26789:26789"
   node:
     type: node:16
+#    ssl: "${VITE_SERVER_HTTPS_PORT:-false}"
     ports:
       - "3000:3000"
       - "3001:3001"
