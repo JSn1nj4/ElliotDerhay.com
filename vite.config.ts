@@ -25,7 +25,7 @@ export default defineConfig(({ mode }) => {
 	viteConfig.plugins = [
 		laravel([
 			'resources/css/app.css',
-			'resources/js/app.js',
+			'resources/js/app.ts',
 		]),
 		vuePlugin(),
 	]
