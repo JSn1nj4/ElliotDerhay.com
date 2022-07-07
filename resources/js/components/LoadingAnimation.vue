@@ -6,7 +6,7 @@
 		</div>
 	</div>
 </template>
-<script>
+<script lang="ts">
 import AtomSpinner from './AtomSpinner.vue';
 export default {
 	name: "load-animation",

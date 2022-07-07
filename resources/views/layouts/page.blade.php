@@ -15,7 +15,7 @@
 @push('footer-extras')
 	<div id="ga-request-popup"></div>
 
-	@vite('resources/js/app.js')
+	@vite('resources/js/app.ts')
 
 	<script type="application/javascript">
 		document.addEventListener('allow_tracking', ga_track);

@@ -14,7 +14,7 @@
 	</div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import {ref, onBeforeMount} from 'vue'
 
 const btnClasses = ref('flex-1 p-4 m-2 font-bold')
