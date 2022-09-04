@@ -1,3 +1,9 @@
+@php
+/**
+ * @var App\Models\Post[] $posts
+ * @var App\Models\Post $post
+ */
+@endphp
 @extends('layouts.blog')
 
 @section('blog')
