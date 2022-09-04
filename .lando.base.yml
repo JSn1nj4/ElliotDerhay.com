@@ -18,10 +18,7 @@ services:
       - '3000:3000'
 events:
   post-start:
-    - appserver: php artisan db:seed
-    - appserver: php artisan github:event:pull
-    - appserver: php artisan tweet:pull
-    - node: yarn dev
+    - printf "\033[0;31mDon't forget to run migrations and seed db!\033[0m\n"
 tooling:
   node:
     service: node
