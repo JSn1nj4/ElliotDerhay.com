@@ -8,9 +8,5 @@
 @endsection
 
 @section('sidebar')
-	<h3 class="text-xl">Widget 1</h3>
-	<hr>
-	<h3 class="text-xl">Widget 2</h3>
-	<hr>
-	<h3 class="text-xl">Widget 3</h3>
+	@include('partials.blog-sidebar')
 @endsection
