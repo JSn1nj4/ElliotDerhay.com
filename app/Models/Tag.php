@@ -11,6 +11,7 @@ use Illuminate\Support\Str;
 /**
  * @property int $id
  * @property string $title
+ * @property string $slug
  */
 class Tag extends Model
 {

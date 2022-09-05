@@ -15,6 +15,8 @@ use Illuminate\Support\Str;
  * @property string $body
  * @property string $excerpt
  * @property string $cover_image
+ * @property Category[] $categories
+ * @property Tag[] $tags
  */
 class Post extends Model
 {
