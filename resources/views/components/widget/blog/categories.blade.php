@@ -1,3 +1,4 @@
+@php /** @var \App\Models\Category[] $categories */ @endphp
 <div>
 	@switch($display)
 		@case('inline')
