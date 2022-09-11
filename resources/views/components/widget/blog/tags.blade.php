@@ -1,7 +1,6 @@
 @php/** @var \App\Models\Tag[] $tags */@endphp
 <div>
-	@foreach
-($tags as $tag)
+	@foreach ($tags as $tag)
 		<span>
 			<a href="/tag/{{ $tag->slug }}">
 				#{{ $tag->title }}
