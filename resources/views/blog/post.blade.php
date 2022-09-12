@@ -8,7 +8,8 @@
 		<p class="my-1 text-lg">
 			Categories:
 			@foreach($post->categories as $cat_i => $category)
-				@unless($cat_i === 0), @endunless<a href="/category/{{ $category->slug }}">{{ $category->title }}</a>
+				@unless($cat_i === 0), @endunless
+				<a href="{{ route('blog', compact('category')) }}">{{ $category->title }}</a>
 			@endforeach
 		</p>
 	@endif
@@ -16,7 +17,8 @@
 		<p class="my-1 text-lg">
 			Tags:
 			@foreach($post->tags as $tag_i => $tag)
-				@unless($tag_i === 0), @endunless<a href="/tag/{{ $tag->slug }}">#{{ $tag->title }}</a>
+				@unless($tag_i === 0), @endunless
+				<a href="{{ route('blog', compact('tag')) }}">#{{ $tag->title }}</a>
 			@endforeach
 		</p>
 	@endif
