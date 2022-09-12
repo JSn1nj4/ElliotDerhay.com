@@ -7,19 +7,18 @@ use Illuminate\Http\Request;
 
 class PostsController extends Controller
 {
-    public function index(Request $request, int $page = 1)
+    public function index(Request $request)
 	{
-		$posts = Post::take(10)
-			->when(optional($request)->category, function ($query, $category_id): void {
-				$query->whereRelation('categories', 'category_id', $category_id);
-			})
-			->when(optional($request)->tag, function ($query, $tag_id): void {
-				$query->whereRelation('tags', 'tag_id', $tag_id);
-			})
-			->offset(($page - 1) * 10)
-			->get();
-
-		return view('blog.index', compact('posts'));
+		return view('blog.index', [
+			'posts' => Post::when(optional($request)->category, function ($query, $category_id): void {
+					$query->whereRelation('categories', 'category_id', $category_id);
+				})
+				->when(optional($request)->tag, function ($query, $tag_id): void {
+					$query->whereRelation('tags', 'tag_id', $tag_id);
+				})
+				->paginate(10)
+				->withQueryString()
+		]);
 	}
 
 	public function show(Request $request, Post $post)
