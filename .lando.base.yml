@@ -7,30 +7,29 @@ config:
   database: mysql:8.0
 services:
   appserver:
+    build_as_root:
+      - curl -sL https://deb.nodesource.com/setup_16.x | bash -
+      - apt-get install -y nodejs
+      - npm install --location=global yarn
+      - yarn
     xdebug: true
     config:
       php: .vscode/php.ini
-  node:
-    type: node:16
-#    ssl: "${VITE_SERVER_HTTPS_PORT:-false}"
+    ssl: true
     ports:
-      - "3000:3000"
-      - "3001:3001"
-      - "24689:24689"
-      - "24690:24690"
+      - '24690:24690'
+      - '24691:24691'
+      - '24692:24692'
+  database:
+    portforward: 49208
 events:
   post-start:
-    # - appserver: composer install
-    # - node: yarn
-    - appserver: php artisan db:seed
-    - appserver: php artisan github:event:pull
-    - appserver: php artisan tweet:pull
-    # - node: yarn dev
+    - printf "\033[0;31mDon't forget to run migrations and seed db!\033[0m\n"
 tooling:
   node:
-    service: node
+    service: appserver
   npx:
-    service: node
+    service: appserver
   pull_content:
     service: appserver
     description: pull fresh content from external sources
@@ -45,4 +44,9 @@ tooling:
       - php artisan github:event:pull
       - php artisan tweet:pull
   yarn:
-    service: node
+    service: appserver
+  yarn_dev:
+    service: appserver
+    description: Start vite dev server
+    user: root
+    cmd: yarn dev
