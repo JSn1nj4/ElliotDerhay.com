@@ -2,7 +2,7 @@
 <div>
 	@foreach ($tags as $tag)
 		<span>
-			<a href="/tag/{{ $tag->slug }}">
+			<a href="{{ route('blog', compact('tag')) }}">
 				#{{ $tag->title }}
 			</a>
 		</span>

@@ -4,7 +4,7 @@
 		@case('inline')
 			@foreach($categories as $category)
 				<span>
-					<a href="/category/{{ $category->slug }}">
+					<a href="{{ route('blog', compact('category')) }}">
 						{{ $category->title }}
 					</a>
 				</span>
@@ -17,7 +17,7 @@
 				@foreach($categories as $category)
 					<li>
 						{{-- <a href="{{ route('blog.category.show', compact('category')) }}"> --}}
-						<a href="/category/{{ $category->slug }}">
+						<a href="{{ route('blog', compact('category')) }}">
 							{{ $category->title }}
 						</a>
 					</li>
