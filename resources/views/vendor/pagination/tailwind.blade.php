@@ -15,7 +15,7 @@
                 <a href="{{ $paginator->nextPageUrl() }}" class="relative inline-flex items-center px-4 py-2 ml-3 text-sm font-medium text-gray-700 border border-gray-300 leading-5 rounded-md hover:text-gray-500 focus:outline-none focus:ring ring-gray-300 focus:border-blue-300 active:text-gray-700 transition ease-in-out duration-150">
                     {!! __('pagination.next') !!}
                 </a>
-            @else
+            @else`
                 <span class="relative inline-flex items-center px-4 py-2 ml-3 text-sm font-medium text-gray-500 border border-gray-300 cursor-default leading-5 rounded-md">
                     {!! __('pagination.next') !!}
                 </span>

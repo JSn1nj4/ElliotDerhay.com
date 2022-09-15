@@ -7,9 +7,6 @@
 @extends('layouts.blog')
 
 @section('blog')
-	{{ $posts->links() }}
-	<div class="mb-12"></div>
-
   @foreach($posts as $post)
 		<x-card.wrapper size="none" padding="p-0" margin="mb-12 last:mb-0">
 			@isset($post->cover_image)
