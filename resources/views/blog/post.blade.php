@@ -28,7 +28,34 @@
 			@endforeach
 		</p>
 	@endif
-	<p class="mb-4 mt-3 text-xl">{{ $post->body }}</p>
+	<div class="mb-4 mt-3">
+		{{-- {{ $post->body }} --}}
+<x-markdown>
+# test heading level 1
+
+## test heading level 2
+
+### test heading level 3
+
+#### test heading level 4
+
+##### test heading level 5
+
+###### test heading level 6
+
+--------
+
+test paragraph
+
+- list item 1
+- list item 2
+- list item 3
+
+1. numbered list item
+2. numbered list item
+3. numbered list item
+</x-markdown>
+	</div>
 @endsection
 
 @section('sidebar')
