@@ -3,13 +3,16 @@
 
 @section('blog')
 	<img src="{{ $post->cover_image }}" class="block rounded-lg" alt="">
+
 	<div class="flex flex-row pt-3 mt-2 gap-4">
 		<p>Posted {{ $post->created_at->toFormattedDateString() }}</p>
 		@unless($post->created_at->unix() === $post->updated_at->unix())
 			<p class="flex-grow-1">Last Updated {{ $post->updated_at->toFormattedDateString() }}</p>
 		@endunless
 	</div>
+
 	<h1 class="content-title text-4xl pt-2 mt-1">{{ $post->title }}</h1>
+
 	@if($post->categories->count() > 0)
 		<p class="my-1 text-lg">
 			Categories:
@@ -19,6 +22,7 @@
 			@endforeach
 		</p>
 	@endif
+
 	@if($post->tags->count() > 0)
 		<p class="my-1 text-lg">
 			Tags:
@@ -28,34 +32,10 @@
 			@endforeach
 		</p>
 	@endif
-	<div class="mb-4 mt-3">
-		{{-- {{ $post->body }} --}}
-<x-markdown>
-# test heading level 1
 
-## test heading level 2
-
-### test heading level 3
-
-#### test heading level 4
-
-##### test heading level 5
-
-###### test heading level 6
-
---------
-
-test paragraph
-
-- list item 1
-- list item 2
-- list item 3
-
-1. numbered list item
-2. numbered list item
-3. numbered list item
-</x-markdown>
-	</div>
+	<x-markdown class="mb-4 mt-3">
+		 {{ $post->body }}
+	</x-markdown>
 @endsection
 
 @section('sidebar')
