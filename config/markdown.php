@@ -1,6 +1,7 @@
 <?php
 
-use App\Renderers\Markdown\Blocks\HeadingRenderer;
+use App\View\Renderers\Markdown\Blocks\HeadingRenderer;
+use App\View\Renderers\Markdown\Blocks\ListItemRenderer;
 use League\CommonMark\Extension\CommonMark\Node\Block\Heading;
 
 return [

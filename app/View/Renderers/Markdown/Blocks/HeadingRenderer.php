@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Renderers\Markdown\Blocks;
+namespace App\View\Renderers\Markdown\Blocks;
 
 use League\CommonMark\Extension\CommonMark\Node\Block\Heading;
 use League\CommonMark\Node\Node;
