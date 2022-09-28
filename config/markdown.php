@@ -3,6 +3,7 @@
 use App\View\Renderers\Markdown\Blocks\HeadingRenderer;
 use App\View\Renderers\Markdown\Blocks\ListItemRenderer;
 use League\CommonMark\Extension\CommonMark\Node\Block\Heading;
+use League\CommonMark\Extension\CommonMark\Node\Block\ListItem;
 
 return [
     'code_highlighting' => [
@@ -72,6 +73,7 @@ return [
      */
     'block_renderers' => [
 		['class' => Heading::class, 'renderer' => new HeadingRenderer(), 'priority' => 1],
+		['class' => ListItem::class, 'renderer' => new ListItemRenderer(), 'priority' => 1],
     ],
 
     /*
