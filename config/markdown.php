@@ -2,8 +2,12 @@
 
 use App\View\Renderers\Markdown\Blocks\HeadingRenderer;
 use App\View\Renderers\Markdown\Blocks\ListItemRenderer;
+use App\View\Renderers\Markdown\Blocks\ParagraphRenderer;
+use App\View\Renderers\Markdown\Blocks\ThematicBreakRenderer;
 use League\CommonMark\Extension\CommonMark\Node\Block\Heading;
 use League\CommonMark\Extension\CommonMark\Node\Block\ListItem;
+use League\CommonMark\Extension\CommonMark\Node\Block\ThematicBreak;
+use League\CommonMark\Node\Block\Paragraph;
 
 return [
     'code_highlighting' => [
@@ -74,6 +78,8 @@ return [
     'block_renderers' => [
 		['class' => Heading::class, 'renderer' => new HeadingRenderer(), 'priority' => 1],
 		['class' => ListItem::class, 'renderer' => new ListItemRenderer(), 'priority' => 1],
+		['class' => Paragraph::class, 'renderer' => new ParagraphRenderer(), 'priority' => 1],
+		['class' => ThematicBreak::class, 'renderer' => new ThematicBreakRenderer(), 'priority' => 1],
     ],
 
     /*

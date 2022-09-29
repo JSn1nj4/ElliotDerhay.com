@@ -17,12 +17,12 @@ class HeadingRenderer implements NodeRendererInterface
 	{
 		/** @var Heading $node */
 		[$level, $attributes] = match($node->getLevel()) {
-			1 => ['h1', ['class' => 'text-4xl']],
-			2 => ['h2', ['class' => 'text-3xl']],
-			3 => ['h3', ['class' => 'text-2xl']],
-			4 => ['h4', ['class' => 'text-xl']],
-			5 => ['h5', ['class' => 'text-lg']],
-			6 => ['h6', ['class' => 'text-md']],
+			1 => ['h1', ['class' => 'text-4xl mt-4 first:mt-0']],
+			2 => ['h2', ['class' => 'text-3xl mt-4 first:mt-0']],
+			3 => ['h3', ['class' => 'text-2xl mt-4 first:mt-0']],
+			4 => ['h4', ['class' => 'text-xl mt-4 first:mt-0']],
+			5 => ['h5', ['class' => 'text-lg mt-4 first:mt-0']],
+			6 => ['h6', ['class' => 'text-md mt-4 first:mt-0']],
 		};
 
 		return new HtmlElement($level, $attributes, $childRenderer->renderNodes($node->children()));
