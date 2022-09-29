@@ -13,6 +13,6 @@ class ThematicBreakRenderer implements \League\CommonMark\Renderer\NodeRendererI
      */
     public function render(Node $node, ChildNodeRendererInterface $childRenderer): HtmlElement
     {
-        return new HtmlElement('hr', ['class' => 'my-4 mx-auto border-t-gray-700 border-t-dashed px-3 w-[40%] max-w-sm'], '');
+        return new HtmlElement('hr', ['class' => 'my-8 mx-auto border-t-gray-700 border-dashed border-t-2 px-3 w-[40%] max-w-sm'], '');
     }
 }
