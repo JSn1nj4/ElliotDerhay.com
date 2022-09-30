@@ -34,7 +34,7 @@
 	@endif
 
 	<x-markdown class="mb-4 mt-3">
-		 {{ $post->body }}
+		 {!! $post->body !!}
 	</x-markdown>
 @endsection
 
