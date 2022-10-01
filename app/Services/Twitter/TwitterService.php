@@ -37,10 +37,8 @@ class TwitterService implements SocialMediaService
 	/**
 	 * Create a new instance of the Tweet model
 	 *
-	 * @todo: need to fix 'valid' issue; 'expires_at' is being set to null
-	 *
 	 * This is necessary to initialize some properties that can't otherwise be
-	 * initialized. Initializing properties outside of a constrctor requires
+	 * initialized. Initializing properties outside the constructor requires
 	 * that the initial values be static.
 	 */
 	public function __construct()
