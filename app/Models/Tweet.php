@@ -6,6 +6,33 @@ use App\DataTransferObjects\TweetDTO;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\Models\Tweet
+ *
+ * @property string $id
+ * @property int $user_id
+ * @property string $body
+ * @property \Illuminate\Support\Carbon $date
+ * @property int|null $sub_tweet_id
+ * @property object $entities
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read string $formatted_body
+ * @property-read string $url
+ * @property-read \App\Models\TwitterUser|null $user
+ * @method static \Illuminate\Database\Eloquent\Builder|Tweet newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Tweet newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Tweet query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Tweet whereBody($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Tweet whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Tweet whereDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Tweet whereEntities($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Tweet whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Tweet whereSubTweetId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Tweet whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Tweet whereUserId($value)
+ * @mixin \Eloquent
+ */
 class Tweet extends Model
 {
 	use HasFactory;

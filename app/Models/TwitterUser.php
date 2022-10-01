@@ -7,6 +7,30 @@ use App\Definitions\CreateMode;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\Models\TwitterUser
+ *
+ * @property int $id
+ * @property string $name
+ * @property string $screen_name
+ * @property string $profile_image_url_https
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read string $profile_url
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Tweet[] $tweets
+ * @property-read int|null $tweets_count
+ * @method static \Database\Factories\TwitterUserFactory factory(...$parameters)
+ * @method static \Illuminate\Database\Eloquent\Builder|TwitterUser newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|TwitterUser newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|TwitterUser query()
+ * @method static \Illuminate\Database\Eloquent\Builder|TwitterUser whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TwitterUser whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TwitterUser whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TwitterUser whereProfileImageUrlHttps($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TwitterUser whereScreenName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TwitterUser whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
 class TwitterUser extends Model
 {
 	use HasFactory;
