@@ -5,6 +5,7 @@ namespace App\Models;
 use App\DataTransferObjects\GithubUserDTO;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * App\Models\GithubUser
@@ -49,7 +50,7 @@ class GithubUser extends Model
 		]);
 	}
 
-	public function events()
+	public function events(): HasMany
 	{
 		return $this->hasMany(GithubEvent::class);
 	}

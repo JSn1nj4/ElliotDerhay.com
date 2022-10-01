@@ -6,6 +6,7 @@ use App\DataTransferObjects\TwitterUserDTO;
 use App\Definitions\CreateMode;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * App\Models\TwitterUser
@@ -56,7 +57,7 @@ class TwitterUser extends Model
 		return "https://twitter.com/{$this->screen_name}";
 	}
 
-	public function tweets()
+	public function tweets(): HasMany
 	{
 		return $this->hasMany(Tweet::class);
 	}

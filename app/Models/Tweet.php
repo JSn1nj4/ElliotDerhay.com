@@ -5,6 +5,7 @@ namespace App\Models;
 use App\DataTransferObjects\TweetDTO;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * App\Models\Tweet
@@ -125,7 +126,7 @@ class Tweet extends Model
 		return "{$this->user->profile_url}/status/{$this->id}";
 	}
 
-	public function user()
+	public function user(): BelongsTo
 	{
 		return $this->belongsTo(TwitterUser::class);
 	}
