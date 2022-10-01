@@ -14,7 +14,7 @@ class Row extends Component
     public function __construct(
 			public ?string $id = null,
 			public string $class = '',
-			public bool $flex = true,
+			public ?string $flexClass = 'md:flex',
 			public ?string $overlayClasses = null,
 	) {}
 

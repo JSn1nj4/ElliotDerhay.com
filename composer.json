@@ -14,9 +14,11 @@
 		"laravel/framework": "^9.0",
 		"laravel/tinker": "^2.7",
 		"sentry/sentry-laravel": "^2.11",
-		"spatie/data-transfer-object": "^3.7"
+		"spatie/data-transfer-object": "^3.7",
+		"spatie/laravel-markdown": "^2.2"
 	},
 	"require-dev": {
+		"barryvdh/laravel-ide-helper": "^2.12",
 		"fakerphp/faker": "^1.9.1",
 		"laravel/dusk": "^6.22",
 		"mockery/mockery": "^1.4.4",

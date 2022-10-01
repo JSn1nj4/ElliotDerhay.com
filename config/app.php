@@ -132,7 +132,7 @@ return [
 	|
 	*/
 
-	'enable-updates' => env('ENABLE_UPDATES', false),
+	'enable-blog' => env('ENABLE_BLOG', false),
 
 	/*
 	|--------------------------------------------------------------------------
