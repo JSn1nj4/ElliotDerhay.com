@@ -96,7 +96,6 @@ return [
      * More info: https://commonmark.thephpleague.com/2.1/customization/rendering/
      */
     'inline_renderers' => [
-        // ['class' => FencedCode::class, 'renderer' => new MyCustomCodeRenderer(), 'priority' => 0]
 		['class' => Code::class, 'renderer' => new CodeRenderer(), 'priority' => 1],
 		['class' => Link::class, 'renderer' => new LinkRenderer(), 'priority' => 1],
     ],
