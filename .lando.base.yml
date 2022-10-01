@@ -19,7 +19,7 @@ services:
       - yarn
     xdebug: true
     config:
-      php: .vscode/php.ini
+      php: .config/php.ini
     ssl: true
     ports:
       - '24690:24690'
