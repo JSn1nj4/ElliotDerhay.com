@@ -13,10 +13,15 @@ proxy:
 services:
   appserver:
     build_as_root:
-      - curl -sL https://deb.nodesource.com/setup_16.x | bash -
-      - apt-get install -y nodejs
+      - curl -sL https://deb.nodesource.com/setup_16.zx | bash -
+      - apt-get update -y
+      - apt-get install -y cron nodejs
       - npm install --location=global yarn
       - yarn
+    run_as_root:
+      - service cron start
+    run:
+      - crontab /app/.config/cron
     xdebug: true
     config:
       php: .config/php.ini
