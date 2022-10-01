@@ -7,15 +7,21 @@ use League\CommonMark\Node\Node;
 use League\CommonMark\Renderer\ChildNodeRendererInterface;
 use League\CommonMark\Renderer\NodeRendererInterface;
 use League\CommonMark\Util\HtmlElement;
+use League\CommonMark\Xml\XmlNodeRendererInterface;
 
-class HeadingRenderer implements NodeRendererInterface
+class HeadingRenderer implements NodeRendererInterface, XmlNodeRendererInterface
 {
-    /**
-     * @inheritDoc
-     */
-    public function render(Node $node, ChildNodeRendererInterface $childRenderer): HtmlElement
+	/**
+	 * @param Heading $node
+	 *
+	 * {@inheritDoc}
+	 *
+	 * @psalm-suppress MoreSpecificImplementedParamType
+	 */
+	public function render(Node $node, ChildNodeRendererInterface $childRenderer): HtmlElement
 	{
-		/** @var Heading $node */
+		Heading::assertInstanceOf($node);
+
 		[$level, $attributes] = match($node->getLevel()) {
 			1 => ['h1', ['class' => 'text-4xl mt-6 first:mt-0']],
 			2 => ['h2', ['class' => 'text-3xl mt-6 first:mt-0']],
@@ -25,6 +31,25 @@ class HeadingRenderer implements NodeRendererInterface
 			6 => ['h6', ['class' => 'text-md mt-6 first:mt-0']],
 		};
 
-		return new HtmlElement($level, $attributes, $childRenderer->renderNodes($node->children()));
-    }
+		return new HtmlElement($level, array_merge($node->data->get('attributes'), $attributes), $childRenderer->renderNodes($node->children()));
+	}
+
+	public function getXmlTagName(Node $node): string
+	{
+		return 'heading';
+	}
+
+	/**
+	 * @param Heading $node
+	 *
+	 * @return array<string, scalar>
+	 *
+	 * @psalm-suppress MoreSpecificImplementedParamType
+	 */
+	public function getXmlAttributes(Node $node): array
+	{
+		Heading::assertInstanceOf($node);
+
+		return ['level' => $node->getLevel()];
+	}
 }
