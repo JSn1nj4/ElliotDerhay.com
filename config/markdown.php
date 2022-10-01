@@ -4,9 +4,11 @@ use App\View\Renderers\Markdown\Blocks\HeadingRenderer;
 use App\View\Renderers\Markdown\Blocks\ListItemRenderer;
 use App\View\Renderers\Markdown\Blocks\ParagraphRenderer;
 use App\View\Renderers\Markdown\Blocks\ThematicBreakRenderer;
+use App\View\Renderers\Markdown\Inline\CodeRenderer;
 use League\CommonMark\Extension\CommonMark\Node\Block\Heading;
 use League\CommonMark\Extension\CommonMark\Node\Block\ListItem;
 use League\CommonMark\Extension\CommonMark\Node\Block\ThematicBreak;
+use League\CommonMark\Extension\CommonMark\Node\Inline\Code;
 use League\CommonMark\Node\Block\Paragraph;
 
 return [
@@ -90,6 +92,7 @@ return [
      */
     'inline_renderers' => [
         // ['class' => FencedCode::class, 'renderer' => new MyCustomCodeRenderer(), 'priority' => 0]
+		['class' => Code::class, 'renderer' => new CodeRenderer(), 'priority' => 1],
     ],
 
     /*
