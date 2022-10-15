@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PostsController;
 // use App\Http\Controllers\ProjectsController;
 use Illuminate\Support\Facades\Route;
