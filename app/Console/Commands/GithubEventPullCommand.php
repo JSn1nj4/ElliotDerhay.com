@@ -4,7 +4,7 @@ namespace App\Console\Commands;
 
 use App\Events\GithubEventsPulledEvent;
 use App\Models\GithubEvent;
-use App\Services\GithubService;
+use App\Services\Github\GithubService;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Storage;
 

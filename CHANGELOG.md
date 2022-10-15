@@ -1,14 +1,149 @@
 # Changelog
 
+## Release 2.0.0
+
+### New
+- `twitter:user:update` command to get fresh Twitter user data
+- `HttpMethod` enum
+- `CreateMode` enum to aid in dynamically selecting model create mode
+- `TwitterService::call()` method for calling endpoints via dedicated enpoint classes
+- `TwitterService::checkForErrors()` method to check responses for errors
+- `TwitterService::getUsers()` method to fetch Twitter user data
+- `TwitterUsersUpdatedEvent` class
+- `github:user:update` command to get fresh GitHub user data
+- `GithubUsersUpdatedEvent` class
+- `GithubService::call()` method for calling endpoints
+- `GithubService::checkforErrors()` method to check responses for errors
+- `GithubService::getUser()` method to fetch GitHub user data
+- `GithubService::getUsers()` method to call `GithubService::getUser()` for multiple users
+- `GithubUserDataFactory` class to generate data structure similar to GitHub's API
+- `TwitterUserDataFactory` to generate Twitter user data similar to data returned by Twitter's API
+- `TwitterUserFactory` to generate fake `TwitterUser` model entities
+- `TokenFactory` to generate fake tokens for testing
+
+### Updates
+- Init `TwitterService::$token` in constructor and use directly
+- Restructure `TwitterService` to use dedicated Endpoint classes
+- Remove `TwitterService::getUrl()` in favor of `AbstractEndpoint::url()` method directly on endpoints
+- Remove `TwitterService::$api_url` property
+- Modify `TwitterUser::fromDTO()` to dynamically choose model create/update methods using `CreateMode` enum
+- Update `TwitterServiceTest`
+- Reorganize "tests/Unit/App/Services" to match "app/Services" folder structure
+- Schedule new user update commands weekly
+- Remove `getUrl()` method from `GitHostService` and `SocialMediaService` contracts
+- Restructure `GithubService` a bit to use dedicated Endpoint classes
+- Add endpoint tests
+- Update `GithubServiceTest`
+- Use `faker()` helper in place of using `\Faker\Factory::create()` for every test case
+
+### Bug fixes
+- Fix #47: token "expires_at" issue
+	- Check for `null` value for tokens that don't have an expiration date
+	- Conversely, ensure value is _not_ `null` as part of expiration check
+
+## Release 1.12.1
+
+### Bug fixes
+- Fix `CreateEvent` and `DeleteEvent` not supporting created/deleted repos
+
+## Release 1.12.0
+
+### Major changes
+- Upgrade environment dependencies
+	- Node 16.14.0
+	- Yarn 1.22.17
+- Upgrade Yarn dependencies
+	- vue@^3.2.30
+	- vue-loader@^17.0.0
+- Remove vue-template-compiler
+- Upgrade composer dependencies
+	- fruitcake/laravel-cors@^2.0.5
+	- guzzlehttp/guzzle@^7.2
+	- laravel/framework@^9.0
+	- laravel/tinker@^2.7
+	- nunomaduro/collision@^6.1
+	- phpunit/phpunit@^9.5.10
+- Replace facade/ignition@^2.5 with spatie/laravel-ignition@^1.0
+- Remove fideloper/proxy@^4.4
+- Remove cross-env@^7.0.2
+- Remove eslint@^8.1.0
+- Add missing peer dependencies
+	- @babel/core@^7.15.8
+	- @babel/plugin-proposal-object-rest-spread@^7.15.6
+	- @babel/plugin-syntax-dynamic-import@^7.8.3
+	- @babel/plugin-transform-runtime@^7.15.8
+	- @babel/preset-env@^7.15.8
+	- autoprefixer@^10.0.2
+	- webpack@^5.60.0
+	- webpack-cli@^4.9.1
+- Update some Vue code
+- Remove some unused Vue templates
+
+### Minor changes
+- Add `lando pull_content` to get latest remote content easily
+- Tweak single "post-install-cmd" script
+- Minor code tweaks
+- Add new Dusk testing directory
+
+## Release 1.11.0
+
+### Main changes
+- Add command to run multiple other artisan commands in bulk
+
+## Release 1.10.2
+
+### Tweaks
+- Attempt to limit automatic migrations only to development environment
+
+## Release 1.10.1
+
+### Main Changes
+- Require PHP 8.1
+- Require Node 16
+- Require Yarn 1.22.5
+- Include ASDF tool versions instead of nodenv config
+- Upgrade Yarn dependencies:
+	- axios@^0.25.0
+	- postcss-mixins@^9.0.1
+	- tailwindcss@^3.0.18
+- Upgrade Composer dependencies:
+	- laravel/framework@^8.82
+	- sentry/sentry-laravel@^2.11
+    - laravel/dusk@^6.22
+    - pestphp/pest@^1.21
+    - pestphp/pest-plugin-laravel@^1.2
+
+### Tweaks
+- Tweak Tailwind config to be more v3-friendly
+
 ## Release 1.10.0
 
-### Changes
+### Main Changes
 - Add dev routes
 	- See ["Develop faster by adding dev routes file in a Laravel app"][1_10_0-dev_routes]
 - Add Lando config
 - Update PHP requirement to PHP 8
+- Update all dependencies
+- Update Laravel boilerplate, mostly
+- Replace GithubClient with GithubService + tests
+- Replace TwitterClient with TwitterService + tests
+- Add PrivatePropertyAccessor reflection class for use in testing
+- Add dark/light mode feature
+- Overhaul homepage
+- Convert some Blade partials to Laravel components
+- Replace some nested Blade yields with [stacks][blade_stacks]
+- Update license
+
+### Tweaks
+- Minor privacy policy updates
+- Font changes
+- Add .env.testing (PR #21 by @zach2825)
+- Other initial testing setup tweaks (PR #21 by @zach2825)
+- Reorganize some Blade partials
+- Code cleanup
 
 [1_10_0-dev_routes]: https://freek.dev/1976-develop-faster-by-adding-dev-routes-file-in-a-laravel-app
+[blade_stacks]: https://laravel.com/docs/8.x/blade#stacks
 
 ### Tweaks
 - Force Yaml to use spaces for indentation

@@ -2,4 +2,6 @@
 
 This project is my personal website.
 
-[View the changelog](CHANGELOG.md)
+[Changelog](CHANGELOG.md)
+
+[License](LICENSE.md)

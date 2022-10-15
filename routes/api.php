@@ -21,12 +21,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// For working with projects
-Route::prefix('/projects')->group(function() {
-	Route::get('/', [ProjectsController::class, 'index']);
-	Route::get('/{count}', [ProjectsController::class, 'index']);
-});
-
 // Retrieve list of tweets
 Route::get('/tweets', [TweetController::class, 'index']);
 Route::get('/tweets/{count}', [TweetController::class, 'index']);
