@@ -11,7 +11,7 @@
 					Submit
 				@endcomponent
 			</span>
-			<span class="text-right flex-grow py-3 border-transparent border-solid border border-r-0"><a href="javascript:void(0)">Forgot Password</a><span>
+			<span class="text-right flex-grow py-3 border-transparent border-solid border border-r-0"><a href="javascript:void(0)">Forgot Password</a></span>
 		</p>
 	</form>
 	<div class="mx-auto my-6 border-2 border-solid border-transparent max-w-xs">

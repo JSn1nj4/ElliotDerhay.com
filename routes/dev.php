@@ -27,3 +27,5 @@ Route::prefix('admin')->middleware('auth')->group(function() {
 		return view('admin.dashboard');
 	})->name('admin.dashboard');
 });
+
+require __DIR__.'/auth.php';
