@@ -4,7 +4,7 @@
 
 	@include('partials.header')
 
-	<main class="bg-white dark:bg-black layer-shadow flex-grow">
+	<main class="bg-white dark:bg-black layer-shadow flex flex-col flex-grow">
 		@yield('content')
 	</main>
 
