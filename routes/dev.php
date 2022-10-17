@@ -22,6 +22,8 @@ Route::prefix('/dashboard')
 	->middleware(['auth', 'verified'])
 	->group(function() {
 		Route::view('/', 'admin.dashboard');
+		//	@todo post routes: resource? (index, create, store, show, edit, update, destroy)
+		//	@todo project routes: resource? (index, create, store, show, edit, update, destroy)
 	});
 
 require __DIR__.'/auth.php';
