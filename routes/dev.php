@@ -18,14 +18,5 @@ Route::get('/error/{code}', function ($code = null) {
 	abort($code);
 })->where('code', '[1-5][0-9]{2}');
 
-Route::get('/login', [LoginController::class, 'index'])->name('login');
-Route::post('/login', [LoginController::class, 'store'])->name('login.attempt');
-Route::get('/logout', [LoginController::class, 'destroy'])->name('logout');
-
-Route::prefix('admin')->middleware('auth')->group(function() {
-	Route::get('/', function() {
-		return view('admin.dashboard');
-	})->name('admin.dashboard');
-});
 
 require __DIR__.'/auth.php';
