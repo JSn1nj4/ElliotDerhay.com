@@ -21,7 +21,7 @@ Route::get('/error/{code}', function ($code = null) {
 Route::prefix('/dashboard')
 	->middleware(['auth', 'verified'])
 	->group(function() {
-		Route::view('/', 'admin.dashboard');
+		Route::view('/', 'admin.dashboard')->name('dashboard');
 		//	@todo post routes: resource? (index, create, store, show, edit, update, destroy)
 		//	@todo project routes: resource? (index, create, store, show, edit, update, destroy)
 	});

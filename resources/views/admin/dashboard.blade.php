@@ -1,12 +1,5 @@
-@extends('admin.layouts.master')
+@extends('admin.layouts.page')
 
-@section('body')
-
-	@include('admin.partials.header', [
-		'menuItems' => [
-			(object) ['name' => 'logout', 'label' => 'Log Out', 'icon' => 'fas fa-sign-out-alt']
-		]
-	])
-
+@section('content')
 	<h1 class="text-8xl">YOU MADE IT!</h1>
 @endsection
