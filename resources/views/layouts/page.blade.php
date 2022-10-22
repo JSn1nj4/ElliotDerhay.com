@@ -1,5 +1,9 @@
 @extends('layouts.master', ['bodyClasses' => $bodyClasses ?? ''])
 
+@push('head-extras')
+	@include('partials.trackers')
+@endpush
+
 @section('body')
 
 	@component('partials.header')

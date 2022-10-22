@@ -1,4 +1,4 @@
-@extends('admin.layouts.master', ['bodyClasses' => $bodyClasses ?? ''])
+@extends('layouts.master', ['bodyClasses' => $bodyClasses ?? ''])
 
 @section('body')
 	@component('partials.header')
@@ -12,3 +12,7 @@
 		@yield('content')
 	</main>
 @endsection
+
+@push('footer-extras')
+	@vite('resources/js/admin/app.ts')
+@endpush
