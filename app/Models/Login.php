@@ -17,4 +17,11 @@ class Login extends Model
 	{
 		return $this->belongsTo(User::class)->first();
 	}
+
+	public static function track(User $user): static
+	{
+		return static::create([
+			'user_id' => $user->id,
+		]);
+	}
 }
