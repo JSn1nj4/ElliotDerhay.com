@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Actions\LogUserLogin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
-use App\Models\Login;
-use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -28,13 +27,14 @@ class AuthenticatedSessionController extends Controller
      * @param  \App\Http\Requests\Auth\LoginRequest  $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(LoginRequest $request)
+    public function store(LoginRequest $request, LogUserLogin $logUserLogin)
     {
         $request->authenticate();
 
         $request->session()->regenerate();
 
-		Login::track(Auth::user());
+		// @todo: if user auth/login success event exists, listen there
+		$logUserLogin(Auth::user());
 
         return redirect()->intended(RouteServiceProvider::HOME);
     }

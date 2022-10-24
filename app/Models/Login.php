@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Login extends Model
 {
@@ -13,15 +14,8 @@ class Login extends Model
 		'user_id',
 	];
 
-	public function user()
+	public function user(): User|BelongsTo|null
 	{
 		return $this->belongsTo(User::class)->first();
-	}
-
-	public static function track(User $user): static
-	{
-		return static::create([
-			'user_id' => $user->id,
-		]);
 	}
 }
