@@ -14,8 +14,8 @@ class Login extends Model
 		'user_id',
 	];
 
-	public function user(): User|BelongsTo|null
+	public function user(): BelongsTo
 	{
-		return $this->belongsTo(User::class)->first();
+		return $this->belongsTo(User::class);
 	}
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Definitions\PostsPerPage;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
@@ -16,7 +17,9 @@ class PostsController extends Controller
 				->when(optional($request)->tag, function ($query, $tag_id): void {
 					$query->whereRelation('tags', 'tag_id', $tag_id);
 				})
-				->paginate(10)
+				->paginate(PostsPerPage::filter(
+					optional($request)->per_page
+				))
 				->withQueryString()
 		]);
 	}
