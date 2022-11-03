@@ -5,12 +5,22 @@ namespace App\Http\Controllers;
 use App\Definitions\PostsPerPage;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 
 class PostsController extends Controller
 {
     public function index(Request $request)
 	{
-		return view('blog.index', [
+		$views = [
+			'blog' => 'blog.index',
+			'dashboard.posts' => 'admin.dashboard.posts',
+		];
+
+		if(!Arr::exists($views, $request->route()->getName())) {
+			abort(404);
+		}
+
+		return view($views[$request->route()->getName()], [
 			'posts' => Post::when(optional($request)->category, function ($query, $category_id): void {
 					$query->whereRelation('categories', 'category_id', $category_id);
 				})
