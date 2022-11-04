@@ -17,11 +17,7 @@
 	</x-row>
 	<x-row flex-class="null">
 		<div class="block md:grid grid-cols-2 gap-6">
-			<x-admin.widget>
-				<x-slot:title>
-					Posts
-				</x-slot:title>
-			</x-admin.widget>
+			<x-admin.posts-widget/>
 			<x-admin.widget>
 				<x-slot:title>
 					Projects
