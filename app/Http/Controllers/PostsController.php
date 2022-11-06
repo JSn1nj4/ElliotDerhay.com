@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Definitions\PostsPerPage;
 use App\Models\Post;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 
 class PostsController extends Controller
 {
-    public function index(Request $request)
+    public function index(Request $request): View
 	{
 		$views = [
 			'blog' => 'blog.index',
@@ -34,7 +35,7 @@ class PostsController extends Controller
 		]);
 	}
 
-	public function show(Request $request, Post $post)
+	public function show(Post $post): View
 	{
 		return view('blog.post', compact('post'));
 	}

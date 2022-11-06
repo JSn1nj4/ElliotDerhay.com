@@ -1,10 +1,10 @@
 <?php
 
-namespace App\View\Components\Admin;
+namespace App\View\Components\Admin\Widgets\Partials;
 
 use Illuminate\View\Component;
 
-class Widget extends Component
+class Title extends Component
 {
     /**
      * Create a new component instance.
@@ -23,6 +23,6 @@ class Widget extends Component
      */
     public function render()
     {
-        return view('components.admin.widget');
+        return view('components.admin.widgets.partials.title');
     }
 }

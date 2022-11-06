@@ -17,12 +17,14 @@
 	</x-row>
 	<x-row flex-class="null">
 		<div class="block md:grid grid-cols-2 gap-6">
-			<x-admin.posts-widget/>
-			<x-admin.widget>
-				<x-slot:title>
-					Projects
-				</x-slot:title>
-			</x-admin.widget>
+			<x-admin.widgets.posts />
+			<x-admin.widgets.wrapper>
+				<x-slot:header>
+					<x-admin.widgets.partials.title>
+						Projects
+					</x-admin.widgets.partials.title>
+				</x-slot:header>
+			</x-admin.widgets.wrapper>
 		</div>
 	</x-row>
 @endsection

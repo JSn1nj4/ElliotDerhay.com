@@ -1,7 +1,12 @@
-<x-admin.widget>
-	<x-slot:title>
-		Posts
-	</x-slot:title>
+<x-admin.widgets.wrapper>
+	<x-slot:header>
+		<x-admin.widgets.partials.title>
+			Posts
+		</x-admin.widgets.partials.title>
+		<x-admin.widgets.partials.button href="#">
+			Manage
+		</x-admin.widgets.partials.button>
+	</x-slot:header>
 
 	<table class="w-full mt-4">
 		<thead>
@@ -19,4 +24,4 @@
 			@endforeach
 		</tbody>
 	</table>
-</x-admin.widget>
+</x-admin.widgets.wrapper>
