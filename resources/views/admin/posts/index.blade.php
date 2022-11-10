@@ -15,7 +15,7 @@
 			</div>
 			<table class="w-full border-collapse table-auto bg-gray-800 rounded-lg">
 				<thead class="table-header-group">
-					<tr class="table-row text-left">
+					<tr class="table-row text-left border-b border-gray-600">
 						<th class="table-cell text-2xl uppercase p-6">Title</th>
 						<th class="table-cell text-2xl uppercase p-6">Date</th>
 						<th class="table-cell text-2xl uppercase text-right p-6">
@@ -25,7 +25,7 @@
 				</thead>
 				<tbody class="table-row-group">
 					@foreach($posts as $post)
-					<tr class="table-row bg-sea-green-800/20 even:bg-sea-green-800/10 border-t border-gray-600">
+					<tr class="table-row bg-sea-green-800/20 even:bg-sea-green-800/10">
 						<td class="table-cell p-6 text-xl">
 							<a class="dark:transition-colors duration-300" href="{{ route('posts.edit', compact('post')) }}">
 								{{ $post->title }}
@@ -40,7 +40,7 @@
 					@endforeach
 				</tbody>
 				<tfoot class="table-footer-group">
-					<tr class="table-row">
+					<tr class="table-row border-t border-gray-600">
 						<td class="table-cell p-6" colspan="3">
 							{{ $posts->links() }}
 						</td>
