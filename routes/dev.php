@@ -22,7 +22,7 @@ Route::prefix('/dashboard')
 	->middleware(['auth', 'verified'])
 	->group(function() {
 		Route::view('/', 'admin.dashboard')->name('dashboard');
-		//	@todo post routes: resource? (index, create, store, show, edit, update, destroy)
+		Route::resource('posts', PostsController::class);
 		//	@todo project routes: resource? (index, create, store, show, edit, update, destroy)
 	});
 

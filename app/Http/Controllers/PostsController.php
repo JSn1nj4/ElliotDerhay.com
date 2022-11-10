@@ -14,7 +14,7 @@ class PostsController extends Controller
 	{
 		$views = [
 			'blog' => 'blog.index',
-			'dashboard.posts' => 'admin.dashboard.posts',
+			'posts.index' => 'admin.posts.index',
 		];
 
 		if(!Arr::exists($views, $request->route()->getName())) {
