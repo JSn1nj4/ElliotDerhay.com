@@ -13,40 +13,39 @@
 			<div class="px-6 pb-6">
 				{{ $posts->links() }}
 			</div>
-			<table class="w-full border-collapse table-auto bg-gray-800 rounded-lg">
-				<thead class="table-header-group">
-					<tr class="table-row text-left border-b border-gray-600">
-						<th class="table-cell text-2xl uppercase p-6">Title</th>
-						<th class="table-cell text-2xl uppercase p-6">Date</th>
-						<th class="table-cell text-2xl uppercase text-right p-6">
+			<x-ui.table.wrapper>
+				<x-ui.table.header>
+					<x-ui.table.row class="border-b border-gray-600">
+						<x-ui.table.heading>Title</x-ui.table.heading>
+						<x-ui.table.heading>Date</x-ui.table.heading>
+						<x-ui.table.heading class="text-right">
 							<a class="px-6 py-1 dark:hover:bg-sea-green-500/20 dark:transition-colors duration-300 outline outline-1" href="{{ route('posts.create') }}">New</a>
-						</th>
-					</tr>
-				</thead>
-				<tbody class="table-row-group">
+						</x-ui.table.heading>
+					</x-ui.table.row>
+				</x-ui.table.header>
+				<x-ui.table.body>
 					@foreach($posts as $post)
-					<tr class="table-row bg-sea-green-800/20 even:bg-sea-green-800/10">
-						<td class="table-cell p-6 text-xl">
-							<a class="dark:transition-colors duration-300" href="{{ route('posts.edit', compact('post')) }}">
-								{{ $post->title }}
-							</a></td>
-						<td class="table-cell p-6 text-xl">
+					<x-ui.table.row class="bg-sea-green-800/20 even:bg-sea-green-800/10">
+						<x-ui.table.data>
+							<a class="dark:transition-colors duration-300" href="{{ route('posts.edit', compact('post')) }}">{{ $post->title }}</a>
+						</x-ui.table.data>
+						<x-ui.table.data>
 							{{ $post->created_at->format('M d Y \a\t H:i') }}
-						</td>
-						<td class="table-cell p-6 text-xl text-right">
+						</x-ui.table.data>
+						<x-ui.table.data class="text-right">
 							<a class="px-6 py-1 dark:hover:bg-sea-green-500/20 dark:transition-colors duration-300 outline outline-1" href="{{ route('posts.edit', compact('post')) }}">Edit</a>
-						</td>
-					</tr>
+						</x-ui.table.data>
+					</x-ui.table.row>
 					@endforeach
-				</tbody>
-				<tfoot class="table-footer-group">
-					<tr class="table-row border-t border-gray-600">
-						<td class="table-cell p-6" colspan="3">
+				</x-ui.table.body>
+				<x-ui.table.footer>
+					<x-ui.table.row class="border-t border-gray-600">
+						<x-ui.table.data colspan="3">
 							{{ $posts->links() }}
-						</td>
-					</tr>
-				</tfoot>
-			</table>
+						</x-ui.table.data>
+					</x-ui.table.row>
+				</x-ui.table.footer>
+			</x-ui.table.wrapper>
 		</x-column>
 	</x-row>
 @endsection
