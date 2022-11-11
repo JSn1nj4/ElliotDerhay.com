@@ -41,6 +41,13 @@ class Post extends Model
 {
     use HasFactory;
 
+	public $fillable = [
+		'body',
+		'cover_image',
+		'slug',
+		'title',
+	];
+
 	public function categories(): BelongsToMany
 	{
 		return $this->belongsToMany(Category::class);
