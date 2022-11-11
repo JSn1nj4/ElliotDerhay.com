@@ -3,7 +3,7 @@
 		<x-admin.widgets.partials.title>
 			Posts
 		</x-admin.widgets.partials.title>
-		<x-admin.widgets.partials.button href="#">
+		<x-admin.widgets.partials.button href="{{ route('posts.index') }}">
 			Manage
 		</x-admin.widgets.partials.button>
 	</x-slot:header>
