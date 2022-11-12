@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Definitions\PostsPerPage;
+use App\Http\Requests\StorePostRequest;
 use App\Models\Post;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -43,14 +44,9 @@ class PostsController extends Controller
 		return view('admin.posts.create');
 	}
 
-	public function store(Request $request): Response|RedirectResponse
+	public function store(StorePostRequest $request): Response|RedirectResponse
 	{
-		Post::create([
-			'cover_image' => '',
-			'title' => $request->title,
-			'slug' => $request->slug,
-			'body' => $request->body,
-		]);
+		Post::create($request->validated());
 
 		return redirect()->route('posts.index');
 	}
