@@ -1,0 +1,1 @@
+<button type="{{ $type->value }}" class="w-full bg-sea-green-600 hover:bg-gray-700/50 transition-colors dark:transition-colors duration-300 rounded px-3 py-1 text-2xl dark:text-black dark:hover:text-white">{{ $slot }}</button>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Definitions\PostsPerPage;
 use App\Http\Requests\StorePostRequest;
+use App\Http\Requests\UpdatePostRequest;
 use App\Models\Post;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -61,7 +62,7 @@ class PostsController extends Controller
 		return view('admin.posts.edit', compact('post'));
 	}
 
-	public function update(StorePostRequest $request, Post $post): Response|RedirectResponse
+	public function update(UpdatePostRequest $request, Post $post): Response|RedirectResponse
 	{
 		$post->update($request->validated());
 

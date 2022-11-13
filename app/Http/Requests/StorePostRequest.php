@@ -14,7 +14,7 @@ class StorePostRequest extends FormRequest
      */
     public function authorize()
     {
-        return User::where('id', \Auth::id())->exists();
+        return User::whereId(\Auth::id())->exists();
     }
 
     /**
@@ -31,7 +31,7 @@ class StorePostRequest extends FormRequest
 				'max:180',
 			],
 			'slug' => [
-				'unique:posts,slug,'.$this->post->id,
+				'unique:posts',
 				'max:180',
 			],
 			'body' => 'required',

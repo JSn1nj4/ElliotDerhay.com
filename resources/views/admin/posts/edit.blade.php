@@ -7,5 +7,12 @@
         'slug' => old('slug') ?? $post->slug,
         'body' => old('body') ?? $post->body,
 		],
-    'editing' => true,
 ])
+
+@section('method')
+	@method('PATCH')
+@endsection
+
+@section('buttons')
+	<x-ui.form.button>Update</x-ui.form.button>
+@endsection
