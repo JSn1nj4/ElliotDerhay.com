@@ -26,8 +26,14 @@ class StorePostRequest extends FormRequest
     {
         return [
 			'cover_image' => 'optional',
-            'title' => 'required|unique:posts|max:180',
-			'slug' => 'unique:posts|max:180',
+            'title' => [
+				'required',
+				'max:180',
+			],
+			'slug' => [
+				'unique:posts,slug,'.$this->post->id,
+				'max:180',
+			],
 			'body' => 'required',
         ];
     }

@@ -56,16 +56,17 @@ class PostsController extends Controller
 		return view('blog.post', compact('post'));
 	}
 
-	// public function edit(int $id): Response
-	// {
-	// 	// display 'edit' view to user
-	// 	// might just be 'create' view, but pre-filled for existing item
-	// }
+	public function edit(Post $post): View
+	{
+		return view('admin.posts.edit', compact('post'));
+	}
 
-	// public function update(Request $request, int $id): Response
-	// {
-	// 	// save changes to an existing item
-	// }
+	public function update(StorePostRequest $request, Post $post): Response|RedirectResponse
+	{
+		$post->update($request->validated());
+
+		return redirect()->route('posts.index');
+	}
 
 	// public function destroy(int $id): Response
 	// {
