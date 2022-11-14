@@ -36,8 +36,10 @@
 						</div>
 					@endif
 					@hasSection('buttons')
-						<div>
-							@yield('buttons')
+						<div class="block">
+							<div class="flex gap-2">
+								@yield('buttons')
+							</div>
 						</div>
 					@endif
 				</div>
