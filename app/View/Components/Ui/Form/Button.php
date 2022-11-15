@@ -52,7 +52,7 @@ class Button extends Component
      */
     public function __construct(
 		private string $color = 'sea-green',
-		private FormButtonStyle $style = FormButtonStyle::Solid,
+		private FormButtonStyle $buttonStyle = FormButtonStyle::Solid,
 		public FormButtonType $type = FormButtonType::Submit,
 	)
     {
@@ -66,7 +66,7 @@ class Button extends Component
 
 	private function colors(): string
 	{
-		return implode(' ', $this->colors[$this->color][$this->style->value]);
+		return implode(' ', $this->colors[$this->color][$this->buttonStyle->value]);
 	}
 
     /**

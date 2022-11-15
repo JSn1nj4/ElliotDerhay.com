@@ -15,5 +15,5 @@
 
 @section('buttons')
 	<x-ui.form.button>Update</x-ui.form.button>
-	<x-ui.link href="#" title="Delete Post" :style="\App\View\Components\Ui\Enums\LinkStyle::ButtonSolid" color="red">Delete</x-ui.link>
+	<x-ui.link href="#" title="Delete Post" :link-style="\App\View\Components\Ui\Enums\LinkStyle::ButtonSolid" color="red">Delete</x-ui.link>
 @endsection

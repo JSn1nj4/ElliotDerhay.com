@@ -1,9 +1,9 @@
-@php use App\View\Components\Ui\Enums\LinkStyle; @endphp
 @php
-	/**
-	 * @var App\Models\Post[] $posts
-	 * @var App\Models\Post $post
-	 */
+use App\View\Components\Ui\Enums\LinkStyle;
+/**
+ * @var App\Models\Post[] $posts
+ * @var App\Models\Post $post
+ */
 @endphp
 @extends('admin.layouts.page')
 
@@ -23,7 +23,7 @@
 							<x-ui.link
 								href="{{ route('posts.create') }}"
 								title="New Post"
-								:style="LinkStyle::ButtonOutline">
+								:link-style="LinkStyle::ButtonOutline">
 								<i class="fas fa-plus"></i>
 							</x-ui.link>
 						</x-ui.table.heading>
@@ -35,7 +35,7 @@
 							<x-ui.table.data>
 								<x-ui.link
 									href="{{ route('posts.edit', compact('post')) }}"
-									:style="LinkStyle::Plain">
+									:link-style="LinkStyle::Plain">
 									{{ $post->title }}
 								</x-ui.link>
 							</x-ui.table.data>
@@ -46,14 +46,14 @@
 								<x-ui.link
 									href="{{ route('posts.edit', compact('post')) }}"
 									title="Edit Post"
-									:style="LinkStyle::ButtonOutline">
+									:link-style="LinkStyle::ButtonOutline">
 										<i class="fas fa-pencil-alt"></i>
 								</x-ui.link>
 								<x-ui.link
 									href="#"
 									title="Delete Post"
 									color="red"
-									:style="LinkStyle::ButtonOutline">
+									:link-style="LinkStyle::ButtonOutline">
 										<i class="far fa-trash-alt"></i>
 								</x-ui.link>
 							</x-ui.table.data>

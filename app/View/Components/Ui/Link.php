@@ -70,7 +70,7 @@ class Link extends Component
 		public ?string $alt = null,
 		private ?string $color = 'sea-green',
 		public string $href = '#',
-		private LinkStyle $style = LinkStyle::Plain,
+		private LinkStyle $linkStyle = LinkStyle::Plain,
 		public ?string $title = null,
 	)
     {
@@ -79,12 +79,12 @@ class Link extends Component
 
 	private function colors(): string
 	{
-		return implode(' ', $this->colors[$this->color][$this->style->value]);
+		return implode(' ', $this->colors[$this->color][$this->linkStyle->value]);
 	}
 
 	public function classes(): string
 	{
-		return match($this->style) {
+		return match($this->linkStyle) {
 			LinkStyle::ButtonSolid => "px-3 py-1 {$this->colors()} dark:transition-colors duration-300",
 			LinkStyle::ButtonOutline => "px-3 py-1 {$this->colors()} dark:transition-colors duration-300 outline outline-1",
 			default => "{$this->colors()} dark:transition-colors duration-300",
