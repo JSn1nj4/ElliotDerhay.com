@@ -20,12 +20,13 @@ class UpdatePostRequest extends FormRequest
 	public function rules()
 	{
 		return [
-			'cover_image' => 'optional',
+			'cover_image' => 'string',
 			'title' => [
 				'required',
 				'max:180',
 			],
 			'slug' => [
+				'required',
 				'unique:posts,slug,'.$this->post->id,
 				'max:180',
 			],

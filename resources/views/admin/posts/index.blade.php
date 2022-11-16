@@ -10,7 +10,12 @@ use App\View\Components\Ui\Enums\LinkStyle;
 @section('content')
 	<x-row flex-class="null">
 		<x-column class="block w-full">
-			<h1 class="text-3xl uppercase mb-8">Posts</h1>
+			<div class="flex flex-col justify-between mb-8 gap-6">
+				<h1 class="text-3xl uppercase">Posts</h1>
+				@if(session()->has('success'))
+					<div class="bg-green-900 border border-green-200 text-green-200 p-3 text-lg">{{ session('success') }}</div>
+				@endif
+			</div>
 			<div class="px-6 pb-6">
 				{{ $posts->links() }}
 			</div>
@@ -49,13 +54,25 @@ use App\View\Components\Ui\Enums\LinkStyle;
 									:link-style="LinkStyle::ButtonOutline">
 										<i class="fas fa-pencil-alt"></i>
 								</x-ui.link>
-								<x-ui.link
-									href="#"
+								<x-ui.form.button
 									title="Delete Post"
 									color="red"
-									:link-style="LinkStyle::ButtonOutline">
-										<i class="far fa-trash-alt"></i>
-								</x-ui.link>
+									:button-style="\App\View\Components\Ui\Enums\FormButtonStyle::Outline"
+									:shape="\App\View\Components\Ui\Enums\FormButtonShape::Square"
+									form="delete_post-{{ $post->id }}"
+									type="submit"
+								>
+									<i class="far fa-trash-alt"></i>
+								</x-ui.form.button>
+								<form
+									id="delete_post-{{ $post->id }}"
+									action="{{ route('posts.destroy', compact('post')) }}"
+									method="POST"
+									class="absolute -z-50"
+								>
+									@csrf
+									@method('DELETE')
+								</form>
 							</x-ui.table.data>
 						</x-ui.table.row>
 					@endforeach

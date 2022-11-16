@@ -1,1 +1,3 @@
-<button type="{{ $type->value }}" class="{{ $classes() }}">{{ $slot }}</button>
+<button type="{{ $buttonType->value }}" class="{{ $classes() }}" {{
+    $attributes->merge(['form' => $form])
+ }}>{{ $slot }}</button>

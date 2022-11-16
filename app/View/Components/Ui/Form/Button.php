@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Ui\Form;
 
+use App\View\Components\Ui\Enums\FormButtonShape;
 use App\View\Components\Ui\Enums\FormButtonStyle;
 use App\View\Components\Ui\Enums\FormButtonType;
 use Illuminate\View\Component;
@@ -18,6 +19,9 @@ class Button extends Component
 				'dark:hover:text-white',
 				'dark:active:text-white',
 				'dark:hover:bg-red-500/20',
+				'outline',
+				'outline-1',
+				'outline-red-600',
 			],
 			'solid' => [
 				'dark:bg-red-600',
@@ -45,6 +49,12 @@ class Button extends Component
 		],
 	];
 
+	private array $shapes = [
+		'round' => 'rounded-full',
+		'rounded' => 'rounded',
+		'square' => 'rounded-none',
+	];
+
     /**
      * Create a new component instance.
      *
@@ -53,7 +63,11 @@ class Button extends Component
     public function __construct(
 		private string $color = 'sea-green',
 		private FormButtonStyle $buttonStyle = FormButtonStyle::Solid,
-		public FormButtonType $type = FormButtonType::Submit,
+		public FormButtonType $buttonType = FormButtonType::Submit,
+		private FormButtonShape $shape = FormButtonShape::Rounded,
+		public ?string $form = null,
+		private string $width = 'w-auto',
+		private ?string $fontSize = null,
 	)
     {
         //
@@ -61,7 +75,20 @@ class Button extends Component
 
 	public function classes(): string
 	{
-		return "w-full {$this->colors()} transition-colors dark:transition-colors duration-300 rounded px-3 py-1 text-2xl";
+		$classes = [
+			$this->width,
+			$this->colors(),
+			'transition-colors',
+			'dark:transition-colors',
+			'duration-300',
+			$this->shapes[$this->shape->value],
+			'px-3',
+			'py-1',
+		];
+
+		if(!is_null($this->fontSize)) $classes[] = $this->fontSize;
+
+		return implode(' ', $classes);
 	}
 
 	private function colors(): string

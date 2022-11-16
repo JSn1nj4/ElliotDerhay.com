@@ -25,12 +25,13 @@ class StorePostRequest extends FormRequest
     public function rules()
     {
         return [
-			'cover_image' => 'optional',
+			'cover_image' => 'string',
             'title' => [
 				'required',
 				'max:180',
 			],
 			'slug' => [
+				'required',
 				'unique:posts',
 				'max:180',
 			],

@@ -49,7 +49,7 @@ class PostsController extends Controller
 	{
 		Post::create($request->validated());
 
-		return redirect()->route('posts.index');
+		return back()->with('success', 'Post published!');
 	}
 
 	public function show(Post $post): View
@@ -66,15 +66,15 @@ class PostsController extends Controller
 	{
 		$post->update($request->validated());
 
-		return redirect()->route('posts.index');
+		return back()->with('success', 'Post updated!');
 	}
 
-	// public function destroy(int $id): Response
-	// {
-	// 	// delete an existing item
-	// 	// maybe show a confirmation popup or page first, then
-	// 	// redirect with an appropriate 'deleted' message
-	//
-	// 	// soft delete or no?
-	// }
+	public function destroy(Post $post): Response|RedirectResponse
+	{
+		$post->delete();
+
+		session()->flash('success', 'Post deleted!');
+
+		return redirect()->route('posts.index');
+	}
 }
