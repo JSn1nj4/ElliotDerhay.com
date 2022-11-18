@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BlogPostsController;
 use App\Http\Controllers\PostsController;
 // use App\Http\Controllers\ProjectsController;
 use Illuminate\Support\Facades\Route;
@@ -7,8 +8,8 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/projects', [ProjectsController::class, 'index'])->name('projects');
 Route::prefix('/blog')
 	->group(function () {
-		Route::get('/', [PostsController::class, 'index'])->name('blog');
-		Route::get('/{post:slug}', [PostsController::class, 'show'])->name('blog.show');
+		Route::get('/', [BlogPostsController::class, 'index'])->name('blog');
+		Route::get('/{post:slug}', [BlogPostsController::class, 'show'])->name('blog.show');
 	});
 
 // error page testing route (only works locally)

@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Ui;
 
+use App\View\Components\Ui\Enums\FormButtonShape;
 use App\View\Components\Ui\Enums\LinkStyle;
 use Illuminate\View\Component;
 
@@ -59,6 +60,62 @@ class Link extends Component
 				'dark:active:text-white',
 			],
 		],
+		'teal' => [
+			'button-outline' => [
+				'text-teal-600',
+				'hover:text-teal-800',
+				'active:text-teal-800',
+				'dark:text-teal-500',
+				'dark:hover:text-white',
+				'dark:active:text-white',
+				'dark:hover:bg-teal-500/20',
+			],
+			'button-solid' => [
+				'dark:bg-teal-600',
+				'dark:hover:bg-gray-700/50',
+				'dark:text-black',
+				'dark:hover:text-white'
+			],
+			'plain' => [
+				'text-teal-600',
+				'hover:text-teal-800',
+				'active:text-teal-800',
+				'dark:text-teal-500',
+				'dark:hover:text-white',
+				'dark:active:text-white',
+			],
+		],
+		'yellow' => [
+			'button-outline' => [
+				'text-yellow-600',
+				'hover:text-yellow-800',
+				'active:text-yellow-800',
+				'dark:text-yellow-500',
+				'dark:hover:text-white',
+				'dark:active:text-white',
+				'dark:hover:bg-yellow-500/20',
+			],
+			'button-solid' => [
+				'dark:bg-yellow-600',
+				'dark:hover:bg-gray-700/50',
+				'dark:text-black',
+				'dark:hover:text-white'
+			],
+			'plain' => [
+				'text-yellow-600',
+				'hover:text-yellow-800',
+				'active:text-yellow-800',
+				'dark:text-yellow-500',
+				'dark:hover:text-white',
+				'dark:active:text-white',
+			],
+		],
+	];
+
+	private array $shapes = [
+		'round' => 'rounded-full',
+		'rounded' => 'rounded',
+		'square' => 'rounded-none',
 	];
 
     /**
@@ -71,7 +128,10 @@ class Link extends Component
 		private ?string $color = 'sea-green',
 		public string $href = '#',
 		private LinkStyle $linkStyle = LinkStyle::Plain,
+		private FormButtonShape $shape = FormButtonShape::Rounded,
 		public ?string $title = null,
+		private string $width = 'w-auto',
+		private ?string $fontSize = null,
 	)
     {
         //
@@ -84,11 +144,31 @@ class Link extends Component
 
 	public function classes(): string
 	{
-		return match($this->linkStyle) {
-			LinkStyle::ButtonSolid => "px-3 py-1 {$this->colors()} dark:transition-colors duration-300",
-			LinkStyle::ButtonOutline => "px-3 py-1 {$this->colors()} dark:transition-colors duration-300 outline outline-1",
-			default => "{$this->colors()} dark:transition-colors duration-300",
-		};
+		$classes = [
+			$this->width,
+			$this->colors(),
+			'transition-colors',
+			'dark:transition-colors',
+			'duration-300',
+		];
+
+		if(!is_null($this->fontSize)) $classes[] = $this->fontSize;
+
+		return implode(' ', array_merge($classes, match($this->linkStyle) {
+			LinkStyle::ButtonSolid => [
+				'px-3',
+				'py-1',
+				$this->shapes[$this->shape->value],
+			],
+			LinkStyle::ButtonOutline => [
+				'px-3',
+				'py-1',
+				'outline',
+				'outline-1',
+				$this->shapes[$this->shape->value],
+			],
+			default => [],
+		}));
 	}
 
     /**

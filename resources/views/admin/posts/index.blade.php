@@ -40,7 +40,8 @@ use App\View\Components\Ui\Enums\LinkStyle;
 							<x-ui.table.data>
 								<x-ui.link
 									href="{{ route('posts.edit', compact('post')) }}"
-									:link-style="LinkStyle::Plain">
+									:link-style="LinkStyle::Plain"
+								>
 									{{ $post->title }}
 								</x-ui.link>
 							</x-ui.table.data>
@@ -49,10 +50,19 @@ use App\View\Components\Ui\Enums\LinkStyle;
 							</x-ui.table.data>
 							<x-ui.table.data class="text-right">
 								<x-ui.link
+									:href="route('posts.show', compact('post'))"
+									title="Preview Post"
+									:link-style="LinkStyle::ButtonOutline"
+									color="yellow"
+								>
+								  	<i class="fas fa-search"></i>
+								</x-ui.link>
+								<x-ui.link
 									href="{{ route('posts.edit', compact('post')) }}"
 									title="Edit Post"
-									:link-style="LinkStyle::ButtonOutline">
-										<i class="fas fa-pencil-alt"></i>
+									:link-style="LinkStyle::ButtonOutline"
+								>
+									<i class="fas fa-pencil-alt"></i>
 								</x-ui.link>
 								<x-ui.form.button
 									title="Delete Post"

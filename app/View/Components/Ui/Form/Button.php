@@ -47,6 +47,40 @@ class Button extends Component
 				'dark:hover:text-white'
 			],
 		],
+		'teal' => [
+			'outline' => [
+				'text-teal-600',
+				'hover:text-teal-800',
+				'active:text-teal-800',
+				'dark:text-teal-500',
+				'dark:hover:text-white',
+				'dark:active:text-white',
+				'dark:hover:bg-teal-500/20',
+			],
+			'solid' => [
+				'dark:bg-teal-600',
+				'dark:hover:bg-gray-700/50',
+				'dark:text-black',
+				'dark:hover:text-white'
+			],
+		],
+		'yellow' => [
+			'outline' => [
+				'text-yellow-600',
+				'hover:text-yellow-800',
+				'active:text-yellow-800',
+				'dark:text-yellow-500',
+				'dark:hover:text-white',
+				'dark:active:text-white',
+				'dark:hover:bg-yellow-500/20',
+			],
+			'solid' => [
+				'dark:bg-yellow-600',
+				'dark:hover:bg-gray-700/50',
+				'dark:text-black',
+				'dark:hover:text-white'
+			],
+		],
 	];
 
 	private array $shapes = [
