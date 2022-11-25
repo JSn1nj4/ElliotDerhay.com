@@ -4,6 +4,7 @@
 	@component('partials.header')
 		<x-nav>
 			<x-nav-item name="dashboard">Dashboard</x-nav-item>
+			<x-nav-item name="posts.index">Posts</x-nav-item>
 			<x-nav-item name="logout" icon="fas fa-sign-out-alt" onclick="event.preventDefault(); document.querySelector('#logout').submit();">Log Out</x-nav-item>
 		</x-nav>
 
