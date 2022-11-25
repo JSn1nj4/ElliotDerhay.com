@@ -26,9 +26,11 @@ class PostsController extends Controller
 
 	public function store(StorePostRequest $request): Response|RedirectResponse
 	{
-		Post::create($request->validated());
+		$post = Post::create($request->validated());
 
-		return back()->with('success', 'Post published!');
+		session()->flash('success', 'Post published!');
+
+		return redirect()->route('posts.edit', compact('post'));
 	}
 
 	public function show(Post $post): View

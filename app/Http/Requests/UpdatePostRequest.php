@@ -4,12 +4,20 @@ namespace App\Http\Requests;
 
 use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Str;
 
 class UpdatePostRequest extends FormRequest
 {
 	public function authorize()
 	{
 		return User::whereId(\Auth::id())->exists();
+	}
+
+	public function prepareForValidation()
+	{
+		$this->merge([
+			'slug' => Str::slug($this->slug ?? $this->title),
+		]);
 	}
 
 	/**
