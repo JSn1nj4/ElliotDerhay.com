@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
+use App\Definitions\PostsPerPage;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use Illuminate\Pagination\AbstractPaginator;
 
 /**
  * App\Models\Post
@@ -41,6 +43,13 @@ class Post extends Model
 {
     use HasFactory;
 
+	public $fillable = [
+		'body',
+		'cover_image',
+		'slug',
+		'title',
+	];
+
 	public function categories(): BelongsToMany
 	{
 		return $this->belongsToMany(Category::class);
@@ -54,5 +63,28 @@ class Post extends Model
 	public function tags(): BelongsToMany
 	{
 		return $this->belongsToMany(Tag::class);
+	}
+
+	/**
+	 * Encapsulates shared logic for listing posts
+	 *
+	 * Checks for query string filters like category, tag, and per_page count.
+	 *
+	 * @param Request $request
+	 * @return AbstractPaginator
+	 */
+	public static function index(Request $request): AbstractPaginator
+	{
+		return self::when(optional($request)->category, function ($query, $category_id): void {
+				$query->whereRelation('categories', 'category_id', $category_id);
+			})
+			->when(optional($request)->tag, function ($query, $tag_id): void {
+				$query->whereRelation('tags', 'tag_id', $tag_id);
+			})
+			->latest()
+			->paginate(PostsPerPage::filter(
+				optional($request)->per_page
+			))
+			->withQueryString();
 	}
 }

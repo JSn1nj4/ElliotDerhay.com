@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Actions\LogUserLogin;
 use App\Contracts\GitHostService;
 use App\Contracts\SocialMediaService;
 use App\Services\Github\GithubService;
@@ -20,6 +21,8 @@ class AppServiceProvider extends ServiceProvider
 		$this->app->singleton(GitHostService::class, fn($app) => new GithubService);
 
 		$this->app->singleton(SocialMediaService::class, fn($app) => new TwitterService);
+
+		$this->app->bind(LogUserLogin::class, fn($app) => new LogUserLogin());
 	}
 
 	/**

@@ -1,14 +1,16 @@
 <?php
 
+use App\Http\Controllers\BlogPostsController;
 use App\Http\Controllers\PostsController;
 // use App\Http\Controllers\ProjectsController;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/projects', [ProjectsController::class, 'index'])->name('projects');
-Route::prefix('/blog')->group(function () {
-	Route::get('/', [PostsController::class, 'index'])->name('blog');
-});
-Route::get('/post/{post:slug}', [PostsController::class, 'show'])->name('blog.show');
+Route::prefix('/blog')
+	->group(function () {
+		Route::get('/', [BlogPostsController::class, 'index'])->name('blog');
+		Route::get('/{post:slug}', [BlogPostsController::class, 'show'])->name('blog.show');
+	});
 
 // error page testing route (only works locally)
 Route::get('/error/{code}', function ($code = null) {
@@ -16,3 +18,13 @@ Route::get('/error/{code}', function ($code = null) {
 
 	abort($code);
 })->where('code', '[1-5][0-9]{2}');
+
+Route::prefix('/dashboard')
+	->middleware(['auth', 'verified'])
+	->group(function() {
+		Route::view('/', 'admin.dashboard')->name('dashboard');
+		Route::resource('posts', PostsController::class);
+		//	@todo project routes: resource? (index, create, store, show, edit, update, destroy)
+	});
+
+require __DIR__.'/auth.php';

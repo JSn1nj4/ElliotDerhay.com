@@ -31,10 +31,14 @@ export default defineConfig(({ mode }) => {
 	const viteConfig: UserConfig = {}
 	if(Object.keys(server).length > 0) viteConfig.server = server
 	viteConfig.plugins = [
-		laravel([
-			'resources/css/app.css',
-			'resources/js/app.ts',
-		]),
+		laravel({
+				input: [
+					'resources/css/app.css',
+					'resources/js/admin/app.ts',
+					'resources/js/app.ts',
+				],
+			refresh: true
+		}),
 		vuePlugin(),
 	]
 

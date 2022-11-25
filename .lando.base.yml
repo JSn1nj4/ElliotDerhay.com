@@ -65,7 +65,7 @@ tooling:
       - php artisan tweet:pull
   yarn:
     service: appserver
-  yarn_dev:
+  dev:
     service: appserver
     description: Start vite dev server
     user: root
