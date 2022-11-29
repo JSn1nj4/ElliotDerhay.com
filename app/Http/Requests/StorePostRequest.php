@@ -13,12 +13,12 @@ class StorePostRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return User::whereId(\Auth::id())->exists();
     }
 
-	public function prepareForValidation()
+	public function prepareForValidation(): void
 	{
 		$this->merge([
 			'slug' => Str::slug($this->slug ?? $this->title),
@@ -30,7 +30,7 @@ class StorePostRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
-    public function rules()
+    public function rules(): array
     {
         return [
 			'cover_image' => 'string',
