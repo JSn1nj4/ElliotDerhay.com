@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Lockout;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class LockoutSeeder extends Seeder
 {
