@@ -4,12 +4,13 @@ namespace App\Providers;
 
 use App\Events\NewGithubEventTypesEvent;
 use App\Events\TweetsPulledEvent;
+use App\Listeners\LogLockouts;
 use App\Listeners\PruneOldTweets;
 use App\Listeners\SendNewGithubEventTypesEmail;
+use Illuminate\Auth\Events\Lockout;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Event;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -19,6 +20,9 @@ class EventServiceProvider extends ServiceProvider
 	 * @var array
 	 */
 	protected $listen = [
+		Lockout::class => [
+			LogLockouts::class,
+		],
 		NewGithubEventTypesEvent::class => [
 			SendNewGithubEventTypesEmail::class,
 		],
