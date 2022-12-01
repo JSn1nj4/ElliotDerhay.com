@@ -2,10 +2,10 @@
 
 use App\Http\Controllers\BlogPostsController;
 use App\Http\Controllers\PostsController;
-use App\Http\Controllers\ProjectsController;
+use App\Http\Controllers\ProjectsPortfolioController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/projects', [ProjectsController::class, 'index'])->name('projects');
+Route::get('/projects', [ProjectsPortfolioController::class, 'index'])->name('portfolio');
 Route::prefix('/blog')
 	->group(function () {
 		Route::get('/', [BlogPostsController::class, 'index'])->name('blog');

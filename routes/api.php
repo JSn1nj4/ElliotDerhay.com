@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\GithubEventController;
-use App\Http\Controllers\ProjectsController;
+use App\Http\Controllers\ProjectsPortfolioController;
 use App\Http\Controllers\TweetController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -23,8 +23,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 // For working with projects
 Route::prefix('/projects')->group(function() {
-	Route::get('/', [ProjectsController::class, 'index']);
-	Route::get('/{count}', [ProjectsController::class, 'index']);
+	Route::get('/', [ProjectsPortfolioController::class, 'index']);
+	Route::get('/{count}', [ProjectsPortfolioController::class, 'index']);
 });
 
 // Retrieve list of tweets

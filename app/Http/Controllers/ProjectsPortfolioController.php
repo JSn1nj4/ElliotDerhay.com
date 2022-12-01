@@ -6,12 +6,12 @@ use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-class ProjectsController extends Controller
+class ProjectsPortfolioController extends Controller
 {
 
 	public function __construct()
 	{
-		if (!config('app.enable-' . Route::currentRouteName())) {
+		if (!config('app.enable-projects')) {
 			abort(404);
 		}
 	}
