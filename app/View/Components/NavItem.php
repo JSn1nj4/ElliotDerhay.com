@@ -17,14 +17,14 @@ class NavItem extends Component
      * @return void
      */
     public function __construct(
-		public string $name,
+		public string $route,
 		public ?string $icon = null,
 		public ?string $scrollTo = null,
 	)
     {
-		$this->href = route($name, absolute: false) . ($scrollTo ? "#{$scrollTo}" : "");
+		$this->href = route($route, absolute: false) . ($scrollTo ? "#{$scrollTo}" : "");
 
-        $this->isActive = (Route::currentRouteName() === $name);
+        $this->isActive = (Route::currentRouteName() === $route);
     }
 
     /**
