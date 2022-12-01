@@ -3,15 +3,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;400;700&display=swap');
 
 /**
- * This injects Tailwind's base styles, which is a combination of
- * Normalize.css and some additional base styles.
- *
- * You can see the styles here:
- * https://github.com/tailwindcss/tailwindcss/blob/master/css/base.css
- *
- * If using `postcss-import`, use this import instead:
- *
- * @import "tailwindcss/base";
+ * base styles
  */
 @tailwind base;
 
@@ -41,29 +33,9 @@ button {
 }
 
 /**
- * This injects any component classes registered by plugins.
- *
- * If using `postcss-import`, use this import instead:
- *
- * @import "tailwindcss/components";
+ * components
  */
 @tailwind components;
-
-/**
- * Here you would add any of your custom component classes; stuff that you'd
- * want loaded *before* the utilities so that the utilities could still
- * override them.
- *
- * Example:
- *
- * .btn { ... }
- * .form-input { ... }
- *
- * Or if using a preprocessor or `postcss-import`:
- *
- * @import "components/buttons";
- * @import "components/forms";
- */
 
 h1, h2, h3, h4, h5, h6 {
 	&.content-title {
@@ -72,42 +44,14 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-	/* &.content-title {
-		@mixin textGlow 5, theme('colors.gray-600');
-	}
-
-	.dark &.content-title {
-		@mixin textGlow 5;
-	} */
-
 	&.banner-title {
 		@apply text-3xl font-normal;
-		/* @mixin textGlow 3, #fff; */
 	}
-}
-
-h2, h3 {
-	/* &.content-title {
-		@mixin textGlow 4;
-	} */
-}
-
-h4, h5 {
-	/* &.content-title {
-		@mixin textGlow 3;
-	} */
-}
-
-h6 {
-	/* &.content-title {
-		@mixin textGlow 2;
-	} */
 }
 
 p {
 	&.banner-paragraph {
 		@apply text-base;
-		/* @mixin textGlow 2, #fff; */
 	}
 }
 
@@ -152,8 +96,6 @@ a {
 		@apply bg-black;
 	}
 
-	/* @mixin transitions $default-speed ease; */
-
 	#menu-toggle:checked + & {
 		visibility: visible;
 		opacity: 1;
@@ -184,7 +126,7 @@ a {
 .banner-section {
 	background-size: cover;
 	background-position: center top;
-	box-shadow: 0px 2px 4px #000;
+	box-shadow: 0 2px 4px #000;
 }
 
 .home-banner {
@@ -197,6 +139,11 @@ a {
 
 .twitter-card {
 	font-family: "Helvetica Neue", "Segoe UI", Helvetica, Arial, sans-serif;
+}
+
+/* took too long trying to customize via spatie/laravel-markdown */
+pre.shiki {
+	@apply my-4 p-4 overflow-x-auto;
 }
 
 @media only screen and (min-width: 600px) {
@@ -238,29 +185,9 @@ a {
 
 
 /**
- * This injects all of Tailwind's utility classes, generated based on your
- * config file.
- *
- * If using `postcss-import`, use this import instead:
- *
- * @import "tailwindcss/utilities";
+ * custom utilities
  */
 @tailwind utilities;
-
-/**
- * Here you would add any custom utilities you need that don't come out of the
- * box with Tailwind.
- *
- * Example :
- *
- * .bg-pattern-graph-paper { ... }
- * .skew-45 { ... }
- *
- * Or if using a preprocessor or `postcss-import`:
- *
- * @import "utilities/background-patterns";
- * @import "utilities/skew-transforms";
- */
 
 .backlight {
 	background-image: linear-gradient(to top, #00A87E, rgba(0, 168, 126, 0.26666666666666666) 5px, transparent 75%);
@@ -283,5 +210,5 @@ a {
 }
 
 .layer-shadow {
-	box-shadow: 0px 2px 4px #000;
+	box-shadow: 0 2px 4px #000;
 }

@@ -1,0 +1,72 @@
+name: elliotderhay
+recipe: laravel
+config:
+  php: '8.1'
+  composer_version: '2.0.12'
+  webroot: public
+  database: mysql:8.0
+proxy:
+  mail:
+    - mail.elliotderhay.lndo.site
+  pma:
+    - pma.elliotderhay.lndo.site
+services:
+  appserver:
+    build_as_root:
+      - curl -sL https://deb.nodesource.com/setup_16.x | bash -
+      - apt-get update -y
+      - apt-get install -y cron nodejs
+      - npm install --location=global yarn
+      - yarn
+    run_as_root:
+      - service cron start
+    run:
+      - crontab /app/.config/cron
+    xdebug: true
+    config:
+      php: .config/php.ini
+    ssl: true
+    ports:
+      - '24690:24690'
+      - '24691:24691'
+      - '24692:24692'
+  database:
+    portforward: 49208
+  mail:
+    type: mailhog
+    ssl: true
+    hogfrom:
+      - appserver
+  pma:
+    type: phpmyadmin
+    ssl: true
+    hosts:
+      - database
+events:
+  post-start:
+    - printf "\033[0;31mDon't forget to run migrations and seed db!\033[0m\n"
+tooling:
+  node:
+    service: appserver
+  npx:
+    service: appserver
+  pull_content:
+    service: appserver
+    description: pull fresh content from external sources
+    cmd:
+      - php artisan github:event:pull
+      - php artisan tweet:pull
+  refresh_db:
+    service: appserver
+    description: rebuild database with fresh data
+    cmd:
+      - php artisan migrate:refresh --seed
+      - php artisan github:event:pull
+      - php artisan tweet:pull
+  yarn:
+    service: appserver
+  dev:
+    service: appserver
+    description: Start vite dev server
+    user: root
+    cmd: yarn dev

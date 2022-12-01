@@ -29,10 +29,10 @@ class Kernel extends ConsoleKernel
 	 */
 	protected function schedule(Schedule $schedule)
 	{
-		$schedule->command(GithubEventPullCommand::class)->daily();
+		$schedule->command(GithubEventPullCommand::class)->hourly();
 		$schedule->command(GithubUserUpdateCommand::class)->weekly();
 		$schedule->command(TokenPruneCommand::class)->daily();
-		$schedule->command(TweetPullCommand::class)->daily();
+		$schedule->command(TweetPullCommand::class)->hourly();
 		$schedule->command(TwitterUserUpdateCommand::class)->weekly();
 	}
 

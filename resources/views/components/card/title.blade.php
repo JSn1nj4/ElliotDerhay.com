@@ -2,5 +2,5 @@
         'mb-4',
         'text-2xl'
 ])>
-{{ $slot }}
+	{{ $slot }}
 </{{ $element }}>
