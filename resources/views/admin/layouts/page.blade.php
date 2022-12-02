@@ -5,6 +5,7 @@
 		<x-nav>
 			<x-nav-item route="dashboard">Dashboard</x-nav-item>
 			<x-nav-item route="posts.index">Posts</x-nav-item>
+			<x-nav-item route="projects.index">Projects</x-nav-item>
 			<x-nav-item route="logout" icon="fas fa-sign-out-alt" onclick="event.preventDefault(); document.querySelector('#logout').submit();">Log Out</x-nav-item>
 		</x-nav>
 
