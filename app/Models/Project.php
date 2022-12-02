@@ -2,7 +2,11 @@
 
 namespace App\Models;
 
+use App\Definitions\ProjectsPerPage;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
+use Illuminate\Pagination\AbstractPaginator;
 
 /**
  * App\Models\Project
@@ -30,5 +34,22 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Project extends Model
 {
-	//
+	use HasFactory;
+
+	public $fillable = [
+		'name',
+		'link',
+		'demo_link',
+		'thumbnail',
+		'short_desc',
+	];
+
+	public static function index(Request $request): AbstractPaginator
+	{
+		return self::latest()
+			->paginate(ProjectsPerPage::filter(
+				optional($request)->per_page
+			))
+			->withQueryString();
+	}
 }
