@@ -15,9 +15,24 @@
 
 			<h1 class="content-title text-4xl pt-2 mt-1">{{ $project->name }}</h1>
 
-			<x-markdown class="mb-4 mt-3">
-				 {!! $project->short_desc !!}
-			</x-markdown>
+			<div class="mb-4 mt-3">
+				<x-ui.table.wrapper>
+					<x-ui.table.body>
+						<x-ui.table.row class="bg-sea-green-800/20 even:bg-sea-green-800/10">
+							<x-ui.table.heading>Description:</x-ui.table.heading>
+							<x-ui.table.data>{{ $project->short_desc }}</x-ui.table.data>
+						</x-ui.table.row>
+						<x-ui.table.row class="bg-sea-green-800/20 even:bg-sea-green-800/10">
+							<x-ui.table.heading>Link:</x-ui.table.heading>
+							<x-ui.table.data><a href="{{ $project->link }}">{{ $project->link }}</a></x-ui.table.data>
+						</x-ui.table.row>
+						<x-ui.table.row class="bg-sea-green-800/20 even:bg-sea-green-800/10">
+							<x-ui.table.heading>Demo:</x-ui.table.heading>
+							<x-ui.table.data><a href="{{ $project->demo_link }}">{{ $project->demo_link }}</a></x-ui.table.data>
+						</x-ui.table.row>
+					</x-ui.table.body>
+				</x-ui.table.wrapper>
+			</div>
 
 			<div class="flex flex-row mt-6 gap-6 justify-end">
 				@if($errors->any())
