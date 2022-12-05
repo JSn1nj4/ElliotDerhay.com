@@ -2,19 +2,10 @@
 
 namespace App\Events;
 
-use Illuminate\Foundation\Events\Dispatchable;
-
-class GithubEventsPulledEvent
+class GithubEventsPulledEvent extends CommandWasRunEvent
 {
-	use Dispatchable;
-
-	/**
-	 * Create a new event instance.
-	 *
-	 * @return void
-	 */
 	public function __construct()
 	{
-		//
+		parent::__construct('github:event:pull');
 	}
 }
