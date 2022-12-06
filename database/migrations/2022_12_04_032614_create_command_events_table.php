@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
 			$table->foreignId('command_id');
 			$table->boolean('succeeded');
+			$table->string('message');
             $table->timestamps();
         });
     }

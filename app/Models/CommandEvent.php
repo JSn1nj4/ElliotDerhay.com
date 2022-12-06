@@ -11,8 +11,10 @@ use Illuminate\Support\Carbon;
  * App\Models\CommandEvent
  *
  * @property int $id
+ * @property int $command_id
  * @property Command $command
  * @property bool $succeeded
+ * @property string $message
  * @property Carbon $created_at
  * @property Carbon $updated_at
  * @method static \Database\Factories\CommandEventFactory factory(...$parameters)
@@ -28,6 +30,7 @@ class CommandEvent extends Model
 	protected $fillable = [
 		'command_id',
 		'succeeded',
+		'message',
 	];
 
 	public function command(): BelongsTo
