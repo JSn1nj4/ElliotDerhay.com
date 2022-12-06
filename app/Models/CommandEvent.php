@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\HasDisplayDates;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -25,7 +26,8 @@ use Illuminate\Support\Carbon;
  */
 class CommandEvent extends Model
 {
-    use HasFactory;
+    use HasDisplayDates,
+		HasFactory;
 
 	protected $fillable = [
 		'command_id',
