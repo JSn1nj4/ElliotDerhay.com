@@ -27,6 +27,7 @@ class CommandEventFactory extends Factory
         return [
             'command_id' => $commands->random()->id,
 			'succeeded' => $this->faker->boolean(),
+			'message' => $this->faker->randomElement(['Run succeeded.', 'Run failed.']),
         ];
     }
 }
