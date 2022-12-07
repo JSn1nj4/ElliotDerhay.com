@@ -24,6 +24,7 @@
 		<div class="block md:grid grid-cols-2 gap-6">
 			<x-admin.widgets.posts />
 			<x-admin.widgets.projects />
+			<x-admin.widgets.command-log />
 		</div>
 	</x-row>
 @endsection
