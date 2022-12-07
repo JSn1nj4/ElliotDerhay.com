@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BlogPostsController;
+use App\Http\Controllers\CommandController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\ProjectsController;
 use App\Http\Controllers\ProjectsPortfolioController;
@@ -26,6 +27,8 @@ Route::prefix('/dashboard')
 		Route::view('/', 'admin.dashboard')->name('dashboard');
 		Route::resource('posts', PostsController::class);
 		Route::resource('projects', ProjectsController::class);
+
+		Route::get('commands', [CommandController::class, 'index'])->name('commands.index');
 	});
 
 require __DIR__.'/auth.php';

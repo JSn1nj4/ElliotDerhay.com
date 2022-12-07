@@ -3,7 +3,7 @@
 		<x-admin.widgets.partials.title>
 			Command Event Log
 		</x-admin.widgets.partials.title>
-		<x-admin.widgets.partials.button>
+		<x-admin.widgets.partials.button href="{{ route('commands.index') }}">
 			Commands
 		</x-admin.widgets.partials.button>
 	</x-slot:header>
