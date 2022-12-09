@@ -44,7 +44,7 @@ use App\View\Components\Ui\Enums\LinkStyle;
 								{{ $event->message }}
 							</x-ui.table.data>
 							<x-ui.table.data class="text-right">
-								{{ $event->created_at->format('M d Y \a\t H:i') }}
+								{{ $event->date_at_time }}
 							</x-ui.table.data>
 						</x-ui.table.row>
 					@endforeach
