@@ -3,8 +3,8 @@
 		<x-admin.widgets.partials.title>
 			Command Event Log
 		</x-admin.widgets.partials.title>
-		<x-admin.widgets.partials.button href="{{ route('commands.index') }}">
-			Commands
+		<x-admin.widgets.partials.button href="{{ route('command-events.index') }}">
+			Manage
 		</x-admin.widgets.partials.button>
 	</x-slot:header>
 
@@ -19,10 +19,10 @@
 			@foreach($events as $event)
 				<tr>
 					<td class="text-left mr-4 py-2">
-						<i {{ $attributes->class([
+						<i class="{{ implode(' ', array_keys(array_filter([
 							'text-red-500 fas fa-times' => !$event->succeeded,
 							'text-green-500 fas fa-check' => $event->succeeded,
-						]) }}></i>
+						]))) }}"></i>
 					</td>
 					<td class="text-left mr-4 py-2">
 						{{ $event->command->signature }}
