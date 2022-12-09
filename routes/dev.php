@@ -29,6 +29,8 @@ Route::prefix('/dashboard')
 		Route::resource('posts', PostsController::class);
 		Route::resource('projects', ProjectsController::class);
 
+		Route::get('commands', [CommandController::class, 'index'])->name('commands.index');
+
 		Route::get('command-log', [CommandEventController::class, 'index'])->name('command-events.index');
 	});
 

@@ -25,6 +25,7 @@
 			<x-admin.widgets.posts />
 			<x-admin.widgets.projects />
 			<x-admin.widgets.command-log />
+			<x-admin.widgets.commands />
 		</div>
 	</x-row>
 @endsection
