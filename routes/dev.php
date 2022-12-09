@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BlogPostsController;
 use App\Http\Controllers\CommandController;
+use App\Http\Controllers\CommandEventController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\ProjectsController;
 use App\Http\Controllers\ProjectsPortfolioController;
@@ -28,7 +29,7 @@ Route::prefix('/dashboard')
 		Route::resource('posts', PostsController::class);
 		Route::resource('projects', ProjectsController::class);
 
-		Route::get('commands', [CommandController::class, 'index'])->name('commands.index');
+		Route::get('command-log', [CommandEventController::class, 'index'])->name('command-events.index');
 	});
 
 require __DIR__.'/auth.php';

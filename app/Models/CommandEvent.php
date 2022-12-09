@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use App\Definitions\PerPage;
 use App\Traits\HasDisplayDates;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Http\Request;
+use Illuminate\Pagination\AbstractPaginator;
 use Illuminate\Support\Carbon;
 
 /**
@@ -38,5 +41,17 @@ class CommandEvent extends Model
 	public function command(): BelongsTo
 	{
 		return $this->belongsTo(Command::class);
+	}
+
+	public static function index(Request $request, ?Command $command = null): AbstractPaginator
+	{
+		return self::when($command, function ($query, $command): void {
+				$query->whereRelation('command', 'command_id', $command->id);
+			})
+			->latest()
+			->paginate(PerPage::filter(
+				optional($request)->per_page
+			))
+			->withQueryString();
 	}
 }
