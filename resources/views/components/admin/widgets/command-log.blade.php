@@ -31,7 +31,7 @@
 						{{ $event->message }}
 					</td>
 					<td class="text-right py-2">
-						{{ $event->shortDate }}
+						{{ $event->short_date }}
 					</td>
 				</tr>
 			@endforeach
