@@ -2,7 +2,7 @@
 
 namespace App\Definitions;
 
-enum ProjectsPerPage: int
+enum PerPage: int
 {
 	case MIN = 1;
 	case MAX = 100;
