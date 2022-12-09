@@ -1,5 +1,4 @@
 @php
-use App\View\Components\Ui\Enums\LinkStyle;
 /**
  * @var \Illuminate\Database\Eloquent\Collection $events
  * @var App\Models\CommandEvent $event
