@@ -24,7 +24,7 @@
 						{{ $command->signature }}
 					</td>
 					<td class="text-right py-2">
-						{{ $command->events()->latest()->first()->short_date }}
+						{{ $command->lastRun->short_date }}
 					</td>
 				</tr>
 			@endforeach
