@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use App\Definitions\PerPage;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Http\Request;
+use Illuminate\Pagination\AbstractPaginator;
 
 /**
  * App\Models\Command
@@ -30,6 +33,15 @@ class Command extends Model
 	public function events(): HasMany
 	{
 		return $this->hasMany(CommandEvent::class);
+	}
+
+	public static function index(Request $request): AbstractPaginator
+	{
+		return self::latest()
+			->paginate(PerPage::filter(
+				optional($request)->per_page
+			))
+			->withQueryString();
 	}
 
 	public function lastRun(): HasOne

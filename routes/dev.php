@@ -30,6 +30,10 @@ Route::prefix('/dashboard')
 		Route::resource('projects', ProjectsController::class);
 
 		Route::get('commands', [CommandController::class, 'index'])->name('commands.index');
+		Route::get('commands/create', [CommandController::class, 'create'])->name('commands.create');
+		Route::get('commands/{command}', [CommandController::class, 'show'])->name('commands.show');
+		Route::get('commands/{command}/edit', [CommandController::class, 'edit'])->name('commands.edit');
+		Route::delete('commands/{command}', [CommandController::class, 'destroy'])->name('commands.destroy');
 
 		Route::get('command-log', [CommandEventController::class, 'index'])->name('command-events.index');
 	});
