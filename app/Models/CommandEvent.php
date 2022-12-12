@@ -26,6 +26,12 @@ use Illuminate\Support\Carbon;
  * @method static \Illuminate\Database\Eloquent\Builder|CommandEvent newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|CommandEvent query()
  * @mixin \Eloquent
+ * @method static \Illuminate\Database\Eloquent\Builder|CommandEvent whereCommandId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CommandEvent whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CommandEvent whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CommandEvent whereMessage($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CommandEvent whereSucceeded($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CommandEvent whereUpdatedAt($value)
  */
 class CommandEvent extends Model
 {

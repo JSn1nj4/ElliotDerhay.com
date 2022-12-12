@@ -22,6 +22,14 @@ use Illuminate\Pagination\AbstractPaginator;
  * @method static \Illuminate\Database\Eloquent\Builder|Command newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Command query()
  * @mixin \Eloquent
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\CommandEvent|null $lastRun
+ * @method static \Illuminate\Database\Eloquent\Builder|Command whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Command whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Command whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Command whereSignature($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Command whereUpdatedAt($value)
  */
 class Command extends Model
 {
