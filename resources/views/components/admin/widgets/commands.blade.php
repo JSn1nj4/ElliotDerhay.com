@@ -24,7 +24,7 @@
 						{{ $command->signature }}
 					</td>
 					<td class="text-right py-2">
-						{{ $command->lastRun->short_date }}
+						{{ optional($command->lastRun)->short_date ?? 'Never run.' }}
 					</td>
 				</tr>
 			@endforeach
