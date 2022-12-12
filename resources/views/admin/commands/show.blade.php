@@ -40,6 +40,25 @@
 
 				<div class="block">
 					<div class="flex gap-2">
+						<x-ui.form.button
+							title="Run Command"
+							color="teal"
+							font-size="text-2xl"
+							width="w-full"
+							form="run_command"
+							type="submit"
+						>
+							Run
+						</x-ui.form.button>
+						<form
+							id="run_command"
+							action="{{ route('command-run.store') }}"
+							method="POST"
+							class="absolute -z-50 hidden"
+						>
+							@csrf
+							<input type="hidden" id="command" name="command" value="{{ $command->signature }}">
+						</form>
 						<x-ui.link
 							font-size="text-2xl"
 							width="w-full"

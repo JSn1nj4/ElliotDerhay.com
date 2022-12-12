@@ -6,6 +6,7 @@ use App\Http\Controllers\CommandEventController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\ProjectsController;
 use App\Http\Controllers\ProjectsPortfolioController;
+use App\Http\Controllers\RunCommandController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/projects', [ProjectsPortfolioController::class, 'index'])->name('portfolio');
@@ -31,6 +32,8 @@ Route::prefix('/dashboard')
 		Route::resource('commands', CommandController::class);
 
 		Route::get('command-log', [CommandEventController::class, 'index'])->name('command-events.index');
+
+		Route::post('command-run', [RunCommandController::class, 'store'])->name('command-run.store');
 	});
 
 require __DIR__.'/auth.php';
