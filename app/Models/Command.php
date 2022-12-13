@@ -38,6 +38,13 @@ class Command extends Model
 		'signature',
 	];
 
+	public static function booted(): void
+	{
+		static::deleted(function (Command $command) {
+			CommandEvent::whereCommandId($command->id)->delete();
+		});
+	}
+
 	public function events(): HasMany
 	{
 		return $this->hasMany(CommandEvent::class);
