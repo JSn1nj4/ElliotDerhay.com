@@ -54,6 +54,7 @@ class CommandEvent extends Model
 		return self::when($command, function ($query, $command): void {
 				$query->whereRelation('command', 'command_id', $command->id);
 			})
+			->with('command')
 			->latest()
 			->paginate(PerPage::filter(
 				optional($request)->per_page
