@@ -12,6 +12,16 @@ use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
+	public array $bindings = [
+		LogCommandEvent::class => LogCommandEvent::class,
+		LogUserLogin::class => LogUserLogin::class,
+	];
+
+	public array $singletons = [
+		GitHostService::class => GithubService::class,
+		SocialMediaService::class => TwitterService::class,
+	];
+
 	/**
 	 * Register any application services.
 	 *
@@ -19,13 +29,7 @@ class AppServiceProvider extends ServiceProvider
 	 */
 	public function register()
 	{
-		$this->app->singleton(GitHostService::class, fn($app) => new GithubService);
-
-		$this->app->singleton(SocialMediaService::class, fn($app) => new TwitterService);
-
-		$this->app->bind(LogCommandEvent::class, fn ($app) => new LogCommandEvent());
-
-		$this->app->bind(LogUserLogin::class, fn($app) => new LogUserLogin());
+		//
 	}
 
 	/**
