@@ -11,10 +11,7 @@
 				<div class="block">
 					<h3 class="text-xl md:text-right">Welcome back, {{ auth()->user()->name }}</h3>
 					<p class="text-xl md:text-right">Last login: {{
-						\App\Models\Login::latest()
-							->first()
-							->created_at
-							->toDayDateTimeString()
+						\App\Models\Login::mostRecent()->long_date_at_time
 					}}</p>
 				</div>
 			</div>

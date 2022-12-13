@@ -6,6 +6,11 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 
 trait HasDisplayDates
 {
+	public function longDateAtTime(): Attribute
+	{
+		return Attribute::get(fn () => $this->created_at->toDayDateTimeString());
+	}
+
 	public function dateAtTime(): Attribute
 	{
 		return Attribute::get(fn () => $this->created_at->format('M d Y \a\t H:i'));
