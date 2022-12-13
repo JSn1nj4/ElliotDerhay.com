@@ -5,7 +5,6 @@ namespace App\Listeners;
 use App\Actions\LogCommandEvent;
 use App\Events\CommandWasRunEvent;
 use App\Models\Command;
-use App\Models\CommandEvent;
 
 class CommandWasRun
 {
@@ -14,11 +13,11 @@ class CommandWasRun
         //
     }
 
-    public function handle(LogCommandEvent $logCommandEvent, CommandWasRunEvent $event): void
+    public function handle(CommandWasRunEvent $event): void
     {
 		// TODO: determine success via individual events?
 
-		$logCommandEvent(
+		LogCommandEvent::make()(
 			command: Command::firstWhere('signature', $event->signature),
 			succeeded: true,
 			message: 'Ran successfully.',
