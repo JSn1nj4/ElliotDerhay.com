@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Events\TokensPruned;
 use App\Models\Token;
 use Illuminate\Console\Command;
 
@@ -39,6 +40,8 @@ class TokenPruneCommand extends Command
 	public function handle()
 	{
 		Token::expired()->delete();
+
+		TokensPruned::dispatch();
 
 		return 0;
 	}

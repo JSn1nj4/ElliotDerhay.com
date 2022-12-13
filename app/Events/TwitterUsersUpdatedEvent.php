@@ -2,19 +2,10 @@
 
 namespace App\Events;
 
-use Illuminate\Foundation\Events\Dispatchable;
-
-class TwitterUsersUpdatedEvent
+class TwitterUsersUpdatedEvent extends CommandWasRunEvent
 {
-    use Dispatchable;
-
-    /**
-     * Create a new event instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        //
-    }
+	public function __construct()
+	{
+		parent::__construct('twitter:user:update');
+	}
 }

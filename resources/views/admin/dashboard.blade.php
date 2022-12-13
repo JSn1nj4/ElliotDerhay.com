@@ -21,9 +21,11 @@
 		</x-column>
 	</x-row>
 	<x-row flex-class="null">
-		<div class="block md:grid grid-cols-2 gap-6">
+		<div class="grid grid-cols-1 lg:grid-cols-2 lg:grid-rows-2 lg:grid-flow-col gap-6">
 			<x-admin.widgets.posts />
 			<x-admin.widgets.projects />
+			<x-admin.widgets.commands />
+			<x-admin.widgets.command-log />
 		</div>
 	</x-row>
 @endsection

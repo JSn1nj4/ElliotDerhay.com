@@ -2,8 +2,15 @@
 
 namespace App\Providers;
 
+use App\Events\GithubEventPruneCommandRun;
+use App\Events\GithubEventsPulledEvent;
+use App\Events\GithubUsersUpdatedEvent;
 use App\Events\NewGithubEventTypesEvent;
+use App\Events\TokensPruned;
+use App\Events\TweetsPruned;
 use App\Events\TweetsPulledEvent;
+use App\Events\TwitterUsersUpdatedEvent;
+use App\Listeners\CommandWasRun;
 use App\Listeners\LogLockouts;
 use App\Listeners\PruneOldTweets;
 use App\Listeners\SendNewGithubEventTypesEmail;
@@ -20,6 +27,15 @@ class EventServiceProvider extends ServiceProvider
 	 * @var array
 	 */
 	protected $listen = [
+		GithubEventPruneCommandRun::class => [
+			CommandWasRun::class,
+		],
+		GithubEventsPulledEvent::class => [
+			CommandWasRun::class,
+		],
+		GithubUsersUpdatedEvent::class => [
+			CommandWasRun::class,
+		],
 		Lockout::class => [
 			LogLockouts::class,
 		],
@@ -29,8 +45,18 @@ class EventServiceProvider extends ServiceProvider
 		Registered::class => [
 			SendEmailVerificationNotification::class,
 		],
+		TokensPruned::class => [
+			CommandWasRun::class,
+		],
+		TweetsPruned::class => [
+			CommandWasRun::class,
+		],
 		TweetsPulledEvent::class => [
 			PruneOldTweets::class,
+			CommandWasRun::class,
+		],
+		TwitterUsersUpdatedEvent::class => [
+			CommandWasRun::class,
 		],
 	];
 

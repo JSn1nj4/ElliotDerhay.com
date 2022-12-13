@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Definitions\ProjectsPerPage;
+use App\Definitions\PerPage;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
@@ -47,7 +47,7 @@ class Project extends Model
 	public static function index(Request $request): AbstractPaginator
 	{
 		return self::latest()
-			->paginate(ProjectsPerPage::filter(
+			->paginate(PerPage::filter(
 				optional($request)->per_page
 			))
 			->withQueryString();
