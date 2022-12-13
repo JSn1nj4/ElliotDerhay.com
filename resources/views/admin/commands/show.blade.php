@@ -102,7 +102,7 @@
 					</x-ui.table.row>
 				</x-ui.table.header>
 				<x-ui.table.body>
-					@foreach($command->events()->limit(10)->get() as $event)
+					@foreach($command->events()->latest()->limit(10)->get() as $event)
 						<x-ui.table.row class="bg-sea-green-800/20 even:bg-sea-green-800/10">
 							<x-ui.table.data>
 								<i class="{{ implode(' ', array_keys(array_filter([
