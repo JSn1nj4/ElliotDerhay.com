@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Models\Project;
 use Illuminate\Contracts\View\View;
@@ -23,7 +24,7 @@ class ProjectsController extends Controller
         return view('admin.projects.create');
     }
 
-    public function store(UpdateProjectRequest $request): Response|RedirectResponse
+    public function store(StoreProjectRequest $request): Response|RedirectResponse
     {
 		$project = Project::create($request->validated());
 
