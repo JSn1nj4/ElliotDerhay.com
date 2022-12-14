@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Definitions\PerPage;
+use App\Enums\PerPage;
 use App\Traits\HasDisplayDates;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;

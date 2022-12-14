@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use App\DataTransferObjects\GithubUserDTO;
-use App\Definitions\CreateMode;
+use App\Enums\CreateMode;
 use App\Events\GithubUsersUpdatedEvent;
 use App\Models\GithubUser;
 use App\Services\Github\GithubService;

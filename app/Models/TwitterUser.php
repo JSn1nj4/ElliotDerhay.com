@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\DataTransferObjects\TwitterUserDTO;
-use App\Definitions\CreateMode;
+use App\Enums\CreateMode;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;

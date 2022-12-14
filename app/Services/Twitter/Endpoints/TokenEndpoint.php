@@ -2,7 +2,7 @@
 
 namespace App\Services\Twitter\Endpoints;
 
-use App\Definitions\HttpMethod;
+use App\Enums\HttpMethod;
 
 class TokenEndpoint extends BaseEndpoint
 {

@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Definitions;
+namespace App\Enums\Traits;
 
-enum PerPage: int
+/**
+ * For use with Per Page enums
+ *
+ * Requires MIN, MAX, and DEFAULT cases
+ */
+trait PerPageHelpers
 {
-	case MIN = 1;
-	case MAX = 100;
-	case DEFAULT = 10;
-
 	public static function isIntegerLike(mixed $value): bool
 	{
 		return is_numeric($value) && ((string)intval($value)) === "$value";

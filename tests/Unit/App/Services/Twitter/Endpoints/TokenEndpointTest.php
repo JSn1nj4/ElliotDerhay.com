@@ -1,6 +1,6 @@
 <?php
 
-use App\Definitions\HttpMethod;
+use App\Enums\HttpMethod;
 use App\Services\Twitter\Endpoints\TokenEndpoint;
 
 it('creates an instance of App\Services\Twitter\Endpoints\TokenEndpoint', function (): void {

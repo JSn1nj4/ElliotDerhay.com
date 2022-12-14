@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use App\DataTransferObjects\TwitterUserDTO;
-use App\Definitions\CreateMode;
+use App\Enums\CreateMode;
 use App\Events\TwitterUsersUpdatedEvent;
 use App\Models\TwitterUser;
 use App\Services\Twitter\TwitterService;

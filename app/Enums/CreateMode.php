@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Definitions;
+namespace App\Enums;
 
 /**
  * The mode used for creating new models

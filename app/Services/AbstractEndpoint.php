@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Definitions\HttpMethod;
+use App\Enums\HttpMethod;
 use Exception;
 
 abstract class AbstractEndpoint

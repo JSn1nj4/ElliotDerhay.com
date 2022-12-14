@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Definitions;
+namespace App\Enums;
 
 enum HttpMethod: string {
 	case GET = "GET";

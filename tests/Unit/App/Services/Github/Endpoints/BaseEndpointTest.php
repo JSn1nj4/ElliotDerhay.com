@@ -1,6 +1,6 @@
 <?php
 
-use App\Definitions\HttpMethod;
+use App\Enums\HttpMethod;
 use App\Services\Github\Endpoints\BaseEndpoint;
 
 it('creates an instance of App\Services\Github\Endpoints\BaseEndpoint', function (): void {

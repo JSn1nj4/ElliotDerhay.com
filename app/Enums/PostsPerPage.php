@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Definitions;
+namespace App\Enums;
 
-use App\Definitions\Traits\PerPageHelpers;
+use App\Enums\Traits\PerPageHelpers;
 
 enum PostsPerPage: int {
 	use PerPageHelpers;
