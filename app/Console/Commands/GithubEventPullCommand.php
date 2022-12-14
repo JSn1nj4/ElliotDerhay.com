@@ -2,7 +2,6 @@
 
 namespace App\Console\Commands;
 
-use App\Events\GithubEventPullCommandRun;
 use App\Events\GithubEventsPulledEvent;
 use App\Models\GithubEvent;
 use App\Services\Github\GithubService;

@@ -2,8 +2,6 @@
 
 namespace App\Rules;
 
-use App\Actions\LogCommandEvent;
-use App\Models\Command;
 use Illuminate\Contracts\Validation\InvokableRule;
 
 class Allowed implements InvokableRule
