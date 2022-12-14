@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Events\GithubEventPruneCommandRun;
+use App\Events\GithubEventsPruned;
 use App\Events\GithubEventsPulledEvent;
 use App\Events\GithubUsersUpdatedEvent;
 use App\Events\NewGithubEventTypesEvent;
@@ -27,7 +27,7 @@ class EventServiceProvider extends ServiceProvider
 	 * @var array
 	 */
 	protected $listen = [
-		GithubEventPruneCommandRun::class => [
+		GithubEventsPruned::class => [
 			CommandWasRun::class,
 		],
 		GithubEventsPulledEvent::class => [

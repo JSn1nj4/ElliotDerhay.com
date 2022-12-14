@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Events\GithubEventPruneCommandRun;
+use App\Events\GithubEventsPruned;
 use App\Models\GithubEvent;
 use Illuminate\Console\Command;
 
@@ -50,7 +50,7 @@ class GithubEventPruneCommand extends Command
 
 		GithubEvent::whereNotIn('id', $keep_ids)->delete();
 
-		GithubEventPruneCommandRun::dispatch();
+		GithubEventsPruned::dispatch();
 
 		return 0;
 	}

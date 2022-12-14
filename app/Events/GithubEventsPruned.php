@@ -2,7 +2,7 @@
 
 namespace App\Events;
 
-class GithubEventPruneCommandRun extends CommandWasRunEvent
+class GithubEventsPruned extends CommandWasRunEvent
 {
     public function __construct()
     {
