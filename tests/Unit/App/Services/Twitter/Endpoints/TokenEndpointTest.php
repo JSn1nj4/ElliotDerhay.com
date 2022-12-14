@@ -10,7 +10,7 @@ it('creates an instance of App\Services\Twitter\Endpoints\TokenEndpoint', functi
 it('sets TokenEndpoint::$method to App\Definitions\HttpMethod::POST', function (): void {
 	expect(TokenEndpoint::make()->method)
 		->toBeInstanceOf(HttpMethod::class)
-		->toEqual(HttpMethod::POST);
+		->toEqual(HttpMethod::Post);
 });
 
 it('sets the \'Authorization\' header', function (): void {

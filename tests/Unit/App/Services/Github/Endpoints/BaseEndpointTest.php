@@ -26,7 +26,7 @@ it('throws an error when accessing uninitialized property BaseEndpoint::$endpoin
 it('expects BaseEndpoint::$method to default to App\Definitions\HttpMethod::GET', function (): void {
 	expect(BaseEndpoint::make()->method)
 		->toBeInstanceOf(HttpMethod::class)
-		->toEqual(HttpMethod::GET);
+		->toEqual(HttpMethod::Get);
 });
 
 it('expects $headers to be an empty array', function (): void {

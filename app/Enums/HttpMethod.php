@@ -3,9 +3,9 @@
 namespace App\Enums;
 
 enum HttpMethod: string {
-	case GET = "GET";
-	case POST = "POST";
-	case PUT = "PUT";
-	case PATCH = "PATCH";
-	case DELETE = "DELETE";
+	case Get = "GET";
+	case Post = "POST";
+	case Put = "PUT";
+	case Patch = "PATCH";
+	case Delete = "DELETE";
 }

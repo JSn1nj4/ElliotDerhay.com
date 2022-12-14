@@ -9,7 +9,7 @@ abstract class AbstractEndpoint
 {
 	protected string $base;
 	protected string $endpoint;
-	protected HttpMethod $method = HttpMethod::GET;
+	protected HttpMethod $method = HttpMethod::Get;
 	protected array $headers = [];
 	protected array $params = [];
 

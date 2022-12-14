@@ -20,6 +20,6 @@ class TokenEndpoint extends BaseEndpoint
 
 		$this->endpoint = "oauth2/token";
 
-		$this->method = HttpMethod::POST;
+		$this->method = HttpMethod::Post;
 	}
 }

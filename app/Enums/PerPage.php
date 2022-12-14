@@ -4,9 +4,9 @@ namespace App\Enums;
 
 enum PerPage: int
 {
-	case MIN = 1;
-	case MAX = 100;
-	case DEFAULT = 10;
+	case Min = 1;
+	case Max = 100;
+	case Default = 10;
 
 	public static function isIntegerLike(mixed $value): bool
 	{
@@ -15,13 +15,13 @@ enum PerPage: int
 
 	public static function filter(mixed $value): int
 	{
-		if(!self::isIntegerLike($value)) return self::DEFAULT->value;
+		if(!self::isIntegerLike($value)) return self::Default->value;
 
 		$int = intval($value);
 
 		return match(true) {
-			$int < self::MIN->value => self::MIN->value,
-			$int > self::MAX->value => self::MAX->value,
+			$int < self::Min->value => self::Min->value,
+			$int > self::Max->value => self::Max->value,
 			default => $int,
 		};
 	}
