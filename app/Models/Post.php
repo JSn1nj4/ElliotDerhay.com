@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Enums\PostsPerPage;
+use App\Enums\PerPage;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -82,7 +82,7 @@ class Post extends Model
 				$query->whereRelation('tags', 'tag_id', $tag_id);
 			})
 			->latest()
-			->paginate(PostsPerPage::filter(
+			->paginate(PerPage::filter(
 				optional($request)->per_page
 			))
 			->withQueryString();
