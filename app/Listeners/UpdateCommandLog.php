@@ -6,7 +6,7 @@ use App\Actions\LogCommandEvent;
 use App\Events\CommandWasRunEvent;
 use App\Models\Command;
 
-class CommandWasRun
+class UpdateCommandLog
 {
     public function __construct()
     {
