@@ -2,17 +2,14 @@
 
 namespace App\DataTransferObjects;
 
-use Spatie\DataTransferObject\DataTransferObject;
-
-class TwitterUserDTO extends DataTransferObject
+class TwitterUserDTO
 {
-	public int $id;
-
-	public string $name;
-
-	public string $screen_name;
-
-	public string $profile_image_url_https;
+	public function __construct(
+		public readonly int $id,
+		public readonly string $name,
+		public readonly string $screen_name,
+		public readonly string $profile_image_url_https,
+	) {}
 
 	public static function fromArray(array $userData): self
 	{

@@ -3,19 +3,16 @@
 namespace App\DataTransferObjects;
 
 use Carbon\Carbon;
-use Spatie\DataTransferObject\DataTransferObject;
 
-class TweetDTO extends DataTransferObject
+class TweetDTO
 {
-	public int $id;
-
-	public TwitterUserDTO $user;
-
-	public string $body;
-
-	public string $date;
-
-	public array $entities;
+	public function __construct(
+		public readonly int $id,
+		public readonly TwitterUserDTO $user,
+		public readonly string $body,
+		public readonly string $date,
+		public readonly array $entities,
+	) {}
 
 	public static function getDate(array $tweetData): string
 	{

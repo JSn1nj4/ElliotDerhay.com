@@ -3,23 +3,18 @@
 namespace App\DataTransferObjects;
 
 use Carbon\Carbon;
-use Spatie\DataTransferObject\DataTransferObject;
 
-class GithubEventDTO extends DataTransferObject
+class GithubEventDTO
 {
-	public string $id;
-
-	public string $type;
-
-	public ?string $action;
-
-	public string $date;
-
-	public GithubUserDTO $user;
-
-	public ?string $source;
-
-	public string $repo;
+	public function __construct(
+		public readonly string $id,
+		public readonly string $type,
+		public readonly ?string $action,
+		public readonly string $date,
+		public readonly GithubUserDTO $user,
+		public readonly ?string $source,
+		public readonly string $repo,
+	) {}
 
 	public static function getAction(array $data): ?string
 	{
