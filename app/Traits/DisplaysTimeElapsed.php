@@ -2,7 +2,7 @@
 
 namespace App\Traits;
 
-use Carbon\Carbon;
+use Illuminate\Support\Carbon;
 use Carbon\CarbonInterface;
 
 trait DisplaysTimeElapsed

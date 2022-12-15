@@ -2,7 +2,7 @@
 
 namespace App\DataTransferObjects;
 
-use Carbon\Carbon;
+use Illuminate\Support\Carbon;
 
 class GithubEventDTO
 {
