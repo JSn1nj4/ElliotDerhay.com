@@ -41,16 +41,12 @@ class TwitterService implements SocialMediaService
 	 * initialized. Initializing properties outside the constructor requires
 	 * that the initial values be static.
 	 */
-	public function __construct()
+	public function __construct(?Token $token)
 	{
 		$this->key = config('services.twitter.key');
 		$this->secret = config('services.twitter.secret');
 
-		$this->token = Token::whereRaw("LOWER(service) like '%twitter%'")
-			->latest()
-			->valid()
-			->first()
-			?? $this->getToken();
+		$this->token = $token ?? $this->getToken();
 	}
 
 	/**

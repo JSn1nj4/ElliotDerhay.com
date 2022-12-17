@@ -6,8 +6,10 @@ use App\Actions\LogCommandEvent;
 use App\Actions\LogUserLogin;
 use App\Contracts\GitHostService;
 use App\Contracts\SocialMediaService;
+use App\Models\Token;
 use App\Services\Github\GithubService;
 use App\Services\Twitter\TwitterService;
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -29,7 +31,12 @@ class AppServiceProvider extends ServiceProvider
 	 */
 	public function register()
 	{
-		//
+		$this->app->when(TwitterService::class)
+			->needs(Token::class)
+			->give(fn () => Token::whereRaw("LOWER(service) LIKE '%twitter%'")
+				->latest()
+				->valid()
+				->first());
 	}
 
 	/**
