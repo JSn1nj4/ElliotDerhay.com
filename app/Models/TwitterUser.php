@@ -43,6 +43,13 @@ class TwitterUser extends Model
 		'profile_image_url_https',
 	];
 
+	public static function booted()
+	{
+		static::deleted(function (TwitterUser $user): void {
+			Tweet::whereUserId($user->id)->delete();
+		});
+	}
+
 	public static function fromDTO(TwitterUserDTO $dto, CreateMode $mode = CreateMode::FirstOrCreate): self
 	{
 		return self::{$mode->value}(['id' => $dto->id], [

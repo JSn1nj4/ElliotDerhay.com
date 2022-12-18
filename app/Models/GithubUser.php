@@ -41,6 +41,13 @@ class GithubUser extends Model
 		'avatar_url',
 	];
 
+	public static function booted()
+	{
+		static::deleted(function (GithubUser $user): void {
+			GithubEvent::whereUserId($user->id)->delete();
+		});
+	}
+
 	public static function fromDTO(GithubUserDTO $dto): self
 	{
 		return self::firstOrCreate(['id' => $dto->id], [

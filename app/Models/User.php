@@ -50,7 +50,14 @@ class User extends Authenticatable
         'password',
     ];
 
-    /**
+	public static function booted()
+	{
+		static::deleted(function (User $user): void {
+			Login::whereUserId($user->id)->delete();
+		});
+	}
+
+	/**
      * The attributes that should be hidden for arrays.
      *
      * @var array
