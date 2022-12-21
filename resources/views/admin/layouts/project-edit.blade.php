@@ -12,27 +12,13 @@
 					<input type="hidden" value="-" name="thumbnail">
 				</div>
 
-				<div class="flex flex-col mb-6 gap-2">
-					<label for="title" class="text-3xl">Project Title</label>
-					<x-ui.form.input id="title" name="name" error="{{ $errors->has('name') }}" value="{{ $fields->name }}" text-size="text-2xl" padding="p-3" />
-				</div>
+				<x-admin.forms.field label="Project Title" field="name" :errors="$errors" large value="{{ $fields->name }}" />
 
-				<div class="flex flex-col my-6 gap-2">
-					<label for="link" class="text-2xl">Link</label>
-					<x-ui.form.input id="link" name="link" error="{{ $errors->has('link') }}" value="{{ $fields->link }}" />
-				</div>
+				<x-admin.forms.field label="Link" field="link" :errors="$errors" value="{{ $fields->link }}" />
 
-				<div class="flex flex-col my-6 gap-2">
-					<label for="demo_link" class="text-2xl">Demo Link</label>
-					<x-ui.form.input id="demo_link" name="demo_link" error="{{ $errors->has('demo_link') }}" value="{{ $fields->demo_link }}" />
-				</div>
+				<x-admin.forms.field label="Demo Link" field="demo_link" :errors="$errors" value="{{ $fields->demo_link }}" />
 
-				<div class="flex flex-col my-6 gap-2">
-					<label for="short_desc" class="text-2xl">Short Description</label>
-					<x-ui.form.text-area id="short_desc" name="short_desc" error="{{ $errors->has('short_desc') }}">
-						{{ $fields->short_desc }}
-					</x-ui.form.text-area>
-				</div>
+				<x-admin.forms.field label="Short Description" field="short_desc" :errors="$errors" value="{{ $fields->demo_link }}" multi-line />
 
 			</form>
 			<div class="flex flex-row mt-6 gap-6 justify-end">

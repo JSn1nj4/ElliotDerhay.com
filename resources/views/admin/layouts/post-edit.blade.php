@@ -12,22 +12,11 @@
 					<input type="hidden" value="-" name="cover_image">
 				</div>
 
-				<div class="flex flex-col mb-6 gap-2">
-					<label for="title" class="text-3xl">Post Title</label>
-					<x-ui.form.input id="title" name="title" error="{{ $errors->has('title') }}" value="{{ $fields->title }}" text-size="text-2xl" padding="p-3" />
-				</div>
+				<x-admin.forms.field label="Post Title" field="title" :errors="$errors" large value="{{ $fields->title }}" />
 
-				<div class="flex flex-col my-6 gap-2">
-					<label for="slug" class="text-2xl">Slug</label>
-					<x-ui.form.input id="slug" name="slug" error="{{ $errors->has('slug') }}" value="{{ $fields->slug }}" />
-				</div>
+				<x-admin.forms.field label="Slug" field="slug" :errors="$errors" value="{{ $fields->slug }}" />
 
-				<div class="flex flex-col my-6 gap-2">
-					<label for="body" class="text-2xl">Body</label>
-					<x-ui.form.text-area id="body" name="body" error="{{ $errors->has('body') }}">
-						{{ $fields->body }}
-					</x-ui.form.text-area>
-				</div>
+				<x-admin.forms.field label="Body" field="body" :errors="$errors" value="{{ $fields->body }}" multiline />
 
 			</form>
 			<div class="flex flex-row mt-6 gap-6 justify-end">

@@ -8,17 +8,9 @@
 				@csrf
 				@yield('method')
 
-				<div class="flex flex-col mb-6 gap-2">
-					<label for="title" class="text-3xl">Command Signature</label>
-					<x-ui.form.input id="signature" name="signature" error="{{ $errors->has('signature') }}" value="{{ $fields->signature }}" text-size="text-2xl" padding="p-3" />
-				</div>
+				<x-admin.forms.field label="Command Signature" field="signature" :errors="$errors" large value="{{ $fields->signature }}" />
 
-				<div class="flex flex-col my-6 gap-2">
-					<label for="short_desc" class="text-2xl">Description</label>
-					<x-ui.form.text-area id="description" name="description" error="{{ $errors->has('description') }}">
-						{{ $fields->description }}
-					</x-ui.form.text-area>
-				</div>
+				<x-admin.forms.field label="Description" field="description" :errors="$errors" multiline value="{{ $fields->description }}" />
 
 			</form>
 			<div class="flex flex-row mt-6 gap-6 justify-end">
