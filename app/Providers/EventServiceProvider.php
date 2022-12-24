@@ -10,11 +10,13 @@ use App\Events\TokensPruned;
 use App\Events\TweetsPruned;
 use App\Events\TweetsPulledEvent;
 use App\Events\TwitterUsersUpdatedEvent;
+use App\Listeners\SendPasswordChangedNotification;
 use App\Listeners\UpdateCommandLog;
 use App\Listeners\LogLockouts;
 use App\Listeners\PruneOldTweets;
 use App\Listeners\SendNewGithubEventTypesEmail;
 use Illuminate\Auth\Events\Lockout;
+use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -41,6 +43,9 @@ class EventServiceProvider extends ServiceProvider
 		],
 		NewGithubEventTypesEvent::class => [
 			SendNewGithubEventTypesEmail::class,
+		],
+		PasswordReset::class => [
+			SendPasswordChangedNotification::class,
 		],
 		Registered::class => [
 			SendEmailVerificationNotification::class,
