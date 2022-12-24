@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ResetPasswordRequest;
+use App\Models\User;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -10,22 +12,43 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
-use Illuminate\Validation\Rules;
+use Illuminate\Validation\ValidationException;
 
 class NewPasswordController extends Controller
 {
-    public function create(Request $request): View
+    public function create(Request $request, string $token): View|RedirectResponse
     {
+		try {
+			$validated = \Validator::validate(array_merge($request->only('email'), [
+				'token' => $token,
+			]), [
+				'email' => ['required', 'email'],
+				'token' => ['required'],
+			]);
+		} catch (ValidationException $e) {
+			return redirect()
+				->route('login')
+				->withErrors(['password' => 'Password reset request is invalid.']);
+		}
+
+		$user = User::whereEmail($validated['email']);
+
+		if (!$user->exists())
+			return redirect()
+				->route('login')
+				->withErrors(['password' => 'Password reset request is invalid.']);
+
+		if (!Password::tokenExists($user->first(), $validated['token']))
+			return redirect()
+				->route('login')
+				->withErrors(['password' => 'Password reset request is invalid.']);
+
         return view('auth.reset-password', ['request' => $request]);
     }
 
-    public function store(Request $request): RedirectResponse
+    public function store(ResetPasswordRequest $request): RedirectResponse
     {
-        $request->validate([
-            'token' => ['required'],
-            'email' => ['required', 'email'],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        ]);
+        $request->validated();
 
         // Here we will attempt to reset the user's password. If it is successful we
         // will update the password on an actual user model and persist it to the
