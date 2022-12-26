@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Events\TweetsPruned;
+use App\Events\TweetsPrunedEvent;
 use App\Models\Tweet;
 use Illuminate\Console\Command;
 
@@ -50,7 +50,7 @@ class TweetPruneCommand extends Command
 
 		Tweet::whereNotIn('id', $keep_ids)->delete();
 
-		TweetsPruned::dispatch();
+		TweetsPrunedEvent::dispatch();
 
 		return 0;
 	}

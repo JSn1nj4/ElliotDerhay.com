@@ -2,7 +2,7 @@
 
 namespace App\Events;
 
-class TokensPruned extends CommandWasRunEvent
+class TokensPrunedEvent extends CommandWasRunEvent
 {
     public function __construct()
     {

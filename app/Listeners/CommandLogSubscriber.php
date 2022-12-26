@@ -7,8 +7,8 @@ use App\Events\CommandWasRunEvent;
 use App\Events\GithubEventsPruned;
 use App\Events\GithubEventsPulledEvent;
 use App\Events\GithubUsersUpdatedEvent;
-use App\Events\TokensPruned;
-use App\Events\TweetsPruned;
+use App\Events\TokensPrunedEvent;
+use App\Events\TweetsPrunedEvent;
 use App\Events\TweetsPulledEvent;
 use App\Events\TwitterUsersUpdatedEvent;
 use App\Models\Command;
@@ -35,8 +35,8 @@ class CommandLogSubscriber
 			GithubEventsPruned::class => 'updateCommandLog',
 			GithubEventsPulledEvent::class => 'updateCommandLog',
 			GithubUsersUpdatedEvent::class => 'updateCommandLog',
-			TokensPruned::class => 'updateCommandLog',
-			TweetsPruned::class => 'updateCommandLog',
+			TokensPrunedEvent::class => 'updateCommandLog',
+			TweetsPrunedEvent::class => 'updateCommandLog',
 			TweetsPulledEvent::class => 'updateCommandLog',
 			TwitterUsersUpdatedEvent::class => 'updateCommandLog',
 		];

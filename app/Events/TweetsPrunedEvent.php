@@ -2,7 +2,7 @@
 
 namespace App\Events;
 
-class TweetsPruned extends CommandWasRunEvent
+class TweetsPrunedEvent extends CommandWasRunEvent
 {
     public function __construct()
     {
