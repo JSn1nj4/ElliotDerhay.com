@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\PerPage;
+use App\Traits\Imageable;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -41,11 +42,15 @@ use Illuminate\Pagination\AbstractPaginator;
  */
 class Post extends Model
 {
-    use HasFactory;
+    use HasFactory,
+		Imageable;
 
+	/**
+	 * @var string[]
+	 * inline type when allowed
+	 */
 	public $fillable = [
 		'body',
-		'cover_image',
 		'slug',
 		'title',
 	];
