@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Contracts\UploadServiceContract;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
+use App\Models\Image;
 use App\Models\Project;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -26,7 +28,14 @@ class ProjectsController extends Controller
 
     public function store(StoreProjectRequest $request): Response|RedirectResponse
     {
-		$project = Project::create($request->validated());
+		$thumbnail = Image::create(resolve(UploadServiceContract::class)
+			->image($request->validated('thumbnail'))
+			->toArray());
+
+		$project = Project::create($request->safe()
+			->except('thumbnail'));
+
+		$project->images()->attach($thumbnail->id);
 
 		session()->flash('success', 'Project published!');
 
@@ -45,7 +54,17 @@ class ProjectsController extends Controller
 
     public function update(UpdateProjectRequest $request, Project $project): Response|RedirectResponse
     {
-        $project->update($request->validated());
+		if ($request->has('thumbnail')) {
+			$thumbnail = Image::create(resolve(UploadServiceContract::class)
+				->image($request->validated('thumbnail'))
+				->toArray());
+		}
+
+		$project->update($request->safe()->except('thumbnail'));
+
+		if (isset($thumbnail)) {
+			$project->images()->attach($thumbnail->id);
+		}
 
 		return back()->with('success', 'Project updated!');
     }

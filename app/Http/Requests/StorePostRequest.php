@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rules\File;
 
 class StorePostRequest extends FormRequest
 {
@@ -33,7 +34,7 @@ class StorePostRequest extends FormRequest
     public function rules(): array
     {
         return [
-			'cover_image' => 'string',
+			'cover_image' => File::types(['png', 'jpg'])->max(5 * 1024),
             'title' => [
 				'required',
 				'max:180',

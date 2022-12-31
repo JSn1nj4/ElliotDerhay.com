@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\File;
 
 class StoreProjectRequest extends FormRequest
 {
@@ -25,7 +26,7 @@ class StoreProjectRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'thumbnail' => 'string',
+            'thumbnail' => File::types(['png', 'jpg'])->max(5 * 1024),
 			'name' => [
 				'required',
 				'max:180',
