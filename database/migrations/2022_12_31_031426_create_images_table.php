@@ -13,8 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('media', function (Blueprint $table) {
-            $table->id();
+        Schema::create('images', function (Blueprint $table) {
+			$table->id();
 			$table->string('name');
 			$table->string('file_name');
 			$table->string('mime_type');
@@ -23,7 +23,7 @@ return new class extends Migration
 			$table->string('file_hash', 64)->unique();
 			$table->string('collection')->nullable();
 			$table->unsignedBigInteger('size');
-            $table->timestamps();
+			$table->timestamps();
         });
     }
 
@@ -34,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('media');
+        Schema::dropIfExists('images');
     }
 };

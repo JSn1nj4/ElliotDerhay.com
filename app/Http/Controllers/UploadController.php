@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Contracts\UploadServiceContract;
 use App\Http\Requests\UploadRequest;
-use App\Models\Media;
+use App\Models\Image;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 
@@ -16,7 +16,7 @@ class UploadController extends Controller
 
 	public function __invoke(UploadRequest $request): Response|RedirectResponse
     {
-		Media::create($this->service
+		Image::create($this->service
 			->image($request->validated('file'))
 			->toArray());
 
