@@ -24,7 +24,6 @@ class AppServiceProvider extends ServiceProvider
 	public array $singletons = [
 		GitHostService::class => GithubService::class,
 		SocialMediaService::class => TwitterService::class,
-		UploadServiceContract::class => UploadService::class,
 	];
 
 	/**

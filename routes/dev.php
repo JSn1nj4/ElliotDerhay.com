@@ -34,8 +34,6 @@ Route::prefix('/dashboard')
 		Route::get('command-log', [CommandEventController::class, 'index'])->name('command-events.index');
 
 		Route::post('command-run', [RunCommandController::class, 'store'])->name('command-run.store');
-
-		Route::post('upload', \App\Http\Controllers\UploadController::class)->name('upload');
 	});
 
 require __DIR__.'/auth.php';

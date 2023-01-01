@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Contracts\UploadServiceContract;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
-use App\Models\Image;
+use App\Jobs\StoreImageJob;
 use App\Models\Post;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -28,17 +27,12 @@ class PostsController extends Controller
 
 	public function store(StorePostRequest $request): Response|RedirectResponse
 	{
-		if ($request->has('cover_image')) {
-			$cover = Image::create(resolve(UploadServiceContract::class)
-				->image($request->validated('cover_image'))
-				->toArray());
-		}
-
 		$post = Post::create($request->safe()->except('cover_image'));
 
-		if (isset($cover)) {
-			$post->images()->attach($cover->id);
-		}
+		$this->dispatchIf(
+			$request->hasFile('cover_image'),
+			new StoreImageJob($request->file('cover_image'), $post),
+		);
 
 		session()->flash('success', 'Post published!');
 
@@ -57,17 +51,12 @@ class PostsController extends Controller
 
 	public function update(UpdatePostRequest $request, Post $post): Response|RedirectResponse
 	{
-		if ($request->has('cover_image')) {
-			$cover = Image::create(resolve(UploadServiceContract::class)
-				->image($request->validated('cover_image'))
-				->toArray());
-		}
-
 		$post->update($request->safe()->except('cover_image'));
 
-		if (isset($cover)) {
-			$post->images()->attach($cover->id);
-		}
+		$this->dispatchIf(
+			$request->hasFile('cover_image'),
+			new StoreImageJob($request->file('cover_image'), $post),
+		);
 
 		return back()->with('success', 'Post updated!');
 	}
