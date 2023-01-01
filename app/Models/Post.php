@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Contracts\ImageableContract;
 use App\Enums\PerPage;
 use App\Traits\Imageable;
 use Illuminate\Support\Carbon;
@@ -40,10 +41,9 @@ use Illuminate\Pagination\AbstractPaginator;
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereUpdatedAt($value)
  * @mixin \Eloquent
  */
-class Post extends Model
+class Post extends ImageableModel
 {
-    use HasFactory,
-		Imageable;
+    use HasFactory;
 
 	/**
 	 * @var string[]

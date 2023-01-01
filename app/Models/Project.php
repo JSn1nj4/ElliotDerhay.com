@@ -33,10 +33,9 @@ use Illuminate\Pagination\AbstractPaginator;
  * @method static \Illuminate\Database\Eloquent\Builder|Project whereUpdatedAt($value)
  * @mixin \Eloquent
  */
-class Project extends Model
+class Project extends ImageableModel
 {
-	use HasFactory,
-		Imageable;
+	use HasFactory;
 
 	public $fillable = [
 		'name',
