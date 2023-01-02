@@ -11,7 +11,6 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\Storage;
 
 class StoreImageJob implements ShouldQueue
 {
@@ -26,13 +25,14 @@ class StoreImageJob implements ShouldQueue
     {
 		$name = $this->file->hashName();
 
-		$upload = Storage::put("{$name}", $this->file);
+		$path = $this->file->store("{$name}");
+		// $path = $this->file->store("temp/{$name}", 'public');
 
 		$image = Image::create([
 			'name' => "{$name}",
 			'file_name' => $this->file->getClientOriginalName(),
 			'mime_type' => $this->file->getClientMimeType(),
-			'path' => $upload->path(),
+			'path' => $path,
 			'disk' => config('app.uploads.disk'),
 			'file_hash' => hash_file(
 				config('app.uploads.hash'),
