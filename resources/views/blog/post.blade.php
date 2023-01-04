@@ -2,7 +2,9 @@
 @extends('layouts.blog')
 
 @section('blog')
-	<img src="{{ $post->cover_image }}" class="block rounded-lg" alt="">
+	@if($post->image)
+		<img src="{{ $post->image->path }}" class="block rounded-lg" alt="">
+	@endif
 
 	<div class="flex flex-row pt-3 mt-2 gap-4">
 		<p>Posted {{ $post->created_at->toFormattedDateString() }}</p>
