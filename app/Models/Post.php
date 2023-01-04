@@ -40,6 +40,8 @@ use Illuminate\Pagination\AbstractPaginator;
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Image[] $images
+ * @property-read int|null $images_count
  */
 class Post extends ImageableModel
 {
