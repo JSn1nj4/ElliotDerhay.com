@@ -19,6 +19,7 @@ class StoreImageJob implements ShouldQueue
     public function __construct(
 		public readonly UploadedFile $file,
 		public readonly ?ImageableContract $relation = null,
+		public readonly string $collection = 'images',
 	) {}
 
     public function handle()
@@ -38,7 +39,7 @@ class StoreImageJob implements ShouldQueue
 				config('app.uploads.hash'),
 				storage_path("images/{$name}"),
 			),
-			'collection' => 'images',
+			'collection' => $this->collection,
 		]);
 
 		$this->relation

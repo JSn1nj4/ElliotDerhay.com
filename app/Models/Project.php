@@ -3,9 +3,7 @@
 namespace App\Models;
 
 use App\Enums\PerPage;
-use App\Traits\Imageable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\AbstractPaginator;
 

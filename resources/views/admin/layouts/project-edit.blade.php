@@ -8,11 +8,13 @@
 				@csrf
 				@yield('method')
 
-				<div class="absolute hidden -z-50">
-					<input type="hidden" value="-" name="thumbnail">
+				<div class="flex flex-col mb-6 gap-2">
+					<p><label for="thumbnail" class="text-3xl">Cover Image</label></p>
+					@if($image) <p><img src="{{ $image->url }}" class="max-w-md"></p> @endif
+				  <p><input type="file" name="thumbnail"></p>
 				</div>
 
-				<x-admin.forms.field label="Project Title" field="name" :errors="$errors" large value="{{ $fields->name }}" />
+				<x-admin.forms.field label="Project Title" field="name" :errors="$errors" value="{{ $fields->name }}" />
 
 				<x-admin.forms.field label="Link" field="link" :errors="$errors" value="{{ $fields->link }}" />
 

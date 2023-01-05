@@ -2,8 +2,9 @@
 @extends('admin.layouts.project-edit', [
     'action' => action([\App\Http\Controllers\ProjectsController::class, 'update'], compact('project')),
     'errors' => $errors,
+    'image' => $project->image,
     'fields' => (object) [
-        'thumbnail' => old('thumbnail', $project->thumbnail),
+        'thumbnail' => old('thumbnail'),
         'name' => old('name', $project->name),
         'link' => old('link', $project->link),
         'demo_link' => old('demo_link', $project->demo_link),
