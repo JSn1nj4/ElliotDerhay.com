@@ -10,7 +10,7 @@ trait Imageable
 {
 	public function image(): Attribute
 	{
-		return Attribute::get(fn () => $this->images()->first());
+		return Attribute::get(fn () => $this->images()->latest()->first());
 	}
 
 	public function images(): MorphToMany
