@@ -26,7 +26,7 @@ class StoreProjectRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'thumbnail' => File::types(['png', 'jpg'])->max(5 * 1024),
+            'thumbnail' => File::image()->max(5 * 1024),
 			'name' => [
 				'required',
 				'max:180',

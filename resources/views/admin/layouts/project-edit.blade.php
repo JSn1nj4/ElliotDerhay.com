@@ -4,14 +4,14 @@
 @section('content')
 	<x-row flex-class="md:flex flex-col gap-6">
 		<x-column class="block w-full">
-			<form id="save_project" method="post" action="{{ $action }}">
+			<form id="save_project" method="post" action="{{ $action }}" enctype="multipart/form-data">
 				@csrf
 				@yield('method')
 
 				<div class="flex flex-col mb-6 gap-2">
 					<p><label for="thumbnail" class="text-3xl">Cover Image</label></p>
 					@if($image) <p><img src="{{ $image->url }}" class="max-w-md"></p> @endif
-				  <p><input type="file" name="thumbnail"></p>
+				  <p><input type="file" id="thumbnail" name="thumbnail" value="{{ $fields->thumbnail }}"></p>
 				</div>
 
 				<x-admin.forms.field label="Project Title" field="name" :errors="$errors" value="{{ $fields->name }}" />
@@ -20,7 +20,7 @@
 
 				<x-admin.forms.field label="Demo Link" field="demo_link" :errors="$errors" value="{{ $fields->demo_link }}" />
 
-				<x-admin.forms.field label="Short Description" field="short_desc" :errors="$errors" value="{{ $fields->demo_link }}" multi-line />
+				<x-admin.forms.field label="Short Description" field="short_desc" :errors="$errors" value="{{ $fields->short_desc }}" multi-line />
 
 			</form>
 			<div class="flex flex-row mt-6 gap-6 justify-end">

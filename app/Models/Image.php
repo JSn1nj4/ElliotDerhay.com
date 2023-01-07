@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Storage;
 
 /**
  * App\Models\Image
@@ -46,6 +47,20 @@ class Image extends Model
 {
     use HasFactory;
 
+	/**
+	 * @var array
+	 */
+	protected $fillable = [
+		'name',
+		'file_name',
+		'mime_type',
+		'path',
+		'disk',
+		'file_hash',
+		'size',
+		'collection',
+	];
+
 	public function posts(): MorphToMany
 	{
 		return $this->morphedByMany(Post::class, 'imageable');
@@ -58,6 +73,6 @@ class Image extends Model
 
 	public function url(): Attribute
 	{
-		return Attribute::get(fn () => $this->path);
+		return Attribute::get(fn () => secure_asset($this->path));
 	}
 }

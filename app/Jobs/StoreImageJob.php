@@ -11,34 +11,44 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class StoreImageJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
+	public readonly string $original_name;
+	public readonly string $path;
+	public readonly string $mime_type;
+	public readonly string $name;
+	public readonly int $size;
+
     public function __construct(
-		public readonly UploadedFile $file,
+		UploadedFile $file,
 		public readonly ?ImageableContract $relation = null,
 		public readonly string $collection = 'images',
-	) {}
+	) {
+		$this->name = $file->hashName();
+		$this->original_name = $file->getClientOriginalName();
+		$this->mime_type = $file->getClientMimeType();
+		$this->path = $file->store("images", 'public');
+		$this->size = $file->getSize();
+	}
 
     public function handle()
     {
-		$name = $this->file->hashName();
-
-		$path = $this->file->store("{$name}");
-		// $path = $this->file->store("temp/{$name}", 'public');
-
 		$image = Image::create([
-			'name' => "{$name}",
-			'file_name' => $this->file->getClientOriginalName(),
-			'mime_type' => $this->file->getClientMimeType(),
-			'path' => $path,
+			'name' => "{$this->name}",
+			'file_name' => $this->original_name,
+			'mime_type' => $this->mime_type,
+			'path' => "storage/{$this->path}",
 			'disk' => config('app.uploads.disk'),
 			'file_hash' => hash_file(
 				config('app.uploads.hash'),
-				storage_path("images/{$name}"),
+				Storage::disk('public')->path($this->path),
 			),
+			'size' => $this->size,
 			'collection' => $this->collection,
 		]);
 
