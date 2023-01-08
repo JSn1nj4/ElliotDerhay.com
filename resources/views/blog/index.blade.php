@@ -12,7 +12,7 @@
 			@if($post->image)
 				<x-card.thumbnail
 					href="{{ route('blog.show', compact('post')) }}"
-					src="{{ $post->image->path }}"
+					src="{{ $post->image->url }}"
 				/>
 			@endif
 			<div class="p-4">

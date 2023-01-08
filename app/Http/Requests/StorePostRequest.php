@@ -34,7 +34,7 @@ class StorePostRequest extends FormRequest
     public function rules(): array
     {
         return [
-			'cover_image' => File::types(['png', 'jpg'])->max(5 * 1024),
+			'cover_image' => File::image()->max(5 * 1024),
             'title' => [
 				'required',
 				'max:180',

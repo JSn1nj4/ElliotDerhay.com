@@ -1,6 +1,7 @@
 @extends('admin.layouts.post-edit', [
     'action' => action([\App\Http\Controllers\PostsController::class, 'store']),
     'errors' => $errors,
+    'image' => null,
     'fields' => (object) [
         'cover_image' => old('cover_image'),
         'title' => old('title'),

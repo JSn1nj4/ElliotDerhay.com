@@ -3,7 +3,7 @@
 
 @section('blog')
 	@if($post->image)
-		<img src="{{ $post->image->path }}" class="block rounded-lg" alt="">
+		<img src="{{ $post->image->url }}" class="block rounded-lg" alt="">
 	@endif
 
 	<div class="flex flex-row pt-3 mt-2 gap-4">
