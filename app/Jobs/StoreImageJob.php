@@ -32,7 +32,7 @@ class StoreImageJob implements ShouldQueue
 		$this->name = $file->hashName();
 		$this->original_name = $file->getClientOriginalName();
 		$this->mime_type = $file->getClientMimeType();
-		$this->path = $file->store("images", 'public');
+		$this->path = $file->store("images", config('app.uploads.disk'));
 		$this->size = $file->getSize();
 	}
 
@@ -42,11 +42,11 @@ class StoreImageJob implements ShouldQueue
 			'name' => "{$this->name}",
 			'file_name' => $this->original_name,
 			'mime_type' => $this->mime_type,
-			'path' => "storage/{$this->path}",
+			'path' => $this->path,
 			'disk' => config('app.uploads.disk'),
 			'file_hash' => hash_file(
 				config('app.uploads.hash'),
-				Storage::disk('public')->path($this->path),
+				Storage::disk(config('app.uploads.disk'))->path($this->path),
 			),
 			'size' => $this->size,
 			'collection' => $this->collection,

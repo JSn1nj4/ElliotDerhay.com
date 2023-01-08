@@ -73,6 +73,6 @@ class Image extends Model
 
 	public function url(): Attribute
 	{
-		return Attribute::get(fn () => secure_asset($this->path));
+		return Attribute::get(fn () => Storage::disk($this->disk)->url($this->path));
 	}
 }
