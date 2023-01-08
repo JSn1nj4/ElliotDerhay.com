@@ -7,6 +7,7 @@ use App\Http\Controllers\PostsController;
 use App\Http\Controllers\ProjectsController;
 use App\Http\Controllers\ProjectsPortfolioController;
 use App\Http\Controllers\RunCommandController;
+use App\Models\Image;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/projects', [ProjectsPortfolioController::class, 'index'])->name('portfolio');
@@ -35,5 +36,9 @@ Route::prefix('/dashboard')
 
 		Route::post('command-run', [RunCommandController::class, 'store'])->name('command-run.store');
 	});
+
+Route::get('/image/{image}', function (Image $image) {
+	return Storage::disk('s3')->response($image->path);
+})->name('s3-image');
 
 require __DIR__.'/auth.php';
