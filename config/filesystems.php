@@ -47,6 +47,12 @@ return [
 			'visibility' => 'public',
 		],
 
+		'temp' => [
+			'driver' => 'scoped',
+			'disk' => 'local',
+			'prefix' => 'temp',
+		],
+
 		's3' => [
 			'driver' => 's3',
 			'key' => env('AWS_ACCESS_KEY_ID'),

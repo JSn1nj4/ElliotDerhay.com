@@ -11,13 +11,13 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
 class StoreImageJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
+	public readonly string $hash;
 	public readonly string $original_name;
 	public readonly string $path;
 	public readonly string $mime_type;
@@ -34,6 +34,10 @@ class StoreImageJob implements ShouldQueue
 		$this->mime_type = $file->getClientMimeType();
 		$this->path = $file->store("images", config('app.uploads.disk'));
 		$this->size = $file->getSize();
+		$this->hash = hash_file(
+			algo: config('app.uploads.hash'),
+			filename: Storage::disk('temp')->path($file->store('images', 'temp')),
+		);
 	}
 
     public function handle()
@@ -44,10 +48,7 @@ class StoreImageJob implements ShouldQueue
 			'mime_type' => $this->mime_type,
 			'path' => $this->path,
 			'disk' => config('app.uploads.disk'),
-			'file_hash' => hash_file(
-				config('app.uploads.hash'),
-				Storage::disk(config('app.uploads.disk'))->path($this->path),
-			),
+			'file_hash' => $this->hash,
 			'size' => $this->size,
 			'collection' => $this->collection,
 		]);
