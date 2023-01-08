@@ -74,7 +74,7 @@ class Image extends Model
 	public function url(): Attribute
 	{
 		return Attribute::get(fn () => match($this->disk) {
-			's3' => route('s3-image', ['image' => $this]),
+			's3-uploads' => route('s3-image', ['image' => $this]),
 			default => Storage::disk($this->disk)->url($this->path),
 		});
 	}

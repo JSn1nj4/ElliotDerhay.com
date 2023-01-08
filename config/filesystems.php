@@ -64,6 +64,18 @@ return [
             'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
 		],
 
+		's3-assets' => [
+			'driver' => 'scoped',
+			'disk' => 's3',
+			'prefix' => 'assets',
+		],
+
+		's3-uploads' => [
+			'driver' => 'scoped',
+			'disk' => 's3',
+			'prefix' => 'uploads',
+		],
+
 	],
 
 	/*

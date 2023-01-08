@@ -37,8 +37,12 @@ Route::prefix('/dashboard')
 		Route::post('command-run', [RunCommandController::class, 'store'])->name('command-run.store');
 	});
 
+Route::get('/assets/{filename}', function (string $filename) {
+	return Storage::disk('s3-assets')->response($filename);
+});
+
 Route::get('/image/{image}', function (Image $image) {
-	return Storage::disk('s3')->response($image->path);
+	return Storage::disk('s3-uploads')->response($image->path);
 })->name('s3-image');
 
 require __DIR__.'/auth.php';
