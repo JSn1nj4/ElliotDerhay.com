@@ -37,9 +37,10 @@ Route::prefix('/dashboard')
 		Route::post('command-run', [RunCommandController::class, 'store'])->name('command-run.store');
 	});
 
-Route::get('/assets/{filename}', function (string $filename) {
-	return Storage::disk('s3-assets')->response($filename);
-});
+Route::get('/assets/{filename}',
+	fn (string $filename) => Storage::disk('s3-assets')
+		->response($filename)
+)->name('assets');
 
 Route::get('/image/{image}',
 	fn (Image $image) => Storage::disk($image->disk)
