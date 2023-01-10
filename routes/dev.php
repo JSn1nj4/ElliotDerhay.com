@@ -41,8 +41,9 @@ Route::get('/assets/{filename}', function (string $filename) {
 	return Storage::disk('s3-assets')->response($filename);
 });
 
-Route::get('/image/{image}', function (Image $image) {
-	return Storage::disk('s3-uploads')->response($image->path);
-})->name('s3-image');
+Route::get('/image/{image}',
+	fn (Image $image) => Storage::disk($image->disk)
+		->response($image->path)
+)->name('image');
 
 require __DIR__.'/auth.php';
