@@ -41,6 +41,15 @@ class StoreImageJob implements ShouldQueue
 		);
 	}
 
+	public function attach(Image $image): void
+	{
+		if ($this->relation->images->contains($image->id)) {
+			$this->relation->images()->detach($image->id);
+		}
+
+		$this->relation->images()->attach($image->id);
+	}
+
 	public function getImage(): Image
 	{
 		$image = Image::whereFileHash($this->hash)->first();
@@ -80,8 +89,8 @@ class StoreImageJob implements ShouldQueue
     {
 		$image = $this->getImage();
 
-		$this->relation
-			?->images()
-			->attach($image->id);
+		if ($this->relation === null) return;
+
+		$this->attach($image);
     }
 }
