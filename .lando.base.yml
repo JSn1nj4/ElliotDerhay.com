@@ -30,8 +30,6 @@ services:
       - '24690:24690'
       - '24691:24691'
       - '24692:24692'
-  database:
-    portforward: 49208
   mail:
     type: mailhog
     ssl: true
