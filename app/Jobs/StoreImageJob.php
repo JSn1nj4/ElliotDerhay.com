@@ -29,6 +29,7 @@ class StoreImageJob implements ShouldQueue
 		public readonly ?ImageableContract $relation = null,
 		public readonly string $collection = 'images',
 		public readonly string $temp_disk = "temp",
+		public readonly string $perm_disk = "s3-uploads",
 	) {
 		$this->name = $file->hashName();
 		$this->original_name = $file->getClientOriginalName();
@@ -85,12 +86,14 @@ class StoreImageJob implements ShouldQueue
 		return $path;
 	}
 
-    public function handle()
+    public function handle(): void
     {
 		$image = $this->getImage();
 
 		if ($this->relation === null) return;
 
 		$this->attach($image);
+
+		TransferImageJob::dispatch($image->id, $this->perm_disk);
     }
 }

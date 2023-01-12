@@ -29,7 +29,7 @@ class PostsController extends Controller
 	{
 		$post = Post::create($request->safe()->except('cover_image'));
 
-		$this->dispatchIf(
+		$this->dispatchSyncIf(
 			$request->hasFile('cover_image'),
 			new StoreImageJob($request->file('cover_image'), $post),
 		);
@@ -53,7 +53,7 @@ class PostsController extends Controller
 	{
 		$post->update($request->safe()->except('cover_image'));
 
-		$this->dispatchIf(
+		$this->dispatchSyncIf(
 			$request->hasFile('cover_image'),
 			new StoreImageJob($request->file('cover_image'), $post),
 		);

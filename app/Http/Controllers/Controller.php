@@ -16,4 +16,9 @@ class Controller extends BaseController
 	{
 		return $condition ? $this->dispatch($job) : false;
 	}
+
+	public function dispatchSyncIf(bool $condition, ShouldQueue $job)
+	{
+		return $condition ? $this->dispatchSync($job) : false;
+	}
 }
