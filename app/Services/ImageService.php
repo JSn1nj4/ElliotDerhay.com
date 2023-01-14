@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-use App\Models\Image;
 use App\Traits\MakesSelf;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
@@ -11,16 +10,16 @@ class ImageService
 {
 	use MakesSelf;
 
-	public function url(Image $image): string
+	public function url(string $path, string $disk): string
 	{
-		return Cache::rememberForever($image->path, function () use ($image) {
-			if (!Storage::disk('public-cache')->exists($image->path)) {
+		return Cache::rememberForever($path, function () use ($path, $disk) {
+			if (!Storage::disk('public-cache')->exists($path)) {
 				Storage::disk('public-cache')
-					->writeStream($image->path, Storage::disk($image->disk)
-						->readStream($image->path));
+					->writeStream($path, Storage::disk($disk)
+						->readStream($path));
 			}
 
-			return Storage::disk('public-cache')->url($image->path);
+			return Storage::disk('public-cache')->url($path);
 		});
 	}
 }

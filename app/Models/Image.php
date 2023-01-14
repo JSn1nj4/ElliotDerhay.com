@@ -73,6 +73,9 @@ class Image extends Model
 
 	public function url(): Attribute
 	{
-		return Attribute::get(fn () => ImageService::make()->url($this));
+		return Attribute::get(fn () => ImageService::make()->url(
+			path: $this->path,
+			disk: $this->disk,
+		));
 	}
 }
