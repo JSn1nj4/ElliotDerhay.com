@@ -47,6 +47,12 @@ return [
 			'visibility' => 'public',
 		],
 
+		'public-cache' => [
+			'driver' => 'scoped',
+			'disk' => 'public',
+			'prefix' => 'cache',
+		],
+
 		'temp' => [
 			'driver' => 'scoped',
 			'disk' => 'local',

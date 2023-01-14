@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
+use App\Services\ImageService;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
-use Storage;
 
 /**
  * App\Models\Image
@@ -73,6 +73,6 @@ class Image extends Model
 
 	public function url(): Attribute
 	{
-		return Attribute::get(fn () => route('image', ['image' => $this]));
+		return Attribute::get(fn () => ImageService::make()->url($this));
 	}
 }
