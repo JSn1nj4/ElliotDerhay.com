@@ -6,7 +6,7 @@
 			@if($project->image)
 			<x-card.thumbnail
 				:href="$project->demo_link ?? $project->link"
-				:src="$project->image->path"
+				:src="$project->image->url"
 				:target="$project->demo_link ? '_self' : '_blank'"/>
 			@endunless
 
