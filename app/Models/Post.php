@@ -21,7 +21,7 @@ use Illuminate\Pagination\AbstractPaginator;
  * @property string $slug
  * @property string $body
  * @property string $excerpt
- * @property string $cover_image
+ * @property Image|null $image
  * @property Category[] $categories
  * @property Tag[] $tags
  * @property Carbon $created_at

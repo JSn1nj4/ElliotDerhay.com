@@ -18,7 +18,6 @@ class CreateProjectsTable extends Migration
 			$table->string('name');
 			$table->string('link');
 			$table->string('demo_link')->nullable();
-			$table->string('thumbnail');
 			$table->string('short_desc');
 			$table->timestamps();
 		});
