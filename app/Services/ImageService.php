@@ -17,15 +17,6 @@ class ImageService
 		return self::make()->url($filename, 's3-assets');
 	}
 
-	// public static function assetResponse(string $filename): string
-	// {
-	// 	return Cache::rememberForever("assets.{$filename}", function() use ($filename) {
-	// 		self::ensureCached($filename, 's3-assets');
-	//
-	// 		return Storage::disk('public-cache')->url($filename);
-	// 	});
-	// }
-
 	private static function ensureCached(string $path, string $disk): void
 	{
 		if (!Storage::disk('public-cache')->exists($path)) {

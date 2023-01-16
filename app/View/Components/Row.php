@@ -12,10 +12,11 @@ class Row extends Component
      * @return void
      */
     public function __construct(
-			public ?string $id = null,
-			public string $class = '',
-			public ?string $flexClass = 'md:flex',
-			public ?string $overlayClasses = null,
+		public ?string $id = null,
+		public string $class = '',
+		public ?string $flexClass = 'md:flex',
+		public ?string $overlayClasses = null,
+		public ?string $backgroundImage = null,
 	) {}
 
     /**

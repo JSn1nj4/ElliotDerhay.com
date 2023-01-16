@@ -1,4 +1,4 @@
-<section {{ isset($id) ? "id={$id}" : "" }} class="relative {{ $class }}">
+<section {{ isset($id) ? "id={$id}" : "" }} class="relative {{ $class }}" style="background-image: url('{{ $backgroundImage }}')">
 	@if ($overlayClasses)
 		<div class="absolute block w-full h-full t-0 l-0 z-0 {{ $overlayClasses }}"></div>
 	@endif

@@ -175,13 +175,6 @@ module.exports = {
 			asterisk: "* ",
 			at: "@ "
 		},
-
-		extend: {
-			backgroundImage: theme => ({
-				"laptop":
-					'url("https://s3.amazonaws.com/elliotderhay-com/banners/pexels-lukas-574073-scaled.jpg")',
-			})
-		}
 	},
 
 	darkMode: "class"
