@@ -50,15 +50,16 @@ class StoreImageJob implements ShouldQueue
 		$this->relation->images()->attach($image->id);
 	}
 
+	public function deleteTempFile(): void
+	{
+		Storage::disk($this->temp_disk)->delete($this->temp_path);
+	}
+
 	public function getImage(): Image
 	{
 		$image = Image::whereFileHash($this->hash)->first();
 
-		if ($image !== null) {
-			Storage::disk($this->temp_disk)->delete($this->temp_path);
-
-			return $image;
-		}
+		if ($image !== null) return $image;
 
 		return Image::create([
 			'name' => "{$this->name}",
@@ -70,6 +71,19 @@ class StoreImageJob implements ShouldQueue
 			'size' => $this->size,
 			'collection' => $this->collection,
 		]);
+	}
+
+	public function handle(): void
+	{
+		$image = $this->getImage();
+
+		if ($this->relation === null) return;
+
+		$this->attach($image);
+
+		$this->deleteTempFile();
+
+		TransferImageJob::dispatch($image->id, config('app.uploads.disk'));
 	}
 
 	public function moveToPublic(): string
@@ -84,15 +98,4 @@ class StoreImageJob implements ShouldQueue
 
 		return $path;
 	}
-
-    public function handle(): void
-    {
-		$image = $this->getImage();
-
-		if ($this->relation === null) return;
-
-		$this->attach($image);
-
-		TransferImageJob::dispatch($image->id, config('app.uploads.disk'));
-    }
 }
