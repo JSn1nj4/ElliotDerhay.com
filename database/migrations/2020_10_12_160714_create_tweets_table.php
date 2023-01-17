@@ -15,7 +15,7 @@ class CreateTweetsTable extends Migration
 	{
 		Schema::create('tweets', function (Blueprint $table) {
 			$table->id();
-			$table->bigInteger('user_id');
+			$table->foreignIdFor(\App\Models\TwitterUser::class);
 			$table->text('body');
 			$table->timestamp('date');
 			$table->integer('sub_tweet_id')->nullable();

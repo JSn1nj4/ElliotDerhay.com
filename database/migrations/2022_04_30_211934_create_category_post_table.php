@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('category_post', function (Blueprint $table) {
             $table->id();
-			$table->integer('category_id')->unsigned();
-			$table->integer('post_id')->unsigned();
+			$table->foreignId(\App\Models\Category::class);
+			$table->foreignId(\App\Models\Post::class);
             $table->timestamps();
         });
     }
