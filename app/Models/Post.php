@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use App\Contracts\ImageableContract;
 use App\Enums\PerPage;
+use App\Traits\Imageable;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -19,7 +21,7 @@ use Illuminate\Pagination\AbstractPaginator;
  * @property string $slug
  * @property string $body
  * @property string $excerpt
- * @property string $cover_image
+ * @property Image|null $image
  * @property Category[] $categories
  * @property Tag[] $tags
  * @property Carbon $created_at
@@ -38,14 +40,19 @@ use Illuminate\Pagination\AbstractPaginator;
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Image[] $images
+ * @property-read int|null $images_count
  */
-class Post extends Model
+class Post extends ImageableModel
 {
     use HasFactory;
 
+	/**
+	 * @var string[]
+	 * inline type when allowed
+	 */
 	public $fillable = [
 		'body',
-		'cover_image',
 		'slug',
 		'title',
 	];

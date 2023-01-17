@@ -9,10 +9,10 @@
 @section('blog')
   @foreach($posts as $post)
 		<x-card.wrapper size="none" padding="p-0" margin="mb-12 last:mb-0">
-			@isset($post->cover_image)
+			@if($post->image)
 				<x-card.thumbnail
 					href="{{ route('blog.show', compact('post')) }}"
-					src="{{ $post->cover_image }}"
+					src="{{ $post->image->url }}"
 				/>
 			@endif
 			<div class="p-4">

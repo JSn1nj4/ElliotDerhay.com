@@ -1,6 +1,7 @@
 @extends('admin.layouts.project-edit', [
     'action' => action([\App\Http\Controllers\ProjectsController::class, 'store']),
     'errors' => $errors,
+    'image' => null,
     'fields' => (object) [
         'thumbnail' => old('thumbnail'),
         'name' => old('name'),

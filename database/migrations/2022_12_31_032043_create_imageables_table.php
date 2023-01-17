@@ -13,13 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('posts', function (Blueprint $table) {
-            $table->id();
-			$table->tinyText('title');
-			$table->tinyText('slug');
-			$table->longText('body');
-            $table->timestamps();
-        });
+        Schema::create('imageables', function (Blueprint $table) {
+			$table->id();
+			$table->foreignId('image_id');
+			$table->unsignedBigInteger('imageable_id');
+			$table->string('imageable_type');
+			$table->timestamps();
+		});
     }
 
     /**
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('posts');
+        //
     }
 };

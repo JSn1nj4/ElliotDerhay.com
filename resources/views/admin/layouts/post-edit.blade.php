@@ -4,12 +4,14 @@
 @section('content')
 	<x-row flex-class="md:flex flex-col gap-6">
 		<x-column class="block w-full">
-			<form id="save_post" method="post" action="{{ $action }}">
+			<form id="save_post" method="post" action="{{ $action }}" enctype="multipart/form-data">
 				@csrf
 				@yield('method')
 
-				<div class="absolute hidden -z-50">
-					<input type="hidden" value="-" name="cover_image">
+				<div class="flex flex-col mb-6 gap-2">
+					<p><label for="cover_image" class="text-3xl">Cover Image</label></p>
+					@if($image) <p><img src="{{ $image->url }}" class="max-w-md"></p> @endif
+					<p><input type="file" id="cover_image" name="cover_image" value="{{ $fields->cover_image }}"></p>
 				</div>
 
 				<x-admin.forms.field label="Post Title" field="title" :errors="$errors" large value="{{ $fields->title }}" />

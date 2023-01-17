@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
+use App\Jobs\StoreImageJob;
 use App\Models\Project;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -26,7 +27,13 @@ class ProjectsController extends Controller
 
     public function store(StoreProjectRequest $request): Response|RedirectResponse
     {
-		$project = Project::create($request->validated());
+		$project = Project::create($request->safe()
+			->except('thumbnail'));
+
+		$this->dispatchIf(
+			$request->hasFile('thumbnail'),
+			new StoreImageJob($request->file('thumbnail'), $project),
+		);
 
 		session()->flash('success', 'Project published!');
 
@@ -45,7 +52,12 @@ class ProjectsController extends Controller
 
     public function update(UpdateProjectRequest $request, Project $project): Response|RedirectResponse
     {
-        $project->update($request->validated());
+		$project->update($request->safe()->except('thumbnail'));
+
+		$this->dispatchIf(
+			$request->hasFile('thumbnail'),
+			new StoreImageJob($request->file('thumbnail'), $project),
+		);
 
 		return back()->with('success', 'Project updated!');
     }

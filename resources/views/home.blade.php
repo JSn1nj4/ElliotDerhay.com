@@ -2,9 +2,9 @@
 
 @section('content')
 
-	<x-row class="bg-laptop" id="about" overlay-classes="bg-sea-green-100 bg-opacity-50 dark:bg-sea-green-800 dark:bg-opacity-75">
+	<x-row id="about" overlay-classes="bg-sea-green-100 bg-opacity-50 dark:bg-sea-green-800 dark:bg-opacity-75" background-image="{{ asset_url('pexels-lukas-574073-scaled.jpg') }}">
 		<x-column class="flex md:order-2 md:w-1/2 lg:w-5/12 xl:w-1/3">
-			<img src="https://s3.amazonaws.com/elliotderhay-com/Elliot.Color2-hd-v2-square.jpg" title="Elliot Derhay" alt="Photo of Elliot Derhay" class="border-black dark:border-white border-2 border-opacity-40 rounded-full">
+			<img src="{{ asset_url("Elliot.Color2-hd-v2-square.jpg") }}" title="Elliot Derhay" alt="Photo of Elliot Derhay" class="border-black dark:border-white border-2 border-opacity-40 rounded-full">
 		</x-column>
 
 		<x-column class="md:order-1 md:w-1/2 lg:w-7/12 xl:w-2/3">

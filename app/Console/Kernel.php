@@ -7,8 +7,11 @@ use App\Console\Commands\GithubUserUpdateCommand;
 use App\Console\Commands\TokenPruneCommand;
 use App\Console\Commands\TweetPullCommand;
 use App\Console\Commands\TwitterUserUpdateCommand;
+use App\Jobs\CleanTempStorageJob;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Illuminate\Queue\Console\WorkCommand;
+use Illuminate\Queue\Queue;
 
 class Kernel extends ConsoleKernel
 {
@@ -34,6 +37,8 @@ class Kernel extends ConsoleKernel
 		$schedule->command(TokenPruneCommand::class)->daily();
 		$schedule->command(TweetPullCommand::class)->hourly();
 		$schedule->command(TwitterUserUpdateCommand::class)->weekly();
+		$schedule->job(CleanTempStorageJob::class)->weekly();
+		$schedule->command(WorkCommand::class, ['--stop-when-empty'])->daily();
 	}
 
 	/**

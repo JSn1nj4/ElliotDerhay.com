@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
+use App\Jobs\StoreImageJob;
 use App\Models\Post;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -26,7 +27,12 @@ class PostsController extends Controller
 
 	public function store(StorePostRequest $request): Response|RedirectResponse
 	{
-		$post = Post::create($request->validated());
+		$post = Post::create($request->safe()->except('cover_image'));
+
+		$this->dispatchIf(
+			$request->hasFile('cover_image'),
+			new StoreImageJob($request->file('cover_image'), $post),
+		);
 
 		session()->flash('success', 'Post published!');
 
@@ -45,7 +51,12 @@ class PostsController extends Controller
 
 	public function update(UpdatePostRequest $request, Post $post): Response|RedirectResponse
 	{
-		$post->update($request->validated());
+		$post->update($request->safe()->except('cover_image'));
+
+		$this->dispatchIf(
+			$request->hasFile('cover_image'),
+			new StoreImageJob($request->file('cover_image'), $post),
+		);
 
 		return back()->with('success', 'Post updated!');
 	}

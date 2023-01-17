@@ -7,6 +7,8 @@ use App\Http\Controllers\PostsController;
 use App\Http\Controllers\ProjectsController;
 use App\Http\Controllers\ProjectsPortfolioController;
 use App\Http\Controllers\RunCommandController;
+use App\Models\Image;
+use App\Services\ImageService;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/projects', [ProjectsPortfolioController::class, 'index'])->name('portfolio');
@@ -35,5 +37,10 @@ Route::prefix('/dashboard')
 
 		Route::post('command-run', [RunCommandController::class, 'store'])->name('command-run.store');
 	});
+
+// This is not working
+// Route::get('/assets/{filename}', function (string $filename) {
+// 	return ImageService::assetResponse($filename);
+// });
 
 require __DIR__.'/auth.php';

@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rules\File;
 
 class UpdatePostRequest extends FormRequest
 {
@@ -28,7 +29,7 @@ class UpdatePostRequest extends FormRequest
 	public function rules()
 	{
 		return [
-			'cover_image' => 'string',
+			'cover_image' => File::image()->max(5 * 1024),
 			'title' => [
 				'required',
 				'max:180',
