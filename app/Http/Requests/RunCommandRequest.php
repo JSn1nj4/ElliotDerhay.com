@@ -2,9 +2,9 @@
 
 namespace App\Http\Requests;
 
-use App\Models\User;
 use App\Rules\CommandAllowed;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
 
 class RunCommandRequest extends FormRequest
 {
@@ -20,7 +20,7 @@ class RunCommandRequest extends FormRequest
 
     public function authorize(): bool
     {
-		return User::whereId(\Auth::id())->exists();
+		return Gate::has('admin');
     }
 
 	public function messages(): array

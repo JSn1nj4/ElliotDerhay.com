@@ -2,21 +2,16 @@
 
 namespace App\Http\Requests;
 
-use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rules\File;
 
 class StorePostRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
     public function authorize(): bool
     {
-        return User::whereId(\Auth::id())->exists();
+        return Gate::has('admin');
     }
 
 	public function prepareForValidation(): void
@@ -26,11 +21,6 @@ class StorePostRequest extends FormRequest
 		]);
 	}
 
-	/**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, mixed>
-     */
     public function rules(): array
     {
         return [

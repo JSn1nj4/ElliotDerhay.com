@@ -2,14 +2,14 @@
 
 namespace App\Http\Requests;
 
-use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
 
 class StoreCommandRequest extends FormRequest
 {
     public function authorize(): bool
     {
-		return User::whereId(\Auth::id())->exists();
+		return Gate::has('admin');
     }
 
     public function rules(): array
