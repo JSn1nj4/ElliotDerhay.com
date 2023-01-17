@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Contracts\Queue\ShouldQueue;
+use App\Jobs\BaseQueueableJob;
+use App\Jobs\BaseSyncJob;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -12,12 +13,12 @@ class Controller extends BaseController
 {
 	use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-	public function dispatchIf(bool $condition, ShouldQueue $job)
+	public function dispatchIf(bool $condition, BaseQueueableJob|BaseSyncJob $job)
 	{
 		return $condition ? $this->dispatch($job) : false;
 	}
 
-	public function dispatchSyncIf(bool $condition, ShouldQueue $job)
+	public function dispatchSyncIf(bool $condition, BaseQueueableJob|BaseSyncJob $job)
 	{
 		return $condition ? $this->dispatchSync($job) : false;
 	}

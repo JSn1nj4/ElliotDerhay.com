@@ -4,19 +4,11 @@ namespace App\Jobs;
 
 use App\Contracts\ImageableContract;
 use App\Models\Image;
-use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldBeUnique;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Http\UploadedFile;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Storage;
 
-class StoreImageJob implements ShouldQueue
+class StoreImageJob extends BaseSyncJob
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
-
 	public readonly string $hash;
 	public readonly string $original_name;
 	public readonly string $mime_type;

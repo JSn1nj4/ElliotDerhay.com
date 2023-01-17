@@ -30,7 +30,7 @@ class ProjectsController extends Controller
 		$project = Project::create($request->safe()
 			->except('thumbnail'));
 
-		$this->dispatchSyncIf(
+		$this->dispatchIf(
 			$request->hasFile('thumbnail'),
 			new StoreImageJob($request->file('thumbnail'), $project),
 		);
@@ -54,7 +54,7 @@ class ProjectsController extends Controller
     {
 		$project->update($request->safe()->except('thumbnail'));
 
-		$this->dispatchSyncIf(
+		$this->dispatchIf(
 			$request->hasFile('thumbnail'),
 			new StoreImageJob($request->file('thumbnail'), $project),
 		);

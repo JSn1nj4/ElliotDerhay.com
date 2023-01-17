@@ -3,19 +3,10 @@
 namespace App\Jobs;
 
 use App\Models\Image;
-use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldBeUnique;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Foundation\Bus\Dispatchable;
-use Illuminate\Queue\Events\JobFailed;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Storage;
 
-class TransferImageJob implements ShouldQueue
+class TransferImageJob extends BaseQueueableJob
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
-
     public function __construct(
 		public int $image_id,
 		public string $new_disk,
