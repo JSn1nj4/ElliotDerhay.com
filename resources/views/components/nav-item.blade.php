@@ -1,6 +1,6 @@
 <a href="{{ $href }}"	{{ $attributes->class([
 	'block',
-	'lg:inline-block',
+	'lg:inline-block' => $inline,
 	'px-4',
 	'py-6',
 	'uppercase',

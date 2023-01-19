@@ -20,6 +20,7 @@ class NavItem extends Component
 		public string $route,
 		public ?string $icon = null,
 		public ?string $scrollTo = null,
+		public readonly bool $inline = false,
 	)
     {
 		$this->href = route($route, absolute: false) . ($scrollTo ? "#{$scrollTo}" : "");
