@@ -8,12 +8,12 @@
 
 	@component('partials.header')
 		<x-nav>
-			<x-nav-item route="home" icon="fas fa-home">Home</x-nav-item>
+			<x-nav-item route="home" icon="fas fa-home" inline>Home</x-nav-item>
 			@if(config('app.enable-blog'))
-				<x-nav-item route="blog">Blog</x-nav-item>
+				<x-nav-item route="blog" inline>Blog</x-nav-item>
 			@endif
 			@if(config('app.enable-projects'))
-				<x-nav-item route="portfolio">Projects</x-nav-item>
+				<x-nav-item route="portfolio" inline>Projects</x-nav-item>
 			@endif
 		</x-nav>
 	@endcomponent
