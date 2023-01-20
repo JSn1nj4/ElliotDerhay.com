@@ -17,6 +17,7 @@ class Row extends Component
 		public ?string $flexClass = 'md:flex',
 		public ?string $overlayClasses = null,
 		public ?string $backgroundImage = null,
+		public readonly bool $contained = true
 	) {}
 
     /**

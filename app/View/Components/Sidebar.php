@@ -11,7 +11,9 @@ class Sidebar extends Component
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(
+		public readonly string $widthClasses = 'lg:w-1/3'
+	)
     {
         //
     }
