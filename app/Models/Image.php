@@ -2,11 +2,14 @@
 
 namespace App\Models;
 
+use App\Enums\PerPage;
 use App\Services\ImageService;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Illuminate\Http\Request;
+use Illuminate\Pagination\AbstractPaginator;
 
 /**
  * App\Models\Image
@@ -61,6 +64,15 @@ class Image extends Model
 		'size',
 		'collection',
 	];
+
+	public static function index(Request $request): AbstractPaginator
+	{
+		return self::latest()
+			->paginate(PerPage::filter(
+				optional($request)->per_page ?? 30
+			))
+			->withQueryString();
+	}
 
 	public function posts(): MorphToMany
 	{

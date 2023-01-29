@@ -3,12 +3,11 @@
 use App\Http\Controllers\BlogPostsController;
 use App\Http\Controllers\CommandController;
 use App\Http\Controllers\CommandEventController;
+use App\Http\Controllers\ImageController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\ProjectsController;
 use App\Http\Controllers\ProjectsPortfolioController;
 use App\Http\Controllers\RunCommandController;
-use App\Models\Image;
-use App\Services\ImageService;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/projects', [ProjectsPortfolioController::class, 'index'])->name('portfolio');
@@ -29,13 +28,18 @@ Route::prefix('/dashboard')
 	->middleware(['auth', 'verified'])
 	->group(function() {
 		Route::view('/', 'admin.dashboard')->name('dashboard');
-		Route::resource('posts', PostsController::class);
-		Route::resource('projects', ProjectsController::class);
+
 		Route::resource('commands', CommandController::class);
 
 		Route::get('command-log', [CommandEventController::class, 'index'])->name('command-events.index');
 
 		Route::post('command-run', [RunCommandController::class, 'store'])->name('command-run.store');
+
+		Route::get('images', [ImageController::class, 'index'])->name('images.index');
+
+		Route::resource('posts', PostsController::class);
+
+		Route::resource('projects', ProjectsController::class);
 	});
 
 // This is not working

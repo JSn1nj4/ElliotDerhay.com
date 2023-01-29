@@ -19,6 +19,7 @@
 						<x-nav-item route="dashboard">Dashboard</x-nav-item>
 						<x-nav-item route="posts.index">Posts</x-nav-item>
 						<x-nav-item route="projects.index">Projects</x-nav-item>
+						<x-nav-item route="images.index">Image Manager</x-nav-item>
 						<x-nav-item route="commands.index">Commands</x-nav-item>
 						<x-nav-item route="command-events.index">Command Log</x-nav-item>
 					</div>
