@@ -36,6 +36,8 @@ Route::prefix('/dashboard')
 		Route::post('command-run', [RunCommandController::class, 'store'])->name('command-run.store');
 
 		Route::get('images', [ImageController::class, 'index'])->name('images.index');
+		Route::get('images/{image}', [ImageController::class, 'show'])->name('images.show');
+		Route::delete('images', [ImageController::class, 'destroy'])->name('images.destroy');
 
 		Route::resource('posts', PostsController::class);
 

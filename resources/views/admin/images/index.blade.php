@@ -26,7 +26,7 @@ use App\View\Components\Ui\Enums\LinkStyle
 			@foreach($chunk as $image)
 				<x-column class="w-1/5">
 					<x-card.wrapper>
-						<x-card.thumbnail src="{{ $image->url }}" />
+						<x-card.thumbnail src="{{ $image->url }}" href="{{ route('images.show', compact('image')) }}" />
 					</x-card.wrapper>
 				</x-column>
 			@endforeach
