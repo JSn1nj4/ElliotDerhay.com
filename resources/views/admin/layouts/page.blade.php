@@ -3,7 +3,9 @@
 @section('body')
 	@component('partials.header')
 		<x-nav>
-			<x-nav-item route="logout" inline icon="fas fa-sign-out-alt" onclick="event.preventDefault(); document.querySelector('#logout').submit();">Log Out</x-nav-item>
+			<x-nav-item route="logout" inline icon="fas fa-sign-out-alt"
+									onclick="event.preventDefault(); document.querySelector('#logout').submit();">Log Out
+			</x-nav-item>
 		</x-nav>
 
 		<form id="logout" method="POST" action="{{ route('logout') }}" class="-z-50 absolute top-0 left-0">
@@ -28,6 +30,8 @@
 		</x-sidebar>
 
 		<x-column class="w-full md:w-2/3 lg:w-3/4 xl:w-4/5 border-l-2 border-gray-400 dark:border-gray-800">
+			@include('partials.session.banner')
+
 			@yield('content')
 		</x-column>
 	</main>

@@ -1,46 +1,64 @@
-@php /** @var App\Models\Image $image */ @endphp
+@php
+/**
+ * @var App\Models\Image $image
+ * @var App\Models\Post $post
+ * @var App\Models\Project $project
+ */
+@endphp
 @extends('admin.layouts.page')
 
 @section('content')
-	<x-row flex-class="md:flex flex-col gap-6">
-		<x-column class="block w-full">
+	<x-row flex-class="md:flex flex-row gap-6">
+		<x-column class="w-2/3">
 			<img src="{{ $image->url }}" class="block rounded-lg" alt="">
-
-			<div class="flex flex-row pt-3 mt-2 gap-4">
-				<p>Created {{ $image->created_at->toFormattedDateString() }}</p>
+		</x-column>
+		<x-column class="w-1/3">
+			<div class="mb-4 mt-3 max-w-full rounded-lg w-full bg-gray-800">
+				<div class="bg-sea-green-800/20 even:bg-sea-green-800/10 p-6 text-xl overflow-hidden overflow-ellipsis">
+					<strong>Name:</strong><br>
+					{{ $image->name }}
+				</div>
+				<div class="bg-sea-green-800/20 even:bg-sea-green-800/10 p-6 text-xl">
+					<strong>Created at:</strong>
+					{{ $image->created_at->toFormattedDateString() }}
+				</div>
 				@unless($image->created_at->unix() === $image->updated_at->unix())
-					<p class="flex-grow-1">Last Updated {{ $image->updated_at->toFormattedDateString() }}</p>
+				<div class="bg-sea-green-800/20 even:bg-sea-green-800/10 p-6 text-xl">
+					<strong>Last Updated:</strong>
+					{{ $image->updated_at->toFormattedDateString() }}
+				</div>
 				@endunless
-			</div>
+				<div class="bg-sea-green-800/20 even:bg-sea-green-800/10 p-6 text-xl">
+					<strong>Storage Location:</strong>
+					{{ $image->disk }}
+				</div>
+				<div class="bg-sea-green-800/20 even:bg-sea-green-800/10 p-6 text-xl">
+					<strong>Size:</strong>
+					{{ $image->size }} bytes
+				</div>
+				<div class="bg-sea-green-800/20 even:bg-sea-green-800/10 p-6 text-xl">
+					<strong>Attached to:</strong><br>
+					@if($image->posts->isNotEmpty())
+						<p class="pt-6">Posts:</p>
+						<ul class="pl-6">
+							@foreach($image->posts as $post)
+								<li>{{ $post->title }}</li>
+							@endforeach
+						</ul>
+					@endif
 
-			<h1 class="content-title text-4xl pt-2 mt-1">{{ $image->name }}</h1>
-
-			<div class="mb-4 mt-3">
-				<x-ui.table.wrapper>
-					<x-ui.table.body>
-						<x-ui.table.row class="bg-sea-green-800/20 even:bg-sea-green-800/10">
-							<x-ui.table.heading>Storage Location:</x-ui.table.heading>
-							<x-ui.table.data>{{ $image->disk }}</x-ui.table.data>
-						</x-ui.table.row>
-						<x-ui.table.row class="bg-sea-green-800/20 even:bg-sea-green-800/10">
-							<x-ui.table.heading>Size:</x-ui.table.heading>
-							<x-ui.table.data>{{ $image->size }} bytes</a></x-ui.table.data>
-						</x-ui.table.row>
-					</x-ui.table.body>
-				</x-ui.table.wrapper>
+					@if($image->projects->isNotEmpty())
+						<p class="pt-6">Projects:</p>
+						<ul class="pl-6">
+							@foreach($image->projects as $project)
+								<li>{{ $project->name }}</li>
+							@endforeach
+						</ul>
+					@endif
+				</div>
 			</div>
 
 			<div class="flex flex-row mt-6 gap-6 justify-end">
-				@if(session()->has('error'))
-					<div class="block p-3 bg-red-900 border border-red-100 text-red-100 rounded flex-grow">
-						{{ session('error') }}
-					</div>
-				@elseif(session()->has('success'))
-					<div class="block p-3 bg-green-900 border border-green-200 text-green-200 rounded flex-grow">
-						{{ session('success') }}
-					</div>
-				@endif
-
 				<div class="block">
 					<div class="flex gap-2">
 						<x-ui.form.button
