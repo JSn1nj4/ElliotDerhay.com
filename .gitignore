@@ -15,10 +15,10 @@ npm-debug.log
 yarn-error.log
 
 # Custom configs
-/.config/*
-!/.config/*-example
 /.vscode/*
 !/.vscode/*-example
+/config/local/*
+!/config/local/*-example
 .lando.local.yml
 
 # Public directory files

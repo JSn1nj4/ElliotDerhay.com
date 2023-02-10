@@ -21,10 +21,10 @@ services:
     run_as_root:
       - service cron start
     run:
-      - crontab /app/.config/cron
+      - crontab /app/config/local/cron
     xdebug: true
     config:
-      php: .config/php.ini
+      php: config/local/php.ini
     ssl: true
     ports:
       - '24690:24690'
