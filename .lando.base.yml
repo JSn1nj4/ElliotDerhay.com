@@ -24,7 +24,7 @@ services:
       - crontab /app/config/local/cron
     xdebug: true
     config:
-      php: config/local/php.ini
+      php: /app/config/local/php.ini
     ssl: true
     ports:
       - '24690:24690'
