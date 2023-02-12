@@ -4,7 +4,7 @@
 @section('content')
 	<x-row flex-class="md:flex flex-col gap-6">
 		<x-column class="block w-full">
-			<img src="{{ $post->cover_image }}" class="block rounded-lg" alt="">
+			<img src="{{ $post->image->url }}" class="block rounded-lg" alt="">
 
 			<div class="flex flex-row pt-3 mt-2 gap-4">
 				<p>Posted {{ $post->created_at->toFormattedDateString() }}</p>
