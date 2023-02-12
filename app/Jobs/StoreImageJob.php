@@ -35,11 +35,7 @@ class StoreImageJob extends BaseSyncJob
 
 	public function attach(Image $image): void
 	{
-		if ($this->relation->images->contains($image->id)) {
-			$this->relation->images()->detach($image->id);
-		}
-
-		$this->relation->images()->attach($image->id);
+		$this->relation->images()->sync([$image->id]);
 	}
 
 	public function deleteTempFile(): void

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\PerPage;
 use App\Services\ImageService;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -83,7 +84,7 @@ class Image extends Model
 	{
 		return $this->morphedByMany(Project::class, 'imageable');
 	}
-
+	
 	public function url(): Attribute
 	{
 		return Attribute::get(fn () => image_url($this->path, $this->disk));
