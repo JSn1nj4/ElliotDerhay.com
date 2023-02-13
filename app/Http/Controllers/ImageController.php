@@ -24,6 +24,17 @@ class ImageController extends Controller
 
 	public function destroy(Image $image): Response|RedirectResponse
 	{
-		return back()->with('error', 'cannot delete image');
+		$image = $image->newQuery()
+			->withCount(['posts', 'projects'])
+			->find($image->id);
+
+		if ($image->posts_count + $image->projects_count > 0) return back()
+			->with('error', 'cannot delete image');
+
+		$image->delete();
+
+		return redirect()
+			->route('images.index')
+			->with('success', 'Image deleted!');
 	}
 }
