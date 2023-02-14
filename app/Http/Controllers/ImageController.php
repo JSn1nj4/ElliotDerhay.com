@@ -29,7 +29,7 @@ class ImageController extends Controller
 			->find($image->id);
 
 		if ($image->posts_count + $image->projects_count > 0) return back()
-			->with('error', 'cannot delete image');
+			->with('error', 'Image cannot be deleted. Detach it from items it is currently attached to first.');
 
 		$image->delete();
 
