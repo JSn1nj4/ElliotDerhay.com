@@ -22,7 +22,6 @@ class ProjectFactory extends Factory
 			'name' => $this->faker->name,
 			'link' => $this->faker->unique()->url,
 			'demo_link' => $demo_url,
-			'thumbnail' => $this->faker->imageUrl(600, 338, 'cats'),
 			'short_desc' => implode(' ', $this->faker->words())
 		];
     }

@@ -19,7 +19,6 @@ class PostFactory extends Factory
 		$data = [
 			'title' => $this->faker->realText(60),
 			'body' => $this->faker->realText(500),
-			'cover_image' => $this->faker->imageUrl(1920, 900),
 		];
 
 		$data['slug'] = str($data['title'])->slug();
