@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('post_tag', function (Blueprint $table) {
             $table->id();
-			$table->foreignId(\App\Models\Post::class);
-			$table->foreignId(\App\Models\Tag::class);
+			$table->foreignIdFor(\App\Models\Post::class, 'post_id');
+			$table->foreignIdFor(\App\Models\Tag::class, 'tag_id');
             $table->timestamps();
         });
     }
