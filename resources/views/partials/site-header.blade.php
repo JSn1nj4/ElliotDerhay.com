@@ -27,9 +27,9 @@
 			@foreach ($menuItems as $key => $item)
 				<a href="{{ route($item->name, [], false) }}"
 				class="block lg:inline-block px-4 py-6 uppercase{{ Route::currentRouteName() === $item->name ? ' active' : '' }}">
-					@if(isset($item->icon))
+					@isset($item->icon)
 						<i class="{{$item->icon}}"></i>
-					@endif
+					@endisset
 					{{ $item->label }}
 				</a>
 			@endforeach
