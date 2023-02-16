@@ -42,9 +42,4 @@ Route::prefix('/dashboard')
 		Route::resource('projects', ProjectsController::class);
 	});
 
-// This is not working
-// Route::get('/assets/{filename}', function (string $filename) {
-// 	return ImageService::assetResponse($filename);
-// });
-
 require __DIR__.'/auth.php';
