@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Contracts\ImageableContract;
 use App\Enums\PerPage;
 use App\Traits\Imageable;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -57,9 +58,9 @@ class Post extends ImageableModel
 		'title',
 	];
 
-	public function categories(): BelongsToMany
+	public function categories(): MorphToMany
 	{
-		return $this->belongsToMany(Category::class);
+		return $this->morphToMany(Category::class, 'categorizeable');
 	}
 
 	public function excerpt(): Attribute
@@ -67,9 +68,9 @@ class Post extends ImageableModel
 		return Attribute::get(fn () => str($this->body)->words(20));
 	}
 
-	public function tags(): BelongsToMany
+	public function tags(): MorphToMany
 	{
-		return $this->belongsToMany(Tag::class);
+		return $this->morphToMany(Tag::class, 'taggable');
 	}
 
 	/**

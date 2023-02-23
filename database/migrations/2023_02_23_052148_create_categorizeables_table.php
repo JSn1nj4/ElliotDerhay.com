@@ -13,10 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('category_post', function (Blueprint $table) {
+        Schema::create('categorizeables', function (Blueprint $table) {
             $table->id();
 			$table->foreignIdFor(\App\Models\Category::class, 'category_id');
-			$table->foreignIdFor(\App\Models\Post::class, 'post_id');
+			$table->unsignedBigInteger('categorizeable_id');
+			$table->string('categorizeable_type');
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('category_post');
+        Schema::dropIfExists('categorizeables');
     }
 };
