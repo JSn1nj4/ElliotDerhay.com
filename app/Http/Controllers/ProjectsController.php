@@ -30,9 +30,10 @@ class ProjectsController extends Controller
 		$project = Project::create($request->safe()
 			->except('thumbnail'));
 
-		$this->dispatchIf(
+		StoreImageJob::dispatchIf(
 			$request->hasFile('thumbnail'),
-			new StoreImageJob($request->file('thumbnail'), $project),
+			$request->file('thumbnail'),
+			$project,
 		);
 
 		session()->flash('success', 'Project published!');
@@ -54,9 +55,10 @@ class ProjectsController extends Controller
     {
 		$project->update($request->safe()->except('thumbnail'));
 
-		$this->dispatchIf(
+		StoreImageJob::dispatchIf(
 			$request->hasFile('thumbnail'),
-			new StoreImageJob($request->file('thumbnail'), $project),
+			$request->file('thumbnail'),
+			$project,
 		);
 
 		return back()->with('success', 'Project updated!');

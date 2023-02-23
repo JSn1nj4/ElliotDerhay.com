@@ -29,9 +29,10 @@ class PostsController extends Controller
 	{
 		$post = Post::create($request->safe()->except('cover_image'));
 
-		$this->dispatchIf(
+		StoreImageJob::dispatchIf(
 			$request->hasFile('cover_image'),
-			new StoreImageJob($request->file('cover_image'), $post),
+			$request->file('cover_image'),
+			$post,
 		);
 
 		session()->flash('success', 'Post published!');
@@ -53,9 +54,10 @@ class PostsController extends Controller
 	{
 		$post->update($request->safe()->except('cover_image'));
 
-		$this->dispatchIf(
+		StoreImageJob::dispatchIf(
 			$request->hasFile('cover_image'),
-			new StoreImageJob($request->file('cover_image'), $post),
+			$request->file('cover_image'),
+			$post,
 		);
 
 		return back()->with('success', 'Post updated!');

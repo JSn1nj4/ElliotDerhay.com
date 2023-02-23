@@ -11,14 +11,14 @@
 				<div class="flex flex-col mb-6 gap-2">
 					<p><label for="cover_image" class="text-3xl">Cover Image</label></p>
 					@if($image) <p><img src="{{ $image->url }}" class="max-w-md"></p> @endif
-					<p><input type="file" id="cover_image" name="cover_image" value="{{ $fields->cover_image }}"></p>
+					<p><input type="file" id="cover_image" name="cover_image" value="{!! $fields->cover_image !!}"></p>
 				</div>
 
-				<x-admin.forms.field label="Post Title" field="title" :errors="$errors" large value="{{ $fields->title }}" />
+				<x-admin.forms.field label="Post Title" field="title" :errors="$errors" large :value="$fields->title" />
 
-				<x-admin.forms.field label="Slug" field="slug" :errors="$errors" value="{{ $fields->slug }}" />
+				<x-admin.forms.field label="Slug" field="slug" :errors="$errors" :value="$fields->slug" />
 
-				<x-admin.forms.field label="Body" field="body" :errors="$errors" value="{{ $fields->body }}" multiline />
+				<x-admin.forms.field label="Body" field="body" :errors="$errors" :value="$fields->body" multiline />
 
 			</form>
 			<div class="flex flex-row mt-6 gap-6 justify-end">

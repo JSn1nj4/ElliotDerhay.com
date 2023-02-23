@@ -3,18 +3,18 @@
 	@unless($multiline)
 		<x-ui.form.input
 			id="{{ $field }}" name="{{ $field }}"
-			error="{{ $errors->has($field) }}" value="{{ $value }}"
+			error="{{ $errors->has($field) }}" value="{!! $value !!}"
 			text-size="{{ $large ? 'text-2xl' : 'text-lg' }}"
 			padding="{{ $large ? 'p-3' : 'p-2' }}"
 		/>
 	@else
 		<x-ui.form.text-area
 			id="{{ $field }}" name="{{ $field }}"
-			error="{{ $errors->has($field) }}" value="{{ $value }}"
+			error="{{ $errors->has($field) }}" value="{!! $value !!}"
 			text-size="{{ $large ? 'text-2xl' : 'text-lg' }}"
 			padding="{{ $large ? 'p-3' : 'p-2' }}"
 		>
-			{{ $value }}
+			{!! $value !!}
 		</x-ui.form.text-area>
 	@endunless
 </div>
