@@ -4,6 +4,8 @@ namespace App\Models;
 
 use App\Enums\PerPage;
 use App\Events\ImageDeletedEvent;
+use App\Models\Scopes\RelationsExist;
+use App\Models\Scopes\WithCount;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -27,8 +29,10 @@ use Illuminate\Pagination\AbstractPaginator;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Post[] $posts
  * @property-read int|null $posts_count
+ * @property-read int $posts_exists
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Project[] $projects
  * @property-read int|null $projects_count
+ * @property-read int $projects_exists
  * @property-read string $url
  * @method static \Database\Factories\ImageFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|Image newModelQuery()
@@ -69,6 +73,13 @@ class Image extends Model
 		'collection',
 	];
 
+	protected static function booted()
+	{
+		static::addGlobalScope(new RelationsExist(['posts', 'projects']));
+
+		static::addGlobalScope(new WithCount(['posts', 'projects']));
+	}
+
 	public static function index(Request $request): AbstractPaginator
 	{
 		return self::latest()
@@ -76,6 +87,11 @@ class Image extends Model
 				optional($request)->per_page ?? 30
 			))
 			->withQueryString();
+	}
+
+	public function isAttached(): bool
+	{
+		return $this->posts_exists && $this->projects_exists;
 	}
 
 	public function posts(): MorphToMany

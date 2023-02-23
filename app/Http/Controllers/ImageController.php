@@ -24,11 +24,7 @@ class ImageController extends Controller
 
 	public function destroy(Image $image): Response|RedirectResponse
 	{
-		$image = $image->newQuery()
-			->withCount(['posts', 'projects'])
-			->find($image->id);
-
-		if ($image->posts_count + $image->projects_count > 0) return back()
+		if ($image->isAttached()) return back()
 			->with('error', 'Image cannot be deleted. Detach it from items it is currently attached to first.');
 
 		$image->delete();
