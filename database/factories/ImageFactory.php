@@ -20,21 +20,9 @@ class ImageFactory extends Factory
     {
 		$collection = "images";
 
-		if (Storage::disk('temp')->directoryMissing('')) {
-			Storage::disk('temp')->createDirectory('');
-		}
+		$this->ensureTempDirExists();
 
-		$temp_image = $this->faker
-			->unique()
-			->image(storage_path('app/temp'));
-
-		$file = new UploadedFile(
-			path: $temp_image,
-			originalName: $this->faker->unique()->firstName() . ".jpg",
-			mimeType: "image/jpeg",
-		);
-
-		$path = $file->store($collection, 'public');
+		[$file, $path] = $this->generateUploadedFile($collection);
 
         return [
             'name' => $this->faker->name(),
@@ -50,4 +38,26 @@ class ImageFactory extends Factory
 			'size' => $file->getSize(),
         ];
     }
+
+	protected function ensureTempDirExists(): void
+	{
+		if (Storage::disk('temp')->directoryMissing('')) {
+			Storage::disk('temp')->createDirectory('');
+		}
+	}
+
+	protected function generateUploadedFile(string $collection = 'images'): array
+	{
+		$file = new UploadedFile(
+			path: $this->faker
+				->unique()
+				->image(storage_path('app/temp')),
+			originalName: $this->faker->unique()->firstName() . ".jpg",
+			mimeType: "image/jpeg",
+		);
+
+		$path = $file->store($collection, 'public');
+
+		return [$file, $path];
+	}
 }
