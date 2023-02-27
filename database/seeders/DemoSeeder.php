@@ -14,6 +14,10 @@ class DemoSeeder extends Seeder
      */
     public function run()
     {
+		if (app()->environment('production')) {
+			throw new \Exception("This seeder must not be run in Production! It will likely destroy live data.");
+		}
+
 		$this->call([
 			CommandEventSeeder::class,
 			ImageSeeder::class,
