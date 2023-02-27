@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Actions\AddCategoryToPost;
 use App\Actions\AddTagToPost;
 use App\Models\Category;
+use App\Models\Image;
 use App\Models\Post;
 use App\Models\Tag;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -37,6 +38,19 @@ class PostSeeder extends Seeder
 		return $post;
 	}
 
+	public function maybeAttachImage(Post $post): Post
+	{
+		$image = Image::inRandomOrder()
+			->limit(3)
+			->get()
+			->add(null)
+			->random();
+
+		if ($image !== null) $post->images()->sync([$image->id]);
+
+		return $post;
+	}
+
     /**
      * Run the database seeds.
      *
@@ -56,6 +70,7 @@ class PostSeeder extends Seeder
 		Post::factory(15)
 			->create()
 			->each([$this, 'addCategories'])
-			->each([$this, 'addTags']);
+			->each([$this, 'addTags'])
+			->each([$this, 'maybeAttachImage']);
     }
 }
