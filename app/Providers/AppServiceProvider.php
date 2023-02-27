@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Actions\HashPassword;
 use App\Actions\LogCommandEvent;
 use App\Actions\LogUserLogin;
 use App\Contracts\GitHostService;
@@ -22,6 +23,7 @@ class AppServiceProvider extends ServiceProvider
 	public array $singletons = [
 		GitHostService::class => GithubService::class,
 		SocialMediaService::class => TwitterService::class,
+		HashPassword::class => HashPassword::class,
 	];
 
 	/**
