@@ -2,10 +2,15 @@
 
 namespace App\Actions;
 
-class BaseAction
+abstract class BaseAction
 {
 	public function __construct() {
 		// ...
+	}
+
+	public function __invoke(): void
+	{
+
 	}
 
 	/**
@@ -15,8 +20,15 @@ class BaseAction
 	 *
 	 * @return static
 	 */
-	public static function make(): static
+	public static function make(...$params): static
 	{
-		return new static();
+		return new static(...$params);
+	}
+
+	public static function invoke(...$params): mixed
+	{
+		$action = new static();
+
+		return $action(...$params);
 	}
 }
