@@ -18,6 +18,12 @@ class ProjectSeeder extends Seeder
 			'demo_link' => 'https://elliotderhay.com',
 			'short_desc' => 'My personal website project built with Laravel, Tailwind CSS, and some Vue.js',
 		],
+		[
+			'name' => 'Frontend Stuff',
+			'link' => 'https://github.com/JSn1nj4/frontend-stuff',
+			'demo_link' => 'https://festuff.elliotderhay.com',
+			'short_desc' => 'A small frontend utilities and other experiments project built on Nuxt',
+		]
 	];
 
 	/**
