@@ -3,38 +3,49 @@
 ## Release 2.0.0
 
 ### New
-- `twitter:user:update` command to get fresh Twitter user data
+- Command to get fresh Twitter user data
 - `HttpMethod` enum
 - `CreateMode` enum to aid in dynamically selecting model create mode
-- `TwitterService::call()` method for calling endpoints via dedicated enpoint classes
+- `TwitterService::call()` method for calling endpoints via dedicated endpoint classes
 - `TwitterService::checkForErrors()` method to check responses for errors
 - `TwitterService::getUsers()` method to fetch Twitter user data
-- `TwitterUsersUpdatedEvent` class
-- `github:user:update` command to get fresh GitHub user data
-- `GithubUsersUpdatedEvent` class
+- Twitter user data update event
+- Command to get fresh GitHub user data
+- GitHub user data update event
 - `GithubService::call()` method for calling endpoints
 - `GithubService::checkforErrors()` method to check responses for errors
 - `GithubService::getUser()` method to fetch GitHub user data
 - `GithubService::getUsers()` method to call `GithubService::getUser()` for multiple users
-- `GithubUserDataFactory` class to generate data structure similar to GitHub's API
-- `TwitterUserDataFactory` to generate Twitter user data similar to data returned by Twitter's API
-- `TwitterUserFactory` to generate fake `TwitterUser` model entities
-- `TokenFactory` to generate fake tokens for testing
+- GitHub user data factory for imitating GitHub API data
+- Twitter user data factory for imitating Twitter API data
+- Factory for generating fake Twitter user entities
+- Factory for generating testing tokens
+- Configure Vite
+- Configure phpMyAdmin and Mailhog in Lando
+- Configure Cron in Lando
+- Configure GitHub Actions
+- Implement blog
+- Implement basic Admin dashboard
+- Implement admin command runner
+- Implement polymorphic image relationship
 
 ### Updates
-- Init `TwitterService::$token` in constructor and use directly
-- Restructure `TwitterService` to use dedicated Endpoint classes
-- Remove `TwitterService::getUrl()` in favor of `AbstractEndpoint::url()` method directly on endpoints
-- Remove `TwitterService::$api_url` property
+- Pass token to Twitter Service constructor
+- Restructure Twitter service to use dedicated Endpoint classes
 - Modify `TwitterUser::fromDTO()` to dynamically choose model create/update methods using `CreateMode` enum
-- Update `TwitterServiceTest`
-- Reorganize "tests/Unit/App/Services" to match "app/Services" folder structure
 - Schedule new user update commands weekly
-- Remove `getUrl()` method from `GitHostService` and `SocialMediaService` contracts
 - Restructure `GithubService` a bit to use dedicated Endpoint classes
 - Add endpoint tests
-- Update `GithubServiceTest`
-- Use `faker()` helper in place of using `\Faker\Factory::create()` for every test case
+- Add Pest to Composer's allowed plugins
+- Increase background task frequency
+- Finish Projects implementation
+- Remove Dusk
+- Group DB seeders
+- Upgrade packages
+- Regen IDE helpers
+- Move some config files
+- Update tests
+- Housekeeping
 
 ### Bug fixes
 - Fix #47: token "expires_at" issue
