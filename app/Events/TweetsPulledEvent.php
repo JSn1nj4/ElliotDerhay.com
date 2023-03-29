@@ -2,19 +2,10 @@
 
 namespace App\Events;
 
-use Illuminate\Foundation\Events\Dispatchable;
-
-class TweetsPulledEvent
+class TweetsPulledEvent extends CommandWasRunEvent
 {
-	use Dispatchable;
-
-	/**
-	 * Create a new event instance.
-	 *
-	 * @return void
-	 */
 	public function __construct()
 	{
-		//
+		parent::__construct('tweet:pull');
 	}
 }

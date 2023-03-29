@@ -2,14 +2,25 @@
 
 namespace App\Providers;
 
+use App\Events\GithubEventsPruned;
+use App\Events\GithubEventsPulledEvent;
+use App\Events\GithubUsersUpdatedEvent;
 use App\Events\NewGithubEventTypesEvent;
-use App\Events\TweetsPulled;
+use App\Events\TokensPrunedEvent;
+use App\Events\TweetsPrunedEvent;
+use App\Events\TweetsPulledEvent;
+use App\Events\TwitterUsersUpdatedEvent;
+use App\Listeners\CommandLogSubscriber;
+use App\Listeners\SendPasswordChangedNotification;
+use App\Listeners\UpdateCommandLog;
+use App\Listeners\LogLockouts;
 use App\Listeners\PruneOldTweets;
 use App\Listeners\SendNewGithubEventTypesEmail;
+use Illuminate\Auth\Events\Lockout;
+use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Event;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -18,16 +29,15 @@ class EventServiceProvider extends ServiceProvider
 	 *
 	 * @var array
 	 */
-	protected $listen = [
-		NewGithubEventTypesEvent::class => [
-			SendNewGithubEventTypesEmail::class,
-		],
-		Registered::class => [
-			SendEmailVerificationNotification::class,
-		],
-		TweetsPulled::class => [
-			PruneOldTweets::class,
-		],
+	protected $listen = [];
+
+	/**
+	 * Subscribers to handle multiple related events
+	 *
+	 * @var array
+	 */
+	protected $subscribe = [
+		CommandLogSubscriber::class,
 	];
 
 	/**
@@ -35,8 +45,13 @@ class EventServiceProvider extends ServiceProvider
 	 *
 	 * @return void
 	 */
-	public function boot()
+	public function boot(): void
 	{
 		//
+	}
+
+	public function shouldDiscoverEvents(): bool
+	{
+		return true;
 	}
 }

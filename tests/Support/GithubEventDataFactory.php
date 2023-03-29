@@ -25,6 +25,8 @@ class GithubEventDataFactory extends BaseFactory
 		'WatchEvent',
 	];
 
+	private array $extraFields = [];
+
 	private ?array $limitedEventTypes;
 
 	private \Faker\Generator $faker;
@@ -45,23 +47,53 @@ class GithubEventDataFactory extends BaseFactory
 			'ForkEvent' => ['forkee' => [
 				'full_name' => "{$user}/{$this->faker->slug}",
 			]],
-			'IssueCommentEvent', 'IssuesEvent' => ['issue' => [
+			'IssueCommentEvent' => ['issue' => [
 				'number' => $this->faker->randomNumber(5),
 			]],
-			'PullRequestEvent' => ['pull_request' => [
-				'number' => $this->faker->randomNumber(5),
-			]],
+			'IssuesEvent' => [
+				'issue' => [
+					'number' => $this->faker->randomNumber(5),
+				],
+				'action' => $this->faker->randomElement([
+					'opened',
+					'edited',
+					'closed',
+					'reopened',
+					'assigned',
+					'unassigned',
+					'labeled',
+					'unlabeled',
+				])
+			],
+			'PullRequestEvent' => [
+				'pull_request' => [
+					'number' => $this->faker->randomNumber(5),
+				],
+				'action' => $this->faker->randomElement([
+					'opened',
+					'edited',
+					'closed',
+					'reopened',
+					'assigned',
+					'unassigned',
+					'review_requested',
+					'review_request_removed',
+					'labeled',
+					'unlabeled',
+					'synchronize',
+				]),
+				'merged' => $this->faker->randomElement([
+					null, // simulate wrapping $data['payload'] in optional()
+					false,
+					true,
+				]),
+			],
 			default => [],
 		});
 
 		return [
 			'id' => $this->faker->numerify('###########'),
-			'actor' => [
-				'id' => $this->faker->randomNumber(7, true),
-				'login' => $user,
-				'display_login' => $user,
-				'avatar_url' => $this->faker->imageUrl(50, 50, 'cats'),
-			],
+			'actor' => GithubUserDataFactory::init()->withUser($user)->makeOne(),
 			'type' => $type,
 			'created_at' => now()->toDateTimeString(),
 			'repo' => [
@@ -85,6 +117,11 @@ class GithubEventDataFactory extends BaseFactory
 		}
 
 		return $data;
+	}
+
+	public function makeOne(): array
+	{
+		return $this->definition();
 	}
 
 	public function withTypes(array $types): self

@@ -9,15 +9,11 @@ class NewGithubEventTypesEvent
 {
     use Dispatchable;
 
-    /**
-     * Create a new event instance.
-     *
-     * @return void
-     */
-    public function __construct(Collection $newEventTypes, array $emailRecipients)
+    public function __construct(
+		public Collection $newEventTypes,
+		public array $emailRecipients,
+	)
     {
-        $this->newEventTypes = $newEventTypes;
-
-		$this->emailRecipients = $emailRecipients;
+        //
     }
 }

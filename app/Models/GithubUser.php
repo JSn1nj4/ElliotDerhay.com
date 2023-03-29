@@ -5,7 +5,31 @@ namespace App\Models;
 use App\DataTransferObjects\GithubUserDTO;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
+/**
+ * App\Models\GithubUser
+ *
+ * @property int $id
+ * @property string $login
+ * @property string $display_login
+ * @property string $avatar_url
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\GithubEvent[] $events
+ * @property-read int|null $events_count
+ * @method static \Database\Factories\GithubUserFactory factory(...$parameters)
+ * @method static \Illuminate\Database\Eloquent\Builder|GithubUser newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|GithubUser newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|GithubUser query()
+ * @method static \Illuminate\Database\Eloquent\Builder|GithubUser whereAvatarUrl($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|GithubUser whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|GithubUser whereDisplayLogin($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|GithubUser whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|GithubUser whereLogin($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|GithubUser whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
 class GithubUser extends Model
 {
 	use HasFactory;
@@ -17,6 +41,13 @@ class GithubUser extends Model
 		'avatar_url',
 	];
 
+	public static function booted()
+	{
+		static::deleted(function (GithubUser $user): void {
+			GithubEvent::whereUserId($user->id)->delete();
+		});
+	}
+
 	public static function fromDTO(GithubUserDTO $dto): self
 	{
 		return self::firstOrCreate(['id' => $dto->id], [
@@ -26,7 +57,7 @@ class GithubUser extends Model
 		]);
 	}
 
-	public function events()
+	public function events(): HasMany
 	{
 		return $this->hasMany(GithubEvent::class);
 	}

@@ -11,14 +11,19 @@ class ProjectSeeder extends Seeder
 	/**
 	 * List project data to seed database with
 	 */
-	private $project_list = [
+	private array $project_list = [
 		[
 			'name' => 'ElliotDerhay.com',
 			'link' => 'https://github.com/JSn1nj4/ElliotDerhay.com',
-			'demo_link' => 'http://elliotderhay.com',
-			'thumbnail' => 'https://elliotderhay-com.s3.amazonaws.com/projects/elliotderhay.com-1.10.0-screenshot.jpg',
+			'demo_link' => 'https://elliotderhay.com',
 			'short_desc' => 'My personal website project built with Laravel, Tailwind CSS, and some Vue.js',
 		],
+		[
+			'name' => 'Frontend Stuff',
+			'link' => 'https://github.com/JSn1nj4/frontend-stuff',
+			'demo_link' => 'https://festuff.elliotderhay.com',
+			'short_desc' => 'A small frontend utilities and other experiments project built on Nuxt',
+		]
 	];
 
 	/**
@@ -28,7 +33,7 @@ class ProjectSeeder extends Seeder
 	 */
 	public function run()
 	{
-		DB::table((new Project)->getTable())
+		DB::table(Project::make()->getTable())
 			->truncate();
 
 		collect($this->project_list)

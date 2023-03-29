@@ -1,4 +1,5 @@
 # Laravel Defaults
+/.idea
 /node_modules
 /public/hot
 /public/storage
@@ -12,9 +13,13 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
-/.idea
+
+# Custom configs
 /.vscode/*
 !/.vscode/*-example
+/config/local/*
+!/config/local/*-example
+.lando.local.yml
 
 # Public directory files
 /public/css

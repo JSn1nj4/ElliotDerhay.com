@@ -1,62 +1,51 @@
 <template>
 	<div class="loading-animation absolute top-0 left-0 w-full h-full"
 		:class="[{ hide: isHidden }, zIndex]">
-		<div class="loader-content mx-auto" :style="`max-width: ${this.size}`">
+		<div class="loader-content mx-auto" :style="`max-width: ${size}`">
 			<atom-spinner />
 		</div>
 	</div>
 </template>
-<script>
+<script setup lang="ts">
 import AtomSpinner from './AtomSpinner.vue';
-export default {
-	name: "load-animation",
+import {defineProps, Ref, ref} from "vue";
 
-	props: {
-		size: {
-			type: String,
-			default: '40px'
-		}
-	},
+const props = withDefaults(defineProps<{
+	size?: string,
+}>(), {
+	size: '40px',
+})
 
-	components: {
-		AtomSpinner,
-	},
+const isHidden: Ref<boolean> = ref(false)
+const zIndex: Ref<string> = ref('z-50')
 
-	data: () => ({
-		isHidden: false,
-		zIndex: 'z-50',
-	}),
+/**
+ * @method fadeOut
+ *
+ * @return void
+ *
+ * @description This method is meant to be called by a parent
+ * component. The purpose is for the parent component to fade this
+ * component out when loading is complete.
+ */
+function fadeOut() {
+	isHidden.value = true;
+	setTimeout(() => {
+		zIndex.value = 'z-0';
+	}, 1000);
+}
 
-	methods: {
-		/**
-		 * @method fadeOut
-		 *
-		 * @return void
-		 *
-		 * @description This method is meant to be called by a parent
-		 * component. The purpose is for the parent component to fade this
-		 * component out when loading is complete.
-		 */
-		fadeOut() {
-			this.isHidden = true;
-			setTimeout(() => {
-				this.zIndex = 'z-0';
-			}, 1000);
-		},
-
-		/**
-		 * @method fadeIn
-		 * @return void
-		 *
-		 * @description This method fades the loader animation back in. This
-		 * method may not be needed in the future. However, it's nice to
-		 * have a way to undo the affects of the fadeOut method.
-		 */
-		fadeIn() {
-			this.zIndex = 'z-50';
-			this.isHidden = false;
-		}
-	}
+/**
+ * @method fadeIn
+ * @return void
+ *
+ * @description This method fades the loader animation back in. This
+ * method may not be needed in the future. However, it's nice to
+ * have a way to undo the affects of the fadeOut method.
+ */
+function fadeIn() {
+	zIndex.value = 'z-50';
+	isHidden.value = false;
 }
 </script>
 <style>

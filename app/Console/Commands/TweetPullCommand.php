@@ -4,7 +4,7 @@ namespace App\Console\Commands;
 
 use App\Events\TweetsPulledEvent;
 use App\Models\Tweet;
-use App\Services\TwitterService;
+use App\Services\Twitter\TwitterService;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 

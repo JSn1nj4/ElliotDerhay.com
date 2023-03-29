@@ -1,5 +1,57 @@
 # Changelog
 
+## Release 2.0.0
+
+### New
+- Command to get fresh Twitter user data
+- `HttpMethod` enum
+- `CreateMode` enum to aid in dynamically selecting model create mode
+- `TwitterService::call()` method for calling endpoints via dedicated endpoint classes
+- `TwitterService::checkForErrors()` method to check responses for errors
+- `TwitterService::getUsers()` method to fetch Twitter user data
+- Twitter user data update event
+- Command to get fresh GitHub user data
+- GitHub user data update event
+- `GithubService::call()` method for calling endpoints
+- `GithubService::checkforErrors()` method to check responses for errors
+- `GithubService::getUser()` method to fetch GitHub user data
+- `GithubService::getUsers()` method to call `GithubService::getUser()` for multiple users
+- GitHub user data factory for imitating GitHub API data
+- Twitter user data factory for imitating Twitter API data
+- Factory for generating fake Twitter user entities
+- Factory for generating testing tokens
+- Configure Vite
+- Configure phpMyAdmin and Mailhog in Lando
+- Configure Cron in Lando
+- Configure GitHub Actions
+- Implement blog
+- Implement basic Admin dashboard
+- Implement admin command runner
+- Implement polymorphic image relationship
+
+### Updates
+- Pass token to Twitter Service constructor
+- Restructure Twitter service to use dedicated Endpoint classes
+- Modify `TwitterUser::fromDTO()` to dynamically choose model create/update methods using `CreateMode` enum
+- Schedule new user update commands weekly
+- Restructure `GithubService` a bit to use dedicated Endpoint classes
+- Add endpoint tests
+- Add Pest to Composer's allowed plugins
+- Increase background task frequency
+- Finish Projects implementation
+- Remove Dusk
+- Group DB seeders
+- Upgrade packages
+- Regen IDE helpers
+- Move some config files
+- Update tests
+- Housekeeping
+
+### Bug fixes
+- Fix #47: token "expires_at" issue
+	- Check for `null` value for tokens that don't have an expiration date
+	- Conversely, ensure value is _not_ `null` as part of expiration check
+
 ## Release 1.12.1
 
 ### Bug fixes

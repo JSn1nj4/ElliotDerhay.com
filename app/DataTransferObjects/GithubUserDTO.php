@@ -2,17 +2,14 @@
 
 namespace App\DataTransferObjects;
 
-use Spatie\DataTransferObject\DataTransferObject;
-
-class GithubUserDTO extends DataTransferObject
+class GithubUserDTO
 {
-	public int $id;
-
-	public string $login;
-
-	public string $display_login;
-
-	public string $avatar_url;
+	public function __construct(
+		public readonly int $id,
+		public readonly string $login,
+		public readonly string $display_login,
+		public readonly string $avatar_url,
+	) {}
 
 	public static function fromArray(array $userData): self
 	{
