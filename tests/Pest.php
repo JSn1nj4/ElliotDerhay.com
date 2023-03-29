@@ -11,10 +11,21 @@
 |
 */
 
+use App\Models\Image;
+use App\Models\Post;
+use App\Models\Project;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
-uses(TestCase::class, RefreshDatabase::class)->in('Feature', 'Unit');
+uses(TestCase::class, RefreshDatabase::class)
+	->in('Unit');
+
+uses(TestCase::class, RefreshDatabase::class)
+	->beforeEach(fn () => Storage::fake())
+	->in('Feature');
+
 /*
 |--------------------------------------------------------------------------
 | Expectations
@@ -41,3 +52,46 @@ expect()->extend('toBeOne', function () {
 |
 */
 
+function createImage(): Image {
+	return Image::factory()->createOne();
+}
+
+function createPost(): Post {
+	return Post::factory()->createOne();
+}
+
+function createProject(): Project {
+	return Project::factory()->createOne();
+}
+
+function createUser(): User {
+	return User::factory()->createOne();
+}
+
+function hashPassword(string $password): string {
+	$hashPassword = new \App\Actions\HashPassword();
+
+	return $hashPassword($password);
+}
+
+function invoke(string $className, array $params): mixed {
+	$class = resolve($className);
+
+	return $class(...$params);
+}
+
+function makeImage(): Image	{
+	return Image::factory()->makeOne();
+}
+
+function makePost(): Post {
+	return Post::factory()->makeOne();
+}
+
+function makeProject(): Project {
+	return Project::factory()->makeOne();
+}
+
+function makeUser(): User {
+	return User::factory()->makeOne();
+}

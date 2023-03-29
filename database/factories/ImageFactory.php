@@ -3,7 +3,9 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Filesystem\FilesystemAdapter;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
 
 /**
@@ -11,7 +13,25 @@ use Illuminate\Support\Facades\Storage;
  */
 class ImageFactory extends Factory
 {
-    /**
+	protected string $diskName = 'public';
+	protected FilesystemAdapter $disk;
+
+	public function __construct(
+		$count = null,
+		?Collection $states = null,
+		?Collection $has = null,
+		?Collection $for = null,
+		?Collection $afterMaking = null,
+		?Collection $afterCreating = null,
+		$connection = null,
+		?Collection $recycle = null
+	) {
+		parent::__construct($count, $states, $has, $for, $afterMaking, $afterCreating, $connection, $recycle);
+
+		$this->disk = Storage::disk($this->diskName);
+	}
+
+	/**
      * Define the model's default state.
      *
      * @return array<string, mixed>
@@ -29,10 +49,10 @@ class ImageFactory extends Factory
 			'file_name' => $file->getClientOriginalName(),
 			'mime_type' => $file->getClientMimeType(),
 			'path' => $path,
-			'disk' => 'public',
+			'disk' => $this->diskName,
 			'file_hash' => hash_file(
 				algo: config('app.uploads.hash'),
-				filename: Storage::disk('public')->path($path),
+				filename: $this->disk->path($path),
 			),
 			'collection' => $collection,
 			'size' => $file->getSize(),
@@ -56,8 +76,17 @@ class ImageFactory extends Factory
 			mimeType: "image/jpeg",
 		);
 
-		$path = $file->store($collection, 'public');
+		$path = $file->store($collection, $this->diskName);
 
 		return [$file, $path];
+	}
+
+	public function setDisk(string $name, FilesystemAdapter|null $disk = null): static
+	{
+		$this->diskName = $name;
+
+		$this->disk = is_null($disk) ? Storage::disk($this->diskName) : $disk;
+
+		return $this;
 	}
 }

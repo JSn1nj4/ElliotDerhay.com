@@ -10,7 +10,9 @@ enum PerPage: int
 
 	public static function isIntegerLike(mixed $value): bool
 	{
-		return is_numeric($value) && ((string)intval($value)) === "$value";
+		return is_numeric($value)
+			&& ((string)intval($value)) === "$value"
+			&& !(is_float($value));
 	}
 
 	public static function filter(mixed $value): int

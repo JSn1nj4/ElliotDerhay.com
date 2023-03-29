@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\File;
 
 class UpdatePostRequest extends FormRequest
@@ -17,7 +18,7 @@ class UpdatePostRequest extends FormRequest
 	public function prepareForValidation(): void
 	{
 		$this->merge([
-			'slug' => Str::slug($this->slug ?? $this->title),
+			'slug' => Str::slug($this->slug ?? $this->title ?? ''),
 		]);
 	}
 
@@ -31,7 +32,9 @@ class UpdatePostRequest extends FormRequest
 			],
 			'slug' => [
 				'required',
-				'unique:posts,slug,'.$this->post->id,
+				Rule::unique('posts')
+					->whereNotNull('slug')
+					->ignore($this->post->id),
 				'max:180',
 			],
 			'body' => 'required',

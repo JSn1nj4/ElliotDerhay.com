@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Actions\AddCategoryToPost;
+use App\Actions\AddTagToPost;
 use App\Actions\HashPassword;
 use App\Actions\LogCommandEvent;
 use App\Actions\LogUserLogin;
@@ -10,7 +12,6 @@ use App\Contracts\SocialMediaService;
 use App\Models\Token;
 use App\Services\Github\GithubService;
 use App\Services\Twitter\TwitterService;
-use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -21,6 +22,8 @@ class AppServiceProvider extends ServiceProvider
 	];
 
 	public array $singletons = [
+		AddCategoryToPost::class => AddCategoryToPost::class,
+		AddTagToPost::class => AddTagToPost::class,
 		GitHostService::class => GithubService::class,
 		SocialMediaService::class => TwitterService::class,
 		HashPassword::class => HashPassword::class,

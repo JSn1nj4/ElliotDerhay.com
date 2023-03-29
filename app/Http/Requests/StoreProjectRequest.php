@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\File;
 
 class StoreProjectRequest extends FormRequest
@@ -23,11 +24,14 @@ class StoreProjectRequest extends FormRequest
 			],
 			'link' => [
 				'required',
+				'url',
 				'unique:projects',
 				'max:2048',
 			],
 			'demo_link' => [
-				'unique:projects',
+				'nullable',
+				'url',
+				Rule::unique('projects')->whereNotNull('demo_link'),
 				'max:2048',
 			],
 			'short_desc' => 'required',

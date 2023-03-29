@@ -14,13 +14,13 @@
 				  <p><input type="file" id="thumbnail" name="thumbnail" value="{!! $fields->thumbnail !!}"></p>
 				</div>
 
-				<x-admin.forms.field label="Project Title" field="name" :errors="$errors" :value="$fields->name" />
+				<x-admin.forms.field label="Project Title" field="name" :errors="$errors" :value="$fields->name ?? ''" />
 
-				<x-admin.forms.field label="Link" field="link" :errors="$errors" :value="$fields->link" />
+				<x-admin.forms.field label="Link" field="link" :errors="$errors" :value="$fields->link ?? ''" />
 
-				<x-admin.forms.field label="Demo Link" field="demo_link" :errors="$errors" :value="$fields->demo_link" />
+				<x-admin.forms.field label="Demo Link" field="demo_link" :errors="$errors" :value="$fields->demo_link ?? ''" />
 
-				<x-admin.forms.field label="Short Description" field="short_desc" :errors="$errors" :value="$fields->short_desc" multi-line />
+				<x-admin.forms.field label="Short Description" field="short_desc" :errors="$errors" :value="$fields->short_desc ?? ''" multi-line />
 
 			</form>
 			<div class="flex flex-row mt-6 gap-6 justify-end">

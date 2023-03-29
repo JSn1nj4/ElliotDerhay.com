@@ -8,11 +8,6 @@ abstract class BaseAction
 		// ...
 	}
 
-	public function __invoke(): void
-	{
-
-	}
-
 	/**
 	 * Create new instance procedurally
 	 *
@@ -23,12 +18,5 @@ abstract class BaseAction
 	public static function make(...$params): static
 	{
 		return new static(...$params);
-	}
-
-	public static function invoke(...$params): mixed
-	{
-		$action = new static();
-
-		return $action(...$params);
 	}
 }
