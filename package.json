@@ -15,7 +15,7 @@
     "scripts": {
         "dev": "vite",
         "development": "yarn run dev",
-        "build": "build",
+        "build": "vite build",
         "prod": "yarn run build",
         "production": "yarn run build"
     },

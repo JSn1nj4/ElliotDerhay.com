@@ -1,5 +1,10 @@
 # Changelog
 
+## Release 2.0.1
+
+### Fixes
+- Fix Node build script
+
 ## Release 2.0.0
 
 ### New
