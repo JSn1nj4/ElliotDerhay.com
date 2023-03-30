@@ -1,5 +1,10 @@
 # Changelog
 
+## Release 2.0.3
+
+### Fixes
+- Move another set of forgotten routes
+
 ## Release 2.0.2
 
 ### Fixes
