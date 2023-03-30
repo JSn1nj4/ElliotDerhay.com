@@ -1,5 +1,10 @@
 # Changelog
 
+## Release 2.0.4
+
+### Fixes
+- Missed HOME route constant
+
 ## Release 2.0.3
 
 ### Fixes
