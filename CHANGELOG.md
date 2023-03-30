@@ -1,5 +1,11 @@
 # Changelog
 
+## Release 2.0.2
+
+### Fixes
+- Move some dev routes created for new features
+- Fix service config model references
+
 ## Release 2.0.1
 
 ### Fixes
