@@ -9,5 +9,3 @@ Route::get('/error/{code}', function ($code = null) {
 
 	abort($code);
 })->where('code', '[1-5][0-9]{2}');
-
-require __DIR__.'/auth.php';

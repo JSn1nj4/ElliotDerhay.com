@@ -50,3 +50,5 @@ Route::prefix('/dashboard')
 
 		Route::resource('projects', ProjectsController::class);
 	});
+
+require __DIR__.'/auth.php';
