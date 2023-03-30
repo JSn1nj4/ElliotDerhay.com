@@ -31,14 +31,14 @@ return [
 	],
 
 	'twitter' => [
-		'model' => App\Tweet::class,
+		'model' => \App\Models\Tweet::class,
 		'key' => env('TWITTER_API_KEY'),
 		'secret' => env('TWITTER_API_SECRET'),
 		'token' => env('TWITTER_API_TOKEN'),
 	],
 
 	'github' => [
-		'model' => App\Models\GithubEvent::class,
+		'model' => \App\Models\GithubEvent::class,
 		'token' => env('GITHUB_API_TOKEN'),
 	]
 
