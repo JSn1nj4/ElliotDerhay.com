@@ -22,10 +22,8 @@ class AuthServiceProvider extends ServiceProvider
 	 *
 	 * @return void
 	 */
-	public function boot()
+	public function boot(): void
 	{
-		$this->registerPolicies();
-
 		Gate::define('admin', function (User $user) {
 			return User::whereId(\Auth::id())->exists();
 		})->define('upload-files', function (User $user) {

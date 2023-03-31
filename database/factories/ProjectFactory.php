@@ -14,8 +14,8 @@ class ProjectFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    public function definition()
-    {
+    public function definition(): array
+	{
 		$demo_url = random_int(0, 1) ? $this->faker->url : null;
 
 		return [

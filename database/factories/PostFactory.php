@@ -14,8 +14,8 @@ class PostFactory extends Factory
      *
      * @return array
      */
-    public function definition()
-    {
+    public function definition(): array
+	{
 		$data = [
 			'title' => $this->faker->realText(60),
 			'body' => $this->faker->realText(500),

@@ -13,8 +13,8 @@ class CategorySeeder extends Seeder
      *
      * @return void
      */
-    public function run()
-    {
+    public function run(): void
+	{
         DB::table(Category::make()->getTable())
 			->truncate();
 

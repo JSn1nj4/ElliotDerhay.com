@@ -56,8 +56,8 @@ class PostSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
-    {
+    public function run(): void
+	{
 		// Seed taxonomies
 		$this->call([
 			CategorySeeder::class,

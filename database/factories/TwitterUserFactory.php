@@ -14,8 +14,8 @@ class TwitterUserFactory extends Factory
      *
      * @return array
      */
-    public function definition()
-    {
+    public function definition(): array
+	{
         return [
 			'id' => (int)$this->faker->numerify('##########'),
 			'name' => $this->faker->name(),

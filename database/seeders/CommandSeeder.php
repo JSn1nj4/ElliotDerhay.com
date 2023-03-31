@@ -43,8 +43,8 @@ class CommandSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
-    {
+    public function run(): void
+	{
         foreach($this->commands as $command) {
 			if(Command::where('signature', $command['signature'])->exists()) {
 				continue;

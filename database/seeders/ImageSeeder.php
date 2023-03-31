@@ -14,8 +14,8 @@ class ImageSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
-    {
+    public function run(): void
+	{
 		DB::table(Image::make()->getTable())
 			->truncate();
 

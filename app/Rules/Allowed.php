@@ -23,8 +23,8 @@ class Allowed implements InvokableRule
 	 *
 	 * TODO: migrate PHPDoc to signature when interface allows
      */
-    public function __invoke($attribute, $value, $fail)
-    {
+    public function __invoke($attribute, $value, $fail): void
+	{
         if ($this->found($value)) return;
 
 		$fail(':attribute is not allowed.');
