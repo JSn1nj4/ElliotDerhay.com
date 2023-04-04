@@ -51,7 +51,7 @@ class GithubEventPullCommand extends Command
 		if($this->option('file')) {
 			Storage::disk('debug')->put($this->option('file'), $events->toJson());
 
-			return 0;
+			return self::SUCCESS;
 		}
 
 		if($this->option('debug')) {
@@ -62,8 +62,8 @@ class GithubEventPullCommand extends Command
 
 		$this->info('GitHub events fetched');
 
-		GithubEventsPulledEvent::dispatch();
+		GithubEventsPulledEvent::dispatch(self::SUCCESS);
 
-		return 0;
+		return self::SUCCESS;
 	}
 }

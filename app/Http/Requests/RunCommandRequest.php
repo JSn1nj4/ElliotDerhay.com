@@ -15,6 +15,8 @@ class RunCommandRequest extends FormRequest
 		'token:prune',
 		'tweet:prune',
 		'tweet:pull',
+		'twitter:feature_status',
+		'twitter:toggle_feature',
 		'twitter:user:update',
 	];
 

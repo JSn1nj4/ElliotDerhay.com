@@ -10,14 +10,14 @@ class CommandAllowed extends Allowed
     /**
      * Run the validation rule.
      *
-     * @param  string  $attribute
-     * @param  mixed  $value
-     * @param  \Closure(string): \Illuminate\Translation\PotentiallyTranslatedString  $fail
+     * @param string $attribute
+     * @param mixed $value
+     * @param \Closure $fail
      * @return void
 	 *
 	 * TODO: migrate PHPDoc to signature when interface allows
      */
-	public function __invoke($attribute, $value, $fail)
+	public function __invoke(string $attribute, mixed $value, \Closure $fail): void
 	{
 		if ($this->found($value)) return;
 

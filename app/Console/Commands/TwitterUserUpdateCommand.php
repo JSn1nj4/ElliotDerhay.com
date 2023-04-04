@@ -5,9 +5,11 @@ namespace App\Console\Commands;
 use App\DataTransferObjects\TwitterUserDTO;
 use App\Enums\CreateMode;
 use App\Events\TwitterUsersUpdatedEvent;
+use App\Features\TwitterFeed;
 use App\Models\TwitterUser;
 use App\Services\Twitter\TwitterService;
 use Illuminate\Console\Command;
+use Laravel\Pennant\Feature;
 
 class TwitterUserUpdateCommand extends Command
 {
@@ -42,6 +44,14 @@ class TwitterUserUpdateCommand extends Command
      */
     public function handle(TwitterService $twitter): int
     {
+		if (Feature::inactive(TwitterFeed::class)) {
+			$this->error("The TwitterFeed feature is currently disabled.");
+
+			TwitterUsersUpdatedEvent::dispatch(self::FAILURE, "TwitterFeed feature is disabled.");
+
+			return self::FAILURE;
+		}
+
 		$this->info("Finding users...");
 
 		$users = TwitterUser::all();
@@ -53,8 +63,8 @@ class TwitterUserUpdateCommand extends Command
 
 		$this->info("Twitter users updated!");
 
-		TwitterUsersUpdatedEvent::dispatch();
+		TwitterUsersUpdatedEvent::dispatch(self::SUCCESS);
 
-        return Command::SUCCESS;
+        return self::SUCCESS;
     }
 }

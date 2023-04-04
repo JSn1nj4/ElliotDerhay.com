@@ -1,5 +1,6 @@
 <?php
 
+use App\Features\TwitterFeed;
 use App\Models\Token;
 use App\Models\TwitterUser;
 use App\Services\Twitter\TwitterService;
@@ -8,11 +9,14 @@ use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Http;
+use Laravel\Pennant\Feature;
 use Tests\Support\PrivateMemberAccessor;
 use Tests\Support\TweetDataFactory;
 use Tests\Support\TwitterUserDataFactory;
 
-use function Pest\Faker\faker;
+use function Pest\Faker\fake;
+
+beforeEach(fn () => Feature::define(TwitterFeed::class, true));
 
 function requestHasParams(Request $request, array $params): bool {
 	return collect($params)
@@ -50,7 +54,7 @@ it('throws an exception if api secret is not set', function (): void {
 
 it('throws an exception if requested tweet count is < 1', function (): void {
 	(new TwitterService(makeToken()))->getPosts(
-		username: faker()->userName(),
+		username: fake()->userName(),
 		count: 0,
 	);
 })->throws(Exception::class, "'\$count' value cannot be below or equal to 0.");
@@ -61,14 +65,14 @@ it('throws an exception if requested tweet count is < 1', function (): void {
  */
 it('throws an exception if requested tweet count is > 3200', function (): void {
 	(new TwitterService(makeToken()))->getPosts(
-		username: faker()->userName(),
+		username: fake()->userName(),
 		count: 3201,
 	);
 })->throws(Exception::class, "'\$count' value cannot be greater than 3200.");
 
 it('processes a response from the twitter api user timeline endpoint', function (): void {
-	$user = faker()->userName();
-	$tweetCount = faker()->numberBetween(1, 3200);
+	$user = fake()->userName();
+	$tweetCount = fake()->numberBetween(1, 3200);
 
 	Http::fake([
 		"api.twitter.com/1.1/statuses/user_timeline.json*" => Http::response(json_encode(TweetDataFactory::init()
@@ -132,7 +136,7 @@ test('`checkForErrors()` throws if an error was found in the response', function
 
 it('returns a collection of `TwitterUserDTO` objects from `getUsers()` method', function (): void {
 	$users = TwitterUser::factory()
-		->count(faker()->numberBetween(1, 100))
+		->count(fake()->numberBetween(1, 100))
 		->make();
 
 	Http::fake([
@@ -148,3 +152,9 @@ it('returns a collection of `TwitterUserDTO` objects from `getUsers()` method', 
 		->toBeInstanceOf(Collection::class)
 		->toHaveCount($users->count());
 });
+
+test('when TwitterFeed feature is disabled, creating an instance of App\Services\Twitter\TwitterService throws an exception', function (): void {
+	Feature::define(TwitterFeed::class, false);
+
+	new TwitterService(makeToken());
+})->throws(Exception::class, "TwitterFeed feature is disabled.");

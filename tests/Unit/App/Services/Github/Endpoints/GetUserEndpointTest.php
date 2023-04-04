@@ -2,7 +2,7 @@
 
 use App\Services\Github\Endpoints\GetUserEndpoint;
 
-beforeEach(fn () => $this->faker = \Faker\Factory::create());
+use function Pest\Faker\fake;
 
 it('creates an instance of App\Services\Github\Endpoints\GetUserEndpoint', function (): void {
 	expect(new GetUserEndpoint)->toBeInstanceOf(GetUserEndpoint::class);
@@ -11,7 +11,7 @@ it('creates an instance of App\Services\Github\Endpoints\GetUserEndpoint', funct
 it('sets the \'Authorization\' header', function (): void {
 	$test_authorization = 'test_authorization';
 	$endpoint = GetUserEndpoint::make()
-		->withUser($this->faker->username())
+		->withUser(fake()->username())
 		->with([
 			'Authorization' => $test_authorization,
 		]);
@@ -27,12 +27,12 @@ it('throws an error if `withUser()` is not called', function (): void {
 
 it('throws an exception if \'Authorization\' header is not passed', function (): void {
 	GetUserEndpoint::make()
-		->withUser($this->faker->username())
+		->withUser(fake()->username())
 		->with([]);
 })->throws(Exception::class);
 
 it('has the correct endpoint value', function (): void {
-	$username = $this->faker->username();
+	$username = fake()->username();
 
 	expect(GetUserEndpoint::make()
 			->withUser($username)
@@ -42,7 +42,7 @@ it('has the correct endpoint value', function (): void {
 });
 
 it('constructs the correct url with `url()`', function (): void {
-	$username = $this->faker->username();
+	$username = fake()->username();
 
 	expect(GetUserEndpoint::make()
 			->withUser($username)

@@ -1,7 +1,7 @@
 <?php
 
 use App\Models\Image;
-use function Pest\Faker\faker;
+use function Pest\Faker\fake;
 use function Pest\Laravel\actingAs;
 use function Pest\Laravel\delete;
 use function Pest\Laravel\get;
@@ -18,7 +18,7 @@ it('allows an admin to access images index page', function () {
 
 it('redirects a logged-out user away from the image view page', function () {
 	get(route('images.show', [
-		'image' => faker()->randomNumber(),
+		'image' => fake()->randomNumber(),
 	]))
 		->assertRedirect(route('login'));
 });

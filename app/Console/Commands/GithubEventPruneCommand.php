@@ -50,8 +50,8 @@ class GithubEventPruneCommand extends Command
 
 		GithubEvent::whereNotIn('id', $keep_ids)->delete();
 
-		GithubEventsPruned::dispatch();
+		GithubEventsPruned::dispatch(self::SUCCESS);
 
-		return 0;
+		return self::SUCCESS;
 	}
 }

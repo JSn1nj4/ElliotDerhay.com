@@ -41,8 +41,8 @@ class TokenPruneCommand extends Command
 	{
 		Token::expired()->delete();
 
-		TokensPrunedEvent::dispatch();
+		TokensPrunedEvent::dispatch(self::SUCCESS);
 
-		return 0;
+		return self::SUCCESS;
 	}
 }

@@ -2,7 +2,7 @@
 
 use App\Models\Post;
 use Illuminate\Http\Testing\File;
-use function Pest\Faker\faker;
+use function Pest\Faker\fake;
 use function Pest\Laravel\actingAs;
 use function Pest\Laravel\delete;
 use function Pest\Laravel\get;
@@ -193,7 +193,7 @@ it('allows logged-in users to create a post', function () {
 
 it('redirects logged-out users away from the post edit page', function () {
 	get(route('posts.edit', [
-		'post' => faker()->randomNumber(),
+		'post' => fake()->randomNumber(),
 	]))
 		->assertRedirect(route('login'));
 });
@@ -374,9 +374,9 @@ it('allows logged-in users to update a post', function () {
 		]), [
 			'cover_image' => File::fake()
 				->image('fake-image.jpg', 300, 300),
-			'title' => faker()->title(),
-			'slug' => faker()->slug(),
-			'body' => faker()->paragraph(),
+			'title' => fake()->title(),
+			'slug' => fake()->slug(),
+			'body' => fake()->paragraph(),
 		])
 		->assertRedirect(route('posts.edit', [
 			'post' => $post,
@@ -402,7 +402,7 @@ it('prevents deleting a post that doesn\'t exist', function () {
 
 	actingAs(createUser())
 		->delete(route('posts.destroy', [
-			'post' => faker()->randomNumber(),
+			'post' => fake()->randomNumber(),
 		]))
 		->assertNotFound();
 

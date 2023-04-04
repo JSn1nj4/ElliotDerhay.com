@@ -2,7 +2,7 @@
 
 use App\Services\Github\Endpoints\ListUserPublicEventsEndpoint;
 
-beforeEach(fn () => $this->faker = \Faker\Factory::create());
+use function Pest\Faker\fake;
 
 it('creates an instance of App\Services\Github\Endpoints\ListUserPublicEventsEndpoint', function (): void {
 	expect(new ListUserPublicEventsEndpoint)->toBeInstanceOf(ListUserPublicEventsEndpoint::class);
@@ -11,11 +11,11 @@ it('creates an instance of App\Services\Github\Endpoints\ListUserPublicEventsEnd
 it('sets the \'Authorization\' header', function (): void {
 	$test_authorization = 'test_authorization';
 	$endpoint = ListUserPublicEventsEndpoint::make()
-		->withUser($this->faker->username())
+		->withUser(fake()->username())
 		->with([
 			'Authorization' => $test_authorization,
 		], [
-			'per_page' => $this->faker->numberBetween(1, 100),
+			'per_page' => fake()->numberBetween(1, 100),
 		]);
 
 	expect($endpoint->headers['Authorization'])
@@ -29,12 +29,12 @@ it('throws an error if `withUser()` is not called', function (): void {
 
 it('throws an exception if \'Authorization\' header is not passed', function (): void {
 	ListUserPublicEventsEndpoint::make()
-		->withUser($this->faker->username())
+		->withUser(fake()->username())
 		->with([]);
 })->throws(Exception::class);
 
 it('has the correct endpoint value', function (): void {
-	$username = $this->faker->username();
+	$username = fake()->username();
 
 	expect(ListUserPublicEventsEndpoint::make()
 		->withUser($username)
@@ -44,7 +44,7 @@ it('has the correct endpoint value', function (): void {
 });
 
 it('constructs the correct url with `url()`', function (): void {
-	$username = $this->faker->username();
+	$username = fake()->username();
 
 	expect(ListUserPublicEventsEndpoint::make()
 		->withUser($username)

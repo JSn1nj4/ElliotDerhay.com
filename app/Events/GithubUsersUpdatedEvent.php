@@ -4,8 +4,8 @@ namespace App\Events;
 
 class GithubUsersUpdatedEvent extends CommandWasRunEvent
 {
-	public function __construct()
+	public function __construct(int $statusCode, string|null $message = null)
 	{
-		parent::__construct('github:user:update');
+		parent::__construct('github:user:update', $statusCode, $message);
 	}
 }

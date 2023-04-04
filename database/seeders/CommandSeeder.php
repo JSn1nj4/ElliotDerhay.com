@@ -9,6 +9,14 @@ class CommandSeeder extends Seeder
 {
 	private array $commands = [
 		[
+			'signature' => 'admin:init',
+			'description' => 'Initialize admin login'
+		],
+		[
+			'signature' => 'admin:reset_password',
+			'description' => 'Reset the admin password'
+		],
+		[
 			'signature' => 'github:event:prune',
 			'description' => 'Prune old GitHub events'
 		],
@@ -31,6 +39,14 @@ class CommandSeeder extends Seeder
 		[
 			'signature' => 'tweet:pull',
 			'description' => 'Fetch latest tweets'
+		],
+		[
+			'signature' => 'twitter:feature_status',
+			'description' => 'Check the state of the TwitterFeed feature'
+		],
+		[
+			'signature' => 'twitter:toggle_feature',
+			'description' => 'Toggle the active state of the TwitterFeed feature'
 		],
 		[
 			'signature' => 'twitter:user:update',

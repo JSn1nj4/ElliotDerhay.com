@@ -2,7 +2,6 @@
 
 namespace Tests\Support;
 
-use Faker\Factory;
 use Faker\Generator;
 
 class TwitterUserDataFactory extends BaseFactory
@@ -13,7 +12,7 @@ class TwitterUserDataFactory extends BaseFactory
 
 	public function __construct()
 	{
-		$this->faker = Factory::create();
+		$this->faker = fake();
 
 		$this->name = $this->faker->name();
 
