@@ -5,6 +5,7 @@ namespace App\Services\Twitter;
 use App\Contracts\SocialMediaService;
 use App\DataTransferObjects\TweetDTO;
 use App\DataTransferObjects\TwitterUserDTO;
+use App\Features\TwitterFeed;
 use App\Models\Token;
 use App\Services\AbstractEndpoint;
 use App\Services\Twitter\Endpoints\TokenEndpoint;
@@ -16,13 +17,14 @@ use Illuminate\Http\Client\Response;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
+use Laravel\Pennant\Feature;
 
 class TwitterService implements SocialMediaService
 {
 	/**
 	 * The token used for retrieving tweet information from the Twitter API
 	 */
-	private ?Token $token;
+	private Token|null $token;
 
 	/**
 	 * The API key used for generating the token
@@ -40,9 +42,14 @@ class TwitterService implements SocialMediaService
 	 * This is necessary to initialize some properties that can't otherwise be
 	 * initialized. Initializing properties outside the constructor requires
 	 * that the initial values be static.
+	 * @throws Exception
 	 */
-	public function __construct(?Token $token)
+	public function __construct(Token|null $token)
 	{
+		if (Feature::inactive(TwitterFeed::class)) {
+			throw new Exception("TwitterFeed feature is disabled.");
+		}
+
 		$this->key = config('services.twitter.key');
 		$this->secret = config('services.twitter.secret');
 
@@ -98,6 +105,7 @@ class TwitterService implements SocialMediaService
 	 *
 	 * This method is intended to be used only if $this->token isn't
 	 * set.
+	 * @throws Exception
 	 */
 	private function getToken(): Token
 	{
@@ -121,8 +129,9 @@ class TwitterService implements SocialMediaService
 	 *
 	 * Check these docs for other details:
 	 * https://developer.twitter.com/en/docs/twitter-api/v1/tweets/timelines/api-reference/get-statuses-user_timeline
+	 * @throws Exception
 	 */
-	public function getPosts(string $username, ?string $since = null, bool $reposts = true, ?int $count = null): Collection
+	public function getPosts(string $username, string|null $since = null, bool $reposts = true, int|null $count = null): Collection
 	{
 		if(is_int($count) && $count < 1) {
 			throw new Exception("'\$count' value cannot be below or equal to 0.");
@@ -157,6 +166,11 @@ class TwitterService implements SocialMediaService
 			));
 	}
 
+	/**
+	 * @param Collection $users
+	 * @return Collection
+	 * @throws Exception
+	 */
 	public function getUsers(Collection $users): Collection
 	{
 		$response = $this->call(UsersLookupEndpoint::make()->with(

@@ -12,8 +12,8 @@ class DemoSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
-    {
+    public function run(): void
+	{
 		if (app()->environment('production')) {
 			throw new \Exception("This seeder must not be run in Production! It will likely destroy live data.");
 		}

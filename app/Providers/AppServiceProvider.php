@@ -34,7 +34,7 @@ class AppServiceProvider extends ServiceProvider
 	 *
 	 * @return void
 	 */
-	public function register()
+	public function register(): void
 	{
 		$this->app->when(TwitterService::class)
 			->needs(Token::class)
@@ -49,7 +49,7 @@ class AppServiceProvider extends ServiceProvider
 	 *
 	 * @return void
 	 */
-	public function boot()
+	public function boot(): void
 	{
 		//
 	}

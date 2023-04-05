@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Actions\HashPassword;
+use App\Events\AdminSetPasswordEvent;
 use App\Models\User;
 use Illuminate\Console\Command;
 
@@ -31,6 +32,9 @@ class AdminSetPasswordCommand extends Command
     {
         if (User::limit(1)->doesntExist()) {
 			$this->error('Admin user does not exist. Run `admin:init` to configure admin user.');
+
+			AdminSetPasswordEvent::dispatch(self::FAILURE, "Admin user did not exist.");
+
 			return self::FAILURE;
 		}
 
@@ -41,6 +45,8 @@ class AdminSetPasswordCommand extends Command
 		]);
 
 		$this->info("Password reset for admin user with email '{$user->email}'.");
+
+		AdminSetPasswordEvent::dispatch(self::SUCCESS);
 
 		return self::SUCCESS;
     }

@@ -38,9 +38,23 @@ class TweetPruneCommand extends Command
 	 *
 	 * @return int
 	 */
-	public function handle()
+	public function handle(): int
 	{
-		$keep_count = $this->option('keep');
+		$keep_count = (int) $this->option('keep');
+
+		if ($keep_count === 0) {
+			if (!$this->confirm("You're about to delete all stored tweets. Are you sure?")) {
+				TweetsPrunedEvent::dispatch(self::FAILURE, "User aborted deleting all tweets.");
+
+				return self::FAILURE;
+			}
+
+			Tweet::truncate();
+
+			TweetsPrunedEvent::dispatch(self::SUCCESS, "All tweets deleted.");
+
+			return self::SUCCESS;
+		}
 
 		$keep_ids = Tweet::latest('date')
 					->take($keep_count)
@@ -50,8 +64,8 @@ class TweetPruneCommand extends Command
 
 		Tweet::whereNotIn('id', $keep_ids)->delete();
 
-		TweetsPrunedEvent::dispatch();
+		TweetsPrunedEvent::dispatch(self::SUCCESS, "Tweets pruned down to latest $keep_count.");
 
-		return 0;
+		return self::SUCCESS;
 	}
 }

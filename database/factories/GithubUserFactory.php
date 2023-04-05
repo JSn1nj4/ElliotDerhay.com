@@ -14,8 +14,8 @@ class GithubUserFactory extends Factory
      *
      * @return array
      */
-    public function definition()
-    {
+    public function definition(): array
+	{
 		$id = $this->faker->randomNumber(7, true);
 		$login = $this->faker->userName();
 

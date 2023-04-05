@@ -14,8 +14,8 @@ class LockoutFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    public function definition()
-    {
+    public function definition(): array
+	{
         return [
             'ip_address' => $this->faker->unique()->ipv4(),
 			'url' => $this->faker->url(),

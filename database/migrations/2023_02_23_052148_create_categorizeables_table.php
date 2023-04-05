@@ -11,8 +11,8 @@ return new class extends Migration
      *
      * @return void
      */
-    public function up()
-    {
+    public function up(): void
+	{
         Schema::create('categorizeables', function (Blueprint $table) {
             $table->id();
 			$table->foreignIdFor(\App\Models\Category::class, 'category_id');
@@ -27,8 +27,8 @@ return new class extends Migration
      *
      * @return void
      */
-    public function down()
-    {
+    public function down(): void
+	{
         Schema::dropIfExists('categorizeables');
     }
 };

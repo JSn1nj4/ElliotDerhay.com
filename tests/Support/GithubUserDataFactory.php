@@ -11,7 +11,7 @@ class GithubUserDataFactory extends BaseFactory
 
 	public function __construct()
 	{
-		$this->faker = Factory::create();
+		$this->faker = fake();
 
 		$this->username = $this->faker->userName();
 	}

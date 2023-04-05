@@ -2,7 +2,7 @@
 
 use App\Models\Project;
 use Illuminate\Http\Testing\File;
-use function Pest\Faker\faker;
+use function Pest\Faker\fake;
 use function Pest\Laravel\actingAs;
 use function Pest\Laravel\delete;
 use function Pest\Laravel\get;
@@ -228,7 +228,7 @@ it('allows logged-in users to create a project', function () {
 
 it('redirects logged-out users away from the project edit page', function () {
 	get(route('projects.edit', [
-		'project' => faker()->randomNumber(),
+		'project' => fake()->randomNumber(),
 	]))
 		->assertRedirect(route('login'));
 });
@@ -450,10 +450,10 @@ it('allows logged-in users to update a project', function () {
 		]), [
 			'thumbnail' => File::fake()
 				->image('fake.jpg', 3000, 3000),
-			'name' => faker()->title,
-			'link' => faker()->unique()->url,
-			'demo_link' => faker()->unique()->url,
-			'short_desc' => faker()->paragraph,
+			'name' => fake()->title,
+			'link' => fake()->unique()->url,
+			'demo_link' => fake()->unique()->url,
+			'short_desc' => fake()->paragraph,
 		])
 		->assertSessionHasNoErrors()
 		->assertRedirect(route('projects.edit', [
@@ -479,7 +479,7 @@ it('prevents deleting a project that doesn\'t exist', function () {
 
 	actingAs(createUser())
 		->delete(route('projects.destroy', [
-			'project' => faker()->randomNumber(),
+			'project' => fake()->randomNumber(),
 		]))
 		->assertNotFound();
 

@@ -40,10 +40,7 @@ class GithubEvent extends Model
 
 	protected $casts = [
 		'id' => 'string',
-	];
-
-	protected $dates = [
-		'date',
+		'date' => 'datetime',
 	];
 
 	protected $fillable = [

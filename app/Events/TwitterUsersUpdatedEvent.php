@@ -4,8 +4,8 @@ namespace App\Events;
 
 class TwitterUsersUpdatedEvent extends CommandWasRunEvent
 {
-	public function __construct()
+	public function __construct(int $statusCode, string|null $message = null)
 	{
-		parent::__construct('twitter:user:update');
+		parent::__construct('twitter:user:update', $statusCode, $message);
 	}
 }

@@ -4,8 +4,8 @@ namespace App\Events;
 
 class GithubEventsPruned extends CommandWasRunEvent
 {
-    public function __construct()
+    public function __construct(int $statusCode, string|null $message = null)
     {
-        parent::__construct('github:event:prune');
+        parent::__construct('github:event:prune', $statusCode, $message);
     }
 }

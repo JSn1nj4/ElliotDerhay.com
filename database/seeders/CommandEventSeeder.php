@@ -13,8 +13,8 @@ class CommandEventSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
-    {
+    public function run(): void
+	{
 		$this->call([
 			CommandSeeder::class,
 		]);

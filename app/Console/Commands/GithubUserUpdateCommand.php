@@ -53,8 +53,8 @@ class GithubUserUpdateCommand extends Command
 
 		$this->info("GitHub users updated!");
 
-		GithubUsersUpdatedEvent::dispatch();
+		GithubUsersUpdatedEvent::dispatch(self::SUCCESS);
 
-		return Command::SUCCESS;
+		return self::SUCCESS;
     }
 }

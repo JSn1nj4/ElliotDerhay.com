@@ -10,11 +10,11 @@
 	</x-widget.wrapper>
 @endif
 
-@if(config('blog.feature.latest_tweets_widget'))
+@feature(\App\Features\TwitterFeed::class)
 	<x-widget.wrapper title="Latest Tweet">
 		<x-twitter.timeline count="1"/>
 	</x-widget.wrapper>
-@endif
+@endfeature
 
 @if(config('blog.feature.github_activity_widget'))
 	<x-widget.wrapper title="GitHub Activity">

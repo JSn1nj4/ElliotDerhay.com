@@ -41,10 +41,7 @@ class Tweet extends Model
 	protected $casts = [
 		'id' => 'string',
 		'entities' => 'object',
-	];
-
-	protected $dates = [
-		'date',
+		'date' => 'datetime',
 	];
 
 	protected $fillable = [

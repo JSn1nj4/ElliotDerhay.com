@@ -3,10 +3,12 @@
 namespace App\Console\Commands;
 
 use App\Events\TweetsPulledEvent;
+use App\Features\TwitterFeed;
 use App\Models\Tweet;
 use App\Services\Twitter\TwitterService;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
+use Laravel\Pennant\Feature;
 
 class TweetPullCommand extends Command
 {
@@ -41,6 +43,14 @@ class TweetPullCommand extends Command
 	 */
 	public function handle(TwitterService $twitter)
 	{
+		if (Feature::inactive(TwitterFeed::class)) {
+			$this->error("The TwitterFeed feature is currently disabled.");
+
+			TweetsPulledEvent::dispatch(self::FAILURE, "TwitterFeed feature is disabled.");
+
+			return self::FAILURE;
+		}
+
 		$user = 'jsn1nj4';
 
 		if($this->option('debug')) {
@@ -65,8 +75,8 @@ class TweetPullCommand extends Command
 
 		$this->info('Tweets fetched');
 
-		TweetsPulledEvent::dispatch();
+		TweetsPulledEvent::dispatch(self::SUCCESS);
 
-		return 0;
+		return self::SUCCESS;
 	}
 }

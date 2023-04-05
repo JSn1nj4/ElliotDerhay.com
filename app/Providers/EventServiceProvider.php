@@ -12,7 +12,6 @@ use App\Events\TweetsPulledEvent;
 use App\Events\TwitterUsersUpdatedEvent;
 use App\Listeners\CommandLogSubscriber;
 use App\Listeners\SendPasswordChangedNotification;
-use App\Listeners\UpdateCommandLog;
 use App\Listeners\LogLockouts;
 use App\Listeners\PruneOldTweets;
 use App\Listeners\SendNewGithubEventTypesEmail;

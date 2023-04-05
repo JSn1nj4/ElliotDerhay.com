@@ -33,7 +33,7 @@ class GithubEventDataFactory extends BaseFactory
 
 	public function __construct()
 	{
-		$this->faker = \Faker\Factory::create();
+		$this->faker = fake();
 	}
 
 	private function definition(): array

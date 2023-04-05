@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Actions\HashPassword;
+use App\Events\AdminInitEvent;
 use App\Models\User;
 use Illuminate\Console\Command;
 
@@ -31,6 +32,9 @@ class AdminInitCommand extends Command
     {
 		if (User::limit(1)->exists()) {
 			$this->error("An admin user exists already. Please update that user instead of running 'admin:init'.");
+
+			AdminInitEvent::dispatch(self::FAILURE, "Admin user already exists.");
+
 			return self::FAILURE;
 		}
 
@@ -41,6 +45,8 @@ class AdminInitCommand extends Command
 		]);
 
 		$this->info("Admin user created for email '{$user->email}'.");
+
+		AdminInitEvent::dispatch(self::SUCCESS);
 
         return self::SUCCESS;
     }

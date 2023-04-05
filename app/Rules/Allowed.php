@@ -16,15 +16,15 @@ class Allowed implements InvokableRule
     /**
      * Run the validation rule.
      *
-     * @param  string  $attribute
+     * @param string $attribute
      * @param  mixed  $value
-     * @param  \Closure(string): \Illuminate\Translation\PotentiallyTranslatedString  $fail
+     * @param \Closure(string): \Illuminate\Translation\PotentiallyTranslatedString $fail
      * @return void
 	 *
 	 * TODO: migrate PHPDoc to signature when interface allows
      */
-    public function __invoke($attribute, $value, $fail)
-    {
+    public function __invoke(string $attribute, mixed $value, \Closure $fail): void
+	{
         if ($this->found($value)) return;
 
 		$fail(':attribute is not allowed.');

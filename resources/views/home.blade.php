@@ -48,12 +48,14 @@
 		</x-column>
 
 		<div class="block md:flex">
-			<x-column class="block md:w-1/2">
-				<h2 class="content-title text-2xl pt-6 mt-4 text-center">Latest Tweet</h2>
-				<section id="twitter_timeline-home">
-					<x-twitter.timeline count="1"/>
-				</section>
-			</x-column>
+			@feature(\App\Features\TwitterFeed::class)
+				<x-column class="block md:w-1/2">
+					<h2 class="content-title text-2xl pt-6 mt-4 text-center">Latest Tweet</h2>
+					<section id="twitter_timeline-home">
+						<x-twitter.timeline count="1"/>
+					</section>
+				</x-column>
+			@endfeature
 
 			<x-column class="block md:w-1/2">
 				<h2 class="content-title text-2xl pt-6 mt-4 text-center">GitHub Activity</h2>

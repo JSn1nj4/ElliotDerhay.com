@@ -29,6 +29,8 @@ class ImageService
 	public function url(string $path, string $disk): string
 	{
 		return Cache::rememberForever($path, function () use ($path, $disk) {
+			if (app()->environment('production')) return Storage::disk($disk)->url($path);
+
 			self::ensureCached($path, $disk);
 
 			return Storage::disk('public-cache')->url($path);
