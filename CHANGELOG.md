@@ -1,5 +1,10 @@
 # Changelog
 
+## Release 2.0.5
+
+### Fixes
+- Use raw S3 asset URLs in Production for now
+
 ## Release 2.0.4
 
 ### Fixes
