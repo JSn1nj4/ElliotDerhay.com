@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Auth;
 
+use App\Features\AdminLogin;
 use App\Models\Lockout;
 use Illuminate\Auth\Events\Lockout as LockoutEvent;
 use Illuminate\Foundation\Http\FormRequest;
@@ -9,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
+use Laravel\Pennant\Feature;
 
 class LoginRequest extends FormRequest
 {
@@ -44,6 +46,8 @@ class LoginRequest extends FormRequest
      */
     public function authenticate(): void
     {
+		if (Feature::inactive(AdminLogin::class)) $this->throwDefault();
+
 		$this->checkIfShouldLockOut();
 
 		$this->ensureIsNotLockedOut();
@@ -53,23 +57,23 @@ class LoginRequest extends FormRequest
 
             RateLimiter::hit($this->throttleKey());
 
-            throw ValidationException::withMessages([
-                'email' => trans('auth.failed'),
-            ]);
+            $this->throwDefault();
         }
 
         RateLimiter::clear($this->throttleKey());
     }
 
+	/**
+	 * @return void
+	 * @throws ValidationException
+	 */
 	public function ensureIsNotLockedOut(): void
 	{
 		if(!Lockout::whereIpAddress($this->ip())->exists()) return;
 
 		sleep(3);
 
-		throw ValidationException::withMessages([
-			'email' => trans('auth.failed'),
-		]);
+		$this->throwDefault();
 	}
 
     /**
@@ -97,4 +101,16 @@ class LoginRequest extends FormRequest
     {
         return Str::transliterate(Str::lower($this->input('email')).'|'.$this->ip());
     }
+
+	/**
+	 * Throw the default ValidationException
+	 * @return void
+	 * @throws ValidationException
+	 */
+	private function throwDefault(): void
+	{
+		throw ValidationException::withMessages([
+			'email' => trans('auth.failed'),
+		]);
+	}
 }
