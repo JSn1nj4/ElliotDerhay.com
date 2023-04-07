@@ -1,10 +1,11 @@
 # Changelog
 
-## Version 2.0.6
+## Version 2.1.0
 
 ### Added
 - AdminLogin feature via Laravel Pennant
 - Commands to toggle admin login feature and check its status
+- Add command to flush sessions
 
 ## Version 2.0.5
 
