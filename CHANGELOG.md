@@ -6,6 +6,7 @@
 - AdminLogin feature via Laravel Pennant
 - Commands to toggle admin login feature and check its status
 - Add command to flush sessions
+- Set up toggleable GitHub feed Pennant feature
 
 ## Version 2.0.5
 
