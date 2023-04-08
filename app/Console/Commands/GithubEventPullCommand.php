@@ -3,10 +3,12 @@
 namespace App\Console\Commands;
 
 use App\Events\GithubEventsPulledEvent;
+use App\Features\GithubFeed;
 use App\Models\GithubEvent;
 use App\Services\Github\GithubService;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Storage;
+use Laravel\Pennant\Feature;
 
 class GithubEventPullCommand extends Command
 {
@@ -40,10 +42,20 @@ class GithubEventPullCommand extends Command
 	/**
 	 * Execute the console command.
 	 *
+	 * @param \App\Services\Github\GithubService $github
 	 * @return int
+	 * @throws \Exception
 	 */
-	public function handle(GithubService $github)
+	public function handle(GithubService $github): int
 	{
+		if (Feature::inactive(GithubFeed::class)) {
+			$this->error('The GitHub feed feature is currently disabled.');
+
+			GithubEventsPulledEvent::dispatch(self::FAILURE, "GitHub feed feature is disabled.");
+
+			return self::FAILURE;
+		}
+
 		$this->info("Fetching GitHub events...");
 
 		$events = $github->getEvents('JSn1nj4', $this->option('count'));

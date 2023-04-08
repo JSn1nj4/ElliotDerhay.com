@@ -33,6 +33,14 @@ class CommandSeeder extends Seeder
 			'description' => 'Fetch latest GitHub activity'
 		],
 		[
+			'signature' => 'github:toggle_feature',
+			'description' => 'Toggle the GitHub feed feature'
+		],
+		[
+			'signature' => 'github:feature_status',
+			'description' => 'Check status of the GitHub feed feature'
+		],
+		[
 			'signature' => 'github:user:update',
 			'description' => 'Update saved GitHub user data'
 		],
