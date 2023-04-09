@@ -15,7 +15,7 @@ return new class extends Migration
 	{
         Schema::create('imageables', function (Blueprint $table) {
 			$table->id();
-			$table->foreignId('image_id');
+			$table->foreignIdFor(\App\Models\Image::class, 'image_id');
 			$table->unsignedBigInteger('imageable_id');
 			$table->string('imageable_type');
 			$table->timestamps();

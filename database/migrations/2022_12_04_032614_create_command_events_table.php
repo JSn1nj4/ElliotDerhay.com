@@ -15,7 +15,7 @@ return new class extends Migration
 	{
         Schema::create('command_events', function (Blueprint $table) {
             $table->id();
-			$table->foreignId('command_id');
+			$table->foreignIdFor(\App\Models\Command::class, 'command_id');
 			$table->boolean('succeeded');
 			$table->string('message');
             $table->timestamps();

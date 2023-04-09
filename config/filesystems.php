@@ -82,6 +82,11 @@ return [
 			'prefix' => 'uploads',
 		],
 
+		'sessions' => [
+			'driver' => 'local',
+			'root' => storage_path('framework/sessions'),
+		],
+
 	],
 
 	/*

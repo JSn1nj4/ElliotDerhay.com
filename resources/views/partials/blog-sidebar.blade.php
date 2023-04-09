@@ -16,8 +16,8 @@
 	</x-widget.wrapper>
 @endfeature
 
-@if(config('blog.feature.github_activity_widget'))
+@feature(\App\Features\GithubFeed::class)
 	<x-widget.wrapper title="GitHub Activity">
 		<x-github.events-feed count="5"/>
 	</x-widget.wrapper>
-@endif
+@endfeature

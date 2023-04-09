@@ -13,8 +13,16 @@ class CommandSeeder extends Seeder
 			'description' => 'Initialize admin login'
 		],
 		[
+			'signature' => 'admin:login_status',
+			'description' => 'Check status of the admin login feature'
+		],
+		[
 			'signature' => 'admin:reset_password',
 			'description' => 'Reset the admin password'
+		],
+		[
+			'signature' => 'admin:toggle_login',
+			'description' => 'Turn the admin login feature on or off'
 		],
 		[
 			'signature' => 'github:event:prune',
@@ -23,6 +31,14 @@ class CommandSeeder extends Seeder
 		[
 			'signature' => 'github:event:pull',
 			'description' => 'Fetch latest GitHub activity'
+		],
+		[
+			'signature' => 'github:toggle_feature',
+			'description' => 'Toggle the GitHub feed feature'
+		],
+		[
+			'signature' => 'github:feature_status',
+			'description' => 'Check status of the GitHub feed feature'
 		],
 		[
 			'signature' => 'github:user:update',

@@ -53,12 +53,11 @@ class TweetPullCommand extends Command
 
 		$user = 'jsn1nj4';
 
-		if($this->option('debug')) {
+		if($this->option('debug')) /** @noinspection DebugFunctionUsageInspection */
 			dd($twitter->getPosts(
 				username: $user,
 				count: 1
 			));
-		}
 
 		$newest_id = optional(DB::table('tweets')->latest('date')->first())->id;
 
