@@ -1,5 +1,10 @@
 # Changelog
 
+## Version 2.1.1
+
+### Fixed
+- Space a type-hinting comment in a Blade file to fix "undefined constant php" error on Heroku platform.
+
 ## Version 2.1.0
 
 ### New

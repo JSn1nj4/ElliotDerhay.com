@@ -1,4 +1,4 @@
-@php/** @var \App\Models\Tag[] $tags */@endphp
+@php /** @var \App\Models\Tag[] $tags */ @endphp
 <div>
 	@foreach ($tags as $tag)
 		<span>
