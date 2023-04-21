@@ -1,5 +1,11 @@
 # Changelog
 
+## Version 2.1.2
+
+### Fixes
+- Hide empty sidebar widgets
+- Add more light/dark color updates for admin
+
 ## Version 2.1.1
 
 ### Fixed
