@@ -12,7 +12,7 @@
 			<div class="flex flex-col justify-between mb-8 gap-6">
 				<h1 class="text-3xl uppercase">Command Event Log</h1>
 				@if(session()->has('success'))
-					<div class="bg-green-900 border border-green-200 text-green-200 p-3 text-lg">{{ session('success') }}</div>
+					<div class="bg-green-200 dark:bg-green-900 border border-green-900 dark:border-green-200 text-green-900 dark:text-green-200 p-3 text-lg">{{ session('success') }}</div>
 				@endif
 			</div>
 			<div class="px-6 pb-6">
