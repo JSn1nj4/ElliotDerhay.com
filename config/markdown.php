@@ -29,7 +29,7 @@ return [
          *
          * More info: https://github.com/shikijs/shiki/blob/master/docs/themes.md
          */
-        'theme' => 'material-palenight',
+        'theme' => 'material-theme-palenight',
     ],
 
     /*
