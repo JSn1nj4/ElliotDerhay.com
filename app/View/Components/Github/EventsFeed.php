@@ -19,7 +19,7 @@ class EventsFeed extends Component
 	 *
 	 * @return void
 	 */
-	public function __construct(int $count = 7, string $loaderSize = '40px')
+	public function __construct(int $count = 7, string $loaderSize = '40px', public string $type = 'default', public string|null $padding = null)
 	{
 		$this->count = $count;
 		$this->loaderSize = $loaderSize;

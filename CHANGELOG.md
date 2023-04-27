@@ -8,6 +8,9 @@
 - Fix code block theme name
 - Display latest blog post on homepage
 
+### Updates
+- Display GitHub feed differently on homepage
+
 ## Version 2.1.1
 
 ### Fixed
