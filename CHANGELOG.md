@@ -10,6 +10,7 @@
 
 ### Updates
 - Display GitHub feed differently on homepage
+- Dark/light colors for inline code
 
 ## Version 2.1.1
 
