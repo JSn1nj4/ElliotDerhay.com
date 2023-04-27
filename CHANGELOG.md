@@ -1,5 +1,17 @@
 # Changelog
 
+## Version 2.1.2
+
+### Fixes
+- Hide empty sidebar widgets
+- Add more light/dark color updates for admin
+- Fix code block theme name
+- Display latest blog post on homepage
+
+### Updates
+- Display GitHub feed differently on homepage
+- Dark/light colors for inline code
+
 ## Version 2.1.1
 
 ### Fixed

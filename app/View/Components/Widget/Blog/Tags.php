@@ -10,16 +10,19 @@ class Tags extends Component
 {
 	public Collection $tags;
 
-    /**
-     * Create a new component instance.
+	/**
+	 * Create a new component instance.
 	 *
-	 * @todo: get tags sorted by post count
+	 * @param string $sortBy
+	 * @param \Illuminate\Database\Eloquent\Collection|null $tags
+	 * @param int $limit
+	 *
 	 * @todo: map 'sortBy' values to "orderBy" methods
-     *
-     * @return void
-     */
+	 * @todo: get tags sorted by post count
+	 */
     public function __construct(
 		public string $sortBy = 'title',
+		Collection|null $tags = null,
 		public int $limit = 10,
 	)
 	{
@@ -29,13 +32,22 @@ class Tags extends Component
 		};
 
 		$this->limit = min($this->limit, 50);
-
-		$this->tags = Tag::withExists('posts')
-			->limit($this->limit)
-			->get();
     }
 
-    /**
+	public function shouldRender(): bool
+	{
+		if(!config('blog.feature.tags_widget')) return false;
+
+		$this->tags ??= Tag::withExists('posts')
+			->limit($this->limit)
+			->get();
+
+		if($this->tags->count() === 0) return false;
+
+		return true;
+	}
+
+	/**
      * Get the view / contents that represent the component.
      *
      * @return \Illuminate\Contracts\View\View|\Closure|string

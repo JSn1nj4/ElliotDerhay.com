@@ -57,27 +57,24 @@
 			</p>
 		</x-column>
 
-		@if(Feature::active(TwitterFeed::class) || Feature::active(GithubFeed::class))
-			<div class="block md:flex">
-				@feature(TwitterFeed::class)
-					<x-column class="block md:w-1/2">
-						<h2 class="content-title text-2xl pt-6 mt-4 text-center">Latest Tweet</h2>
-						<section id="twitter_timeline-home">
-							<x-twitter.timeline count="1"/>
-						</section>
-					</x-column>
-				@endfeature
+		<div class="block md:flex">
+			<x-column class="block md:w-1/2">
+				<h2 class="content-title text-2xl pt-6 mt-4 text-center">Latest Blog Post</h2>
+				<section id="blog_feed-home">
+					<x-post.latest />
+				</section>
+			</x-column>
 
-				@feature(GithubFeed::class)
-					<x-column class="block md:w-1/2">
-						<h2 class="content-title text-2xl pt-6 mt-4 text-center">GitHub Activity</h2>
-						<section id="github_events_feed-home" class="font-mono">
-							<x-github.events-feed count="3"/>
-						</section>
-					</x-column>
-				@endfeature
-			</div>
-		@endif
+			@feature(GithubFeed::class)
+				<x-column class="block md:w-1/2">
+					<h2 class="content-title text-2xl pt-6 mt-4 text-center">GitHub Activity</h2>
+					<section id="github_events_feed-home" class="font-mono">
+						<x-github.events-feed padding="px-4 py-6" count="5" />
+					</section>
+				</x-column>
+			@endfeature
+		</div>
+
 	</x-row>
 
 @endsection

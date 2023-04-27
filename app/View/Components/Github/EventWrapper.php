@@ -24,7 +24,7 @@ class EventWrapper extends Component
 	 *
 	 * @return void
 	 */
-	public function __construct(GithubEvent $event)
+	public function __construct(GithubEvent $event, public string $type = 'default', public string|null $padding = null)
 	{
 		$this->event = $event;
 		$this->type_kebab = Str::kebab($this->event->type);
