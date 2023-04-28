@@ -2,6 +2,7 @@
 
 namespace App\View\Renderers\Markdown\Blocks;
 
+use App\View\Renderers\Markdown\Traits\Resumeable;
 use League\CommonMark\Extension\CommonMark\Node\Block\Heading;
 use League\CommonMark\Node\Node;
 use League\CommonMark\Renderer\ChildNodeRendererInterface;
@@ -11,6 +12,8 @@ use League\CommonMark\Xml\XmlNodeRendererInterface;
 
 class HeadingRenderer implements NodeRendererInterface, XmlNodeRendererInterface
 {
+	use Resumeable;
+
 	/**
 	 * @param Heading $node
 	 *

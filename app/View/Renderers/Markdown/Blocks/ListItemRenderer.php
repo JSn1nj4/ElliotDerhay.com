@@ -2,6 +2,7 @@
 
 namespace App\View\Renderers\Markdown\Blocks;
 
+use App\View\Renderers\Markdown\Traits\Resumeable;
 use League\CommonMark\Extension\CommonMark\Node\Block\ListItem;
 use League\CommonMark\Extension\TaskList\TaskListItemMarker;
 use League\CommonMark\Node\Block\Paragraph;
@@ -13,6 +14,8 @@ use League\CommonMark\Xml\XmlNodeRendererInterface;
 
 class ListItemRenderer implements NodeRendererInterface, XmlNodeRendererInterface
 {
+	use Resumeable;
+
 	/**
 	 * @param ListItem $node
 	 *

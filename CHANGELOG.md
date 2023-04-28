@@ -1,5 +1,10 @@
 # Changelog
 
+## Version 2.1.3
+
+### Fixes
+- Fix #92: support state restore in cached config objects
+
 ## Version 2.1.2
 
 ### Fixes
