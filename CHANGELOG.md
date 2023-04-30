@@ -2,8 +2,12 @@
 
 ## Version 2.1.3
 
+### New
+- #100: add "View Public" links on admin content view/edit pages
+
 ### Fixes
 - Fix #92: support state restore in cached config objects
+- Fix #101: content slice/dupe bug during editing
 
 ## Version 2.1.2
 
