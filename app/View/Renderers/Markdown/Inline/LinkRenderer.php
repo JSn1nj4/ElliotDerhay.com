@@ -2,6 +2,7 @@
 
 namespace App\View\Renderers\Markdown\Inline;
 
+use App\View\Renderers\Markdown\Traits\Resumeable;
 use Illuminate\Support\Facades\URL;
 use League\CommonMark\Extension\CommonMark\Node\Inline\Link;
 use League\CommonMark\Node\Node;
@@ -18,6 +19,8 @@ use League\Config\ConfigurationInterface;
  */
 class LinkRenderer implements NodeRendererInterface, XmlNodeRendererInterface, ConfigurationAwareInterface
 {
+	use Resumeable;
+
 	/** @psalm-readonly-allow-private-mutation */
 	private ConfigurationInterface $config;
 

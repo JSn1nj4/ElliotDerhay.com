@@ -2,12 +2,15 @@
 
 namespace App\View\Renderers\Markdown\Blocks;
 
+use App\View\Renderers\Markdown\Traits\Resumeable;
 use League\CommonMark\Node\Node;
 use League\CommonMark\Renderer\ChildNodeRendererInterface;
 use League\CommonMark\Util\HtmlElement;
 
 class ThematicBreakRenderer implements \League\CommonMark\Renderer\NodeRendererInterface
 {
+	use Resumeable;
+
     /**
      * @inheritDoc
      */

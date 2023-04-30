@@ -2,6 +2,7 @@
 
 namespace App\View\Renderers\Markdown\Blocks;
 
+use App\View\Renderers\Markdown\Traits\Resumeable;
 use League\CommonMark\Node\Block\Paragraph;
 use League\CommonMark\Node\Block\TightBlockInterface;
 use League\CommonMark\Node\Node;
@@ -12,6 +13,8 @@ use League\CommonMark\Xml\XmlNodeRendererInterface;
 
 class ParagraphRenderer implements NodeRendererInterface, XmlNodeRendererInterface
 {
+	use Resumeable;
+
 	/**
 	 * @param Paragraph $node
 	 *

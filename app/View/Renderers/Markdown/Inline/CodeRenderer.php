@@ -2,6 +2,7 @@
 
 namespace App\View\Renderers\Markdown\Inline;
 
+use App\View\Renderers\Markdown\Traits\Resumeable;
 use League\CommonMark\Extension\CommonMark\Node\Inline\Code;
 use League\CommonMark\Node\Node;
 use League\CommonMark\Renderer\ChildNodeRendererInterface;
@@ -12,6 +13,8 @@ use League\CommonMark\Xml\XmlNodeRendererInterface;
 
 class CodeRenderer implements NodeRendererInterface, XmlNodeRendererInterface
 {
+	use Resumeable;
+
     /**
 	 * @param Code $node
 	 *

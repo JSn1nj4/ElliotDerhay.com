@@ -8,11 +8,12 @@
 				<img src="{{ $post->image->url }}" class="block rounded-lg" alt="">
 			@endif
 
-			<div class="flex flex-row pt-3 mt-2 gap-4">
+			<div class="flex flex-row pt-3 mt-2 gap-4 text-xl">
 				<p>Posted {{ $post->created_at->toFormattedDateString() }}</p>
 				@unless($post->created_at->unix() === $post->updated_at->unix())
 					<p class="flex-grow-1">Last Updated {{ $post->updated_at->toFormattedDateString() }}</p>
 				@endunless
+				<p><a class="underline" href="{{ route('blog.show', compact('post')) }}" target="public_post-{{ $post->id }}">View Public</a></p>
 			</div>
 
 			<h1 class="content-title text-4xl pt-2 mt-1">{{ $post->title }}</h1>
