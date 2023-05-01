@@ -9,7 +9,7 @@ class AdminLogin
     /**
      * Resolve the feature's initial value.
      */
-    public function resolve(User $user): bool
+    public function resolve(null $scope): bool
     {
         return true;
     }

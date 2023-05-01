@@ -20,6 +20,9 @@ class FeatureServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+		// Force features on this site to be global by default
+		Feature::resolveScopeUsing(fn ($driver) => null);
+
         Feature::macro('toggle', function (string $feature) {
 			Feature::inactive($feature) ?
 				Feature::activate($feature) :

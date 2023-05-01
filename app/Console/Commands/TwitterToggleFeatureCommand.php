@@ -28,7 +28,7 @@ class TwitterToggleFeatureCommand extends Command
      */
     public function handle(): int
     {
-        Feature::toggleForEveryone(TwitterFeed::class);
+        Feature::toggle(TwitterFeed::class);
 
 		$message = match (Feature::inactive(TwitterFeed::class)) {
 			true => "TwitterFeed feature deactivated",

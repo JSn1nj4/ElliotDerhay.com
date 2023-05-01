@@ -4,8 +4,10 @@
 
 ### Updates
 - [#102][gh_102]: Make cookie popup more mobile-friendly
+- [#103][gh_103]: Make Pennant features global-only by default
 
 [gh_102]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/102
+[gh_103]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/103
 
 ## Version 2.1.3
 
