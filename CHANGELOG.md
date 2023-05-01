@@ -1,5 +1,12 @@
 # Changelog
 
+## Version 2.1.4
+
+### Updates
+- [#102][gh_102]: Make cookie popup more mobile-friendly
+
+[gh_102]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/102
+
 ## Version 2.1.3
 
 ### New
