@@ -1,6 +1,11 @@
 # Changelog
 
-## Version 2.1.4
+## Version 2.2.0
+
+### New
+- [#88][gh_88]: Create image lightbox modal that can be used on blog posts
+
+[gh_88]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/88
 
 ### Updates
 - [#102][gh_102]: Make cookie popup more mobile-friendly
