@@ -7,7 +7,7 @@
 			'opacity-0': !visible,
 		}"
 		:style="{
-			transitionDuration: speed,
+			transitionDuration: `${speed}ms`,
 			transitionTimingFunction: timing,
 		}"
 	>
@@ -54,10 +54,7 @@ function maybeOpen() {
 	if (visible.value === true) return
 
 	front.value = true
-
-	setTimeout(() => {
-		visible.value = true
-	}, props.speed)
+	visible.value = true
 }
 
 function maybeClose() {
@@ -86,7 +83,7 @@ const props = withDefaults(defineProps<{
 	timing?: timing,
 	transition?: boolean,
 }>(), {
-	speed: 300,
+	speed: 500,
 	timing: "linear",
 	transition: true,
 })
