@@ -1,6 +1,6 @@
 <template>
 	<section
-		class="lightbox overlay fixed transition-opacity bg-black/50 w-screen min-h-screen top-0"
+		class="lightbox overlay fixed transition-opacity bg-black/50 w-full min-h-screen top-0"
 		:class="{
 			'z-50': front,
 			'-z-50': !front,
