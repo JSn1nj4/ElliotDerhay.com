@@ -1,12 +1,20 @@
 <script type="application/javascript">
-	const lightboxables = document.querySelectorAll('img.lightbox-trigger')
+	const lightboxTriggers = document.querySelectorAll('img.lightbox-trigger')
 
-	function triggerPopup(e) {
-		const event = new CustomEvent('lightbox.show', { detail: e.target })
+	function triggerPopup({target}) {
+		const imageData = {
+			src: target.src,
+		}
+
+		if (target?.alt) imageData.alt = target.alt
+		if (target?.srcset) imageData.srcset = target.srcset
+		if (target?.title) imageData.title = target.title
+
+		const event = new CustomEvent('lightbox.show', { detail: imageData })
 		document.dispatchEvent(event)
 	}
 
-	lightboxables.forEach((img) => {
-		img.addEventListener('click', triggerPopup)
+	lightboxTriggers.forEach((trigger) => {
+		trigger.addEventListener('click', triggerPopup)
 	})
 </script>
