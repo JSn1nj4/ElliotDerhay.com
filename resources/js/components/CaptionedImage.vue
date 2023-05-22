@@ -1,5 +1,5 @@
 <template>
-	<div class="relative block overflow-hidden">
+	<figure class="relative block overflow-hidden">
 		<img
 			class="relative mx-auto object-contain"
 			:src="src"
@@ -13,7 +13,7 @@
 		>
 			{{ caption }}
 		</figcaption>
-	</div>
+	</figure>
 </template>
 
 <script setup lang="ts">
