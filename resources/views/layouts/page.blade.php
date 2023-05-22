@@ -28,7 +28,6 @@
 
 @push('footer-extras')
 	<div id="ga-request-popup"></div>
-	<div id="lightbox-modal"></div>
 
 	@vite('resources/js/app.ts')
 

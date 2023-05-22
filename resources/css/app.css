@@ -141,6 +141,10 @@ a {
 	font-family: "Helvetica Neue", "Segoe UI", Helvetica, Arial, sans-serif;
 }
 
+.lightbox-trigger {
+	@apply cursor-pointer transition-all duration-300 ease-linear outline outline-1 mt-1 outline-black hover:outline-sea-green-600 dark:hover:outline-sea-green-200;
+}
+
 /* took too long trying to customize via spatie/laravel-markdown */
 pre.shiki {
 	@apply my-4 p-4 overflow-x-auto;

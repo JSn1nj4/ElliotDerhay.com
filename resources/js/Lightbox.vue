@@ -11,7 +11,7 @@
 			transitionTimingFunction: timing,
 		}"
 	>
-		<button @click="triggerClose" class="absolute top-2 right-4 text-4xl z-50">&times;</button>
+		<button @click="maybeClose" class="absolute top-2 right-4 text-4xl z-50">&times;</button>
 		<div class="relative min-h-screen max-h-screen px-16 py-8">
 			<CaptionedImage
 				:src="image.src"
@@ -43,24 +43,32 @@ type duration =
 type timing =
 	| 'linear'
 
-const front: Ref<boolean> = ref(true) // TODO: default false
-const visible: Ref<boolean> = ref(true) // TODO: default false
+const defaultData = { src: '' }
 
-const image: Ref<ImageWithCaption> = ref({
-	alt: 'fake alt',
-	src: 'https://fakeimg.pl/768x576/282828/eae0d0/?retina=1',
-	srcset: null,
-	title: 'fake title',
-	caption: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magni, repellat.',
-})
+const front: Ref<boolean> = ref(false)
+const visible: Ref<boolean> = ref(false)
 
-function triggerClose(e) {
+const image: Ref<ImageWithCaption> = ref(defaultData)
+
+function maybeOpen() {
+	if (visible.value === true) return
+
+	front.value = true
+
+	setTimeout(() => {
+		visible.value = true
+	}, props.speed)
+}
+
+function maybeClose() {
+	if (front.value === false) return
+
 	visible.value = false
 
 	setTimeout(() => {
 		front.value = false
 
-		triggerUpdate({ src: '' })
+		triggerUpdate(defaultData)
 	}, props.speed)
 }
 
@@ -68,16 +76,9 @@ function triggerUpdate(data: ImageWithCaption) {
 	image.value = data
 }
 
-function triggerOpen(e) {
-	// TODO: set image if has ImageWithCaption
-	// triggerUpdate(e.imageData)
-
-	if (front.value === false) front.value = true
-	if (visible.value === true) return
-
-	setTimeout(() => {
-		visible.value = true
-	}, props.speed)
+function receiveImage(e) {
+	triggerUpdate(e.detail)
+	maybeOpen()
 }
 
 const props = withDefaults(defineProps<{
@@ -90,7 +91,7 @@ const props = withDefaults(defineProps<{
 	transition: true,
 })
 
-// TODO: receive update event
+document.addEventListener('lightbox.show', receiveImage)
 </script>
 
 <style lang="postcss">
