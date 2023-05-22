@@ -1,5 +1,5 @@
 <template>
-	<figure class="relative block overflow-hidden">
+	<figure class="relative block overflow-hidden rounded-lg">
 		<img
 			class="relative mx-auto object-contain"
 			:src="src"
