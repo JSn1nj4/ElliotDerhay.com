@@ -13,7 +13,7 @@
 	>
 		<button @click="maybeClose" class="absolute top-2 right-4 text-4xl z-50">&times;</button>
 		<div class="relative min-h-screen max-h-screen px-16 py-8">
-			<CaptionedImage
+			<CaptionableImage
 				:src="image.src"
 				:srcset="image.srcset"
 				:alt="image.alt"
@@ -25,7 +25,7 @@
 </template>
 
 <script setup lang="ts">
-import CaptionedImage from "./components/CaptionedImage.vue";
+import CaptionableImage from "./components/CaptionableImage.vue";
 import {ImageWithCaption} from "./components/ImageTypes";
 import {ref, Ref} from "vue";
 
