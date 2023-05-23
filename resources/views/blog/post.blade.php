@@ -3,7 +3,9 @@
 
 @section('blog')
 	@if($post->image)
-		<img src="{{ $post->image->url }}" class="block rounded-lg" alt="">
+		<figure class="lightbox-trigger">
+			<img src="{{ $post->image->url }}" class="block rounded-lg" alt="">
+		</figure>
 	@endif
 
 	<div class="flex flex-row pt-3 mt-2 gap-4">
@@ -43,3 +45,11 @@
 @section('sidebar')
 	@include('partials.blog-sidebar')
 @endsection
+
+@prependonce('footer-extras')
+	<div id="lightbox-modal"></div>
+@endprependonce
+
+@pushonce('footer-extras')
+	@include('partials.lightbox-trigger')
+@endpushonce

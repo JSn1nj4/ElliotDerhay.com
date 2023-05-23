@@ -10,7 +10,9 @@
 @section('content')
 	<x-row flex-class="md:flex flex-row gap-6">
 		<x-column class="w-2/3">
-			<img src="{{ $image->url }}" class="block rounded-lg" alt="">
+			<figure>
+				<img src="{{ $image->url }}" class="block rounded-lg" alt="">
+			</figure>
 		</x-column>
 		<x-column class="w-1/3">
 			<div class="mb-4 mt-3 max-w-full rounded-lg w-full bg-gray-200 dark:bg-gray-800">
