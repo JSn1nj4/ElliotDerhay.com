@@ -25,8 +25,8 @@ class CaptionableImageRenderer implements NodeRendererInterface
 
 		$attrs = $node->data->get('attributes');
 
-		$attrs['title'] ??= $node->getTitle();
-		$attrs['src'] ??= $node->getUrl();
+		if ($title = $node->getTitle()) $attrs['title'] = $title;
+		if ($src = $node->getUrl()) $attrs['src'] = $src;
 
 		if ($node->hasChildren()) {
 			$attrs = $this->getAdditionalAttributes($node, $attrs);
@@ -34,9 +34,9 @@ class CaptionableImageRenderer implements NodeRendererInterface
 
 		$img = new HtmlElement('img', $attrs, $this->maybePrepCaption($attrs), true);
 
-		return new HtmlElement(tagName: 'figure', attributes: [
+		return new HtmlElement('figure', [
 			'class' => 'lightbox-trigger'
-		], contents: (string)$img);
+		], (string)$img);
 	}
 
 	private function getAdditionalAttributes(Node $node, array $attrs): array
