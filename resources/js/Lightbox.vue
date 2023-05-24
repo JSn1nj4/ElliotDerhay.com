@@ -83,7 +83,7 @@ const props = withDefaults(defineProps<{
 	timing?: timing,
 	transition?: boolean,
 }>(), {
-	speed: 500,
+	speed: 200,
 	timing: "linear",
 	transition: true,
 })
