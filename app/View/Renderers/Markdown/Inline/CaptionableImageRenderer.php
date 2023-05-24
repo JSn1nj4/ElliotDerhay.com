@@ -35,7 +35,7 @@ class CaptionableImageRenderer implements NodeRendererInterface
 		$img = new HtmlElement('img', $attrs, $this->maybePrepCaption($attrs), true);
 
 		return new HtmlElement('figure', [
-			'class' => 'lightbox-trigger'
+			'class' => 'lightbox-trigger inline-block'
 		], (string)$img);
 	}
 
@@ -53,7 +53,9 @@ class CaptionableImageRenderer implements NodeRendererInterface
 	private function maybePrepCaption(array $attrs): string
 	{
 		return match(isset($attrs['alt'])) {
-			true => (string)new HtmlElement(tagName: 'figcaption', contents: $attrs['alt']),
+			true => (string)new HtmlElement(tagName: 'figcaption', attributes: [
+				'class' => ''
+			], contents: $attrs['alt']),
 			default => '',
 		};
 	}

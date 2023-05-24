@@ -142,7 +142,19 @@ a {
 }
 
 .lightbox-trigger {
-	@apply cursor-pointer transition-all duration-300 ease-linear outline outline-1 rounded-lg mt-1 outline-black hover:outline-sea-green-600 dark:hover:outline-sea-green-200;
+	@apply cursor-pointer transition-all duration-300 ease-linear outline outline-1 rounded-lg mt-1 outline-black hover:bg-sea-green-600 hover:dark:bg-sea-green-200 hover:outline-sea-green-600 dark:hover:outline-sea-green-200;
+
+	img {
+		@apply rounded-lg;
+	}
+
+	figcaption {
+		@apply px-4 py-2 mb-4 italic text-center transition-colors duration-300 ease-linear;
+	}
+
+	&:hover figcaption {
+		@apply dark:text-black;
+	}
 }
 
 /* took too long trying to customize via spatie/laravel-markdown */
