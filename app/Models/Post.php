@@ -43,6 +43,8 @@ use Illuminate\Pagination\AbstractPaginator;
  * @mixin \Eloquent
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Image[] $images
  * @property-read int|null $images_count
+ * @property-read string $page_title
+ * @property-read string $meta_description
  */
 class Post extends ImageableModel
 {
@@ -94,5 +96,21 @@ class Post extends ImageableModel
 				optional($request)->per_page
 			))
 			->withQueryString();
+	}
+
+	public function pageTitle(): Attribute
+	{
+		return Attribute::get(fn () => "{$this->title} - ElliotDerhay.com");
+	}
+
+	public function metaDescription(): Attribute
+	{
+		return Attribute::get(fn () => str($this->body)
+			->words(30, '')
+			->replaceMatches("/(\r\n|\r|\n)+/", " ")
+			->whenEndsWith(['.', '?', '!', '...'],
+				static fn ($string) => $string->append(''),
+				static fn ($string) => $string->append('...'),
+			));
 	}
 }

@@ -1,5 +1,8 @@
 @extends('layouts.page')
 
+@section('page-title', 'Elliot\'s Projects - ElliotDerhay.com')
+@section('meta-description', 'Below are projects that I\'ve either built myself or contributed directly to. Some will also have links to demos.')
+
 @section('content')
 	<div class="container mx-auto px-4 pt-6">
 		<section class="block">

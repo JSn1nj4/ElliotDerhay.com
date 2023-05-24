@@ -1,5 +1,8 @@
 @extends('admin.layouts.page')
 
+@section('page-title', 'Dashboard - ElliotDerhay.com')
+@section('meta-description', '')
+
 @section('content')
 	<x-row flex-class="md:flex gap-6" :contained="false">
 		<x-column class="block w-full">

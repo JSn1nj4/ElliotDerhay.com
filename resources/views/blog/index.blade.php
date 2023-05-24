@@ -1,10 +1,13 @@
 @php
 /**
- * @var App\Models\Post[] $posts
+ * @var \Illuminate\Database\Eloquent\Collection $posts
  * @var App\Models\Post $post
  */
 @endphp
 @extends('layouts.blog')
+
+@section('page-title', 'Elliot\'s Tech Blog - ElliotDerhay.com')
+@section('meta-description', "Latest post: {$posts->first()->title}")
 
 @section('blog')
   @foreach($posts as $post)

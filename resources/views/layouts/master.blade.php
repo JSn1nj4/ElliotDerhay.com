@@ -6,7 +6,8 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="theme-color" content="#002e24">
 
-		<title>ElliotDerhay.com</title>
+		<title>@yield('page-title', 'ElliotDerhay.com')</title>
+		<meta name="description" content="@yield('meta-description', 'A simple guy who loves web development and design')">
 
 		@vite('resources/css/app.css')
 		<script src="https://kit.fontawesome.com/a9f488e9e4.js" crossorigin="anonymous"></script>
