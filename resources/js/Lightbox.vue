@@ -94,7 +94,7 @@ document.addEventListener('lightbox.show', receiveImage)
 <style lang="postcss">
 .lightbox {
 	img	{
-		max-height: calc(100vh - theme(spacing.8) * 2);
+		max-height: calc(100vh - theme('spacing.8') * 2);
 	}
 }
 </style>
