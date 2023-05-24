@@ -1,5 +1,12 @@
 # Changelog
 
+## Version 2.2.1
+
+### Updates
+- [#116][gh_116]: Speed up Lightbox transitions
+
+[gh_116]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/88
+
 ## Version 2.2.0
 
 ### New
