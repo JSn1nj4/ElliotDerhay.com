@@ -5,7 +5,9 @@
 	<x-row flex-class="md:flex flex-col gap-6">
 		<x-column class="block w-full">
 			@if($project->image)
-				<img src="{{ $project->image->url }}" class="block rounded-lg" alt="">
+				<figure>
+					<img src="{{ $project->image->url }}" class="block rounded-lg" alt="">
+				</figure>
 			@endif
 
 			<div class="flex flex-row pt-3 mt-2 gap-4">

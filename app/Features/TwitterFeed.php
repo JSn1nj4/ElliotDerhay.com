@@ -7,7 +7,7 @@ class TwitterFeed
     /**
      * Resolve the feature's initial value.
      */
-    public function resolve(mixed $scope): bool
+    public function resolve(null $scope): bool
     {
         return false;
     }

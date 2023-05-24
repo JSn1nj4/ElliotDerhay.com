@@ -1,5 +1,21 @@
 # Changelog
 
+## Version 2.2.0
+
+### New
+- [#88][gh_88]: Create image lightbox modal that can be used on blog posts
+
+[gh_88]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/88
+
+### Updates
+- [#102][gh_102]: Make cookie popup more mobile-friendly
+- [#103][gh_103]: Make Pennant features global-only by default
+- [#110][gh_110]: Move lang folder to root, in line with latest Laravel defaults
+
+[gh_102]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/102
+[gh_103]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/103
+[gh_110]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/110
+
 ## Version 2.1.3
 
 ### New

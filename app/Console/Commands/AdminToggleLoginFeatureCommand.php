@@ -28,7 +28,7 @@ class AdminToggleLoginFeatureCommand extends Command
      */
     public function handle(): int
     {
-        Feature::toggleForEveryone(AdminLogin::class);
+        Feature::toggle(AdminLogin::class);
 
 		$message = match (Feature::active(AdminLogin::class)) {
 			true => "Admin login feature activated",

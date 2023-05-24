@@ -5,6 +5,7 @@ use App\View\Renderers\Markdown\Blocks\HeadingRenderer;
 use App\View\Renderers\Markdown\Blocks\ListItemRenderer;
 use App\View\Renderers\Markdown\Blocks\ParagraphRenderer;
 use App\View\Renderers\Markdown\Blocks\ThematicBreakRenderer;
+use App\View\Renderers\Markdown\Inline\CaptionableImageRenderer;
 use App\View\Renderers\Markdown\Inline\CodeRenderer;
 use App\View\Renderers\Markdown\Inline\LinkRenderer;
 use League\CommonMark\Extension\CommonMark\Node\Block\BlockQuote;
@@ -12,6 +13,7 @@ use League\CommonMark\Extension\CommonMark\Node\Block\Heading;
 use League\CommonMark\Extension\CommonMark\Node\Block\ListItem;
 use League\CommonMark\Extension\CommonMark\Node\Block\ThematicBreak;
 use League\CommonMark\Extension\CommonMark\Node\Inline\Code;
+use League\CommonMark\Extension\CommonMark\Node\Inline\Image;
 use League\CommonMark\Extension\CommonMark\Node\Inline\Link;
 use League\CommonMark\Node\Block\Paragraph;
 
@@ -98,6 +100,7 @@ return [
     'inline_renderers' => [
 		['class' => Code::class, 'renderer' => new CodeRenderer(), 'priority' => 1],
 		['class' => Link::class, 'renderer' => new LinkRenderer(), 'priority' => 1],
+		['class' => Image::class, 'renderer' => new CaptionableImageRenderer(), 'priority' => 1],
     ],
 
     /*

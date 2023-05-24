@@ -29,7 +29,7 @@ class GithubToggleFeatureCommand extends Command
      */
     public function handle(): void
     {
-        Feature::toggleForEveryone(GithubFeed::class);
+        Feature::toggle(GithubFeed::class);
 
 		$message = match (Feature::active(GithubFeed::class)) {
 			true => 'Github feed feature activated',
