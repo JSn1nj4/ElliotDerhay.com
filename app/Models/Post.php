@@ -3,8 +3,11 @@
 namespace App\Models;
 
 use App\Contracts\ImageableContract;
+use App\Contracts\SearchDisplayableContract;
 use App\Enums\PerPage;
 use App\Traits\Imageable;
+use App\Traits\SearchDisplayable;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -45,10 +48,12 @@ use Illuminate\Pagination\AbstractPaginator;
  * @property-read int|null $images_count
  * @property-read string $page_title
  * @property-read string $meta_description
+ * @property \App\Models\SearchDisplayMeta $searchDisplayMeta
  */
-class Post extends ImageableModel
+class Post extends ImageableModel implements SearchDisplayableContract
 {
-    use HasFactory;
+    use HasFactory,
+		SearchDisplayable;
 
 	/**
 	 * @var string[]
@@ -100,12 +105,12 @@ class Post extends ImageableModel
 
 	public function pageTitle(): Attribute
 	{
-		return Attribute::get(fn () => "{$this->title} - ElliotDerhay.com");
+		return Attribute::get(fn () => $this->searchDisplayMeta?->page_title ?? "{$this->title} - ElliotDerhay.com");
 	}
 
 	public function metaDescription(): Attribute
 	{
-		return Attribute::get(fn () => str($this->body)
+		return Attribute::get(fn () => $this->searchDisplayMeta->meta_description ?? str($this->body)
 			->words(30, '')
 			->replaceMatches("/(\r\n|\r|\n)+/", " ")
 			->whenEndsWith(['.', '?', '!', '...'],
