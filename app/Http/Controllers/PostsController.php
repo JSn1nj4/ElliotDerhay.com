@@ -65,7 +65,8 @@ class PostsController extends Controller
 
 		$post->update($safe);
 
-		$meta = $post->searchMeta()->updateOrCreate([
+		$meta = $post->searchMeta()->firstOrCreate();
+		$meta->update([
 			'search_title' => $safe['search_title'] ?? null,
 			'search_description' => $safe['search_description'] ?? null,
 		]);

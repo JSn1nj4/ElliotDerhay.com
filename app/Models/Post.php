@@ -109,8 +109,10 @@ class Post extends ImageableModel implements SearchDisplayableContract
 			get: fn () => $this->searchMeta?->search_title
 				?? "{$this->title} - ElliotDerhay.com",
 
-			set: fn (string $title) => $this->searchMeta()
-					->updateOrCreate(['search_title' => $title]),
+			set: function (string $title) {
+				$meta = $this->searchMeta()->firstOrCreate();
+				$meta->update(['search_title' => $title]);
+			},
 		);
 	}
 
@@ -125,8 +127,10 @@ class Post extends ImageableModel implements SearchDisplayableContract
 					static fn ($string) => $string->append('...'),
 				),
 
-			set: fn (string $description) => $this->searchMeta()
-					->updateOrCreate(['search_description' => $description]),
+			set: function (string $description) {
+				$meta = $this->searchMeta()->firstOrCreate();
+				$meta->update(['search_description' => $description]);
+			},
 		);
 	}
 }
