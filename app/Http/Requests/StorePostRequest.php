@@ -29,6 +29,8 @@ class StorePostRequest extends FormRequest
 				'required',
 				'max:180',
 			],
+			'search_title' => 'max:180',
+			'search_description' => 'max:250',
 			'slug' => [
 				'required',
 				'unique:posts',

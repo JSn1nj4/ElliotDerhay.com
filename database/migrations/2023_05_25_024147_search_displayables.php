@@ -15,8 +15,8 @@ return new class extends Migration
 			$table->id();
 			$table->unsignedBigInteger('search_displayable_id');
 			$table->string('search_displayable_type');
-			$table->string('page_title')->nullable();
-			$table->string('meta_description')->nullable();
+			$table->string('search_title')->nullable();
+			$table->string('search_description')->nullable();
 			$table->timestamps();
 		});
     }

@@ -46,9 +46,9 @@ use Illuminate\Pagination\AbstractPaginator;
  * @mixin \Eloquent
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Image[] $images
  * @property-read int|null $images_count
- * @property-read string $page_title
- * @property-read string $meta_description
- * @property \App\Models\SearchDisplayMeta $searchDisplayMeta
+ * @property string $page_title
+ * @property string $meta_description
+ * @property \App\Models\SearchMeta $searchMeta
  */
 class Post extends ImageableModel implements SearchDisplayableContract
 {
@@ -105,17 +105,28 @@ class Post extends ImageableModel implements SearchDisplayableContract
 
 	public function pageTitle(): Attribute
 	{
-		return Attribute::get(fn () => $this->searchDisplayMeta?->page_title ?? "{$this->title} - ElliotDerhay.com");
+		return Attribute::make(
+			get: fn () => $this->searchMeta?->search_title
+				?? "{$this->title} - ElliotDerhay.com",
+
+			set: fn (string $title) => $this->searchMeta()
+					->updateOrCreate(['search_title' => $title]),
+		);
 	}
 
 	public function metaDescription(): Attribute
 	{
-		return Attribute::get(fn () => $this->searchDisplayMeta->meta_description ?? str($this->body)
-			->words(30, '')
-			->replaceMatches("/(\r\n|\r|\n)+/", " ")
-			->whenEndsWith(['.', '?', '!', '...'],
-				static fn ($string) => $string->append(''),
-				static fn ($string) => $string->append('...'),
-			));
+		return Attribute::make(
+			get: fn () => $this->searchMeta?->search_description ?? str($this->body)
+				->words(30, '')
+				->replaceMatches("/(\r\n|\r|\n)+/", " ")
+				->whenEndsWith(['.', '?', '!', '...'],
+					static fn ($string) => $string->append(''),
+					static fn ($string) => $string->append('...'),
+				),
+
+			set: fn (string $description) => $this->searchMeta()
+					->updateOrCreate(['search_description' => $description]),
+		);
 	}
 }

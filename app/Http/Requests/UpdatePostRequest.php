@@ -30,6 +30,8 @@ class UpdatePostRequest extends FormRequest
 				'required',
 				'max:180',
 			],
+			'search_title' => 'max:180',
+			'search_description' => 'max:250',
 			'slug' => [
 				'required',
 				Rule::unique('posts')

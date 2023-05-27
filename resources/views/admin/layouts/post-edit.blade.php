@@ -16,6 +16,10 @@
 
 				<x-admin.forms.field label="Post Title" field="title" :errors="$errors" large :value="$fields->title ?? ''" />
 
+				<x-admin.forms.field label="Custom Search Title" field="search_title" :errors="$errors" :value="$fields->search_title ?? ''" />
+
+				<x-admin.forms.field label="Custom Search Description" field="search_description" :errors="$errors" :value="$fields->search_description ?? ''" multiline />
+
 				<x-admin.forms.field label="Slug" field="slug" :errors="$errors" :value="$fields->slug ?? ''" />
 
 				<x-admin.forms.field label="Body" field="body" :errors="$errors" :value="$fields->body ?? ''" multiline />

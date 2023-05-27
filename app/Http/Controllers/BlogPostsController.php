@@ -17,6 +17,6 @@ class BlogPostsController extends Controller
 
 	public function show(Post $post): View
 	{
-		return view('blog.post', compact('post'));
+		return view('blog.post', ['post' => $post->load('searchMeta')]);
 	}
 }

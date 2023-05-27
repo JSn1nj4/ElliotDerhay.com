@@ -27,7 +27,16 @@ class PostsController extends Controller
 
 	public function store(StorePostRequest $request): Response|RedirectResponse
 	{
-		$post = Post::create($request->safe()->except('cover_image'));
+		$safe = $request->safe()->except('cover_image');
+
+		$post = Post::create($safe);
+
+		$meta = $post->searchMeta()->create([
+			'search_title' => $safe['search_title'] ?? null,
+			'search_description' => $safe['search_description'] ?? null,
+		]);
+
+		$post->setRelation('searchMeta', $meta);
 
 		StoreImageJob::dispatchIf(
 			$request->hasFile('cover_image'),
@@ -52,7 +61,16 @@ class PostsController extends Controller
 
 	public function update(UpdatePostRequest $request, Post $post): Response|RedirectResponse
 	{
-		$post->update($request->safe()->except('cover_image'));
+		$safe = $request->safe()->except('cover_image');
+
+		$post->update($safe);
+
+		$meta = $post->searchMeta()->updateOrCreate([
+			'search_title' => $safe['search_title'] ?? null,
+			'search_description' => $safe['search_description'] ?? null,
+		]);
+
+		$post->setRelation('searchMeta', $meta);
 
 		StoreImageJob::dispatchIf(
 			$request->hasFile('cover_image'),

@@ -6,12 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 /**
- * @property string $page_title
- * @property string $meta_description
+ * @property string $search_title
+ * @property string $search_description
  */
-class SearchDisplayMeta extends Model
+class SearchMeta extends Model
 {
 	protected $table = 'search_displayables';
+
+	protected $fillable = [
+		'search_title',
+		'search_description',
+	];
 
 	public function searchDisplayable(): MorphTo
 	{

@@ -2,13 +2,13 @@
 
 namespace App\Traits;
 
-use App\Models\SearchDisplayMeta;
+use App\Models\SearchMeta;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 trait SearchDisplayable
 {
-	public function searchDisplayMeta(): MorphOne
+	public function searchMeta(): MorphOne
 	{
-		return $this->morphOne(SearchDisplayMeta::class, 'search_displayable');
+		return $this->morphOne(SearchMeta::class, 'search_displayable');
 	}
 }

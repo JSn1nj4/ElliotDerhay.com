@@ -11,5 +11,5 @@ interface SearchDisplayableContract
 
 	public function metaDescription(): Attribute;
 
-	public function searchDisplayMeta(): MorphOne;
+	public function searchMeta(): MorphOne;
 }
