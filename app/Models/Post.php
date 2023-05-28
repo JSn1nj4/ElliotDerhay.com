@@ -106,8 +106,7 @@ class Post extends ImageableModel implements SearchDisplayableContract
 	public function pageTitle(): Attribute
 	{
 		return Attribute::make(
-			get: fn () => $this->searchMeta?->search_title
-				?? "{$this->title} - ElliotDerhay.com",
+			get: fn () => $this->searchMeta?->search_title ?? $this->title,
 
 			set: function (string $title) {
 				$meta = $this->searchMeta()->firstOrCreate();
