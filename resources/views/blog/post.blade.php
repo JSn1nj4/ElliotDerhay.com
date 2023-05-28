@@ -1,6 +1,9 @@
 @php /** @var App\Models\Post $post */ @endphp
 @extends('layouts.blog')
 
+@section('page-title', $post->page_title)
+@section('meta-description', $post->meta_description)
+
 @section('blog')
 	@if($post->image)
 		<figure class="lightbox-trigger">

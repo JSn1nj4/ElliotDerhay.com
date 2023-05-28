@@ -3,8 +3,11 @@
 namespace App\Models;
 
 use App\Contracts\ImageableContract;
+use App\Contracts\SearchDisplayableContract;
 use App\Enums\PerPage;
 use App\Traits\Imageable;
+use App\Traits\SearchDisplayable;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -43,10 +46,14 @@ use Illuminate\Pagination\AbstractPaginator;
  * @mixin \Eloquent
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Image[] $images
  * @property-read int|null $images_count
+ * @property string $page_title
+ * @property string $meta_description
+ * @property \App\Models\SearchMeta $searchMeta
  */
-class Post extends ImageableModel
+class Post extends ImageableModel implements SearchDisplayableContract
 {
-    use HasFactory;
+    use HasFactory,
+		SearchDisplayable;
 
 	/**
 	 * @var string[]
@@ -94,5 +101,37 @@ class Post extends ImageableModel
 				optional($request)->per_page
 			))
 			->withQueryString();
+	}
+
+	public function pageTitle(): Attribute
+	{
+		return Attribute::make(
+			get: fn () => $this->searchMeta?->search_title ?? $this->title,
+
+			// TODO: how can this be more efficient?
+			set: function (string $title) {
+				$meta = $this->searchMeta()->firstOrCreate();
+				$meta->update(['search_title' => $title]);
+			},
+		);
+	}
+
+	public function metaDescription(): Attribute
+	{
+		return Attribute::make(
+			get: fn () => $this->searchMeta?->search_description ?? str($this->body)
+				->words(30, '')
+				->replaceMatches("/(\r\n|\r|\n)+/", " ")
+				->whenEndsWith(['.', '?', '!', '...'],
+					static fn ($string) => $string->append(''),
+					static fn ($string) => $string->append('...'),
+				),
+
+			// TODO: how can this be more efficient?
+			set: function (string $description) {
+				$meta = $this->searchMeta()->firstOrCreate();
+				$meta->update(['search_description' => $description]);
+			},
+		);
 	}
 }

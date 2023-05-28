@@ -5,6 +5,8 @@
     'fields' => (object) [
         'cover_image' => old('cover_image'),
         'title' => old('title'),
+        'search_title' => old('search_title'),
+        'search_description' => old('search_description'),
         'slug' => old('slug'),
         'body' => old('body'),
 		],

@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Ui\Form;
 
+use App\Enums\TextAreaHeight;
 use Illuminate\View\Component;
 
 class TextArea extends Component
@@ -15,7 +16,7 @@ class TextArea extends Component
 		public string $id,
 		public string $name,
 		public bool $error = false,
-		public string $height = 'h-64',
+		public TextAreaHeight $height = TextAreaHeight::Medium, // todo: need height variations: h-32 = sm?, h-64 = mid, h-128 = lg?
 		public string $padding = 'p-2',
 		public string $textSize = 'text-lg',
 	)

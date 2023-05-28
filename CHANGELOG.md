@@ -1,5 +1,12 @@
 # Changelog
 
+## Version 2.3.0
+
+### New
+- [#94][gh_94]: Add SEO-related features - page title and meta description
+
+[gh_94]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/88
+
 ## Version 2.2.1
 
 ### Updates

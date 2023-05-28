@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Admin\Forms;
 
+use App\Enums\TextAreaHeight;
 use Illuminate\View\Component;
 
 class Field extends Component
@@ -18,6 +19,7 @@ class Field extends Component
 		public object $errors,
 		public bool $large = false,
 		public bool $multiline = false,
+		public TextAreaHeight $multilineSize = TextAreaHeight::Medium,
 	)
     {
         //
