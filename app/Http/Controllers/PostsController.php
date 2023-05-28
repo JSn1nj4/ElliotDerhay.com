@@ -30,13 +30,8 @@ class PostsController extends Controller
 		$safe = $request->safe()->except('cover_image');
 
 		$post = Post::create($safe);
-
-		$meta = $post->searchMeta()->create([
-			'search_title' => $safe['search_title'] ?? null,
-			'search_description' => $safe['search_description'] ?? null,
-		]);
-
-		$post->setRelation('searchMeta', $meta);
+		$post->page_title = $safe['search_title'];
+		$post->meta_description = $safe['search_description'];
 
 		StoreImageJob::dispatchIf(
 			$request->hasFile('cover_image'),
@@ -64,20 +59,8 @@ class PostsController extends Controller
 		$safe = $request->safe()->except('cover_image');
 
 		$post->update($safe);
-
-		$meta = $post->searchMeta()->firstOrCreate();
-		$meta->update([
-			'search_title' => $safe['search_title'] ?? null,
-			'search_description' => $safe['search_description'] ?? null,
-		]);
-
-		$post->setRelation('searchMeta', $meta);
-
-		StoreImageJob::dispatchIf(
-			$request->hasFile('cover_image'),
-			$request->file('cover_image'),
-			$post,
-		);
+		$post->page_title = $safe['search_title'];
+		$post->meta_description = $safe['search_description'];
 
 		return back()->with('success', 'Post updated!');
 	}

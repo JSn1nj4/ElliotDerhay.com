@@ -108,6 +108,7 @@ class Post extends ImageableModel implements SearchDisplayableContract
 		return Attribute::make(
 			get: fn () => $this->searchMeta?->search_title ?? $this->title,
 
+			// TODO: how can this be more efficient?
 			set: function (string $title) {
 				$meta = $this->searchMeta()->firstOrCreate();
 				$meta->update(['search_title' => $title]);
@@ -126,6 +127,7 @@ class Post extends ImageableModel implements SearchDisplayableContract
 					static fn ($string) => $string->append('...'),
 				),
 
+			// TODO: how can this be more efficient?
 			set: function (string $description) {
 				$meta = $this->searchMeta()->firstOrCreate();
 				$meta->update(['search_description' => $description]);
