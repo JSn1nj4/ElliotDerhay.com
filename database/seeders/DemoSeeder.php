@@ -23,6 +23,7 @@ class DemoSeeder extends Seeder
 			ImageSeeder::class,
 			PostSeeder::class,
 			ProjectSeeder::class,
+			UserSeeder::class,
 		]);
     }
 }

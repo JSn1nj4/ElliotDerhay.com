@@ -5,6 +5,9 @@
 ### New
 - [#94][gh_94]: Add SEO-related features - page title and meta description
 
+### Updates
+- Seed an admin user during development
+
 [gh_94]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/88
 
 ## Version 2.2.1
