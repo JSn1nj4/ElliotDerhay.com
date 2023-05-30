@@ -8,10 +8,26 @@
 				@csrf
 				@yield('method')
 
-				<div class="flex flex-col mb-6 gap-2">
-					<p><label for="cover_image" class="text-3xl">Cover Image</label></p>
-					@if($image) <p><img src="{{ $image->url }}" class="max-w-md"></p> @endif
-					<p><input type="file" id="cover_image" name="cover_image" value="{!! $fields->cover_image !!}"></p>
+				<div class="flex flex-row gap-8 mb-6">
+					<div class="flex flex-col gap-2 w-2/3">
+						<p><label for="cover_image" class="text-3xl">Cover Image</label></p>
+						@if($image) <p><img src="{{ $image->url }}"></p> @endif
+						<p><input type="file" id="cover_image" name="cover_image" value="{!! $fields->cover_image !!}"></p>
+					</div>
+					<div class="flex flex-col gap-4 flex-grow">
+						@hasSection('buttons')
+							<div class="flex flex-col w-full gap-2 rounded-lg border dark:border-gray-600 dark:bg-gray-600/20 p-4">
+								<p class="text-3xl">Actions</p>
+								<div class="flex gap-4 just">
+									@yield('buttons')
+								</div>
+							</div>
+						@endif
+
+						@isset($widgets?->tags)
+							<x-admin.editing.widgets.tags :errors="$errors->tags" :input="$fields->tags ?? ''" />
+						@endisset
+					</div>
 				</div>
 
 				<x-admin.forms.field label="Post Title" field="title" :errors="$errors" large :value="$fields->title ?? ''" />
@@ -40,13 +56,6 @@
 				@elseif(session()->has('success'))
 					<div class="block p-3 bg-green-200 dark:bg-green-900 border border-green-900 dark:border-green-200 text-green-900 dark:text-green-200 rounded flex-grow">
 						{{ session('success') }}
-					</div>
-				@endif
-				@hasSection('buttons')
-					<div class="block">
-						<div class="flex gap-2">
-							@yield('buttons')
-						</div>
 					</div>
 				@endif
 			</div>

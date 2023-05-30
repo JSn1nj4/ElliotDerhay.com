@@ -11,6 +11,10 @@
         'slug' => old('slug', $post->slug),
         'body' => old('body', $post->body),
 		],
+		'widgets' => (object) [
+				// 'categories' => old('categories', $post->categories),
+				'tags' => old('tags', $post->tags),
+		],
 ])
 
 @section('method')
