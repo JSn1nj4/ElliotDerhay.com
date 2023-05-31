@@ -32,6 +32,11 @@ class Tag extends Model
 {
     use HasFactory;
 
+	protected $fillable = [
+		'title',
+		'slug',
+	];
+
 	public function posts(): MorphToMany
 	{
 		return $this->morphedByMany(Post::class, 'taggable');
@@ -39,6 +44,12 @@ class Tag extends Model
 
 	public function slug(): Attribute
 	{
-		return Attribute::get(fn () => Str::slug($this->title));
+		return Attribute::make(
+			get: fn () => $this->slug,
+			set: static fn (string $input) => str($input)->slug(dictionary: [
+					'@' => 'at',
+					'&' => 'and',
+				])->toString(),
+		);
 	}
 }
