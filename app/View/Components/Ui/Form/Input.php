@@ -20,6 +20,7 @@ class Input extends Component
 		public string $textSize = 'text-lg',
 		public TextInputType $type = TextInputType::Text,
 		public ?string $value = null,
+		public string|null $form = null,
 	)
     {
         //

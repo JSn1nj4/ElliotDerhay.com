@@ -1,7 +1,7 @@
 <textarea
 	id="{{ $id }}"
 	name="{{ $name }}"
-	{{ $attributes->class([
+	{{ $attributes->merge(compact('form'))->class([
     'w-full',
     $textSize,
     $padding,

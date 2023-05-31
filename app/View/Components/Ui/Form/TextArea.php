@@ -19,6 +19,7 @@ class TextArea extends Component
 		public TextAreaHeight $height = TextAreaHeight::Medium, // todo: need height variations: h-32 = sm?, h-64 = mid, h-128 = lg?
 		public string $padding = 'p-2',
 		public string $textSize = 'text-lg',
+		public string|null $form = null,
 	)
     {
         //

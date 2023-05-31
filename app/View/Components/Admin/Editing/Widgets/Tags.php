@@ -15,7 +15,8 @@ class Tags extends Component
      */
     public function __construct(
 		public $errors = null,
-		public Collection|string|null $tags = null
+		public Collection|string|null $tags = null,
+		public string|null $form = null,
 	)
     {
         $this->prepareData();
