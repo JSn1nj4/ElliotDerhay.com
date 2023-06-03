@@ -6,6 +6,7 @@
 			error="{{ $errors->has($field) }}" value="{!! $value !!}"
 			text-size="{{ $large ? 'text-2xl' : 'text-lg' }}"
 			padding="{{ $large ? 'p-3' : 'p-2' }}"
+			:form="$form"
 		/>
 	@else
 		<x-ui.form.text-area
@@ -14,6 +15,7 @@
 			text-size="{{ $large ? 'text-2xl' : 'text-lg' }}"
 			padding="{{ $large ? 'p-3' : 'p-2' }}"
 			:height="$multilineSize"
+			:form="$form"
 		>
 			{!! $value !!}
 		</x-ui.form.text-area>

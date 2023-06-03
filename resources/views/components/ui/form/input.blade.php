@@ -2,7 +2,7 @@
 	type="{{ $type->value }}"
 	id="{{ $id }}"
 	name="{{ $name }}"
-	{{ $attributes->class([
+	{{ $attributes->merge(compact('form'))->class([
     $textSize,
     $padding,
     'dark:bg-gray-800',

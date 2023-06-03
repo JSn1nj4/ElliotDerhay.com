@@ -2,20 +2,17 @@
 
 namespace App\Models;
 
-use App\Contracts\ImageableContract;
 use App\Contracts\SearchDisplayableContract;
+use App\DataTransferObjects\TagDTO;
 use App\Enums\PerPage;
-use App\Traits\Imageable;
 use App\Traits\SearchDisplayable;
-use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\AbstractPaginator;
+use Illuminate\Support\Collection;
 
 /**
  * App\Models\Post
@@ -27,7 +24,7 @@ use Illuminate\Pagination\AbstractPaginator;
  * @property string $excerpt
  * @property Image|null $image
  * @property Category[] $categories
- * @property Tag[] $tags
+ * @property \Illuminate\Database\Eloquent\Collection|Tag[] $tags
  * @property Carbon $created_at
  * @property Carbon $updated_at
  * @property-read int|null $categories_count
@@ -133,5 +130,16 @@ class Post extends ImageableModel implements SearchDisplayableContract
 				$meta->update(['search_description' => $description]);
 			},
 		);
+	}
+
+	/**
+	 * @param \Illuminate\Support\Collection<Tag> $tags
+	 * @return self
+	 */
+	public function syncTags(Collection $tags): self
+	{
+		$this->tags()->sync($tags->map(static fn (Tag $tag) => $tag->id)->all());
+
+		return $this;
 	}
 }

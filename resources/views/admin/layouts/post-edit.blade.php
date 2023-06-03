@@ -2,15 +2,15 @@
 @extends('admin.layouts.page')
 
 @section('content')
-	<x-row flex-class="md:flex flex-col gap-6">
-		<x-column class="block w-full">
+	<x-row flex-class="md:flex gap-6">
+		<x-column class="block w-2/3">
 			<form id="save_post" method="post" action="{{ $action }}" enctype="multipart/form-data">
 				@csrf
 				@yield('method')
 
-				<div class="flex flex-col mb-6 gap-2">
+				<div class="flex flex-col gap-2 w-full mb-6">
 					<p><label for="cover_image" class="text-3xl">Cover Image</label></p>
-					@if($image) <p><img src="{{ $image->url }}" class="max-w-md"></p> @endif
+					@if($image) <p><img src="{{ $image->url }}" class="w-full"></p> @endif
 					<p><input type="file" id="cover_image" name="cover_image" value="{!! $fields->cover_image !!}"></p>
 				</div>
 
@@ -42,13 +42,25 @@
 						{{ session('success') }}
 					</div>
 				@endif
-				@hasSection('buttons')
-					<div class="block">
-						<div class="flex gap-2">
-							@yield('buttons')
+			</div>
+		</x-column>
+
+		<x-column class="block w-1/3">
+			<div class="flex flex-row gap-8 mb-6">
+				<div class="flex flex-col gap-4 flex-grow">
+					@hasSection('buttons')
+						<div class="flex flex-col w-full gap-2 rounded-lg border dark:border-gray-600 dark:bg-gray-600/20 p-4">
+							<p class="text-3xl">Actions</p>
+							<div class="flex gap-4 just">
+								@yield('buttons')
+							</div>
 						</div>
-					</div>
-				@endif
+					@endif
+
+					@if($widgets?->tags !== null)
+						<x-admin.editing.widgets.tags form="save_post" :errors="$errors->tags" :tags="$widgets->tags ?? ''" />
+					@endif
+				</div>
 			</div>
 		</x-column>
 	</x-row>

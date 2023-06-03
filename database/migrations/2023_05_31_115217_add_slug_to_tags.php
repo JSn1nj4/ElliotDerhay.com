@@ -8,25 +8,22 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
     public function up(): void
-	{
-        Schema::create('tags', static function (Blueprint $table) {
-            $table->id();
-			$table->tinyText('title');
-            $table->timestamps();
-        });
+    {
+		Schema::whenTableDoesntHaveColumn('tags', 'slug', static function (Blueprint $table) {
+			$table->string('slug')->unique();
+		});
     }
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
     public function down(): void
-	{
-        Schema::dropIfExists('tags');
+    {
+        Schema::whenTableHasColumn('tags', 'slug', static function (Blueprint $table) {
+			$table->dropIndex('slug');
+            $table->removeColumn('slug');
+        });
     }
 };

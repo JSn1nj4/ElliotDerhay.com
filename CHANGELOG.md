@@ -7,8 +7,13 @@
 
 ### Updates
 - Seed an admin user during development
+- [#106][gh_106]: Add tagging UI for posts to admin dashboard
+
+### Fixes
+- Broken PSR7 autoloader dependency for Sentry
 
 [gh_94]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/88
+[gh_106]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/106
 
 ## Version 2.2.1
 
