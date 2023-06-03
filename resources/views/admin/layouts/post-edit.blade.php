@@ -1,6 +1,10 @@
 @php /** @var object|\App\Models\Post $fields */ @endphp
 @extends('admin.layouts.page')
 
+@pushonce('head-extras')
+	@livewireStyles
+@endpushonce
+
 @section('content')
 	<x-row flex-class="md:flex gap-6">
 		<x-column class="block w-2/3">
@@ -65,3 +69,7 @@
 		</x-column>
 	</x-row>
 @endsection
+
+@pushonce('footer-extras')
+	@livewireScripts
+@endpushonce
