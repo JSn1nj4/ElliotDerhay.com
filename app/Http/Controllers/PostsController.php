@@ -68,6 +68,12 @@ class PostsController extends Controller
 
 		$post->syncTags(Tag::fromString($safe['tags']));
 
+		StoreImageJob::dispatchIf(
+			$request->hasFile('cover_image'),
+			$request->file('cover_image'),
+			$post,
+		);
+
 		return back()->with('success', 'Post updated!');
 	}
 

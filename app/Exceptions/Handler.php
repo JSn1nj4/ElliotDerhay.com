@@ -40,15 +40,16 @@ class Handler extends ExceptionHandler
 	/**
 	 * Report or log an exception.
 	 *
-	 * @param  \Throwable  $e
+	 * @param \Throwable $e
 	 * @return void
+	 * @throws \Throwable
 	 */
-	public function report(Throwable $exception)
+	public function report(Throwable $e): void
 	{
-		if (app()->bound('sentry') && $this->shouldReport($exception)) {
-			app('sentry')->captureException($exception);
+		if (app()->bound('sentry') && $this->shouldReport($e)) {
+			app('sentry')->captureException($e);
 		}
 
-		parent::report($exception);
+		parent::report($e);
 	}
 }

@@ -8,9 +8,11 @@
 ### Updates
 - Seed an admin user during development
 - [#106][gh_106]: Add tagging UI for posts to admin dashboard
+- Bring exception handler in line with parent 
 
 ### Fixes
 - Broken PSR7 autoloader dependency for Sentry
+- Add missing image store job on Post update
 
 [gh_94]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/88
 [gh_106]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/106
