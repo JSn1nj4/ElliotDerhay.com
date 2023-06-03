@@ -18,6 +18,10 @@ class StorePostRequest extends FormRequest
 	{
 		$this->merge([
 			'slug' => Str::slug($this->slug ?? $this->title ?? ''),
+			'tags' => str($this->tags ?? '')
+				->stripTags()
+				->trim(" {}[]`~!@#\$%^*+=<>/\\\r\n")
+				->toString(),
 		]);
 	}
 
@@ -37,6 +41,7 @@ class StorePostRequest extends FormRequest
 				'max:180',
 			],
 			'body' => 'required',
+			'tags' => 'string',
         ];
     }
 }

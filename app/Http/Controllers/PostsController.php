@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTransferObjects\TagDTO;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Jobs\StoreImageJob;
 use App\Models\Post;
+use App\Models\Tag;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -32,6 +34,8 @@ class PostsController extends Controller
 		$post = Post::create($safe);
 		$post->page_title = $safe['search_title'];
 		$post->meta_description = $safe['search_description'];
+
+		$post->syncTags(Tag::fromString($safe['tags']));
 
 		StoreImageJob::dispatchIf(
 			$request->hasFile('cover_image'),
@@ -61,6 +65,8 @@ class PostsController extends Controller
 		$post->update($safe);
 		$post->page_title = $safe['search_title'];
 		$post->meta_description = $safe['search_description'];
+
+		$post->syncTags(Tag::fromString($safe['tags']));
 
 		return back()->with('success', 'Post updated!');
 	}

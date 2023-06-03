@@ -57,9 +57,9 @@
 						</div>
 					@endif
 
-					@isset($widgets?->tags)
+					@if($widgets?->tags !== null)
 						<x-admin.editing.widgets.tags form="save_post" :errors="$errors->tags" :tags="$widgets->tags ?? ''" />
-					@endisset
+					@endif
 				</div>
 			</div>
 		</x-column>

@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up(): void
 	{
-        Schema::create('tags', function (Blueprint $table) {
+        Schema::create('tags', static function (Blueprint $table) {
             $table->id();
 			$table->tinyText('title');
             $table->timestamps();
