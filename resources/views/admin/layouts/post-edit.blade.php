@@ -64,6 +64,10 @@
 					@if($widgets?->tags !== null)
 						<x-admin.editing.widgets.tags form="save_post" :errors="$errors->tags" :tags="$widgets->tags ?? ''" />
 					@endif
+
+					@if($widgets?->categories)
+						<livewire:admin.editing.widgets.categories form="save_post" :errors="$errors->categories" :categorizeable="$post ?? null" />
+					@endif
 				</div>
 			</div>
 		</x-column>

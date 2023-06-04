@@ -10,6 +10,10 @@
         'slug' => old('slug'),
         'body' => old('body'),
 		],
+		'widgets' => (object) [
+				'categories' => true,
+				'tags' => old('tags', $post->tags),
+		],
 ])
 
 @section('buttons')

@@ -11,8 +11,9 @@
         'slug' => old('slug', $post->slug),
         'body' => old('body', $post->body),
 		],
+		'post' => $post,
 		'widgets' => (object) [
-				// 'categories' => old('categories', $post->categories),
+				'categories' => true,
 				'tags' => old('tags', $post->tags),
 		],
 ])
