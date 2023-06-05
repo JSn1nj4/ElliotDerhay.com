@@ -1,5 +1,6 @@
 <div class="flex flex-col w-full gap-2 rounded-lg border dark:border-gray-600 dark:bg-gray-600/20 p-4">
 		<p class="text-2xl">Categories</p>
+		<p class="text-lg">Choose from existing categories or create a new one.</p>
 
 		<div class="border border-black dark:border-gray-600 rounded-lg bg-gray-800 flex flex-col">
 			<div>
@@ -20,7 +21,4 @@
 				@endforeach
 			</div>
 		</div>
-
-		<p class="text-lg">Choose from existing categories or create a new one.</p>
-		{{--	"add new" form section here	--}}
 </div>
