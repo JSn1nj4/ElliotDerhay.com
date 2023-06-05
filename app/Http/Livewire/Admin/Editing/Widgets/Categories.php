@@ -16,6 +16,8 @@ class Categories extends Component
 
 	public CategorizeableContract|null $categorizeable = null;
 
+	protected $listeners = ['category.create' => 'saveNew'];
+
 
 	public function boot(): void
 	{
