@@ -29,11 +29,13 @@ class Categories extends Component
 	{
 		$dto = new CategoryDTO($title);
 
+		$category = Category::firstOrCreate(['slug' => $dto->slug], [
+			'title' => $dto->title,
+		]);
+
 		$this->categorizeable
 			?->categories()
-			->firstOrCreate(['slug' => $dto->slug], [
-				'title' => $dto->title,
-			]);
+			->attach($category->id);
 	}
 
 	public function modelHas(Category $category): bool
