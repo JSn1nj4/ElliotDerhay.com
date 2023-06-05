@@ -16,22 +16,10 @@ class Categories extends Component
 
 	public Model|null $categorizeable = null;
 
-	/**
-	 * @var \Illuminate\Support\Collection<\App\Models\Category> $new_categories;
-	 */
-	public \Illuminate\Support\Collection $new_categories;
 
 	public function boot(): void
 	{
-		$this->new_categories = collect([]);
-
-		$this->categories = Category::whereNotIn('slug',
-			$this->new_categories
-				->map(fn (Category $cat) => $cat->slug)
-				->all()
-		)
-			->limit(100)
-			->get();
+		$this->categories = Category::limit(100)->get();
 
 		// load related categories if categorizeable model available
 		$this->categorizeable?->load('categories');
@@ -41,9 +29,19 @@ class Categories extends Component
 	{
 		$dto = new CategoryDTO($title);
 
-		$this->new_categories->push(Category::firstOrCreate(['slug' => $dto->slug], [
-			'title' => $dto->title,
-		]));
+		$this->categorizeable
+			?->categories()
+			->firstOrCreate(['slug' => $dto->slug], [
+				'title' => $dto->title,
+			]);
+	}
+
+	public function modelHas(Category $category): bool
+	{
+		return $this->categorizeable
+			?->categories
+			->contains(fn ($cat) => $cat->id === $category->id)
+			?? false;
 	}
 
     public function render()
