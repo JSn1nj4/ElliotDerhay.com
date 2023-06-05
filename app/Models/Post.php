@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
+use App\Contracts\CategorizeableContract;
 use App\Contracts\SearchDisplayableContract;
 use App\DataTransferObjects\TagDTO;
 use App\Enums\PerPage;
+use App\Traits\Categorizeable;
 use App\Traits\SearchDisplayable;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Support\Carbon;
@@ -47,9 +49,12 @@ use Illuminate\Support\Collection;
  * @property string $meta_description
  * @property \App\Models\SearchMeta $searchMeta
  */
-class Post extends ImageableModel implements SearchDisplayableContract
+class Post extends ImageableModel implements SearchDisplayableContract, CategorizeableContract
 {
-    use HasFactory,
+	// TODO: Implement Taggable stuff too
+	// TODO: Replace ImageableModel stuff with contract and trait ONLY
+    use Categorizeable,
+		HasFactory,
 		SearchDisplayable;
 
 	/**
@@ -61,11 +66,6 @@ class Post extends ImageableModel implements SearchDisplayableContract
 		'slug',
 		'title',
 	];
-
-	public function categories(): MorphToMany
-	{
-		return $this->morphToMany(Category::class, 'categorizeable');
-	}
 
 	public function excerpt(): Attribute
 	{

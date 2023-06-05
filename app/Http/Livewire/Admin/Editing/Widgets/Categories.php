@@ -2,10 +2,10 @@
 
 namespace App\Http\Livewire\Admin\Editing\Widgets;
 
+use App\Contracts\CategorizeableContract;
 use App\DataTransferObjects\CategoryDTO;
 use App\Models\Category;
 use Illuminate\Database\Eloquent\Collection as ModelCollection;
-use Illuminate\Database\Eloquent\Model;
 use Livewire\Component;
 
 class Categories extends Component
@@ -14,7 +14,7 @@ class Categories extends Component
 
 	public string $form;
 
-	public Model|null $categorizeable = null;
+	public CategorizeableContract|null $categorizeable = null;
 
 
 	public function boot(): void
