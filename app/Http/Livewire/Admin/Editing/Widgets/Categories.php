@@ -21,15 +21,26 @@ class Categories extends Component
 
 	public function boot(): void
 	{
-		$this->categories = Category::limit(100)->get();
+		$this->categories = Category::orderBy('title')
+			->limit(100)
+			->get();
 
 		// load related categories if categorizeable model available
 		$this->categorizeable?->load('categories');
 	}
 
+	protected function sanitize(string $title): string
+	{
+		return str($title)
+			->stripTags()
+			->trim()
+			->remove("{}[]`~!@#\$%^*+=<>/\\\r\n")
+			->toString();
+	}
+
 	public function saveNew(string $title): void
 	{
-		$dto = new CategoryDTO($title);
+		$dto = new CategoryDTO($this->sanitize($title));
 
 		$category = Category::firstOrCreate(['slug' => $dto->slug], [
 			'title' => $dto->title,
@@ -44,7 +55,7 @@ class Categories extends Component
 	{
 		return $this->categorizeable
 			?->categories
-			->contains(fn ($cat) => $cat->id === $category->id)
+			->contains(static fn ($cat) => $cat->id === $category->id)
 			?? false;
 	}
 
