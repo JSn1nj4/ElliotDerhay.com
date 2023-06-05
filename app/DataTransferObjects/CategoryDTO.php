@@ -11,6 +11,15 @@ class CategoryDTO
 		$this->process();
 	}
 
+	public static function fromString(string $title): self
+	{
+		return new self(str($title)
+			->stripTags()
+			->trim()
+			->remove("{}[]`~!@#\$%^*+=<>/\\\r\n")
+			->toString());
+	}
+
 	private function process(): void
 	{
 		$this->title = trim($this->title);

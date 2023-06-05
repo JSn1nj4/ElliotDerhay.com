@@ -32,6 +32,11 @@ class Category extends Model
 {
     use HasFactory;
 
+	protected $fillable = [
+		'title',
+		'slug',
+	];
+
 	public function posts(): MorphToMany
 	{
 		return $this->morphedByMany(Post::class, 'categorizeable');
