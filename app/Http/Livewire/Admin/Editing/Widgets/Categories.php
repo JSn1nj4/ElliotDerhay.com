@@ -6,10 +6,13 @@ use App\Contracts\CategorizeableContract;
 use App\DataTransferObjects\CategoryDTO;
 use App\Models\Category;
 use Illuminate\Database\Eloquent\Collection as ModelCollection;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
 
 class Categories extends Component
 {
+	use AuthorizesRequests;
+
 	public ModelCollection $categories;
 
 	public string $form;
@@ -17,7 +20,6 @@ class Categories extends Component
 	public CategorizeableContract|null $categorizeable = null;
 
 	protected $listeners = ['category.create' => 'saveNew'];
-
 
 	public function boot(): void
 	{
@@ -40,6 +42,8 @@ class Categories extends Component
 
 	public function saveNew(string $title): void
 	{
+		$this->authorize('save-category');
+
 		$dto = new CategoryDTO($this->sanitize($title));
 
 		$category = Category::firstOrCreate(['slug' => $dto->slug], [
