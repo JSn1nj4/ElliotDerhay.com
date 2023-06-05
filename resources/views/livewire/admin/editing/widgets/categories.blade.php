@@ -1,4 +1,5 @@
-<div class="flex flex-col w-full gap-2 rounded-lg border dark:border-gray-600 dark:bg-gray-600/20 p-4">
+<div class="relative block overflow-clip">
+	<div class="flex flex-col w-full gap-2 rounded-lg border dark:border-gray-600 dark:bg-gray-600/20 p-4">
 		<p class="text-2xl">Categories</p>
 		<p class="text-lg">Choose from existing categories or create a new one.</p>
 
@@ -9,8 +10,10 @@
 			<hr class="border-dashed border-black dark:border-gray-600">
 			<div class="flex flex-col px-4 py-2 max-h-64 overflow-y-auto">
 				@php /** @var \Illuminate\Database\Eloquent\Collection<\App\Models\Category> $categories */ @endphp
-				@foreach($categories as $category)
+				@foreach($categories as $index => $category)
+					{{-- This might need a checkbox list, not individual checkboxes --}}
 					<livewire:ui.form.checkbox
+						wire:model="category.{{ $index }}"
 						:wire:key="'category-'.$category->id"
 						:field-id="'category-'.$category->id"
 						name="post_categories[]"
@@ -21,4 +24,8 @@
 				@endforeach
 			</div>
 		</div>
+	</div>
+	<div wire:loading.delay class="absolute p-4 bg-black/25 h-full w-full z-50 content-center place-content-center">
+		Loading...
+	</div>
 </div>

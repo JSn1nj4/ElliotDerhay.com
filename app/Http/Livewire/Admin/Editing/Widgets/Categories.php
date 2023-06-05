@@ -2,10 +2,10 @@
 
 namespace App\Http\Livewire\Admin\Editing\Widgets;
 
-use App\Contracts\CategorizeableContract;
 use App\DataTransferObjects\CategoryDTO;
 use App\Models\Category;
-use Illuminate\Database\Eloquent\Collection as ModelCollection;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
 
@@ -13,11 +13,16 @@ class Categories extends Component
 {
 	use AuthorizesRequests;
 
-	public ModelCollection $categories;
+	public Collection $categories;
+
+	public Model|null $categorizeable = null;
 
 	public string $form;
 
-	public CategorizeableContract|null $categorizeable = null;
+	protected $rules = [
+		'categories.*.title' => 'required|string|max:255',
+		'categories.*.slug' => 'string|max:100',
+	];
 
 	protected $listeners = ['category.create' => 'saveNew'];
 
@@ -43,6 +48,8 @@ class Categories extends Component
 	public function saveNew(string $title): void
 	{
 		$this->authorize('save-category');
+
+		$this->validate();
 
 		$dto = new CategoryDTO($this->sanitize($title));
 
