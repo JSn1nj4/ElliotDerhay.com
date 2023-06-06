@@ -17,8 +17,8 @@ class Categories extends Component
 	public string $form;
 
 	protected array $rules = [
-		'new.title' => 'required|string|max:255',
-		'new.slug' => 'string|max:100',
+		'new.title' => 'required|string|min:1|max:255',
+		'new.slug' => 'string|min:1|max:100',
 	];
 
 	protected $listeners = [
@@ -50,8 +50,13 @@ class Categories extends Component
 	{
 		return str($title)
 			->stripTags()
+			->remove([
+				"{", "}", "[", "]", '<', '>',
+				"`", "~", "!", "@", "#", '$',
+				'%', '^', '*', '+', '=', '/',
+				'\\', "\r", "\n"
+			])
 			->trim()
-			->remove("{}[]`~!@#\$%^*+=<>/\\\r\n")
 			->toString();
 	}
 
@@ -60,6 +65,11 @@ class Categories extends Component
 		$this->authorize('save-category');
 
 		$dto = new CategoryDTO($this->sanitize($title));
+
+		// The input resulted in an empty string
+		// TODO: validation message about sanitized input being empty...?
+		// TODO: Is sanitized input that results in empties being silently rejected by Livewire...? No validation falures...
+		// if (strlen($dto->title) + strlen($dto->slug) === 0) return;
 
 		$this->new = $dto->toArray();
 
