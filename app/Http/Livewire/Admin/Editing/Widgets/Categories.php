@@ -13,27 +13,38 @@ class Categories extends Component
 {
 	use AuthorizesRequests;
 
-	public Collection $categories;
-
 	public Model|null $categorizeable = null;
 
 	public string $form;
 
-	protected $rules = [
-		'categories.*.title' => 'required|string|max:255',
-		'categories.*.slug' => 'string|max:100',
+	protected array $rules = [
+		'new.title' => 'required|string|max:255',
+		'new.slug' => 'string|max:100',
 	];
 
-	protected $listeners = ['category.create' => 'saveNew'];
+	protected $listeners = [
+		'category.create' => 'saveNew',
+		'updated' => '$refresh',
+	];
+
+	public array|null $new;
 
 	public function boot(): void
 	{
-		$this->categories = Category::orderBy('title')
-			->limit(100)
-			->get();
-
 		// load related categories if categorizeable model available
 		$this->categorizeable?->load('categories');
+	}
+
+	public function getCategoriesProperty()
+	{
+		return Category::orderBy('title')
+			->limit(100)
+			->get()
+			->map(function (Category $item) {
+				$item['checked'] = $this->modelHas($item);
+
+				return $item;
+			});
 	}
 
 	protected function sanitize(string $title): string
@@ -49,9 +60,13 @@ class Categories extends Component
 	{
 		$this->authorize('save-category');
 
+		$this->new = compact('title');
+
 		$this->validate();
 
-		$dto = new CategoryDTO($this->sanitize($title));
+		$dto = new CategoryDTO($this->sanitize($this->new['title']));
+
+		$this->new = null;
 
 		$category = Category::firstOrCreate(['slug' => $dto->slug], [
 			'title' => $dto->title,
@@ -60,6 +75,8 @@ class Categories extends Component
 		$this->categorizeable
 			?->categories()
 			->attach($category->id);
+
+		$this->emit('updated');
 	}
 
 	public function modelHas(Category $category): bool

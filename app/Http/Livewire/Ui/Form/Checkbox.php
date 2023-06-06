@@ -12,6 +12,8 @@ class Checkbox extends Component
 	public string $label;
 	public bool $checked = false;
 
+	protected $listeners = ['updated' => '$refresh'];
+
     public function render()
     {
         return view('livewire.ui.form.checkbox');
