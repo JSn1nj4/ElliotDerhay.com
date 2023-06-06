@@ -23,7 +23,7 @@ class Categories extends Component
 
 	protected $listeners = [
 		'category.create' => 'saveNew',
-		'updated' => '$refresh',
+		'categories.updated' => '$refresh',
 	];
 
 	public array|null $new;
@@ -85,7 +85,7 @@ class Categories extends Component
 
 		$this->categorizeable?->load('categories');
 
-		$this->emit('updated');
+		$this->emit('categories.updated');
 	}
 
 	public function modelHas(Category $category): bool

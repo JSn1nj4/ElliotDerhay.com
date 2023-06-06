@@ -5,7 +5,7 @@
 
 		<div class="border border-black dark:border-gray-600 rounded-lg bg-gray-800 flex flex-col">
 			<div>
-				<livewire:ui.form.inline-single field="New Category" button="Save" submit-event="category.create" />
+				<livewire:ui.form.inline-single field="New Category" button="Save" submit-event="category.create" reset-event="categories.updated" />
 			</div>
 			<hr class="border-dashed border-black dark:border-gray-600">
 			<div class="flex flex-col px-4 py-2 max-h-64 overflow-y-auto">
