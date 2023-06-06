@@ -12,6 +12,7 @@ class Categories extends Component
 {
 	use AuthorizesRequests;
 
+	/** @var \Illuminate\Database\Eloquent\Model|\App\Contracts\CategorizeableContract|null $categorizeable */
 	public Model|null $categorizeable = null;
 
 	public string $form;
@@ -77,11 +78,13 @@ class Categories extends Component
 
 		$this->new = null;
 
+		$category = Category::firstOrCreate(['slug' => $dto->slug], [
+			'title' => $dto->title,
+		]);
+
 		$this->categorizeable
 			?->categories()
-			->attach(Category::firstOrCreate(['slug' => $dto->slug], [
-				'title' => $dto->title,
-			])->id);
+			->attach($category->id);
 
 		$this->categorizeable?->load('categories');
 
