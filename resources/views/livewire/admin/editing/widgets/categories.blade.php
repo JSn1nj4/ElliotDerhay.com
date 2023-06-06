@@ -24,7 +24,7 @@
 			</div>
 		</div>
 	</div>
-	<div wire:loading.delay class="absolute p-4 bg-black/25 h-full w-full z-50 content-center place-content-center">
+	<div wire:loading class="absolute p-4 bg-black/25 h-full w-full z-50 content-center place-content-center">
 		Loading...
 	</div>
 </div>
