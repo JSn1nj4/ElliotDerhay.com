@@ -60,21 +60,21 @@ class Categories extends Component
 	{
 		$this->authorize('save-category');
 
-		$this->new = compact('title');
+		$dto = new CategoryDTO($this->sanitize($title));
+
+		$this->new = $dto->toArray();
 
 		$this->validate();
 
-		$dto = new CategoryDTO($this->sanitize($this->new['title']));
-
 		$this->new = null;
-
-		$category = Category::firstOrCreate(['slug' => $dto->slug], [
-			'title' => $dto->title,
-		]);
 
 		$this->categorizeable
 			?->categories()
-			->attach($category->id);
+			->attach(Category::firstOrCreate(['slug' => $dto->slug], [
+				'title' => $dto->title,
+			])->id);
+
+		$this->categorizeable?->load('categories');
 
 		$this->emit('updated');
 	}
