@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Traits\CanSanitizeInputs;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
@@ -13,6 +14,8 @@ use Illuminate\Validation\Rules\File;
  * @property string $slug
  */
 class StorePostRequest extends FormRequest {
+	use CanSanitizeInputs;
+
 	public function authorize(): bool
 	{
 		return Gate::has('admin');
@@ -21,11 +24,9 @@ class StorePostRequest extends FormRequest {
 	public function prepareForValidation(): void
 	{
 		$this->merge([
+			// 'categories' => $this->sanitize($this->categories ?? ''),
 			'slug' => Str::slug($this->slug ?? $this->title ?? ''),
-			'tags' => str($this->tags ?? '')
-				->stripTags()
-				->trim(" {}[]`~!@#\$%^*+=<>/\\\r\n")
-				->toString(),
+			'tags' => $this->sanitize($this->tags ?? ''),
 		]);
 	}
 
@@ -45,6 +46,7 @@ class StorePostRequest extends FormRequest {
 				'max:180',
 			],
 			'body' => 'required',
+			// 'categories' => 'string',
 			'tags' => 'string',
 		];
 	}

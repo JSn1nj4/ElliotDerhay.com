@@ -4,13 +4,15 @@ namespace App\Http\Livewire\Admin\Editing\Widgets;
 
 use App\DataTransferObjects\CategoryDTO;
 use App\Models\Category;
+use App\Traits\CanSanitizeInputs;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
 
 class Categories extends Component
 {
-	use AuthorizesRequests;
+	use AuthorizesRequests,
+		CanSanitizeInputs;
 
 	/** @var \Illuminate\Database\Eloquent\Model|\App\Contracts\CategorizeableContract|null $categorizeable */
 	public Model|null $categorizeable = null;
@@ -45,20 +47,6 @@ class Categories extends Component
 
 				return $item;
 			});
-	}
-
-	protected function sanitize(string $title): string
-	{
-		return str($title)
-			->stripTags()
-			->remove([
-				"{", "}", "[", "]", '<', '>',
-				"`", "~", "!", "@", "#", '$',
-				'%', '^', '*', '+', '=', '/',
-				'\\', "\r", "\n"
-			])
-			->trim()
-			->toString();
 	}
 
 	public function saveNew(string $title): void
