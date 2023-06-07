@@ -24,7 +24,7 @@
 			</div>
 		</div>
 	</div>
-	<div wire:loading class="absolute p-4 bg-black/25 h-full w-full z-50 content-center place-content-center">
-		Loading...
+	<div wire:loading class="absolute top-0 left-0 flex p-4 bg-black/40 h-full w-full z-50 place-content-center place-items-center">
+		<p class="text-xl">Loading...</p>
 	</div>
 </div>
