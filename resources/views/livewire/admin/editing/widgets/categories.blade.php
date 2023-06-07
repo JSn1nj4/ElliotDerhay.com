@@ -13,7 +13,7 @@
 				@foreach($this->categories as $index => $category)
 					{{-- This might need a checkbox list, not individual checkboxes --}}
 					<livewire:ui.form.checkbox
-						:wire:key="'category-' . $category->id"
+						:wire:key="'category-'.$category->id.'-'.$category->checked"
 						:field-id="'category-'. $category->id"
 						name="post_categories[]"
 						:value="$category->id"
