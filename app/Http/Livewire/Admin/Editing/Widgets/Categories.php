@@ -67,11 +67,6 @@ class Categories extends Component
 
 		$dto = new CategoryDTO($this->sanitize($title));
 
-		// The input resulted in an empty string
-		// TODO: validation message about sanitized input being empty...?
-		// TODO: Is sanitized input that results in empties being silently rejected by Livewire...? No validation falures...
-		// if (strlen($dto->title) + strlen($dto->slug) === 0) return;
-
 		$this->new = $dto->toArray();
 
 		$this->validate();
