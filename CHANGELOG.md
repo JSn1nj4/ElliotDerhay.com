@@ -8,7 +8,8 @@
 ### Updates
 - Seed an admin user during development
 - [#106][gh_106]: Add tagging UI for posts to admin dashboard
-- Bring exception handler in line with parent 
+- Bring exception handler in line with parent
+- [#107][gh_107]: Add admin category UI to posts
 
 ### Fixes
 - Broken PSR7 autoloader dependency for Sentry
@@ -16,6 +17,7 @@
 
 [gh_94]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/88
 [gh_106]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/106
+[gh_106]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/107
 
 ## Version 2.2.1
 

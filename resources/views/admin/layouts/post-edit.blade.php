@@ -1,6 +1,10 @@
 @php /** @var object|\App\Models\Post $fields */ @endphp
 @extends('admin.layouts.page')
 
+@pushonce('head-extras')
+	@livewireStyles
+@endpushonce
+
 @section('content')
 	<x-row flex-class="md:flex gap-6">
 		<x-column class="block w-2/3">
@@ -57,6 +61,10 @@
 						</div>
 					@endif
 
+					@if($widgets?->categories)
+						<livewire:admin.editing.widgets.categories form="save_post" :errors="$errors->categories" :categorizeable="$post ?? null" />
+					@endif
+
 					@if($widgets?->tags !== null)
 						<x-admin.editing.widgets.tags form="save_post" :errors="$errors->tags" :tags="$widgets->tags ?? ''" />
 					@endif
@@ -65,3 +73,7 @@
 		</x-column>
 	</x-row>
 @endsection
+
+@pushonce('footer-extras')
+	@livewireScripts
+@endpushonce
