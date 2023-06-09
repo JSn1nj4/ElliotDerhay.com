@@ -166,11 +166,12 @@ class Link extends Component
 			'transition-colors',
 			'dark:transition-colors',
 			'duration-300',
+			'text-center',
 		];
 
 		if(!is_null($this->fontSize)) $classes[] = $this->fontSize;
 
-		return implode(' ', array_merge($classes, match($this->linkStyle) {
+		return implode(' ', [...$classes, ...match ($this->linkStyle) {
 			LinkStyle::ButtonSolid => [
 				'px-3',
 				'py-1',
@@ -184,7 +185,7 @@ class Link extends Component
 				$this->shapes[$this->shape->value],
 			],
 			default => [],
-		}));
+		}]);
 	}
 
     /**

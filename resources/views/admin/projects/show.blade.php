@@ -5,7 +5,7 @@
 	<x-row flex-class="md:flex flex-col gap-6">
 		<x-column class="block w-full">
 			@if($project->image)
-				<figure>
+				<figure class="lightbox-trigger inline-block">
 					<img src="{{ $project->image->url }}" class="block rounded-lg" alt="">
 				</figure>
 			@endif
@@ -88,3 +88,11 @@
 		</x-column>
 	</x-row>
 @endsection
+
+@prependonce('footer-extras')
+	<div id="lightbox-modal"></div>
+@endprependonce
+
+@pushonce('footer-extras')
+	@include('partials.lightbox-trigger')
+@endpushonce

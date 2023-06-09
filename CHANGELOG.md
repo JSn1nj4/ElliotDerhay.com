@@ -10,10 +10,13 @@
 - [#106][gh_106]: Add tagging UI for posts to admin dashboard
 - Bring exception handler in line with parent
 - [#107][gh_107]: Add admin category UI to posts
+- Use lightbox in project and image manager admin views
 
 ### Fixes
 - Broken PSR7 autoloader dependency for Sentry
 - Add missing image store job on Post update
+- Center text in link buttons
+- Make header `<figure>` elements `inline-block` like Markdown-rendered images
 
 [gh_94]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/88
 [gh_106]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/106

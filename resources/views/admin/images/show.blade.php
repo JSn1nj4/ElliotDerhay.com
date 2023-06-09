@@ -10,7 +10,7 @@
 @section('content')
 	<x-row flex-class="md:flex flex-row gap-6">
 		<x-column class="w-2/3">
-			<figure>
+			<figure class="lightbox-trigger inline-block">
 				<img src="{{ $image->url }}" class="block rounded-lg" alt="">
 			</figure>
 		</x-column>
@@ -88,3 +88,11 @@
 		</x-column>
 	</x-row>
 @endsection
+
+@prependonce('footer-extras')
+	<div id="lightbox-modal"></div>
+@endprependonce
+
+@pushonce('footer-extras')
+	@include('partials.lightbox-trigger')
+@endpushonce
