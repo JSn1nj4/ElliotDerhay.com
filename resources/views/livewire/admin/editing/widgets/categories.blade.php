@@ -15,7 +15,8 @@
 					<livewire:ui.form.checkbox
 						:wire:key="'category-'.$category->id.'-'.$category->checked"
 						:field-id="'category-'. $category->id"
-						name="post_categories[]"
+						form="{{ $form }}"
+						name="categories[]"
 						:value="$category->id"
 						:label="$category->title"
 						:checked="$category->checked"

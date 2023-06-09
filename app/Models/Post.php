@@ -4,7 +4,6 @@ namespace App\Models;
 
 use App\Contracts\CategorizeableContract;
 use App\Contracts\SearchDisplayableContract;
-use App\DataTransferObjects\TagDTO;
 use App\Enums\PerPage;
 use App\Traits\Categorizeable;
 use App\Traits\SearchDisplayable;
@@ -133,7 +132,18 @@ class Post extends ImageableModel implements SearchDisplayableContract, Categori
 	}
 
 	/**
-	 * @param \Illuminate\Support\Collection<Tag> $tags
+	 * @param \Illuminate\Support\Collection<\App\Models\Category|int> $categories
+	 * @return self
+	 */
+	public function syncCategories(Collection $categories): self
+	{
+		$this->categories()->sync($categories->map(static fn (Category $category) => $category->id)->all());
+
+		return $this;
+	}
+
+	/**
+	 * @param \Illuminate\Support\Collection<\App\Models\Tag> $tags
 	 * @return self
 	 */
 	public function syncTags(Collection $tags): self

@@ -12,6 +12,8 @@ class Checkbox extends Component
 	public string $label;
 	public bool $checked = false;
 
+	public string|null $form = null;
+
 	protected $listeners = ['updated' => '$refresh'];
 
     public function render()

@@ -24,7 +24,12 @@ class StorePostRequest extends FormRequest {
 	public function prepareForValidation(): void
 	{
 		$this->merge([
-			// 'categories' => $this->sanitize($this->categories ?? ''),
+			'categories' => collect($this->categories)
+				->map(fn ($category) => $this->sanitize($category))
+				->filter()
+				->values()
+				->map(static fn ($category) => (int) $category)
+				->toArray(),
 			'slug' => Str::slug($this->slug ?? $this->title ?? ''),
 			'tags' => $this->sanitize($this->tags ?? ''),
 		]);
@@ -46,7 +51,7 @@ class StorePostRequest extends FormRequest {
 				'max:180',
 			],
 			'body' => 'required',
-			// 'categories' => 'string',
+			'categories' => 'array',
 			'tags' => 'string',
 		];
 	}
