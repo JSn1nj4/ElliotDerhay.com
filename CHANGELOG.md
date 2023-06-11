@@ -4,12 +4,13 @@
 
 ### New
 - [#94][gh_94]: Add SEO-related features - page title and meta description
+- [#106][gh_106]: Add tagging UI for posts to admin dashboard
+- [#107][gh_107]: Add admin category UI to posts
+- [#104][gh_104]: Add Sitemap
 
 ### Updates
 - Seed an admin user during development
-- [#106][gh_106]: Add tagging UI for posts to admin dashboard
 - Bring exception handler in line with parent
-- [#107][gh_107]: Add admin category UI to posts
 - Use lightbox in project and image manager admin views
 
 ### Fixes
@@ -19,8 +20,9 @@
 - Make header `<figure>` elements `inline-block` like Markdown-rendered images
 
 [gh_94]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/88
+[gh_104]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/104
 [gh_106]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/106
-[gh_106]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/107
+[gh_107]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/107
 
 ## Version 2.2.1
 
