@@ -16,7 +16,9 @@ Route::get('/error/{code}', function ($code = null) {
 
 Route::get('/sitemap.xml',
 	static fn (Request $request) => Cache::remember('sitemap',
-		10,
+		// cache for a week since the blog might update weekly
+		ttl()->days(7)->get(),
+
 		static fn (): Sitemap => Sitemap::create()
 
 			->add(Url::create(route('home'))
