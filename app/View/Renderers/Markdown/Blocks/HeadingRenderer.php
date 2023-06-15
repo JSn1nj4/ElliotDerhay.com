@@ -34,7 +34,26 @@ class HeadingRenderer implements NodeRendererInterface, XmlNodeRendererInterface
 			6 => ['h6', ['class' => 'text-md mt-6 first:mt-0']],
 		};
 
-		return new HtmlElement($level, array_merge($node->data->get('attributes'), $attributes), $childRenderer->renderNodes($node->children()));
+		$id = str($node->firstChild()->getLiteral())->slug(separator: '_', dictionary: [
+			'@' => 'at',
+			'&' => 'and',
+		]);
+
+		return new HtmlElement('a', [
+			'class' => 'linked-heading',
+			'href' => $id->prepend('#')->toString(),
+		], (string) new HtmlElement($level,
+			// set heading attributes
+			[
+				...$node->data->get('attributes'),
+				...$attributes,
+				...[
+					'id' => $id->toString(),
+				],
+			],
+			// render child heading child nodes
+			$childRenderer->renderNodes($node->children())
+		));
 	}
 
 	public function getXmlTagName(Node $node): string
