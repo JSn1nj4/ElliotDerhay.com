@@ -14,6 +14,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\AbstractPaginator;
 use Illuminate\Support\Collection;
+use Spatie\Sitemap\Contracts\Sitemapable;
+use Spatie\Sitemap\Tags\Url;
 
 /**
  * App\Models\Post
@@ -48,7 +50,7 @@ use Illuminate\Support\Collection;
  * @property string $meta_description
  * @property \App\Models\SearchMeta $searchMeta
  */
-class Post extends ImageableModel implements SearchDisplayableContract, CategorizeableContract
+class Post extends ImageableModel implements SearchDisplayableContract, CategorizeableContract, Sitemapable
 {
 	// TODO: Implement Taggable stuff too
 	// TODO: Replace ImageableModel stuff with contract and trait ONLY
@@ -151,5 +153,10 @@ class Post extends ImageableModel implements SearchDisplayableContract, Categori
 		$this->tags()->sync($tags->map(static fn (Tag $tag) => $tag->id)->all());
 
 		return $this;
+	}
+
+	public function toSitemapTag(): Url|string|array
+	{
+		return route('blog.show', ['post' => $this]);
 	}
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\DataTransferObjects\TtlDTO;
 use App\Services\ImageService;
 
 /**
@@ -25,4 +26,14 @@ function asset_url(string $filename): string {
  */
 function image_url(string $path, string $disk): string {
 	return ImageService::make()->url($path, $disk);
+}
+
+/**
+ * Creates a new TtlDTO that's effectively "empty" (set to 0 at first).
+ *
+ * Setting the value from there can be done with a few methods and then returned for use.
+ * @return TtlDTO
+ */
+function ttl(): TtlDTO {
+	return new TtlDTO(0);
 }

@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-
 // error page testing route (only works locally)
 Route::get('/error/{code}', function ($code = null) {
 	if (!view()->exists("errors.$code")) abort(404);
