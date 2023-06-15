@@ -12,7 +12,7 @@
 		],
 		'widgets' => (object) [
 				'categories' => true,
-				'tags' => old('tags', $post->tags),
+				'tags' => old('tags'),
 		],
 ])
 
