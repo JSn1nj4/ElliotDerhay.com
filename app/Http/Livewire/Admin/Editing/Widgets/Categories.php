@@ -49,8 +49,10 @@ class Categories extends Component
 			});
 	}
 
-	public function saveNew(string $title): void
+	public function saveNew(string|null $title): void
 	{
+		if ($title === null) return;
+
 		$this->authorize('save-category');
 
 		$dto = new CategoryDTO($this->sanitize($title));

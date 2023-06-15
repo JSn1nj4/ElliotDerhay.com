@@ -14,7 +14,7 @@ class InlineSingle extends Component
 	public string $submitEvent;
 	public string $resetEvent;
 
-	public string|null $value;
+	public string|null $value = null;
 
 	protected $listeners = ['updated' => 'resetForm'];
 
