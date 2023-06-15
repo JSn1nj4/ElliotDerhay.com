@@ -32,8 +32,9 @@ class PostsController extends Controller
 		$safe = $request->safe()->except('cover_image');
 
 		$post = Post::create($safe);
-		$post->page_title = $safe['search_title'];
-		$post->meta_description = $safe['search_description'];
+
+		if ($safe['search_title'] !== null) $post->page_title = $safe['search_title'];
+		if ($safe['search_description'] !== null) $post->meta_description = $safe['search_description'];
 
 		$post
 			->syncCategories(Category::fromIds($safe['categories']))
@@ -65,8 +66,9 @@ class PostsController extends Controller
 		$safe = $request->safe()->except('cover_image');
 
 		$post->update($safe);
-		$post->page_title = $safe['search_title'];
-		$post->meta_description = $safe['search_description'];
+
+		if ($safe['search_title'] !== null) $post->page_title = $safe['search_title'];
+		if ($safe['search_description'] !== null) $post->meta_description = $safe['search_description'];
 
 		$post
 			->syncCategories(Category::fromIds($safe['categories']))
