@@ -12,7 +12,7 @@
 		],
 		'widgets' => (object) [
 				'categories' => true,
-				'tags' => old('tags'),
+				'tags' => '',
 		],
 ])
 
