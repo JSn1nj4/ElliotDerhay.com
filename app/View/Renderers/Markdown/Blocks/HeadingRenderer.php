@@ -58,7 +58,7 @@ class HeadingRenderer implements NodeRendererInterface, XmlNodeRendererInterface
 				],
 			],
 			// render link
-			new HtmlElement('a', [
+			(string) new HtmlElement('a', [
 				'class' => 'heading-anchor absolute top-0 left-0 inline-block invisible',
 				'title' => 'Click to copy',
 				'alt' => 'Heading anchor link',
