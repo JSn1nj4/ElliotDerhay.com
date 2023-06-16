@@ -29,9 +29,9 @@ class HeadingRenderer implements NodeRendererInterface, XmlNodeRendererInterface
 		$sharedClasses = join(' ', [
 			'relative',
 			'mt-6',
-			'-ml-8',
+			'sm:-ml-8',
 			'first:mt-0',
-			'pl-8',
+			'sm:pl-8',
 		]);
 
 		[$level, $attributes] = match($node->getLevel()) {
@@ -57,17 +57,17 @@ class HeadingRenderer implements NodeRendererInterface, XmlNodeRendererInterface
 					'id' => $id->toString(),
 				],
 			],
+			// render heading content
+			$childRenderer->renderNodes($node->children())
 			// render link
-			(string) new HtmlElement('a', [
-				'class' => 'heading-anchor absolute top-0 left-0 inline-block invisible',
+			. (string) new HtmlElement('a', [
+				'class' => 'heading-anchor sm:absolute sm:top-0 sm:left-0 pl-2 sm:pl-0 inline-block sm:invisible',
 				'title' => 'Click to copy',
 				'alt' => 'Heading anchor link',
 				'href' => $id->prepend('#')->toString(),
 			], (string) new HtmlElement('i', [
-				'class' => 'fas fa-regular fa-anchor fa-sm',
+				'class' => 'fas fa-regular fa-anchor fa-xs sm:fa-sm',
 			], ''))
-			// render heading content
-			. $childRenderer->renderNodes($node->children())
 		);
 	}
 	public function getXmlTagName(Node $node): string
