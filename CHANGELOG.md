@@ -12,6 +12,7 @@
 - Seed an admin user during development
 - Bring exception handler in line with parent
 - Use lightbox in project and image manager admin views
+- [#111][gh_111]: Generate Markdown heading links
 
 ### Fixes
 - Broken PSR7 autoloader dependency for Sentry
@@ -23,6 +24,7 @@
 [gh_104]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/104
 [gh_106]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/106
 [gh_107]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/107
+[gh_111]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/111
 
 ## Version 2.2.1
 

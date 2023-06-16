@@ -21,6 +21,31 @@
 
 		@stack('footer-extras')
 
+		<script>
+			// todo: organize one-off scripts within bundled JS
+			function copyOnClick(e) {
+				var elem = e.target;
+
+				while (!elem.hasAttribute('href')) {
+					elem = elem.parentElement;
+				}
+
+				const text = elem.href.charAt(0) === '#' ?
+					`${window.location}${elem.href}` :
+					elem.href;
+
+				navigator.clipboard.writeText(text);
+
+				console.log(`Link copied to clipboard: ${text}`);
+			}
+
+			const anchors = document.querySelectorAll('.heading-anchor');
+
+			anchors.forEach(function (elem) {
+				elem.addEventListener('click', copyOnClick, { capture: true });
+			});
+		</script>
+
 		@include('partials.dark-mode')
 	</body>
 </html>
