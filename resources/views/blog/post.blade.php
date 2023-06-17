@@ -6,7 +6,7 @@
 
 @section('blog')
 	@if($post->image)
-		<figure class="lightbox-trigger">
+		<figure class="lightbox-trigger inline-block">
 			<img src="{{ $post->image->url }}" class="block rounded-lg" alt="">
 		</figure>
 	@endif
