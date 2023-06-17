@@ -1,4 +1,3 @@
-@php use App\Features\GithubFeed;use App\Features\TwitterFeed;use Laravel\Pennant\Feature; @endphp
 @extends('layouts.page')
 
 @section('content')
@@ -65,7 +64,7 @@
 				</section>
 			</x-column>
 
-			@feature(GithubFeed::class)
+			@feature(App\Features\GithubFeed::class)
 				<x-column class="block md:w-1/2">
 					<h2 class="content-title text-2xl pt-6 mt-4 text-center">GitHub Activity</h2>
 					<section id="github_events_feed-home" class="font-mono">

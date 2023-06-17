@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Jobs\StoreImageJob;
+use App\Models\Category;
 use App\Models\Post;
+use App\Models\Tag;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -27,7 +29,16 @@ class PostsController extends Controller
 
 	public function store(StorePostRequest $request): Response|RedirectResponse
 	{
-		$post = Post::create($request->safe()->except('cover_image'));
+		$safe = $request->safe()->except('cover_image');
+
+		$post = Post::create($safe);
+
+		if ($safe['search_title'] !== null) $post->page_title = $safe['search_title'];
+		if ($safe['search_description'] !== null) $post->meta_description = $safe['search_description'];
+
+		$post
+			->syncCategories(Category::fromIds($safe['categories']))
+			->syncTags(Tag::fromString($safe['tags']));
 
 		StoreImageJob::dispatchIf(
 			$request->hasFile('cover_image'),
@@ -52,7 +63,16 @@ class PostsController extends Controller
 
 	public function update(UpdatePostRequest $request, Post $post): Response|RedirectResponse
 	{
-		$post->update($request->safe()->except('cover_image'));
+		$safe = $request->safe()->except('cover_image');
+
+		$post->update($safe);
+
+		if ($safe['search_title'] !== null) $post->page_title = $safe['search_title'];
+		if ($safe['search_description'] !== null) $post->meta_description = $safe['search_description'];
+
+		$post
+			->syncCategories(Category::fromIds($safe['categories']))
+			->syncTags(Tag::fromString($safe['tags']));
 
 		StoreImageJob::dispatchIf(
 			$request->hasFile('cover_image'),

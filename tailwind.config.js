@@ -84,7 +84,11 @@ module.exports = {
 			"40": "10rem",
 			"48": "12rem",
 			"56": "14rem",
-			"64": "16rem"
+			"64": "16rem",
+			"72": "18rem",
+			"80": "20rem",
+			"96": "24rem",
+			"128": "32rem",
 		},
 
 		// @TODO: Test new default breakpoints - 640, 768, 1024, 1280

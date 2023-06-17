@@ -1,9 +1,12 @@
 @php /** @var App\Models\Post $post */ @endphp
 @extends('layouts.blog')
 
+@section('page-title', $post->page_title)
+@section('meta-description', $post->meta_description)
+
 @section('blog')
 	@if($post->image)
-		<figure class="lightbox-trigger">
+		<figure class="lightbox-trigger inline-block">
 			<img src="{{ $post->image->url }}" class="block rounded-lg" alt="">
 		</figure>
 	@endif

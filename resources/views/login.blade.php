@@ -1,5 +1,8 @@
 @extends('layouts.page')
 
+@section('page-title', 'Log in - ElliotDerhay.com')
+@section('meta-description', 'Log into the dashboard')
+
 @section('content')
 	<form class="mx-auto my-6 border-2 border-solid border-gray-700 rounded-md bg-white bg-opacity-5 max-w-xs p-8" action="{{ route('login.attempt') }}" method="POST">
 		@csrf

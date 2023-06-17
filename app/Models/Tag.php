@@ -2,11 +2,12 @@
 
 namespace App\Models;
 
+use App\DataTransferObjects\TagDTO;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
-use Illuminate\Support\Str;
 
 /**
  * App\Models\Tag
@@ -32,6 +33,11 @@ class Tag extends Model
 {
     use HasFactory;
 
+	protected $fillable = [
+		'title',
+		'slug',
+	];
+
 	public function posts(): MorphToMany
 	{
 		return $this->morphedByMany(Post::class, 'taggable');
@@ -39,6 +45,33 @@ class Tag extends Model
 
 	public function slug(): Attribute
 	{
-		return Attribute::get(fn () => Str::slug($this->title));
+		return Attribute::set(static fn (string $input) => str($input)
+			->slug(dictionary: [
+				'@' => 'at',
+				'&' => 'and',
+			])->toString());
+	}
+
+	/**
+	 * Get a Tag list from a comma-separated list string
+	 * @param string $tag_list
+	 * @return \Illuminate\Database\Eloquent\Collection
+	 */
+	public static function fromString(string $tag_list): Collection
+	{
+		/** @var \Illuminate\Support\Collection $tagDTOs */
+		$tagDTOs = str($tag_list)
+			->explode(',')
+			->map(static fn ($tag) => trim($tag))
+			->filter() // remove empty values - blanks, breaks, nulls etc.
+			->values() // removes keys explicitly set by `filter()`
+			->map(static fn (string $tag) => new TagDTO($tag));
+
+		static::upsert(
+			$tagDTOs->map(static fn (TagDTO $dto) => $dto->toArray())->all(),
+			['slug'], ['title']
+		);
+
+		return static::whereIn('slug', $tagDTOs->map(static fn (TagDTO $dto) => $dto->slug))->get();
 	}
 }

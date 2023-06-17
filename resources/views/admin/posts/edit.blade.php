@@ -6,8 +6,15 @@
     'fields' => (object) [
         'cover_image' => old('cover_image'),
         'title' => old('title', $post->title),
+        'search_title' => old('search_title', $post->searchMeta?->search_title),
+        'search_description' => old('search_description', $post->searchMeta?->search_description),
         'slug' => old('slug', $post->slug),
         'body' => old('body', $post->body),
+		],
+		'post' => $post,
+		'widgets' => (object) [
+				'categories' => true,
+				'tags' => old('tags', $post->tags),
 		],
 ])
 

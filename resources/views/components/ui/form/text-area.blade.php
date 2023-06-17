@@ -1,7 +1,7 @@
 <textarea
 	id="{{ $id }}"
 	name="{{ $name }}"
-	{{ $attributes->class([
+	{{ $attributes->merge(compact('form'))->class([
     'w-full',
     $textSize,
     $padding,
@@ -14,6 +14,6 @@
     'dark:transition-colors',
     'duration-300',
     'rounded',
-    $height,
+    $height->value,
     'outline-red-200 focus:outline-red-100 dark:bg-red-900' => $error
 ]) }}>{{ $slot }}</textarea>

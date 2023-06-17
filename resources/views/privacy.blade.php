@@ -1,5 +1,8 @@
 @extends('layouts.page')
 
+@section('page-title', 'Privacy Policy - ElliotDerhay.com')
+@section('meta-description', 'This privacy policy applies to this Website and its collection of information. This policy does not cover how third-party websites linked to from this Website use personally-identifiable information.')
+
 @section('content')
 
 	<x-row :flex="false">

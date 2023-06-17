@@ -1,5 +1,36 @@
 # Changelog
 
+## Version 2.3.0
+
+### New
+- [#94][gh_94]: Add SEO-related features - page title and meta description
+- [#106][gh_106]: Add tagging UI for posts to admin dashboard
+- [#107][gh_107]: Add admin category UI to posts
+- [#104][gh_104]: Add Sitemap
+
+### Updates
+- Seed an admin user during development
+- Bring exception handler in line with parent
+- Use lightbox in project and image manager admin views
+- [#111][gh_111]: Generate Markdown heading links
+- Update dependencies
+
+### Fixes
+- Broken PSR7 autoloader dependency for Sentry
+- Add missing image store job on Post update
+- Center text in link buttons
+- Make header `<figure>` elements `inline-block` like Markdown-rendered images
+- [#122][gh_122]: Posts generating meta description from body break response
+- Unable to import types
+- Fix minor post header image display issue on hover
+
+[gh_94]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/88
+[gh_104]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/104
+[gh_106]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/106
+[gh_107]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/107
+[gh_111]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/111
+[gh_122]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/122
+
 ## Version 2.2.1
 
 ### Updates
