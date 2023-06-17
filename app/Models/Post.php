@@ -123,7 +123,7 @@ class Post extends ImageableModel implements SearchDisplayableContract, Categori
 				->whenEndsWith(['.', '?', '!', '...'],
 					static fn ($string) => $string->append(''),
 					static fn ($string) => $string->append('...'),
-				),
+				)->toString(),
 
 			// TODO: how can this be more efficient?
 			set: function (string $description) {
