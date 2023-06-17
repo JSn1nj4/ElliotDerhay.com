@@ -17,16 +17,7 @@
 </template>
 
 <script setup lang="ts">
-type Url = string
-
-// TODO: figure out why I have to redefine this interface instead of importing
-interface ImageWithCaption {
-	alt?: string
-	srcset?: Url[]
-	src: Url
-	title?: string
-	caption?: string
-}
+import {ImageWithCaption} from "./ImageTypes";
 
 const props = defineProps<ImageWithCaption>()
 </script>

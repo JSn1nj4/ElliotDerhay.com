@@ -20,7 +20,8 @@
 - Add missing image store job on Post update
 - Center text in link buttons
 - Make header `<figure>` elements `inline-block` like Markdown-rendered images
-- [#122][gh_122]: Posts generating meta description from body break response 
+- [#122][gh_122]: Posts generating meta description from body break response
+- Unable to import types
 
 [gh_94]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/88
 [gh_104]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/104
