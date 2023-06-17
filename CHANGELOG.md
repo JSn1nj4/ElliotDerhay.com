@@ -13,6 +13,7 @@
 - Bring exception handler in line with parent
 - Use lightbox in project and image manager admin views
 - [#111][gh_111]: Generate Markdown heading links
+- Update dependencies
 
 ### Fixes
 - Broken PSR7 autoloader dependency for Sentry
