@@ -4,7 +4,9 @@ import forms from '@tailwindcss/forms'
 import typography from '@tailwindcss/typography'
 import theme from "tailwindcss/defaultTheme";
 
-module.exports = {
+
+
+const config = {
 	content: [
 		"app/**/*.php",
 		"resources/**/*.js",
@@ -17,6 +19,7 @@ module.exports = {
 		spacing: {
 			px: "1px",
 			"0": "0",
+			"0.5": "0.125rem",
 			"1": "0.25rem",
 			"2": "0.5rem",
 			"3": "0.75rem",
@@ -24,6 +27,7 @@ module.exports = {
 			"5": "1.25rem",
 			"6": "1.5rem",
 			"8": "2rem",
+			"9": "2.25rem",
 			"10": "2.5rem",
 			"12": "3rem",
 			"16": "4rem",
@@ -33,6 +37,7 @@ module.exports = {
 			"40": "10rem",
 			"48": "12rem",
 			"56": "14rem",
+			"60": "15rem",
 			"64": "16rem",
 			"72": "18rem",
 			"80": "20rem",
@@ -81,6 +86,7 @@ module.exports = {
 		fontWeight: {
 			extralight: 200,
 			normal: 400,
+			medium: 500,
 			bold: 700
 		},
 
@@ -140,6 +146,7 @@ module.exports = {
 				seaGreen: {
 					"900": "#002e24",
 					"800": "#005442",
+					"700": "#018669",
 					"600": "#00a682",
 					"500": "#00C49A",
 					"400": "#00ffc8",
@@ -148,15 +155,6 @@ module.exports = {
 				},
 
 				danger: colors.rose,
-				primary: {
-					"900": "#002e24",
-					"800": "#005442",
-					"600": "#00a682",
-					"500": "#00C49A",
-					"400": "#00ffc8",
-					"200": "#6effe0",
-					"100": "#bbfff0",
-				},
 				success: colors.green,
 				warning: colors.yellow,
 			}
@@ -170,3 +168,8 @@ module.exports = {
 		typography,
 	],
 };
+
+// late overrides
+config.theme.extend.colors.primary = config.theme.extend.colors.seaGreen
+
+module.exports = config
