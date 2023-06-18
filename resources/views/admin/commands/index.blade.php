@@ -24,7 +24,7 @@
 			</div>
 			<x-ui.table.wrapper>
 				<x-ui.table.header>
-					<x-ui.table.row class="border-b border-gray-600">
+					<x-ui.table.row class="border-b border-neutral-600">
 						<x-ui.table.heading>Signature</x-ui.table.heading>
 						<x-ui.table.heading>Description</x-ui.table.heading>
 						<x-ui.table.heading class="text-right">
@@ -92,7 +92,7 @@
 					@endforeach
 				</x-ui.table.body>
 				<x-ui.table.footer>
-					<x-ui.table.row class="border-t border-gray-600">
+					<x-ui.table.row class="border-t border-neutral-600">
 						<x-ui.table.data colspan="4">
 							{{ $commands->links() }}
 						</x-ui.table.data>

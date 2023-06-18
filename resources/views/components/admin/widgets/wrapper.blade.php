@@ -1,4 +1,4 @@
-<x-column class="block bg-gray-200 dark:bg-gray-800 dark:hover:bg-seaGreen-200/20 p-6 rounded-xl border border-gray-500 hover:border-gray-800 dark:border-gray-700/30 dark:hover:border-seaGreen-200 transition-colors duration-300">
+<x-column class="block bg-neutral-200 dark:bg-neutral-800 dark:hover:bg-seaGreen-200/20 p-6 rounded-xl border border-neutral-500 hover:border-neutral-800 dark:border-neutral-700/30 dark:hover:border-seaGreen-200 transition-colors duration-300">
 	@if(isset($header))
 	<div class="block md:flex flex-row justify-between">
 		{{ $header }}

@@ -23,7 +23,7 @@ const props = withDefaults(defineProps<{
 const urlIsSet = ref(false)
 const cursorClass = ref('')
 const typeClasses = ref({
-	default: 'rounded-lg border border-gray-600 trans-border-color hover:border-seaGreen-500 bg-gray-900',
+	default: 'rounded-lg border border-neutral-600 trans-border-color hover:border-seaGreen-500 bg-neutral-900',
 	transparent: ''
 })
 const marginVal = ref('')

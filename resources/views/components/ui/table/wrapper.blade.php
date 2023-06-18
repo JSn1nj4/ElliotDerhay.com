@@ -2,8 +2,8 @@
 	'w-full',
 	'border-collapse',
 	'table-auto',
-	'bg-gray-200',
-	'dark:bg-gray-800',
+	'bg-neutral-200',
+	'dark:bg-neutral-800',
 	'rounded-lg',
 	$class,
 ])->merge([

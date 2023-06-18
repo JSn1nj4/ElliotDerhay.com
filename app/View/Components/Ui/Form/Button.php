@@ -30,7 +30,7 @@ class Button extends Component
 			],
 			'solid' => [
 				'bg-red-800',
-				'hover:bg-gray-600/50',
+				'hover:bg-neutral-600/50',
 				'text-white',
 				'hover:text-black',
 				'dark:bg-red-600',
@@ -59,11 +59,11 @@ class Button extends Component
 			],
 			'solid' => [
 				'bg-seaGreen-800',
-				'hover:bg-gray-600/50',
+				'hover:bg-neutral-600/50',
 				'text-white',
 				'hover:text-black',
 				'dark:bg-seaGreen-600',
-				'dark:hover:bg-gray-700/50',
+				'dark:hover:bg-neutral-700/50',
 				'dark:text-black',
 				'dark:hover:text-white'
 			],
@@ -88,11 +88,11 @@ class Button extends Component
 			],
 			'solid' => [
 				'bg-teal-800',
-				'hover:bg-gray-600/50',
+				'hover:bg-neutral-600/50',
 				'text-white',
 				'hover:text-black',
 				'dark:bg-teal-600',
-				'dark:hover:bg-gray-700/50',
+				'dark:hover:bg-neutral-700/50',
 				'dark:text-black',
 				'dark:hover:text-white'
 			],
@@ -117,11 +117,11 @@ class Button extends Component
 			],
 			'solid' => [
 				'bg-yellow-800',
-				'hover:bg-gray-600/50',
+				'hover:bg-neutral-600/50',
 				'text-white',
 				'hover:text-black',
 				'dark:bg-yellow-600',
-				'dark:hover:bg-gray-700/50',
+				'dark:hover:bg-neutral-700/50',
 				'dark:text-black',
 				'dark:hover:text-white',
 			],

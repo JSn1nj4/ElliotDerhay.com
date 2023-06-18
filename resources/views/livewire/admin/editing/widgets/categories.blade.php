@@ -1,13 +1,13 @@
 <div class="relative block overflow-clip">
-	<div class="flex flex-col w-full gap-2 rounded-lg border dark:border-gray-600 dark:bg-gray-600/20 p-4">
+	<div class="flex flex-col w-full gap-2 rounded-lg border dark:border-neutral-600 dark:bg-neutral-600/20 p-4">
 		<p class="text-2xl">Categories</p>
 		<p class="text-lg">Choose from existing categories or create a new one.</p>
 
-		<div class="border border-black dark:border-gray-600 rounded-lg bg-gray-800 flex flex-col">
+		<div class="border border-black dark:border-neutral-600 rounded-lg bg-neutral-800 flex flex-col">
 			<div>
 				<livewire:ui.form.inline-single field="New Category" button="Save" submit-event="category.create" reset-event="categories.updated" />
 			</div>
-			<hr class="border-dashed border-black dark:border-gray-600">
+			<hr class="border-dashed border-black dark:border-neutral-600">
 			<div class="flex flex-col px-4 py-2 max-h-64 overflow-y-auto">
 				@php /** @property \Illuminate\Database\Eloquent\Collection<\App\Models\Category> $this->categories */ @endphp
 				@foreach($this->categories as $index => $category)

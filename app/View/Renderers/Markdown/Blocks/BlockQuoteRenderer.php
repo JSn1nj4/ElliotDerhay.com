@@ -25,7 +25,7 @@ class BlockQuoteRenderer implements NodeRendererInterface, XmlNodeRendererInterf
 	{
 		BlockQuote::assertInstanceOf($node);
 
-		$attrs = array_merge($node->data->get('attributes'), ['class' => 'border-l-gray-700 border-l-2 border-solid pl-4']);
+		$attrs = array_merge($node->data->get('attributes'), ['class' => 'border-l-neutral-700 border-l-2 border-solid pl-4']);
 
 		$filling        = $childRenderer->renderNodes($node->children());
 		$innerSeparator = $childRenderer->getInnerSeparator();

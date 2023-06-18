@@ -13,7 +13,7 @@
 					<a href="{{ $tweet->user->profile_url }}" target="_blank" class="font-bold">
 						{{ $tweet->user->name }}
 					</a><br>
-					<a href="{{ $tweet->user->profile_url }}" target="_blank" class="text-gray-800 dark:text-gray-600">
+					<a href="{{ $tweet->user->profile_url }}" target="_blank" class="text-neutral-800 dark:text-neutral-600">
 						{{ "@" . $tweet->user->screen_name }}
 					</a>
 				</p>

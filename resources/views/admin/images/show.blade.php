@@ -15,7 +15,7 @@
 			</figure>
 		</x-column>
 		<x-column class="w-1/3">
-			<div class="mb-4 mt-3 max-w-full rounded-lg w-full bg-gray-200 dark:bg-gray-800">
+			<div class="mb-4 mt-3 max-w-full rounded-lg w-full bg-neutral-200 dark:bg-neutral-800">
 				<div class="bg-seaGreen-600/40 dark:bg-seaGreen-800/20 even:bg-seaGreen-200/40 dark:even:bg-seaGreen-800/10 p-6 text-xl overflow-hidden overflow-ellipsis">
 					<strong>Name:</strong><br>
 					{{ $image->name }}

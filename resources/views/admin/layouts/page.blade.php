@@ -29,7 +29,7 @@
 			</x-row>
 		</x-sidebar>
 
-		<x-column class="w-full md:w-2/3 lg:w-3/4 xl:w-4/5 border-l-2 border-gray-400 dark:border-gray-800">
+		<x-column class="w-full md:w-2/3 lg:w-3/4 xl:w-4/5 border-l-2 border-neutral-400 dark:border-neutral-800">
 			@include('partials.session.banner')
 
 			@yield('content')

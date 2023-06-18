@@ -53,7 +53,7 @@
 			<div class="flex flex-row gap-8 mb-6">
 				<div class="flex flex-col gap-4 flex-grow">
 					@hasSection('buttons')
-						<div class="flex flex-col w-full gap-2 rounded-lg border dark:border-gray-600 dark:bg-gray-600/20 p-4">
+						<div class="flex flex-col w-full gap-2 rounded-lg border dark:border-neutral-600 dark:bg-neutral-600/20 p-4">
 							<p class="text-3xl">Actions</p>
 							<div class="flex gap-4 just">
 								@yield('buttons')
