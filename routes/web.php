@@ -79,5 +79,3 @@ Route::get('/sitemap.xml',
 			->add(\App\Models\Post::all())
 	)
 		->toResponse($request));
-
-require __DIR__.'/auth.php';
