@@ -1,70 +1,19 @@
-let defaultConfig = require('tailwindcss/defaultConfig');
+import defaultConfig from 'tailwindcss/defaultConfig'
+import colors from 'tailwindcss/colors'
+import forms from '@tailwindcss/forms'
+import typography from '@tailwindcss/typography'
+import theme from "tailwindcss/defaultTheme";
 
 module.exports = {
 	content: [
 		"app/**/*.php",
 		"resources/**/*.js",
 		"resources/**/*.vue",
-		"resources/**/*.php"
+		"resources/**/*.php",
+		"./vendor/filament/**/*.blade.php"
 	],
 
 	theme: {
-		colors: {
-			transparent: "transparent",
-			current: "currentColor",
-
-			black: "#000000",
-			"gray-900": "#090909",
-			"gray-800": "#151515",
-			"gray-700": "#606f7b",
-			"gray-600": "#8795a1",
-			"gray-500": "#b8c2cc",
-			"gray-400": "#dae1e7",
-			"gray-200": "#f1f5f8",
-			"gray-100": "#f8fafc",
-			white: "#ffffff",
-
-			"red-900": "#3b0d0c",
-			"red-800": "#621b18",
-			"red-600": "#cc1f1a",
-			"red-500": "#e3342f",
-			"red-400": "#ef5753",
-			"red-200": "#f9acaa",
-			"red-100": "#fcebea",
-
-			"yellow-900": "#453411",
-			"yellow-800": "#684f1d",
-			"yellow-600": "#f2d024",
-			"yellow-500": "#ffed4a",
-			"yellow-400": "#fff382",
-			"yellow-200": "#fff9c2",
-			"yellow-100": "#fcfbeb",
-
-			"green-900": "#0f2f21",
-			"green-800": "#1a4731",
-			"green-600": "#1f9d55",
-			"green-500": "#38c172",
-			"green-400": "#51d88a",
-			"green-200": "#a2f5bf",
-			"green-100": "#e3fcec",
-
-			"sea-green-900": "#002e24",
-			"sea-green-800": "#005442",
-			"sea-green-600": "#00a682",
-			"sea-green-500": "#00C49A",
-			"sea-green-400": "#00ffc8",
-			"sea-green-200": "#6effe0",
-			"sea-green-100": "#bbfff0",
-
-			"teal-900": "#0d3331",
-			"teal-800": "#20504f",
-			"teal-600": "#38a89d",
-			"teal-500": "#4dc0b5",
-			"teal-400": "#64d5ca",
-			"teal-200": "#a0f0ed",
-			"teal-100": "#e8fffe"
-		},
-
 		spacing: {
 			px: "1px",
 			"0": "0",
@@ -179,7 +128,45 @@ module.exports = {
 			asterisk: "* ",
 			at: "@ "
 		},
+
+		extend: {
+			colors: {
+				transparent: "transparent",
+				current: "currentColor",
+
+				black: "#000000",
+				white: "#ffffff",
+
+				seaGreen: {
+					"900": "#002e24",
+					"800": "#005442",
+					"600": "#00a682",
+					"500": "#00C49A",
+					"400": "#00ffc8",
+					"200": "#6effe0",
+					"100": "#bbfff0",
+				},
+
+				danger: colors.rose,
+				primary: {
+					"900": "#002e24",
+					"800": "#005442",
+					"600": "#00a682",
+					"500": "#00C49A",
+					"400": "#00ffc8",
+					"200": "#6effe0",
+					"100": "#bbfff0",
+				},
+				success: colors.green,
+				warning: colors.yellow,
+			}
+		}
 	},
 
-	darkMode: "class"
+	darkMode: "class",
+
+	plugins: [
+		forms,
+		typography,
+	],
 };

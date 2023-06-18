@@ -36,7 +36,7 @@ use App\View\Components\Ui\Enums\LinkStyle;
 				</x-ui.table.header>
 				<x-ui.table.body>
 					@foreach($projects as $project)
-						<x-ui.table.row class="bg-sea-green-800/20 even:bg-sea-green-800/10">
+						<x-ui.table.row class="bg-seaGreen-800/20 even:bg-seaGreen-800/10">
 							<x-ui.table.data>
 								<x-ui.link
 									href="{{ route('projects.edit', compact('project')) }}"

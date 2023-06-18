@@ -22,15 +22,15 @@
 			<div class="mb-4 mt-3">
 				<x-ui.table.wrapper>
 					<x-ui.table.body>
-						<x-ui.table.row class="bg-sea-green-800/20 even:bg-sea-green-800/10">
+						<x-ui.table.row class="bg-seaGreen-800/20 even:bg-seaGreen-800/10">
 							<x-ui.table.heading>Description:</x-ui.table.heading>
 							<x-ui.table.data>{{ $project->short_desc }}</x-ui.table.data>
 						</x-ui.table.row>
-						<x-ui.table.row class="bg-sea-green-800/20 even:bg-sea-green-800/10">
+						<x-ui.table.row class="bg-seaGreen-800/20 even:bg-seaGreen-800/10">
 							<x-ui.table.heading>Link:</x-ui.table.heading>
 							<x-ui.table.data><a href="{{ $project->link }}">{{ $project->link }}</a></x-ui.table.data>
 						</x-ui.table.row>
-						<x-ui.table.row class="bg-sea-green-800/20 even:bg-sea-green-800/10">
+						<x-ui.table.row class="bg-seaGreen-800/20 even:bg-seaGreen-800/10">
 							<x-ui.table.heading>Demo:</x-ui.table.heading>
 							<x-ui.table.data><a href="{{ $project->demo_link }}">{{ $project->demo_link }}</a></x-ui.table.data>
 						</x-ui.table.row>

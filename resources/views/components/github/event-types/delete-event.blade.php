@@ -16,7 +16,7 @@
 
 				{{-- If there's no ref, it's assumed the repo was deleted --}}
 				@if($hasGitRef)
-					<span class="text-sea-green-600 dark:text-sea-green-800">
+					<span class="text-seaGreen-600 dark:text-seaGreen-800">
 						{{ $refName }}
 					</span>
 

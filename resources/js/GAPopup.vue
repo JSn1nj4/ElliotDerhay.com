@@ -6,8 +6,8 @@
 					<p class="pb-4 md:p-4 mx-2 md:my-2">Please confirm whether you would like to allow tracking cookies on this website, in accordance with its <a href="/privacy">privacy policy</a>.</p>
 				</div>
 				<div class="flex md:w-64">
-					<button :class="`${btnClasses} bg-sea-green-500 dark:bg-sea-green-600 text-gray-100 dark:text-gray-900`" @click="allowTracker(true)">Allow</button>
-					<button :class="`${btnClasses} bg-gray-400 dark:bg-gray-800 text-sea-green-600 dark:text-sea-green-500`" @click="allowTracker(false)">Deny</button>
+					<button :class="`${btnClasses} bg-seaGreen-500 dark:bg-seaGreen-600 text-gray-100 dark:text-gray-900`" @click="allowTracker(true)">Allow</button>
+					<button :class="`${btnClasses} bg-gray-400 dark:bg-gray-800 text-seaGreen-600 dark:text-seaGreen-500`" @click="allowTracker(false)">Deny</button>
 				</div>
 			</div>
 		</div>

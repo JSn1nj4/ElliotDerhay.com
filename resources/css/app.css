@@ -60,15 +60,15 @@ p {
 }
 
 a {
-	@apply text-sea-green-600 trans-color;
+	@apply text-seaGreen-600 trans-color;
 
 	.dark & {
-		@apply text-sea-green-500 trans-color;
+		@apply text-seaGreen-500 trans-color;
 	}
 
 	&:hover,
 	&.active {
-		@apply text-sea-green-800;
+		@apply text-seaGreen-800;
 	}
 
 	.dark &:hover,
@@ -77,7 +77,7 @@ a {
 	}
 
 	&.active {
-		@mixin textGlow 3, theme('colors.gray-500');
+		@mixin textGlow 3, theme('colors.gray.500');
 	}
 
 	.dark &.active {
@@ -146,7 +146,7 @@ a {
 }
 
 .lightbox-trigger {
-	@apply cursor-pointer transition-all duration-300 ease-linear outline outline-1 rounded-lg mt-1 outline-black hover:bg-sea-green-600 hover:dark:bg-sea-green-200 hover:outline-sea-green-600 dark:hover:outline-sea-green-200;
+	@apply cursor-pointer transition-all duration-300 ease-linear outline outline-1 rounded-lg mt-1 outline-black hover:bg-seaGreen-600 hover:dark:bg-seaGreen-200 hover:outline-seaGreen-600 dark:hover:outline-seaGreen-200;
 
 	img {
 		@apply rounded-lg;
@@ -208,6 +208,12 @@ pre.shiki {
  * custom utilities
  */
 @tailwind utilities;
+
+@layer base {
+	:root {
+		--color-primary: theme('colors.seaGreen.500');
+	}
+}
 
 .backlight {
 	background-image: linear-gradient(to top, #00A87E, rgba(0, 168, 126, 0.26666666666666666) 5px, transparent 75%);
