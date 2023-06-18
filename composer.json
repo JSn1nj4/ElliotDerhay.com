@@ -9,6 +9,7 @@
 	"type": "project",
 	"require": {
 		"php": "^8.2",
+		"filament/filament": "^2.0",
 		"guzzlehttp/guzzle": "^7.2",
 		"laravel/framework": "^10.0",
 		"laravel/pennant": "^1.2",
@@ -65,7 +66,8 @@
 			"@php artisan key:generate --ansi"
 		],
 		"post-update-cmd": [
-			"@php artisan vendor:publish --tag=laravel-assets --ansi --force"
+			"@php artisan vendor:publish --tag=laravel-assets --ansi --force",
+			"@php artisan filament:upgrade"
 		]
 	},
 	"config": {
