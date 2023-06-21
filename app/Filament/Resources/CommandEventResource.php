@@ -12,7 +12,9 @@ class CommandEventResource extends Resource
 {
     protected static ?string $model = CommandEvent::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'heroicon-o-clipboard-list';
+
+	protected static ?string $navigationLabel = 'Command Log';
 
     public static function table(Table $table): Table
     {
