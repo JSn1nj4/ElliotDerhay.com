@@ -16,4 +16,18 @@ class ViewCommand extends ViewRecord
             Actions\EditAction::make(),
         ];
     }
+
+	protected function getFooterWidgets(): array
+	{
+		return [
+			CommandResource\Widgets\CommandLog::class,
+		];
+	}
+
+	protected function getFooterWidgetsColumns(): int|string|array
+	{
+		return [
+			'md' => 1,
+		];
+	}
 }
