@@ -39,30 +39,30 @@ class Button extends Component
 				'dark:hover:text-red-200'
 			],
 		],
-		'seaGreen' => [
+		'caribbeanGreen' => [
 			'outline' => [
-				'text-seaGreen-600',
-				'hover:text-seaGreen-800',
-				'active:text-seaGreen-800',
-				'dark:text-seaGreen-500',
+				'text-caribbeanGreen-600',
+				'hover:text-caribbeanGreen-800',
+				'active:text-caribbeanGreen-800',
+				'dark:text-caribbeanGreen-500',
 				'dark:hover:text-white',
 				'dark:active:text-white',
-				'dark:hover:bg-seaGreen-500/20',
+				'dark:hover:bg-caribbeanGreen-500/20',
 				'outline',
 				'outline-1',
-				'outline-seaGreen-800',
-				'hover:outline-seaGreen-600',
-				'active:outline-seaGreen-600',
-				'dark:outline-seaGreen-600',
-				'dark:hover:outline-seaGreen-800',
-				'dark:active:outline-seaGreen-800',
+				'outline-caribbeanGreen-800',
+				'hover:outline-caribbeanGreen-600',
+				'active:outline-caribbeanGreen-600',
+				'dark:outline-caribbeanGreen-600',
+				'dark:hover:outline-caribbeanGreen-800',
+				'dark:active:outline-caribbeanGreen-800',
 			],
 			'solid' => [
-				'bg-seaGreen-800',
+				'bg-caribbeanGreen-800',
 				'hover:bg-neutral-600/50',
 				'text-white',
 				'hover:text-black',
-				'dark:bg-seaGreen-600',
+				'dark:bg-caribbeanGreen-600',
 				'dark:hover:bg-neutral-700/50',
 				'dark:text-black',
 				'dark:hover:text-white'
@@ -140,7 +140,7 @@ class Button extends Component
      * @return void
      */
     public function __construct(
-		private string $color = 'seaGreen',
+		private string $color = 'caribbeanGreen',
 		private FormButtonStyle $buttonStyle = FormButtonStyle::Solid,
 		public FormButtonType $buttonType = FormButtonType::Submit,
 		private FormButtonShape $shape = FormButtonShape::Rounded,

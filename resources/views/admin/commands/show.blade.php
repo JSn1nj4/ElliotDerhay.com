@@ -103,7 +103,7 @@
 				</x-ui.table.header>
 				<x-ui.table.body>
 					@foreach($command->events()->latest()->limit(10)->get() as $event)
-						<x-ui.table.row class="bg-seaGreen-800/20 even:bg-seaGreen-800/10">
+						<x-ui.table.row class="bg-caribbeanGreen-800/20 even:bg-caribbeanGreen-800/10">
 							<x-ui.table.data>
 								<i class="{{ implode(' ', array_keys(array_filter([
 									'text-red-500 fas fa-times' => !$event->succeeded,

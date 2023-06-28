@@ -14,7 +14,7 @@
 
 				{{ $action }}
 
-				<a href="{{ $repoUrl() }}/issues/{{ $event->source }}" target="_blank" class="text-seaGreen-600 dark:text-seaGreen-500">
+				<a href="{{ $repoUrl() }}/issues/{{ $event->source }}" target="_blank" class="text-caribbeanGreen-600 dark:text-caribbeanGreen-500">
 					{{ $issueNumberText }}
 				</a>
 

@@ -143,15 +143,18 @@ const config = {
 				black: "#000000",
 				white: "#ffffff",
 
-				seaGreen: {
-					"900": "#002e24",
-					"800": "#005442",
-					"700": "#018669",
-					"600": "#00a682",
-					"500": "#00C49A",
-					"400": "#00ffc8",
-					"200": "#6effe0",
-					"100": "#bbfff0",
+				caribbeanGreen: {
+					'50': '#eafff7',
+					'100': '#cdfeeb',
+					'200': '#a0fadc',
+					'300': '#63f2ca',
+					'400': '#25e2b3',
+					'500': '#00c49a',
+					'600': '#00a481',
+					'700': '#00836b',
+					'800': '#006756',
+					'900': '#005548',
+					'950': '#00302a',
 				},
 
 				danger: colors.rose,
@@ -170,6 +173,6 @@ const config = {
 };
 
 // late overrides
-config.theme.extend.colors.primary = config.theme.extend.colors.seaGreen
+config.theme.extend.colors.primary = config.theme.extend.colors.caribbeanGreen
 
 module.exports = config

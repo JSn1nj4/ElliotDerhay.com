@@ -39,31 +39,31 @@ class Link extends Component
 			],
 
 		],
-		'seaGreen' => [
+		'caribbeanGreen' => [
 			'button-outline' => [
-				'text-seaGreen-800',
-				'hover:text-seaGreen-600',
-				'active:text-seaGreen-600',
-				'dark:text-seaGreen-500',
+				'text-caribbeanGreen-800',
+				'hover:text-caribbeanGreen-600',
+				'active:text-caribbeanGreen-600',
+				'dark:text-caribbeanGreen-500',
 				'dark:hover:text-white',
 				'dark:active:text-white',
-				'dark:hover:bg-seaGreen-500/20',
+				'dark:hover:bg-caribbeanGreen-500/20',
 			],
 			'button-solid' => [
-				'bg-seaGreen-800',
+				'bg-caribbeanGreen-800',
 				'hover:bg-neutral-600/50',
 				'text-white',
 				'hover:text-black',
-				'dark:bg-seaGreen-600',
+				'dark:bg-caribbeanGreen-600',
 				'dark:hover:bg-neutral-700/50',
 				'dark:text-black',
 				'dark:hover:text-white'
 			],
 			'plain' => [
-				'text-seaGreen-600',
-				'hover:text-seaGreen-800',
-				'active:text-seaGreen-800',
-				'dark:text-seaGreen-500',
+				'text-caribbeanGreen-600',
+				'hover:text-caribbeanGreen-800',
+				'active:text-caribbeanGreen-800',
+				'dark:text-caribbeanGreen-500',
 				'dark:hover:text-white',
 				'dark:active:text-white',
 			],
@@ -141,7 +141,7 @@ class Link extends Component
      */
     public function __construct(
 		public ?string $alt = null,
-		private ?string $color = 'seaGreen',
+		private ?string $color = 'caribbeanGreen',
 		public string $href = '#',
 		private LinkStyle $linkStyle = LinkStyle::Plain,
 		private FormButtonShape $shape = FormButtonShape::Rounded,

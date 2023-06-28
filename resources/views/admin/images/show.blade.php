@@ -16,29 +16,29 @@
 		</x-column>
 		<x-column class="w-1/3">
 			<div class="mb-4 mt-3 max-w-full rounded-lg w-full bg-neutral-200 dark:bg-neutral-800">
-				<div class="bg-seaGreen-600/40 dark:bg-seaGreen-800/20 even:bg-seaGreen-200/40 dark:even:bg-seaGreen-800/10 p-6 text-xl overflow-hidden overflow-ellipsis">
+				<div class="bg-caribbeanGreen-600/40 dark:bg-caribbeanGreen-800/20 even:bg-caribbeanGreen-200/40 dark:even:bg-caribbeanGreen-800/10 p-6 text-xl overflow-hidden overflow-ellipsis">
 					<strong>Name:</strong><br>
 					{{ $image->name }}
 				</div>
-				<div class="bg-seaGreen-600/40 dark:bg-seaGreen-800/20 even:bg-seaGreen-200/40 dark:even:bg-seaGreen-800/10 p-6 text-xl">
+				<div class="bg-caribbeanGreen-600/40 dark:bg-caribbeanGreen-800/20 even:bg-caribbeanGreen-200/40 dark:even:bg-caribbeanGreen-800/10 p-6 text-xl">
 					<strong>Created at:</strong>
 					{{ $image->created_at->toFormattedDateString() }}
 				</div>
 				@unless($image->created_at->unix() === $image->updated_at->unix())
-				<div class="bg-seaGreen-600/40 dark:bg-seaGreen-800/20 even:bg-seaGreen-200/40 dark:even:bg-seaGreen-800/10 p-6 text-xl">
+				<div class="bg-caribbeanGreen-600/40 dark:bg-caribbeanGreen-800/20 even:bg-caribbeanGreen-200/40 dark:even:bg-caribbeanGreen-800/10 p-6 text-xl">
 					<strong>Last Updated:</strong>
 					{{ $image->updated_at->toFormattedDateString() }}
 				</div>
 				@endunless
-				<div class="bg-seaGreen-600/40 dark:bg-seaGreen-800/20 even:bg-seaGreen-200/40 dark:even:bg-seaGreen-800/10 p-6 text-xl">
+				<div class="bg-caribbeanGreen-600/40 dark:bg-caribbeanGreen-800/20 even:bg-caribbeanGreen-200/40 dark:even:bg-caribbeanGreen-800/10 p-6 text-xl">
 					<strong>Storage Location:</strong>
 					{{ $image->disk }}
 				</div>
-				<div class="bg-seaGreen-600/40 dark:bg-seaGreen-800/20 even:bg-seaGreen-200/40 dark:even:bg-seaGreen-800/10 p-6 text-xl">
+				<div class="bg-caribbeanGreen-600/40 dark:bg-caribbeanGreen-800/20 even:bg-caribbeanGreen-200/40 dark:even:bg-caribbeanGreen-800/10 p-6 text-xl">
 					<strong>Size:</strong>
 					{{ $image->size }} bytes
 				</div>
-				<div class="bg-seaGreen-600/40 dark:bg-seaGreen-800/20 even:bg-seaGreen-200/40 dark:even:bg-seaGreen-800/10 p-6 text-xl">
+				<div class="bg-caribbeanGreen-600/40 dark:bg-caribbeanGreen-800/20 even:bg-caribbeanGreen-200/40 dark:even:bg-caribbeanGreen-800/10 p-6 text-xl">
 					<strong>Attached to:</strong><br>
 					@if($image->posts->isNotEmpty())
 						<p class="pt-6">Posts:</p>

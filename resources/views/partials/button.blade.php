@@ -1,5 +1,5 @@
 @php
-	$classes = "p-3 border-neutral-700 bg-neutral-700 bg-opacity-30 border-solid border rounded-sm transition-colors ease-linear duration-300 hover:border-seaGreen-500 hover:bg-seaGreen-500 hover:text-neutral-900";
+	$classes = "p-3 border-neutral-700 bg-neutral-700 bg-opacity-30 border-solid border rounded-sm transition-colors ease-linear duration-300 hover:border-caribbeanGreen-500 hover:bg-caribbeanGreen-500 hover:text-neutral-900";
 
 	if($type === 'link') {
 		$href ??= "javascript:void(0)";

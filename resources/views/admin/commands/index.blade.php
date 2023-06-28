@@ -40,7 +40,7 @@
 				</x-ui.table.header>
 				<x-ui.table.body>
 					@foreach($commands as $command)
-						<x-ui.table.row class="bg-seaGreen-800/20 even:bg-seaGreen-800/10">
+						<x-ui.table.row class="bg-caribbeanGreen-800/20 even:bg-caribbeanGreen-800/10">
 							<x-ui.table.data>
 								<x-ui.link
 									:href="route('commands.edit', compact('command'))"

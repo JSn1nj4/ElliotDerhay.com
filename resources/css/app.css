@@ -60,15 +60,15 @@ p {
 }
 
 a {
-	@apply text-seaGreen-600 trans-color;
+	@apply text-caribbeanGreen-600 trans-color;
 
 	.dark & {
-		@apply text-seaGreen-500 trans-color;
+		@apply text-caribbeanGreen-500 trans-color;
 	}
 
 	&:hover,
 	&.active {
-		@apply text-seaGreen-800;
+		@apply text-caribbeanGreen-800;
 	}
 
 	.dark &:hover,
@@ -146,7 +146,7 @@ a {
 }
 
 .lightbox-trigger {
-	@apply cursor-pointer transition-all duration-300 ease-linear outline outline-1 rounded-lg mt-1 outline-black hover:bg-seaGreen-600 hover:dark:bg-seaGreen-200 hover:outline-seaGreen-600 dark:hover:outline-seaGreen-200;
+	@apply cursor-pointer transition-all duration-300 ease-linear outline outline-1 rounded-lg mt-1 outline-black hover:bg-caribbeanGreen-600 hover:dark:bg-caribbeanGreen-200 hover:outline-caribbeanGreen-600 dark:hover:outline-caribbeanGreen-200;
 
 	img {
 		@apply rounded-lg;
@@ -211,7 +211,7 @@ pre.shiki {
 
 @layer base {
 	:root {
-		--color-primary: theme('colors.seaGreen.500');
+		--color-primary: theme('colors.caribbeanGreen.500');
 	}
 }
 
