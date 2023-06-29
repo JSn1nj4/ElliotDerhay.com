@@ -9,10 +9,14 @@ use App\Actions\LogCommandEvent;
 use App\Actions\LogUserLogin;
 use App\Contracts\GitHostService;
 use App\Contracts\SocialMediaService;
+use App\Filament\Resources\CommandEventResource;
+use App\Filament\Resources\CommandResource;
 use App\Models\Token;
 use App\Services\Github\GithubService;
 use App\Services\Twitter\TwitterService;
 use Filament\Facades\Filament;
+use Filament\Navigation\NavigationGroup;
+use Filament\Navigation\NavigationItem;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -52,6 +56,13 @@ class AppServiceProvider extends ServiceProvider
 	 */
 	public function boot(): void
 	{
-		Filament::registerViteTheme('resources/css/filament.css');
+		Filament::serving(static function () {
+			Filament::registerViteTheme('resources/css/filament.css');
+
+			Filament::registerNavigationGroups([
+				NavigationGroup::make('Content'),
+				NavigationGroup::make('Administration'),
+			]);
+		});
 	}
 }

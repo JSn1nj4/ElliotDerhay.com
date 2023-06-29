@@ -4,6 +4,8 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\ProjectResource\Pages;
 use App\Filament\Resources\ProjectResource\RelationManagers;
+use App\Forms\Components\ImageViewField;
+use App\Jobs\StoreImageJob;
 use App\Models\Image;
 use App\Models\Project;
 use App\View\Components\Column;
@@ -14,6 +16,9 @@ use Filament\Resources\Table;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Validation\UnauthorizedException;
+use Livewire\TemporaryUploadedFile;
 
 class ProjectResource extends Resource
 {
@@ -21,31 +26,37 @@ class ProjectResource extends Resource
 
     protected static string|null $navigationIcon = 'heroicon-o-code';
 
-    public static function form(Form $form): Form
+	protected static int|null $navigationSort = 0;
+
+	protected static string|null $navigationGroup = 'Content';
+
+	public static function form(Form $form): Form
     {
         return $form->columns(3)
             ->schema([
-				Forms\Components\Section::make('Info')
-					->columnSpan(2)
-					->schema([
-						Forms\Components\TextInput::make('name')
-							->required(),
-						Forms\Components\Textarea::make('short_desc')
-							->required(),
-					]),
 				Forms\Components\Section::make('Image')
 					->columnSpan(1)
 					->schema([
-						Forms\Components\FileUpload::make('image'),
+						ImageViewField::make('image'),
+						Forms\Components\FileUpload::make('image')
+							->image()
+							->avatar()
+							->saveUploadedFileUsing(self::storeImage(...)),
 					]),
-				Forms\Components\Section::make('Links')
+				Forms\Components\Section::make('Info')
+					->columnSpan(2)
 					->columns()
 					->schema([
-						Forms\Components\TextInput::make('link')
-							->label('Project')
+						Forms\Components\TextInput::make('name')
+							->columnSpanFull()
 							->required(),
-						Forms\Components\TextInput::make('demo_link')
-							->label('Demo'),
+						Forms\Components\TextInput::make('link')
+							->label('Project link')
+							->required(),
+						Forms\Components\TextInput::make('demo_link'),
+						Forms\Components\Textarea::make('short_desc')
+							->columnSpanFull()
+							->required(),
 					]),
             ]);
     }
@@ -54,7 +65,7 @@ class ProjectResource extends Resource
     {
         return $table
             ->columns([
-				Tables\Columns\ImageColumn::make('image')
+				Tables\Columns\ImageColumn::make('image.url')
 					->disk(static fn (Image $image) => $image->disk),
                 Tables\Columns\TextColumn::make('name'),
 				Tables\Columns\TextColumn::make('link'),
@@ -87,4 +98,9 @@ class ProjectResource extends Resource
             'edit' => Pages\EditProject::route('/{record}/edit'),
         ];
     }
+
+	protected static function storeImage(TemporaryUploadedFile $file): void
+	{
+		StoreImageJob::dispatchSync($file);
+	}
 }

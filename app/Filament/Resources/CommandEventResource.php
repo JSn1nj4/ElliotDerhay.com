@@ -10,11 +10,15 @@ use Filament\Tables;
 
 class CommandEventResource extends Resource
 {
-    protected static ?string $model = CommandEvent::class;
+    protected static string|null $model = CommandEvent::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-clipboard-list';
+    protected static string|null $navigationIcon = 'heroicon-o-clipboard-list';
 
-	protected static ?string $navigationLabel = 'Command Log';
+	protected static string|null $navigationLabel = 'Command Log';
+
+	protected static int|null $navigationSort = 1;
+
+	protected static string|null $navigationGroup = 'Administration';
 
     public static function table(Table $table): Table
     {

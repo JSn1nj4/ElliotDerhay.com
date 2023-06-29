@@ -15,9 +15,11 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class CommandResource extends Resource
 {
-    protected static ?string $model = Command::class;
+    protected static string|null $model = Command::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-terminal';
+    protected static string|null $navigationIcon = 'heroicon-o-terminal';
+
+	protected static string|null $navigationGroup = 'Administration';
 
     public static function form(Form $form): Form
     {
