@@ -2,22 +2,17 @@
 
 namespace App\Filament\Resources;
 
+use App\Actions\StoresImage;
 use App\Filament\Resources\ProjectResource\Pages;
 use App\Filament\Resources\ProjectResource\RelationManagers;
 use App\Forms\Components\ImageViewField;
-use App\Jobs\StoreImageJob;
 use App\Models\Image;
 use App\Models\Project;
-use App\View\Components\Column;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Illuminate\Support\Facades\Gate;
-use Illuminate\Validation\UnauthorizedException;
 use Livewire\TemporaryUploadedFile;
 
 class ProjectResource extends Resource
@@ -39,8 +34,9 @@ class ProjectResource extends Resource
 					->schema([
 						ImageViewField::make('image'),
 						Forms\Components\FileUpload::make('image')
+							->disableLabel()
+							->model(self::$model)
 							->image()
-							->avatar()
 							->saveUploadedFileUsing(self::storeImage(...)),
 					]),
 				Forms\Components\Section::make('Info')
@@ -99,8 +95,12 @@ class ProjectResource extends Resource
         ];
     }
 
-	protected static function storeImage(TemporaryUploadedFile $file): void
+	protected static function storeImage(TemporaryUploadedFile $file): Image
 	{
-		StoreImageJob::dispatchSync($file);
+		$storeImage = StoresImage::make();
+
+//		dd($file);
+
+		return $storeImage($file);
 	}
 }
