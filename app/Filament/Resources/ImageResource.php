@@ -70,7 +70,7 @@ class ImageResource extends Resource
     {
         return [
             'index' => Pages\ListImages::route('/'),
-            // 'create' => Pages\CreateImage::route('/create'),
+			'create' => Pages\CreateImage::route('/create'),
             'edit' => Pages\EditImage::route('/{record}/edit'),
         ];
     }
