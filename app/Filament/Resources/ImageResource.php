@@ -27,9 +27,8 @@ class ImageResource extends Resource
 
     public static function form(Form $form): Form
     {
-        return $form
+        return $form->columns(3)
             ->schema([
-                //
             ]);
     }
 

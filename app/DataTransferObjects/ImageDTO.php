@@ -37,6 +37,7 @@ final readonly class ImageDTO
 			),
 			size: $file->getSize(),
 			collection: $collection,
+			disk: $temp_disk,
 		);
 	}
 }
