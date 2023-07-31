@@ -3,6 +3,7 @@
 namespace App\Forms\Components;
 
 use App\Models\Image;
+use App\Models\ImageableModel;
 use Filament\Forms\Components\Field;
 use Illuminate\Contracts\View\View;
 
@@ -14,7 +15,10 @@ class ImageViewField extends Field
 
 	public function render(): View
 	{
-		$this->image = $this->getModelInstance()->image ?? Image::make();
+		$this->image = match($this->getModelInstance()::class) {
+			Image::class => $this->getModelInstance(),
+			default => $this->getModelInstance()->image ?? Image::make(),
+		};
 
 		return parent::render();
 	}
