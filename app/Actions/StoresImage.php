@@ -3,6 +3,7 @@
 namespace App\Actions;
 
 use App\Contracts\ImageableContract;
+use App\DataTransferObjects\FileLocation;
 use App\Jobs\TransferImageJob;
 use App\Models\Image;
 use Illuminate\Http\UploadedFile;
@@ -61,6 +62,16 @@ class StoresImage extends BaseAction
 		return $image;
 	}
 
+	public static function execute(
+		UploadedFile $file,
+		ImageableContract|null $relation = null,
+		string $collection = 'images',
+		string $temp_disk = 'temp',
+	): Image
+	{
+		return self::make()($file, $relation, $collection, $temp_disk);
+	}
+
 	protected function getImage(): Image
 	{
 		$image = Image::whereFileHash($this->hash)->first();
@@ -91,14 +102,15 @@ class StoresImage extends BaseAction
 
 	public function moveToPublic(): string
 	{
-		$path = "{$this->collection}/{$this->name}";
+		$permanent_path = "{$this->collection}/{$this->name}";
 
-		if (!Storage::disk('public')
-			->writeStream($path, Storage::disk($this->temp_disk)
-				->readStream($this->temp_path))) {
-			throw new \Exception("Unable to write file '{$this->temp_path}' to public disk.");
-		}
+		$result = MoveImage::execute(
+			from: new FileLocation($this->temp_disk, $this->temp_path),
+			to: new FileLocation('public', $permanent_path)
+		);
 
-		return $path;
+		if (!$result->succeeded) throw new \Exception($result->message);
+
+		return $permanent_path;
 	}
 }
