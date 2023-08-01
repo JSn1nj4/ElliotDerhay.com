@@ -14,8 +14,8 @@ final readonly class ImageDTO
 		public string $path,
 		public string $file_hash,
 		public int $size,
-		public string|null $collection,
-		public string $disk = 'local',
+		public string $disk,
+		public string $collection = 'images',
 	) {}
 
 	public static function fromUpload(
