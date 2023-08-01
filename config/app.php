@@ -200,6 +200,7 @@ return [
 	*/
 	'uploads' => [
 		'disk' => env('UPLOAD_DISK', 'local'),
+		'temp' => env('UPLOAD_TEMP_DISK', 'temp'),
 		'hash' => env('UPLOAD_FILE_HASH', 'md5'),
 	],
 

@@ -2,10 +2,7 @@
 
 namespace App\Models;
 
-use App\Actions\MoveImage;
-use App\DataTransferObjects\FileLocation;
 use App\Enums\PerPage;
-use App\Events\ImageDeletedEvent;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -55,10 +52,6 @@ class Image extends Model
 {
     use HasFactory;
 
-	protected $dispatchesEvents = [
-		'deleted' => ImageDeletedEvent::class,
-	];
-
 	/**
 	 * @var array
 	 */
@@ -72,25 +65,6 @@ class Image extends Model
 		'size',
 		'collection',
 	];
-
-	protected static function booted(): void
-	{
-		static::creating(function (self $model): void {
-			if ($model->disk === 'public') return;
-
-			$permanent_path = "{$model->collection}/{$model->name}";
-
-			$result = MoveImage::execute(
-				from: new FileLocation($model->disk, $model->path),
-				to: new FileLocation('public', $permanent_path)
-			);
-
-			if (!$result->succeeded) throw new \Exception($result->message);
-
-			$model->disk = 'public';
-			$model->path = $permanent_path;
-		});
-	}
 
 	public static function index(Request $request): AbstractPaginator
 	{

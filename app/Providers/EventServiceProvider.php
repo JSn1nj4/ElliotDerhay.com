@@ -15,6 +15,8 @@ use App\Listeners\SendPasswordChangedNotification;
 use App\Listeners\LogLockouts;
 use App\Listeners\PruneOldTweets;
 use App\Listeners\SendNewGithubEventTypesEmail;
+use App\Models\Image;
+use App\Observers\ImageObserver;
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Auth\Events\Registered;
@@ -29,6 +31,14 @@ class EventServiceProvider extends ServiceProvider
 	 * @var array
 	 */
 	protected $listen = [];
+
+	/**
+	 * Register model event observers
+	 * @var array[] $observers
+	 */
+	protected $observers = [
+		Image::class => [ImageObserver::class],
+	];
 
 	/**
 	 * Subscribers to handle multiple related events

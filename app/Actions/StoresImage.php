@@ -57,8 +57,6 @@ class StoresImage extends BaseAction
 
 		$this->deleteTempFile();
 
-		TransferImageJob::dispatch($image->id, config('app.uploads.disk'));
-
 		return $image;
 	}
 
@@ -82,7 +80,7 @@ class StoresImage extends BaseAction
 			'name' => "{$this->name}",
 			'file_name' => $this->original_name,
 			'mime_type' => $this->mime_type,
-			'path' => $this->moveToPublic(),
+			'path' => $this->temp_path,
 			'disk' => 'public',
 			'file_hash' => $this->hash,
 			'size' => $this->size,
@@ -98,19 +96,5 @@ class StoresImage extends BaseAction
 	protected function deleteTempFile(): void
 	{
 		Storage::disk($this->temp_disk)->delete($this->temp_path);
-	}
-
-	public function moveToPublic(): string
-	{
-		$permanent_path = "{$this->collection}/{$this->name}";
-
-		$result = MoveImage::execute(
-			from: new FileLocation($this->temp_disk, $this->temp_path),
-			to: new FileLocation('public', $permanent_path)
-		);
-
-		if (!$result->succeeded) throw new \Exception($result->message);
-
-		return $permanent_path;
 	}
 }
