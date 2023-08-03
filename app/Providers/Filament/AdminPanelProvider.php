@@ -5,6 +5,7 @@ namespace App\Providers\Filament;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Filament\Navigation\NavigationGroup;
 use Filament\Pages;
 use Filament\Panel;
 use Filament\PanelProvider;
@@ -28,10 +29,27 @@ class AdminPanelProvider extends PanelProvider
             ->path('admin')
             ->login()
             ->colors([
-                'primary' => Color::Amber,
+				'primary' => [
+					50 => '#eafff7',
+					100 => '#cdfeeb',
+					200 => '#a0fadc',
+					300 => '#63f2ca',
+					400 => '#25e2b3',
+					500 => '#00c49a',
+					600 => '#00a481',
+					700 => '#00836b',
+					800 => '#006756',
+					900 => '#005548',
+					950 => '#00302a',
+				],
+				'danger' => Color::Rose,
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
+			->navigationGroups([
+				NavigationGroup::make('Content'),
+				NavigationGroup::make('Administration'),
+			])
             ->pages([
                 Pages\Dashboard::class,
             ])

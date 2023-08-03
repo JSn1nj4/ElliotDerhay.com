@@ -26,15 +26,11 @@ class CommandLog extends TableWidget
 	protected function getTableColumns(): array
 	{
 		return [
-			Tables\Columns\IconColumn::make('status')
-				->options([
-					'heroicon-s-x',
-					'heroicon-s-check' => static fn ($state, CommandEvent $record) => $record->succeeded,
-				])
-				->colors([
-					'danger',
-					'primary' => static fn ($state, CommandEvent $record) => $record->succeeded,
-				]),
+			Tables\Columns\IconColumn::make('succeeded')
+				->label('Status')
+				->boolean()
+				->true('s-check', 'primary')
+				->false('s-x-mark','danger'),
 			Tables\Columns\TextColumn::make('command.signature')
 				->label('Command'),
 			Tables\Columns\TextColumn::make('command.description')

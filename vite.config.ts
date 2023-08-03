@@ -34,7 +34,6 @@ export default defineConfig(({ mode }) => {
 		laravel({
 				input: [
 					'resources/css/app.css',
-					'resources/css/filament.css',
 					'resources/js/admin/app.ts',
 					'resources/js/app.ts',
 				],
