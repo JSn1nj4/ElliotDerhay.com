@@ -17,11 +17,11 @@ class CommandResource extends Resource
 {
     protected static string|null $model = Command::class;
 
-    protected static string|null $navigationIcon = 'heroicon-o-terminal';
+    protected static string|null $navigationIcon = 'm-command-line';
 
 	protected static string|null $navigationGroup = 'Administration';
 
-    public static function form(Form $form): Form
+    public static function form(Forms\Form $form): Forms\Form
     {
         return $form
             ->schema([
@@ -34,7 +34,7 @@ class CommandResource extends Resource
             ]);
     }
 
-    public static function table(Table $table): Table
+    public static function table(Tables\Table $table): Tables\Table
     {
         return $table
             ->columns([

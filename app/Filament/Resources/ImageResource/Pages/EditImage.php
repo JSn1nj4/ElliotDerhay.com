@@ -13,7 +13,7 @@ class EditImage extends EditRecord
 {
     protected static string $resource = ImageResource::class;
 
-	protected function form(Form $form): Form
+	public function form(Forms\Form $form): Forms\Form
 	{
 		return $form->columns(3)
 			->schema([

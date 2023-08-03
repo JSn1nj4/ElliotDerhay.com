@@ -12,7 +12,7 @@ class CommandEventResource extends Resource
 {
     protected static string|null $model = CommandEvent::class;
 
-    protected static string|null $navigationIcon = 'heroicon-o-clipboard-list';
+    protected static string|null $navigationIcon = 'm-clipboard-document-list';
 
 	protected static string|null $navigationLabel = 'Command Log';
 
@@ -20,8 +20,8 @@ class CommandEventResource extends Resource
 
 	protected static string|null $navigationGroup = 'Administration';
 
-    public static function table(Table $table): Table
-    {
+    public static function table(Tables\Table $table): Tables\Table
+	{
         return $table
             ->columns([
                 Tables\Columns\IconColumn::make('status')

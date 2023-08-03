@@ -17,7 +17,7 @@ class ImageResource extends Resource
 {
     protected static string|null $model = Image::class;
 
-    protected static string|null $navigationIcon = 'heroicon-o-photograph';
+    protected static string|null $navigationIcon = 'm-photo';
 
 	protected static int|null $navigationSort = 1;
 
@@ -25,14 +25,14 @@ class ImageResource extends Resource
 
 	protected static string|null $navigationLabel = 'Image Gallery';
 
-    public static function form(Form $form): Form
+    public static function form(Forms\Form $form): Forms\Form
     {
         return $form->columns(3)
             ->schema([
             ]);
     }
 
-    public static function table(Table $table): Table
+    public static function table(Tables\Table $table): Tables\Table
     {
         return $table
 			->columns([

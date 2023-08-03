@@ -24,7 +24,7 @@ class ViewCommand extends ViewRecord
 		];
 	}
 
-	protected function getFooterWidgetsColumns(): int|string|array
+	public function getFooterWidgetsColumns(): int|string|array
 	{
 		return [
 			'md' => 1,

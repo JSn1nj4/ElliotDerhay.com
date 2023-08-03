@@ -19,14 +19,14 @@ class ProjectResource extends Resource
 {
     protected static string|null $model = Project::class;
 
-    protected static string|null $navigationIcon = 'heroicon-o-code';
+    protected static string|null $navigationIcon = 'm-code-bracket';
 
 	protected static int|null $navigationSort = 0;
 
 	protected static string|null $navigationGroup = 'Content';
 
-	public static function form(Form $form): Form
-    {
+	public static function form(Forms\Form $form): Forms\Form
+	{
         return $form->columns(3)
             ->schema([
 				Forms\Components\Section::make('Image')
@@ -34,7 +34,7 @@ class ProjectResource extends Resource
 					->schema([
 						ImageViewField::make('image'),
 						Forms\Components\FileUpload::make('image')
-							->disableLabel()
+							->label()
 							->image(),
 					]),
 				Forms\Components\Section::make('Info')
@@ -55,8 +55,8 @@ class ProjectResource extends Resource
             ]);
     }
 
-    public static function table(Table $table): Table
-    {
+    public static function table(Tables\Table $table): Tables\Table
+	{
         return $table
             ->columns([
 				Tables\Columns\ImageColumn::make('image.url')

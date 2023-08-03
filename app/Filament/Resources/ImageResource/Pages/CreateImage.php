@@ -13,7 +13,7 @@ class CreateImage extends CreateRecord
 {
     protected static string $resource = ImageResource::class;
 
-	protected function form(Form $form): Form
+	public function form(Forms\Form $form): Forms\Form
 	{
 		return $form->columns(3)
 			->schema([
@@ -54,7 +54,7 @@ class CreateImage extends CreateRecord
 			]);
 	}
 
-	protected function updateForm(\Closure $set, TemporaryUploadedFile $file): void
+	protected function updateForm(Forms\Set $set, TemporaryUploadedFile $file): void
 	{
 		$dto = ImageDTO::fromUpload($file);
 
