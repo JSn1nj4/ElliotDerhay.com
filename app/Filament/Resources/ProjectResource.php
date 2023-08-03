@@ -62,7 +62,8 @@ class ProjectResource extends Resource
         return $table
             ->columns([
 				Tables\Columns\ImageColumn::make('image.url')
-					->disk(static fn (Image $image) => $image->disk),
+					->disk(static fn (Image $image) => $image->disk)
+					->size('auto')->height(135),
                 Tables\Columns\TextColumn::make('name'),
 				Tables\Columns\TextColumn::make('link'),
 				Tables\Columns\TextColumn::make('demo_link'),
@@ -94,13 +95,4 @@ class ProjectResource extends Resource
             'edit' => Pages\EditProject::route('/{record}/edit'),
         ];
     }
-
-	protected static function storeImage(TemporaryUploadedFile $file): Image
-	{
-		$storeImage = StoresImage::make();
-
-//		dd($file);
-
-		return $storeImage($file);
-	}
 }

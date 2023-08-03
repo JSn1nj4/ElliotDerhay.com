@@ -38,7 +38,7 @@ class ImageResource extends Resource
 			->columns([
 				Tables\Columns\ImageColumn::make('url')
 					->disk(static fn (Image $image) => $image->disk)
-					->size(200),
+					->size('auto')->height(135),
 				Tables\Columns\TextColumn::make('name'),
 				Tables\Columns\TextColumn::make('file_name')
 					->label('Filename'),
