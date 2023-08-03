@@ -35,9 +35,7 @@ class ProjectResource extends Resource
 						ImageViewField::make('image'),
 						Forms\Components\FileUpload::make('image')
 							->disableLabel()
-							->model(self::$model)
-							->image()
-							->saveUploadedFileUsing(self::storeImage(...)),
+							->image(),
 					]),
 				Forms\Components\Section::make('Info')
 					->columnSpan(2)
@@ -83,7 +81,7 @@ class ProjectResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+			//
         ];
     }
 
