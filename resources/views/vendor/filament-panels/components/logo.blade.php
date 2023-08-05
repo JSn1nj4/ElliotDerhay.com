@@ -1,1 +1,1 @@
-<span class="text-xl sm:text-3xl tracking-tighter py-px2 pl-2 align-middle"><img src="{{ asset_url("avatar.png") }}" width="60" height="60" alt="ElliotDerhay.com logo" title="Elliot Derhay" class="inline-block border-solid border-2 border-white rounded-full"> Elliot Derhay</span>
+<img src="{{ asset_url("avatar.png") }}" width="50" height="50" alt="ElliotDerhay.com logo" title="Elliot Derhay" class="border-solid border-2 border-white rounded-full">

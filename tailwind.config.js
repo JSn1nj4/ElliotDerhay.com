@@ -3,10 +3,12 @@ import colors from 'tailwindcss/colors'
 import forms from '@tailwindcss/forms'
 import typography from '@tailwindcss/typography'
 import theme from "tailwindcss/defaultTheme";
+import preset from './vendor/filament/filament/tailwind.config.preset'
 
 
 
 const config = {
+	presets: [preset],
 	content: [
 		"app/**/*.php",
 		"resources/**/*.js",
