@@ -36,8 +36,8 @@ final readonly class ImageDTO
 				filename: Storage::disk($temp_disk)->path($temp_path),
 			),
 			size: $file->getSize(),
-			collection: $collection,
 			disk: $temp_disk,
+			collection: $collection,
 		);
 	}
 }

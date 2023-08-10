@@ -5,13 +5,23 @@ namespace App\Filament\Resources\ImageResource\Pages;
 use App\DataTransferObjects\ImageDTO;
 use App\Filament\Resources\ImageResource;
 use Filament\Forms;
-use Filament\Resources\Form;
 use Filament\Resources\Pages\CreateRecord;
-use Livewire\TemporaryUploadedFile;
+use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 
 class CreateImage extends CreateRecord
 {
     protected static string $resource = ImageResource::class;
+
+	public array|null $image = [];
+	public string|null $name = null;
+	public string|null $collection = null;
+	public string|null $disk = null;
+	public string|null $file_name = null;
+	public string|null $mime_type = null;
+	public string|null $path = null;
+	public int|null $size = null;
+	public string|null $file_hash = null;
+
 
 	public function form(Forms\Form $form): Forms\Form
 	{
@@ -21,10 +31,21 @@ class CreateImage extends CreateRecord
 					->columnSpan(1)
 					->schema([
 						Forms\Components\FileUpload::make('image')
-							->disableLabel()
+							->hiddenLabel()
 							->image()
+							->afterStateUpdated(static function (Forms\Set $set, TemporaryUploadedFile $state) {
+								$dto = ImageDTO::fromUpload($state);
+
+								$set('name', $dto->name);
+								$set('collection', $dto->collection);
+								$set('disk', $dto->disk);
+								$set('file_name', $dto->file_name);
+								$set('mime_type', $dto->mime_type);
+								$set('path', $dto->path);
+								$set('size', $dto->size);
+								$set('file_hash', $dto->file_hash);
+							})
 							->reactive()
-							->afterStateUpdated(fn ($set, $state) => $this->updateForm($set, $state)),
 					]),
 				Forms\Components\Section::make('Info')
 					->columnSpan(2)
@@ -52,19 +73,5 @@ class CreateImage extends CreateRecord
 							->disabled(),
 					]),
 			]);
-	}
-
-	protected function updateForm(Forms\Set $set, TemporaryUploadedFile $file): void
-	{
-		$dto = ImageDTO::fromUpload($file);
-
-		$set('name', $dto->name);
-		$set('collection', $dto->collection);
-		$set('disk', $dto->disk);
-		$set('file_name', $dto->file_name);
-		$set('mime_type', $dto->mime_type);
-		$set('path', $dto->path);
-		$set('size', $dto->size);
-		$set('file_hash', $dto->file_hash);
 	}
 }
