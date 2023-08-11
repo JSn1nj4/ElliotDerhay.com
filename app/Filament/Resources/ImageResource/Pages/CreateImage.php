@@ -55,22 +55,22 @@ class CreateImage extends CreateRecord
 							->columnSpanFull(),
 						Forms\Components\TextInput::make('collection')
 							->columnSpan(2)
-							->disabled(),
+							->disabled()->dehydrated(),
 						Forms\Components\TextInput::make('disk')
-							->disabled(),
+							->disabled()->dehydrated(),
 						Forms\Components\TextInput::make('file_name')
 							->columnSpan(2)
-							->disabled(),
+							->disabled()->dehydrated(),
 						Forms\Components\TextInput::make('mime_type')
-							->disabled(),
+							->disabled()->dehydrated(),
 						Forms\Components\TextInput::make('path')
 							->columnSpan(2)
-							->disabled(),
+							->disabled()->dehydrated(),
 						Forms\Components\TextInput::make('size')
 							->numeric()
-							->disabled(),
+							->disabled()->dehydrated(),
 						Forms\Components\Hidden::make('file_hash')
-							->disabled(),
+							->disabled()->dehydrated(),
 					]),
 			]);
 	}
