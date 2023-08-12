@@ -4,16 +4,10 @@ namespace App\Filament\Resources;
 
 use App\DataTransferObjects\ImageDTO;
 use App\Filament\Resources\ImageResource\Pages;
-use App\Filament\Resources\ImageResource\RelationManagers;
-use App\Forms\Components\ImageViewField;
 use App\Models\Image;
 use Filament\Forms;
-use Filament\Resources\Form;
 use Filament\Resources\Resource;
-use Filament\Resources\Table;
 use Filament\Tables;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 
 class ImageResource extends Resource
@@ -52,6 +46,12 @@ class ImageResource extends Resource
 							})
 							->reactive()
 					])->visibleOn('create'),
+
+				Forms\Components\Section::make('Preview')
+					->columnSpan(1)
+					->schema([
+
+					])->hiddenOn('create'),
 
 				Forms\Components\Section::make('Info')
 					->columnSpan(2)
@@ -100,6 +100,7 @@ class ImageResource extends Resource
                 //
             ])
             ->actions([
+				Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
 				Tables\Actions\DeleteAction::make(),
             ])
@@ -120,6 +121,7 @@ class ImageResource extends Resource
         return [
             'index' => Pages\ListImages::route('/'),
 			'create' => Pages\CreateImage::route('/create'),
+			'view' => Pages\ViewImage::route('/{record}'),
             'edit' => Pages\EditImage::route('/{record}/edit'),
         ];
     }

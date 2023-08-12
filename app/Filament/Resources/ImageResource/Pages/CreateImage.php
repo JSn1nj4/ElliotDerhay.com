@@ -2,11 +2,8 @@
 
 namespace App\Filament\Resources\ImageResource\Pages;
 
-use App\DataTransferObjects\ImageDTO;
 use App\Filament\Resources\ImageResource;
-use Filament\Forms;
 use Filament\Resources\Pages\CreateRecord;
-use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 
 class CreateImage extends CreateRecord
 {
