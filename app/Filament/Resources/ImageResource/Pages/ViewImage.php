@@ -22,6 +22,7 @@ class ViewImage extends ViewRecord
 	protected function getActions(): array
 	{
 		return [
+			Actions\EditAction::make(),
 			Actions\DeleteAction::make(),
 		];
 	}
