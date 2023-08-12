@@ -2,8 +2,10 @@
 
 namespace App\Filament\Resources;
 
+use App\DataTransferObjects\ImageDTO;
 use App\Filament\Resources\ImageResource\Pages;
 use App\Filament\Resources\ImageResource\RelationManagers;
+use App\Forms\Components\ImageViewField;
 use App\Models\Image;
 use Filament\Forms;
 use Filament\Resources\Form;
@@ -12,6 +14,7 @@ use Filament\Resources\Table;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 
 class ImageResource extends Resource
 {
@@ -27,9 +30,56 @@ class ImageResource extends Resource
 
     public static function form(Forms\Form $form): Forms\Form
     {
-        return $form->columns(3)
-            ->schema([
-            ]);
+		return $form->columns(3)
+			->schema([
+				Forms\Components\Section::make('Upload')
+					->columnSpan(1)
+					->schema([
+						Forms\Components\FileUpload::make('image')
+							->hiddenLabel()
+							->image()
+							->afterStateUpdated(static function (Forms\Set $set, TemporaryUploadedFile $state) {
+								$dto = ImageDTO::fromUpload($state);
+
+								$set('name', $dto->name);
+								$set('collection', $dto->collection);
+								$set('disk', $dto->disk);
+								$set('file_name', $dto->file_name);
+								$set('mime_type', $dto->mime_type);
+								$set('path', $dto->path);
+								$set('size', $dto->size);
+								$set('file_hash', $dto->file_hash);
+							})
+							->reactive()
+					])->visibleOn('create'),
+
+				Forms\Components\Section::make('Info')
+					->columnSpan(2)
+					->columns(3)
+					->schema([
+						Forms\Components\TextInput::make('name')
+							->columnSpanFull()
+							->disabledOn('create')->dehydrated(),
+						Forms\Components\TextInput::make('collection')
+							->columnSpan(2)
+							->disabled()->dehydrated(),
+						Forms\Components\TextInput::make('disk')
+							->disabled()->dehydrated(),
+						Forms\Components\TextInput::make('file_name')
+							->columnSpan(2)
+							->disabled()->dehydrated(),
+						Forms\Components\TextInput::make('mime_type')
+							->disabled()->dehydrated(),
+						Forms\Components\TextInput::make('path')
+							->columnSpan(2)
+							->disabled()->dehydrated(),
+						Forms\Components\TextInput::make('size')
+							->numeric()
+							->disabled()->dehydrated(),
+						Forms\Components\Hidden::make('file_hash')
+							->disabled()->dehydrated(),
+					]),
+			]);
     }
 
     public static function table(Tables\Table $table): Tables\Table
