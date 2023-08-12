@@ -23,6 +23,16 @@ class ImageResource extends Resource
 
 	protected static string|null $navigationLabel = 'Image Gallery';
 
+	public array|null $image = [];
+	public string|null $name = null;
+	public string|null $collection = null;
+	public string|null $disk = null;
+	public string|null $file_name = null;
+	public string|null $mime_type = null;
+	public string|null $path = null;
+	public int|null $size = null;
+	public string|null $file_hash = null;
+
     public static function form(Forms\Form $form): Forms\Form
     {
 		return $form->columns(3)
