@@ -3,6 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\DataTransferObjects\ImageDTO;
+use App\Filament\Forms\Components\ImageViewField;
 use App\Filament\Resources\ImageResource\Pages;
 use App\Models\Image;
 use Filament\Forms;
@@ -50,7 +51,7 @@ class ImageResource extends Resource
 				Forms\Components\Section::make('Preview')
 					->columnSpan(1)
 					->schema([
-
+						ImageViewField::make('image')->hiddenLabel(),
 					])->hiddenOn('create'),
 
 				Forms\Components\Section::make('Info')
