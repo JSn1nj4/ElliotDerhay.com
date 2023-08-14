@@ -43,6 +43,7 @@ class ImageResource extends Resource
 						Forms\Components\FileUpload::make('image')
 							->hiddenLabel()
 							->image()
+							->maxSize(5 * 1024)
 							->afterStateUpdated(static function (Forms\Set $set, TemporaryUploadedFile $state) {
 								$dto = ImageDTO::fromUpload($state);
 
@@ -70,24 +71,47 @@ class ImageResource extends Resource
 					->schema([
 						Forms\Components\TextInput::make('name')
 							->columnSpanFull()
+							->required()
+							->maxLength(255)
 							->disabledOn('create')->dehydrated(),
+
 						Forms\Components\TextInput::make('collection')
 							->columnSpan(2)
+							->required()
+							->maxLength(255)
 							->disabled()->dehydrated(),
+
 						Forms\Components\TextInput::make('disk')
+							->required()
+							->maxLength(255)
 							->disabled()->dehydrated(),
+
 						Forms\Components\TextInput::make('file_name')
 							->columnSpan(2)
+							->required()
+							->maxLength(255)
 							->disabled()->dehydrated(),
+
 						Forms\Components\TextInput::make('mime_type')
+							->required()
+							->maxLength(255)
 							->disabled()->dehydrated(),
+
 						Forms\Components\TextInput::make('path')
 							->columnSpan(2)
+							->required()
+							->maxLength(255)
 							->disabled()->dehydrated(),
+
 						Forms\Components\TextInput::make('size')
 							->numeric()
+							->required()
+							->integer()
 							->disabled()->dehydrated(),
+
 						Forms\Components\Hidden::make('file_hash')
+							->required()
+							->unique()
 							->disabled()->dehydrated(),
 					]),
 			]);
@@ -107,6 +131,7 @@ class ImageResource extends Resource
 					->label('File type'),
 				Tables\Columns\TextColumn::make('disk'),
 			])
+			->defaultSort('created_at', 'desc')
             ->filters([
                 //
             ])
