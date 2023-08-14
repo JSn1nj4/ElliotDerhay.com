@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use App\Models\Category;
+use App\Models\Image;
 use App\Models\User;
+use App\Policies\ImagePolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
@@ -16,6 +18,7 @@ class AuthServiceProvider extends ServiceProvider
 	 */
 	protected $policies = [
 		// 'App\Models\Model' => 'App\Policies\ModelPolicy',
+		Image::class => ImagePolicy::class,
 	];
 
 	/**
@@ -25,12 +28,6 @@ class AuthServiceProvider extends ServiceProvider
 	 */
 	public function boot(): void
 	{
-		Gate::define('admin', function (User $user) {
-			return User::whereId(\Auth::id())->exists();
-		})->define('upload-files', function (User $user) {
-			return User::whereId(\Auth::id())->exists();
-		})->define('save-category', function (User $user) {
-			return User::whereId(\Auth::id())->exists();
-		});
+		// ...
 	}
 }
