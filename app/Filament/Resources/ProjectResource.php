@@ -3,17 +3,15 @@
 namespace App\Filament\Resources;
 
 use App\Actions\StoresImage;
+use App\Filament\Forms\Components\ImageViewField;
 use App\Filament\Resources\ProjectResource\Pages;
 use App\Filament\Resources\ProjectResource\RelationManagers;
-use App\Forms\Components\ImageViewField;
 use App\Models\Image;
 use App\Models\Project;
 use Filament\Forms;
-use Filament\Resources\Form;
 use Filament\Resources\Resource;
-use Filament\Resources\Table;
 use Filament\Tables;
-use Livewire\TemporaryUploadedFile;
+use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 
 class ProjectResource extends Resource
 {
@@ -34,7 +32,7 @@ class ProjectResource extends Resource
 					->schema([
 						ImageViewField::make('image'),
 						Forms\Components\FileUpload::make('image')
-							->label()
+							->hiddenLabel()
 							->image(),
 					]),
 				Forms\Components\Section::make('Info')
