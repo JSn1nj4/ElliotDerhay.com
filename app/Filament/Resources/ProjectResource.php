@@ -3,10 +3,8 @@
 namespace App\Filament\Resources;
 
 use App\Actions\StoresImage;
-use App\DataTransferObjects\ImageDTO;
 use App\Filament\Forms\Components\ImageViewField;
 use App\Filament\Resources\ProjectResource\Pages;
-use App\Filament\Resources\ProjectResource\RelationManagers;
 use App\Models\Image;
 use App\Models\Project;
 use Filament\Forms;
@@ -112,7 +110,7 @@ class ProjectResource extends Resource
     public static function getRelations(): array
     {
         return [
-			// RelationManagers\ImagesRelationManager::class,
+			//
         ];
     }
 
