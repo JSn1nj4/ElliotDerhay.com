@@ -37,7 +37,7 @@ class ProjectResource extends Resource
 							->hiddenLabel()
 							->hiddenOn('create'),
 
-						Forms\Components\FileUpload::make('image')
+						Forms\Components\FileUpload::make('upload')
 							->hiddenLabel()
 							->image()
 							->maxSize(5 * 1024)
@@ -112,7 +112,7 @@ class ProjectResource extends Resource
     public static function getRelations(): array
     {
         return [
-			//
+			// RelationManagers\ImagesRelationManager::class,
         ];
     }
 
