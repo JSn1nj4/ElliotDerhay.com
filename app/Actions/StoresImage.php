@@ -4,6 +4,7 @@ namespace App\Actions;
 
 use App\Contracts\ImageableContract;
 use App\DataTransferObjects\FileLocation;
+use App\DataTransferObjects\ImageDTO;
 use App\Jobs\TransferImageJob;
 use App\Models\Image;
 use Illuminate\Http\UploadedFile;
@@ -11,13 +12,9 @@ use Illuminate\Support\Facades\Storage;
 
 class StoresImage extends BaseAction
 {
-	protected string $collection;
-	protected string $hash;
-	protected string $mime_type;
-	protected string $name;
-	protected string $original_name;
+	protected ImageDTO $dto;
+
 	protected ImageableContract|null $relation;
-	protected int $size;
 	protected string $temp_disk;
 	protected string $temp_path;
 
@@ -36,26 +33,13 @@ class StoresImage extends BaseAction
 	): Image
 	{
 		$this->relation = $relation;
-		$this->collection = $collection;
 		$this->temp_disk = $temp_disk;
 
-		$this->name = $file->hashName();
-		$this->original_name = $file->getClientOriginalName();
-		$this->mime_type = $file->getClientMimeType();
-		$this->temp_path = $file->store($this->collection, $this->temp_disk);
-		$this->size = $file->getSize();
-		$this->hash = hash_file(
-			algo: config('app.uploads.hash'),
-			filename: Storage::disk($this->temp_disk)->path($this->temp_path),
-		);
+		$this->dto = ImageDTO::fromUpload($file, $collection, $temp_disk);
 
 		$image = $this->getImage();
 
-		if ($this->relation === null) return $image;
-
 		$this->maybeAttach($image);
-
-		$this->deleteTempFile();
 
 		return $image;
 	}
@@ -72,29 +56,19 @@ class StoresImage extends BaseAction
 
 	protected function getImage(): Image
 	{
-		$image = Image::whereFileHash($this->hash)->first();
-
-		if ($image !== null) return $image;
-
-		return Image::create([
-			'name' => "{$this->name}",
-			'file_name' => $this->original_name,
-			'mime_type' => $this->mime_type,
-			'path' => $this->temp_path,
-			'disk' => 'public',
-			'file_hash' => $this->hash,
-			'size' => $this->size,
-			'collection' => $this->collection,
+		return Image::firstOrCreate(['file_hash' => $this->dto->file_hash], [
+			'name' => (string)$this->dto->name,
+			'file_name' => $this->dto->file_name,
+			'mime_type' => $this->dto->mime_type,
+			'path' => $this->dto->path,
+			'disk' => $this->dto->disk,
+			'size' => $this->dto->size,
+			'collection' => $this->dto->collection,
 		]);
 	}
 
 	protected function maybeAttach(Image $image): void
 	{
 		$this->relation?->images()->sync([$image->id]);
-	}
-
-	protected function deleteTempFile(): void
-	{
-		Storage::disk($this->temp_disk)->delete($this->temp_path);
 	}
 }

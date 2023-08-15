@@ -3,6 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Actions\StoresImage;
+use App\DataTransferObjects\ImageDTO;
 use App\Filament\Forms\Components\ImageViewField;
 use App\Filament\Resources\ProjectResource\Pages;
 use App\Filament\Resources\ProjectResource\RelationManagers;
@@ -23,6 +24,8 @@ class ProjectResource extends Resource
 
 	protected static string|null $navigationGroup = 'Content';
 
+	public int|null $image_id = null;
+
 	public static function form(Forms\Form $form): Forms\Form
 	{
         return $form->columns(3)
@@ -30,26 +33,55 @@ class ProjectResource extends Resource
 				Forms\Components\Section::make('Image')
 					->columnSpan(1)
 					->schema([
-						ImageViewField::make('image'),
+						ImageViewField::make('image')
+							->hiddenLabel()
+							->hiddenOn('create'),
+
 						Forms\Components\FileUpload::make('image')
 							->hiddenLabel()
-							->image(),
+							->image()
+							->maxSize(5 * 1024)
+							->afterStateUpdated(static function (Forms\Set $set, TemporaryUploadedFile $state) {
+								$image = StoresImage::execute($state);
+
+								$set('image_id', $image->id);
+							})
+							->reactive(),
+
+						Forms\Components\Hidden::make('image_id'),
 					]),
+
 				Forms\Components\Section::make('Info')
 					->columnSpan(2)
 					->columns()
 					->schema([
 						Forms\Components\TextInput::make('name')
 							->columnSpanFull()
-							->required(),
+							->required()
+							->maxLength(255),
+
 						Forms\Components\TextInput::make('link')
 							->label('Project link')
-							->required(),
-						Forms\Components\TextInput::make('demo_link'),
+							->required()
+							->maxLength(255),
+
+						Forms\Components\TextInput::make('demo_link')
+							->maxLength(255),
+
 						Forms\Components\Textarea::make('short_desc')
 							->columnSpanFull()
-							->required(),
-					]),
+							->required()
+							->maxLength(255),
+					])
+					->saveRelationshipsUsing(static function (Project $project, Forms\Get $get) {
+						$image_id = $get('image_id');
+
+						if ($image_id === null) return;
+
+						if (Image::whereId($image_id)->doesntExist()) return;
+
+						$project->images()->sync([$image_id]);
+					}),
             ]);
     }
 
@@ -64,6 +96,7 @@ class ProjectResource extends Resource
 				Tables\Columns\TextColumn::make('link'),
 				Tables\Columns\TextColumn::make('demo_link'),
             ])
+			->defaultSort('created_at', 'desc')
             ->filters([
                 //
             ])

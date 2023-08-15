@@ -21,6 +21,7 @@ final class ImageObserver
 		if ($image->disk !== config('app.uploads.temp')) return;
 
 		$permanent_path = "{$image->collection}/{$image->name}";
+		$old_path = $image->path;
 
 		$result = MoveImage::execute(
 			from: new FileLocation(config('app.uploads.temp'), $image->path),
@@ -31,6 +32,9 @@ final class ImageObserver
 
 		$image->disk = 'public';
 		$image->path = $permanent_path;
+
+		// Cleanup
+		Storage::disk(config('app.uploads.temp'))->delete($old_path);
 	}
 
     /**
