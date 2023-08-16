@@ -18,8 +18,6 @@ class ProjectResource extends Resource
 
     protected static string|null $navigationIcon = 'm-code-bracket';
 
-	protected static int|null $navigationSort = 0;
-
 	protected static string|null $navigationGroup = 'Content';
 
 	public int|null $image_id = null;
