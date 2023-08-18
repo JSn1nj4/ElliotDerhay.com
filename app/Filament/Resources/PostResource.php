@@ -32,68 +32,99 @@ class PostResource extends Resource
 			->columns(3)
             ->schema([
 				Forms\Components\Section::make('Content')
-					->heading()
 					->columnSpan(2)
 					->schema([
 						Forms\Components\Textarea::make('title')
 							->required()
-							->maxLength(255)
+							->maxLength(180)
 							->columnSpanFull(),
 						Forms\Components\Textarea::make('slug')
 							->required()
-							->maxLength(255)
+							->maxLength(180)
 							->columnSpanFull(),
-						Forms\Components\Textarea::make('body')
+						Forms\Components\MarkdownEditor::make('body')
 							->required()
 							->columnSpanFull(),
 					]),
 
-				Forms\Components\Section::make('Meta')
-					->columnSpan(1)
-					->schema([
-						ImageViewField::make('image')
-							->hiddenLabel()
-							->hiddenOn('create')
-							->visible(static fn (Image $image) => $image->exists()),
+				Forms\Components\Group::make([
+					Forms\Components\Section::make('Image')						->schema([
+							ImageViewField::make('image')
+								->hiddenLabel()
+								->hiddenOn('create')
+								->visible(static fn (Image $image) => $image->exists()),
 
-						Forms\Components\FileUpload::make('upload')
-							->hiddenLabel()
-							->image()
-							->maxSize(5 * 1024)
-							->afterStateUpdated(static function (Forms\Set $set, TemporaryUploadedFile $state) {
-								$image = StoresImage::execute($state);
+							Forms\Components\FileUpload::make('upload')
+								->hiddenLabel()
+								->image()
+								->maxSize(5 * 1024)
+								->afterStateUpdated(static function (Forms\Set $set, TemporaryUploadedFile $state) {
+									$image = StoresImage::execute($state);
 
-								$set('image_id', $image->id);
-							})
-							->reactive(),
+									$set('image_id', $image->id);
+								})
+								->reactive(),
 
-						Forms\Components\Hidden::make('image_id'),
+							Forms\Components\Hidden::make('image_id'),
+						])
+						->saveRelationshipsUsing(static function (Post $post, Forms\Get $get) {
+							$image_id = $get('image_id');
 
-						Forms\Components\Repeater::make('categories')
-							->relationship()
-							->reorderable()
-							->grid(2)
-							->schema([
-								Forms\Components\TextInput::make('title')->hiddenLabel(),
-							]),
+							if ($image_id === null) return;
 
-						Forms\Components\Repeater::make('tags')
-							->relationship()
-							->reorderable()
-							->grid(3)
-							->schema([
-								Forms\Components\TextInput::make('title')->hiddenLabel(),
-							]),
-					])
-					->saveRelationshipsUsing(static function (Post $post, Forms\Get $get) {
-						$image_id = $get('image_id');
+							if (Image::whereId($image_id)->doesntExist()) return;
 
-						if ($image_id === null) return;
+							$post->images()->sync([$image_id]);
+						}),
 
-						if (Image::whereId($image_id)->doesntExist()) return;
+					Forms\Components\Section::make('Meta')
+						->relationship('searchMeta')
+						->schema([
+							Forms\Components\TextInput::make('search_title')
+								->label('Custom Search Title')
+								->maxLength('180'),
 
-						$post->images()->sync([$image_id]);
-					}),
+							Forms\Components\Textarea::make('search_description')
+								->label('Custom Search Description')
+								->maxLength('250'),
+						]),
+
+					Forms\Components\Section::make('Taxonomies')
+						->schema([
+							Forms\Components\Select::make('categories')
+								->relationship('categories', 'title')
+								->multiple()
+								->createOptionForm([
+									Forms\Components\TextInput::make('title')
+										->live(debounce: 500)
+										->alphaNum()
+										->maxLength(255)
+										->afterStateUpdated(static function (Forms\Set $set, $state) {
+											if ($state === null || strlen($state) === 0) return;
+
+											$set('slug', str($state)->lower()->slug()->toString());
+										}),
+									Forms\Components\Hidden::make('slug'),
+								]),
+
+							Forms\Components\Select::make('tags')
+								->relationship('tags', 'title')
+								->multiple()
+								->createOptionForm([
+									Forms\Components\TextInput::make('title')
+										->live(debounce: 500)
+										->alphaNum()
+										->maxLength(255)
+										->afterStateUpdated(static function (Forms\Set $set, $state) {
+											if ($state === null || strlen($state) === 0) return;
+
+											$set('slug', str($state)->lower()->slug()->toString());
+										}),
+									Forms\Components\Hidden::make('slug'),
+								]),
+						]),
+				])
+				->columnSpan(1),
             ]);
     }
 
@@ -169,18 +200,10 @@ class PostResource extends Resource
             ]);
     }
 
-    public static function getRelations(): array
-    {
-        return [
-            //
-        ];
-    }
-
     public static function getPages(): array
     {
         return [
             'index' => Pages\ListPosts::route('/'),
-			'view' => Pages\ViewPost::route('/{record}'),
             'create' => Pages\CreatePost::route('/create'),
             'edit' => Pages\EditPost::route('/{record}/edit'),
         ];
