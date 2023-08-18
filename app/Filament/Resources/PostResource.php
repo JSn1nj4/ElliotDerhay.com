@@ -40,6 +40,7 @@ class PostResource extends Resource
 							->columnSpanFull(),
 						Forms\Components\Textarea::make('slug')
 							->required()
+							->unique(ignoreRecord: true)
 							->maxLength(180)
 							->columnSpanFull(),
 						Forms\Components\MarkdownEditor::make('body')
