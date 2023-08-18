@@ -37,11 +37,28 @@ class PostResource extends Resource
 						Forms\Components\Textarea::make('title')
 							->required()
 							->maxLength(180)
+							->reactive()
+							->debounce(500)
+							->afterStateUpdated(static function (Forms\Set $set, Forms\Get $get, string|null $state) {
+								$slug = str($get('slug'))->trim();
+
+								if (!in_array($slug, [null, ''])) return;
+
+								$set('slug', str($state)->slug()->toString());
+							})
 							->columnSpanFull(),
 						Forms\Components\Textarea::make('slug')
 							->required()
 							->unique(ignoreRecord: true)
 							->maxLength(180)
+							->reactive()
+							->debounce(500)
+							->afterStateUpdated(static function (Forms\Set $set, Forms\Get $get, string|null $state) {
+								$set('slug', match(trim($state)) {
+									null, '' => str($get('title')),
+									default => str($state)
+								}->slug()->toString());
+							})
 							->columnSpanFull(),
 						Forms\Components\MarkdownEditor::make('body')
 							->required()
