@@ -62,6 +62,21 @@ class PostResource extends Resource
 							})
 							->columnSpanFull(),
 						Forms\Components\MarkdownEditor::make('body')
+							// TODO: Implement native file uploads using separate image collection - 'content' instead of 'images'?
+							->toolbarButtons([
+								'bold',
+								'italic',
+								'strike',
+								'link',
+								'heading',
+								'blockquote',
+								'codeBlock',
+								'bulletList',
+								'orderedList',
+								'table',
+								'undo',
+								'redo',
+							])
 							->required()
 							->columnSpanFull(),
 					]),
