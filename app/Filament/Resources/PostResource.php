@@ -48,7 +48,8 @@ class PostResource extends Resource
 					]),
 
 				Forms\Components\Group::make([
-					Forms\Components\Section::make('Image')						->schema([
+					Forms\Components\Section::make('Image')
+						->schema([
 							ImageViewField::make('image')
 								->hiddenLabel()
 								->hiddenOn('create')
