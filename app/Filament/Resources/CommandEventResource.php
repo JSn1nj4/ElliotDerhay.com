@@ -38,11 +38,9 @@ class CommandEventResource extends Resource
 					->label('Date'),
             ])
             ->filters([
-				Tables\Filters\SelectFilter::make('succeeded')
-					->options([
-						true => 'Succeeded',
-						false => 'Failed',
-					])
+				Tables\Filters\TernaryFilter::make('succeeded')
+					->trueLabel('Succeeded')
+					->falseLabel('Failed')
 					->label('Status'),
             ])
             ->bulkActions([
