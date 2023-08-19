@@ -27,9 +27,12 @@ class CommandResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('signature')
                     ->required()
-                    ->maxLength(255),
+					->string()
+                    ->maxLength(255)
+					->unique(ignoreRecord: true),
                 Forms\Components\TextInput::make('description')
                     ->required()
+					->string()
                     ->maxLength(255),
             ]);
     }
@@ -38,8 +41,10 @@ class CommandResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('signature'),
-                Tables\Columns\TextColumn::make('description'),
+                Tables\Columns\TextColumn::make('signature')
+					->searchable(),
+                Tables\Columns\TextColumn::make('description')
+					->searchable(),
             ])
             ->filters([
                 //
