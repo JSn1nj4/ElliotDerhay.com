@@ -30,11 +30,10 @@ class ProjectResource extends Resource
 					->columnSpan(1)
 					->schema([
 						ImageViewField::make('image')
-							->hiddenLabel()
-							->hiddenOn('create'),
+							->hiddenOn('create')
+							->hiddenLabel(),
 
 						Forms\Components\FileUpload::make('upload')
-							->hiddenLabel()
 							->image()
 							->maxSize(5 * 1024)
 							->afterStateUpdated(static function (Forms\Set $set, TemporaryUploadedFile $state) {
@@ -42,7 +41,8 @@ class ProjectResource extends Resource
 
 								$set('image_id', $image->id);
 							})
-							->reactive(),
+							->reactive()
+							->hiddenLabel(),
 
 						Forms\Components\Hidden::make('image_id'),
 					]),
@@ -57,12 +57,13 @@ class ProjectResource extends Resource
 							->maxLength(255),
 
 						Forms\Components\TextInput::make('link')
-							->label('Project link')
 							->required()
-							->maxLength(255),
+							->maxLength(2048)
+							->unique(ignoreRecord: true)
+							->label('Project link'),
 
 						Forms\Components\TextInput::make('demo_link')
-							->maxLength(255),
+							->maxLength(2048),
 
 						Forms\Components\Textarea::make('short_desc')
 							->columnSpanFull()
@@ -88,7 +89,8 @@ class ProjectResource extends Resource
 				Tables\Columns\ImageColumn::make('image.url')
 					->disk(static fn (Image $image) => $image->disk)
 					->size('auto')->height(135),
-                Tables\Columns\TextColumn::make('name'),
+                Tables\Columns\TextColumn::make('name')
+					->searchable(),
 				Tables\Columns\TextColumn::make('link'),
 				Tables\Columns\TextColumn::make('demo_link'),
             ])
