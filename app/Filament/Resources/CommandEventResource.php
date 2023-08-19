@@ -25,19 +25,25 @@ class CommandEventResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\IconColumn::make('succeeded')
-					->label('Status')
 					->boolean()
 					->true('s-check', 'primary')
-					->false('s-x-mark','danger'),
+					->false('s-x-mark','danger')
+					->label('Status'),
 				Tables\Columns\TextColumn::make('command.signature')
+					->searchable()
 					->label('Command'),
 				Tables\Columns\TextColumn::make('message'),
 				Tables\Columns\TextColumn::make('created_at')
-					->label('Date')
-					->dateTime(),
+					->dateTime()
+					->label('Date'),
             ])
             ->filters([
-                //
+				Tables\Filters\SelectFilter::make('succeeded')
+					->options([
+						true => 'Succeeded',
+						false => 'Failed',
+					])
+					->label('Status'),
             ])
             ->bulkActions([
             ]);
