@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\BlogPostsController;
 use App\Http\Controllers\ProjectsPortfolioController;
-use App\Http\Controllers\RunCommandController;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
 use Spatie\Sitemap\Sitemap;
@@ -29,12 +28,6 @@ Route::prefix('/blog')
 	->group(static function () {
 		Route::get('/', [BlogPostsController::class, 'index'])->name('blog');
 		Route::get('/{post:slug}', [BlogPostsController::class, 'show'])->name('blog.show');
-	});
-
-Route::prefix('/dashboard')
-	->middleware(['auth', 'verified'])
-	->group(static function () {
-		Route::post('command-run', [RunCommandController::class, 'store'])->name('command-run.store');
 	});
 
 Route::get('/sitemap.xml',

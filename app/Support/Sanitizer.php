@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Traits;
+namespace App\Support;
 
-trait CanSanitizeInputs
+use Illuminate\Support\Stringable;
+
+class Sanitizer
 {
-	protected function sanitize(string $input): string
+	public static function sanitize(string $input): Stringable
 	{
 		return str($input)
 			->stripTags()
@@ -14,7 +16,6 @@ trait CanSanitizeInputs
 				'%', '^', '*', '+', '=', '/',
 				'\\', "\r", "\n"
 			])
-			->trim()
-			->toString();
+			->trim();
 	}
 }

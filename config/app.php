@@ -193,6 +193,21 @@ return [
 
 	/*
 	|--------------------------------------------------------------------------
+	| Admin Command Settings
+	|--------------------------------------------------------------------------
+	|
+	| Define settings related to manually running commands in the admin panel.
+	|
+	*/
+	'commands' => [
+		'whitelist' => array_map(
+			'trim',
+			array_values(explode(',', env('COMMANDS_WHITELIST', '')))
+		),
+	],
+
+	/*
+	|--------------------------------------------------------------------------
 	| Upload Settings
 	|--------------------------------------------------------------------------
 	|
