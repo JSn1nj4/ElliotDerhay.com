@@ -7,12 +7,11 @@ use App\Filament\Forms\Components\ImageViewField;
 use App\Filament\Resources\PostResource\Pages;
 use App\Models\Image;
 use App\Models\Post;
+use App\Support\Sanitizer;
 use Filament\Forms;
-use Filament\Forms\Form;
 use Filament\Infolists;
 use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Table;
 use Illuminate\Support\Collection;
 use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 
@@ -26,7 +25,7 @@ class PostResource extends Resource
 
 	public int|null $image_id = null;
 
-    public static function form(Form $form): Form
+    public static function form(Forms\Form $form): Forms\Form
     {
         return $form
 			->columns(3)
@@ -44,7 +43,7 @@ class PostResource extends Resource
 
 								if (!in_array($slug, [null, ''])) return;
 
-								$set('slug', str($state)->slug()->toString());
+								$set('slug', Sanitizer::slug($state)->toString());
 							})
 							->columnSpanFull(),
 
@@ -52,13 +51,14 @@ class PostResource extends Resource
 							->required()
 							->unique(ignoreRecord: true)
 							->maxLength(180)
+							->alphaDash()
 							->reactive()
 							->debounce(500)
 							->afterStateUpdated(static function (Forms\Get $get, Forms\Set $set, string|null $state) {
-								$set('slug', (match(trim($state)) {
-									null, '' => str($get('title')),
-									default => str($state)
-								})->slug()->toString());
+								$set('slug', Sanitizer::slug(match(trim($state)) {
+									null, '' => $get('title'),
+									default => $state
+								})->toString());
 							})
 							->columnSpanFull(),
 						Forms\Components\MarkdownEditor::make('body')
@@ -137,7 +137,7 @@ class PostResource extends Resource
 										->afterStateUpdated(static function (Forms\Set $set, $state) {
 											if ($state === null || strlen($state) === 0) return;
 
-											$set('slug', str($state)->lower()->slug()->toString());
+											$set('slug', Sanitizer::slug($state)->toString());
 										}),
 									Forms\Components\Hidden::make('slug'),
 								]),
@@ -153,7 +153,7 @@ class PostResource extends Resource
 										->afterStateUpdated(static function (Forms\Set $set, $state) {
 											if ($state === null || strlen($state) === 0) return;
 
-											$set('slug', str($state)->lower()->slug()->toString());
+											$set('slug', Sanitizer::slug($state)->toString());
 										}),
 									Forms\Components\Hidden::make('slug'),
 								]),
@@ -197,7 +197,7 @@ class PostResource extends Resource
 			]);
 	}
 
-	public static function table(Table $table): Table
+	public static function table(Tables\Table $table): Tables\Table
     {
         return $table
             ->columns([
