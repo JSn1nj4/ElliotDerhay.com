@@ -7,6 +7,7 @@ use App\Filament\Forms\Components\ImageViewField;
 use App\Filament\Resources\ImageResource\Pages;
 use App\Models\Image;
 use Filament\Forms;
+use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
@@ -25,95 +26,77 @@ class ImageResource extends Resource
 
 	public array|null $image = [];
 	public string|null $name = null;
-	public string|null $collection = null;
-	public string|null $disk = null;
-	public string|null $file_name = null;
-	public string|null $mime_type = null;
-	public string|null $path = null;
-	public int|null $size = null;
-	public string|null $file_hash = null;
+	// public string|null $collection = null;
+	// public string|null $disk = null;
+	// public string|null $file_name = null;
+	// public string|null $mime_type = null;
+	// public string|null $path = null;
+	// public int|null $size = null;
+	// public string|null $file_hash = null;
 
     public static function form(Forms\Form $form): Forms\Form
     {
-		return $form->columns(3)
+		return $form
+			->columns(1)
 			->schema([
-				Forms\Components\Section::make('Upload')
-					->columnSpan(1)
-					->schema([
-						Forms\Components\FileUpload::make('image')
-							->hiddenLabel()
-							->image()
-							->maxSize(5 * 1024)
-							->afterStateUpdated(static function (Forms\Set $set, TemporaryUploadedFile $state) {
-								$dto = ImageDTO::fromUpload($state);
+				Forms\Components\Group::make([
+					Forms\Components\Section::make('Preview')
+						->columnSpan(1)
+						->schema([
+							ImageViewField::make('image')->hiddenLabel(),
+						]),
 
-								$set('name', $dto->name);
-								$set('collection', $dto->collection);
-								$set('disk', $dto->disk);
-								$set('file_name', $dto->file_name);
-								$set('mime_type', $dto->mime_type);
-								$set('path', $dto->path);
-								$set('size', $dto->size);
-								$set('file_hash', $dto->file_hash);
-							})
-							->reactive()
-					])->visibleOn('create'),
+					Forms\Components\Section::make('Info')
+						->columnSpan(2)
+						->columns(3)
+						->schema([
+							Forms\Components\TextInput::make('name')
+								->columnSpanFull()
+								->required()
+								->maxLength(255),
 
-				Forms\Components\Section::make('Preview')
-					->columnSpan(1)
-					->schema([
-						ImageViewField::make('image')->hiddenLabel(),
-					])->hiddenOn('create'),
+							Forms\Components\TextInput::make('collection')
+								->columnSpan(2)
+								->required()
+								->maxLength(255)
+								->disabled(),
 
-				Forms\Components\Section::make('Info')
-					->columnSpan(2)
+							Forms\Components\TextInput::make('disk')
+								->required()
+								->maxLength(255)
+								->disabled(),
+
+							Forms\Components\TextInput::make('file_name')
+								->columnSpan(2)
+								->required()
+								->maxLength(255)
+								->disabled(),
+
+							Forms\Components\TextInput::make('mime_type')
+								->required()
+								->maxLength(255)
+								->disabled(),
+
+							Forms\Components\TextInput::make('path')
+								->columnSpan(2)
+								->required()
+								->maxLength(255)
+								->disabled(),
+
+							Forms\Components\TextInput::make('size')
+								->numeric()
+								->required()
+								->integer()
+								->disabled(),
+
+							Forms\Components\Hidden::make('file_hash')
+								->required()
+								->unique()
+								->disabled(),
+						]),
+					])
 					->columns(3)
-					->schema([
-						Forms\Components\TextInput::make('name')
-							->columnSpanFull()
-							->required()
-							->maxLength(255)
-							->disabledOn('create')->dehydrated(),
-
-						Forms\Components\TextInput::make('collection')
-							->columnSpan(2)
-							->required()
-							->maxLength(255)
-							->disabled()->dehydrated(),
-
-						Forms\Components\TextInput::make('disk')
-							->required()
-							->maxLength(255)
-							->disabled()->dehydrated(),
-
-						Forms\Components\TextInput::make('file_name')
-							->columnSpan(2)
-							->required()
-							->maxLength(255)
-							->disabled()->dehydrated(),
-
-						Forms\Components\TextInput::make('mime_type')
-							->required()
-							->maxLength(255)
-							->disabled()->dehydrated(),
-
-						Forms\Components\TextInput::make('path')
-							->columnSpan(2)
-							->required()
-							->maxLength(255)
-							->disabled()->dehydrated(),
-
-						Forms\Components\TextInput::make('size')
-							->numeric()
-							->required()
-							->integer()
-							->disabled()->dehydrated(),
-
-						Forms\Components\Hidden::make('file_hash')
-							->required()
-							->unique()
-							->disabled()->dehydrated(),
-					]),
+					->hiddenOn('create'),
 			]);
     }
 
