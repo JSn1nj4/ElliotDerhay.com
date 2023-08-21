@@ -37,6 +37,10 @@ class UploadImage extends Page
 			->body(sprintf('File "%s" successfully saved!', $image->file_name))
 			->success()
 			->send();
+
+		$this->redirect(route('filament.admin.resources.images.view', [
+			'record' => $image,
+		]));
 	}
 
 	public function form(Forms\Form $form): Forms\Form
