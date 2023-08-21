@@ -33,7 +33,7 @@ class PostResource extends Resource
 				Forms\Components\Section::make('Content')
 					->columnSpan(2)
 					->schema([
-						Forms\Components\Textarea::make('title')
+						Forms\Components\TextInput::make('title')
 							->required()
 							->maxLength(180)
 							->reactive()
@@ -47,7 +47,7 @@ class PostResource extends Resource
 							})
 							->columnSpanFull(),
 
-						Forms\Components\Textarea::make('slug')
+						Forms\Components\TextInput::make('slug')
 							->required()
 							->unique(ignoreRecord: true)
 							->maxLength(180)
