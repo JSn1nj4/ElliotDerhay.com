@@ -116,12 +116,22 @@ class PostResource extends Resource
 						->relationship('searchMeta')
 						->schema([
 							Forms\Components\TextInput::make('search_title')
-								->label('Custom Search Title')
-								->maxLength('180'),
+								->string()
+								->maxLength('180')
+								->mutateDehydratedStateUsing(static fn (string|null $state) => match($state) {
+									null => $state,
+									default => Sanitizer::sanitize($state),
+								})
+								->label('Custom Search Title'),
 
 							Forms\Components\Textarea::make('search_description')
-								->label('Custom Search Description')
-								->maxLength('250'),
+								->string()
+								->maxLength('250')
+								->mutateDehydratedStateUsing(static fn (string|null $state) => match($state) {
+									null => $state,
+									default => Sanitizer::sanitize($state),
+								})
+								->label('Custom Search Description'),
 						]),
 
 					Forms\Components\Section::make('Taxonomies')
