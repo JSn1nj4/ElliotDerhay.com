@@ -12,15 +12,12 @@ class CreateProject extends CreateRecord
 
 	protected function prepareForValidation($attributes)
 	{
-		$attributes['name'] = Sanitizer::sanitize($attributes['name']);
-
-		$attributes['short_desc'] = Sanitizer::sanitize($attributes['short_desc']);
-
-		$attributes['link'] = Sanitizer::url($attributes['link']);
-
-		if (isset($attributes['demo_link'])) {
-			$attributes['demo_link'] = Sanitizer::url($attributes['demo_link']);
-		}
+		$attributes['data'] = collect($attributes['data'])
+			->transform(static fn ($item, $key) => match($key) {
+				'name', 'short_desc' => Sanitizer::sanitize($item)->toString(),
+				'link', 'demo_link' => Sanitizer::url($item)->toString(),
+				default => $item,
+			});
 
 		return $attributes;
 	}

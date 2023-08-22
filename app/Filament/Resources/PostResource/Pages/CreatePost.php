@@ -13,11 +13,12 @@ class CreatePost extends CreateRecord
 
 	protected function prepareForValidation($attributes)
 	{
-		$attributes['title'] = Sanitizer::sanitize($attributes['title']);
-
-		$attributes['slug'] = Sanitizer::slug($attributes['slug']);
-
-		// $attributes['body'] = Sanitizer::url($attributes['body']);
+		$attributes['data'] = collect($attributes['data'])
+			->transform(static fn ($item, $key) => match($key) {
+				'title' => Sanitizer::sanitize($item)->toString(),
+				'slug' => Sanitizer::slug($item)->toString(),
+				default => $item,
+			});
 
 		return $attributes;
 	}
