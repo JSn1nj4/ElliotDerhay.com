@@ -26,13 +26,6 @@ class ImageResource extends Resource
 
 	public array|null $image = [];
 	public string|null $name = null;
-	// public string|null $collection = null;
-	// public string|null $disk = null;
-	// public string|null $file_name = null;
-	// public string|null $mime_type = null;
-	// public string|null $path = null;
-	// public int|null $size = null;
-	// public string|null $file_hash = null;
 
     public static function form(Forms\Form $form): Forms\Form
     {
@@ -43,7 +36,9 @@ class ImageResource extends Resource
 					Forms\Components\Section::make('Preview')
 						->columnSpan(1)
 						->schema([
-							ImageViewField::make('image')->hiddenLabel(),
+							ImageViewField::make('image')
+								->dehydrated(false)
+								->hiddenLabel(),
 						]),
 
 					Forms\Components\Section::make('Info')
@@ -57,46 +52,32 @@ class ImageResource extends Resource
 
 							Forms\Components\TextInput::make('collection')
 								->columnSpan(2)
-								->required()
-								->maxLength(255)
 								->disabled(),
 
 							Forms\Components\TextInput::make('disk')
-								->required()
-								->maxLength(255)
 								->disabled(),
 
 							Forms\Components\TextInput::make('file_name')
 								->columnSpan(2)
-								->required()
-								->maxLength(255)
 								->disabled(),
 
 							Forms\Components\TextInput::make('mime_type')
-								->required()
-								->maxLength(255)
 								->disabled(),
 
 							Forms\Components\TextInput::make('path')
 								->columnSpan(2)
-								->required()
-								->maxLength(255)
 								->disabled(),
 
 							Forms\Components\TextInput::make('size')
 								->numeric()
-								->required()
-								->integer()
 								->disabled(),
 
 							Forms\Components\Hidden::make('file_hash')
-								->required()
-								->unique()
+								->unique(ignoreRecord: true)
 								->disabled(),
 						]),
 					])
-					->columns(3)
-					->hiddenOn('create'),
+					->columns(3),
 			]);
     }
 
