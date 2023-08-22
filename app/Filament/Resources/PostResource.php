@@ -118,19 +118,13 @@ class PostResource extends Resource
 							Forms\Components\TextInput::make('search_title')
 								->string()
 								->maxLength('180')
-								->mutateDehydratedStateUsing(static fn (string|null $state) => match($state) {
-									null => $state,
-									default => Sanitizer::sanitize($state),
-								})
+								->mutateDehydratedStateUsing(static fn (string|null $state) => self::sanitize($state))
 								->label('Custom Search Title'),
 
 							Forms\Components\Textarea::make('search_description')
 								->string()
 								->maxLength('250')
-								->mutateDehydratedStateUsing(static fn (string|null $state) => match($state) {
-									null => $state,
-									default => Sanitizer::sanitize($state),
-								})
+								->mutateDehydratedStateUsing(static fn (string|null $state) => self::sanitize($state))
 								->label('Custom Search Description'),
 						]),
 
@@ -142,14 +136,17 @@ class PostResource extends Resource
 								->createOptionForm([
 									Forms\Components\TextInput::make('title')
 										->live(debounce: 500)
-										->alphaNum()
+										->string()
 										->maxLength(255)
 										->afterStateUpdated(static function (Forms\Set $set, $state) {
 											if ($state === null || strlen($state) === 0) return;
 
 											$set('slug', Sanitizer::slug($state)->toString());
-										}),
-									Forms\Components\Hidden::make('slug'),
+										})
+										->mutateDehydratedStateUsing(static fn (string|null $state) => self::sanitize($state)),
+									Forms\Components\Hidden::make('slug')
+										->alphaDash()
+										->mutateDehydratedStateUsing(static fn (string|null $state) => self::sanitizeSlug($state)),
 								]),
 
 							Forms\Components\Select::make('tags')
@@ -158,14 +155,17 @@ class PostResource extends Resource
 								->createOptionForm([
 									Forms\Components\TextInput::make('title')
 										->live(debounce: 500)
-										->alphaNum()
+										->string()
 										->maxLength(255)
 										->afterStateUpdated(static function (Forms\Set $set, $state) {
 											if ($state === null || strlen($state) === 0) return;
 
 											$set('slug', Sanitizer::slug($state)->toString());
-										}),
-									Forms\Components\Hidden::make('slug'),
+										})
+										->mutateDehydratedStateUsing(static fn (string|null $state) => self::sanitize($state)),
+									Forms\Components\Hidden::make('slug')
+										->alphaDash()
+										->mutateDehydratedStateUsing(static fn (string|null $state) => self::sanitizeSlug($state)),
 								]),
 						]),
 				])
@@ -253,4 +253,20 @@ class PostResource extends Resource
             'edit' => Pages\EditPost::route('/{record}/edit'),
         ];
     }
+
+	public static function sanitize(string|null $state): string|null
+	{
+		return match($state) {
+			null => $state,
+			default => Sanitizer::sanitize($state),
+		};
+	}
+
+	public static function sanitizeSlug(string|null $state): string|null
+	{
+		return match($state) {
+			null => $state,
+			default => Sanitizer::slug($state),
+		};
+	}
 }
