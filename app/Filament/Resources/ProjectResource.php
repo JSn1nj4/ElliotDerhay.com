@@ -58,12 +58,14 @@ class ProjectResource extends Resource
 
 						Forms\Components\TextInput::make('link')
 							->required()
-							->maxLength(2048)
+							->url()
+							->maxLength(255)
 							->unique(ignoreRecord: true)
 							->label('Project link'),
 
 						Forms\Components\TextInput::make('demo_link')
-							->maxLength(2048),
+							->url()
+							->maxLength(255),
 
 						Forms\Components\Textarea::make('short_desc')
 							->columnSpanFull()

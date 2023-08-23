@@ -2,15 +2,12 @@
 
 namespace App\Filament\Resources;
 
-use App\DataTransferObjects\ImageDTO;
 use App\Filament\Forms\Components\ImageViewField;
 use App\Filament\Resources\ImageResource\Pages;
 use App\Models\Image;
 use Filament\Forms;
-use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Tables;
-use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 
 class ImageResource extends Resource
 {
@@ -87,13 +84,17 @@ class ImageResource extends Resource
 			->columns([
 				Tables\Columns\ImageColumn::make('url')
 					->disk(static fn (Image $image) => $image->disk)
-					->size('auto')->height(135),
+					->size('auto')->height(135)
+					->label('Preview'),
 				Tables\Columns\TextColumn::make('name'),
 				Tables\Columns\TextColumn::make('file_name')
+					->toggleable()
 					->label('Filename'),
 				Tables\Columns\TextColumn::make('mime_type')
+					->toggleable(isToggledHiddenByDefault: true)
 					->label('File type'),
-				Tables\Columns\TextColumn::make('disk'),
+				Tables\Columns\TextColumn::make('disk')
+					->toggleable(),
 			])
 			->defaultSort('created_at', 'desc')
             ->filters([
