@@ -20,5 +20,5 @@ const props = withDefaults(defineProps<{
 	linePositionClass: 'w-10',
 })
 
-const commonClasses = computed(() => `absolute ${props.linePositionClass} border-r border-gray-600`)
+const commonClasses = computed(() => `absolute ${props.linePositionClass} border-r border-neutral-600`)
 </script>

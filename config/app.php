@@ -186,8 +186,24 @@ return [
 		// App\Providers\BroadcastServiceProvider::class,
 		App\Providers\EventServiceProvider::class,
 		App\Providers\FeatureServiceProvider::class,
-		App\Providers\RouteServiceProvider::class,
+		App\Providers\Filament\AdminPanelProvider::class,
+        App\Providers\RouteServiceProvider::class,
 
+	],
+
+	/*
+	|--------------------------------------------------------------------------
+	| Admin Command Settings
+	|--------------------------------------------------------------------------
+	|
+	| Define settings related to manually running commands in the admin panel.
+	|
+	*/
+	'commands' => [
+		'whitelist' => array_map(
+			'trim',
+			array_values(explode(',', env('COMMANDS_WHITELIST', '')))
+		),
 	],
 
 	/*
@@ -200,6 +216,7 @@ return [
 	*/
 	'uploads' => [
 		'disk' => env('UPLOAD_DISK', 'local'),
+		'temp' => env('UPLOAD_TEMP_DISK', 'temp'),
 		'hash' => env('UPLOAD_FILE_HASH', 'md5'),
 	],
 

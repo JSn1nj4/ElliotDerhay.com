@@ -5,7 +5,7 @@
 		<div class="pb-4 w-full max-w-md mx-auto">
 			<h1 class="text-xl sm:text-4xl">
 				<span class="align-middle text-3xl sm:text-6xl font-extralight" style="text-shadow:;">{{ $errorCode }}</span>
-				<span class="inline-block align-middle w-0 h-10 sm:h-16 border-solid border-r-2 border-sea-green-500">&nbsp;</span>
+				<span class="inline-block align-middle w-0 h-10 sm:h-16 border-solid border-r-2 border-caribbeanGreen-500">&nbsp;</span>
 				<span class="align-middle leading-none">{{ $errorTitle }}</span>
 			</h1>
 

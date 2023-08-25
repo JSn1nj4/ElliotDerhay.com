@@ -2,7 +2,9 @@
 
 namespace App\Jobs;
 
+use App\Actions\MoveImage;
 use App\Contracts\ImageableContract;
+use App\DataTransferObjects\FileLocation;
 use App\Models\Image;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
@@ -53,7 +55,7 @@ class StoreImageJob extends BaseSyncJob
 			'name' => "{$this->name}",
 			'file_name' => $this->original_name,
 			'mime_type' => $this->mime_type,
-			'path' => $this->moveToPublic(),
+			'path' => $this->temp_path,
 			'disk' => 'public',
 			'file_hash' => $this->hash,
 			'size' => $this->size,
@@ -70,20 +72,5 @@ class StoreImageJob extends BaseSyncJob
 		$this->attach($image);
 
 		$this->deleteTempFile();
-
-		TransferImageJob::dispatch($image->id, config('app.uploads.disk'));
-	}
-
-	public function moveToPublic(): string
-	{
-		$path = "{$this->collection}/{$this->name}";
-
-		if (!Storage::disk('public')
-			->writeStream($path, Storage::disk($this->temp_disk)
-				->readStream($this->temp_path))) {
-			throw new \Exception("Unable to write file '{$this->temp_path}' to public disk.");
-		}
-
-		return $path;
 	}
 }
