@@ -5,8 +5,12 @@
 ### New
 - [#125][gh_125] Replace admin dashboard with Filament
 
+### Changes
+- Remove `Feature::toggleForEveryone` macro now that the default scope is everyone
+
 ### Fixes
 - Fix/add Changelog issue/PR links
+- Make project startup script more bulletproof
 
 [gh_125]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/125
 

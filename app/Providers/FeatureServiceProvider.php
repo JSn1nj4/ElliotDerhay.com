@@ -28,14 +28,5 @@ class FeatureServiceProvider extends ServiceProvider
 				Feature::activate($feature) :
 				Feature::deactivate($feature);
 		});
-
-		/**
-		 * @method void toggleForEveryone Warning: this will toggle the setting based on the current scope
-		 */
-		Feature::macro('toggleForEveryone', static function (string $feature) {
-			Feature::inactive($feature) ?
-				Feature::activateForEveryone($feature) :
-				Feature::deactivateForEveryone($feature);
-		});
     }
 }
