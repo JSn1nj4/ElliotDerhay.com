@@ -210,13 +210,16 @@ class PostResource extends Resource
 	public static function table(Tables\Table $table): Tables\Table
     {
         return $table
+			->defaultSort('created_at', 'desc')
             ->columns([
 				Tables\Columns\ImageColumn::make('image.url')
 					->disk(static fn (Image $image) => $image->disk)
 					->size('auto')->height(135),
 				Tables\Columns\TextColumn::make('title')
+					->searchable()
 					->sortable(),
-				Tables\Columns\TextColumn::make('slug'),
+				Tables\Columns\TextColumn::make('slug')
+					->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -226,7 +229,6 @@ class PostResource extends Resource
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
-			->defaultSort('created_at', 'desc')
             ->filters([
                 //
             ])

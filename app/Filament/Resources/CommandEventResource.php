@@ -23,6 +23,7 @@ class CommandEventResource extends Resource
     public static function table(Tables\Table $table): Tables\Table
 	{
         return $table
+			->defaultSort('created_at', 'desc')
             ->columns([
                 Tables\Columns\IconColumn::make('succeeded')
 					->boolean()
@@ -32,9 +33,11 @@ class CommandEventResource extends Resource
 				Tables\Columns\TextColumn::make('command.signature')
 					->searchable()
 					->label('Command'),
-				Tables\Columns\TextColumn::make('message'),
+				Tables\Columns\TextColumn::make('message')
+					->searchable(),
 				Tables\Columns\TextColumn::make('created_at')
 					->dateTime()
+					->sortable()
 					->label('Date'),
             ])
             ->filters([

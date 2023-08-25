@@ -81,13 +81,16 @@ class ImageResource extends Resource
     public static function table(Tables\Table $table): Tables\Table
     {
         return $table
+			->defaultSort('created_at', 'desc')
 			->columns([
 				Tables\Columns\ImageColumn::make('url')
 					->disk(static fn (Image $image) => $image->disk)
 					->size('auto')->height(135)
 					->label('Preview'),
-				Tables\Columns\TextColumn::make('name'),
+				Tables\Columns\TextColumn::make('name')
+					->searchable(),
 				Tables\Columns\TextColumn::make('file_name')
+					->searchable()
 					->toggleable()
 					->label('Filename'),
 				Tables\Columns\TextColumn::make('mime_type')
@@ -96,7 +99,6 @@ class ImageResource extends Resource
 				Tables\Columns\TextColumn::make('disk')
 					->toggleable(),
 			])
-			->defaultSort('created_at', 'desc')
             ->filters([
                 //
             ])

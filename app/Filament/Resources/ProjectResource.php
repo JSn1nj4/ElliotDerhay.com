@@ -87,6 +87,7 @@ class ProjectResource extends Resource
     public static function table(Tables\Table $table): Tables\Table
 	{
         return $table
+			->defaultSort('created_at', 'desc')
             ->columns([
 				Tables\Columns\ImageColumn::make('image.url')
 					->disk(static fn (Image $image) => $image->disk)
@@ -96,7 +97,6 @@ class ProjectResource extends Resource
 				Tables\Columns\TextColumn::make('link'),
 				Tables\Columns\TextColumn::make('demo_link'),
             ])
-			->defaultSort('created_at', 'desc')
             ->filters([
                 //
             ])
