@@ -3,7 +3,7 @@
 ## Version 2.4.0
 
 ### New
-- [#125][gh_125] Replace admin dashboard with Filament
+- [#125][pr_125] Replace admin dashboard with Filament
 
 ### Changes
 - Remove `Feature::toggleForEveryone` macro now that the default scope is everyone
@@ -11,8 +11,10 @@
 ### Fixes
 - Fix/add Changelog issue/PR links
 - Make project startup script more bulletproof
+- Fix font issue caused by Tailwind config ([#128][is_128])
 
-[gh_125]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/125
+[pr_125]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/125
+[is_128]: https://github.com/JSn1nj4/ElliotDerhay.com/issue/125
 
 ## Version 2.3.0
 

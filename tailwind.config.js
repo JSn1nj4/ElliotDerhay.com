@@ -1,14 +1,11 @@
-import defaultConfig from 'tailwindcss/defaultConfig'
+import defaultTheme from 'tailwindcss/defaultTheme'
 import colors from 'tailwindcss/colors'
-import forms from '@tailwindcss/forms'
-import typography from '@tailwindcss/typography'
-import theme from "tailwindcss/defaultTheme";
 import preset from './vendor/filament/filament/tailwind.config.preset'
 
 
 
 const config = {
-	presets: [preset],
+	// presets: [preset],
 	content: [
 		"app/**/*.php",
 		"resources/**/*.js",
@@ -57,7 +54,7 @@ const config = {
 		},
 
 		fontFamily: {
-			...defaultConfig.fontFamily,
+			...defaultTheme.fontFamily,
 			sans: [
 				"Source Sans Pro",
 				"ui-sans-serif",
@@ -166,13 +163,6 @@ const config = {
 			}
 		}
 	},
-
-	darkMode: "class",
-
-	plugins: [
-		forms,
-		typography,
-	],
 };
 
 // late overrides
