@@ -3,8 +3,9 @@
 ## Version 2.4.0
 
 ### New
-- [#125][pr_125] Replace admin dashboard with Filament
-- [#129][is_129] Implement global search
+- [#125][pr_125]: Replace admin dashboard with Filament
+- [#129][is_129]: Implement global search
+- [#113][is_113]: Implement post draft / published features in [#130][pr_130]
 
 ### Changes
 - Remove `Feature::toggleForEveryone` macro now that the default scope is everyone
@@ -14,9 +15,11 @@
 - Make project startup script more bulletproof
 - Fix font issue caused by Tailwind config ([#128][is_128])
 
+[is_113]: https://github.com/JSn1nj4/ElliotDerhay.com/issue/113
 [pr_125]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/125
 [is_128]: https://github.com/JSn1nj4/ElliotDerhay.com/issue/128
 [is_129]: https://github.com/JSn1nj4/ElliotDerhay.com/issue/129
+[pr_130]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/130
 
 ## Version 2.3.0
 
