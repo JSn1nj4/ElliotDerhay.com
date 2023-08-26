@@ -23,6 +23,8 @@ class PostResource extends Resource
 
 	protected static string|null $navigationGroup = 'Content';
 
+	protected static string|null $recordTitleAttribute = 'title';
+
 	public int|null $image_id = null;
 
     public static function form(Forms\Form $form): Forms\Form

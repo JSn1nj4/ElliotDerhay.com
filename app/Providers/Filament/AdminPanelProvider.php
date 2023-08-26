@@ -29,6 +29,7 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login(Login::class)
+			->globalSearchKeyBindings(['command+k', 'ctrl+k'])
 			->maxContentWidth('full')
             ->colors([
 				'primary' => [

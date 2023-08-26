@@ -21,6 +21,8 @@ class CommandResource extends Resource
 
 	protected static string|null $navigationGroup = 'Administration';
 
+	protected static string|null $recordTitleAttribute = 'signature';
+
     public static function form(Forms\Form $form): Forms\Form
     {
         return $form

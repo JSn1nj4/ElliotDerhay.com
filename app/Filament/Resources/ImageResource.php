@@ -21,6 +21,8 @@ class ImageResource extends Resource
 
 	protected static string|null $navigationLabel = 'Image Gallery';
 
+	protected static string|null $recordTitleAttribute = 'name';
+
 	public array|null $image = [];
 	public string|null $name = null;
 

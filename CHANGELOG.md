@@ -4,6 +4,7 @@
 
 ### New
 - [#125][pr_125] Replace admin dashboard with Filament
+- [#129][is_129] Implement global search
 
 ### Changes
 - Remove `Feature::toggleForEveryone` macro now that the default scope is everyone
@@ -14,7 +15,8 @@
 - Fix font issue caused by Tailwind config ([#128][is_128])
 
 [pr_125]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/125
-[is_128]: https://github.com/JSn1nj4/ElliotDerhay.com/issue/125
+[is_128]: https://github.com/JSn1nj4/ElliotDerhay.com/issue/128
+[is_129]: https://github.com/JSn1nj4/ElliotDerhay.com/issue/129
 
 ## Version 2.3.0
 

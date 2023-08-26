@@ -20,6 +20,8 @@ class ProjectResource extends Resource
 
 	protected static string|null $navigationGroup = 'Content';
 
+	protected static string|null $recordTitleAttribute = 'name';
+
 	public int|null $image_id = null;
 
 	public static function form(Forms\Form $form): Forms\Form
