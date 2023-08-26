@@ -222,12 +222,16 @@ class PostResource extends Resource
 					->sortable(),
 				Tables\Columns\TextColumn::make('slug')
 					->searchable(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
+				Tables\Columns\IconColumn::make('published')
+					->boolean()
+					->true('s-check', 'primary')
+					->false('s-x-mark','danger'),
+                Tables\Columns\TextColumn::make('published_at')
+                    ->dateTime('M d, Y | H:i')
                     ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->toggleable(),
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
+					->dateTime('M d, Y | H:i')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])

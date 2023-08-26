@@ -22,11 +22,15 @@ class LatestPosts extends BaseWidget
             ->columns([
                 Tables\Columns\TextColumn::make('title'),
 				Tables\Columns\TextColumn::make('created_at')
-					->label('Created')
-					->dateTime(),
-				Tables\Columns\TextColumn::make('updated_at')
-					->label('Last Updated')
-					->dateTime(),
+					->dateTime('M d, Y | H:i')
+					->label('Created'),
+				Tables\Columns\TextColumn::make('published_at')
+					->dateTime('M d, Y | H:i')
+					->label('Published At'),
+				Tables\Columns\IconColumn::make('published')
+					->boolean()
+					->true('s-check', 'primary')
+					->false('s-x-mark','danger'),
             ]);
     }
 }
