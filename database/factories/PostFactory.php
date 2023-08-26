@@ -19,9 +19,13 @@ class PostFactory extends Factory
 		$data = [
 			'title' => $this->faker->realText(60),
 			'body' => $this->faker->realText(500),
+			'published' => $this->faker->boolean(75),
 		];
 
 		$data['slug'] = str($data['title'])->slug();
+		$data['published_at'] = $data['published']
+			? $this->faker->dateTime()
+			: null;
 
         return $data;
     }

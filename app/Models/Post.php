@@ -28,8 +28,10 @@ use Spatie\Sitemap\Tags\Url;
  * @property Image|null $image
  * @property Category[] $categories
  * @property \Illuminate\Database\Eloquent\Collection|Tag[] $tags
+ * @property boolean $published
  * @property Carbon $created_at
  * @property Carbon $updated_at
+ * @property Carbon|null $published_at
  * @property-read int|null $categories_count
  * @property-read int|null $tags_count
  * @method static \Database\Factories\PostFactory factory(...$parameters)
@@ -58,6 +60,10 @@ class Post extends ImageableModel implements SearchDisplayableContract, Categori
 		HasFactory,
 		SearchDisplayable;
 
+	protected $casts = [
+		'published_at' => 'datetime',
+	];
+
 	/**
 	 * @var string[]
 	 * inline type when allowed
@@ -66,7 +72,28 @@ class Post extends ImageableModel implements SearchDisplayableContract, Categori
 		'body',
 		'slug',
 		'title',
+		'published',
+		'published_at',
 	];
+
+	protected static function booted(): void
+	{
+		static::creating(static function (self $post): void {
+			if ($post->published_at !== null) return;
+
+			if (!$post->published) return;
+
+			$post->published_at = now();
+		});
+
+		static::updating(static function (self $post): void {
+			if ($post->published_at !== null) return;
+
+			if (!$post->published) return;
+
+			$post->published_at = now();
+		});
+	}
 
 	public function excerpt(): Attribute
 	{
