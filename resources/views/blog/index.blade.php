@@ -7,14 +7,21 @@
 @extends('layouts.blog')
 
 @section('page-title', 'Elliot\'s Tech Blog - ElliotDerhay.com')
-@section('meta-description', "Latest post: {$posts->first()->title}")
+@if($posts->count() > 0)
+	@section('meta-description', "Latest post: {$posts->first()->title}")
+@endif
 
 @section('blog')
-  @foreach($posts as $post)
-		<x-post.card :post="$post" size="none" padding="p-0" margin="mb-12 last:mb-0" />
-  @endforeach
+	@if($posts->count() > 0)
+		@foreach($posts as $post)
+			<x-post.card :post="$post" size="none" padding="p-0" margin="mb-12 last:mb-0" />
+		@endforeach
 
 	{{ $posts->links() }}
+	@else
+		<h1 class="text-4xl text-center mb-4">Sorry, no posts to display.</h1>
+		<p class="text-2xl text-center">Check back soon!</p>
+	@endif
 @endsection
 
 @section('sidebar')

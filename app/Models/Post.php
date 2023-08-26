@@ -7,6 +7,7 @@ use App\Contracts\SearchDisplayableContract;
 use App\Enums\PerPage;
 use App\Traits\Categorizeable;
 use App\Traits\SearchDisplayable;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -45,6 +46,8 @@ use Spatie\Sitemap\Tags\Url;
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereSlug($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereUpdatedAt($value)
+ * @method \Illuminate\Database\Eloquent\Builder|Post published()
+ * @method static \Illuminate\Database\Eloquent\Builder|Post published()
  * @mixin \Eloquent
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Image[] $images
  * @property-read int|null $images_count
@@ -121,6 +124,7 @@ class Post extends ImageableModel implements SearchDisplayableContract, Categori
 			->when(optional($request)->tag, function ($query, $tag_id): void {
 				$query->whereRelation('tags', 'tag_id', $tag_id);
 			})
+			->published()
 			->latest()
 			->paginate(PerPage::filter(
 				optional($request)->per_page
@@ -158,6 +162,13 @@ class Post extends ImageableModel implements SearchDisplayableContract, Categori
 				$meta->update(['search_description' => $description]);
 			},
 		);
+	}
+
+	public function scopePublished(Builder $builder): void
+	{
+		$builder->where( 'published',  '=', true)
+			->where('published_at', '<>', null)
+			->where('published_at', '<', now());
 	}
 
 	/**
