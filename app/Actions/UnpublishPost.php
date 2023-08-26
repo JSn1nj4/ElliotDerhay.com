@@ -12,13 +12,13 @@ class UnpublishPost extends BaseAction
 		if ($post->update(['published' => false])) {
 			return new OperationResult(
 				true,
-				"Post '{$post->id}' unpublished!",
+				__("Post ':post' unpublished!", ['post' => $post->id]),
 			);
 		}
 
 		return new OperationResult(
 			false,
-			"Post '{$post->id}' failed to unpublish.",
+			__("Post ':post' failed to unpublish.", ['post' => $post->id]),
 		);
 	}
 

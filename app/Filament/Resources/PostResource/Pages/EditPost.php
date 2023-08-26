@@ -33,7 +33,7 @@ class EditPost extends EditRecord
 					if ($result->succeeded) {
 						Notification::make()
 							->title(__('Post published!'))
-							->body("<a target='_blank' href='" . route('blog.show', ['post' => $record]) . "'>View Live</a>")
+							->body("<a target='_blank' href='" . route('blog.show', ['post' => $record]) . "'>" . __("View Live") . "</a>")
 							->success()
 							->send();
 

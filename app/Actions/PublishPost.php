@@ -12,13 +12,13 @@ class PublishPost extends BaseAction
 		if ($post->update(['published' => true])) {
 			return new OperationResult(
 				true,
-				"Post '{$post->id}' published!",
+				__("Post ':post' published!", ['post' => $post->id]),
 			);
 		}
 
 		return new OperationResult(
 			false,
-			"Post '{$post->id}' failed to publish.",
+			__("Post ':post' failed to publish.", ['post' => $post->id]),
 		);
 	}
 
