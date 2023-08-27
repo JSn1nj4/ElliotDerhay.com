@@ -12,8 +12,8 @@
 	@endif
 
 	<div class="flex flex-row pt-3 mt-2 gap-4">
-		<p>Posted {{ $post->created_at->toFormattedDateString() }}</p>
-		@unless($post->created_at->unix() === $post->updated_at->unix())
+		<p>Published {{ $post->published_at->toFormattedDateString() }}</p>
+		@unless($post->published_at->unix() === $post->updated_at->unix())
 			<p class="flex-grow-1">Last Updated {{ $post->updated_at->toFormattedDateString() }}</p>
 		@endunless
 	</div>

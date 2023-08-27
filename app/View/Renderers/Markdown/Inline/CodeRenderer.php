@@ -24,7 +24,7 @@ class CodeRenderer implements NodeRendererInterface, XmlNodeRendererInterface
     {
 		Code::assertInstanceOf($node);
 
-		$attrs = array_merge($node->data->get('attributes'), ['class' => 'text-yellow-800/70 dark:text-yellow-400 bg-gray-400/40 dark:bg-gray-800 px-1']);
+		$attrs = array_merge($node->data->get('attributes'), ['class' => 'text-yellow-800/70 dark:text-yellow-400 bg-neutral-400/40 dark:bg-neutral-800 px-1']);
 
         return new HtmlElement('code', $attrs, Xml::escape($node->getLiteral()));
     }

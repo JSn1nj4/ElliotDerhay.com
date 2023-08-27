@@ -1,80 +1,33 @@
-let defaultConfig = require('tailwindcss/defaultConfig');
+import defaultTheme from 'tailwindcss/defaultTheme'
+import colors from 'tailwindcss/colors'
+import preset from './vendor/filament/filament/tailwind.config.preset'
 
-module.exports = {
+
+
+const config = {
+	// presets: [preset],
 	content: [
 		"app/**/*.php",
 		"resources/**/*.js",
 		"resources/**/*.vue",
-		"resources/**/*.php"
+		"resources/**/*.php",
+		"./vendor/filament/**/*.blade.php"
 	],
 
 	theme: {
-		colors: {
-			transparent: "transparent",
-			current: "currentColor",
-
-			black: "#000000",
-			"gray-900": "#090909",
-			"gray-800": "#151515",
-			"gray-700": "#606f7b",
-			"gray-600": "#8795a1",
-			"gray-500": "#b8c2cc",
-			"gray-400": "#dae1e7",
-			"gray-200": "#f1f5f8",
-			"gray-100": "#f8fafc",
-			white: "#ffffff",
-
-			"red-900": "#3b0d0c",
-			"red-800": "#621b18",
-			"red-600": "#cc1f1a",
-			"red-500": "#e3342f",
-			"red-400": "#ef5753",
-			"red-200": "#f9acaa",
-			"red-100": "#fcebea",
-
-			"yellow-900": "#453411",
-			"yellow-800": "#684f1d",
-			"yellow-600": "#f2d024",
-			"yellow-500": "#ffed4a",
-			"yellow-400": "#fff382",
-			"yellow-200": "#fff9c2",
-			"yellow-100": "#fcfbeb",
-
-			"green-900": "#0f2f21",
-			"green-800": "#1a4731",
-			"green-600": "#1f9d55",
-			"green-500": "#38c172",
-			"green-400": "#51d88a",
-			"green-200": "#a2f5bf",
-			"green-100": "#e3fcec",
-
-			"sea-green-900": "#002e24",
-			"sea-green-800": "#005442",
-			"sea-green-600": "#00a682",
-			"sea-green-500": "#00C49A",
-			"sea-green-400": "#00ffc8",
-			"sea-green-200": "#6effe0",
-			"sea-green-100": "#bbfff0",
-
-			"teal-900": "#0d3331",
-			"teal-800": "#20504f",
-			"teal-600": "#38a89d",
-			"teal-500": "#4dc0b5",
-			"teal-400": "#64d5ca",
-			"teal-200": "#a0f0ed",
-			"teal-100": "#e8fffe"
-		},
-
 		spacing: {
 			px: "1px",
 			"0": "0",
+			"0.5": "0.125rem",
 			"1": "0.25rem",
 			"2": "0.5rem",
 			"3": "0.75rem",
 			"4": "1rem",
 			"5": "1.25rem",
 			"6": "1.5rem",
+			"7": "1.75rem",
 			"8": "2rem",
+			"9": "2.25rem",
 			"10": "2.5rem",
 			"12": "3rem",
 			"16": "4rem",
@@ -84,6 +37,7 @@ module.exports = {
 			"40": "10rem",
 			"48": "12rem",
 			"56": "14rem",
+			"60": "15rem",
 			"64": "16rem",
 			"72": "18rem",
 			"80": "20rem",
@@ -100,7 +54,7 @@ module.exports = {
 		},
 
 		fontFamily: {
-			...defaultConfig.fontFamily,
+			...defaultTheme.fontFamily,
 			sans: [
 				"Source Sans Pro",
 				"ui-sans-serif",
@@ -132,6 +86,7 @@ module.exports = {
 		fontWeight: {
 			extralight: 200,
 			normal: 400,
+			medium: 500,
 			bold: 700
 		},
 
@@ -179,7 +134,38 @@ module.exports = {
 			asterisk: "* ",
 			at: "@ "
 		},
-	},
 
-	darkMode: "class"
+		extend: {
+			colors: {
+				transparent: "transparent",
+				current: "currentColor",
+
+				black: "#000000",
+				white: "#ffffff",
+
+				caribbeanGreen: {
+					'50': '#eafff7',
+					'100': '#cdfeeb',
+					'200': '#a0fadc',
+					'300': '#63f2ca',
+					'400': '#25e2b3',
+					'500': '#00c49a',
+					'600': '#00a481',
+					'700': '#00836b',
+					'800': '#006756',
+					'900': '#005548',
+					'950': '#00302a',
+				},
+
+				danger: colors.rose,
+				success: colors.green,
+				warning: colors.yellow,
+			}
+		}
+	},
 };
+
+// late overrides
+config.theme.extend.colors.primary = config.theme.extend.colors.caribbeanGreen
+
+module.exports = config

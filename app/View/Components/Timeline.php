@@ -24,7 +24,7 @@ class Timeline extends Component
 		$this->showLine = $showLine;
 		$this->showDottedLine = $showDottedLine;
 		$this->linePositionClass = $linePositionClass;
-		$this->commonClasses = "absolute {$this->linePositionClass} border-r border-gray-600";
+		$this->commonClasses = "absolute {$this->linePositionClass} border-r border-neutral-600";
 	}
 
 	/**

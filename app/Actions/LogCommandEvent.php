@@ -7,6 +7,10 @@ use App\Models\CommandEvent;
 
 class LogCommandEvent extends BaseAction
 {
+	public static function execute(Command $command, bool $succeeded, string $message): void {
+		self::make()($command, $succeeded, $message);
+	}
+
 	public function __invoke(Command $command, bool $succeeded, string $message): void
 	{
 		CommandEvent::create([

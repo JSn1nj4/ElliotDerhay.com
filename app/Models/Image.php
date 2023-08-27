@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Enums\PerPage;
-use App\Events\ImageDeletedEvent;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -52,10 +51,6 @@ use Illuminate\Pagination\AbstractPaginator;
 class Image extends Model
 {
     use HasFactory;
-
-	protected $dispatchesEvents = [
-		'deleted' => ImageDeletedEvent::class,
-	];
 
 	/**
 	 * @var array

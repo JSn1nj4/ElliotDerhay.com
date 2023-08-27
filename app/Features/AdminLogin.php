@@ -2,8 +2,6 @@
 
 namespace App\Features;
 
-use App\Models\User;
-
 class AdminLogin
 {
     /**

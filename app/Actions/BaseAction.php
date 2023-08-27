@@ -13,6 +13,7 @@ abstract class BaseAction
 	 *
 	 * This will allow chaining where using `new` directly not preferred.
 	 *
+	 * @param mixed ...$params
 	 * @return static
 	 */
 	public static function make(...$params): static

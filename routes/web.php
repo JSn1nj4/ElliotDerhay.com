@@ -1,13 +1,7 @@
 <?php
 
 use App\Http\Controllers\BlogPostsController;
-use App\Http\Controllers\CommandController;
-use App\Http\Controllers\CommandEventController;
-use App\Http\Controllers\ImageController;
-use App\Http\Controllers\PostsController;
-use App\Http\Controllers\ProjectsController;
 use App\Http\Controllers\ProjectsPortfolioController;
-use App\Http\Controllers\RunCommandController;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
 use Spatie\Sitemap\Sitemap;
@@ -36,24 +30,6 @@ Route::prefix('/blog')
 		Route::get('/{post:slug}', [BlogPostsController::class, 'show'])->name('blog.show');
 	});
 
-Route::prefix('/dashboard')
-	->middleware(['auth', 'verified'])
-	->group(static function () {
-		Route::view('/', 'admin.dashboard')->name('dashboard');
-
-		Route::resource('commands', CommandController::class);
-
-		Route::get('command-log', [CommandEventController::class, 'index'])->name('command-events.index');
-
-		Route::post('command-run', [RunCommandController::class, 'store'])->name('command-run.store');
-
-		Route::resource('images', ImageController::class)->only(['index', 'show', 'destroy']);
-
-		Route::resource('posts', PostsController::class);
-
-		Route::resource('projects', ProjectsController::class);
-	});
-
 Route::get('/sitemap.xml',
 	static fn (Request $request) => Cache::remember('sitemap',
 		// cache for a week since the blog might update weekly
@@ -79,5 +55,3 @@ Route::get('/sitemap.xml',
 			->add(\App\Models\Post::all())
 	)
 		->toResponse($request));
-
-require __DIR__.'/auth.php';

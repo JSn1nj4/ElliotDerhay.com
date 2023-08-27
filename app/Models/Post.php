@@ -7,6 +7,7 @@ use App\Contracts\SearchDisplayableContract;
 use App\Enums\PerPage;
 use App\Traits\Categorizeable;
 use App\Traits\SearchDisplayable;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -28,8 +29,10 @@ use Spatie\Sitemap\Tags\Url;
  * @property Image|null $image
  * @property Category[] $categories
  * @property \Illuminate\Database\Eloquent\Collection|Tag[] $tags
+ * @property boolean $published
  * @property Carbon $created_at
  * @property Carbon $updated_at
+ * @property Carbon|null $published_at
  * @property-read int|null $categories_count
  * @property-read int|null $tags_count
  * @method static \Database\Factories\PostFactory factory(...$parameters)
@@ -43,6 +46,8 @@ use Spatie\Sitemap\Tags\Url;
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereSlug($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereUpdatedAt($value)
+ * @method \Illuminate\Database\Eloquent\Builder|Post published()
+ * @method static \Illuminate\Database\Eloquent\Builder|Post published()
  * @mixin \Eloquent
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Image[] $images
  * @property-read int|null $images_count
@@ -58,6 +63,10 @@ class Post extends ImageableModel implements SearchDisplayableContract, Categori
 		HasFactory,
 		SearchDisplayable;
 
+	protected $casts = [
+		'published_at' => 'datetime',
+	];
+
 	/**
 	 * @var string[]
 	 * inline type when allowed
@@ -66,7 +75,28 @@ class Post extends ImageableModel implements SearchDisplayableContract, Categori
 		'body',
 		'slug',
 		'title',
+		'published',
+		'published_at',
 	];
+
+	protected static function booted(): void
+	{
+		static::creating(static function (self $post): void {
+			if ($post->published_at !== null) return;
+
+			if (!$post->published) return;
+
+			$post->published_at = now();
+		});
+
+		static::updating(static function (self $post): void {
+			if ($post->published_at !== null) return;
+
+			if (!$post->published) return;
+
+			$post->published_at = now();
+		});
+	}
 
 	public function excerpt(): Attribute
 	{
@@ -88,15 +118,16 @@ class Post extends ImageableModel implements SearchDisplayableContract, Categori
 	 */
 	public static function index(Request $request): AbstractPaginator
 	{
-		return self::when(optional($request)->category, function ($query, $category_id): void {
+		return self::when($request?->get('category'), static function ($query, $category_id): void {
 				$query->whereRelation('categories', 'category_id', $category_id);
 			})
-			->when(optional($request)->tag, function ($query, $tag_id): void {
+			->when($request?->get('tag'), static function ($query, $tag_id): void {
 				$query->whereRelation('tags', 'tag_id', $tag_id);
 			})
-			->latest()
+			->published()
+			->latest('published_at')
 			->paginate(PerPage::filter(
-				optional($request)->per_page
+				$request?->get('per_page')
 			))
 			->withQueryString();
 	}
@@ -131,6 +162,13 @@ class Post extends ImageableModel implements SearchDisplayableContract, Categori
 				$meta->update(['search_description' => $description]);
 			},
 		);
+	}
+
+	public function scopePublished(Builder $builder): void
+	{
+		$builder->where( 'published',  '=', true)
+			->where('published_at', '<>', null)
+			->where('published_at', '<', now());
 	}
 
 	/**

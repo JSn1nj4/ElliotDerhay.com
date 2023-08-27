@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Tag;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,7 +19,13 @@ class TagFactory extends Factory
 	{
 		return [
             'title' => $this->faker->unique()->name,
-			'slug' => $this->faker->unique()->slug,
         ];
     }
+
+	public function configure(): self|Factory
+    {
+		return $this->afterMaking(static function (Tag $tag) {
+			$tag->slug = str($tag->title)->slug()->toString();
+		});
+	}
 }

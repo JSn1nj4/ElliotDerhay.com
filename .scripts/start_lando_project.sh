@@ -16,10 +16,10 @@ if ! command_exists "lando"; then
 	echo "'lando' was not found in your \$PATH. Aborting startup."
 fi
 
-if [ $(lando list --format json | jq '.|length') -le "1" ]; then
-	lando start
+if [ $(command lando list --format json | jq '.|length') -le "1" ]; then
+	command lando start
 	print_msg "elliotderhay running"
-	lando dev
+	command lando dev
 else
 	print_msg "elliotderhay already running - check if dev script is running too"
 fi

@@ -1,5 +1,26 @@
 # Changelog
 
+## Version 2.4.0
+
+### New
+- [#125][pr_125]: Replace admin dashboard with Filament
+- [#129][is_129]: Implement global search
+- [#113][is_113]: Implement post draft / published features in [#130][pr_130]
+
+### Changes
+- Remove `Feature::toggleForEveryone` macro now that the default scope is everyone
+
+### Fixes
+- Fix/add Changelog issue/PR links
+- Make project startup script more bulletproof
+- Fix font issue caused by Tailwind config ([#128][is_128])
+
+[is_113]: https://github.com/JSn1nj4/ElliotDerhay.com/issue/113
+[pr_125]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/125
+[is_128]: https://github.com/JSn1nj4/ElliotDerhay.com/issue/128
+[is_129]: https://github.com/JSn1nj4/ElliotDerhay.com/issue/129
+[pr_130]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/130
+
 ## Version 2.3.0
 
 ### New
@@ -24,7 +45,7 @@
 - Unable to import types
 - Fix minor post header image display issue on hover
 
-[gh_94]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/88
+[gh_94]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/94
 [gh_104]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/104
 [gh_106]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/106
 [gh_107]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/107
@@ -36,7 +57,7 @@
 ### Updates
 - [#116][gh_116]: Speed up Lightbox transitions
 
-[gh_116]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/88
+[gh_116]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/116
 
 ## Version 2.2.0
 
@@ -60,8 +81,11 @@
 - #100: add "View Public" links on admin content view/edit pages
 
 ### Fixes
-- Fix #92: support state restore in cached config objects
-- Fix #101: content slice/dupe bug during editing
+- Fix [#92][gh_92]: support state restore in cached config objects
+- Fix [#101][gh_101]: content slice/dupe bug during editing
+
+[gh_92]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/92
+[gh_101]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/101
 
 ## Version 2.1.2
 
@@ -168,9 +192,11 @@
 - Housekeeping
 
 ### Bug fixes
-- Fix #47: token "expires_at" issue
+- Fix [#47][gh_47]: token "expires_at" issue
 	- Check for `null` value for tokens that don't have an expiration date
 	- Conversely, ensure value is _not_ `null` as part of expiration check
+
+[gh_47]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/47
 
 ## Version 1.12.1
 

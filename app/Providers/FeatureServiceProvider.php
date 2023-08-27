@@ -21,21 +21,12 @@ class FeatureServiceProvider extends ServiceProvider
     public function boot(): void
     {
 		// Force features on this site to be global by default
-		Feature::resolveScopeUsing(fn ($driver) => null);
+		Feature::resolveScopeUsing(static fn ($driver) => null);
 
-        Feature::macro('toggle', function (string $feature) {
+        Feature::macro('toggle', static function (string $feature) {
 			Feature::inactive($feature) ?
 				Feature::activate($feature) :
 				Feature::deactivate($feature);
-		});
-
-		/**
-		 * @method void toggleForEveryone Warning: this will toggle the setting based on the current scope
-		 */
-		Feature::macro('toggleForEveryone', function (string $feature) {
-			Feature::inactive($feature) ?
-				Feature::activateForEveryone($feature) :
-				Feature::deactivateForEveryone($feature);
 		});
     }
 }
