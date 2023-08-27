@@ -18,6 +18,18 @@ return new class extends Migration
         Schema::whenTableDoesntHaveColumn('posts', 'published_at', static function (Blueprint $table) {
             $table->timestamp('published_at')->nullable();
         });
+
+		DB::table('posts')
+			->whereNotNull('created_at')
+			->orderBy('created_at')
+			->each(static function ($record) {
+				DB::table('posts')
+					->where('id', '=', $record->id)
+					->update([
+						'published' => true,
+						'published_at' => $record->created_at,
+					]);
+			});
     }
 
     /**
