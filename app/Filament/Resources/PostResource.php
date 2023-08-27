@@ -218,16 +218,31 @@ class PostResource extends Resource
 					->disk(static fn (Image $image) => $image->disk)
 					->size('auto')->height(135),
 				Tables\Columns\TextColumn::make('title')
+					->wrap(true)
 					->searchable()
 					->sortable(),
 				Tables\Columns\TextColumn::make('slug')
+					->toggleable(isToggledHiddenByDefault: true)
+					->limit('30')
 					->searchable(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
+				Tables\Columns\TextColumn::make('published')
+					->formatStateUsing(static fn (bool $state) => $state ? 'Published' : 'Draft')
+					->colors([
+						'success' => 1,
+						'gray' => 0,
+					])
+					->icons([
+						'o-check-badge' => 1,
+						'o-pencil-square' => 0,
+					])
+					->iconPosition('after')
+					->label('Status'),
+                Tables\Columns\TextColumn::make('published_at')
+                    ->dateTime('M d, Y | H:i')
                     ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->toggleable(),
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
+					->dateTime('M d, Y | H:i')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])

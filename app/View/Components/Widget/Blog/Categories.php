@@ -4,6 +4,7 @@ namespace App\View\Components\Widget\Blog;
 
 use App\Enums\DisplayMode;
 use App\Models\Category;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\View\Component;
 
@@ -36,7 +37,9 @@ class Categories extends Component
 	{
 		if(!config('blog.feature.categories_widget')) return false;
 
-		$this->categories ??= Category::withExists('posts')->get();
+		$this->categories ??= Category::whereHas('posts',
+			static fn (Builder $builder) => $builder->published()
+		)->get();
 
 		if($this->categories->count() === 0) return false;
 

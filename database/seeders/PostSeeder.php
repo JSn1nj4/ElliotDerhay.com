@@ -21,7 +21,7 @@ class PostSeeder extends Seeder
 		Category::inRandomOrder()
 			->limit(rand(0, 2))
 			->get()
-			->each(fn ($category) => $addCategoryToPost($category, $post));
+			->each(static fn ($category) => $addCategoryToPost($category, $post));
 
 		return $post;
 	}
@@ -33,7 +33,7 @@ class PostSeeder extends Seeder
 		Tag::inRandomOrder()
 			->limit(rand(0, 7))
 			->get()
-			->each(fn ($tag) => $addTagToPost($tag, $post));
+			->each(static fn ($tag) => $addTagToPost($tag, $post));
 
 		return $post;
 	}

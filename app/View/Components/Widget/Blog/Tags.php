@@ -3,6 +3,7 @@
 namespace App\View\Components\Widget\Blog;
 
 use App\Models\Tag;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\View\Component;
 
@@ -38,7 +39,9 @@ class Tags extends Component
 	{
 		if(!config('blog.feature.tags_widget')) return false;
 
-		$this->tags ??= Tag::withExists('posts')
+		$this->tags ??= Tag::whereHas('posts',
+			static fn (Builder $builder) => $builder->published()
+		)
 			->limit($this->limit)
 			->get();
 

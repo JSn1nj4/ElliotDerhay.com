@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,5 +20,12 @@ class CategoryFactory extends Factory
         return [
             'title' => $this->faker->unique()->word(),
         ];
+    }
+
+    public function configure(): self|Factory
+    {
+        return $this->afterMaking(static function (Category $category) {
+            $category->slug = str($category->title)->slug()->toString();
+        });
     }
 }
