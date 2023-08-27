@@ -118,16 +118,16 @@ class Post extends ImageableModel implements SearchDisplayableContract, Categori
 	 */
 	public static function index(Request $request): AbstractPaginator
 	{
-		return self::when(optional($request)->category, function ($query, $category_id): void {
+		return self::when($request?->get('category'), static function ($query, $category_id): void {
 				$query->whereRelation('categories', 'category_id', $category_id);
 			})
-			->when(optional($request)->tag, function ($query, $tag_id): void {
+			->when($request?->get('tag'), static function ($query, $tag_id): void {
 				$query->whereRelation('tags', 'tag_id', $tag_id);
 			})
 			->published()
-			->latest()
+			->latest('published_at')
 			->paginate(PerPage::filter(
-				optional($request)->per_page
+				$request?->get('per_page')
 			))
 			->withQueryString();
 	}
