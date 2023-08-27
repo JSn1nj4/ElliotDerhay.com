@@ -1,5 +1,10 @@
 # Changelog
 
+## Version 2.4.2
+
+### Fixes
+- Try forcing HTTPS URL scheme in production
+
 ## Version 2.4.1
 
 ### Fixes

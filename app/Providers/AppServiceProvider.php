@@ -12,6 +12,7 @@ use App\Contracts\SocialMediaService;
 use App\Models\Token;
 use App\Services\Github\GithubService;
 use App\Services\Twitter\TwitterService;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -51,6 +52,6 @@ class AppServiceProvider extends ServiceProvider
 	 */
 	public function boot(): void
 	{
-
+        if (app()->isProduction()) URL::forceScheme('https');
 	}
 }
