@@ -18,7 +18,7 @@ class TagFactory extends Factory
 	{
 		return [
             'title' => $this->faker->unique()->name,
-			'slug' => $this->faker->unique()->slug,
+			'slug' => static fn ($state) => str($state['title'])->slug()->toString(),
         ];
     }
 }

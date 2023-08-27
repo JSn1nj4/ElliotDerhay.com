@@ -18,6 +18,7 @@ class CategoryFactory extends Factory
 	{
         return [
             'title' => $this->faker->unique()->word(),
+			'slug' => static fn ($state) => str($state['title'])->slug()->toString(),
         ];
     }
 }

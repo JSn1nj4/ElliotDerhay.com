@@ -16,17 +16,12 @@ class PostFactory extends Factory
      */
     public function definition(): array
 	{
-		$data = [
+        return [
 			'title' => $this->faker->realText(60),
+			'slug' => static fn ($state) => str($state['slug'])->slug()->toString(),
 			'body' => $this->faker->realText(500),
 			'published' => $this->faker->boolean(75),
+			'published_at' => fn ($state) => ($state['published'] ? $this->faker->dateTime() : null),
 		];
-
-		$data['slug'] = str($data['title'])->slug();
-		$data['published_at'] = $data['published']
-			? $this->faker->dateTime()
-			: null;
-
-        return $data;
     }
 }
