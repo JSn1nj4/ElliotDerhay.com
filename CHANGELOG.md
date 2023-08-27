@@ -1,5 +1,11 @@
 # Changelog
 
+## Version 2.4.1
+
+### Fixes
+- Add missing requirements for Filament access
+- Reorder some messy parts of the User model
+
 ## Version 2.4.0
 
 ### New

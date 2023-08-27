@@ -2,7 +2,10 @@
 
 namespace App\Models;
 
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -35,9 +38,18 @@ use Illuminate\Notifications\Notifiable;
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
  * @mixin \Eloquent
  */
-class User extends Authenticatable
+class User extends Authenticatable implements FilamentUser
 {
     use HasFactory, Notifiable;
+
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+    ];
 
     /**
      * The attributes that are mass assignable.
@@ -50,14 +62,7 @@ class User extends Authenticatable
         'password',
     ];
 
-	public static function booted()
-	{
-		static::deleted(function (User $user): void {
-			Login::whereUserId($user->id)->delete();
-		});
-	}
-
-	/**
+    /**
      * The attributes that should be hidden for arrays.
      *
      * @var array
@@ -67,16 +72,19 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+	public static function booted()
+	{
+		static::deleted(static function (self $user): void {
+			Login::whereUserId($user->id)->delete();
+		});
+	}
 
-	public function logins()
+    public function canAccessPanel(Panel $panel): bool
+    {
+        return $this->hasVerifiedEmail();
+    }
+
+	public function logins(): HasMany
 	{
 		return $this->hasMany(Login::class);
 	}
