@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Post;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,10 +19,16 @@ class PostFactory extends Factory
 	{
         return [
 			'title' => $this->faker->realText(60),
-			'slug' => static fn ($state) => str($state['slug'])->slug()->toString(),
 			'body' => $this->faker->realText(500),
-			'published' => $this->faker->boolean(75),
-			'published_at' => fn ($state) => ($state['published'] ? $this->faker->dateTime() : null),
 		];
+    }
+
+    public function configure(): self|Factory
+    {
+        return $this->afterMaking(function (Post $post) {
+            $post->slug = str($post->title)->slug()->toString();
+			$post->published = $this->faker->boolean(75);
+			$post->published_at = $post->published ? $this->faker->dateTime() : null;
+        });
     }
 }
