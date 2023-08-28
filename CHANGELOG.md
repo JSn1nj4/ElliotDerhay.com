@@ -1,5 +1,12 @@
 # Changelog
 
+## Version 2.4.3
+
+### Fixes
+- [#131][is_131]: Fix EditPost save issue
+
+[is_131]: https://github.com/JSn1nj4/ElliotDerhay.com/issue/131
+
 ## Version 2.4.2
 
 ### Fixes
