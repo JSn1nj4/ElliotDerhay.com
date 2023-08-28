@@ -163,6 +163,8 @@ const config = {
 			}
 		}
 	},
+	
+	darkMode: 'class',
 };
 
 // late overrides

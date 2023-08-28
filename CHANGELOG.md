@@ -8,8 +8,10 @@
 
 ### Fixes
 - [#131][is_131]: Fix EditPost save issue
+- [#132][is_132]: Fix dark mode switcher
 
 [is_131]: https://github.com/JSn1nj4/ElliotDerhay.com/issue/131
+[is_132]: https://github.com/JSn1nj4/ElliotDerhay.com/issue/132
 
 ## Version 2.4.2
 
