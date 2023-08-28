@@ -2,6 +2,9 @@
 
 ## Version 2.4.3
 
+### Changes
+- Collapse some form sections when empty
+
 ### Fixes
 - [#131][is_131]: Fix EditPost save issue
 
