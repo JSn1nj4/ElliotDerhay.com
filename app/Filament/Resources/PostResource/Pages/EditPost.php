@@ -33,6 +33,11 @@ class EditPost extends EditRecord
 			Actions\Action::make('Publish')
 				->hidden(static fn (Post $record) => $record->published)
 				->color('warning')
+				->requiresConfirmation()
+				->modalHeading("Publishing Post")
+				->modalDescription("Are you sure you want to publish this?")
+				->modalCancelActionLabel('No')
+				->modalSubmitActionLabel('Yes')
 				->action(static function (Post $record): void {
 					$result = PublishPost::execute($record);
 
@@ -60,6 +65,11 @@ class EditPost extends EditRecord
 				->visible(static fn (Post $record) => $record->published)
 				->outlined()
 				->color('warning')
+				->requiresConfirmation()
+				->modalHeading("Unpublishing Post")
+				->modalDescription("Are you sure you want to convert this back to a draft?")
+				->modalCancelActionLabel('No')
+				->modalSubmitActionLabel('Yes')
 				->action(static function (Post $record): void {
 					$result = UnpublishPost::execute($record);
 

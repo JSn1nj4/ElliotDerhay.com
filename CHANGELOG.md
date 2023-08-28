@@ -4,6 +4,7 @@
 
 ### Changes
 - Collapse some form sections when empty
+- Require confirmation for publishing and unpublishing posts
 
 ### Fixes
 - [#131][is_131]: Fix EditPost save issue
