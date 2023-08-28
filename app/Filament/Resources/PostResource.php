@@ -115,6 +115,13 @@ class PostResource extends Resource
 						}),
 
 					Forms\Components\Section::make('Meta')
+						->collapsed(static fn (array $state) => collect($state)
+								->filter(static fn ($item, $key) => match($key) {
+									'search_title', 'search_description' => true,
+									default => false,
+								})
+								->whereNotNull()
+								->isEmpty())
 						->relationship('searchMeta')
 						->schema([
 							Forms\Components\TextInput::make('search_title')
@@ -131,6 +138,10 @@ class PostResource extends Resource
 						]),
 
 					Forms\Components\Section::make('Taxonomies')
+						->collapsed(static fn ($state) => empty([
+							...$state['categories'],
+							...$state['tags']
+						]))
 						->schema([
 							Forms\Components\Select::make('categories')
 								->relationship('categories', 'title')

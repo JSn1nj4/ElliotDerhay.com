@@ -8,8 +8,10 @@ use App\Filament\Resources\PostResource;
 use App\Models\Post;
 use App\Support\Sanitizer;
 use Filament\Actions;
+use Filament\Notifications\Actions\ActionGroup;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\EditRecord;
+use Illuminate\Notifications\Action;
 
 class EditPost extends EditRecord
 {
@@ -19,21 +21,35 @@ class EditPost extends EditRecord
 
     protected function getHeaderActions(): array
     {
-		[$save, $cancel] = parent::getFormActions();
+		return [
+			...$this->publishActions(),
+			Actions\DeleteAction::make(),
+		];
+    }
 
-        return [
-			$cancel,
-			$save->outlined(),
+	protected function publishActions(): array
+	{
+		return [
 			Actions\Action::make('Publish')
 				->hidden(static fn (Post $record) => $record->published)
 				->color('warning')
+				->requiresConfirmation()
+				->modalHeading("Publishing Post")
+				->modalDescription("Are you sure you want to publish this?")
+				->modalCancelActionLabel('No')
+				->modalSubmitActionLabel('Yes')
 				->action(static function (Post $record): void {
 					$result = PublishPost::execute($record);
 
 					if ($result->succeeded) {
 						Notification::make()
 							->title(__('Post published!'))
-							->body("<a target='_blank' href='" . route('blog.show', ['post' => $record]) . "'>" . __("View Live") . "</a>")
+							->actions([
+								\Filament\Notifications\Actions\Action::make('View Live')
+									->url(route('blog.show', ['post' => $record]))
+									->openUrlInNewTab()
+									->color('success'),
+							])
 							->success()
 							->send();
 
@@ -49,6 +65,11 @@ class EditPost extends EditRecord
 				->visible(static fn (Post $record) => $record->published)
 				->outlined()
 				->color('warning')
+				->requiresConfirmation()
+				->modalHeading("Unpublishing Post")
+				->modalDescription("Are you sure you want to convert this back to a draft?")
+				->modalCancelActionLabel('No')
+				->modalSubmitActionLabel('Yes')
 				->action(static function (Post $record): void {
 					$result = UnpublishPost::execute($record);
 
@@ -66,12 +87,14 @@ class EditPost extends EditRecord
 						->danger()
 						->send();
 				}),
-        ];
-    }
+		];
+	}
 
 	protected function getFormActions(): array
 	{
 		return [
+			...parent::getFormActions(),
+			...$this->publishActions(),
 			Actions\DeleteAction::make(),
 		];
 	}
