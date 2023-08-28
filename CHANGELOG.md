@@ -1,5 +1,10 @@
 # Changelog
 
+## Version 2.4.4
+
+### New
+- Add 'View Live' action for posts
+
 ## Version 2.4.3
 
 ### Changes

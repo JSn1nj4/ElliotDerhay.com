@@ -22,6 +22,14 @@ class EditPost extends EditRecord
     protected function getHeaderActions(): array
     {
 		return [
+			Actions\Action::make('View Live')
+				->visible(static fn (Post $record) => $record->published)
+				->color('info')
+				->outlined()
+				->icon('o-arrow-top-right-on-square')
+				->iconPosition(IconPosition::After)
+				->url(route('blog.show', ['post' => $this->getRecord()]))
+				->openUrlInNewTab(),
 			...$this->publishActions(),
 			Actions\DeleteAction::make(),
 		];
