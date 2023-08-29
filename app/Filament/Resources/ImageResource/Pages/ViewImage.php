@@ -3,18 +3,14 @@
 namespace App\Filament\Resources\ImageResource\Pages;
 
 use App\Filament\Resources\ImageResource;
+use App\Filament\Traits\HasViewActionsWithIcons;
 use Filament\Actions;
 use Filament\Resources\Pages\ViewRecord;
+use Filament\Support\Enums\IconPosition;
 
 class ViewImage extends ViewRecord
 {
-    protected static string $resource = ImageResource::class;
+	use HasViewActionsWithIcons;
 
-	protected function getActions(): array
-	{
-		return [
-			Actions\EditAction::make(),
-			Actions\DeleteAction::make(),
-		];
-	}
+    protected static string $resource = ImageResource::class;
 }

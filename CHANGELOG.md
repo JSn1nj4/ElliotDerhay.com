@@ -5,6 +5,9 @@
 ### New
 - Add 'View Live' action for posts
 
+### Changes
+- Add icons to action buttons
+
 ## Version 2.4.3
 
 ### Changes

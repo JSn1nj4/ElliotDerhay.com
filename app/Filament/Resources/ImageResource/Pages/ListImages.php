@@ -3,17 +3,12 @@
 namespace App\Filament\Resources\ImageResource\Pages;
 
 use App\Filament\Resources\ImageResource;
-use Filament\Actions\CreateAction;
+use App\Filament\Traits\HasNewActionWithIcon;
 use Filament\Resources\Pages\ListRecords;
 
 class ListImages extends ListRecords
 {
-    protected static string $resource = ImageResource::class;
+	use HasNewActionWithIcon;
 
-	protected function getActions(): array
-	{
-		return [
-			CreateAction::make(),
-		];
-	}
+    protected static string $resource = ImageResource::class;
 }
