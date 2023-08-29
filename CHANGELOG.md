@@ -7,6 +7,7 @@
 
 ### Changes
 - Add icons to action buttons
+- Post status as colorized badges
 
 ## Version 2.4.3
 

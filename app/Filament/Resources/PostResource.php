@@ -238,6 +238,7 @@ class PostResource extends Resource
 					->searchable(),
 				Tables\Columns\TextColumn::make('published')
 					->formatStateUsing(static fn (bool $state) => $state ? 'Published' : 'Draft')
+					->badge()
 					->colors([
 						'success' => 1,
 						'gray' => 0,
