@@ -3,17 +3,13 @@
 namespace App\Filament\Resources\ProjectResource\Pages;
 
 use App\Filament\Resources\ProjectResource;
+use App\Filament\Traits\HasNewActionWithIcon;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 
 class ListProjects extends ListRecords
 {
-    protected static string $resource = ProjectResource::class;
+	use HasNewActionWithIcon;
 
-    protected function getActions(): array
-    {
-        return [
-            Actions\CreateAction::make(),
-        ];
-    }
+    protected static string $resource = ProjectResource::class;
 }

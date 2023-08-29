@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Forms\Components\ImageViewField;
 use App\Filament\Resources\ImageResource\Pages;
+use App\Filament\Traits\HasCountBadge;
 use App\Models\Image;
 use Filament\Forms;
 use Filament\Resources\Resource;
@@ -11,6 +12,8 @@ use Filament\Tables;
 
 class ImageResource extends Resource
 {
+	use HasCountBadge;
+
     protected static string|null $model = Image::class;
 
     protected static string|null $navigationIcon = 'm-photo';

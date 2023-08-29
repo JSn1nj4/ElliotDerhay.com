@@ -6,11 +6,10 @@ use App\Actions\PublishPost;
 use App\Actions\UnpublishPost;
 use App\Filament\Resources\PostResource;
 use App\Models\Post;
-use App\Support\Sanitizer;
 use Filament\Actions;
-use Filament\Notifications\Actions\ActionGroup;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\EditRecord;
+use Filament\Support\Enums\IconPosition;
 use Illuminate\Notifications\Action;
 
 class EditPost extends EditRecord
@@ -22,8 +21,18 @@ class EditPost extends EditRecord
     protected function getHeaderActions(): array
     {
 		return [
+			Actions\Action::make('View Live')
+				->visible(static fn (Post $record) => $record->published)
+				->color('info')
+				->outlined()
+				->icon('o-arrow-top-right-on-square')
+				->iconPosition(IconPosition::After)
+				->url(route('blog.show', ['post' => $this->getRecord()]))
+				->openUrlInNewTab(),
 			...$this->publishActions(),
-			Actions\DeleteAction::make(),
+			Actions\DeleteAction::make()
+				->icon('o-trash')
+				->iconPosition(IconPosition::After),
 		];
     }
 
@@ -33,6 +42,8 @@ class EditPost extends EditRecord
 			Actions\Action::make('Publish')
 				->hidden(static fn (Post $record) => $record->published)
 				->color('warning')
+				->icon('o-globe-alt')
+				->iconPosition(IconPosition::After)
 				->requiresConfirmation()
 				->modalHeading("Publishing Post")
 				->modalDescription("Are you sure you want to publish this?")
@@ -65,6 +76,8 @@ class EditPost extends EditRecord
 				->visible(static fn (Post $record) => $record->published)
 				->outlined()
 				->color('warning')
+				->icon('o-lock-closed')
+				->iconPosition(IconPosition::After)
 				->requiresConfirmation()
 				->modalHeading("Unpublishing Post")
 				->modalDescription("Are you sure you want to convert this back to a draft?")
@@ -92,10 +105,19 @@ class EditPost extends EditRecord
 
 	protected function getFormActions(): array
 	{
+		[$save, $cancel] = parent::getFormActions();
+
 		return [
-			...parent::getFormActions(),
+			$save
+				->icon('o-circle-stack')
+				->iconPosition(IconPosition::After),
+			$cancel
+				->icon('o-arrow-uturn-left')
+				->iconPosition(IconPosition::After),
 			...$this->publishActions(),
-			Actions\DeleteAction::make(),
+			Actions\DeleteAction::make()
+				->icon('o-trash')
+				->iconPosition(IconPosition::After),
 		];
 	}
 }

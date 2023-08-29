@@ -3,21 +3,20 @@
 namespace App\Filament\Resources\ImageResource\Pages;
 
 use App\Filament\Resources\ImageResource;
+use App\Filament\Traits\HasEditFormActionsWithIcons;
+use App\Filament\Traits\HasEditActionsWithIcons;
 use App\Support\Sanitizer;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
+use Filament\Support\Enums\IconPosition;
+use function Livewire\after;
 
 class EditImage extends EditRecord
 {
-    protected static string $resource = ImageResource::class;
+	use HasEditActionsWithIcons,
+		HasEditFormActionsWithIcons;
 
-    protected function getActions(): array
-    {
-        return [
-			Actions\ViewAction::make(),
-            Actions\DeleteAction::make(),
-        ];
-    }
+    protected static string $resource = ImageResource::class;
 
 	protected function prepareForValidation($attributes)
 	{

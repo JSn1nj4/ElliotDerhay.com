@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Actions\StoresImage;
 use App\Filament\Forms\Components\ImageViewField;
 use App\Filament\Resources\ProjectResource\Pages;
+use App\Filament\Traits\HasCountBadge;
 use App\Models\Image;
 use App\Models\Project;
 use Filament\Forms;
@@ -14,6 +15,8 @@ use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 
 class ProjectResource extends Resource
 {
+	use HasCountBadge;
+
     protected static string|null $model = Project::class;
 
     protected static string|null $navigationIcon = 'm-code-bracket';

@@ -9,6 +9,7 @@ use App\Support\Sanitizer;
 use Filament\Actions;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\ViewRecord;
+use Filament\Support\Enums\IconPosition;
 use Illuminate\Support\Facades\Artisan;
 
 class ViewCommand extends ViewRecord
@@ -82,7 +83,10 @@ class ViewCommand extends ViewRecord
 						);
 					}
 				}),
-            Actions\EditAction::make(),
+
+			Actions\EditAction::make()
+				->icon('o-pencil-square')
+				->iconPosition(IconPosition::After),
         ];
     }
 

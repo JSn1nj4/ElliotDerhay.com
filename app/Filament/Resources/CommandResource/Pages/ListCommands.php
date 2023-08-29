@@ -3,17 +3,12 @@
 namespace App\Filament\Resources\CommandResource\Pages;
 
 use App\Filament\Resources\CommandResource;
-use Filament\Actions;
+use App\Filament\Traits\HasNewActionWithIcon;
 use Filament\Resources\Pages\ListRecords;
 
 class ListCommands extends ListRecords
 {
-    protected static string $resource = CommandResource::class;
+	use HasNewActionWithIcon;
 
-    protected function getActions(): array
-    {
-        return [
-            Actions\CreateAction::make(),
-        ];
-    }
+    protected static string $resource = CommandResource::class;
 }
