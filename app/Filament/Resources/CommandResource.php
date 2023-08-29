@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\CommandResource\Pages;
 use App\Filament\Resources\CommandResource\RelationManagers;
+use App\Filament\Traits\HasCountBadge;
 use App\Models\Command;
 use Filament\Forms;
 use Filament\Resources\Form;
@@ -15,6 +16,8 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class CommandResource extends Resource
 {
+	use HasCountBadge;
+
     protected static string|null $model = Command::class;
 
     protected static string|null $navigationIcon = 'm-command-line';

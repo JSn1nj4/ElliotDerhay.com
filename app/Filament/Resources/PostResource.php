@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Actions\StoresImage;
 use App\Filament\Forms\Components\ImageViewField;
 use App\Filament\Resources\PostResource\Pages;
+use App\Filament\Traits\HasCountBadge;
 use App\Models\Image;
 use App\Models\Post;
 use App\Support\Sanitizer;
@@ -17,6 +18,8 @@ use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 
 class PostResource extends Resource
 {
+	use HasCountBadge;
+
     protected static string|null $model = Post::class;
 
     protected static string|null $navigationIcon = 'm-document-text';

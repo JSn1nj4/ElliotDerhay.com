@@ -4,10 +4,13 @@
 
 ### New
 - Add 'View Live' action for posts
+- [#133][is_133]: Add counter badges to multiple resources
 
 ### Changes
 - Add icons to action buttons
 - Post status as colorized badges
+
+[is_133]: https://github.com/JSn1nj4/ElliotDerhay.com/issue/133
 
 ## Version 2.4.3
 
