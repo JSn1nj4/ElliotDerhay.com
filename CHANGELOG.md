@@ -1,5 +1,11 @@
 # Changelog
 
+## Version 2.4.6
+
+### Fixes
+
+- Remove forgotten JS debugging line...
+
 ## Version 2.4.5
 
 ### Fixes

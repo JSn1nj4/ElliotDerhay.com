@@ -6,8 +6,6 @@
 	function ga_track({detail}) {
 		let dnt = !detail.allow ? 'DNT=1' : 'DNT=0';
 
-		console.log(detail);
-
 		if (!!detail.time) dnt += ';expires=' + detail.time.toUTCString();
 
 		// only good for when the user interacts with this mess
