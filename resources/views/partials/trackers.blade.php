@@ -1,6 +1,7 @@
+@php $ga_id = 'G-N77DW1F89N'; @endphp
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id={{ $ga_id }}"></script>
 <script type="application/javascript">
-	const GA_ID = 'UA-165049241-1';
-
 	// Enable or disable GA tracking
 	function ga_track({detail}) {
 		let dnt = !detail.allow ? 'DNT=1' : 'DNT=0';
@@ -11,7 +12,7 @@
 
 		// only good for when the user interacts with this mess
 		document.cookie = dnt
-		window[`ga-disable-${GA_ID}`] = !detail.allow;
+		window['ga-disable-{{ $ga_id }}'] = !detail.allow;
 	}
 
 	if (
@@ -27,5 +28,6 @@
 	window.dataLayer = window.dataLayer || [];
 	function gtag(){dataLayer.push(arguments);}
 	gtag('js', new Date());
-	gtag('config', GA_ID);
+
+	gtag('config', '{{ $ga_id }}');
 </script>
