@@ -5,6 +5,8 @@
 ### Fixes
 
 - [#134][is_134]: Popup and DNT cookies weren't sticking
+- Add missing analytics tracker script
+- Fix sitemap including unpublished posts
 
 [is_134]: https://github.com/JSn1nj4/ElliotDerhay.com/issue/134
 
