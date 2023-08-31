@@ -20,10 +20,21 @@ import {ref, onBeforeMount} from 'vue'
 const btnClasses = ref('flex-1 p-4 m-2 font-bold')
 const displayClass = ref('block')
 
-function allowTracker(allow) {
-	const event = new CustomEvent('allow_tracking', { detail: allow });
-	document.dispatchEvent(event);
-	document.cookie = 'GA_POPUP_INTERACTION=1'
+function allowTracker(allow: boolean) {
+	let now = new Date();
+	now.setTime(now.getTime() + (1000 * 60 * 60 * 24 * 400))
+
+	document.dispatchEvent(new CustomEvent(
+		'allow_tracking',
+		{
+			detail: {
+				allow,
+				time: now
+			},
+		}
+	));
+
+	document.cookie = 'GA_POPUP_INTERACTION=1;expires=' + now.toUTCString()
 	hide()
 }
 

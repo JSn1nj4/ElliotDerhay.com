@@ -1,5 +1,13 @@
 # Changelog
 
+## Version 2.4.5
+
+### Fixes
+
+- [#134][is_134]: Popup and DNT cookies weren't sticking
+
+[is_134]: https://github.com/JSn1nj4/ElliotDerhay.com/issue/134
+
 ## Version 2.4.4
 
 ### New
