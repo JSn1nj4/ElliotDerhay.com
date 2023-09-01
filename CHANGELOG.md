@@ -1,5 +1,13 @@
 # Changelog
 
+## Version 2.5.0
+
+### Changes
+
+- [#114][is_114]: Upgrade yarn version ([][]) 
+
+[is_114]: https://github.com/JSn1nj4/ElliotDerhay.com/issue/114
+
 ## Version 2.4.7
 
 ### Fixes
