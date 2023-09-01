@@ -8,11 +8,13 @@ use App\Filament\Resources\PostResource\Pages;
 use App\Filament\Traits\HasCountBadge;
 use App\Models\Image;
 use App\Models\Post;
+use App\Models\Scopes\PostPublishedScope;
 use App\Support\Sanitizer;
 use Filament\Forms;
 use Filament\Infolists;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
 use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 
@@ -188,6 +190,11 @@ class PostResource extends Resource
 				->columnSpan(1),
             ]);
     }
+
+	public static function getEloquentQuery(): Builder
+	{
+		return parent::getEloquentQuery()->withoutGlobalScope(PostPublishedScope::class);
+	}
 
 	public static function infolist(Infolists\Infolist $infolist): Infolists\Infolist
 	{
