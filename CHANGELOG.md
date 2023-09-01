@@ -6,7 +6,12 @@
 
 - [#114][is_114]: Upgrade yarn version ([#142][pr_142]) 
 
+### Fixes
+
+- [#143][is_143]: Remove leftover 'published' call from sitemap config
+
 [is_114]: https://github.com/JSn1nj4/ElliotDerhay.com/issue/114
+[is_143]: https://github.com/JSn1nj4/ElliotDerhay.com/issue/143
 [pr_142]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/142
 
 ## Version 2.4.7
