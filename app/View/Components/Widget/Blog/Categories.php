@@ -37,9 +37,7 @@ class Categories extends Component
 	{
 		if(!config('blog.feature.categories_widget')) return false;
 
-		$this->categories ??= Category::whereHas('posts',
-			static fn (Builder $builder) => $builder->published()
-		)->get();
+		$this->categories ??= Category::withExists('posts')->get();
 
 		if($this->categories->count() === 0) return false;
 
