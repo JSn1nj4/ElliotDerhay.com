@@ -124,7 +124,6 @@ class Post extends ImageableModel implements SearchDisplayableContract, Categori
 			->when($request?->get('tag'), static function ($query, $tag_id): void {
 				$query->whereRelation('tags', 'tag_id', $tag_id);
 			})
-			->published()
 			->latest('published_at')
 			->paginate(PerPage::filter(
 				$request?->get('per_page')
