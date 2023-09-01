@@ -4,9 +4,10 @@
 
 ### Fixes
 
-- [#139][is_139]: Fix leaking draft posts
+- [#139][is_139]: Fix leaking draft posts ([#141][pr_141])
 
 [is_139]: https://github.com/JSn1nj4/ElliotDerhay.com/issue/139
+[pr_141]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/141
 
 ## Version 2.4.6
 

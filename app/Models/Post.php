@@ -8,7 +8,6 @@ use App\Enums\PerPage;
 use App\Models\Scopes\PostPublishedScope;
 use App\Traits\Categorizeable;
 use App\Traits\SearchDisplayable;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
