@@ -4,9 +4,10 @@
 
 ### Changes
 
-- [#114][is_114]: Upgrade yarn version ([][]) 
+- [#114][is_114]: Upgrade yarn version ([#142][pr_142]) 
 
 [is_114]: https://github.com/JSn1nj4/ElliotDerhay.com/issue/114
+[pr_142]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/142
 
 ## Version 2.4.7
 
