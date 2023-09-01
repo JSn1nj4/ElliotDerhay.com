@@ -1,5 +1,13 @@
 # Changelog
 
+## Version 2.5.0
+
+### Fixes
+
+- [#139][is_139]: Fix leaking draft posts
+
+[is_139]: https://github.com/JSn1nj4/ElliotDerhay.com/issue/139
+
 ## Version 2.4.6
 
 ### Fixes
