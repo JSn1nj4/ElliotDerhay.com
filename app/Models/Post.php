@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Contracts\CategorizeableContract;
 use App\Contracts\SearchDisplayableContract;
 use App\Enums\PerPage;
+use App\Models\Scopes\PostPublishedScope;
 use App\Traits\Categorizeable;
 use App\Traits\SearchDisplayable;
 use Illuminate\Database\Eloquent\Builder;
@@ -81,6 +82,8 @@ class Post extends ImageableModel implements SearchDisplayableContract, Categori
 
 	protected static function booted(): void
 	{
+		static::addGlobalScope(new PostPublishedScope());
+
 		static::creating(static function (self $post): void {
 			if ($post->published_at !== null) return;
 
@@ -161,13 +164,6 @@ class Post extends ImageableModel implements SearchDisplayableContract, Categori
 				$meta->update(['search_description' => $description]);
 			},
 		);
-	}
-
-	public function scopePublished(Builder $builder): void
-	{
-		$builder->where( 'published',  '=', true)
-			->where('published_at', '<>', null)
-			->where('published_at', '<', now());
 	}
 
 	/**
