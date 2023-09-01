@@ -39,9 +39,7 @@ class Tags extends Component
 	{
 		if(!config('blog.feature.tags_widget')) return false;
 
-		$this->tags ??= Tag::whereHas('posts',
-			static fn (Builder $builder) => $builder->published()
-		)
+		$this->tags ??= Tag::withExists('posts')
 			->limit($this->limit)
 			->get();
 

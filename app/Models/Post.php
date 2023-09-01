@@ -5,9 +5,9 @@ namespace App\Models;
 use App\Contracts\CategorizeableContract;
 use App\Contracts\SearchDisplayableContract;
 use App\Enums\PerPage;
+use App\Models\Scopes\PostPublishedScope;
 use App\Traits\Categorizeable;
 use App\Traits\SearchDisplayable;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -81,6 +81,8 @@ class Post extends ImageableModel implements SearchDisplayableContract, Categori
 
 	protected static function booted(): void
 	{
+		static::addGlobalScope(new PostPublishedScope());
+
 		static::creating(static function (self $post): void {
 			if ($post->published_at !== null) return;
 
@@ -124,7 +126,6 @@ class Post extends ImageableModel implements SearchDisplayableContract, Categori
 			->when($request?->get('tag'), static function ($query, $tag_id): void {
 				$query->whereRelation('tags', 'tag_id', $tag_id);
 			})
-			->published()
 			->latest('published_at')
 			->paginate(PerPage::filter(
 				$request?->get('per_page')
@@ -162,13 +163,6 @@ class Post extends ImageableModel implements SearchDisplayableContract, Categori
 				$meta->update(['search_description' => $description]);
 			},
 		);
-	}
-
-	public function scopePublished(Builder $builder): void
-	{
-		$builder->where( 'published',  '=', true)
-			->where('published_at', '<>', null)
-			->where('published_at', '<', now());
 	}
 
 	/**

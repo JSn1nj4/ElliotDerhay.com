@@ -3,12 +3,15 @@
 namespace App\Filament\Widgets;
 
 use App\Models\Post;
+use App\Models\Scopes\PostPublishedScope;
 use Filament\Actions\DeleteAction;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Filament\Widgets\TableWidget as BaseWidget;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\Relation;
 
 class LatestPosts extends BaseWidget
 {
@@ -17,7 +20,9 @@ class LatestPosts extends BaseWidget
 	public function table(Table $table): Table
     {
         return $table
-            ->query(Post::latest('created_at')->limit(5))
+            ->query(Post::latest('created_at')
+				->withoutGlobalScope(PostPublishedScope::class)
+				->limit(5))
 			->paginated(false)
             ->columns([
                 Tables\Columns\TextColumn::make('title'),
