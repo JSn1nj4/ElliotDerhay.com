@@ -17,7 +17,9 @@ abstract class PostState implements PostStateContract
 	 */
 	public function publish(): bool
 	{
-		throw new \Exception("Post '{$this->post->id}' cannot be published.");
+		throw new \Exception(__("Post ':post' cannot be published.", [
+			'post' => $this->post->id,
+		]));
 	}
 
 	/**
@@ -26,6 +28,8 @@ abstract class PostState implements PostStateContract
 	 */
 	public function unpublish(): bool
 	{
-		throw new \Exception("Post '{$this->post->id}' cannot be unpublished.");
+		throw new \Exception(__("Post ':post' cannot be unpublished.", [
+			'post' => $this->post->id,
+		]));
 	}
 }

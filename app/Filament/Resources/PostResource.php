@@ -250,12 +250,12 @@ class PostResource extends Resource
 					->formatStateUsing(static fn (bool $state) => $state ? 'Published' : 'Draft')
 					->badge()
 					->colors([
-						'success' => 1,
-						'gray' => 0,
+						'success' => true,
+						'gray' => false,
 					])
 					->icons([
-						'o-check-badge' => 1,
-						'o-pencil-square' => 0,
+						'o-check-badge' => true,
+						'o-pencil-square' => false,
 					])
 					->iconPosition('after')
 					->label('Status'),

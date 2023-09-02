@@ -67,6 +67,7 @@ class Post extends ImageableModel implements SearchDisplayableContract, Categori
 		SearchDisplayable;
 
 	protected $casts = [
+		'published' => 'boolean',
 		'published_at' => 'datetime',
 	];
 
