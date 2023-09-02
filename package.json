@@ -5,7 +5,7 @@
     "license": "MIT",
     "engines": {
         "node": "^20.2.x",
-        "yarn": "^1.22.x"
+        "yarn": "^3.6.x"
     },
     "repository": {
         "type": "git",
@@ -51,5 +51,6 @@
         "autoprefixer": "^10.0.2",
         "webpack": "^5.60.0",
         "webpack-cli": "^4.9.1"
-    }
+    },
+    "packageManager": "yarn@3.6.3"
 }

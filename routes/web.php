@@ -52,6 +52,6 @@ Route::get('/sitemap.xml',
 				->setChangeFrequency(SitemapUrl::CHANGE_FREQUENCY_WEEKLY)
 				->setPriority(0.1))
 
-			->add(\App\Models\Post::published()->get())
+			->add(\App\Models\Post::all())
 	)
 		->toResponse($request));

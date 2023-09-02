@@ -15,6 +15,15 @@ Homestead.yaml
 npm-debug.log
 yarn-error.log
 
+# Yarn Berry
+/.yarn/*
+!/.yarn/plugins
+!/.yarn/releases
+.pnp.cjs
+.pnp.data.json
+.pnp.js
+.pnp.loader.mjs
+
 # Custom configs
 /.vscode/*
 !/.vscode/*-example
