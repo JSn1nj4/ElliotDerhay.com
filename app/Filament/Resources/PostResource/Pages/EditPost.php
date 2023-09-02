@@ -2,8 +2,6 @@
 
 namespace App\Filament\Resources\PostResource\Pages;
 
-use App\Actions\PublishPost;
-use App\Actions\UnpublishPost;
 use App\Filament\Resources\PostResource;
 use App\Models\Post;
 use Filament\Actions;
@@ -29,7 +27,9 @@ class EditPost extends EditRecord
 				->iconPosition(IconPosition::After)
 				->url(route('blog.show', ['post' => $this->getRecord()]))
 				->openUrlInNewTab(),
+
 			...$this->publishActions(),
+
 			Actions\DeleteAction::make()
 				->icon('o-trash')
 				->iconPosition(IconPosition::After),
@@ -70,6 +70,7 @@ class EditPost extends EditRecord
 							->send();
 					}
 				}),
+
 			Actions\Action::make('Unpublish')
 				->visible(static fn (Post $record) => $record->published)
 				->outlined()
@@ -107,10 +108,13 @@ class EditPost extends EditRecord
 			$save
 				->icon('o-circle-stack')
 				->iconPosition(IconPosition::After),
+
 			$cancel
 				->icon('o-arrow-uturn-left')
 				->iconPosition(IconPosition::After),
+
 			...$this->publishActions(),
+
 			Actions\DeleteAction::make()
 				->icon('o-trash')
 				->iconPosition(IconPosition::After),

@@ -10,6 +10,8 @@ class PostPublished extends PostState
 	 */
 	public function unpublish(): bool
 	{
-		return $this->post->update(['published' => false]) || parent::unpublish();
+		$this->post->published = false;
+
+		return $this->post->save() || parent::unpublish();
 	}
 }

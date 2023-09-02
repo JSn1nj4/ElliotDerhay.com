@@ -10,9 +10,12 @@ class PostUnpublished extends PostState
 	 */
     public function publish(): bool
 	{
-        return $this->post->update([
-			'published' => true,
-			'published_at' => $this->post->published_at ?? now(),
-		]) || parent::publish();
+		$this->post->published = true;
+
+		if (!$this->post->published_at) {
+			$this->post->published_at = now();
+		}
+
+		return $this->post->save() || parent::publish();
     }
 }

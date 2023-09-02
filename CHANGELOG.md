@@ -1,6 +1,10 @@
 # Changelog
 
-## Version 2.5.1
+## Version 2.6.0
+
+### New
+
+- [#140][is_140]: Try State Pattern on posts
 
 ### Changes
 
