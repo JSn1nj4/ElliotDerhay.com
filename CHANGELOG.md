@@ -1,5 +1,11 @@
 # Changelog
 
+## Version 2.5.1
+
+### Changes
+
+- [#138][is_138]: Ended up just doing some related tidying + removing unused code... I like my buttons with icons.
+
 ## Version 2.5.0
 
 ### Changes

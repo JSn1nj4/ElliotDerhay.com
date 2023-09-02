@@ -4,7 +4,7 @@ namespace App\Filament\Traits;
 
 use Filament\Support\Enums\IconPosition;
 
-trait HasNewActionWithIcon
+trait HasCreateActionWithIcon
 {
 	protected function getActions(): array
 	{

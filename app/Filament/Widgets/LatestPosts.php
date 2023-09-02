@@ -4,14 +4,9 @@ namespace App\Filament\Widgets;
 
 use App\Models\Post;
 use App\Models\Scopes\PostPublishedScope;
-use Filament\Actions\DeleteAction;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Filament\Widgets\TableWidget as BaseWidget;
-use Illuminate\Contracts\Support\Htmlable;
-use Illuminate\Contracts\View\View;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Relations\Relation;
 
 class LatestPosts extends BaseWidget
 {
