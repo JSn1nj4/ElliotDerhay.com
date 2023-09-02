@@ -1,10 +1,18 @@
 # Changelog
 
-## Version 2.5.1
+## Version 2.6.0
+
+### New
+
+- [#140][is_140]: Try State Pattern on posts ([#145][pr_145])
 
 ### Changes
 
 - [#138][is_138]: Ended up just doing some related tidying + removing unused code... I like my buttons with icons.
+
+[is_138]: https://github.com/JSn1nj4/ElliotDerhay.com/issue/138
+[is_140]: https://github.com/JSn1nj4/ElliotDerhay.com/issue/140
+[pr_145]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/145
 
 ## Version 2.5.0
 
