@@ -50,9 +50,9 @@ class EditPost extends EditRecord
 				->modalCancelActionLabel('No')
 				->modalSubmitActionLabel('Yes')
 				->action(static function (Post $record): void {
-					$result = PublishPost::execute($record);
+					try {
+						$record->state()->publish();
 
-					if ($result->succeeded) {
 						Notification::make()
 							->title(__('Post published!'))
 							->actions([
@@ -63,14 +63,12 @@ class EditPost extends EditRecord
 							])
 							->success()
 							->send();
-
-						return;
+					} catch (\Exception $e) {
+						Notification::make()
+							->title($e->getMessage())
+							->danger()
+							->send();
 					}
-
-					Notification::make()
-						->title(__('Post failed to publish.'))
-						->danger()
-						->send();
 				}),
 			Actions\Action::make('Unpublish')
 				->visible(static fn (Post $record) => $record->published)
@@ -84,21 +82,19 @@ class EditPost extends EditRecord
 				->modalCancelActionLabel('No')
 				->modalSubmitActionLabel('Yes')
 				->action(static function (Post $record): void {
-					$result = UnpublishPost::execute($record);
+					try {
+						$record->state()->unpublish();
 
-					if ($result->succeeded) {
 						Notification::make()
 							->title(__('Post unpublished!'))
 							->success()
 							->send();
-
-						return;
+					} catch (\Exception $e) {
+						Notification::make()
+							->title($e->getMessage())
+							->danger()
+							->send();
 					}
-
-					Notification::make()
-						->title(__('Post failed to unpublish.'))
-						->danger()
-						->send();
 				}),
 		];
 	}
