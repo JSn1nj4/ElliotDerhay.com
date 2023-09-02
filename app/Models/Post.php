@@ -105,11 +105,6 @@ class Post extends ImageableModel implements SearchDisplayableContract, Categori
 		return Attribute::get(fn () => str($this->body)->words(20));
 	}
 
-	public function tags(): MorphToMany
-	{
-		return $this->morphToMany(Tag::class, 'taggable');
-	}
-
 	/**
 	 * Encapsulates shared logic for listing posts
 	 *
@@ -133,19 +128,6 @@ class Post extends ImageableModel implements SearchDisplayableContract, Categori
 			->withQueryString();
 	}
 
-	public function pageTitle(): Attribute
-	{
-		return Attribute::make(
-			get: fn () => $this->searchMeta?->search_title ?? $this->title,
-
-			// TODO: how can this be more efficient?
-			set: function (string $title) {
-				$meta = $this->searchMeta()->firstOrCreate();
-				$meta->update(['search_title' => $title]);
-			},
-		);
-	}
-
 	public function metaDescription(): Attribute
 	{
 		return Attribute::make(
@@ -161,6 +143,19 @@ class Post extends ImageableModel implements SearchDisplayableContract, Categori
 			set: function (string $description) {
 				$meta = $this->searchMeta()->firstOrCreate();
 				$meta->update(['search_description' => $description]);
+			},
+		);
+	}
+
+	public function pageTitle(): Attribute
+	{
+		return Attribute::make(
+			get: fn () => $this->searchMeta?->search_title ?? $this->title,
+
+			// TODO: how can this be more efficient?
+			set: function (string $title) {
+				$meta = $this->searchMeta()->firstOrCreate();
+				$meta->update(['search_title' => $title]);
 			},
 		);
 	}
@@ -185,6 +180,11 @@ class Post extends ImageableModel implements SearchDisplayableContract, Categori
 		$this->tags()->sync($tags->map(static fn (Tag $tag) => $tag->id)->all());
 
 		return $this;
+	}
+
+	public function tags(): MorphToMany
+	{
+		return $this->morphToMany(Tag::class, 'taggable');
 	}
 
 	public function toSitemapTag(): Url|string|array
