@@ -3,13 +3,12 @@
 namespace App\Filament\Resources\PostResource\Pages;
 
 use App\Filament\Resources\PostResource;
-use App\Filament\Traits\HasNewActionWithIcon;
-use Filament\Actions;
+use App\Filament\Traits\HasCreateActionWithIcon;
 use Filament\Resources\Pages\ListRecords;
 
 class ListPosts extends ListRecords
 {
-	use HasNewActionWithIcon;
+	use HasCreateActionWithIcon;
 
     protected static string $resource = PostResource::class;
 }

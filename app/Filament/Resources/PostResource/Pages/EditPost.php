@@ -2,8 +2,6 @@
 
 namespace App\Filament\Resources\PostResource\Pages;
 
-use App\Actions\PublishPost;
-use App\Actions\UnpublishPost;
 use App\Filament\Resources\PostResource;
 use App\Models\Post;
 use Filament\Actions;
@@ -29,7 +27,9 @@ class EditPost extends EditRecord
 				->iconPosition(IconPosition::After)
 				->url(route('blog.show', ['post' => $this->getRecord()]))
 				->openUrlInNewTab(),
+
 			...$this->publishActions(),
+
 			Actions\DeleteAction::make()
 				->icon('o-trash')
 				->iconPosition(IconPosition::After),
@@ -50,9 +50,9 @@ class EditPost extends EditRecord
 				->modalCancelActionLabel('No')
 				->modalSubmitActionLabel('Yes')
 				->action(static function (Post $record): void {
-					$result = PublishPost::execute($record);
+					try {
+						$record->state()->publish();
 
-					if ($result->succeeded) {
 						Notification::make()
 							->title(__('Post published!'))
 							->actions([
@@ -63,15 +63,14 @@ class EditPost extends EditRecord
 							])
 							->success()
 							->send();
-
-						return;
+					} catch (\Exception $e) {
+						Notification::make()
+							->title($e->getMessage())
+							->danger()
+							->send();
 					}
-
-					Notification::make()
-						->title(__('Post failed to publish.'))
-						->danger()
-						->send();
 				}),
+
 			Actions\Action::make('Unpublish')
 				->visible(static fn (Post $record) => $record->published)
 				->outlined()
@@ -84,21 +83,19 @@ class EditPost extends EditRecord
 				->modalCancelActionLabel('No')
 				->modalSubmitActionLabel('Yes')
 				->action(static function (Post $record): void {
-					$result = UnpublishPost::execute($record);
+					try {
+						$record->state()->unpublish();
 
-					if ($result->succeeded) {
 						Notification::make()
 							->title(__('Post unpublished!'))
 							->success()
 							->send();
-
-						return;
+					} catch (\Exception $e) {
+						Notification::make()
+							->title($e->getMessage())
+							->danger()
+							->send();
 					}
-
-					Notification::make()
-						->title(__('Post failed to unpublish.'))
-						->danger()
-						->send();
 				}),
 		];
 	}
@@ -111,10 +108,13 @@ class EditPost extends EditRecord
 			$save
 				->icon('o-circle-stack')
 				->iconPosition(IconPosition::After),
+
 			$cancel
 				->icon('o-arrow-uturn-left')
 				->iconPosition(IconPosition::After),
+
 			...$this->publishActions(),
+
 			Actions\DeleteAction::make()
 				->icon('o-trash')
 				->iconPosition(IconPosition::After),

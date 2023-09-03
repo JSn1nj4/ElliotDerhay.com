@@ -4,8 +4,11 @@ namespace App\Models;
 
 use App\Contracts\CategorizeableContract;
 use App\Contracts\SearchDisplayableContract;
+use App\Contracts\States\PostStateContract;
 use App\Enums\PerPage;
 use App\Models\Scopes\PostPublishedScope;
+use App\States\Posts\PostPublished;
+use App\States\Posts\PostUnpublished;
 use App\Traits\Categorizeable;
 use App\Traits\SearchDisplayable;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
@@ -64,6 +67,7 @@ class Post extends ImageableModel implements SearchDisplayableContract, Categori
 		SearchDisplayable;
 
 	protected $casts = [
+		'published' => 'boolean',
 		'published_at' => 'datetime',
 	];
 
@@ -75,39 +79,16 @@ class Post extends ImageableModel implements SearchDisplayableContract, Categori
 		'body',
 		'slug',
 		'title',
-		'published',
-		'published_at',
 	];
 
 	protected static function booted(): void
 	{
 		static::addGlobalScope(new PostPublishedScope());
-
-		static::creating(static function (self $post): void {
-			if ($post->published_at !== null) return;
-
-			if (!$post->published) return;
-
-			$post->published_at = now();
-		});
-
-		static::updating(static function (self $post): void {
-			if ($post->published_at !== null) return;
-
-			if (!$post->published) return;
-
-			$post->published_at = now();
-		});
 	}
 
 	public function excerpt(): Attribute
 	{
 		return Attribute::get(fn () => str($this->body)->words(20));
-	}
-
-	public function tags(): MorphToMany
-	{
-		return $this->morphToMany(Tag::class, 'taggable');
 	}
 
 	/**
@@ -133,19 +114,6 @@ class Post extends ImageableModel implements SearchDisplayableContract, Categori
 			->withQueryString();
 	}
 
-	public function pageTitle(): Attribute
-	{
-		return Attribute::make(
-			get: fn () => $this->searchMeta?->search_title ?? $this->title,
-
-			// TODO: how can this be more efficient?
-			set: function (string $title) {
-				$meta = $this->searchMeta()->firstOrCreate();
-				$meta->update(['search_title' => $title]);
-			},
-		);
-	}
-
 	public function metaDescription(): Attribute
 	{
 		return Attribute::make(
@@ -161,6 +129,19 @@ class Post extends ImageableModel implements SearchDisplayableContract, Categori
 			set: function (string $description) {
 				$meta = $this->searchMeta()->firstOrCreate();
 				$meta->update(['search_description' => $description]);
+			},
+		);
+	}
+
+	public function pageTitle(): Attribute
+	{
+		return Attribute::make(
+			get: fn () => $this->searchMeta?->search_title ?? $this->title,
+
+			// TODO: how can this be more efficient?
+			set: function (string $title) {
+				$meta = $this->searchMeta()->firstOrCreate();
+				$meta->update(['search_title' => $title]);
 			},
 		);
 	}
@@ -185,6 +166,24 @@ class Post extends ImageableModel implements SearchDisplayableContract, Categori
 		$this->tags()->sync($tags->map(static fn (Tag $tag) => $tag->id)->all());
 
 		return $this;
+	}
+
+	/**
+	 * @returns PostStateContract
+	 * @throws \Exception
+	 */
+	public function state(): PostStateContract
+	{
+		return match($this->published) {
+			true => new PostPublished($this),
+			false => new PostUnpublished($this),
+			default => throw new \Exception("Unresolvable `\$post->published` state. Expected: `true` or `false`. Actual: '{$this->published}'."),
+		};
+	}
+
+	public function tags(): MorphToMany
+	{
+		return $this->morphToMany(Tag::class, 'taggable');
 	}
 
 	public function toSitemapTag(): Url|string|array

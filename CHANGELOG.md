@@ -1,5 +1,22 @@
 # Changelog
 
+## Version 2.6.0
+
+### New
+
+- [#140][is_140]: Try State Pattern on posts ([#145][pr_145])
+- [#136][is_136]: Schema.org / Open Graph metadata for blog posts ([#147][pr_147])
+
+### Changes
+
+- [#138][is_138]: Ended up just doing some related tidying + removing unused code... I like my buttons with icons.
+
+[is_136]: https://github.com/JSn1nj4/ElliotDerhay.com/issue/136
+[is_138]: https://github.com/JSn1nj4/ElliotDerhay.com/issue/138
+[is_140]: https://github.com/JSn1nj4/ElliotDerhay.com/issue/140
+[pr_145]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/145
+[pr_147]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/147
+
 ## Version 2.5.0
 
 ### Changes

@@ -5,7 +5,6 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\CommandEventResource\Pages;
 use App\Models\CommandEvent;
 use Filament\Resources\Resource;
-use Filament\Resources\Table;
 use Filament\Tables;
 
 class CommandEventResource extends Resource

@@ -41,6 +41,7 @@ class ViewCommand extends ViewRecord
         return [
 			Actions\Action::make('Run')
 				->icon('o-command-line')
+				->iconPosition(IconPosition::After)
 				->color('warning')
 				->requiresConfirmation()
 				->outlined(true)

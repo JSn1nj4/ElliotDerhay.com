@@ -5,7 +5,6 @@ namespace App\Filament\Resources\CommandResource\Widgets;
 use App\Models\Command;
 use App\Models\CommandEvent;
 use Filament\Tables;
-use Filament\Tables\Table;
 use Filament\Widgets\TableWidget;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\Relation;
