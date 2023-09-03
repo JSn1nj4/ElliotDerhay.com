@@ -4,6 +4,17 @@
 @section('page-title', $post->page_title)
 @section('meta-description', $post->meta_description)
 
+@push('head-extras')
+	@include('partials.schema-markup', [
+	  'type' => 'Article',
+	  'name' => $post->title,
+	  'date' => $post->published_at->format('Y-m-d'),
+	  'image' => $post->image->url,
+	  'category' => $post->categories->first()?->title,
+	  'body' => $post->body,
+	])
+@endpush
+
 @section('blog')
 	@if($post->image)
 		<figure class="lightbox-trigger inline-block">
