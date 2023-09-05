@@ -2,9 +2,15 @@
 
 ## Version 2.6.1
 
+### New
+
+- [#150][is_150]: Implement X (Twitter) Card markup
+
 ### Fixes
 
 - Fix issue preventing sending pre-built lists of categories and tags to Categories and Tags blog widgets.
+
+[is_150]: https://github.com/JSn1nj4/ElliotDerhay.com/issue/150
 
 ## Version 2.6.0
 

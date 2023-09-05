@@ -13,6 +13,7 @@
 	  'category' => $post->categories->first()?->title,
 	  'body' => $post->body,
 	])
+	<x-x-meta :metadata="$post->xCardMeta()" />
 	@include('partials.metadata.open-graph-markup', [
   	'type' => 'article',
   	'title' => $post->title,
