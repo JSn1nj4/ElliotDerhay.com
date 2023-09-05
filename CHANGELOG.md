@@ -1,5 +1,11 @@
 # Changelog
 
+## Version 2.6.1
+
+### Fixes
+
+- Fix issue preventing sending pre-built lists of categories and tags to Categories and Tags blog widgets.
+
 ## Version 2.6.0
 
 ### New
