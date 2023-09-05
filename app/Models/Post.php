@@ -5,7 +5,10 @@ namespace App\Models;
 use App\Contracts\CategorizeableContract;
 use App\Contracts\SearchDisplayableContract;
 use App\Contracts\States\PostStateContract;
+use App\Contracts\XMetaContract;
+use App\DataTransferObjects\XMetaDTO;
 use App\Enums\PerPage;
+use App\Enums\XMetaCardType;
 use App\Models\Scopes\PostPublishedScope;
 use App\States\Posts\PostPublished;
 use App\States\Posts\PostUnpublished;
@@ -58,7 +61,7 @@ use Spatie\Sitemap\Tags\Url;
  * @property string $meta_description
  * @property \App\Models\SearchMeta $searchMeta
  */
-class Post extends ImageableModel implements SearchDisplayableContract, CategorizeableContract, Sitemapable
+class Post extends ImageableModel implements SearchDisplayableContract, CategorizeableContract, Sitemapable, XMetaContract
 {
 	// TODO: Implement Taggable stuff too
 	// TODO: Replace ImageableModel stuff with contract and trait ONLY
@@ -189,5 +192,15 @@ class Post extends ImageableModel implements SearchDisplayableContract, Categori
 	public function toSitemapTag(): Url|string|array
 	{
 		return route('blog.show', ['post' => $this]);
+	}
+
+	public function xCardMeta(): XMetaDTO
+	{
+		return new XMetaDTO(
+			xTitle: $this->page_title,
+			xDescription: $this->meta_description,
+			xCard: XMetaCardType::SummaryLargeImage,
+			xImage: $this->image->url,
+		);
 	}
 }
