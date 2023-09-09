@@ -1,0 +1,32 @@
+{
+  "tabWidth": 4,
+  "useTabs": true,
+  "semi": false,
+  "singleQuote": true,
+  "trailingComma": "all",
+  "bracketSpacing": false,
+  "jsxBracketSameLine": false,
+  "arrowParens": "avoid",
+  "proseWrap": "preserve",
+  "overrides": [
+    {
+      "files": [
+        "*.js",
+        "*.blade.php",
+        "*.vue"
+      ],
+      "options": {
+        "tabWidth": 2
+      }
+    },
+    {
+      "files": [
+        "*.{yml,yaml}"
+      ],
+      "options": {
+        "tabWidth": 2,
+        "useTabs": false
+      }
+    }
+  ]
+}
