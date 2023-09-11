@@ -4,25 +4,29 @@ namespace App\View\Components\Widget\Blog;
 
 use App\Enums\DisplayMode;
 use App\Models\Category;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Collection;
 use Illuminate\View\Component;
 
 class Categories extends Component
 {
 	public Collection|null $categories;
+
 	public DisplayMode $displayMode;
 
 	/**
 	 * Create a new component instance.
 	 * @param string|null $displayMode
-	 * @param \Illuminate\Database\Eloquent\Collection|null $categories
+	 * @param array|null $categories
 	 */
     public function __construct(
 		string|null $displayMode = null,
-		Collection|null $categories = null,
+		// `array` instead of `Collection` to prevent Laravel from
+		// injecting an empty Collection
+		array|null $categories = null,
 	)
 	{
+		if ($categories !== null) $this->categories = collect($categories);
+
 		try {
 			$this->displayMode = DisplayMode::from($displayMode);
 		} catch (\Throwable $throwable) {

@@ -1,0 +1,26 @@
+extends:
+  - eslint:recommended
+  - plugin:@typescript-eslint/recommended
+  - plugin:vue/vue3-recommended
+parser: vue-eslint-parser
+plugins:
+  - "@typescript-eslint"
+rules:
+  no-shadow: off
+  "@typescript-eslint/no-shadow":
+    - error
+  no-use-before-define: off
+  "@typescript-eslint/no-use-before-define":
+    - error
+  complexity:
+    - error
+    - 10
+  no-await-in-loop: warn
+  no-eval: error
+  no-implied-eval: error
+  prefer-promise-reject-errors: warn
+env:
+  browser: true
+parserOptions:
+  parser: "@babel/eslint-parser"
+  sourceType: module

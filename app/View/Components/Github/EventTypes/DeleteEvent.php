@@ -24,6 +24,8 @@ class DeleteEvent extends BaseComponent
 			$event
 		);
 
+		if ($this->refNull($this->event->source)) return;
+
 		$this->preposition = 'from';
 		$this->setRefName($this->event->source);
 		$this->setRefUrl($this->repoUrl());

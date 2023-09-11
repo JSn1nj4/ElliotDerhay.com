@@ -3,19 +3,18 @@
 namespace App\View\Components\Widget\Blog;
 
 use App\Models\Tag;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Collection;
 use Illuminate\View\Component;
 
 class Tags extends Component
 {
-	public Collection $tags;
+	public Collection|null $tags;
 
 	/**
 	 * Create a new component instance.
 	 *
 	 * @param string $sortBy
-	 * @param \Illuminate\Database\Eloquent\Collection|null $tags
+	 * @param array|null $tags
 	 * @param int $limit
 	 *
 	 * @todo: map 'sortBy' values to "orderBy" methods
@@ -23,10 +22,14 @@ class Tags extends Component
 	 */
     public function __construct(
 		public string $sortBy = 'title',
-		Collection|null $tags = null,
+		// `array` instead of `Collection` to prevent Laravel from
+		// injecting an empty Collection
+		array|null $tags = null,
 		public int $limit = 10,
 	)
 	{
+		if ($tags !== null) $this->tags = collect($tags);
+
 		$this->sortBy = match($this->sortBy) {
 			'count' => 'count',
 			default => 'title',
