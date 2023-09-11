@@ -10,15 +10,19 @@ use App\Enums\XMetaCardType;
 class XMetaDTO
 {
 	public function __construct(
-		public string $xTitle,
-		public string $xDescription,
+		public string             $xTitle,
+		public string             $xDescription,
 		public XMetaCardType|null $xCard = null,
-		public string|null $xSite = null,
-		public string|null $xCreator = null,
-		public string|null $xImage = null,
-		public string|null $xImageAlt = null,
-	) {
-		$this->xCard ??= XMetaCardType::from(config('markup.x.card_type'));
+		public string|null        $xSite = null,
+		public string|null        $xCreator = null,
+		public string|null        $xImage = null,
+		public string|null        $xImageAlt = null,
+	)
+	{
+		$this->xCard = match ($this->xImage) {
+			null => XMetaCardType::Summary,
+			default => XMetaCardType::from(config('markup.x.card_type')),
+		};
 		$this->xSite ??= config('markup.x.username');
 		$this->xCreator ??= config('markup.x.username');
 		$this->xImage ??= config('markup.x.image');
