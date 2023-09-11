@@ -24,12 +24,10 @@ class CreateEvent extends BaseComponent
 			$event
 		);
 
-		$this->hasGitRef = $this->refNotNull($this->event->source);
+		if ($this->refNull($this->event->source)) return;
 
-		if($this->hasGitRef) {
-			$this->preposition = 'at';
-			$this->setRefName($this->event->source);
-			$this->setRefUrl($this->repoUrl());
-		}
+		$this->preposition = 'at';
+		$this->setRefName($this->event->source);
+		$this->setRefUrl($this->repoUrl());
 	}
 }

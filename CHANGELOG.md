@@ -10,8 +10,11 @@
 ### Fixes
 
 - Fix issue preventing sending pre-built lists of categories and tags to Categories and Tags blog widgets.
+- [#152][is_152]: Fix incorrect rendering of GitHub Create and Delete events
 
-[is_150]: https://github.com/JSn1nj4/ElliotDerhay.com/issue/150
+[is_150]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/150
+
+[is_152]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/152
 
 [pr_151]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/151
 
@@ -28,11 +31,11 @@ Add Twitter Card markup for posts (#151)
 
 - [#138][is_138]: Ended up just doing some related tidying + removing unused code... I like my buttons with icons.
 
-[is_136]: https://github.com/JSn1nj4/ElliotDerhay.com/issue/136
+[is_136]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/136
 
-[is_138]: https://github.com/JSn1nj4/ElliotDerhay.com/issue/138
+[is_138]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/138
 
-[is_140]: https://github.com/JSn1nj4/ElliotDerhay.com/issue/140
+[is_140]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/140
 
 [pr_145]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/145
 
@@ -49,9 +52,9 @@ Add Twitter Card markup for posts (#151)
 - [#143][is_143]: Remove leftover 'published' call from sitemap config
 - Dang it Cloudflare... Trust 'all proxies', since Cloudflare's IPs can change too much...
 
-[is_114]: https://github.com/JSn1nj4/ElliotDerhay.com/issue/114
+[is_114]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/114
 
-[is_143]: https://github.com/JSn1nj4/ElliotDerhay.com/issue/143
+[is_143]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/143
 
 [pr_142]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/142
 
@@ -61,7 +64,7 @@ Add Twitter Card markup for posts (#151)
 
 - [#139][is_139]: Fix leaking draft posts ([#141][pr_141])
 
-[is_139]: https://github.com/JSn1nj4/ElliotDerhay.com/issue/139
+[is_139]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/139
 
 [pr_141]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/141
 
@@ -79,9 +82,9 @@ Add Twitter Card markup for posts (#151)
 - Add missing analytics tracker script
 - [#137][is_137]: Fix sitemap including unpublished posts
 
-[is_134]: https://github.com/JSn1nj4/ElliotDerhay.com/issue/134
+[is_134]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/134
 
-[is_137]: https://github.com/JSn1nj4/ElliotDerhay.com/issue/137
+[is_137]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/137
 
 ## Version 2.4.4
 
@@ -95,7 +98,7 @@ Add Twitter Card markup for posts (#151)
 - Add icons to action buttons
 - Post status as colorized badges
 
-[is_133]: https://github.com/JSn1nj4/ElliotDerhay.com/issue/133
+[is_133]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/133
 
 ## Version 2.4.3
 
@@ -109,9 +112,9 @@ Add Twitter Card markup for posts (#151)
 - [#131][is_131]: Fix EditPost save issue
 - [#132][is_132]: Fix dark mode switcher
 
-[is_131]: https://github.com/JSn1nj4/ElliotDerhay.com/issue/131
+[is_131]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/131
 
-[is_132]: https://github.com/JSn1nj4/ElliotDerhay.com/issue/132
+[is_132]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/132
 
 ## Version 2.4.2
 
@@ -144,13 +147,13 @@ Add Twitter Card markup for posts (#151)
 - Make project startup script more bulletproof
 - Fix font issue caused by Tailwind config ([#128][is_128])
 
-[is_113]: https://github.com/JSn1nj4/ElliotDerhay.com/issue/113
+[is_113]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/113
 
 [pr_125]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/125
 
-[is_128]: https://github.com/JSn1nj4/ElliotDerhay.com/issue/128
+[is_128]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/128
 
-[is_129]: https://github.com/JSn1nj4/ElliotDerhay.com/issue/129
+[is_129]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/129
 
 [pr_130]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/130
 
