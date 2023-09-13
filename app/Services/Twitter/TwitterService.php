@@ -77,7 +77,7 @@ class TwitterService implements SocialMediaService
 
 		return with(
 			Http::withHeaders($endpoint->headers),
-			fn(PendingRequest $pendingRequest): PendingRequest => match (true) {
+			fn (PendingRequest $pendingRequest): PendingRequest => match (true) {
 				in_array($endpoint::class, $endpoint_map['asForm']) => $pendingRequest->asForm(),
 				default => $pendingRequest,
 			}
@@ -152,14 +152,14 @@ class TwitterService implements SocialMediaService
 				'include_rts' => $reposts,
 				'screen_name' => $username,
 				'since_id' => $since,
-			])->reject(fn($value, $key) => is_null($value))
+			])->reject(fn ($value, $key) => is_null($value))
 				->toArray())
 		);
 
 		$this->checkForErrors($response);
 
 		return collect($response->json())
-			->transform(fn($tweet) => new TweetDTO(
+			->transform(fn ($tweet) => new TweetDTO(
 				id: $tweet['id'],
 				user: TwitterUserDTO::fromArray($tweet['user']),
 				body: $tweet['text'],
@@ -187,7 +187,7 @@ class TwitterService implements SocialMediaService
 		$this->checkForErrors($response);
 
 		return collect($response->json())
-			->transform(fn($user) => new TwitterUserDTO(
+			->transform(fn ($user) => new TwitterUserDTO(
 				id: $user['id'],
 				name: $user['name'],
 				screen_name: $user['screen_name'],
@@ -200,7 +200,7 @@ class TwitterService implements SocialMediaService
 		return new OperationResult(
 			succeeded: false,
 			message: __(":method method is not implemented.", [
-				'method' => "`{$this::class}::post`",
+				'method' => $this::class . "::post",
 			]),
 		);
 	}
