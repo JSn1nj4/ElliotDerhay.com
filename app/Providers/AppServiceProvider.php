@@ -12,6 +12,7 @@ use App\Contracts\SocialMediaService;
 use App\Models\Token;
 use App\Services\Github\GithubService;
 use App\Services\Twitter\TwitterService;
+use App\Services\X\XService;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 
@@ -26,7 +27,8 @@ class AppServiceProvider extends ServiceProvider
 		AddCategoryToPost::class => AddCategoryToPost::class,
 		AddTagToPost::class => AddTagToPost::class,
 		GitHostService::class => GithubService::class,
-		SocialMediaService::class => TwitterService::class,
+		SocialMediaService::class => XService::class,
+		TwitterService::class => TwitterService::class,
 		HashPassword::class => HashPassword::class,
 	];
 
@@ -39,7 +41,7 @@ class AppServiceProvider extends ServiceProvider
 	{
 		$this->app->when(TwitterService::class)
 			->needs(Token::class)
-			->give(fn () => Token::whereRaw("LOWER(service) LIKE '%twitter%'")
+			->give(static fn () => Token::whereRaw("LOWER(service) LIKE '%twitter%'")
 				->latest()
 				->valid()
 				->first());
@@ -52,6 +54,6 @@ class AppServiceProvider extends ServiceProvider
 	 */
 	public function boot(): void
 	{
-        if (app()->isProduction()) URL::forceScheme('https');
+		if (app()->isProduction()) URL::forceScheme('https');
 	}
 }

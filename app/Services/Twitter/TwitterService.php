@@ -3,6 +3,8 @@
 namespace App\Services\Twitter;
 
 use App\Contracts\SocialMediaService;
+use App\DataTransferObjects\OperationResult;
+use App\DataTransferObjects\SocialPostDTO;
 use App\DataTransferObjects\TweetDTO;
 use App\DataTransferObjects\TwitterUserDTO;
 use App\Features\TwitterFeed;
@@ -75,15 +77,15 @@ class TwitterService implements SocialMediaService
 
 		return with(
 			Http::withHeaders($endpoint->headers),
-			fn (PendingRequest $pendingRequest): PendingRequest => match(true) {
+			fn(PendingRequest $pendingRequest): PendingRequest => match (true) {
 				in_array($endpoint::class, $endpoint_map['asForm']) => $pendingRequest->asForm(),
 				default => $pendingRequest,
 			}
 		)
-		->{Str::lower($endpoint->method->value)}(
-			$endpoint->url(),
-			$endpoint->params
-		);
+			->{Str::lower($endpoint->method->value)}(
+				$endpoint->url(),
+				$endpoint->params
+			);
 	}
 
 	/**
@@ -133,11 +135,11 @@ class TwitterService implements SocialMediaService
 	 */
 	public function getPosts(string $username, string|null $since = null, bool $reposts = true, int|null $count = null): Collection
 	{
-		if(is_int($count) && $count < 1) {
+		if (is_int($count) && $count < 1) {
 			throw new Exception("'\$count' value cannot be below or equal to 0.");
 		}
 
-		if(is_int($count) && $count > 3200) {
+		if (is_int($count) && $count > 3200) {
 			throw new Exception("'\$count' value cannot be greater than 3200.");
 		}
 
@@ -150,14 +152,14 @@ class TwitterService implements SocialMediaService
 				'include_rts' => $reposts,
 				'screen_name' => $username,
 				'since_id' => $since,
-			])->reject(fn ($value, $key) => is_null($value))
-			->toArray())
+			])->reject(fn($value, $key) => is_null($value))
+				->toArray())
 		);
 
 		$this->checkForErrors($response);
 
 		return collect($response->json())
-			->transform(fn ($tweet) => new TweetDTO(
+			->transform(fn($tweet) => new TweetDTO(
 				id: $tweet['id'],
 				user: TwitterUserDTO::fromArray($tweet['user']),
 				body: $tweet['text'],
@@ -185,11 +187,21 @@ class TwitterService implements SocialMediaService
 		$this->checkForErrors($response);
 
 		return collect($response->json())
-			->transform(fn ($user) => new TwitterUserDTO(
+			->transform(fn($user) => new TwitterUserDTO(
 				id: $user['id'],
 				name: $user['name'],
 				screen_name: $user['screen_name'],
 				profile_image_url_https: $user['profile_image_url_https'],
 			));
+	}
+
+	public function post(SocialPostDTO $postDTO): OperationResult
+	{
+		return new OperationResult(
+			succeeded: false,
+			message: __(":method method is not implemented.", [
+				'method' => "`{$this::class}::post`",
+			]),
+		);
 	}
 }
