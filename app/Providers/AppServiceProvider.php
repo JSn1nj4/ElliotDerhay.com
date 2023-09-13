@@ -9,6 +9,7 @@ use App\Actions\LogCommandEvent;
 use App\Actions\LogUserLogin;
 use App\Contracts\GitHostService;
 use App\Contracts\SocialMediaService;
+use App\DataTransferObjects\TokenDTO;
 use App\Models\Token;
 use App\Services\Github\GithubService;
 use App\Services\Twitter\TwitterService;
@@ -27,7 +28,6 @@ class AppServiceProvider extends ServiceProvider
 		AddCategoryToPost::class => AddCategoryToPost::class,
 		AddTagToPost::class => AddTagToPost::class,
 		GitHostService::class => GithubService::class,
-		SocialMediaService::class => XService::class,
 		TwitterService::class => TwitterService::class,
 		HashPassword::class => HashPassword::class,
 	];
@@ -45,6 +45,13 @@ class AppServiceProvider extends ServiceProvider
 				->latest()
 				->valid()
 				->first());
+
+		$this->app->singletonIf(
+			SocialMediaService::class,
+			static fn () => new XService(
+				new TokenDTO(config('services.x.token'))
+			),
+		);
 	}
 
 	/**

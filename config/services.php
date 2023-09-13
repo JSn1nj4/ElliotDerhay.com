@@ -40,6 +40,10 @@ return [
 	'github' => [
 		'model' => \App\Models\GithubEvent::class,
 		'token' => env('GITHUB_API_TOKEN'),
-	]
+	],
+
+	'x' => [
+		'token' => env('X_BEARER_TOKEN'),
+	],
 
 ];

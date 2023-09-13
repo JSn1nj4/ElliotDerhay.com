@@ -5,13 +5,19 @@ namespace App\Services\X;
 use App\Contracts\SocialMediaService;
 use App\DataTransferObjects\OperationResult;
 use App\DataTransferObjects\SocialPostDTO;
+use App\DataTransferObjects\TokenDTO;
 use Illuminate\Support\Collection;
 
 class XService implements SocialMediaService
 {
 
+	public function __construct(TokenDTO $token)
+	{
+
+	}
+
 	/**
-	 * This method is not implemented due to Twitter/X implementing tight API limitations on free integrations when the new plans were introduced.
+	 * This method is not implemented due to Twitter/X implementing tight API limitations on free integrations when the ne    w plans were introduced.
 	 * @unstable
 	 * @param string $username
 	 * @param string|null $since
@@ -26,6 +32,11 @@ class XService implements SocialMediaService
 
 	public function post(SocialPostDTO $postDTO): OperationResult
 	{
-		// TODO: Implement post() method.
+		return new OperationResult(
+			succeeded: false,
+			message: __(":method method is not implemented.", [
+				'method' => $this::class . "::post",
+			]),
+		);
 	}
 }
