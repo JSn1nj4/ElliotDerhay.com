@@ -8,8 +8,7 @@ use App\Actions\HashPassword;
 use App\Actions\LogCommandEvent;
 use App\Actions\LogUserLogin;
 use App\Contracts\GitHostService;
-use App\Contracts\SocialMediaService;
-use App\DataTransferObjects\TokenDTO;
+use App\DataTransferObjects\XApiCredentials;
 use App\Models\Token;
 use App\Services\Github\GithubService;
 use App\Services\Twitter\TwitterService;
@@ -39,6 +38,18 @@ class AppServiceProvider extends ServiceProvider
 	 */
 	public function register(): void
 	{
+		$this->app->singletonIf(
+			XApiCredentials::class,
+			static fn () => new XApiCredentials(
+				account_id: config('x.account_id'),
+				access_token: config('x.access_token'),
+				access_token_secret: config('x.access_token_secret'),
+				consumer_key: config('x.api_key'),
+				consumer_secret: config('x.api_secret'),
+				bearer_token: config('x.bearer_token'),
+			),
+		);
+
 		$this->app->when(TwitterService::class)
 			->needs(Token::class)
 			->give(static fn () => Token::whereRaw("LOWER(service) LIKE '%twitter%'")
@@ -47,10 +58,8 @@ class AppServiceProvider extends ServiceProvider
 				->first());
 
 		$this->app->singletonIf(
-			SocialMediaService::class,
-			static fn () => new XService(
-				new TokenDTO(config('services.x.token'))
-			),
+			XService::class,
+			static fn () => new XService(app(XApiCredentials::class)),
 		);
 	}
 

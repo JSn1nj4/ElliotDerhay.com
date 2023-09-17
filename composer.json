@@ -13,6 +13,7 @@
         "laravel/tinker": "^2.8",
         "league/flysystem-aws-s3-v3": "^3.12",
         "league/flysystem-path-prefixing": "^3.10",
+        "noweh/twitter-api-v2-php": "^3.4",
         "sentry/sentry-laravel": "^3.3",
         "spatie/laravel-markdown": "^2.2",
         "spatie/laravel-sitemap": "^6.3"
