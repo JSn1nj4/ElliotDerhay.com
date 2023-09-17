@@ -41,12 +41,12 @@ class AppServiceProvider extends ServiceProvider
 		$this->app->singletonIf(
 			XApiCredentials::class,
 			static fn () => new XApiCredentials(
-				account_id: config('x.account_id'),
-				access_token: config('x.access_token'),
-				access_token_secret: config('x.access_token_secret'),
-				consumer_key: config('x.api_key'),
-				consumer_secret: config('x.api_secret'),
-				bearer_token: config('x.bearer_token'),
+				account_id: config('services.x.account_id'),
+				access_token: config('services.x.access_token'),
+				access_token_secret: config('services.x.access_token_secret'),
+				consumer_key: config('services.x.api_key'),
+				consumer_secret: config('services.x.api_secret'),
+				bearer_token: config('services.x.bearer_token'),
 			),
 		);
 
