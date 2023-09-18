@@ -51,6 +51,7 @@ return [
 		'bearer_token' => env('X_BEARER_TOKEN'),
 		'client_id' => env('X_CLIENT_ID'),
 		'client_secret' => env('X_CLIENT_SECRET'),
+		'username' => env('X_USERNAME'),
 	],
 
 ];

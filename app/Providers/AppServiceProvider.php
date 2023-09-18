@@ -12,7 +12,7 @@ use App\DataTransferObjects\XApiCredentials;
 use App\Models\Token;
 use App\Services\Github\GithubService;
 use App\Services\Twitter\TwitterService;
-use App\Services\X\XService;
+use App\Services\XService;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 
