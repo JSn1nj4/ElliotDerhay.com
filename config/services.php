@@ -40,6 +40,18 @@ return [
 	'github' => [
 		'model' => \App\Models\GithubEvent::class,
 		'token' => env('GITHUB_API_TOKEN'),
-	]
+	],
+
+	'x' => [
+		'access_token' => env('X_ACCESS_TOKEN'),
+		'access_token_secret' => env('X_ACCESS_TOKEN_SECRET'),
+		'account_id' => (int)env('X_ACCOUNT_ID'),
+		'api_key' => env('X_API_KEY'),
+		'api_secret' => env('X_API_SECRET'),
+		'bearer_token' => env('X_BEARER_TOKEN'),
+		'client_id' => env('X_CLIENT_ID'),
+		'client_secret' => env('X_CLIENT_SECRET'),
+		'username' => env('X_USERNAME'),
+	],
 
 ];
