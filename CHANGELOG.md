@@ -1,27 +1,36 @@
 # Changelog
 
+## Version 2.6.2
+
+### New
+
+- [#135][is_135]: Post to X when publishing posts ([#155][pr_155])
+
+[is_135]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/135
+
+[pr_155]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/155
+
+### Fixes
+
+- Tweak formatting rules
+
 ## Version 2.6.1
 
 ### New
 
 - [#150][is_150]: Implement X (Twitter) Card markup ([#151][pr_151])
 - Finally configure ESLint and Prettier for automatic formatting
-- [#135][is_135]: Post to X when publishing posts ([#155][pr_155])
 
 ### Fixes
 
 - Fix issue preventing sending pre-built lists of categories and tags to Categories and Tags blog widgets.
 - [#152][is_152]: Fix incorrect rendering of GitHub Create and Delete events
 
-[is_135]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/135
-
 [is_150]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/150
 
 [is_152]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/152
 
 [pr_151]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/151
-
-[pr_155]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/155
 
 Add Twitter Card markup for posts (#151)
 
