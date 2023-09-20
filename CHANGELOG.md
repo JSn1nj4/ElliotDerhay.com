@@ -1,5 +1,19 @@
 # Changelog
 
+## Version 2.6.2
+
+### New
+
+- [#135][is_135]: Post to X when publishing posts ([#155][pr_155])
+
+[is_135]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/135
+
+[pr_155]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/155
+
+### Fixes
+
+- Tweak formatting rules
+
 ## Version 2.6.1
 
 ### New
