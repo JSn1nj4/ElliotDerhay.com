@@ -2,13 +2,22 @@
 
 namespace App\DataTransferObjects;
 
+use Illuminate\Support\Str;
+use Illuminate\Support\Stringable;
+
 readonly class SocialPostDTO
 {
 	public function __construct(
 		public string $text,
 		public array  $links = [],
+		public array  $tags = [],
 	)
 	{
+	}
+
+	public function __toString(): string
+	{
+		$this->stringify();
 	}
 
 	/**
@@ -17,13 +26,26 @@ readonly class SocialPostDTO
 	 */
 	public function stringify(): string
 	{
-		return collect($this->links)
-			->map(static fn ($item, $key) => match (true) {
-				is_numeric($key) => $item,
-				default => "{$key}: {$item}",
-			})
-			->reduce(static function ($str, $link) {
-				return "{$str}\n{$link}";
-			}, $this->text);
+		return implode("\n", [
+			$this->text,
+
+			// Format tags correctly
+			collect($this->tags)
+				->transform(static fn (string $item) => str($item)
+					->lower()
+					->pipe(static function (Stringable $item) {
+						return preg_replace('/[^A-Za-z0-9]/', '', $item);
+					})
+					->lower()
+					->prepend('#')
+				)
+				->implode(' '),
+
+			// Format and filter links
+			collect($this->links)
+				->filter(static fn (string $item) => Str::isUrl($item))
+				->transform(static fn (string $item) => Str::lower($item))
+				->implode("\n")
+		]);
 	}
 }
