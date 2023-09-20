@@ -39,10 +39,14 @@ class XService implements SocialMediaService
 	public function post(SocialPostDTO $postDTO): OperationResult
 	{
 		try {
+			// todo: implement caching
 			$result = $this->client
 				->tweet()
 				->create()
-				->performRequest(['text' => $postDTO->stringify()]);
+				->performRequest(
+					postData: ['text' => $postDTO->stringify()],
+					withHeaders: true
+				);
 
 			if ($result?->data?->id && $result?->data?->text) {
 				$message = "Successfully posted to X!";
@@ -52,6 +56,9 @@ class XService implements SocialMediaService
 					$message,
 					"https://x.com/{$this->username}/status/{$result->data->id}"
 				));
+
+				// todo: remove once caching figured out
+				\Log::info("{$result->headers}\n");
 
 				return new OperationResult(
 					succeeded: true,

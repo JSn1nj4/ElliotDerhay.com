@@ -17,7 +17,7 @@ readonly class SocialPostDTO
 
 	public function __toString(): string
 	{
-		$this->stringify();
+		return $this->stringify();
 	}
 
 	/**
