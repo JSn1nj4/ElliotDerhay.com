@@ -4,8 +4,10 @@ namespace App\Models;
 
 use App\Contracts\CategorizeableContract;
 use App\Contracts\SearchDisplayableContract;
+use App\Contracts\SocialPostable;
 use App\Contracts\States\PostStateContract;
 use App\Contracts\XMetaContract;
+use App\DataTransferObjects\SocialPostDTO;
 use App\DataTransferObjects\XMetaDTO;
 use App\Enums\PerPage;
 use App\Enums\XMetaCardType;
@@ -14,12 +16,12 @@ use App\States\Posts\PostPublished;
 use App\States\Posts\PostUnpublished;
 use App\Traits\Categorizeable;
 use App\Traits\SearchDisplayable;
-use Illuminate\Database\Eloquent\Relations\MorphToMany;
-use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\AbstractPaginator;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Spatie\Sitemap\Contracts\Sitemapable;
 use Spatie\Sitemap\Tags\Url;
@@ -33,7 +35,7 @@ use Spatie\Sitemap\Tags\Url;
  * @property string $body
  * @property string $excerpt
  * @property Image|null $image
- * @property Category[] $categories
+ * @property \Illuminate\Database\Eloquent\Collection|Category[] $categories
  * @property \Illuminate\Database\Eloquent\Collection|Tag[] $tags
  * @property boolean $published
  * @property Carbon $created_at
@@ -61,11 +63,11 @@ use Spatie\Sitemap\Tags\Url;
  * @property string $meta_description
  * @property \App\Models\SearchMeta $searchMeta
  */
-class Post extends ImageableModel implements SearchDisplayableContract, CategorizeableContract, Sitemapable, XMetaContract
+class Post extends ImageableModel implements SearchDisplayableContract, CategorizeableContract, Sitemapable, XMetaContract, SocialPostable
 {
 	// TODO: Implement Taggable stuff too
 	// TODO: Replace ImageableModel stuff with contract and trait ONLY
-    use Categorizeable,
+	use Categorizeable,
 		HasFactory,
 		SearchDisplayable;
 
@@ -94,6 +96,25 @@ class Post extends ImageableModel implements SearchDisplayableContract, Categori
 		return Attribute::get(fn () => str($this->body)->words(20));
 	}
 
+	public function getPostable(): SocialPostDTO
+	{
+		return new SocialPostDTO(
+			text: "I wrote a thing!",
+
+			links: [
+				route('blog.show', ['post' => $this])
+			],
+
+			tags: collect([
+				$this->categories->map(static fn (Category $category) => $category->title)->all(),
+				$this->tags->map(static fn (Tag $tag) => $tag->title)->all(),
+			])
+				->flatten()
+				->unique()
+				->all(),
+		);
+	}
+
 	/**
 	 * Encapsulates shared logic for listing posts
 	 *
@@ -105,8 +126,8 @@ class Post extends ImageableModel implements SearchDisplayableContract, Categori
 	public static function index(Request $request): AbstractPaginator
 	{
 		return self::when($request?->get('category'), static function ($query, $category_id): void {
-				$query->whereRelation('categories', 'category_id', $category_id);
-			})
+			$query->whereRelation('categories', 'category_id', $category_id);
+		})
 			->when($request?->get('tag'), static function ($query, $tag_id): void {
 				$query->whereRelation('tags', 'tag_id', $tag_id);
 			})
@@ -177,7 +198,7 @@ class Post extends ImageableModel implements SearchDisplayableContract, Categori
 	 */
 	public function state(): PostStateContract
 	{
-		return match($this->published) {
+		return match ($this->published) {
 			true => new PostPublished($this),
 			false => new PostUnpublished($this),
 			default => throw new \Exception("Unresolvable `\$post->published` state. Expected: `true` or `false`. Actual: '{$this->published}'."),
