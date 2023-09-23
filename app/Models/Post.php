@@ -220,8 +220,8 @@ class Post extends ImageableModel implements SearchDisplayableContract, Categori
 		return new XMetaDTO(
 			xTitle: $this->page_title,
 			xDescription: $this->meta_description,
-			xCard: XMetaCardType::SummaryLargeImage,
-			xImage: $this->image->url,
+			xCard: $this->image !== null ? XMetaCardType::SummaryLargeImage : XMetaCardType::Summary,
+			xImage: $this->image?->url,
 		);
 	}
 }
