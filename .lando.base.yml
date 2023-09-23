@@ -19,11 +19,11 @@ services:
       - curl -sL https://deb.nodesource.com/setup_20.x | bash -
       - apt-get update -y
       - apt-get install -y cron nodejs
-      - corepack enable
+      #- corepack enable
     run_as_root:
       - service cron start
     build:
-      - yarn set version stable
+      #- yarn set version stable
       - yarn
     run:
       - crontab /app/config/local/cron

@@ -1,5 +1,12 @@
 # Changelog
 
+## Version 2.6.3
+
+### Fixes
+
+- Fix XMetaDTO usage for posts that have no image
+- Revert from Yarn Berry to Yarn 1.22.x to fix issue with Shiki code highlighting
+
 ## Version 2.6.2
 
 ### New
