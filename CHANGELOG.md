@@ -9,6 +9,7 @@
 ### Changes
 
 - Update to Node install process in Lando
+- Dump dedicated phpMyAdmin container for port-forwarding DB container
 
 ### Fixes
 
