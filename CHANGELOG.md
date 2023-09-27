@@ -6,6 +6,10 @@
 
 - Update to Node install process in Lando
 
+### Fixes
+
+- Mitigate random ImageFactory failures
+
 ## Version 2.6.3
 
 ### Fixes
