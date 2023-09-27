@@ -1,5 +1,11 @@
 # Changelog
 
+## Version 2.6.4
+
+### Changes
+
+- Update to Node install process in Lando
+
 ## Version 2.6.3
 
 ### Fixes
