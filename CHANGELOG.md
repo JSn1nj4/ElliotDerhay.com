@@ -2,6 +2,10 @@
 
 ## Version 2.6.4
 
+### New
+
+- Add a PublishPostToX Pennant feature for more control over posting condition
+
 ### Changes
 
 - Update to Node install process in Lando
