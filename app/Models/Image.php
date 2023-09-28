@@ -21,6 +21,7 @@ use Illuminate\Pagination\AbstractPaginator;
  * @property string $disk
  * @property string $file_hash
  * @property string|null $collection
+ * @property string|null $caption
  * @property int $size
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
@@ -50,7 +51,7 @@ use Illuminate\Pagination\AbstractPaginator;
  */
 class Image extends Model
 {
-    use HasFactory;
+	use HasFactory;
 
 	/**
 	 * @var array
