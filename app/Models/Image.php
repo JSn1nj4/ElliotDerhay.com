@@ -59,6 +59,7 @@ class Image extends Model
 	protected $fillable = [
 		'name',
 		'file_name',
+		'caption',
 		'mime_type',
 		'path',
 		'disk',
