@@ -27,6 +27,9 @@
 	@if($post->image)
 		<figure class="lightbox-trigger inline-block">
 			<img src="{{ $post->image->url }}" class="block rounded-lg" alt="">
+			@if($post->image->caption)
+				<figcaption class='my-2 italic'>{{ $post->image->caption }}</figcaption>
+			@endif
 		</figure>
 	@endif
 

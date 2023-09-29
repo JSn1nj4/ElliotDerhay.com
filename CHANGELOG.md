@@ -5,6 +5,7 @@
 ### New
 
 - Add a PublishPostToX Pennant feature for more control over posting condition
+- Add an optional image caption for post images
 
 ### Changes
 
