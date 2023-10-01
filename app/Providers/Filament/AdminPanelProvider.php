@@ -12,6 +12,7 @@ use Filament\Pages;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
+use Filament\Support\Facades\FilamentView;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
@@ -19,9 +20,20 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Illuminate\View\View;
 
 class AdminPanelProvider extends PanelProvider
 {
+    public function register(): void
+    {
+        parent::register();
+
+        FilamentView::registerRenderHook(
+            'panels::body.end',
+            static fn(): View => view('filament.partials.footer-scripts'),
+        );
+    }
+
     public function panel(Panel $panel): Panel
     {
         return $panel
@@ -29,39 +41,39 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login(Login::class)
-			->globalSearchKeyBindings(['command+k', 'ctrl+k'])
-			->maxContentWidth('full')
+            ->globalSearchKeyBindings(['command+k', 'ctrl+k'])
+            ->maxContentWidth('full')
             ->colors([
-				'primary' => [
-					50 => '#eafff7',
-					100 => '#cdfeeb',
-					200 => '#a0fadc',
-					300 => '#63f2ca',
-					400 => '#25e2b3',
-					500 => '#00c49a',
-					600 => '#00a481',
-					700 => '#00836b',
-					800 => '#006756',
-					900 => '#005548',
-					950 => '#00302a',
-				],
-				'danger' => Color::Rose,
+                'primary' => [
+                    50 => '#eafff7',
+                    100 => '#cdfeeb',
+                    200 => '#a0fadc',
+                    300 => '#63f2ca',
+                    400 => '#25e2b3',
+                    500 => '#00c49a',
+                    600 => '#00a481',
+                    700 => '#00836b',
+                    800 => '#006756',
+                    900 => '#005548',
+                    950 => '#00302a',
+                ],
+                'danger' => Color::Rose,
             ])
-			->favicon(asset_url("avatar.png"))
+            ->favicon(asset_url("avatar.png"))
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
-			->navigationGroups([
-				NavigationGroup::make('Content'),
-				NavigationGroup::make('Administration'),
-			])
+            ->navigationGroups([
+                NavigationGroup::make('Content'),
+                NavigationGroup::make('Administration'),
+            ])
             ->pages([
                 Pages\Dashboard::class,
             ])
             ->widgets([
                 \Filament\Widgets\AccountWidget::class,
                 \Filament\Widgets\FilamentInfoWidget::class,
-				Widgets\LatestPosts::class,
-				Widgets\CommandLog::class,
+                Widgets\LatestPosts::class,
+                Widgets\CommandLog::class,
             ])
             ->middleware([
                 EncryptCookies::class,

@@ -1,4 +1,9 @@
-import { createApp } from "vue"
-import Lightbox from "../Lightbox.vue";
+import {createApp} from 'vue'
+import Lightbox from '../Lightbox.vue'
+import {DirtyStatesRegister} from './DirtyStatesRegister'
 
-createApp(Lightbox).mount("#lightbox-modal")
+if (document.getElementById('lightbox-modal')) {
+	createApp(Lightbox).mount('#lightbox-modal')
+}
+
+new DirtyStatesRegister()
