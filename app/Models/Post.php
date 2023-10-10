@@ -99,7 +99,7 @@ class Post extends ImageableModel implements SearchDisplayableContract, Categori
 	public function getPostable(): SocialPostDTO
 	{
 		return new SocialPostDTO(
-			text: "I wrote a thing!",
+			text: "I wrote a thing!\n\n{$this->title}",
 
 			links: [
 				route('blog.show', ['post' => $this])

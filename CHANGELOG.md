@@ -11,6 +11,7 @@
 
 - Update to Node install process in Lando
 - Dump dedicated phpMyAdmin container for port-forwarding DB container
+- Include post title in default X publishing text
 
 ### Fixes
 
