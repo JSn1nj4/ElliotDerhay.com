@@ -14,9 +14,9 @@ class ImageResource extends Resource
 {
 	use HasCountBadge;
 
-    protected static string|null $model = Image::class;
+	protected static string|null $model = Image::class;
 
-    protected static string|null $navigationIcon = 'm-photo';
+	protected static string|null $navigationIcon = 'm-photo';
 
 	protected static int|null $navigationSort = 1;
 
@@ -29,8 +29,8 @@ class ImageResource extends Resource
 	public array|null $image = [];
 	public string|null $name = null;
 
-    public static function form(Forms\Form $form): Forms\Form
-    {
+	public static function form(Forms\Form $form): Forms\Form
+	{
 		return $form
 			->columns(1)
 			->schema([
@@ -48,44 +48,47 @@ class ImageResource extends Resource
 						->columns(3)
 						->schema([
 							Forms\Components\TextInput::make('name')
-								->columnSpanFull()
+								->columnSpan(2)
 								->required()
 								->maxLength(255),
 
-							Forms\Components\TextInput::make('collection')
-								->columnSpan(2)
-								->disabled(),
-
-							Forms\Components\TextInput::make('disk')
-								->disabled(),
-
 							Forms\Components\TextInput::make('file_name')
-								->columnSpan(2)
+								->columnSpan(1)
+								->disabled(),
+
+							Forms\Components\Textarea::make('caption')
+								->columnSpanFull()
+								->maxLength(255),
+
+							Forms\Components\TextInput::make('collection')
 								->disabled(),
 
 							Forms\Components\TextInput::make('mime_type')
-								->disabled(),
-
-							Forms\Components\TextInput::make('path')
-								->columnSpan(2)
 								->disabled(),
 
 							Forms\Components\TextInput::make('size')
 								->numeric()
 								->disabled(),
 
+							Forms\Components\TextInput::make('disk')
+								->disabled(),
+
+							Forms\Components\TextInput::make('path')
+								->columnSpan(2)
+								->disabled(),
+
 							Forms\Components\Hidden::make('file_hash')
 								->unique(ignoreRecord: true)
 								->disabled(),
 						]),
-					])
+				])
 					->columns(3),
 			]);
-    }
+	}
 
-    public static function table(Tables\Table $table): Tables\Table
-    {
-        return $table
+	public static function table(Tables\Table $table): Tables\Table
+	{
+		return $table
 			->defaultSort('created_at', 'desc')
 			->columns([
 				Tables\Columns\ImageColumn::make('url')
@@ -104,33 +107,33 @@ class ImageResource extends Resource
 				Tables\Columns\TextColumn::make('disk')
 					->toggleable(),
 			])
-            ->filters([
-                //
-            ])
-            ->actions([
+			->filters([
+				//
+			])
+			->actions([
 				Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
+				Tables\Actions\EditAction::make(),
 				Tables\Actions\DeleteAction::make(),
-            ])
-            ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
-            ]);
-    }
+			])
+			->bulkActions([
+				Tables\Actions\DeleteBulkAction::make(),
+			]);
+	}
 
-    public static function getRelations(): array
-    {
-        return [
-            //
-        ];
-    }
+	public static function getRelations(): array
+	{
+		return [
+			//
+		];
+	}
 
-    public static function getPages(): array
-    {
-        return [
-            'index' => Pages\ListImages::route('/'),
+	public static function getPages(): array
+	{
+		return [
+			'index' => Pages\ListImages::route('/'),
 			'create' => Pages\UploadImage::route('/create'),
 			'view' => Pages\ViewImage::route('/{record}'),
-            'edit' => Pages\EditImage::route('/{record}/edit'),
-        ];
-    }
+			'edit' => Pages\EditImage::route('/{record}/edit'),
+		];
+	}
 }

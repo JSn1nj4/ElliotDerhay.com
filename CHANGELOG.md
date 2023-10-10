@@ -1,5 +1,26 @@
 # Changelog
 
+## Version 2.6.4
+
+### New
+
+- Add a PublishPostToX Pennant feature for more control over posting condition
+- [#158][is_158]: Add an optional image caption for post images ([#159][pr_159])
+
+### Changes
+
+- Update to Node install process in Lando
+- Dump dedicated phpMyAdmin container for port-forwarding DB container
+- Include post title in default X publishing text
+
+### Fixes
+
+- Mitigate random ImageFactory failures
+
+[is_158]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/158
+
+[pr_159]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/159
+
 ## Version 2.6.3
 
 ### Fixes

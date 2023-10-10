@@ -21,6 +21,19 @@ class Sanitizer
 			->trim();
 	}
 
+	public static function paragraph(string $input): Stringable
+	{
+		return str($input)
+			->stripTags()
+			->remove([
+				"{", "}", "[", "]", '<', '>',
+				"`", "~", "@", "#", '$',
+				'^', '+', '=',
+				'\\', "\r", "\n"
+			])
+			->trim();
+	}
+
 	public static function slug(string $input): Stringable
 	{
 		return str($input)->stripTags()->slug();
