@@ -1,5 +1,11 @@
 # Changelog
 
+## Version 2.6.5
+
+### Development
+
+- Start a bunch of missing tests
+
 ## Version 2.6.4
 
 ### New
