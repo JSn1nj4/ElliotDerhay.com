@@ -28,6 +28,32 @@ uses(TestCase::class, RefreshDatabase::class)
 
 /*
 |--------------------------------------------------------------------------
+| Assertions
+|--------------------------------------------------------------------------
+*/
+
+/**
+ * Assert that a condition is false.
+ * @param $condition
+ * @param string $message
+ * @return void
+ */
+function assertFalse($condition, string $message = ''): void {
+	\PHPUnit\Framework\assertFalse($condition, $message);
+}
+
+/**
+ * Assert that a condition is true.
+ * @param $condition
+ * @param string $message
+ * @return void
+ */
+function assertTrue($condition, string $message = ''): void {
+	\PHPUnit\Framework\assertTrue($condition, $message);
+}
+
+/*
+|--------------------------------------------------------------------------
 | Expectations
 |--------------------------------------------------------------------------
 |
