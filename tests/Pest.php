@@ -37,10 +37,6 @@ uses(TestCase::class, RefreshDatabase::class)
 |
 */
 
-expect()->extend('toBeOne', function () {
-    return $this->toBe(1);
-});
-
 /*
 |--------------------------------------------------------------------------
 | Functions
@@ -80,7 +76,7 @@ function invoke(string $className, array $params): mixed {
 	return $class(...$params);
 }
 
-function makeImage(): Image	{
+function makeImage(): Image {
 	return Image::factory()->makeOne();
 }
 
