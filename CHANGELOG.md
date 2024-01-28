@@ -1,5 +1,15 @@
 # Changelog
 
+## Version 2.7.0
+
+### New
+
+- [#166][is_166]: Start using Postmark for emails ([#168][pr_168])
+
+[is_166]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/166
+
+[pr_168]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/168
+
 ## Version 2.6.4
 
 ### New
