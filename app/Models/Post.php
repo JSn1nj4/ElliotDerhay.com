@@ -16,8 +16,10 @@ use App\States\Posts\PostPublished;
 use App\States\Posts\PostUnpublished;
 use App\Traits\Categorizeable;
 use App\Traits\SearchDisplayable;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\AbstractPaginator;
@@ -56,12 +58,15 @@ use Spatie\Sitemap\Tags\Url;
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereUpdatedAt($value)
  * @method \Illuminate\Database\Eloquent\Builder|Post published()
  * @method static \Illuminate\Database\Eloquent\Builder|Post published()
- * @mixin \Eloquent
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Image[] $images
  * @property-read int|null $images_count
  * @property string $page_title
  * @property string $meta_description
  * @property \App\Models\SearchMeta $searchMeta
+ * @method static Builder|Post publishedRecently()
+ * @method static Builder|Post wherePublished($value)
+ * @method static Builder|Post wherePublishedAt($value)
+ * @mixin \Eloquent
  */
 class Post extends ImageableModel implements SearchDisplayableContract, CategorizeableContract, Sitemapable, XMetaContract, SocialPostable
 {
@@ -86,18 +91,15 @@ class Post extends ImageableModel implements SearchDisplayableContract, Categori
 		'title',
 	];
 
-	protected static function booted(): void
-	{
+	protected static function booted(): void {
 		static::addGlobalScope(new PostPublishedScope());
 	}
 
-	public function excerpt(): Attribute
-	{
+	public function excerpt(): Attribute {
 		return Attribute::get(fn () => str($this->body)->words(20));
 	}
 
-	public function getPostable(): SocialPostDTO
-	{
+	public function getPostable(): SocialPostDTO {
 		return new SocialPostDTO(
 			text: "I wrote a thing!\n\n{$this->title}",
 
@@ -123,8 +125,7 @@ class Post extends ImageableModel implements SearchDisplayableContract, Categori
 	 * @param Request $request
 	 * @return AbstractPaginator
 	 */
-	public static function index(Request $request): AbstractPaginator
-	{
+	public static function index(Request $request): AbstractPaginator {
 		return self::when($request?->get('category'), static function ($query, $category_id): void {
 			$query->whereRelation('categories', 'category_id', $category_id);
 		})
@@ -138,8 +139,7 @@ class Post extends ImageableModel implements SearchDisplayableContract, Categori
 			->withQueryString();
 	}
 
-	public function metaDescription(): Attribute
-	{
+	public function metaDescription(): Attribute {
 		return Attribute::make(
 			get: fn () => $this->searchMeta?->search_description ?? str($this->body)
 				->words(30, '')
@@ -157,8 +157,7 @@ class Post extends ImageableModel implements SearchDisplayableContract, Categori
 		);
 	}
 
-	public function pageTitle(): Attribute
-	{
+	public function pageTitle(): Attribute {
 		return Attribute::make(
 			get: fn () => $this->searchMeta?->search_title ?? $this->title,
 
@@ -170,12 +169,15 @@ class Post extends ImageableModel implements SearchDisplayableContract, Categori
 		);
 	}
 
+	public function scopePublishedRecently(Builder $query): Builder|Model|null {
+		return $query->whereDate('published_at', '>=', today()->subWeek()->toDateString());
+	}
+
 	/**
 	 * @param \Illuminate\Support\Collection<\App\Models\Category|int> $categories
 	 * @return self
 	 */
-	public function syncCategories(Collection $categories): self
-	{
+	public function syncCategories(Collection $categories): self {
 		$this->categories()->sync($categories->map(static fn (Category $category) => $category->id)->all());
 
 		return $this;
@@ -185,8 +187,7 @@ class Post extends ImageableModel implements SearchDisplayableContract, Categori
 	 * @param \Illuminate\Support\Collection<\App\Models\Tag> $tags
 	 * @return self
 	 */
-	public function syncTags(Collection $tags): self
-	{
+	public function syncTags(Collection $tags): self {
 		$this->tags()->sync($tags->map(static fn (Tag $tag) => $tag->id)->all());
 
 		return $this;
@@ -196,8 +197,7 @@ class Post extends ImageableModel implements SearchDisplayableContract, Categori
 	 * @returns PostStateContract
 	 * @throws \Exception
 	 */
-	public function state(): PostStateContract
-	{
+	public function state(): PostStateContract {
 		return match ($this->published) {
 			true => new PostPublished($this),
 			false => new PostUnpublished($this),
@@ -205,18 +205,15 @@ class Post extends ImageableModel implements SearchDisplayableContract, Categori
 		};
 	}
 
-	public function tags(): MorphToMany
-	{
+	public function tags(): MorphToMany {
 		return $this->morphToMany(Tag::class, 'taggable');
 	}
 
-	public function toSitemapTag(): Url|string|array
-	{
+	public function toSitemapTag(): Url|string|array {
 		return route('blog.show', ['post' => $this]);
 	}
 
-	public function xCardMeta(): XMetaDTO
-	{
+	public function xCardMeta(): XMetaDTO {
 		return new XMetaDTO(
 			xTitle: $this->page_title,
 			xDescription: $this->meta_description,

@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Models\Post;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
@@ -35,8 +36,8 @@ class WeeklyReportEmail extends Mailable
 		return new Content(
 			markdown: 'emails.reports.weekly',
 			with: [
-				'lastLogin' => now()->toIso8601String(),
-				'postsPublished' => 1,
+				'lastLogin' => '(needs implementing)',
+				'postsPublished' => Post::publishedRecently()->count(),
 			],
 		);
 	}
