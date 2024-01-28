@@ -8,3 +8,7 @@ Route::get('/error/{code}', function ($code = null) {
 
 	abort($code);
 })->where('code', '[1-5][0-9]{2}');
+
+Route::prefix('/preview')->group(static function () {
+	Route::get('/mail/{name}', [\App\Http\Controllers\MailPreviewsController::class, 'show']);
+});
