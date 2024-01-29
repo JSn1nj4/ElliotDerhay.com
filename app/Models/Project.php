@@ -28,11 +28,11 @@ use Illuminate\Pagination\AbstractPaginator;
  * @method static \Illuminate\Database\Eloquent\Builder|Project whereShortDesc($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Project whereThumbnail($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Project whereUpdatedAt($value)
- * @mixin \Eloquent
  * @property-read Image|null $image
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Image[] $images
  * @property-read int|null $images_count
  * @method static \Database\Factories\ProjectFactory factory(...$parameters)
+ * @mixin \Eloquent
  */
 class Project extends ImageableModel
 {

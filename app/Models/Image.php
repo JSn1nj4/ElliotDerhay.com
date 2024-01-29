@@ -47,6 +47,7 @@ use Illuminate\Pagination\AbstractPaginator;
  * @method static \Illuminate\Database\Eloquent\Builder|Image wherePath($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Image whereSize($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Image whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Image whereCaption($value)
  * @mixin \Eloquent
  */
 class Image extends Model
