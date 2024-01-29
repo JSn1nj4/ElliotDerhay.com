@@ -25,7 +25,7 @@ class WeeklyReportEmail extends Mailable
 	 */
 	public function envelope(): Envelope {
 		return new Envelope(
-			subject: 'Weekly Report Email',
+			subject: 'Weekly Admin Report',
 		);
 	}
 
