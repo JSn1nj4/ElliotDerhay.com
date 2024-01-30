@@ -23,8 +23,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @method static Builder|Login whereId($value)
  * @method static Builder|Login whereUpdatedAt($value)
  * @method static Builder|Login whereUserId($value)
- * @mixin \Eloquent
  * @method static Builder|Login mostRecent()
+ * @mixin \Eloquent
  */
 class Login extends Model
 {

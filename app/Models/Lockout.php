@@ -21,7 +21,6 @@ use Illuminate\Support\Carbon;
  * @method static \Illuminate\Database\Eloquent\Builder|Lockout newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Lockout newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Lockout query()
- * @mixin \Eloquent
  * @method static \Illuminate\Database\Eloquent\Builder|Lockout whereContentType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Lockout whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Lockout whereCredential($value)
@@ -30,6 +29,7 @@ use Illuminate\Support\Carbon;
  * @method static \Illuminate\Database\Eloquent\Builder|Lockout whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Lockout whereUrl($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Lockout whereUserAgent($value)
+ * @mixin \Eloquent
  */
 class Lockout extends Model
 {

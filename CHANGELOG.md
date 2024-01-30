@@ -1,10 +1,45 @@
 # Changelog
 
-## Version 2.6.5
+## Version 2.8.2
 
 ### Development
 
 - Start a bunch of missing tests
+
+## Version 2.8.1
+
+### Fix
+
+- Revert [#171][pr_171]
+
+## Version 2.8.0
+
+### New
+
+- [#170][is_170]: Create custom Node clock ([#171][pr_171])
+
+[is_170]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/167
+
+[pr_171]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/168
+
+## Version 2.7.0
+
+### New
+
+- [#166][is_166]: Start using Postmark for emails ([#168][pr_168])
+- [#167][is_167]: Create and schedule weekly report email ([#169][pr_169])
+
+### Development
+
+- Regenerate IDE helper markup on models
+
+[is_166]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/166
+
+[is_167]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/167
+
+[pr_168]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/168
+
+[pr_169]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/169
 
 ## Version 2.6.4
 
