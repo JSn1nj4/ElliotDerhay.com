@@ -1,5 +1,15 @@
 # Changelog
 
+## Version 2.8.0
+
+### New
+
+- [#170][is_170]: Create custom Node clock ([#171][pr_171])
+
+[is_170]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/167
+
+[pr_171]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/168
+
 ## Version 2.7.0
 
 ### New
