@@ -1,5 +1,13 @@
 # Changelog
 
+## Version 2.8.2
+
+### Development
+
+- Update local tool versions
+- Set up pm2 for local dev
+- Fix image seeder
+
 ## Version 2.8.1
 
 ### Fix
