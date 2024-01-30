@@ -1,5 +1,11 @@
 # Changelog
 
+## Version 2.8.1
+
+### Fix
+
+- Revert [#171][pr_171]
+
 ## Version 2.8.0
 
 ### New
