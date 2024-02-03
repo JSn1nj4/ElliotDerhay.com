@@ -33,6 +33,8 @@ class Handler extends ExceptionHandler
 	 */
 	public function register(): void {
 		$this->reportable(static function (Throwable $e) {
+			if (app()->environment('local')) return;
+
 			Integration::captureUnhandledException($e);
 		});
 	}
