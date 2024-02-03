@@ -15,7 +15,7 @@ class ImageFactory extends Factory
 {
 	protected string $diskName = 'public';
 	protected FilesystemAdapter $disk;
-	private \DateTime|null $timer = null;
+	private int|null $timer = null;
 
 	public function __construct(
 		$count = null,
@@ -26,8 +26,7 @@ class ImageFactory extends Factory
 		Collection|null $afterCreating = null,
 		$connection = null,
 		Collection|null $recycle = null
-	)
-	{
+	) {
 		parent::__construct($count, $states, $has, $for, $afterMaking, $afterCreating, $connection, $recycle);
 
 		$this->disk = Storage::disk($this->diskName);
@@ -38,8 +37,7 @@ class ImageFactory extends Factory
 	 *
 	 * @return array<string, mixed>
 	 */
-	public function definition(): array
-	{
+	public function definition(): array {
 		$collection = "images";
 
 		$this->ensureTempDirExists();
@@ -61,8 +59,7 @@ class ImageFactory extends Factory
 		];
 	}
 
-	protected function ensureTempDirExists(): void
-	{
+	protected function ensureTempDirExists(): void {
 		if (Storage::disk('temp')->directoryMissing('')) {
 			Storage::disk('temp')->createDirectory('');
 		}
@@ -71,8 +68,7 @@ class ImageFactory extends Factory
 	/**
 	 * @throws \Exception
 	 */
-	protected function generateUploadedFile(string $collection = 'images'): array
-	{
+	protected function generateUploadedFile(string $collection = 'images'): array {
 		$temp_path = false;
 
 		/**
@@ -100,13 +96,11 @@ class ImageFactory extends Factory
 		return [$file, $path];
 	}
 
-	private function resetTimer(): void
-	{
+	private function resetTimer(): void {
 		$this->timer = null;
 	}
 
-	public function setDisk(string $name, FilesystemAdapter|null $disk = null): static
-	{
+	public function setDisk(string $name, FilesystemAdapter|null $disk = null): static {
 		$this->diskName = $name;
 
 		$this->disk = is_null($disk) ? Storage::disk($this->diskName) : $disk;
@@ -114,8 +108,7 @@ class ImageFactory extends Factory
 		return $this;
 	}
 
-	private function timer(int $seconds = (60 * 1)): void
-	{
+	private function timer(int $seconds = (60 * 1)): void {
 		$this->timer ??= now()->addSeconds($seconds)->getTimestamp();
 
 		if (now()->getTimestamp() >= $this->timer) {

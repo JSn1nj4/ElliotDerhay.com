@@ -16,6 +16,11 @@
 		"dev": "vite",
 		"development": "yarn run dev",
 		"build": "vite build",
+		"ed:start": "pm2 start ecosystem.config.js",
+		"ed:delete": "pm2 delete ecosystem.config.js",
+		"ed:stop": "pm2 delete ecosystem.config.js",
+		"ed:monit": "pm2 monit",
+		"ed:dev": "yarn ed:delete && yarn ed:start && yarn ed:monit",
 		"prod": "yarn run build",
 		"production": "yarn run build"
 	},
@@ -26,7 +31,9 @@
 		"@vitejs/plugin-vue": "^4.1.0",
 		"autoprefixer": "^10.4.14",
 		"axios": "^1.3.4",
+		"dotenv": "^16.4.1",
 		"laravel-vite-plugin": "^0.7.4",
+		"pm2": "^5.3.1",
 		"postcss": "^8.4.27",
 		"postcss-import": "^15.0.0",
 		"postcss-mixins": "^9.0.4",
@@ -40,7 +47,8 @@
 	},
 	"dependencies": {
 		"date-fns": "^2.29.2",
-		"shiki": "^0.14.1"
+		"shiki": "^0.14.1",
+		"yarn": "1.22.19"
 	},
 	"peerDependencies": {
 		"@babel/core": "^7.15.8",

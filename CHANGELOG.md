@@ -1,5 +1,14 @@
 # Changelog
 
+## Version 2.8.2
+
+### Development
+
+- Update local tool versions
+- Set up pm2 for local dev
+- Fix image seeder
+- [#172][is_172]: Update Sentry configuration ([#173][pr_173])
+
 ## Version 2.8.1
 
 ### Fix
@@ -12,9 +21,13 @@
 
 - [#170][is_170]: Create custom Node clock ([#171][pr_171])
 
-[is_170]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/167
+[is_170]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/170
 
-[pr_171]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/168
+[is_172]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/172
+
+[pr_171]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/171
+
+[pr_173]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/173
 
 ## Version 2.7.0
 
