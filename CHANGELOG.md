@@ -5,7 +5,7 @@
 ### Development
 
 - Update local tool versions
-- Switch to fully local dev
+- Switch to fully local dev ([#176][pr_176])
 - Fix image seeder
 - [#172][is_172]: Update Sentry configuration ([#173][pr_173])
 
@@ -28,6 +28,8 @@
 [pr_171]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/171
 
 [pr_173]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/173
+
+[pr_176]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/176
 
 ## Version 2.7.0
 
