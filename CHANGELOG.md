@@ -5,7 +5,7 @@
 ### Development
 
 - Update local tool versions
-- Set up pm2 for local dev
+- Switch to fully local dev
 - Fix image seeder
 - [#172][is_172]: Update Sentry configuration ([#173][pr_173])
 
