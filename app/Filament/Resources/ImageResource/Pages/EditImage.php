@@ -15,7 +15,7 @@ class EditImage extends EditRecord
 
 	protected static string $resource = ImageResource::class;
 
-	protected function prepareForValidation($attributes)
+	protected function prepareForValidation($attributes): array
 	{
 		$attributes['data'] = collect($attributes['data'])
 			->transform(static function ($item, $key) {
