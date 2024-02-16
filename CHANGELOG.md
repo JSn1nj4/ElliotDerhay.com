@@ -8,6 +8,7 @@
 - Switch to fully local dev ([#176][pr_176])
 - Fix image seeder
 - [#172][is_172]: Update Sentry configuration ([#173][pr_173])
+- Allow dependabot to handle dependency patch updates
 
 ## Version 2.8.1
 
