@@ -2,6 +2,10 @@
 
 ## Version 2.8.2
 
+### Updates
+
+- Bulk update all dependencies
+
 ### Development
 
 - Update local tool versions
