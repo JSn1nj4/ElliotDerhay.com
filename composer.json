@@ -20,7 +20,7 @@
 		"noweh/twitter-api-v2-php": "^3.4",
 		"sentry/sentry-laravel": "^4.0.0",
 		"spatie/laravel-markdown": "^2.2",
-		"spatie/laravel-sitemap": "^6.3"
+		"spatie/laravel-sitemap": "^7.0"
 	},
 	"require-dev": {
 		"barryvdh/laravel-ide-helper": "^2.13",
@@ -31,7 +31,6 @@
 		"pestphp/pest": "^2.3",
 		"pestphp/pest-plugin-faker": "^2.0",
 		"pestphp/pest-plugin-laravel": "^2.0",
-		"pestphp/pest-plugin-mock": "^2.0",
 		"phpunit/phpunit": "^10.0",
 		"spatie/laravel-ignition": "^2.0"
 	},

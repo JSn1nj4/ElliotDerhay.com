@@ -30,14 +30,11 @@ export default defineConfig(({mode}) => {
 	if (Object.keys(hmr).length > 0) server.hmr = hmr
 	if (VITE_SERVER_HOST)
 		server.host = VITE_SERVER_HOST !== 'true' ? VITE_SERVER_HOST : true
-	if (VITE_SERVER_HTTPS)
-		server.https =
-			VITE_SERVER_HTTPS === 'true'
-				? {
-						cert: fs.readFileSync(VITE_CERT),
-						key: fs.readFileSync(VITE_CERT_KEY),
-				  }
-				: false
+	if (VITE_SERVER_HTTPS && VITE_SERVER_HTTPS === 'true')
+		server.https = {
+			cert: fs.readFileSync(VITE_CERT),
+			key: fs.readFileSync(VITE_CERT_KEY),
+		}
 	server.port = VITE_SERVER_PORT ? parseInt(VITE_SERVER_PORT) : 24690
 
 	// build viteConfig object
