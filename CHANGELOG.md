@@ -13,6 +13,7 @@
 - Fix image seeder
 - [#172][is_172]: Update Sentry configuration ([#173][pr_173])
 - Allow dependabot to handle dependency patch updates
+- Clean up Vite config
 
 ## Version 2.8.1
 
