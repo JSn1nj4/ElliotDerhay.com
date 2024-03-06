@@ -2,9 +2,12 @@
  * Popup idea inspiration:
  * - https://kevdees.com/adding-google-analytics-to-your-website-while-respecting-do-not-track/
  */
-import { createApp } from "vue"
-import GAPopup from "./GAPopup.vue"
-import Lightbox from "./Lightbox.vue";
+import {createApp} from 'vue'
+import Lightbox from './Lightbox.vue'
+import Alpine from '@alpinejs/csp'
 
-createApp(GAPopup).mount("#ga-request-popup")
-createApp(Lightbox).mount("#lightbox-modal")
+createApp(Lightbox).mount('#lightbox-modal')
+
+window.Alpine = Alpine
+
+Alpine.start()
