@@ -10,11 +10,7 @@ export default defineConfig(({mode}) => {
 	return {
 		plugins: [
 			laravel({
-				input: [
-					'resources/css/app.css',
-					'resources/js/admin/app.ts',
-					'resources/js/app.ts',
-				],
+				input: ['resources/css/app.css', 'resources/js/app.ts'],
 				refresh: true,
 			}),
 			vuePlugin(),
