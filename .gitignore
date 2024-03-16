@@ -32,6 +32,9 @@ yarn-error.log
 !/config/local/*-example
 .lando.local.yml
 
+# backups
+/database/backups
+
 # Public directory files
 /public/css
 /public/js

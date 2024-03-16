@@ -14,6 +14,7 @@
 - [#172][is_172]: Update Sentry configuration ([#173][pr_173])
 - Allow dependabot to handle dependency patch updates
 - Clean up Vite config
+- Ignore database backups directory
 
 ## Version 2.8.2
 
