@@ -1,5 +1,13 @@
 # Changelog
 
+## Version 2.8.2
+
+This is a hotfix for an existing production issue.
+
+### Fix
+
+- Make existing weekly job run one time
+
 ## Version 2.8.1
 
 ### Fix

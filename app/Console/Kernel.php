@@ -29,7 +29,8 @@ class Kernel extends ConsoleKernel
 	/**
 	 * Define the application's command schedule.
 	 */
-	protected function schedule(Schedule $schedule): void {
+	protected function schedule(Schedule $schedule): void
+	{
 		$schedule->command(GithubEventPullCommand::class)->hourly();
 		$schedule->command(GithubUserUpdateCommand::class)->weekly();
 		$schedule->command(TokenPruneCommand::class)->daily();
@@ -43,13 +44,16 @@ class Kernel extends ConsoleKernel
 		$schedule->command(WorkCommand::class, ['--stop-when-empty'])->daily();
 
 		// reports can run after everything else honestly
-		$schedule->command(SendWeeklyReportCommand::class)->saturdays();
+		$schedule->command(SendWeeklyReportCommand::class)
+			->saturdays()
+			->at(config('app.schedule.default.weekly_time'));
 	}
 
 	/**
 	 * Register the commands for the application.
 	 */
-	protected function commands(): void {
+	protected function commands(): void
+	{
 		$this->load(__DIR__ . '/Commands');
 
 		require base_path('routes/console.php');
