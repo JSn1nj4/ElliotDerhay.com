@@ -39,9 +39,9 @@
 			front: false,
 			image: null,
 
-			speed: 200,
-			timing: 'linear',
-			transition: true,
+			speed: {{ $speed }},
+			timing: '{{ $timing }}',
+			transition: {{ $transition }},
 			visible: false,
 
 			imageAlt() {
