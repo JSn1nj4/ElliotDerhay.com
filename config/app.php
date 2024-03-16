@@ -39,7 +39,7 @@ return [
 	|
 	*/
 
-	'debug' => (bool) env('APP_DEBUG', false),
+	'debug' => (bool)env('APP_DEBUG', false),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -187,7 +187,7 @@ return [
 		App\Providers\EventServiceProvider::class,
 		App\Providers\FeatureServiceProvider::class,
 		App\Providers\Filament\AdminPanelProvider::class,
-        App\Providers\RouteServiceProvider::class,
+		App\Providers\RouteServiceProvider::class,
 
 	],
 
@@ -204,6 +204,21 @@ return [
 			'trim',
 			array_values(explode(',', env('COMMANDS_WHITELIST', '')))
 		),
+	],
+
+	/*
+	|--------------------------------------------------------------------------
+	| Schedule settings
+	|--------------------------------------------------------------------------
+	|
+	| Define settings job and command scheduling.
+	|
+	*/
+
+	'schedule' => [
+		'default' => [
+			'weekly_time' => env('SCHEDULE_DEFAULT_WEEKLY_TIME', '0:0'),
+		],
 	],
 
 	/*

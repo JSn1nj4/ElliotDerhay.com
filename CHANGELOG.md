@@ -1,6 +1,6 @@
 # Changelog
 
-## Version 2.8.2
+## Version 2.8.3
 
 ### Updates
 
@@ -14,6 +14,14 @@
 - [#172][is_172]: Update Sentry configuration ([#173][pr_173])
 - Allow dependabot to handle dependency patch updates
 - Clean up Vite config
+
+## Version 2.8.2
+
+This is a hotfix for an existing production issue.
+
+### Fix
+
+- Make existing weekly job run one time
 
 ## Version 2.8.1
 
