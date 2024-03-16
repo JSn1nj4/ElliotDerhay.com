@@ -5,6 +5,7 @@
 ### Updates
 
 - Bulk update all dependencies
+- [#153][is_153]: Convert Vue-based popups to Alpine ([#185][pr_185])
 
 ### Development
 
@@ -15,6 +16,16 @@
 - Allow dependabot to handle dependency patch updates
 - Clean up Vite config
 - Ignore database backups directory
+
+[is_153]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/153
+
+[is_172]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/172
+
+[pr_173]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/173
+
+[pr_176]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/176
+
+[pr_185]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/185
 
 ## Version 2.8.2
 
@@ -38,13 +49,7 @@ This is a hotfix for an existing production issue.
 
 [is_170]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/170
 
-[is_172]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/172
-
 [pr_171]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/171
-
-[pr_173]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/173
-
-[pr_176]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/176
 
 ## Version 2.7.0
 
