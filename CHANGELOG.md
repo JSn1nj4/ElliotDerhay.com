@@ -15,6 +15,7 @@
 - Allow dependabot to handle dependency patch updates
 - Clean up Vite config
 - Ignore database backups directory
+- Ignore public assets build directory
 
 ## Version 2.8.2
 
