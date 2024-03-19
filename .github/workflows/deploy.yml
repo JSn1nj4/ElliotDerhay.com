@@ -12,10 +12,10 @@ jobs:
     steps:
       - name: "Prep SSH"
         run: |
-          mkdir ~p ~/.ssh
+          if [ ! -d ~/.ssh ]; then mkdir ~p ~/.ssh; fi
           echo "$DEPLOY_HOST_KEY" >> ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
-          cat >>~/.ssh/config <<END
+          cat >> ~/.ssh/config <<END
           Host deploy-host
             HostName $DEPLOY_HOST
             User $DEPLOY_HOST_USER
