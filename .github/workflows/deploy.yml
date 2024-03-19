@@ -1,0 +1,45 @@
+name: Deploy
+on:
+  push:
+    branches:
+      - main
+      - master
+jobs:
+  deploy:
+    name: "Deploy Application"
+    runs-on: ubuntu-latest
+    #needs: test # if a test job is defined, it must succeed first
+    steps:
+      - name: "Prep SSH"
+        run: |
+          if [ ! -d ~/.ssh ]; then mkdir ~p ~/.ssh; fi
+          echo "$DEPLOY_HOST_KEY" >> ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          cat >> ~/.ssh/config <<END
+          Host deploy-host
+            HostName $DEPLOY_HOST
+            User $DEPLOY_HOST_USER
+            IdentityFile ~/.ssh/deploy_key
+            IdentitiesOnly yes
+          END
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_HOST_KEY: ${{ secrets.DEPLOY_HOST_KEY }}
+          DEPLOY_HOST_USER: ${{ secrets.DEPLOY_HOST_USER }}
+
+      - name: "Ensure dependencies"
+        run: ssh deploy-host 'command -v git && test -d $DEPLOY_HOST_PROJECT_ROOT && command -v php && command -v composer'
+        env:
+          DEPLOY_HOST_PROJECT_ROOT: ${{ secrets.DEPLOY_HOST_PROJECT_ROOT }}
+
+      - name: "Pull, install, build"
+        run: |
+          ssh deploy-host 'cd $DEPLOY_HOST_PROJECT_ROOT \
+            && git checkout $DEPLOY_BRANCH \
+            && git reset --hard \
+            && git pull \
+            && composer install --no-dev
+            && yarn && yarn prod'
+        env:
+          DEPLOY_BRANCH: ${{ secrets.DEPLOY_BRANCH }}
+          DEPLOY_HOST_PROJECT_ROOT: ${{ secrets.DEPLOY_HOST_PROJECT_ROOT }}

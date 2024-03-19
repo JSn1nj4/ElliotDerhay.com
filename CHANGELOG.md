@@ -17,6 +17,7 @@
 - Clean up Vite config
 - Ignore database backups directory
 - Ignore public assets build directory
+- Add deploy workflow
 
 [is_153]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/153
 
