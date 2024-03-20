@@ -35,12 +35,12 @@ jobs:
 
       - name: "Pull, install, build"
         run: |
-          ssh deploy-host 'cd $DEPLOY_HOST_PROJECT_ROOT \
-            && git checkout $DEPLOY_BRANCH \
+          ssh deploy-host "cd \"$DEPLOY_HOST_PROJECT_ROOT\" \
+            && git checkout \"$DEPLOY_BRANCH\" \
             && git reset --hard \
             && git pull \
             && composer install --no-dev \
-            && yarn && yarn prod'
+            && yarn && yarn prod"
         env:
           DEPLOY_BRANCH: ${{ secrets.DEPLOY_BRANCH }}
           DEPLOY_HOST_PROJECT_ROOT: ${{ secrets.DEPLOY_HOST_PROJECT_ROOT }}
