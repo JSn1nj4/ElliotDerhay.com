@@ -21,6 +21,7 @@ jobs:
             User $DEPLOY_HOST_USER
             IdentityFile ~/.ssh/deploy_key
             IdentitiesOnly yes
+            StrictHostKeyChecking accept-new
           END
         env:
           DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
