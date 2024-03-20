@@ -2,9 +2,15 @@
  * Popup idea inspiration:
  * - https://kevdees.com/adding-google-analytics-to-your-website-while-respecting-do-not-track/
  */
-import { createApp } from "vue"
-import GAPopup from "./GAPopup.vue"
-import Lightbox from "./Lightbox.vue";
+import Alpine from '@alpinejs/csp'
 
-createApp(GAPopup).mount("#ga-request-popup")
-createApp(Lightbox).mount("#lightbox-modal")
+// convince TS that adding new stuff to `window` is ok
+declare global {
+	interface Window {
+		Alpine: any
+	}
+}
+
+window.Alpine = Alpine || {}
+
+Alpine.start()

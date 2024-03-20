@@ -1,5 +1,34 @@
 # Changelog
 
+## Version 2.8.3
+
+### Updates
+
+- Bulk update all dependencies
+- [#153][is_153]: Convert Vue-based popups to Alpine ([#185][pr_185])
+
+### Development
+
+- Update local tool versions
+- Switch to fully local dev ([#176][pr_176])
+- Fix image seeder
+- [#172][is_172]: Update Sentry configuration ([#173][pr_173])
+- Allow dependabot to handle dependency patch updates
+- Clean up Vite config
+- Ignore database backups directory
+- Ignore public assets build directory
+- Add deploy workflow
+
+[is_153]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/153
+
+[is_172]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/172
+
+[pr_173]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/173
+
+[pr_176]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/176
+
+[pr_185]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/185
+
 ## Version 2.8.2
 
 This is a hotfix for an existing production issue.
@@ -20,9 +49,9 @@ This is a hotfix for an existing production issue.
 
 - [#170][is_170]: Create custom Node clock ([#171][pr_171])
 
-[is_170]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/167
+[is_170]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/170
 
-[pr_171]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/168
+[pr_171]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/171
 
 ## Version 2.7.0
 

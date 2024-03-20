@@ -6,13 +6,13 @@ use App\Support\Sanitizer;
 
 trait PreparesForValidation
 {
-	protected function prepareForValidation($attributes)
+	protected function prepareForValidation($attributes): array
 	{
 		$attributes['data'] = collect($attributes['data'])
 			->transform(static function ($item, $key) {
 				if ($item === null) return null;
 
-				return match($key) {
+				return match ($key) {
 					'title' => Sanitizer::sanitize($item)->toString(),
 					'slug' => Sanitizer::slug($item)->toString(),
 					default => $item,

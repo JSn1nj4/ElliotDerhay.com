@@ -15,6 +15,7 @@ ij_typescript_space_before_function_left_parenth = true
 
 [*.md]
 trim_trailing_whitespace = false
+insert_final_newline = false
 
 [*.php]
 ij_php_space_before_closure_left_parenthesis = true
@@ -29,3 +30,4 @@ indent_size = 2
 [*.{yml,yaml}]
 indent_style = space
 indent_size = 2
+insert_final_newline = false

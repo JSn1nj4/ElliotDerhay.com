@@ -2,6 +2,7 @@
 /.idea
 /.phpunit.cache
 /node_modules
+/public/build
 /public/hot
 /public/storage
 /storage/*.key
@@ -10,6 +11,7 @@
 .env.backup
 .phpunit.result.cache
 docker-compose.override.yml
+error.log
 Homestead.json
 Homestead.yaml
 npm-debug.log
@@ -30,6 +32,9 @@ yarn-error.log
 /config/local/*
 !/config/local/*-example
 .lando.local.yml
+
+# backups
+/database/backups
 
 # Public directory files
 /public/css

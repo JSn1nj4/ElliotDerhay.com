@@ -6,7 +6,7 @@ use App\Support\Sanitizer;
 
 trait PreparesForValidation
 {
-	protected function prepareForValidation($attributes)
+	protected function prepareForValidation($attributes): array
 	{
 		$attributes['date'] = collect($attributes['data'])
 			->transform(static function ($item, $key) {

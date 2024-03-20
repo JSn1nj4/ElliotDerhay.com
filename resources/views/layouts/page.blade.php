@@ -1,9 +1,5 @@
 @extends('layouts.master', ['bodyClasses' => $bodyClasses ?? ''])
 
-@push('head-extras')
-	@include('partials.trackers')
-@endpush
-
 @section('body')
 
 	@component('partials.header')
@@ -23,15 +19,10 @@
 	</main>
 
 	@include('partials.footer')
-
 @endsection
 
 @push('footer-extras')
-	<div id="ga-request-popup"></div>
-
 	@vite('resources/js/app.ts')
 
-	<script type="application/javascript">
-		document.addEventListener('allow_tracking', ga_track);
-	</script>
+	<x-google-analytics />
 @endpush
