@@ -1,5 +1,11 @@
 # Changelog
 
+## Version 2.8.5
+
+### Fix
+
+- Deploy workflow syntax error
+
 ## Version 2.8.4
 
 ### Fix

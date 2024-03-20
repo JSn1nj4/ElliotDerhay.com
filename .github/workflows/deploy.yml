@@ -39,7 +39,7 @@ jobs:
             && git checkout $DEPLOY_BRANCH \
             && git reset --hard \
             && git pull \
-            && composer install --no-dev
+            && composer install --no-dev \
             && yarn && yarn prod'
         env:
           DEPLOY_BRANCH: ${{ secrets.DEPLOY_BRANCH }}
