@@ -1,5 +1,11 @@
 # Changelog
 
+## Version 2.8.6
+
+### Fix
+
+- Deploy script syntax error
+
 ## Version 2.8.5
 
 ### Fix
