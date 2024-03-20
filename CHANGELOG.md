@@ -1,5 +1,11 @@
 # Changelog
 
+## Version 2.8.4
+
+### Fix
+
+- Allow the deploy workflow to auto-accept host info for a new key
+
 ## Version 2.8.3
 
 ### Updates
