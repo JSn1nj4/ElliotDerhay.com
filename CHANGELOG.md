@@ -1,10 +1,74 @@
 # Changelog
 
-## Version 2.8.2
+## Version 2.9.0
+
+### Updates
+
+- [#183][is_183]: Upgrade to Laravel 11 ([#190][pr_190])
 
 ### Development
 
+- Purge old VS Code configs
 - Start a bunch of missing tests
+
+[is_183]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/183
+
+[pr_190]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/190
+
+## Version 2.8.6
+
+### Fix
+
+- Deploy script syntax error
+
+## Version 2.8.5
+
+### Fix
+
+- Deploy workflow syntax error
+
+## Version 2.8.4
+
+### Fix
+
+- Allow the deploy workflow to auto-accept host info for a new key
+
+## Version 2.8.3
+
+### Updates
+
+- Bulk update all dependencies
+- [#153][is_153]: Convert Vue-based popups to Alpine ([#185][pr_185])
+
+### Development
+
+- Update local tool versions
+- Switch to fully local dev ([#176][pr_176])
+- Fix image seeder
+- [#172][is_172]: Update Sentry configuration ([#173][pr_173])
+- Allow dependabot to handle dependency patch updates
+- Clean up Vite config
+- Ignore database backups directory
+- Ignore public assets build directory
+- Add deploy workflow
+
+[is_153]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/153
+
+[is_172]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/172
+
+[pr_173]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/173
+
+[pr_176]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/176
+
+[pr_185]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/185
+
+## Version 2.8.2
+
+This is a hotfix for an existing production issue.
+
+### Fix
+
+- Make existing weekly job run one time
 
 ## Version 2.8.1
 
@@ -18,9 +82,9 @@
 
 - [#170][is_170]: Create custom Node clock ([#171][pr_171])
 
-[is_170]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/167
+[is_170]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/170
 
-[pr_171]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/168
+[pr_171]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/171
 
 ## Version 2.7.0
 

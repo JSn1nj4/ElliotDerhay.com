@@ -38,7 +38,8 @@ uses(TestCase::class, RefreshDatabase::class)
  * @param string $message
  * @return void
  */
-function assertFalse($condition, string $message = ''): void {
+function assertFalse($condition, string $message = ''): void
+{
 	\PHPUnit\Framework\assertFalse($condition, $message);
 }
 
@@ -48,7 +49,8 @@ function assertFalse($condition, string $message = ''): void {
  * @param string $message
  * @return void
  */
-function assertTrue($condition, string $message = ''): void {
+function assertTrue($condition, string $message = ''): void
+{
 	\PHPUnit\Framework\assertTrue($condition, $message);
 }
 
@@ -74,46 +76,56 @@ function assertTrue($condition, string $message = ''): void {
 |
 */
 
-function createImage(): Image {
+function createImage(): Image
+{
 	return Image::factory()->createOne();
 }
 
-function createPost(): Post {
+function createPost(): Post
+{
 	return Post::factory()->createOne();
 }
 
-function createProject(): Project {
+function createProject(): Project
+{
 	return Project::factory()->createOne();
 }
 
-function createUser(): User {
+function createUser(): User
+{
 	return User::factory()->createOne();
 }
 
-function hashPassword(string $password): string {
+function hashPassword(string $password): string
+{
 	$hashPassword = new \App\Actions\HashPassword();
 
 	return $hashPassword($password);
 }
 
-function invoke(string $className, array $params): mixed {
+function invoke(string $className, array $params): mixed
+{
 	$class = resolve($className);
 
 	return $class(...$params);
 }
 
-function makeImage(): Image {
+function makeImage(): Image
+{
 	return Image::factory()->makeOne();
 }
 
-function makePost(): Post {
+function makePost(): Post
+{
 	return Post::factory()->makeOne();
 }
 
-function makeProject(): Project {
+function makeProject(): Project
+{
 	return Project::factory()->makeOne();
 }
 
-function makeUser(): User {
+function makeUser(): User
+{
 	return User::factory()->makeOne();
 }

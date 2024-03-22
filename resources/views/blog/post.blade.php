@@ -76,9 +76,5 @@
 @endsection
 
 @prependonce('footer-extras')
-	<div id="lightbox-modal"></div>
+	<x-lightbox />
 @endprependonce
-
-@pushonce('footer-extras')
-	@include('partials.lightbox-trigger')
-@endpushonce
