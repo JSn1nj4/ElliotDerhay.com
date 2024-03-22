@@ -3,37 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Tweet;
+use Illuminate\Database\Eloquent\Collection;
 
 class TweetController extends Controller
 {
-	/**
-	 * Store instance of App\Tseet on controller instantiation
-	 *
-	 * @method                  __construct
-	 * @access public
-	 *
-	 * @return void
-	 */
-	public function __construct()
-	{
-		//
-	}
-
-	/**
-	 * Get a list of tweets for display in a timeline-like view
-	 *
-	 * @method                  index
-	 * @access public
-	 *
-	 * @param integer           $count
-	 *
-	 * @return object
-	 */
-	public function index(int $count = 5)
+	public function index(int $count = 5): Collection
 	{
 		return Tweet::with('user')
-				->latest('date')
-				->take($count)
-				->get();
+			->latest('date')
+			->take($count)
+			->get();
 	}
 }
