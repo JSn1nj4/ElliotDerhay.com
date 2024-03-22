@@ -20,7 +20,8 @@
 		"noweh/twitter-api-v2-php": "^3.4",
 		"sentry/sentry-laravel": "^4.3",
 		"spatie/laravel-markdown": "^2.5",
-		"spatie/laravel-sitemap": "^7.0"
+		"spatie/laravel-sitemap": "^7.0",
+		"ext-pdo": "*"
 	},
 	"require-dev": {
 		"barryvdh/laravel-ide-helper": "^3.0",
