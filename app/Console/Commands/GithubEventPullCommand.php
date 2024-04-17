@@ -30,16 +30,6 @@ class GithubEventPullCommand extends Command
 	protected $description = 'Fetch events from GitHub\'s events API.';
 
 	/**
-	 * Create a new command instance.
-	 *
-	 * @return void
-	 */
-	public function __construct()
-	{
-		parent::__construct();
-	}
-
-	/**
 	 * Execute the console command.
 	 *
 	 * @param \App\Services\Github\GithubService $github
@@ -60,13 +50,13 @@ class GithubEventPullCommand extends Command
 
 		$events = $github->getEvents('JSn1nj4', $this->option('count'));
 
-		if($this->option('file')) {
+		if ($this->option('file')) {
 			Storage::disk('debug')->put($this->option('file'), $events->toJson());
 
 			return self::SUCCESS;
 		}
 
-		if($this->option('debug')) {
+		if ($this->option('debug')) {
 			dd($events);
 		}
 
