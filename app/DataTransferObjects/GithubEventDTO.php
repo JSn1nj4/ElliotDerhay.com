@@ -19,6 +19,11 @@ readonly class GithubEventDTO
 	public static function getAction(array $data): string|null
 	{
 		return match ($data['type']) {
+			'CommitCommentEvent' => match (optional($data['payload'])['action']) {
+				'created' => 'commented on',
+				default => 'deleted a comment on',
+			},
+
 			'IssuesEvent' => optional($data['payload'])['action'],
 
 			'PullRequestEvent' => match (true) {
@@ -40,6 +45,7 @@ readonly class GithubEventDTO
 	public static function getEventSource(array $data): string|null
 	{
 		return match ($data['type']) {
+			'CommitCommentEvent' => $data['payload']['comment']['commit_id'],
 			'CreateEvent', 'DeleteEvent', 'PushEvent' => $data['payload']['ref'],
 			'ForkEvent' => $data['payload']['forkee']['full_name'],
 			'IssueCommentEvent', 'IssuesEvent' => $data['payload']['issue']['number'],

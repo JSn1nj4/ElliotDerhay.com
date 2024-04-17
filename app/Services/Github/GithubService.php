@@ -30,6 +30,7 @@ class GithubService implements GitHostService
 	 * Reference: https://docs.github.com/en/developers/webhooks-and-events/events/github-event-types
 	 */
 	private array $supportedEventTypes = [
+		'CommitCommentEvent',
 		'CreateEvent',
 		'DeleteEvent',
 		'ForkEvent',
