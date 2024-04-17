@@ -4,36 +4,48 @@ namespace App\DataTransferObjects;
 
 use Illuminate\Support\Carbon;
 
-class GithubEventDTO
+readonly class GithubEventDTO
 {
 	public function __construct(
-		public readonly string $id,
-		public readonly string $type,
-		public readonly ?string $action,
-		public readonly string $date,
-		public readonly GithubUserDTO $user,
-		public readonly ?string $source,
-		public readonly string $repo,
+		public string        $id,
+		public string        $type,
+		public string|null   $action,
+		public string        $date,
+		public GithubUserDTO $user,
+		public string|null   $source,
+		public string        $repo,
 	) {}
 
-	public static function getAction(array $data): ?string
+	public static function getAction(array $data): string|null
 	{
 		return match ($data['type']) {
-			'IssuesEvent' => \optional($data['payload'])['action'],
-			'PullRequestEvent' => (\optional($data['payload'])['merged']
-				? 'merged'
-				: \optional($data['payload'])['action']),
+			'IssuesEvent' => optional($data['payload'])['action'],
+
+			'PullRequestEvent' => match (true) {
+				optional($data['payload'])['merged'] !== null => 'merged',
+				default => optional($data['payload'])['action'],
+			},
+
+			'PullRequestReviewCommentEvent' => match (optional($data['payload'])['action']) {
+				'created' => 'commented on a review of',
+				'deleted' => 'deleted a review comment on',
+				default => 'updated a review comment on',
+			},
+
+			'PullRequestReviewEvent' => 'started a review on',
 			default => null,
 		};
 	}
 
-	public static function getEventSource(array $data): ?string
+	public static function getEventSource(array $data): string|null
 	{
 		return match ($data['type']) {
-			'CreateEvent', 'DeleteEvent', 'PushEvent' 	=> $data['payload']['ref'],
-			'ForkEvent' 								=> $data['payload']['forkee']['full_name'],
-			'IssueCommentEvent', 'IssuesEvent' 			=> $data['payload']['issue']['number'],
-			'PullRequestEvent' 							=> $data['payload']['pull_request']['number'],
+			'CreateEvent', 'DeleteEvent', 'PushEvent' => $data['payload']['ref'],
+			'ForkEvent' => $data['payload']['forkee']['full_name'],
+			'IssueCommentEvent', 'IssuesEvent' => $data['payload']['issue']['number'],
+			'PullRequestEvent',
+			'PullRequestReviewCommentEvent',
+			'PullRequestReviewEvent' => $data['payload']['pull_request']['number'],
 			default => null,
 		};
 	}
