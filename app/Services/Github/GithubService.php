@@ -41,6 +41,7 @@ class GithubService implements GitHostService
 		'PullRequestReviewCommentEvent',
 		'PullRequestReviewEvent',
 		'PushEvent',
+		'ReleaseEvent',
 		'WatchEvent',
 	];
 

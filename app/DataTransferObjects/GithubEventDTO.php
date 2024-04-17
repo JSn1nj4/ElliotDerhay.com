@@ -38,6 +38,12 @@ readonly class GithubEventDTO
 			},
 
 			'PullRequestReviewEvent' => 'started a review on',
+
+			'ReleaseEvent' => match (optional($data['payload'])['action']) {
+				null => 'updated',
+				default => optional($data['payload'])['action'],
+			},
+
 			default => null,
 		};
 	}
@@ -52,6 +58,7 @@ readonly class GithubEventDTO
 			'PullRequestEvent',
 			'PullRequestReviewCommentEvent',
 			'PullRequestReviewEvent' => $data['payload']['pull_request']['number'],
+			'ReleaseEvent' => $data['payload']['release']['html_url'],
 			default => null,
 		};
 	}
