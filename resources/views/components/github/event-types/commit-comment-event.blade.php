@@ -15,14 +15,19 @@
 
 				{{ $action }}
 
-				{{-- If there's no ref, it's assumed the repo was deleted --}}
-				@unless($refName === null)
+				{{-- no refUrl assumes it was deleted --}}
+				@if($refUrl === null)
 					<span class="text-caribbeanGreen-600 dark:text-caribbeanGreen-800">
 						{{ $refName }}
 					</span>
+				@else
+					<a href="{{ $refUrl }}" target="_blank">
+						{{ $refName }}
+					</a>
+				@endif
 
-					{{ $preposition }}
-				@endunless
+
+				{{ $preposition }}
 
 				<a href="{{ $repoUrl() }}" target="_blank">
 					{{ $event->repo }}
