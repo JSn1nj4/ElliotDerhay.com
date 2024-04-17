@@ -1,5 +1,24 @@
 # Changelog
 
+## Version 2.9.0
+
+### Updates
+
+- [#183][is_183]: Upgrade to Laravel 11 ([#190][pr_190])
+- [#39][is_39]: Look into support for new GitHub events ([#193][pr_193])
+
+### Development
+
+- Purge old VS Code configs
+
+[is_39]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/39
+
+[is_183]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/183
+
+[pr_190]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/190
+
+[pr_193]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/193
+
 ## Version 2.8.6
 
 ### Fix
