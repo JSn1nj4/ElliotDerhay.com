@@ -1,5 +1,15 @@
 # Changelog
 
+## Version 2.9.1
+
+### Fix
+
+- [#194][is_194]: Migrate old schedule stuff to console routes file ([#195][pr_195])
+
+[is_194]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/194
+
+[pr_195]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/195
+
 ## Version 2.9.0
 
 ### Updates
