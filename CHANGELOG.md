@@ -1,5 +1,11 @@
 # Changelog
 
+## Version 2.9.2
+
+### Development
+
+- No more Lando stuff
+
 ## Version 2.9.1
 
 ### Fix
