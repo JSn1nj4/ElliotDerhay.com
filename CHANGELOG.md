@@ -2,6 +2,12 @@
 
 ## Version 2.9.2
 
+### Changes
+
+- Update `session:flush` command
+	- Fix working with sessions file storage (if used)
+	- Forcefully log users out if using database driver
+
 ### Development
 
 - No more Lando stuff
