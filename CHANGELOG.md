@@ -1,19 +1,46 @@
 # Changelog
 
+## Version 2.9.2
+
+### Changes
+
+- Update `session:flush` command
+	- Fix working with sessions file storage (if used)
+	- Forcefully log users out if using database driver
+
+### Development
+
+- No more Lando stuff
+
+## Version 2.9.1
+
+### Fix
+
+- [#194][is_194]: Migrate old schedule stuff to console routes file ([#195][pr_195])
+
+[is_194]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/194
+
+[pr_195]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/195
+
 ## Version 2.9.0
 
 ### Updates
 
 - [#183][is_183]: Upgrade to Laravel 11 ([#190][pr_190])
+- [#39][is_39]: Look into support for new GitHub events ([#193][pr_193])
 
 ### Development
 
 - Purge old VS Code configs
 - Start a bunch of missing tests
 
+[is_39]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/39
+
 [is_183]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/183
 
 [pr_190]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/190
+
+[pr_193]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/193
 
 ## Version 2.8.6
 

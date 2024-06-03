@@ -30,6 +30,7 @@ class GithubService implements GitHostService
 	 * Reference: https://docs.github.com/en/developers/webhooks-and-events/events/github-event-types
 	 */
 	private array $supportedEventTypes = [
+		'CommitCommentEvent',
 		'CreateEvent',
 		'DeleteEvent',
 		'ForkEvent',
@@ -37,7 +38,10 @@ class GithubService implements GitHostService
 		'IssuesEvent',
 		'PublicEvent',
 		'PullRequestEvent',
+		'PullRequestReviewCommentEvent',
+		'PullRequestReviewEvent',
 		'PushEvent',
+		'ReleaseEvent',
 		'WatchEvent',
 	];
 
@@ -51,10 +55,10 @@ class GithubService implements GitHostService
 	public function __construct()
 	{
 		foreach ([
-			'services.github.token',
-			'mail.to.name',
-			'mail.to.address',
-		] as $key) {
+					 'services.github.token',
+					 'mail.to.name',
+					 'mail.to.address',
+				 ] as $key) {
 			if (config($key) === null) {
 				throw new Exception("Config option '{$key}' not set.");
 			}
@@ -142,11 +146,11 @@ class GithubService implements GitHostService
 	 */
 	public function getEvents(string $user, int $count): Collection
 	{
-		if($count < 1) {
+		if ($count < 1) {
 			throw new Exception("'\$count' value must be 1 or higher. Value is '{$count}'.");
 		}
 
-		if($count > 100) {
+		if ($count > 100) {
 			throw new Exception("'\$count' value must be 100 or less. Value is '{$count}'.");
 		}
 
