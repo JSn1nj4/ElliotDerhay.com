@@ -3,12 +3,44 @@
 namespace App\Services\Mastodon;
 
 use App\DataTransferObjects\MastodonApiCredentials;
+use App\Models\Token;
 
 class MastodonClient
 {
 	public function __construct(
 		#[\SensitiveParameter] protected MastodonApiCredentials $credentials,
 	) {}
+
+	/**
+	 * Reduce cached Rate Limit Remaining count by 1
+	 * @return void
+	 */
+	public function decreaseRemaining(): void {}
+
+	/**
+	 * Fetches the current API token.
+	 *
+	 * If expired, an attempt will be made to renew it. Failure will result in default number of retries and then triggering an administrative notification.
+	 * @return \App\Models\Token
+	 */
+	protected function token(): Token
+	{
+		$token = Token::mastodon()->first();
+
+		if ($token !== null) return $token;
+
+		return $this->requestToken();
+	}
+
+	protected function rateLimited(): bool {}
+
+	protected function requestToken(): Token {}
+
+	/*
+	 * @return true
+	 * @throws \App\Exceptions\TokenVerificationFailedException
+	 */
+	protected function verifyToken(): true {}
 }
 
 
@@ -31,6 +63,8 @@ class MastodonClient
  *    -F 'redirect_uri=urn:ietf:wg:oauth:2.0:oob' \
  *    -F 'grant_type=client_credentials' \
  *    https://<domain.name>/oauth/token
+ *
+ * Need to save token (encrypted) and expiration time
  */
 
 /**
