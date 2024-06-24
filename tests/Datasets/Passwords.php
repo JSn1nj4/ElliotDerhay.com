@@ -1,11 +1,11 @@
 <?php
 
-use function Pest\Faker\faker;
+use function Pest\Faker\fake;
 
 dataset('random_passwords', function () {
-	yield faker()->password();
-	yield faker()->password();
-	yield faker()->password();
-	yield faker()->password();
-	yield faker()->password();
+	yield fake()->password();
+	yield fake()->password();
+	yield fake()->password();
+	yield fake()->password();
+	yield fake()->password();
 });

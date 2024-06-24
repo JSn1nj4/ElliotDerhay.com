@@ -32,6 +32,7 @@
 ### Development
 
 - Purge old VS Code configs
+- Start a bunch of missing tests
 
 [is_39]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/39
 

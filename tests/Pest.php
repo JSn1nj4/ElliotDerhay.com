@@ -15,16 +15,10 @@ use App\Models\Image;
 use App\Models\Post;
 use App\Models\Project;
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Storage;
-use Tests\TestCase;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-uses(TestCase::class, RefreshDatabase::class)
-	->in('Unit');
-
-uses(TestCase::class, RefreshDatabase::class)
-	->beforeEach(fn () => Storage::fake())
-	->in('Feature');
+uses(Tests\TestCase::class, DatabaseMigrations::class)
+	->in('Feature', 'Unit');
 
 /*
 |--------------------------------------------------------------------------
@@ -37,9 +31,9 @@ uses(TestCase::class, RefreshDatabase::class)
 |
 */
 
-// expect()->extend('toBeOne', function () {
-//     return $this->toBe(1);
-// });
+expect()->extend('toBeOne', function () {
+	return $this->toBe(1);
+});
 
 /*
 |--------------------------------------------------------------------------
@@ -72,7 +66,7 @@ function createUser(): User
 	return User::factory()->createOne();
 }
 
-function hashPassword(string $password): string
+function hashPassword(#[\SensitiveParameter] string $password): string
 {
 	$hashPassword = new \App\Actions\HashPassword();
 

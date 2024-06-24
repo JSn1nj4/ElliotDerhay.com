@@ -8,21 +8,19 @@ use Illuminate\View\Component;
 
 class Latest extends Component
 {
-	public Post $post;
+	public Post|null $post;
 
-    /**
-     * Create a new component instance.
-     */
-    public function __construct()
-    {
+	/**
+	 * Create a new component instance.
+	 */
+	public function __construct() {
 		$this->post = Post::latest()->first();
-    }
+	}
 
-    /**
-     * Get the view / contents that represent the component.
-     */
-    public function render(): View
-    {
-        return view('components.post.latest');
-    }
+	/**
+	 * Get the view / contents that represent the component.
+	 */
+	public function render(): View {
+		return view('components.post.latest');
+	}
 }
