@@ -1,5 +1,20 @@
 # Changelog
 
+## Version 2.9.2
+
+### Changes
+
+- Update `session:flush` command
+	- Fix working with sessions file storage (if used)
+	- Forcefully log users out if using database driver
+	- Update profile pic on homepage
+
+### Development
+
+- No more Lando stuff
+- Add Mailpit startup command
+- Fix a potential deploy edge case caused by untracked files not being removed first
+
 ## Version 2.9.1
 
 ### Fix
@@ -20,6 +35,7 @@
 ### Development
 
 - Purge old VS Code configs
+- Start a bunch of missing tests
 
 [is_39]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/39
 

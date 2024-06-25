@@ -1,10 +1,10 @@
 <?php
 
-use function Pest\Faker\faker;
+use function Pest\Faker\fake;
 
 dataset('random_objects', function () {
-	yield faker()->dateTime();
-	yield faker()->dateTimeInInterval();
-	yield faker()->timezone();
+	yield fake()->dateTime();
+	yield fake()->dateTimeInInterval();
+	yield fake()->timezone();
 	yield new stdClass();
 });

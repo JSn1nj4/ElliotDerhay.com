@@ -27,8 +27,8 @@ class MoveImage
 				->readStream($from->path));
 
 		return $succeeded ?
-			$this->success("File on disk '{$from->disk}' at path '{$from->path}' moved  to disk '{$to->disk}' at path '{$to->path}'.") :
-			$this->failure("Failed to move file on disk '{$from->disk}' at path disk '{$to->disk}' at path '{$to->path}'.");
+			$this->success("File on disk '{$from->disk}' at path '{$from->path}' moved to disk '{$to->disk}' at path '{$to->path}'.") :
+			$this->failure("Failed to move file on disk '{$from->disk}' at path '{$from->path}' disk '{$to->disk}' at path '{$to->path}'.");
 	}
 
 	public static function execute(

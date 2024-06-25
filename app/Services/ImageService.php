@@ -3,10 +3,8 @@
 namespace App\Services;
 
 use App\Traits\MakesSelf;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
-use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class ImageService
 {
@@ -19,11 +17,11 @@ class ImageService
 
 	private static function ensureCached(string $path, string $disk): void
 	{
-		if (!Storage::disk('public-cache')->exists($path)) {
-			Storage::disk('public-cache')
-				->writeStream($path, Storage::disk($disk)
-					->readStream($path));
-		}
+		if (Storage::disk('public-cache')->exists($path)) return;
+
+		Storage::disk('public-cache')
+			->writeStream($path, Storage::disk($disk)
+				->readStream($path));
 	}
 
 	public function url(string $path, string $disk): string
