@@ -11,6 +11,7 @@
 ### Development
 
 - No more Lando stuff
+- Add Mailpit startup command
 
 ## Version 2.9.1
 
