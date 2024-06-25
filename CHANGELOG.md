@@ -13,6 +13,7 @@
 
 - No more Lando stuff
 - Add Mailpit startup command
+- Fix a potential deploy edge case caused by untracked files not being removed first
 
 ## Version 2.9.1
 
