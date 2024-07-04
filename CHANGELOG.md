@@ -1,5 +1,11 @@
 # Changelog
 
+## Version 2.10.0
+
+### Changes
+
+- Set `::selection` color
+
 ## Version 2.9.2
 
 ### Changes
