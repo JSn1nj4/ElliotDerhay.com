@@ -5,7 +5,7 @@
 
 	$scrollIntoViewJsSnippet = ($scrollTo !== false)
 			? <<<JS
-				 (\$el.closest('{$scrollTo}') || document.querySelector('{$scrollTo}')).scrollIntoView()
+				 (\$el.closest('{$scrollTo}') || document.querySelector('{$scrollTo}')).scrollIntoView({ behavior: 'smooth' })
 			JS
 			: '';
 
@@ -66,7 +66,7 @@ $disabledColors = implode(' ', [
                     {!! __('pagination.previous') !!}
 						</span>
 					@else
-						<button type="button" wire:click="previousPage('{{ $paginator->getPageName() }}')"
+						<button type="button" wire:click.debounce="previousPage('{{ $paginator->getPageName() }}')"
 										x-on:click="{{ $scrollIntoViewJsSnippet }}" wire:loading.attr="disabled"
 										dusk="previousPage{{ $paginator->getPageName() == 'page' ? '' : '.' . $paginator->getPageName() }}.before"
 										class="relative inline-flex items-center px-4 py-2 text-sm font-medium border leading-5 rounded-md focus:outline-none focus:ring transition ease-in-out duration-150 {{ $selectableColors }}">
@@ -77,7 +77,7 @@ $disabledColors = implode(' ', [
 
 				<span>
 					@if ($paginator->hasMorePages())
-						<button type="button" wire:click="nextPage('{{ $paginator->getPageName() }}')"
+						<button type="button" wire:click.debounce="nextPage('{{ $paginator->getPageName() }}')"
 										x-on:click="{{ $scrollIntoViewJsSnippet }}" wire:loading.attr="disabled"
 										dusk="nextPage{{ $paginator->getPageName() == 'page' ? '' : '.' . $paginator->getPageName() }}.before"
 										class="relative inline-flex items-center px-4 py-2 ml-3 text-sm font-medium border leading-5 rounded-md focus:outline-none focus:ring transition ease-in-out duration-150 {{ $selectableColors }}">
@@ -122,7 +122,7 @@ $disabledColors = implode(' ', [
 									</span>
 								</span>
 							@else
-								<button type="button" wire:click="previousPage('{{ $paginator->getPageName() }}')"
+								<button type="button" wire:click.debounce="previousPage('{{ $paginator->getPageName() }}')"
 												x-on:click="{{ $scrollIntoViewJsSnippet }}"
 												dusk="previousPage{{ $paginator->getPageName() == 'page' ? '' : '.' . $paginator->getPageName() }}.after"
 												class="relative inline-flex items-center px-2 py-2 text-sm font-medium border rounded-l-md leading-5 focus:z-10 focus:outline-none focus:ring transition ease-in-out duration-150 {{ $selectableColors }}"
@@ -157,7 +157,7 @@ $disabledColors = implode(' ', [
 											</span>
 										@else
 											<button type="button"
-															wire:click="gotoPage({{ $page }}, '{{ $paginator->getPageName() }}')"
+															wire:click.debounce="gotoPage({{ $page }}, '{{ $paginator->getPageName() }}')"
 															x-on:click="{{ $scrollIntoViewJsSnippet }}"
 															class="relative inline-flex items-center px-4 py-2 -ml-px text-sm font-medium border leading-5 focus:z-10 focus:outline-none focus:ring transition ease-in-out duration-150 {{ $selectableColors }}"
 															aria-label="{{ __('Go to page :page', compact('page')) }}">
@@ -172,7 +172,7 @@ $disabledColors = implode(' ', [
 						<span>
 							{{-- Next Page Link --}}
 							@if ($paginator->hasMorePages())
-								<button type="button" wire:click="nextPage('{{ $paginator->getPageName() }}')"
+								<button type="button" wire:click.debounce="nextPage('{{ $paginator->getPageName() }}')"
 												x-on:click="{{ $scrollIntoViewJsSnippet }}"
 												dusk="nextPage{{ $paginator->getPageName() == 'page' ? '' : '.' . $paginator->getPageName() }}.after"
 												class="relative inline-flex items-center px-2 py-2 -ml-px text-sm font-medium border rounded-r-md leading-5 focus:z-10 focus:outline-none focus:ring transition ease-in-out duration-150 {{ $selectableColors }}"
