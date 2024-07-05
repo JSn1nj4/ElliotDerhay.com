@@ -4,6 +4,7 @@ use App\Http\Controllers\BlogPostsController;
 use App\Http\Controllers\ProjectsPortfolioController;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
+use Livewire\Volt\Volt;
 use Spatie\Sitemap\Sitemap;
 use Spatie\Sitemap\Tags\Url as SitemapUrl;
 
@@ -26,7 +27,7 @@ Route::view('/privacy', 'privacy')->name('privacy');
 Route::get('/projects', [ProjectsPortfolioController::class, 'index'])->name('portfolio');
 Route::prefix('/blog')
 	->group(static function () {
-		Route::get('/', [BlogPostsController::class, 'index'])->name('blog');
+		Volt::route('/', 'blog-feed')->name('blog');
 		Route::get('/{post:slug}', [BlogPostsController::class, 'show'])->name('blog.show');
 	});
 
@@ -36,22 +37,18 @@ Route::get('/sitemap.xml',
 		ttl()->days(7)->get(),
 
 		static fn (): Sitemap => Sitemap::create()
-
 			->add(SitemapUrl::create(route('home'))
 				->setLastModificationDate(Carbon::today())
 				->setChangeFrequency(SitemapUrl::CHANGE_FREQUENCY_WEEKLY)
 				->setPriority(0.1))
-
 			->add(SitemapUrl::create(route('privacy'))
 				->setLastModificationDate(Carbon::today())
 				->setChangeFrequency(SitemapUrl::CHANGE_FREQUENCY_MONTHLY)
 				->setPriority(0.1))
-
 			->add(SitemapUrl::create(route('blog'))
 				->setLastModificationDate(Carbon::today())
 				->setChangeFrequency(SitemapUrl::CHANGE_FREQUENCY_WEEKLY)
 				->setPriority(0.1))
-
 			->add(\App\Models\Post::all())
 	)
 		->toResponse($request));
