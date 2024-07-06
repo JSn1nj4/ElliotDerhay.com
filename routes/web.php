@@ -27,7 +27,7 @@ Route::view('/privacy', 'privacy')->name('privacy');
 Route::get('/projects', [ProjectsPortfolioController::class, 'index'])->name('portfolio');
 Route::prefix('/blog')
 	->group(static function () {
-		Volt::route('/', 'blog-feed')->name('blog');
+		Volt::route('/', 'blog-index')->name('blog');
 		Route::get('/{post:slug}', [BlogPostsController::class, 'show'])->name('blog.show');
 	});
 
