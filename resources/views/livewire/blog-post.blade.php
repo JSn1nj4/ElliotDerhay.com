@@ -1,10 +1,29 @@
-@php /** @var App\Models\Post $post */ @endphp
-@extends('layouts.blog')
+<?php
 
-@section('page-title', $post->page_title)
-@section('meta-description', $post->meta_description)
+use App\Enums\PerPage;
+use App\Filters\{CategoryQueryParam, TagQueryParam};
+use App\Models\Post;
+use Livewire\Attributes\{Computed, Layout, Title, Url};
 
-@push('head-extras')
+new
+#[Layout('components.layouts.blog')]
+class extends \Livewire\Volt\Component {
+	use \Livewire\WithPagination;
+
+	public Post $post;
+
+	public function mount(Post $post)
+	{
+		$this->post = $post;
+	}
+}; ?>
+
+<x-slot:title>Elliot's Tech Blog - ElliotDerhay.com</x-slot:title>
+<x-slot:meta-description>
+	Latest post: {{ $post->meta_description }}
+</x-slot:meta-description>
+
+<x-slot:head-extras>
 	@include('partials.metadata.schema-markup', [
 	  'type' => 'Article',
 	  'name' => $post->title,
@@ -21,9 +40,9 @@
   	'url' => route('blog.show', compact('post')),
   	'image' => $post->image?->url,
 	])
-@endpush
+</x-slot:head-extras>
 
-@section('blog')
+<root>
 	@if($post->image)
 		<figure class="lightbox-trigger inline-block">
 			<img src="{{ $post->image->url }}" class="block rounded-lg" alt="">
@@ -69,12 +88,12 @@
 	<x-markdown class="mb-4 mt-3">
 		{!! $post->body !!}
 	</x-markdown>
-@endsection
+</root>
 
-@section('sidebar')
+<x-slot:sidebar>
 	@include('partials.blog-sidebar')
-@endsection
+</x-slot:sidebar>
 
-@prependonce('footer-extras')
+<x-slot:footer-extras>
 	<x-lightbox />
-@endprependonce
+</x-slot:footer-extras>

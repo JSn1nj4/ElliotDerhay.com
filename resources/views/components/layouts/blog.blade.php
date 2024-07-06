@@ -13,6 +13,10 @@
 	<script src="https://kit.fontawesome.com/a9f488e9e4.js" crossorigin="anonymous"></script>
 
 	<link rel="shortcut icon" href="{{ asset_url('favicon.png') }}">
+
+	@isset($headExtras)
+		{{ $headExtras }}
+	@endisset
 </head>
 <body class="bg-white dark:bg-black text-black dark:text-white font-sans flex flex-col {{ $bodyClasses ?? '' }}">
 
@@ -20,7 +24,7 @@
 	<x-nav>
 		<x-nav-item route="home" icon="fas fa-home" inline>Home</x-nav-item>
 		@if(config('app.enable-blog'))
-			<x-nav-item route="blog" inline>Blog</x-nav-item>
+			<x-nav-item route="blog" inline livewire>Blog</x-nav-item>
 		@endif
 		@if(config('app.enable-projects'))
 			<x-nav-item route="portfolio" inline>Projects</x-nav-item>
@@ -48,6 +52,10 @@
 @vite('resources/js/app.ts')
 
 <x-google-analytics />
+
+@isset($footerExtras)
+	{{ $footerExtras }}
+@endisset
 
 <script>
 	// todo: organize one-off scripts within bundled JS

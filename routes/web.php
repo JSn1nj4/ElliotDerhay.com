@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\BlogPostsController;
 use App\Http\Controllers\ProjectsPortfolioController;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
@@ -28,7 +27,7 @@ Route::get('/projects', [ProjectsPortfolioController::class, 'index'])->name('po
 Route::prefix('/blog')
 	->group(static function () {
 		Volt::route('/', 'blog-index')->name('blog');
-		Route::get('/{post:slug}', [BlogPostsController::class, 'show'])->name('blog.show');
+		Volt::route('/{post:slug}', 'blog-post')->name('blog.show');
 	});
 
 Route::get('/sitemap.xml',
