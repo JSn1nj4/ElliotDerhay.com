@@ -54,9 +54,13 @@ function createImage(): Image
 	return Image::factory()->createOne();
 }
 
-function createPost(): Post
+function createPost(bool $publish = false): Post
 {
-	return Post::factory()->createOne();
+	$factory = Post::factory();
+
+	if ($publish) $factory->state(['published' => true]);
+	
+	return $factory->createOne();
 }
 
 
