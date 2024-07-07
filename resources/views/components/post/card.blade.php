@@ -1,5 +1,5 @@
 @php /** @var App\Models\Post $post */ @endphp
-<x-card.wrapper :size="$size" :padding="$padding" :margin="$margin">
+<x-card.wrapper :extra-classes='$extraClasses' :size="$size" :padding="$padding" :margin="$margin">
 	@if($post->image)
 		<x-card.thumbnail
 			href="{{ route('blog.show', compact('post')) }}"

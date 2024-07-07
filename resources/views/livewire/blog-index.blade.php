@@ -60,7 +60,14 @@ class extends \Livewire\Volt\Component {
 <root>
 	@if($this->hasPosts())
 		@foreach($posts as $post)
-			<x-post.card :post="$post" size="none" padding="p-0" margin="mb-12 last:mb-0" livewire />
+			<x-post.card
+				extra-classes='blog-post-card'
+				:post="$post"
+				size="none"
+				padding="p-0"
+				margin="mb-12 last:mb-0"
+				livewire
+			/>
 		@endforeach
 		{{ $posts->links() }}
 	@else
