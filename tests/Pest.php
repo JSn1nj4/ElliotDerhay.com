@@ -11,14 +11,17 @@
 |
 */
 
+use App\Actions\HashPassword;
 use App\Models\Image;
 use App\Models\Post;
 use App\Models\Project;
 use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Livewire\Livewire;
+use Livewire\Volt\Volt;
 
 uses(Tests\TestCase::class, DatabaseMigrations::class)
-	->in('Feature', 'Unit');
+	->in('Feature');
 
 /*
 |--------------------------------------------------------------------------
@@ -56,6 +59,7 @@ function createPost(): Post
 	return Post::factory()->createOne();
 }
 
+
 function createProject(): Project
 {
 	return Project::factory()->createOne();
@@ -66,9 +70,9 @@ function createUser(): User
 	return User::factory()->createOne();
 }
 
-function hashPassword(#[\SensitiveParameter] string $password): string
+function hashPassword(#[SensitiveParameter] string $password): string
 {
-	$hashPassword = new \App\Actions\HashPassword();
+	$hashPassword = new HashPassword();
 
 	return $hashPassword($password);
 }
@@ -98,4 +102,16 @@ function makeProject(): Project
 function makeUser(): User
 {
 	return User::factory()->makeOne();
+}
+
+// borrowed from Ryan Chandler:
+// https://x.com/ryangjchandler/status/1808796458260341189
+function livewireMountable(string $class, array $params = []): void
+{
+	it('can be mounted', fn () => Livewire::test($class, $params)->assertOk());
+}
+
+function voltMountable(string $component, array $params = []): void
+{
+	it('can be mounted', fn () => Volt::test($component, $params)->assertOk());
 }
