@@ -10,20 +10,20 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class TagFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array
-     */
-    public function definition(): array
+	/**
+	 * Define the model's default state.
+	 *
+	 * @return array
+	 */
+	public function definition(): array
 	{
 		return [
-            'title' => $this->faker->unique()->name,
-        ];
-    }
+			'title' => fake()->unique()->name,
+		];
+	}
 
 	public function configure(): self|Factory
-    {
+	{
 		return $this->afterMaking(static function (Tag $tag) {
 			$tag->slug = str($tag->title)->slug()->toString();
 		});
