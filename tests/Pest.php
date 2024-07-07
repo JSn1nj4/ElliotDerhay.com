@@ -106,12 +106,16 @@ function makeUser(): User
 
 // borrowed from Ryan Chandler:
 // https://x.com/ryangjchandler/status/1808796458260341189
-function livewireMountable(string $class, array $params = []): void
+function livewireMountable(string $class, Closure|null $params = null): void
 {
-	it('can be mounted', fn () => Livewire::test($class, $params)->assertOk());
+	it('can be mounted', function () use ($class, $params) {
+		Livewire::test($class, is_callable($params) ? $params() : [])->assertOk();
+	});
 }
 
-function voltMountable(string $component, array $params = []): void
+function voltMountable(string $component, Closure|null $params = null): void
 {
-	it('can be mounted', fn () => Volt::test($component, $params)->assertOk());
+	it('can be mounted', function () use ($component, $params) {
+		Volt::test($component, is_callable($params) ? $params() : [])->assertOk();
+	});
 }
