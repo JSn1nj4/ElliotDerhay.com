@@ -23,8 +23,14 @@ class PostFactory extends Factory
 			'title' => fake()->realText(60),
 			'body' => fake()->realText(500),
 			'slug' => str($title)->slug()->toString(),
-			'published' => $published,
-			'published_at' => $published ? fake()->dateTime() : null,
 		];
+	}
+
+	public function published(): static
+	{
+		return $this->state(static fn (array $attributes): array => [
+			'published' => true,
+			'published_at' => fake()->dateTime(),
+		]);
 	}
 }

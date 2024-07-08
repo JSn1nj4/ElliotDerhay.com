@@ -71,10 +71,7 @@ function createPosts(int $count = 1, bool|null $publish = null): Collection|null
 {
 	$factory = Post::factory()->count($count);
 
-	if ($publish !== null) $factory->afterMaking(function (Post $post) use ($publish) {
-		$post->published = $publish;
-		$post->published_at = $publish ? fake()->dateTime() : null;
-	});
+	if ($publish) return $factory->published()->create();
 
 	return $factory->create();
 }
