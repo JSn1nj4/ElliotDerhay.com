@@ -17,11 +17,10 @@ use App\Models\Post;
 use App\Models\Project;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Livewire\Livewire;
 use Livewire\Volt\Volt;
 
-uses(Tests\TestCase::class, DatabaseMigrations::class)
+uses(Tests\TestCase::class, \Illuminate\Foundation\Testing\RefreshDatabase::class)
 	->in('Feature');
 
 /*
@@ -50,6 +49,14 @@ expect()->extend('toBeOne', function () {
 |
 */
 
+function expectPostPublished(Post $post): \Pest\Expectation
+{
+	return expect($post->published)
+		->toBeTrue('Testing "published" field')
+		->and($post->published_at)
+		->toBeInstanceOf(\Carbon\Carbon::class, 'Testing "published_at" field');
+}
+
 function createImage(): Image
 {
 	return Image::factory()->createOne();
@@ -64,10 +71,10 @@ function createPosts(int $count = 1, bool|null $publish = null): Collection|null
 {
 	$factory = Post::factory()->count($count);
 
-	if ($publish !== null) $factory->state([
-		'publish' => $publish,
-		'published_at' => $publish ? fake()->dateTime() : null,
-	]);
+	if ($publish !== null) $factory->afterMaking(function (Post $post) use ($publish) {
+		$post->published = $publish;
+		$post->published_at = $publish ? fake()->dateTime() : null;
+	});
 
 	return $factory->create();
 }
