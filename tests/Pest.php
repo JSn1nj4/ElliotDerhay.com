@@ -16,6 +16,7 @@ use App\Models\Image;
 use App\Models\Post;
 use App\Models\Project;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Livewire\Livewire;
 use Livewire\Volt\Volt;
@@ -54,13 +55,21 @@ function createImage(): Image
 	return Image::factory()->createOne();
 }
 
-function createPost(bool $publish = false): Post
+function createPost(bool|null $publish = null): Post|null
 {
-	$factory = Post::factory();
+	return createPosts(1, $publish)->first();
+}
 
-	if ($publish) $factory->state(['published' => true]);
-	
-	return $factory->createOne();
+function createPosts(int $count = 1, bool|null $publish = null): Collection|null
+{
+	$factory = Post::factory()->count($count);
+
+	if ($publish !== null) $factory->state([
+		'publish' => $publish,
+		'published_at' => $publish ? fake()->dateTime() : null,
+	]);
+
+	return $factory->create();
 }
 
 
