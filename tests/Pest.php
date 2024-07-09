@@ -16,11 +16,14 @@ use App\Models\Image;
 use App\Models\Post;
 use App\Models\Project;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
 use Livewire\Volt\Volt;
+use Pest\Expectation;
 
-uses(Tests\TestCase::class, \Illuminate\Foundation\Testing\RefreshDatabase::class)
+uses(Tests\TestCase::class, RefreshDatabase::class)
 	->in('Feature');
 
 /*
@@ -49,12 +52,12 @@ expect()->extend('toBeOne', function () {
 |
 */
 
-function expectPostPublished(Post $post): \Pest\Expectation
+function expectPostPublished(Post $post): Expectation
 {
 	return expect($post->published)
 		->toBeTrue('Testing "published" field')
 		->and($post->published_at)
-		->toBeInstanceOf(\Carbon\Carbon::class, 'Testing "published_at" field');
+		->toBeInstanceOf(Carbon::class, 'Testing "published_at" field');
 }
 
 function createImage(): Image

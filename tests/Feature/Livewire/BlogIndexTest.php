@@ -8,7 +8,7 @@ voltMountable('blog-index');
 it('renders posts that are published', function () {
 	$posts = createPosts(10, true);
 
-	$posts->each(static fn ($post) => expectPostPublished($post));
+	$posts->each(fn ($post) => expectPostPublished($post));
 
 	Volt::test('blog-index')
 		->assertOk()
