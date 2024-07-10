@@ -33,4 +33,6 @@ describe('post index component', function () {
 			->assertDontSee($posts->get('excerpt'))
 			->assertDontSee('Read More');
 	});
+
+	test('does not show lightbox when clicking a thumbnail', function () {});
 });
