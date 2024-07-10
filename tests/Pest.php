@@ -60,6 +60,14 @@ function expectPostPublished(Post $post): Expectation
 		->toBeInstanceOf(Carbon::class, 'Testing "published_at" field');
 }
 
+function expectPostNotPublished(Post $post): Expectation
+{
+	return expect($post->published)
+		->toBeIn([null, false], 'Testing "published" field')
+		->and($post->published_at)
+		->toBeNull('Testing "published_at" field');
+}
+
 function createImage(): Image
 {
 	return Image::factory()->createOne();

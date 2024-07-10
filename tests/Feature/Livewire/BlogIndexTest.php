@@ -1,22 +1,36 @@
 <?php
 
 use Livewire\Volt\Volt;
-use function Pest\Laravel\get;
 
 voltMountable('blog-index');
 
-it('renders posts that are published', function () {
-	$posts = createPosts(10, true);
+test('blog page renders the volt component')
+	->get('/blog')
+	->assertOk()
+	->assertSeeVolt('blog-index');
 
-	$posts->each(fn ($post) => expectPostPublished($post));
+describe('post index component', function () {
+	test('does render published posts', function () {
+		$posts = createPosts(10, true);
 
-	Volt::test('blog-index')
-		->assertOk()
-		->assertSee($posts->get('title'))
-		->assertSee($posts->get('excerpt'))
-		->assertSee('Read More');
+		$posts->each(fn ($post) => expectPostPublished($post));
 
-	// for some reason this needs to be called after doing the actual volt test
-	get('/blog')->assertOk()
-		->assertSeeVolt('blog-index');
+		Volt::test('blog-index')
+			->assertOk()
+			->assertSee($posts->get('title'))
+			->assertSee($posts->get('excerpt'))
+			->assertSee('Read More');
+	});
+
+	test('does not render unpublished posts', function () {
+		$posts = createPosts(10);
+
+		$posts->each(fn ($post) => expectPostNotPublished($post));
+
+		Volt::test('blog-index')
+			->assertOk()
+			->assertDontSee($posts->get('title'))
+			->assertDontSee($posts->get('excerpt'))
+			->assertDontSee('Read More');
+	});
 });
