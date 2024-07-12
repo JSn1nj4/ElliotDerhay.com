@@ -51,7 +51,7 @@
 
 @vite('resources/js/app.ts')
 
-<x-google-analytics />
+<livewire:google-analytics />
 
 @isset($footerExtras)
 	{{ $footerExtras }}
