@@ -6,9 +6,14 @@
 
 - Set `::selection` color
 - [#184][is_184]: Use Volt for blog ([#206][pr_206])
-- Delete dependabot workflow file
+- [#204][is_204]: Delete dependabot workflow file
+- [#205][is_205]: Remove direct Alpine dependency
 
 [is_184]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/184
+
+[is_204]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/204
+
+[is_205]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/205
 
 [pr_206]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/206
 
