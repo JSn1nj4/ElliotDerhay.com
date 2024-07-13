@@ -20,14 +20,24 @@ describe('blog post page', function () {
 			->assertSeeVolt('blog-post');
 	});
 
-	test('instead of rendering the blog post component, shows the 404 page for an unpublished post', function () {
+	test('shows the 404 page for an unpublished post', function () {
 		$post = createPost();
 
 		/** @noinspection ClassnameLiteralInspection */
 		get("/blog/{$post->slug}")
 			->assertNotFound()
+			->assertSee('No query results for model')
+			->assertSee("[App\\Models\\Post] {$post->slug}")
+			->assertDontSeeVolt('blog-post');
+
+		Config::set('app.env', 'production');
+
+		/** @noinspection ClassnameLiteralInspection */
+		get("/blog/{$post->slug}")
+			->assertNotFound()
+			->assertSee('Not Found')
 			->assertDontSee('No query results for model')
-			->assertDontSee('App\Models\Post')
+			->assertDontSee("[App\\Models\\Post] {$post->slug}")
 			->assertDontSeeVolt('blog-post');
 	});
 });
