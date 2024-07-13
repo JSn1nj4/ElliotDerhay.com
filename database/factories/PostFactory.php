@@ -2,7 +2,6 @@
 
 namespace Database\Factories;
 
-use App\Models\Post;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -10,25 +9,37 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class PostFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array
-     */
-    public function definition(): array
+	/**
+	 * Define the model's default state.
+	 *
+	 * @return array
+	 */
+	public function definition(): array
 	{
-        return [
-			'title' => $this->faker->realText(60),
-			'body' => $this->faker->realText(500),
-		];
-    }
+		$title = fake()->realText(60);
 
-    public function configure(): self|Factory
-    {
-        return $this->afterMaking(function (Post $post) {
-            $post->slug = str($post->title)->slug()->toString();
-			$post->published = $this->faker->boolean(75);
-			$post->published_at = $post->published ? $this->faker->dateTime() : null;
-        });
-    }
+		return [
+			'title' => $title,
+			'body' => fake()->realText(500),
+			'slug' => str($title)->slug()->toString(),
+		];
+	}
+
+	public function maybePublished(int $chancePercent = 50): static
+	{
+		$published = fake()->boolean($chancePercent);
+
+		return $this->state([
+			'published' => $published,
+			'published_at' => $published ? fake()->dateTime() : null,
+		]);
+	}
+
+	public function published(): static
+	{
+		return $this->state([
+			'published' => true,
+			'published_at' => fake()->dateTime(),
+		]);
+	}
 }

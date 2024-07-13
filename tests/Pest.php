@@ -11,14 +11,20 @@
 |
 */
 
+use App\Actions\HashPassword;
 use App\Models\Image;
 use App\Models\Post;
 use App\Models\Project;
 use App\Models\User;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Livewire\Livewire;
+use Livewire\Volt\Volt;
+use Pest\Expectation;
 
-uses(Tests\TestCase::class, DatabaseMigrations::class)
-	->in('Feature', 'Unit');
+uses(Tests\TestCase::class, RefreshDatabase::class)
+	->in('Feature');
 
 /*
 |--------------------------------------------------------------------------
@@ -46,15 +52,41 @@ expect()->extend('toBeOne', function () {
 |
 */
 
+function expectPostPublished(Post $post): Expectation
+{
+	return expect($post->published)
+		->toBeTrue('Testing "published" field')
+		->and($post->published_at)
+		->toBeInstanceOf(Carbon::class, 'Testing "published_at" field');
+}
+
+function expectPostNotPublished(Post $post): Expectation
+{
+	return expect($post->published)
+		->toBeIn([null, false], 'Testing "published" field')
+		->and($post->published_at)
+		->toBeNull('Testing "published_at" field');
+}
+
 function createImage(): Image
 {
 	return Image::factory()->createOne();
 }
 
-function createPost(): Post
+function createPost(bool|null $publish = null): Post|null
 {
-	return Post::factory()->createOne();
+	return createPosts(1, $publish)->first();
 }
+
+function createPosts(int $count = 1, bool|null $publish = null): Collection|null
+{
+	$factory = Post::factory()->count($count);
+
+	if ($publish) return $factory->published()->create();
+
+	return $factory->create();
+}
+
 
 function createProject(): Project
 {
@@ -66,9 +98,9 @@ function createUser(): User
 	return User::factory()->createOne();
 }
 
-function hashPassword(#[\SensitiveParameter] string $password): string
+function hashPassword(#[SensitiveParameter] string $password): string
 {
-	$hashPassword = new \App\Actions\HashPassword();
+	$hashPassword = new HashPassword();
 
 	return $hashPassword($password);
 }
@@ -98,4 +130,20 @@ function makeProject(): Project
 function makeUser(): User
 {
 	return User::factory()->makeOne();
+}
+
+// borrowed from Ryan Chandler:
+// https://x.com/ryangjchandler/status/1808796458260341189
+function livewireMountable(string $class, Closure|null $params = null): void
+{
+	it('can be mounted', function () use ($class, $params) {
+		Livewire::test($class, is_callable($params) ? $params() : [])->assertOk();
+	});
+}
+
+function voltMountable(string $component, Closure|null $params = null): void
+{
+	it('can be mounted', function () use ($component, $params) {
+		Volt::test($component, is_callable($params) ? $params() : [])->assertOk();
+	});
 }

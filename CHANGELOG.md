@@ -5,6 +5,11 @@
 ### Changes
 
 - Set `::selection` color
+- [#184][is_184]: Use Volt for blog ([#206][pr_206])
+
+[is_184]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/184
+
+[pr_206]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/206
 
 ## Version 2.9.2
 

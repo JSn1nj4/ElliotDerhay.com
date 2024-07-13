@@ -9,18 +9,18 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class TokenFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array
-     */
-    public function definition(): array
+	/**
+	 * Define the model's default state.
+	 *
+	 * @return array
+	 */
+	public function definition(): array
 	{
-        return [
-            'id' => $this->faker->randomNumber(),
-			'service' => $this->faker->randomElement(['twitter']),
-			'value' => $this->faker->sha256(),
-			'expires_at' => $this->faker->randomElement([null]),
-        ];
-    }
+		return [
+			'id' => fake()->randomNumber(),
+			'service' => fake()->randomElement(['twitter']),
+			'value' => fake()->sha256(),
+			'expires_at' => fake()->randomElement([null]),
+		];
+	}
 }

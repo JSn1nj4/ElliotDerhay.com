@@ -15,8 +15,8 @@ class CommandEventFactory extends Factory
 	 * @return array|mixed[]
 	 * @throws \Throwable
 	 */
-    public function definition(): array
-    {
+	public function definition(): array
+	{
 		/**
 		 * @var Collection|Command[] $commands
 		 */
@@ -24,10 +24,10 @@ class CommandEventFactory extends Factory
 
 		throw_if($commands->count() === 0, new \Exception('Commands table is empty. Please fill commands table before generating fake events.'));
 
-        return [
-            'command_id' => $commands->random()->id,
-			'succeeded' => $this->faker->boolean(),
-			'message' => $this->faker->randomElement(['Run succeeded.', 'Run failed.']),
-        ];
-    }
+		return [
+			'command_id' => $commands->random()->id,
+			'succeeded' => fake()->boolean(),
+			'message' => fake()->randomElement(['Run succeeded.', 'Run failed.']),
+		];
+	}
 }

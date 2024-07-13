@@ -9,21 +9,21 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class GithubUserFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array
-     */
-    public function definition(): array
+	/**
+	 * Define the model's default state.
+	 *
+	 * @return array
+	 */
+	public function definition(): array
 	{
-		$id = $this->faker->randomNumber(7, true);
-		$login = $this->faker->userName();
+		$id = fake()->randomNumber(7, true);
+		$login = fake()->userName();
 
-        return [
-            'id' => $id,
+		return [
+			'id' => $id,
 			'login' => $login,
 			'display_login' => $login,
 			'avatar_url' => "https://avatars.githubusercontent.com/u/{$id}?",
-        ];
-    }
+		];
+	}
 }

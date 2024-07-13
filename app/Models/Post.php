@@ -1,4 +1,4 @@
-<?php
+<?php /** @noinspection ParameterDefaultsNullInspection */
 
 namespace App\Models;
 
@@ -91,15 +91,18 @@ class Post extends ImageableModel implements SearchDisplayableContract, Categori
 		'title',
 	];
 
-	protected static function booted(): void {
+	protected static function booted(): void
+	{
 		static::addGlobalScope(new PostPublishedScope());
 	}
 
-	public function excerpt(): Attribute {
+	public function excerpt(): Attribute
+	{
 		return Attribute::get(fn () => str($this->body)->words(20));
 	}
 
-	public function getPostable(): SocialPostDTO {
+	public function getPostable(): SocialPostDTO
+	{
 		return new SocialPostDTO(
 			text: "I wrote a thing!\n\n{$this->title}",
 
@@ -125,7 +128,8 @@ class Post extends ImageableModel implements SearchDisplayableContract, Categori
 	 * @param Request $request
 	 * @return AbstractPaginator
 	 */
-	public static function index(Request $request): AbstractPaginator {
+	public static function index(Request $request): AbstractPaginator
+	{
 		return self::when($request?->get('category'), static function ($query, $category_id): void {
 			$query->whereRelation('categories', 'category_id', $category_id);
 		})
@@ -139,7 +143,8 @@ class Post extends ImageableModel implements SearchDisplayableContract, Categori
 			->withQueryString();
 	}
 
-	public function metaDescription(): Attribute {
+	public function metaDescription(): Attribute
+	{
 		return Attribute::make(
 			get: fn () => $this->searchMeta?->search_description ?? str($this->body)
 				->words(30, '')
@@ -157,7 +162,21 @@ class Post extends ImageableModel implements SearchDisplayableContract, Categori
 		);
 	}
 
-	public function pageTitle(): Attribute {
+	public static function paged(int $per_page = 10, int|string|null $category = null, int|string|null $tag = null): AbstractPaginator
+	{
+		return self::when($category, static function ($query, $category_id): void {
+			$query->whereRelation('categories', 'category_id', $category_id);
+		})
+			->when($tag, static function ($query, $tag_id): void {
+				$query->whereRelation('tags', 'tag_id', $tag_id);
+			})
+			->latest('published_at')
+			->paginate($per_page)
+			->withQueryString();
+	}
+
+	public function pageTitle(): Attribute
+	{
 		return Attribute::make(
 			get: fn () => $this->searchMeta?->search_title ?? $this->title,
 
@@ -169,7 +188,8 @@ class Post extends ImageableModel implements SearchDisplayableContract, Categori
 		);
 	}
 
-	public function scopePublishedRecently(Builder $query): Builder|Model|null {
+	public function scopePublishedRecently(Builder $query): Builder|Model|null
+	{
 		return $query->whereDate('published_at', '>=', today()->subWeek()->toDateString());
 	}
 
@@ -177,7 +197,8 @@ class Post extends ImageableModel implements SearchDisplayableContract, Categori
 	 * @param \Illuminate\Support\Collection<\App\Models\Category|int> $categories
 	 * @return self
 	 */
-	public function syncCategories(Collection $categories): self {
+	public function syncCategories(Collection $categories): self
+	{
 		$this->categories()->sync($categories->map(static fn (Category $category) => $category->id)->all());
 
 		return $this;
@@ -187,7 +208,8 @@ class Post extends ImageableModel implements SearchDisplayableContract, Categori
 	 * @param \Illuminate\Support\Collection<\App\Models\Tag> $tags
 	 * @return self
 	 */
-	public function syncTags(Collection $tags): self {
+	public function syncTags(Collection $tags): self
+	{
 		$this->tags()->sync($tags->map(static fn (Tag $tag) => $tag->id)->all());
 
 		return $this;
@@ -197,7 +219,8 @@ class Post extends ImageableModel implements SearchDisplayableContract, Categori
 	 * @returns PostStateContract
 	 * @throws \Exception
 	 */
-	public function state(): PostStateContract {
+	public function state(): PostStateContract
+	{
 		return match ($this->published) {
 			true => new PostPublished($this),
 			false => new PostUnpublished($this),
@@ -205,15 +228,18 @@ class Post extends ImageableModel implements SearchDisplayableContract, Categori
 		};
 	}
 
-	public function tags(): MorphToMany {
+	public function tags(): MorphToMany
+	{
 		return $this->morphToMany(Tag::class, 'taggable');
 	}
 
-	public function toSitemapTag(): Url|string|array {
+	public function toSitemapTag(): Url|string|array
+	{
 		return route('blog.show', ['post' => $this]);
 	}
 
-	public function xCardMeta(): XMetaDTO {
+	public function xCardMeta(): XMetaDTO
+	{
 		return new XMetaDTO(
 			xTitle: $this->page_title,
 			xDescription: $this->meta_description,
