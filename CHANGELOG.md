@@ -6,6 +6,7 @@
 
 - Set `::selection` color
 - [#184][is_184]: Use Volt for blog ([#206][pr_206])
+- Delete dependabot workflow file
 
 [is_184]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/184
 
