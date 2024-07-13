@@ -1,5 +1,9 @@
 @extends('layouts.master', ['bodyClasses' => $bodyClasses ?? ''])
 
+@push('head-extras')
+	<livewire:google-analytics />
+@endpush
+
 @section('body')
 
 	@component('partials.header')
@@ -24,5 +28,5 @@
 @push('footer-extras')
 	@vite('resources/js/app.ts')
 
-	<x-google-analytics />
+	@include('partials.cookie-popup')
 @endpush

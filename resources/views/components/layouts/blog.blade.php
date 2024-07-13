@@ -17,6 +17,8 @@
 	@isset($headExtras)
 		{{ $headExtras }}
 	@endisset
+	
+	<livewire:google-analytics />
 </head>
 <body class="bg-white dark:bg-black text-black dark:text-white font-sans flex flex-col {{ $bodyClasses ?? '' }}">
 
@@ -51,7 +53,7 @@
 
 @vite('resources/js/app.ts')
 
-<livewire:google-analytics />
+@include('partials.cookie-popup')
 
 @isset($footerExtras)
 	{{ $footerExtras }}
