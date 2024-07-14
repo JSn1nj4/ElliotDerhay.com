@@ -16,7 +16,12 @@ This project is my personal website.
 
 ### Install Dependencies
 
-1. If you use ASDF, run `asdf install` to install tool versions.
+1. Make sure you meet the project's runtime requirements:
+	- If you use ASDF, run `asdf install`
+	- If you manage runtimes another way:
+		- PHP 8.2.x
+		- Node 20.x
+		- Yarn 1.22.x
 2. Run `composer install`.
 3. Run `yarn` to install dependencies.
 	- If you use vanilla `npm` instead, I'm terribly sorry. ¯\\\_(ツ)\_/¯
@@ -25,6 +30,8 @@ This project is my personal website.
 
 - Generate project key: `php artisan key:generate`.
 - Run migrations: `php artisan migrate`.
+- Link public storage: `php artisan storage:link`
+- _Optionally_, seed dev data: `php artisan db:seed --seeder=DemoSeeder`
 
 ### _A Note about caching_
 
