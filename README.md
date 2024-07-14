@@ -31,9 +31,6 @@ This project is my personal website.
 This project's `.env` uses the `file` cache store. But Laravel 11.x's default cache store is `database`. Feel free to
 change this or comment it out to use the default.
 
-If you _do_ want to use the `database` cache store, make sure to run migrations first. There are some helper
-functions in this project that use caching under the hood, so the `cache` table needs to exist ahead of time.
-
 ---
 
 [Changelog](CHANGELOG.md)
