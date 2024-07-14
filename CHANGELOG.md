@@ -12,8 +12,11 @@
 
 - [#204][is_204]: Delete dependabot workflow file
 - [#201][is_201]: Use fallback cache driver for `ImageService` ([#207][pr_207])
+- [#200][is_200]: Remove risk of boot-time dependency on `pennant` table ([#209][pr_209])
 
 [is_184]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/184
+
+[is_200]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/200
 
 [is_201]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/201
 
@@ -24,6 +27,8 @@
 [pr_206]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/206
 
 [pr_207]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/207
+
+[pr_209]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/209
 
 ## Version 2.9.2
 
