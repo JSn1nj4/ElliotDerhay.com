@@ -8,14 +8,19 @@
 - [#184][is_184]: Use Volt for blog ([#206][pr_206])
 - [#204][is_204]: Delete dependabot workflow file
 - [#205][is_205]: Remove direct Alpine dependency
+- [#201][is_201]: Use fallback cache driver for `ImageService` ([#207][pr_207])
 
 [is_184]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/184
+
+[is_201]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/201
 
 [is_204]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/204
 
 [is_205]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/205
 
 [pr_206]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/206
+
+[pr_207]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/207
 
 ## Version 2.9.2
 
