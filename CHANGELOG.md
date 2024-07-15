@@ -11,6 +11,7 @@
 - Update `.env.example` to be more complete
 	- Also alphabetize this while I'm at it; this was driving me crazy...
 - [#202][is_202]: Condense migrations
+- [#203][is_203]: Slim down cookie banner ([#210][pr_210])
 
 ### Fixed
 
@@ -26,6 +27,8 @@
 
 [is_202]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/202
 
+[is_203]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/203
+
 [is_204]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/204
 
 [is_205]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/205
@@ -37,6 +40,8 @@
 [pr_207]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/207
 
 [pr_209]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/209
+
+[pr_210]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/210
 
 ## Version 2.9.2
 
