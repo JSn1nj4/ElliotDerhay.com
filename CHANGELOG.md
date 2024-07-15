@@ -11,6 +11,7 @@
 - Update `.env.example` to be more complete
 	- Also alphabetize this while I'm at it; this was driving me crazy...
 - [#202][is_202]: Condense migrations
+- [#198][is_198]: Slim down cookie banner ([#210][pr_210])
 
 ### Fixed
 
@@ -19,6 +20,8 @@
 - [#200][is_200]: Remove risk of boot-time dependency on `pennant` table ([#209][pr_209])
 
 [is_184]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/184
+
+[is_198]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/198
 
 [is_200]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/200
 
@@ -37,6 +40,8 @@
 [pr_207]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/207
 
 [pr_209]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/209
+
+[pr_210]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/210
 
 ## Version 2.9.2
 
