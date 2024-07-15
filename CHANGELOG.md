@@ -7,6 +7,9 @@
 - Set `::selection` color
 - [#184][is_184]: Use Volt for blog ([#206][pr_206])
 - [#205][is_205]: Remove direct Alpine dependency
+- [#208][is_208]: Make 'remote' disk for `ImageService` configurable
+- Update `.env.example` to be more complete
+	- Also alphabetize this while I'm at it; this was driving me crazy...
 
 ### Fixed
 
@@ -23,6 +26,8 @@
 [is_204]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/204
 
 [is_205]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/205
+
+[is_208]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/208
 
 [pr_206]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/206
 

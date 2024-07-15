@@ -33,10 +33,23 @@ This project is my personal website.
 - Link public storage: `php artisan storage:link`
 - _Optionally_, seed dev data: `php artisan db:seed --seeder=DemoSeeder`
 
+---
+
 ### _A Note about caching_
 
 This project's `.env` uses the `file` cache store. But Laravel 11.x's default cache store is `database`. Feel free to
 change this or comment it out to use the default.
+
+### _A note on the `ImageService`_
+
+There are a couple of helpers used around the project (`assets_url()` and `image_url()`) that hook into
+the `App\Services\ImageService` class. This exists to:
+
+- allow permanent image storage to live on another `disk`
+- *Still* provide fast load times for images by "caching" them on the same disk as the application at first request
+
+The ENV var `IMAGE_SERVICE_REMOTE_DISK` lets you choose where to look for downloadable assets. It defaults to a local
+disk to ensure these features work as intended after cloning.
 
 ---
 
