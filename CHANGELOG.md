@@ -10,6 +10,7 @@
 - [#208][is_208]: Make 'remote' disk for `ImageService` configurable
 - Update `.env.example` to be more complete
 	- Also alphabetize this while I'm at it; this was driving me crazy...
+- [#202][is_202]: Condense migrations
 
 ### Fixed
 
@@ -22,6 +23,8 @@
 [is_200]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/200
 
 [is_201]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/201
+
+[is_202]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/202
 
 [is_204]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/204
 
