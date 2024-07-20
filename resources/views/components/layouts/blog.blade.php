@@ -59,6 +59,8 @@
 	{{ $footerExtras }}
 @endisset
 
+<livewire:lightbox />
+
 <script>
 	// todo: organize one-off scripts within bundled JS
 	function copyOnClick(e) {
