@@ -18,8 +18,12 @@
 - [#204][is_204]: Delete dependabot workflow file
 - [#201][is_201]: Use fallback cache driver for `ImageService` ([#207][pr_207])
 - [#200][is_200]: Remove risk of boot-time dependency on `pennant` table ([#209][pr_209])
+- [#198][is_198]: Ensure lightbox opens only where it's needed ([#212][pr_212])
+- As part of [#212][pr_212], make sure lightbox content is constrained to viewport
 
 [is_184]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/184
+
+[is_198]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/198
 
 [is_200]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/200
 
@@ -42,6 +46,8 @@
 [pr_209]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/209
 
 [pr_210]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/210
+
+[pr_212]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/212
 
 ## Version 2.9.2
 
