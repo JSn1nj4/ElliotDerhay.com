@@ -128,7 +128,7 @@ new class extends Component {
 	</script>
 	<section
 		x-data="lightbox"
-		class="lightbox overlay fixed transition-opacity bg-black/50 w-full min-h-screen top-0"
+		class="lightbox overlay fixed transition-opacity bg-black/50 w-full h-screen top-0"
 		:class="{
 			'z-50': front,
 			'-z-50': !front,
@@ -140,11 +140,11 @@ new class extends Component {
 		}"
 	>
 		<button @click="maybeClose()" class="absolute top-2 right-4 text-4xl z-50">&times;</button>
-		<div class="relative min-h-screen max-h-screen px-16 py-8">
+		<div class="relative h-screen object-contain flex flex-col items-center px-16 py-8">
 			{{--	START: captionable image	--}}
-			<figure class="relative block overflow-hidden rounded-lg">
+			<figure class="relative block overflow-hidden rounded-lg object-contain w-fit h-full">
 				<img
-					class="relative mx-auto object-contain"
+					class="relative mx-auto object-contain w-full h-full"
 					:src="image.src"
 					:alt="image.alt"
 					:title="image.title"
@@ -152,16 +152,16 @@ new class extends Component {
 				>
 				<figcaption
 					x-show="image.caption"
-					class="caption absolute bottom-0 left-0 block w-full p-4 text-center bg-black/30"
+					class="caption absolute bottom-0 left-0 block p-4 w-full text-center bg-black/30"
 					x-text="image.caption"
 				></figcaption>
 			</figure>
 			{{--	END: captionable image	--}}
 		</div>
 	</section>
-	<style lang="text/css">
-		.lightbox img {
-			max-height: calc(100vh - theme('spacing.8') * 2);
-		}
+	<style lang="pcss">
+		/*.lightbox img {*/
+		/*	max-height: calc(100vh - theme('spacing.8') * 2);*/
+		/*}*/
 	</style>
 </div>
