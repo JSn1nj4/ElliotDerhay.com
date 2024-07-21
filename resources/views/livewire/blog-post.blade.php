@@ -93,7 +93,3 @@ class extends \Livewire\Volt\Component {
 <x-slot:sidebar>
 	@include('partials.blog-sidebar')
 </x-slot:sidebar>
-
-<x-slot:footer-extras>
-	<x-lightbox />
-</x-slot:footer-extras>
