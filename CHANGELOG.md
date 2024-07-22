@@ -20,6 +20,7 @@
 - [#200][is_200]: Remove risk of boot-time dependency on `pennant` table ([#209][pr_209])
 - [#198][is_198]: Ensure lightbox opens only where it's needed ([#212][pr_212])
 - As part of [#212][pr_212], make sure lightbox content is constrained to viewport
+- [#211][is_211]: Fix accidentally redeclaring global constant `anchors`
 
 [is_184]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/184
 
@@ -38,6 +39,8 @@
 [is_205]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/205
 
 [is_208]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/208
+
+[is_211]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/211
 
 [pr_206]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/206
 
