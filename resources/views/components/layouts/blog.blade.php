@@ -78,8 +78,8 @@
 
 		console.log(`Link copied to clipboard: ${text}`)
 	}
-
-	const anchors = document.querySelectorAll('.heading-anchor')
+	
+	var anchors = document.querySelectorAll('.heading-anchor')
 
 	anchors.forEach(function (elem) {
 		elem.addEventListener('click', copyOnClick, {capture: true})
