@@ -159,9 +159,4 @@ new class extends Component {
 			{{--	END: captionable image	--}}
 		</div>
 	</section>
-	<style lang="pcss">
-		/*.lightbox img {*/
-		/*	max-height: calc(100vh - theme('spacing.8') * 2);*/
-		/*}*/
-	</style>
 </div>

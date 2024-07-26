@@ -12,6 +12,7 @@
 	- Also alphabetize this while I'm at it; this was driving me crazy...
 - [#202][is_202]: Condense migrations
 - [#203][is_203]: Slim down cookie banner ([#210][pr_210])
+- Minor housekeeping
 
 ### Fixed
 
