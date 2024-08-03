@@ -58,6 +58,7 @@ class AdminPanelProvider extends PanelProvider
 				Pages\Dashboard::class,
 			])
 			->widgets([
+				Widgets\LastLoginWidget::class,
 				Widgets\LatestPosts::class,
 				Widgets\CommandLog::class,
 			])
