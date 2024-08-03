@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Models\LoginActivity;
 use App\Models\Post;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
@@ -16,14 +17,16 @@ class WeeklyReportEmail extends Mailable
 	/**
 	 * Create a new message instance.
 	 */
-	public function __construct() {
+	public function __construct()
+	{
 		//
 	}
 
 	/**
 	 * Get the message envelope.
 	 */
-	public function envelope(): Envelope {
+	public function envelope(): Envelope
+	{
 		return new Envelope(
 			subject: 'Weekly Admin Report',
 		);
@@ -32,11 +35,23 @@ class WeeklyReportEmail extends Mailable
 	/**
 	 * Get the message content definition.
 	 */
-	public function content(): Content {
+	public function content(): Content
+	{
 		return new Content(
 			markdown: 'emails.reports.weekly',
 			with: [
-				'lastLogin' => '(needs implementing)',
+				'lastLogin' => LoginActivity::succeeded()
+						->latest()
+						->first()
+						?->created_at
+						->toDayDateTimeString() ?? 'No recent logins.',
+
+				'lastFailure' => LoginActivity::failed()
+						->latest()
+						->first()
+						?->created_at
+						->toDayDateTimeString() ?? 'No recent login failures.',
+
 				'postsPublished' => Post::publishedRecently()->count(),
 			],
 		);
@@ -47,7 +62,8 @@ class WeeklyReportEmail extends Mailable
 	 *
 	 * @return array<int, \Illuminate\Mail\Mailables\Attachment>
 	 */
-	public function attachments(): array {
+	public function attachments(): array
+	{
 		return [];
 	}
 }
