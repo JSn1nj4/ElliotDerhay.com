@@ -6,7 +6,7 @@ use App\Console\Commands\{GithubEventPullCommand,
 	TokenPruneCommand,
 	TweetPullCommand,
 	TwitterUserUpdateCommand};
-use App\Jobs\CleanTempStorageJob;
+use App\Jobs\{CleanTempStorageJob, PruneLoginActivityJob};
 use Illuminate\Queue\Console\WorkCommand;
 use Illuminate\Support\Facades\Schedule;
 
@@ -18,6 +18,7 @@ Schedule::command(TweetPullCommand::class)->hourly();
 Schedule::command(TwitterUserUpdateCommand::class)->weekly();
 
 Schedule::job(CleanTempStorageJob::class)->weekly();
+Schedule::job(PruneLoginActivityJob::class)->weekly();
 Schedule::command(WorkCommand::class, ['--stop-when-empty'])->daily();
 
 // reports can run after everything else honestly

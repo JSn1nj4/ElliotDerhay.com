@@ -2,17 +2,16 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DemoSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
-    public function run(): void
+	/**
+	 * Run the database seeds.
+	 *
+	 * @return void
+	 */
+	public function run(): void
 	{
 		if (app()->environment('production')) {
 			throw new \Exception("This seeder must not be run in Production! It will likely destroy live data.");
@@ -24,6 +23,7 @@ class DemoSeeder extends Seeder
 			PostSeeder::class,
 			ProjectSeeder::class,
 			UserSeeder::class,
+			LoginActivitySeeder::class,
 		]);
-    }
+	}
 }
