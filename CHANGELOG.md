@@ -13,6 +13,7 @@
 - [#202][is_202]: Condense migrations
 - [#203][is_203]: Slim down cookie banner ([#210][pr_210])
 - Minor housekeeping
+- [#191][is_191]: Reimplement login activity ([#213][pr_213])
 
 ### Fixed
 
@@ -24,6 +25,8 @@
 - [#211][is_211]: Fix accidentally redeclaring global constant `anchors`
 
 [is_184]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/184
+
+[is_191]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/191
 
 [is_198]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/198
 
@@ -52,6 +55,8 @@
 [pr_210]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/210
 
 [pr_212]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/212
+
+[pr_213]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/213
 
 ## Version 2.9.2
 
