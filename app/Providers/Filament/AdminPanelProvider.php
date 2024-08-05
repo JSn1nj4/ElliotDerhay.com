@@ -22,16 +22,16 @@ use Illuminate\View\Middleware\ShareErrorsFromSession;
 
 class AdminPanelProvider extends PanelProvider
 {
-    public function panel(Panel $panel): Panel
-    {
-        return $panel
-            ->default()
-            ->id('admin')
-            ->path('admin')
-            ->login(Login::class)
+	public function panel(Panel $panel): Panel
+	{
+		return $panel
+			->default()
+			->id('admin')
+			->path('admin')
+			->login(Login::class)
 			->globalSearchKeyBindings(['command+k', 'ctrl+k'])
 			->maxContentWidth('full')
-            ->colors([
+			->colors([
 				'primary' => [
 					50 => '#eafff7',
 					100 => '#cdfeeb',
@@ -46,36 +46,35 @@ class AdminPanelProvider extends PanelProvider
 					950 => '#00302a',
 				],
 				'danger' => Color::Rose,
-            ])
+			])
 			->favicon(asset_url("avatar.png"))
-            ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
-            ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
+			->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
+			->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
 			->navigationGroups([
 				NavigationGroup::make('Content'),
 				NavigationGroup::make('Administration'),
 			])
-            ->pages([
-                Pages\Dashboard::class,
-            ])
-            ->widgets([
-                \Filament\Widgets\AccountWidget::class,
-                \Filament\Widgets\FilamentInfoWidget::class,
+			->pages([
+				Pages\Dashboard::class,
+			])
+			->widgets([
+				Widgets\LastLoginWidget::class,
 				Widgets\LatestPosts::class,
 				Widgets\CommandLog::class,
-            ])
-            ->middleware([
-                EncryptCookies::class,
-                AddQueuedCookiesToResponse::class,
-                StartSession::class,
-                AuthenticateSession::class,
-                ShareErrorsFromSession::class,
-                VerifyCsrfToken::class,
-                SubstituteBindings::class,
-                DisableBladeIconComponents::class,
-                DispatchServingFilamentEvent::class,
-            ])
-            ->authMiddleware([
-                Authenticate::class,
-            ]);
-    }
+			])
+			->middleware([
+				EncryptCookies::class,
+				AddQueuedCookiesToResponse::class,
+				StartSession::class,
+				AuthenticateSession::class,
+				ShareErrorsFromSession::class,
+				VerifyCsrfToken::class,
+				SubstituteBindings::class,
+				DisableBladeIconComponents::class,
+				DispatchServingFilamentEvent::class,
+			])
+			->authMiddleware([
+				Authenticate::class,
+			]);
+	}
 }

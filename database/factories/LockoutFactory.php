@@ -9,24 +9,24 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class LockoutFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
-    public function definition(): array
+	/**
+	 * Define the model's default state.
+	 *
+	 * @return array<string, mixed>
+	 */
+	public function definition(): array
 	{
-        return [
-            'ip_address' => $this->faker->unique()->ipv4(),
-			'url' => $this->faker->url(),
-			'user_agent' => $this->faker->userAgent(),
-			'content_type' => $this->faker->randomElement([
+		return [
+			'ip_address' => fake()->unique()->ipv4(),
+			'url' => fake()->url(),
+			'user_agent' => fake()->userAgent(),
+			'content_type' => fake()->randomElement([
 				'json',
 				'xml',
 				'html',
 				'text',
 			]),
-			'credential' => $this->faker->safeEmail(),
-        ];
-    }
+			'credential' => fake()->safeEmail(),
+		];
+	}
 }

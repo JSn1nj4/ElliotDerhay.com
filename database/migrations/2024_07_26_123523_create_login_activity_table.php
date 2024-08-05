@@ -10,8 +10,13 @@ return new class extends Migration {
 	 */
 	public function up(): void
 	{
-		Schema::whenTableDoesntHaveColumn('images', 'caption', static function (Blueprint $table) {
-			$table->string('caption')->nullable();
+		Schema::create('login_activity', function (Blueprint $table) {
+			$table->id();
+			$table->string('email');
+			$table->boolean('succeeded');
+			$table->text('info')->nullable();
+			$table->ipAddress();
+			$table->timestamps();
 		});
 	}
 
@@ -20,8 +25,6 @@ return new class extends Migration {
 	 */
 	public function down(): void
 	{
-		Schema::whenTableHasColumn('images', 'caption', static function (Blueprint $table) {
-			$table->removeColumn('caption');
-		});
+		Schema::dropIfExists('login_activity');
 	}
 };

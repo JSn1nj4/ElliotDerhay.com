@@ -36,6 +36,12 @@ return [
 			'throw' => false,
 		],
 
+		'local-assets' => [
+			'driver' => 'scoped',
+			'disk' => 'local',
+			'prefix' => 'local-assets',
+		],
+
 		'debug' => [
 			'driver' => 'local',
 			'root' => storage_path('app/debug'),
@@ -53,12 +59,6 @@ return [
 			'driver' => 'scoped',
 			'disk' => 'public',
 			'prefix' => 'cache',
-		],
-
-		'temp' => [
-			'driver' => 'scoped',
-			'disk' => 'local',
-			'prefix' => 'temp',
 		],
 
 		's3' => [
@@ -85,6 +85,12 @@ return [
 			'prefix' => 'uploads',
 		],
 
+		'temp' => [
+			'driver' => 'scoped',
+			'disk' => 'local',
+			'prefix' => 'temp',
+		],
+
 	],
 
 	/*
@@ -100,6 +106,21 @@ return [
 
 	'links' => [
 		public_path('storage') => storage_path('app/public'),
+	],
+
+	/*
+    |--------------------------------------------------------------------------
+    | Symbolic Links
+    |--------------------------------------------------------------------------
+    |
+    | Here you may configure the symbolic links that will be created when the
+    | `storage:link` Artisan command is executed. The array keys should be
+    | the locations of the links and the values should be their targets.
+    |
+    */
+
+	'image_service' => [
+		'assets_disk' => env('IMAGE_SERVICE_ASSETS_DISK', 'local-assets'),
 	],
 
 ];

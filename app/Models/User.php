@@ -5,7 +5,6 @@ namespace App\Models;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -20,8 +19,6 @@ use Illuminate\Notifications\Notifiable;
  * @property string|null $remember_token
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Login[] $logins
- * @property-read int|null $logins_count
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
  * @property-read int|null $notifications_count
  * @method static \Database\Factories\UserFactory factory(...$parameters)
@@ -73,20 +70,8 @@ class User extends Authenticatable implements FilamentUser
 		'remember_token',
 	];
 
-	public static function booted()
-	{
-		static::deleted(static function (self $user): void {
-			Login::whereUserId($user->id)->delete();
-		});
-	}
-
 	public function canAccessPanel(Panel $panel): bool
 	{
 		return $this->hasVerifiedEmail();
-	}
-
-	public function logins(): HasMany
-	{
-		return $this->hasMany(Login::class);
 	}
 }

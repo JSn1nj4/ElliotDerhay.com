@@ -1,5 +1,63 @@
 # Changelog
 
+## Version 2.10.0
+
+### Changes
+
+- Set `::selection` color
+- [#184][is_184]: Use Volt for blog ([#206][pr_206])
+- [#205][is_205]: Remove direct Alpine dependency
+- [#208][is_208]: Make 'remote' disk for `ImageService` configurable
+- Update `.env.example` to be more complete
+	- Also alphabetize this while I'm at it; this was driving me crazy...
+- [#202][is_202]: Condense migrations
+- [#203][is_203]: Slim down cookie banner ([#210][pr_210])
+- Minor housekeeping
+- [#191][is_191]: Reimplement login activity ([#213][pr_213])
+
+### Fixed
+
+- [#204][is_204]: Delete dependabot workflow file
+- [#201][is_201]: Use fallback cache driver for `ImageService` ([#207][pr_207])
+- [#200][is_200]: Remove risk of boot-time dependency on `pennant` table ([#209][pr_209])
+- [#198][is_198]: Ensure lightbox opens only where it's needed ([#212][pr_212])
+- As part of [#212][pr_212], make sure lightbox content is constrained to viewport
+- [#211][is_211]: Fix accidentally redeclaring global constant `anchors`
+
+[is_184]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/184
+
+[is_191]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/191
+
+[is_198]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/198
+
+[is_200]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/200
+
+[is_201]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/201
+
+[is_202]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/202
+
+[is_203]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/203
+
+[is_204]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/204
+
+[is_205]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/205
+
+[is_208]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/208
+
+[is_211]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/211
+
+[pr_206]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/206
+
+[pr_207]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/207
+
+[pr_209]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/209
+
+[pr_210]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/210
+
+[pr_212]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/212
+
+[pr_213]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/213
+
 ## Version 2.9.2
 
 ### Changes
