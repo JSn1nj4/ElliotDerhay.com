@@ -38,6 +38,7 @@ jobs:
           ssh deploy-host "cd \"$DEPLOY_HOST_PROJECT_ROOT\" \
             && git checkout \"$DEPLOY_BRANCH\" \
             && git reset --hard \
+            && git clean -f -d \
             && git pull \
             && composer install --no-dev \
             && yarn && yarn prod"

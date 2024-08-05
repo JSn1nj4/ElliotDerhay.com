@@ -9,20 +9,20 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class ProjectFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
-    public function definition(): array
+	/**
+	 * Define the model's default state.
+	 *
+	 * @return array<string, mixed>
+	 */
+	public function definition(): array
 	{
-		$demo_url = random_int(0, 1) ? $this->faker->url : null;
+		$demo_url = random_int(0, 1) ? fake()->url : null;
 
 		return [
-			'name' => $this->faker->name,
-			'link' => $this->faker->unique()->url,
+			'name' => fake()->name,
+			'link' => fake()->unique()->url,
 			'demo_link' => $demo_url,
-			'short_desc' => implode(' ', $this->faker->words())
+			'short_desc' => implode(' ', fake()->words())
 		];
-    }
+	}
 }

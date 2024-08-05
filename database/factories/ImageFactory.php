@@ -26,7 +26,8 @@ class ImageFactory extends Factory
 		Collection|null $afterCreating = null,
 		$connection = null,
 		Collection|null $recycle = null
-	) {
+	)
+	{
 		parent::__construct($count, $states, $has, $for, $afterMaking, $afterCreating, $connection, $recycle);
 
 		$this->disk = Storage::disk($this->diskName);
@@ -37,7 +38,8 @@ class ImageFactory extends Factory
 	 *
 	 * @return array<string, mixed>
 	 */
-	public function definition(): array {
+	public function definition(): array
+	{
 		$collection = "images";
 
 		$this->ensureTempDirExists();
@@ -45,7 +47,7 @@ class ImageFactory extends Factory
 		[$file, $path] = $this->generateUploadedFile($collection);
 
 		return [
-			'name' => $this->faker->name(),
+			'name' => fake()->name(),
 			'file_name' => $file->getClientOriginalName(),
 			'mime_type' => $file->getClientMimeType(),
 			'path' => $path,
@@ -59,7 +61,8 @@ class ImageFactory extends Factory
 		];
 	}
 
-	protected function ensureTempDirExists(): void {
+	protected function ensureTempDirExists(): void
+	{
 		if (Storage::disk('temp')->directoryMissing('')) {
 			Storage::disk('temp')->createDirectory('');
 		}
@@ -68,7 +71,8 @@ class ImageFactory extends Factory
 	/**
 	 * @throws \Exception
 	 */
-	protected function generateUploadedFile(string $collection = 'images'): array {
+	protected function generateUploadedFile(string $collection = 'images'): array
+	{
 		$temp_path = false;
 
 		/**
@@ -78,7 +82,7 @@ class ImageFactory extends Factory
 		while ($temp_path === false) {
 			$this->timer(); // error out if running too long to prevent disk filling up
 
-			$temp_path = $this->faker
+			$temp_path = fake()
 				->unique()
 				->image(storage_path('app/temp'));
 		}
@@ -87,7 +91,7 @@ class ImageFactory extends Factory
 
 		$file = new UploadedFile(
 			path: $temp_path,
-			originalName: $this->faker->unique()->firstName() . ".jpg",
+			originalName: fake()->unique()->firstName() . ".jpg",
 			mimeType: "image/jpeg",
 		);
 
@@ -96,11 +100,13 @@ class ImageFactory extends Factory
 		return [$file, $path];
 	}
 
-	private function resetTimer(): void {
+	private function resetTimer(): void
+	{
 		$this->timer = null;
 	}
 
-	public function setDisk(string $name, FilesystemAdapter|null $disk = null): static {
+	public function setDisk(string $name, FilesystemAdapter|null $disk = null): static
+	{
 		$this->diskName = $name;
 
 		$this->disk = is_null($disk) ? Storage::disk($this->diskName) : $disk;
@@ -108,7 +114,8 @@ class ImageFactory extends Factory
 		return $this;
 	}
 
-	private function timer(int $seconds = (60 * 1)): void {
+	private function timer(int $seconds = (60 * 1)): void
+	{
 		$this->timer ??= now()->addSeconds($seconds)->getTimestamp();
 
 		if (now()->getTimestamp() >= $this->timer) {

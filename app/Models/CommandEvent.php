@@ -31,6 +31,9 @@ use Illuminate\Support\Carbon;
  * @method static \Illuminate\Database\Eloquent\Builder|CommandEvent whereMessage($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CommandEvent whereSucceeded($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CommandEvent whereUpdatedAt($value)
+ * @property-read mixed $date_at_time
+ * @property-read mixed $long_date_at_time
+ * @property-read mixed $short_date
  * @mixin \Eloquent
  */
 class CommandEvent extends Model

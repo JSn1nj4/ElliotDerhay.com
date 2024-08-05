@@ -5,7 +5,8 @@
 	<x-row id="about" overlay-classes="bg-caribbeanGreen-200 bg-opacity-50 dark:bg-caribbeanGreen-700 dark:bg-opacity-75"
 				 background-image="{{ asset_url('pexels-lukas-574073-scaled.jpg') }}">
 		<x-column class="flex md:order-2 md:w-1/2 lg:w-5/12 xl:w-1/3">
-			<img src="{{ asset_url("Elliot.Color2-hd-v2-square.jpg") }}" title="Elliot Derhay" alt="Photo of Elliot Derhay"
+			<img src="{{ asset_url("Elliot-head-on-square-color-medium.jpg") }}" title="Elliot Derhay"
+					 alt="Photo of Elliot Derhay"
 					 class="border-black dark:border-white border-2 border-opacity-40 rounded-full">
 		</x-column>
 
@@ -39,7 +40,7 @@
 				concepts. {{-- Below are some projects I maintain or contribute to, as well as some I have worked on in the past. --}}
 			</p>
 
-			<x-project.grid :count="3"/>
+			<x-project.grid :count="3" />
 		</x-column>
 	</x-row>
 
@@ -65,12 +66,12 @@
 			</x-column>
 
 			@feature(App\Features\GithubFeed::class)
-				<x-column class="block md:w-1/2">
-					<h2 class="content-title text-2xl pt-6 mt-4 text-center">GitHub Activity</h2>
-					<section id="github_events_feed-home" class="font-mono">
-						<x-github.events-feed padding="px-4 py-6" count="5" />
-					</section>
-				</x-column>
+			<x-column class="block md:w-1/2">
+				<h2 class="content-title text-2xl pt-6 mt-4 text-center">GitHub Activity</h2>
+				<section id="github_events_feed-home" class="font-mono">
+					<x-github.events-feed padding="px-4 py-6" count="5" />
+				</section>
+			</x-column>
 			@endfeature
 		</div>
 

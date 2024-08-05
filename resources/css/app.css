@@ -8,17 +8,19 @@
 @tailwind base;
 
 html {
-   height: 100%;
-   line-height: 1.15;
+	height: 100%;
+	line-height: 1.15;
 }
+
 body {
-   min-height: 100%;
+	min-height: 100%;
 }
 
 ul {
 	list-style-type: disc;
 	padding-left: theme('padding.4');
 }
+
 ol {
 	list-style-type: decimal;
 	padding-left: theme('padding.4');
@@ -30,6 +32,14 @@ img {
 
 button {
 	@mixin transitions color $default-speed|border-color $default-speed;
+}
+
+::selection {
+	@apply text-white bg-slate-800;
+
+	.dark & {
+		@apply text-black bg-slate-400;
+	}
 }
 
 /**
