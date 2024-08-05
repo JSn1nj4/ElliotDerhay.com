@@ -7,6 +7,9 @@ Everything going on at [{{ config('app.name') }}]({{ route('home') }})
 ## Last Login
 {{ $lastLogin }}
 
+## Last Login Failure
+{{ $lastFailure }}
+
 ## Post Published
 {{ $postsPublished }}
 </x-mail::panel>

@@ -6,7 +6,6 @@ use App\Actions\AddCategoryToPost;
 use App\Actions\AddTagToPost;
 use App\Actions\HashPassword;
 use App\Actions\LogCommandEvent;
-use App\Actions\LogUserLogin;
 use App\Contracts\GitHostService;
 use App\DataTransferObjects\XApiCredentials;
 use App\Models\Token;
@@ -20,7 +19,6 @@ class AppServiceProvider extends ServiceProvider
 {
 	public array $bindings = [
 		LogCommandEvent::class => LogCommandEvent::class,
-		LogUserLogin::class => LogUserLogin::class,
 	];
 
 	public array $singletons = [

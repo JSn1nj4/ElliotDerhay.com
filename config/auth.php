@@ -2,6 +2,10 @@
 
 return [
 
+	'activity' => [
+		'days_to_retain' => env('AUTH_ACTIVITY_DAYS_TO_KEEP', 60),
+	],
+
 	/*
     |--------------------------------------------------------------------------
     | Authentication Defaults
