@@ -1,5 +1,11 @@
 # Changelog
 
+## Version 2.10.1
+
+### Changes
+
+- Try View Creators for the first time with nav items
+
 ## Version 2.10.0
 
 ### Changes
