@@ -12,7 +12,9 @@ use App\Models\Token;
 use App\Services\Github\GithubService;
 use App\Services\Twitter\TwitterService;
 use App\Services\XService;
+use App\View\Creators\PublicNavigationCreator;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -59,6 +61,9 @@ class AppServiceProvider extends ServiceProvider
 			XService::class,
 			static fn () => new XService(app(XApiCredentials::class)),
 		);
+
+		// trying out a feature; assuming this is a "separation of concerns" thing that's existed for a while
+		View::creator('layouts.page', PublicNavigationCreator::class);
 	}
 
 	/**

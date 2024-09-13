@@ -8,13 +8,16 @@
 
 	@component('partials.header')
 		<x-nav>
-			<x-nav-item route="home" icon="fas fa-home" inline livewire>Home</x-nav-item>
-			@if(config('app.enable-blog'))
-				<x-nav-item route="blog" inline livewire>Blog</x-nav-item>
-			@endif
-			@if(config('app.enable-projects'))
-				<x-nav-item route="portfolio" inline livewire>Projects</x-nav-item>
-			@endif
+			@php /** @var \App\DataTransferObjects\NavItemDTO[] $navItems */ @endphp
+			{{-- Injected via View Creator --}}
+			@foreach($navItems as $navItem)
+				<x-nav-item
+					:route='$navItem->route'
+					:icon='$navItem->icon'
+					inline
+					livewire
+				>{{ $navItem->label }}</x-nav-item>
+			@endforeach
 		</x-nav>
 	@endcomponent
 
