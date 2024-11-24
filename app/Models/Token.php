@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
@@ -43,21 +44,21 @@ class Token extends Model
 		'value',
 	];
 
-	public function scopeExpired($query)
+	public function scopeExpired(Builder $query)
 	{
 		return $query
 			->whereNotNull('expires_at')
 			->where('expires_at', '<=', Carbon::today()->toDateTimeString());
 	}
 
-	public function scopeValid($query)
+	public function scopeValid(Builder $query)
 	{
 		return $query
 			->whereNull('expires_at')
 			->orWhere('expires_at', '>', Carbon::today()->toDateTimeString());
 	}
 
-	public function scopeMastodon($query)
+	public function scopeMastodon(Builder $query)
 	{
 		return $query->valid()->where('service', 'mastodon');
 	}
