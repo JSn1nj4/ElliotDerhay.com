@@ -7,9 +7,11 @@ use App\Actions\AddTagToPost;
 use App\Actions\HashPassword;
 use App\Actions\LogCommandEvent;
 use App\Contracts\GitHostService;
+use App\DataTransferObjects\MastodonApiCredentials;
 use App\DataTransferObjects\XApiCredentials;
 use App\Models\Token;
 use App\Services\Github\GithubService;
+use App\Services\Mastodon\MastodonConnector;
 use App\Services\Twitter\TwitterService;
 use App\Services\XService;
 use Illuminate\Support\Facades\URL;
@@ -58,6 +60,19 @@ class AppServiceProvider extends ServiceProvider
 		$this->app->singletonIf(
 			XService::class,
 			static fn () => new XService(app(XApiCredentials::class)),
+		);
+
+		$this->app->singleton(
+			MastodonConnector::class,
+			static fn () => new MastodonConnector(
+				host: config('instance.domain'),
+				credentials: new MastodonApiCredentials(
+					clientName: config('client.name'),
+					clientDomain: config('client.domain'),
+					clientKey: config('client.key'),
+					clientSecret: config('client.secret'),
+				),
+			),
 		);
 	}
 
