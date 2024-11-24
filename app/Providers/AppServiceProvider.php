@@ -8,6 +8,7 @@ use App\Actions\HashPassword;
 use App\Actions\LogCommandEvent;
 use App\Contracts\GitHostService;
 use App\DataTransferObjects\MastodonApiCredentials;
+use App\DataTransferObjects\MastodonInstanceInfo;
 use App\DataTransferObjects\XApiCredentials;
 use App\Models\Token;
 use App\Services\Github\GithubService;
@@ -62,16 +63,21 @@ class AppServiceProvider extends ServiceProvider
 			static fn () => new XService(app(XApiCredentials::class)),
 		);
 
+		$this->app->bind(MastodonInstanceInfo::class, fn () => new MastodonInstanceInfo(
+			config('mastodon.instance.domain')
+		));
+
+		$this->app->bind(MastodonApiCredentials::class, fn () => new MastodonApiCredentials(
+			clientId: config('client.id'),
+			clientSecret: config('client.secret'),
+			clientDomain: config('client.domain'),
+		));
+
 		$this->app->singleton(
 			MastodonConnector::class,
 			static fn () => new MastodonConnector(
-				host: config('instance.domain'),
-				credentials: new MastodonApiCredentials(
-					clientName: config('client.name'),
-					clientDomain: config('client.domain'),
-					clientKey: config('client.key'),
-					clientSecret: config('client.secret'),
-				),
+				instance: resolve(MastodonInstanceInfo::class),
+				credentials: resolve(MastodonApiCredentials::class),
 			),
 		);
 	}

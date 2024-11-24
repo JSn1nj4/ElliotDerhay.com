@@ -3,18 +3,19 @@
 namespace App\Services\Mastodon;
 
 use App\DataTransferObjects\MastodonApiCredentials;
+use App\DataTransferObjects\MastodonInstanceInfo;
 use Saloon\Http\Connector;
 
 class MastodonConnector extends Connector
 {
 	public function __construct(
-		protected string                 $host,
+		protected MastodonInstanceInfo   $instance,
 		protected MastodonApiCredentials $credentials,
 	) {}
 
 	public function resolveBaseUrl(): string
 	{
-		return "https://{$this->host}/api/v1";
+		return "https://{$this->instance->domain}/api/v1";
 	}
 
 	protected function defaultHeaders(): array
