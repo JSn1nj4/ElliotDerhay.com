@@ -36,6 +36,7 @@ class Token extends Model
 
 	protected $casts = [
 		'expires_at' => 'datetime',
+		'value' => 'encrypted',
 	];
 
 	protected $fillable = [
