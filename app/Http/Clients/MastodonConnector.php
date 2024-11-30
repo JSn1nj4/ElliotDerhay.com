@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Mastodon;
+namespace App\Http\Clients;
 
 use App\DataTransferObjects\MastodonApiCredentials;
 use App\DataTransferObjects\MastodonInstanceInfo;
