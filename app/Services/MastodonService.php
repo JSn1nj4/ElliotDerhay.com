@@ -32,7 +32,9 @@ class MastodonService implements SocialMediaService
 
 		$request->body()
 			// might redirect to a signed URL later for storage / displaying a success page
-			->set(new MultipartValue('redirect_uri', 'urn:ietf:wg:oauth:2.0:oob'));
+			->set([
+				new MultipartValue('redirect_uri', 'urn:ietf:wg:oauth:2.0:oob'),
+			]);
 
 		$response = $this->client
 			->authenticate(new MastodonClientCredentialAuthenticator(
