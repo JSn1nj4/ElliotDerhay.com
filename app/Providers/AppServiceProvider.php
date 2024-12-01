@@ -76,8 +76,8 @@ class AppServiceProvider extends ServiceProvider
 		));
 
 		$this->app->bind(MastodonApiCredentials::class, fn () => new MastodonApiCredentials(
-			clientId: config('client.id'),
-			clientSecret: config('client.secret'),
+			clientId: config('mastodon.client.id'),
+			clientSecret: config('mastodon.client.secret'),
 		));
 
 		$this->app->singleton(
