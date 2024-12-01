@@ -56,6 +56,8 @@ class MastodonService implements SocialMediaService
 			$response->status(),
 		);
 
+		dump($response->array());
+
 		Token::create([
 			'service' => 'mastodon',
 			'value' => $response->collect()
