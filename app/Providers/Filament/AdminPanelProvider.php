@@ -50,6 +50,8 @@ class AdminPanelProvider extends PanelProvider
 			->favicon(asset_url("avatar.png"))
 			->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
 			->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
+			// Without this, Filament thought it needed to look in resources/views/app/ for widget views 🤨
+			->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
 			->navigationGroups([
 				NavigationGroup::make('Content'),
 				NavigationGroup::make('Administration'),
