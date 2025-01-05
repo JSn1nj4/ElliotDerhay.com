@@ -65,19 +65,19 @@ class AppServiceProvider extends ServiceProvider
 		);
 
 		$this->app->bind(MastodonInstanceInfo::class, fn () => new MastodonInstanceInfo(
-			config('mastodon.instance.domain')
+			config('services.mastodon.instance.domain')
 		));
 
 		$this->app->bind(MastodonAppInfo::class, fn () => new MastodonAppInfo(
-			config('mastodon.client.id'),
-			config('mastodon.client.redirect_uris'),
-			config('mastodon.client.scopes'),
-			config('mastodon.client.website'),
+			config('services.mastodon.client.id'),
+			config('services.mastodon.client.redirect_uris'),
+			config('services.mastodon.client.scopes'),
+			config('services.mastodon.client.website'),
 		));
 
 		$this->app->bind(MastodonApiCredentials::class, fn () => new MastodonApiCredentials(
-			clientId: config('mastodon.client.id'),
-			clientSecret: config('mastodon.client.secret'),
+			clientId: config('services.mastodon.client.id'),
+			clientSecret: config('services.mastodon.client.secret'),
 		));
 
 		$this->app->singleton(
