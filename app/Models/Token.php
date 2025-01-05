@@ -66,8 +66,9 @@ class Token extends Model
 
 	public function expiresSoon(): bool
 	{
-		$comparison = Carbon::now()
-			->add(config('services.oauth.expiration_warning_timeframe'));
+		$comparison = Carbon::now()->add(
+			config('services.oauth.expiration_warning_timeframe')
+		);
 
 		return $comparison->greaterThanOrEqualTo($this->expires_at);
 	}

@@ -52,10 +52,14 @@ return [
 
 	'oauth' => [
 		/**
-		 * Value needs to be in the form of 'x days', 'y weeks', 'z months' etc.
-		 * It will be used to check if the token's expiration time is within that timeframe.
+		 * Value needs to be in the form of 'x days', 'y weeks',
+		 * 'z months' etc. It will be used to check if the token's
+		 * expiration time is within that timeframe. Defaults to 1 day
+		 * since no one would be crazy enough to design their OAuth API
+		 * to require user authorization in less than 24 hours anyway—
+		 * at least, I don't think so...
 		 */
-		'expiration_warning_timeframe' => env('OAUTH_TOKEN_EXPIRATION_WARNING_TIMEFRAME'),
+		'expiration_warning_timeframe' => env('OAUTH_TOKEN_EXPIRATION_WARNING_TIMEFRAME') ?? '1 day',
 	],
 
 	'twitter' => [
