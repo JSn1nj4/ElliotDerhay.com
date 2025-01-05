@@ -63,4 +63,12 @@ class Token extends Model
 	{
 		return $query->valid()->where('service', 'mastodon');
 	}
+
+	public function expiresSoon(): bool
+	{
+		$comparison = Carbon::now()
+			->add(config('services.oauth.expiration_warning_timeframe'));
+
+		return $comparison->greaterThanOrEqualTo($this->expires_at);
+	}
 }

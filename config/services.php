@@ -31,6 +31,14 @@ return [
 		],
 	],
 
+	'oauth' => [
+		/**
+		 * Value needs to be in the form of 'x days', 'y weeks', 'z months' etc.
+		 * It will be used to check if the token's expiration time is within that timeframe.
+		 */
+		'expiration_warning_timeframe' => env('OAUTH_TOKEN_EXPIRATION_WARNING_TIMEFRAME'),
+	],
+
 	'twitter' => [
 		'model' => \App\Models\Tweet::class,
 		'key' => env('TWITTER_API_KEY'),
