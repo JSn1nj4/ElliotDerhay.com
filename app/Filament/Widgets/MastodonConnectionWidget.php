@@ -16,8 +16,8 @@ class MastodonConnectionWidget extends Widget
 		$token = Token::mastodon()->first();
 
 		return match (true) {
-			$token === null => OauthConnectionHealth::Expired, // nothing found
-			$token->doesntExist() => OauthConnectionHealth::Expired, // scope covers 'expired'
+			$token === null => OauthConnectionHealth::NotConfigured, // nothing found
+			$token->expires_at !== null => OauthConnectionHealth::Expired,
 			$token->expiresSoon() => OauthConnectionHealth::ExpiringSoon,
 			default => OauthConnectionHealth::Good,
 		};
