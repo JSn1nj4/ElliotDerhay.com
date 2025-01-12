@@ -5,16 +5,21 @@
 ### Changes
 
 - [#218][is_218]: Process queue more frequently
+- [#175][is_175]: Replace Yarn with pnpm ([#222][pr_222])
 
 ### Maintenance
 
 - [#219][is_219]: Bulk dependency updates ([#221][pr_221])
+
+[is_175]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/175
 
 [is_218]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/218
 
 [is_219]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/219
 
 [pr_221]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/221
+
+[pr_222]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/222
 
 ## Version 2.10.1
 
