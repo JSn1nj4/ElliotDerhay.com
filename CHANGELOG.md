@@ -6,7 +6,15 @@
 
 - [#218][is_218]: Process queue more frequently
 
+### Maintenance
+
+- [#219][is_219]: Bulk dependency updates ([#221][pr_221])
+
 [is_218]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/218
+
+[is_219]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/219
+
+[pr_221]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/221
 
 ## Version 2.10.1
 
