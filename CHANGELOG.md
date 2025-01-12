@@ -1,5 +1,13 @@
 # Changelog
 
+## Version 2.11.0
+
+### Changes
+
+- [#218][is_218]: Process queue more frequently
+
+[is_218]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/218
+
 ## Version 2.10.1
 
 ### Changes
