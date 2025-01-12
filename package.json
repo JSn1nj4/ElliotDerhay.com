@@ -6,7 +6,7 @@
 	"license": "MIT",
 	"engines": {
 		"node": "^20.2.x",
-		"yarn": "^1.22.x"
+		"pnpm": "^10.0.x"
 	},
 	"repository": {
 		"type": "git",
@@ -15,10 +15,8 @@
 	"private": true,
 	"scripts": {
 		"dev": "vite",
-		"development": "yarn run dev",
 		"build": "vite build",
-		"prod": "yarn run build",
-		"production": "yarn run build"
+		"prod": "pnpm run build"
 	},
 	"devDependencies": {
 		"@tailwindcss/forms": "^0.5.4",
