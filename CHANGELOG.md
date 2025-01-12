@@ -6,6 +6,7 @@
 
 - [#218][is_218]: Process queue more frequently
 - [#175][is_175]: Replace Yarn with pnpm ([#222][pr_222])
+- [#220][is_220]: Update to PHP 8.4 ([#223][pr_223])
 
 ### Maintenance
 
@@ -17,9 +18,13 @@
 
 [is_219]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/219
 
+[is_220]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/220
+
 [pr_221]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/221
 
 [pr_222]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/222
+
+[pr_223]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/223
 
 ## Version 2.10.1
 
