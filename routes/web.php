@@ -21,7 +21,7 @@ use Spatie\Sitemap\Tags\Url as SitemapUrl;
 // standard views
 Volt::route('/', 'home')->name('home');
 
-Route::view('/privacy', 'privacy')->name('privacy');
+Volt::route('/privacy', 'privacy')->name('privacy');
 
 Route::get('/projects', [ProjectsPortfolioController::class, 'index'])->name('portfolio');
 Route::prefix('/blog')
