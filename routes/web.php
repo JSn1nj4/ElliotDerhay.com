@@ -19,7 +19,7 @@ use Spatie\Sitemap\Tags\Url as SitemapUrl;
 */
 
 // standard views
-Route::view('/', 'home')->name('home');
+Volt::route('/', 'home')->name('home');
 
 Route::view('/privacy', 'privacy')->name('privacy');
 
