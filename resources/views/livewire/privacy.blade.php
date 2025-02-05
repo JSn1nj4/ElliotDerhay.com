@@ -7,10 +7,10 @@ new class extends Component {
 }; ?>
 
 <x-slot:title>Privacy Policy - ElliotDerhay.com</x-slot:title>
-<x-slot:description>
+<x-slot:meta-description>
 	This privacy policy applies to this Website and its collection of information. This policy does not cover how
 	third-party websites linked to from this Website use personally-identifiable information.
-</x-slot:description>
+</x-slot:meta-description>
 <root>
 	<x-row :flex="false">
 		<x-column class="block w-full">
