@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\ProjectsPortfolioController;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
@@ -23,7 +22,7 @@ Volt::route('/', 'home')->name('home');
 
 Volt::route('/privacy', 'privacy')->name('privacy');
 
-Route::get('/projects', [ProjectsPortfolioController::class, 'index'])->name('portfolio');
+Volt::route('/projects', 'projects.index')->name('portfolio');
 Route::prefix('/blog')
 	->group(static function () {
 		Volt::route('/', 'blog-index')->name('blog');
