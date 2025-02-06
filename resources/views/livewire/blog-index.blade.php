@@ -6,7 +6,6 @@ use App\Models\Post;
 use Livewire\Attributes\{Computed, Layout, Title, Url};
 
 new
-#[Layout('components.layouts.blog')]
 class extends \Livewire\Volt\Component {
 	use \Livewire\WithPagination;
 
@@ -57,7 +56,7 @@ class extends \Livewire\Volt\Component {
 	<x-slot:meta-description>Latest post: {{$posts->first()->title}}</x-slot:meta-description>
 @endif
 
-<root>
+<x-blog.wrapper>
 	@if($this->hasPosts())
 		@foreach($posts as $post)
 			<x-post.card
@@ -74,8 +73,8 @@ class extends \Livewire\Volt\Component {
 		<h1 class="text-4xl text-center mb-4">Sorry, no posts to display.</h1>
 		<p class="text-2xl text-center">Check back soon!</p>
 	@endif
-</root>
 
-<x-slot:sidebar>
-	@include('partials.blog-sidebar')
-</x-slot:sidebar>
+	<x-slot:sidebar>
+		@include('partials.blog-sidebar')
+	</x-slot:sidebar>
+</x-blog.wrapper>
