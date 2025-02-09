@@ -20,6 +20,9 @@
 ### Maintenance
 
 - [#219][is_219]: Bulk dependency updates ([#221][pr_221])
+- Condense Blade layout files
+- Update error pages
+- Remove a broken online style
 
 [is_175]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/175
 
