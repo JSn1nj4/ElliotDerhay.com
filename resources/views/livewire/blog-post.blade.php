@@ -6,7 +6,6 @@ use App\Models\Post;
 use Livewire\Attributes\{Computed, Layout, Title, Url};
 
 new
-#[Layout('components.layouts.blog')]
 class extends \Livewire\Volt\Component {
 	use \Livewire\WithPagination;
 
@@ -42,7 +41,7 @@ class extends \Livewire\Volt\Component {
 	])
 </x-slot:head-extras>
 
-<root>
+<x-blog.wrapper>
 	@if($post->image)
 		<figure class="lightbox-trigger inline-block">
 			<img src="{{ $post->image->url }}" class="block rounded-lg" alt="">
@@ -88,8 +87,8 @@ class extends \Livewire\Volt\Component {
 	<x-markdown class="mb-4 mt-3">
 		{!! $post->body !!}
 	</x-markdown>
-</root>
 
-<x-slot:sidebar>
-	@include('partials.blog-sidebar')
-</x-slot:sidebar>
+	<x-slot:sidebar>
+		@include('partials.blog-sidebar')
+	</x-slot:sidebar>
+</x-blog.wrapper>

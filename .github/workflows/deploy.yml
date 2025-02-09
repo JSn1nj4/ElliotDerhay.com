@@ -29,7 +29,7 @@ jobs:
           DEPLOY_HOST_USER: ${{ secrets.DEPLOY_HOST_USER }}
 
       - name: "Ensure dependencies"
-        run: ssh deploy-host 'command -v git && test -d $DEPLOY_HOST_PROJECT_ROOT && command -v php && command -v composer'
+        run: ssh deploy-host 'command -v git && test -d $DEPLOY_HOST_PROJECT_ROOT && command -v php && command -v composer && command -v pnpm'
         env:
           DEPLOY_HOST_PROJECT_ROOT: ${{ secrets.DEPLOY_HOST_PROJECT_ROOT }}
 
@@ -41,7 +41,7 @@ jobs:
             && git clean -f -d \
             && git pull \
             && composer install --no-dev \
-            && yarn && yarn prod"
+            && pnpm install && pnpm run prod"
         env:
           DEPLOY_BRANCH: ${{ secrets.DEPLOY_BRANCH }}
           DEPLOY_HOST_PROJECT_ROOT: ${{ secrets.DEPLOY_HOST_PROJECT_ROOT }}

@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\ProjectsPortfolioController;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
@@ -19,11 +18,11 @@ use Spatie\Sitemap\Tags\Url as SitemapUrl;
 */
 
 // standard views
-Route::view('/', 'home')->name('home');
+Volt::route('/', 'home')->name('home');
 
-Route::view('/privacy', 'privacy')->name('privacy');
+Volt::route('/privacy', 'privacy')->name('privacy');
 
-Route::get('/projects', [ProjectsPortfolioController::class, 'index'])->name('portfolio');
+Volt::route('/projects', 'projects.index')->name('portfolio');
 Route::prefix('/blog')
 	->group(static function () {
 		Volt::route('/', 'blog-index')->name('blog');

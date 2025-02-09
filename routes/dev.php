@@ -12,3 +12,5 @@ Route::get('/error/{code}', function ($code = null) {
 Route::prefix('/preview')->group(static function () {
 	Route::get('/mail/{name}', [\App\Http\Controllers\MailPreviewsController::class, 'show']);
 });
+
+Route::get('/phpinfo', static fn () => phpinfo());

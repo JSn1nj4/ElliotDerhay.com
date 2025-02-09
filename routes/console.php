@@ -19,7 +19,7 @@ Schedule::command(TwitterUserUpdateCommand::class)->weekly();
 
 Schedule::job(CleanTempStorageJob::class)->weekly();
 Schedule::job(PruneLoginActivityJob::class)->weekly();
-Schedule::command(WorkCommand::class, ['--stop-when-empty'])->daily();
+Schedule::command(WorkCommand::class, ['--stop-when-empty'])->hourly();
 
 // reports can run after everything else honestly
 Schedule::command(SendWeeklyReportCommand::class)

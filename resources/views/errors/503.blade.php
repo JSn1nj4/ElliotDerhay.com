@@ -4,7 +4,7 @@
 ])
 
 @section('status-body')
-		<p>
-				This site is down for maintenance. Please check back later.
-		</p>
+	<p>
+		This website is down for maintenance. Please check back later.
+	</p>
 @endsection
