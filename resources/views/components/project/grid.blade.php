@@ -1,5 +1,5 @@
 @unless ($projects->isEmpty())
-	<div class="block md:flex flex-wrap projects-list pb-4">
+	<div class="grid grid-cols-1 md:grid-cols-3 projects-list gap-8">
 		@each('partials.project-card', $projects, 'project')
 	</div>
 @endunless
