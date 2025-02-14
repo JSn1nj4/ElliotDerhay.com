@@ -63,7 +63,7 @@ class extends \Livewire\Volt\Component {
 				Elliot's Tech Blog
 			</h1>
 		</section>
-		
+
 		<section>
 			@if($this->hasPosts())
 				@foreach($posts as $post)
