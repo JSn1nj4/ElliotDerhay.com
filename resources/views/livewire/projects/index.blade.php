@@ -34,7 +34,7 @@ new class extends Component {
 	}
 }; ?>
 
-<div class="container mx-auto px-4 pt-6">
+<article class="container mx-auto px-4 pt-6">
 	<section class="block">
 
 		<div class="w-full pb-6 text-center">
@@ -54,10 +54,10 @@ new class extends Component {
 	<section class="block w-full md:flex">
 
 		<div class="w-full pb-8 px-2 pt-6 mt-4 md:pt-0 md:mt-0">
-			<section id="main-projects-list-wrapper">
+			<div id="main-projects-list-wrapper">
 				@include('partials.projects-list', compact('projects'))
-			</section>
+			</div>
 		</div>
 
 	</section>
-</div>
+</article>

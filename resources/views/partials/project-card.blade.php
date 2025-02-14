@@ -1,13 +1,13 @@
 @php /** @var App\Models\Project $project */ @endphp
-<div class="md:w-1/2 lg:w-1/3 project">
+<article class="md:w-1/2 lg:w-1/3 project">
 	<div class="px-4">
 		<x-card.wrapper size="md" padding="p-0">
 
 			@if($project->image)
-			<x-card.thumbnail
-				:href="$project->demo_link ?? $project->link"
-				:src="$project->image->url"
-				:target="$project->demo_link ? '_self' : '_blank'"/>
+				<x-card.thumbnail
+					:href="$project->demo_link ?? $project->link"
+					:src="$project->image->url"
+					:target="$project->demo_link ? '_self' : '_blank'" />
 			@endunless
 
 			<div class="p-4">
@@ -39,4 +39,4 @@
 
 		</x-card.wrapper>
 	</div>
-</div>
+</article>
