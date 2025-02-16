@@ -58,9 +58,9 @@ class extends \Livewire\Volt\Component {
 			Published {{ $post->published_at->toFormattedDateString() }}
 		</time>
 		@unless($post->published_at->unix() === $post->updated_at->unix())
-			<time class="flex-grow-1" datetime="{{ $post->updated_at->toIso8601ZuluString('millisecond') }}">
+			<p class="flex-grow-1">
 				Last Updated {{ $post->updated_at->toFormattedDateString() }}
-			</time>
+			</p>
 		@endunless
 	</div>
 
