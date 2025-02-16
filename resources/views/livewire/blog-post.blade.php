@@ -28,7 +28,7 @@ class extends \Livewire\Volt\Component {
 	@include('partials.metadata.schema-markup', [
 	  'type' => 'Article',
 	  'name' => $post->title,
-	  'date' => $post->published_at->format('Y-m-d'),
+	  'date' => $post->published_at->toIso8601ZuluString('millisecond'),
 	  'image' => $post->image?->url,
 	  'category' => $post->categories->first()?->title,
 	  'body' => $post->body,
