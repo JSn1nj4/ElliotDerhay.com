@@ -39,6 +39,11 @@ class extends \Livewire\Volt\Component {
   	'description' => $post->meta_description,
   	'url' => route('blog.show', compact('post')),
   	'image' => $post->image?->url,
+  	'publishedTime' => $post->published_at->toIso8601ZuluString('millisecond'),
+  	'modifiedTime' => match (true) {
+  		$post->published_at->unix() === $post->updated_at->unix() => null,
+  		default => $post->updated_at->toIso8601ZuluString('millisecond'),
+  	},
 	])
 </x-slot:head-extras>
 
