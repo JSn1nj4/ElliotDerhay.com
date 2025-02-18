@@ -56,25 +56,35 @@ class extends \Livewire\Volt\Component {
 	<x-slot:meta-description>Latest post: {{$posts->first()->title}}</x-slot:meta-description>
 @endif
 
-<x-blog.wrapper>
-	@if($this->hasPosts())
-		@foreach($posts as $post)
-			<x-post.card
-				extra-classes='blog-post-card'
-				:post="$post"
-				size="none"
-				padding="p-0"
-				margin="mb-12 last:mb-0"
-				livewire
-			/>
-		@endforeach
-		{{ $posts->links() }}
-	@else
-		<h1 class="text-4xl text-center mb-4">Sorry, no posts to display.</h1>
-		<p class="text-2xl text-center">Check back soon!</p>
-	@endif
+<article>
+	<x-blog.wrapper>
+		<section class="block w-full pb-6 px-2">
+			<h1 class="content-title text-4xl pt-6 mt-4 md:pt-0 md:mt-0">
+				Elliot's Tech Blog
+			</h1>
+		</section>
 
-	<x-slot:sidebar>
-		@include('partials.blog-sidebar')
-	</x-slot:sidebar>
-</x-blog.wrapper>
+		<section>
+			@if($this->hasPosts())
+				@foreach($posts as $post)
+					<x-post.card
+						extra-classes='blog-post-card'
+						:post="$post"
+						size="none"
+						padding="p-0"
+						margin="mb-12 last:mb-0"
+						livewire
+					/>
+				@endforeach
+				{{ $posts->links() }}
+			@else
+				<h1 class="text-4xl text-center mb-4">Sorry, no posts to display.</h1>
+				<p class="text-2xl text-center">Check back soon!</p>
+			@endif
+		</section>
+
+		<x-slot:sidebar>
+			@include('partials.blog-sidebar')
+		</x-slot:sidebar>
+	</x-blog.wrapper>
+</article>

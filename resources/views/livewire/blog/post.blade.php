@@ -15,18 +15,21 @@ class extends \Livewire\Volt\Component {
 	{
 		$this->post = $post;
 	}
-}; ?>
+};
+/** @var Post $post */
+?>
 
-<x-slot:title>Elliot's Tech Blog - ElliotDerhay.com</x-slot:title>
+{{-- using raw values here is safe because the component at the end is processing it --}}
+<x-slot:title>{!! $post->page_title !!}</x-slot:title>
 <x-slot:meta-description>
-	Latest post: {{ $post->meta_description }}
+	Latest post: {!! $post->meta_description !!}
 </x-slot:meta-description>
 
 <x-slot:head-extras>
 	@include('partials.metadata.schema-markup', [
 	  'type' => 'Article',
 	  'name' => $post->title,
-	  'date' => $post->published_at->format('Y-m-d'),
+	  'date' => $post->published_at->toIso8601ZuluString('millisecond'),
 	  'image' => $post->image?->url,
 	  'category' => $post->categories->first()?->title,
 	  'body' => $post->body,
@@ -38,6 +41,11 @@ class extends \Livewire\Volt\Component {
   	'description' => $post->meta_description,
   	'url' => route('blog.show', compact('post')),
   	'image' => $post->image?->url,
+  	'publishedTime' => $post->published_at->toIso8601ZuluString('millisecond'),
+  	'modifiedTime' => match (true) {
+  		$post->published_at->unix() === $post->updated_at->unix() => null,
+  		default => $post->updated_at->toIso8601ZuluString('millisecond'),
+  	},
 	])
 </x-slot:head-extras>
 
@@ -52,9 +60,13 @@ class extends \Livewire\Volt\Component {
 	@endif
 
 	<div class="flex flex-row pt-3 mt-2 gap-4">
-		<p>Published {{ $post->published_at->toFormattedDateString() }}</p>
+		<time datetime="{{ $post->published_at->toIso8601ZuluString('millisecond') }}">
+			Published {{ $post->published_at->toFormattedDateString() }}
+		</time>
 		@unless($post->published_at->unix() === $post->updated_at->unix())
-			<p class="flex-grow-1">Last Updated {{ $post->updated_at->toFormattedDateString() }}</p>
+			<p class="flex-grow-1">
+				Last Updated {{ $post->updated_at->toFormattedDateString() }}
+			</p>
 		@endunless
 	</div>
 

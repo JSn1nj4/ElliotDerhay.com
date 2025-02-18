@@ -1,5 +1,20 @@
 # Changelog
 
+## Version 2.11.1
+
+### Changes
+
+- [Issue #227][is_227]: Use somewhat more semantic HTML ([#228][pr_228])
+- Output blog post titles in `<title>` tag
+- Fix meta description output for blog posts
+- Add some better processing for blog post page titles
+- Set OpenGraph publish and modified times on blog posts
+- Reorganize Blog Livewire/Volt components
+
+[is_227]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/227
+
+[pr_228]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/228
+
 ## Version 2.11.0
 
 ### Changes

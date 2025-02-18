@@ -39,7 +39,7 @@ new class extends Component {
 				What I Do
 			</h2>
 
-			<p class="mb-4 text-xl">
+			<p class="mb-8 text-xl">
 				I primarily work on WordPress projects, but I love working with Laravel. My primary side project is this
 				website. I use it as both a personal profile and a sandbox for learning new
 				concepts. {{-- Below are some projects I maintain or contribute to, as well as some I have worked on in the past. --}}
