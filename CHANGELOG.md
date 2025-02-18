@@ -8,6 +8,7 @@
 - Fix meta description output for blog posts
 - Add some better processing for blog post page titles
 - Set OpenGraph publish and modified times on blog posts
+- Reorganize Blog Livewire/Volt components
 
 ## Version 2.11.0
 
