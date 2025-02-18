@@ -3,7 +3,7 @@
 <meta property="og:url" content="{{ $url }}" />
 <meta property="og:type" content="{{ $type }}" />
 @isset($publishedTime)
-	<meta property="article:published_time" content="{{ $ublishedTime }}" />
+	<meta property="article:published_time" content="{{ $publishedTime }}" />
 @endisset
 @isset($modifiedTime)
 	<meta property="article:modified_time" content="{{ $modifiedTime }}" />

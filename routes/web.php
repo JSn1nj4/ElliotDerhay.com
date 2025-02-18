@@ -25,8 +25,8 @@ Volt::route('/privacy', 'privacy')->name('privacy');
 Volt::route('/projects', 'projects.index')->name('portfolio');
 Route::prefix('/blog')
 	->group(static function () {
-		Volt::route('/', 'blog-index')->name('blog');
-		Volt::route('/{post:slug}', 'blog-post')->name('blog.show');
+		Volt::route('/', 'blog.index')->name('blog');
+		Volt::route('/{post:slug}', 'blog.post')->name('blog.show');
 	});
 
 Route::get('/sitemap.xml',

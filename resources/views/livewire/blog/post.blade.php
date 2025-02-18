@@ -15,7 +15,9 @@ class extends \Livewire\Volt\Component {
 	{
 		$this->post = $post;
 	}
-}; ?>
+};
+/** @var Post $post */
+?>
 
 {{-- using raw values here is safe because the component at the end is processing it --}}
 <x-slot:title>{!! $post->page_title !!}</x-slot:title>
@@ -27,7 +29,7 @@ class extends \Livewire\Volt\Component {
 	@include('partials.metadata.schema-markup', [
 	  'type' => 'Article',
 	  'name' => $post->title,
-	  'date' => $post->published_at->format('Y-m-d'),
+	  'date' => $post->published_at->toIso8601ZuluString('millisecond'),
 	  'image' => $post->image?->url,
 	  'category' => $post->categories->first()?->title,
 	  'body' => $post->body,
@@ -58,9 +60,13 @@ class extends \Livewire\Volt\Component {
 	@endif
 
 	<div class="flex flex-row pt-3 mt-2 gap-4">
-		<p>Published {{ $post->published_at->toFormattedDateString() }}</p>
+		<time datetime="{{ $post->published_at->toIso8601ZuluString('millisecond') }}">
+			Published {{ $post->published_at->toFormattedDateString() }}
+		</time>
 		@unless($post->published_at->unix() === $post->updated_at->unix())
-			<p class="flex-grow-1">Last Updated {{ $post->updated_at->toFormattedDateString() }}</p>
+			<p class="flex-grow-1">
+				Last Updated {{ $post->updated_at->toFormattedDateString() }}
+			</p>
 		@endunless
 	</div>
 
