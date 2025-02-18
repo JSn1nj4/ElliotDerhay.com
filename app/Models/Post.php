@@ -178,7 +178,16 @@ class Post extends ImageableModel implements SearchDisplayableContract, Categori
 	public function pageTitle(): Attribute
 	{
 		return Attribute::make(
-			get: fn () => $this->searchMeta?->search_title ?? $this->title,
+			get: function () {
+				if ($this->searchMeta?->search_title !== null) {
+					return $this->searchMeta?->search_title . " - " . config('app.name');
+				}
+
+				return str($this->title)
+					->limit(60 - strlen(' - ') - strlen(config('app.name')))
+					->append(' - ', config('app.name'))
+					->value();
+			},
 
 			// TODO: how can this be more efficient?
 			set: function (string $title) {

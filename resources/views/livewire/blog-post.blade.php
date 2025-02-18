@@ -19,9 +19,10 @@ class extends \Livewire\Volt\Component {
 /** @var Post $post */
 ?>
 
-<x-slot:title>Elliot's Tech Blog - ElliotDerhay.com</x-slot:title>
+{{-- using raw values here is safe because the component at the end is processing it --}}
+<x-slot:title>{!! $post->page_title !!}</x-slot:title>
 <x-slot:meta-description>
-	Latest post: {{ $post->meta_description }}
+	Latest post: {!! $post->meta_description !!}
 </x-slot:meta-description>
 
 <x-slot:head-extras>
@@ -40,6 +41,11 @@ class extends \Livewire\Volt\Component {
   	'description' => $post->meta_description,
   	'url' => route('blog.show', compact('post')),
   	'image' => $post->image?->url,
+  	'publishedTime' => $post->published_at->toIso8601ZuluString('millisecond'),
+  	'modifiedTime' => match (true) {
+  		$post->published_at->unix() === $post->updated_at->unix() => null,
+  		default => $post->updated_at->toIso8601ZuluString('millisecond'),
+  	},
 	])
 </x-slot:head-extras>
 
