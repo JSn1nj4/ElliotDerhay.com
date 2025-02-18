@@ -1,5 +1,14 @@
 # Changelog
 
+## Version 2.11.1
+
+### Changes
+
+- Output blog post titles in `<title>` tag
+- Fix meta description output for blog posts
+- Add some better processing for blog post page titles
+- Set OpenGraph publish and modified times on blog posts
+
 ## Version 2.11.0
 
 ### Changes
