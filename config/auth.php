@@ -3,7 +3,10 @@
 return [
 
 	'activity' => [
+		// maximum days worth of entries to retain
 		'days_to_retain' => env('AUTH_ACTIVITY_DAYS_TO_KEEP', 60),
+		// minimum number of entries to retain if less than 60 days worth
+		'min_entries' => env('AUTH_ACTIVITY_MINIMUM_ENTRIES', 30),
 	],
 
 	/*

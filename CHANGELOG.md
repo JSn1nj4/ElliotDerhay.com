@@ -1,5 +1,20 @@
 # Changelog
 
+## Version 2.11.2
+
+### Changes
+
+- [Issue #229][is_229]: 500-error-at-admin-login ([#231][pr_231])
+- [Issue #230][is_230]: Make filament dashboard route dynamic ([#232][pr_232])
+
+[is_229]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/229
+
+[is_230]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/230
+
+[pr_231]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/231
+
+[pr_232]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/232
+
 ## Version 2.11.1
 
 ### Changes

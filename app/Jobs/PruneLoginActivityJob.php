@@ -16,6 +16,10 @@ class PruneLoginActivityJob implements ShouldQueue
 
 	public function handle(): void
 	{
+		if (LoginActivity::count() <= config()->integer('auth.activity.min_entries')) {
+			return;
+		}
+
 		LoginActivity::whereDate(
 			'created_at',
 			'<=',

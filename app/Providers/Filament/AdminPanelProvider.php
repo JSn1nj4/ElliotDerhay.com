@@ -27,7 +27,7 @@ class AdminPanelProvider extends PanelProvider
 		return $panel
 			->default()
 			->id('admin')
-			->path('admin')
+			->path(config()->string('filament.admin.path'))
 			->login(Login::class)
 			->globalSearchKeyBindings(['command+k', 'ctrl+k'])
 			->maxContentWidth('full')
