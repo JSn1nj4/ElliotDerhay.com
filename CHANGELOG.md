@@ -1,5 +1,15 @@
 # Changelog
 
+## Version 2.11.2
+
+### Changes
+
+- [Issue #229][is_229]: 500-error-at-admin-login ([#231][pr_231])
+
+[is_229]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/229
+
+[pr_231]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/231
+
 ## Version 2.11.1
 
 ### Changes
