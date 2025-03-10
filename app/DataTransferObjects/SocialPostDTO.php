@@ -8,12 +8,11 @@ use Illuminate\Support\Stringable;
 readonly class SocialPostDTO
 {
 	public function __construct(
-		public string $text,
-		public array  $links = [],
-		public array  $tags = [],
-	)
-	{
-	}
+		public string    $text,
+		public array     $links = [],
+		public array     $tags = [],
+		public self|null $subpost = null,
+	) {}
 
 	public function __toString(): string
 	{
