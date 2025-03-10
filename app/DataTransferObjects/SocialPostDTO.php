@@ -8,10 +8,10 @@ use Illuminate\Support\Stringable;
 readonly class SocialPostDTO
 {
 	public function __construct(
-		public string    $text,
-		public array     $links = [],
-		public array     $tags = [],
-		public self|null $subpost = null,
+		public string|null $text = null,
+		public array       $links = [],
+		public array       $tags = [],
+		public self|null   $subpost = null,
 	) {}
 
 	public function __toString(): string
@@ -25,7 +25,7 @@ readonly class SocialPostDTO
 	 */
 	public function stringify(): string
 	{
-		return implode("\n", [
+		return collect([
 			$this->text,
 
 			// Format tags correctly
@@ -45,6 +45,8 @@ readonly class SocialPostDTO
 				->filter(static fn (string $item) => Str::isUrl($item))
 				->transform(static fn (string $item) => Str::lower($item))
 				->implode("\n")
-		]);
+		])
+			->reject(static fn ($item) => $item === null)
+			->implode("\n");
 	}
 }
