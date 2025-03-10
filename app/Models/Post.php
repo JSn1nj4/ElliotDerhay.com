@@ -10,6 +10,7 @@ use App\Contracts\XMetaContract;
 use App\DataTransferObjects\SocialPostDTO;
 use App\DataTransferObjects\XMetaDTO;
 use App\Enums\PerPage;
+use App\Enums\SocialPlatform;
 use App\Enums\XMetaCardType;
 use App\Models\Scopes\PostPublishedScope;
 use App\States\Posts\PostPublished;
@@ -98,7 +99,7 @@ class Post extends ImageableModel implements SearchDisplayableContract, Categori
 		return Attribute::get(fn () => str($this->body)->words(20));
 	}
 
-	public function getPostable(): SocialPostDTO
+	public function getPostable(SocialPlatform|null $for = null): SocialPostDTO
 	{
 		return new SocialPostDTO(
 			text: "I wrote a thing!\n\n{$this->title}",

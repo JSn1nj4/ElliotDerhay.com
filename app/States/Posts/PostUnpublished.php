@@ -2,6 +2,7 @@
 
 namespace App\States\Posts;
 
+use App\Enums\SocialPlatform;
 use App\Features\PublishPostToX;
 use App\Jobs\PostToXJob;
 use Laravel\Pennant\Feature;
@@ -21,7 +22,7 @@ class PostUnpublished extends PostState
 
 			PostToXJob::dispatchIf(
 				Feature::active(PublishPostToX::class),
-				$this->post->getPostable(),
+				$this->post->getPostable(for: SocialPlatform::X),
 			);
 		}
 
