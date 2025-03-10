@@ -1,5 +1,15 @@
 # Changelog
 
+## Version 2.??.?
+
+### Changes
+
+- [Issue #214][is_214]: Migrate global scopes and observers to PHP attributes ([#233][pr_233])
+
+[is_214]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/214
+
+[pr_233]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/233
+
 ## Version 2.11.2
 
 ### Changes
