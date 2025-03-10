@@ -101,6 +101,24 @@ class Post extends ImageableModel implements SearchDisplayableContract, Categori
 
 	public function getPostable(SocialPlatform|null $for = null): SocialPostDTO
 	{
+		if ($for === SocialPlatform::X) {
+			return new SocialPostDTO(
+				text: "I wrote a thing!\n\n{$this->title}\n(Link in replies 🔗)",
+
+				tags: collect([
+					$this->categories->map(static fn (Category $category) => $category->title)->all(),
+					$this->tags->map(static fn (Tag $tag) => $tag->title)->all(),
+				])
+					->flatten()
+					->unique()
+					->all(),
+
+				subpost: new SocialPostDTO(links: [
+					route('blog.show', ['post' => $this])
+				])
+			);
+		}
+
 		return new SocialPostDTO(
 			text: "I wrote a thing!\n\n{$this->title}",
 
