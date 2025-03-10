@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use App\Enums\PerPage;
+use App\Observers\ImageObserver;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -50,6 +52,7 @@ use Illuminate\Pagination\AbstractPaginator;
  * @method static \Illuminate\Database\Eloquent\Builder|Image whereCaption($value)
  * @mixin \Eloquent
  */
+#[ObservedBy([ImageObserver::class])]
 class Image extends Model
 {
 	use HasFactory;
