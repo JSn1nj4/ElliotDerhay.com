@@ -2,25 +2,7 @@
 
 namespace App\Providers;
 
-use App\Events\GithubEventsPruned;
-use App\Events\GithubEventsPulledEvent;
-use App\Events\GithubUsersUpdatedEvent;
-use App\Events\NewGithubEventTypesEvent;
-use App\Events\TokensPrunedEvent;
-use App\Events\TweetsPrunedEvent;
-use App\Events\TweetsPulledEvent;
-use App\Events\TwitterUsersUpdatedEvent;
 use App\Listeners\CommandLogSubscriber;
-use App\Listeners\SendPasswordChangedNotification;
-use App\Listeners\LogLockouts;
-use App\Listeners\PruneOldTweets;
-use App\Listeners\SendNewGithubEventTypesEmail;
-use App\Models\Image;
-use App\Observers\ImageObserver;
-use Illuminate\Auth\Events\Lockout;
-use Illuminate\Auth\Events\PasswordReset;
-use Illuminate\Auth\Events\Registered;
-use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider
@@ -31,14 +13,6 @@ class EventServiceProvider extends ServiceProvider
 	 * @var array
 	 */
 	protected $listen = [];
-
-	/**
-	 * Register model event observers
-	 * @var array[] $observers
-	 */
-	protected $observers = [
-		Image::class => [ImageObserver::class],
-	];
 
 	/**
 	 * Subscribers to handle multiple related events
