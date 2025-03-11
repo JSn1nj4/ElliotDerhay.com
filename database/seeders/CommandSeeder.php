@@ -48,41 +48,21 @@ class CommandSeeder extends Seeder
 			'signature' => 'token:prune',
 			'description' => 'Prune old tokens'
 		],
-		[
-			'signature' => 'tweet:prune',
-			'description' => 'Prune old tweets'
-		],
-		[
-			'signature' => 'tweet:pull',
-			'description' => 'Fetch latest tweets'
-		],
-		[
-			'signature' => 'twitter:feature_status',
-			'description' => 'Check the state of the TwitterFeed feature'
-		],
-		[
-			'signature' => 'twitter:toggle_feature',
-			'description' => 'Toggle the active state of the TwitterFeed feature'
-		],
-		[
-			'signature' => 'twitter:user:update',
-			'description' => 'Update saved Twitter user data'
-		],
 	];
 
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
-    public function run(): void
+	/**
+	 * Run the database seeds.
+	 *
+	 * @return void
+	 */
+	public function run(): void
 	{
-        foreach($this->commands as $command) {
-			if(Command::where('signature', $command['signature'])->exists()) {
+		foreach ($this->commands as $command) {
+			if (Command::where('signature', $command['signature'])->exists()) {
 				continue;
 			}
 
 			Command::create($command);
 		}
-    }
+	}
 }
