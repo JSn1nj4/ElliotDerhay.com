@@ -28,20 +28,10 @@ class Settings extends Page
 			Forms\Components\Section::make('Features')
 				->schema([
 					Forms\Components\Toggle::make('admin_login')
-						->reactive()
-						->afterStateUpdated(static function (bool $state) {
-							match ($state) {
-								true => Feature::activate(AdminLogin::class),
-								false => feature::deactivate(AdminLogin::class),
-							};
-
-							Notification::make('admin_login_updated')
-								->title('Admin Login feature updated!')
-								->success()
-								->send();
-						})
-						->label('Admin Login')
-						->inlineLabel(),
+						->disabled()
+						->helperText('This should always appear "on". You wouldn\'t want to lock yourself out, right?')
+						->inlineLabel()
+						->label('Admin Login'),
 
 					Forms\Components\Toggle::make('github_feed')
 						->reactive()
