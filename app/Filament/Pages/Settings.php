@@ -2,8 +2,12 @@
 
 namespace App\Filament\Pages;
 
+use App\Features\AdminLogin;
+use App\Features\GithubFeed;
+use App\Features\PublishPostToX;
 use Filament\Forms;
 use Filament\Pages\Page;
+use Laravel\Pennant\Feature;
 
 class Settings extends Page
 {
@@ -15,9 +19,11 @@ class Settings extends Page
 
 	protected static string|null $navigationLabel = 'Settings';
 
+	public array $features = [];
+
 	public function form(Forms\Form $form): Forms\Form
 	{
-		return $form->schema([
+		return $form->statePath('features')->schema([
 			Forms\Components\Section::make('Features')
 				->schema([
 					Forms\Components\Toggle::make('admin_login')
@@ -33,5 +39,14 @@ class Settings extends Page
 						->inlineLabel(),
 				])
 		]);
+	}
+
+	public function __construct()
+	{
+		$this->features = [
+			'admin_login' => Feature::active(AdminLogin::class),
+			'github_feed' => Feature::active(GithubFeed::class),
+			'publish_posts_to_x' => Feature::active(PublishPostToX::class),
+		];
 	}
 }
