@@ -46,8 +46,8 @@ class Settings extends Page
 								->success()
 								->send();
 						})
-						->label('GitHub Activity Feed')
-						->inlineLabel(),
+						->inlineLabel()
+						->label('GitHub Activity Feed'),
 
 					Forms\Components\Toggle::make('publish_posts_to_x')
 						->reactive()
@@ -62,8 +62,8 @@ class Settings extends Page
 								->success()
 								->send();
 						})
-						->label('Publish Posts to X')
-						->inlineLabel(),
+						->inlineLabel()
+						->label('Publish Posts to X'),
 				])
 		]);
 	}
