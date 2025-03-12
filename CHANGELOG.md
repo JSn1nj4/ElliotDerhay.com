@@ -6,9 +6,17 @@
 
 - [Issue #216][is_216]: Migrate global scopes and observers to PHP attributes ([#233][pr_234])
 
+### Changes
+
+- [Issue #149][is_149]: Twitter cleanup ([#235][pr_235])
+
+[is_149]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/149
+
 [is_216]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/216
 
 [pr_234]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/234
+
+[pr_235]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/235
 
 ### Changes
 
