@@ -5,6 +5,7 @@
 ### new
 
 - [Issue #216][is_216]: Migrate global scopes and observers to PHP attributes ([#233][pr_234])
+- [Issue #162][is_162]: Pennant feature management panel ([#236][pr_236])
 
 ### Changes
 
@@ -12,11 +13,15 @@
 
 [is_149]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/149
 
+[is_162]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/162
+
 [is_216]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/216
 
 [pr_234]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/234
 
 [pr_235]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/235
+
+[pr_236]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/236
 
 ### Changes
 
