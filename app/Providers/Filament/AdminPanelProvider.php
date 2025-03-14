@@ -8,6 +8,7 @@ use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Filament\Navigation\NavigationGroup;
+use Filament\Navigation\NavigationItem;
 use Filament\Pages;
 use Filament\Panel;
 use Filament\PanelProvider;
@@ -51,8 +52,28 @@ class AdminPanelProvider extends PanelProvider
 			->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
 			->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
 			->navigationGroups([
+				NavigationGroup::make('Frontend')->collapsed(),
 				NavigationGroup::make('Content'),
 				NavigationGroup::make('Administration'),
+			])
+			->navigationItems([
+				NavigationItem::make('Homepage')
+					->icon('heroicon-o-home')
+					->url('/')
+					->openUrlInNewTab()
+					->group('Frontend'),
+
+				NavigationItem::make('Blog')
+					->icon('heroicon-o-newspaper')
+					->url('/blog')
+					->openUrlInNewTab()
+					->group('Frontend'),
+
+				NavigationItem::make('Projects')
+					->icon('m-code-bracket')
+					->url('/projects')
+					->openUrlInNewTab()
+					->group('Frontend'),
 			])
 			->pages([
 				Pages\Dashboard::class,
