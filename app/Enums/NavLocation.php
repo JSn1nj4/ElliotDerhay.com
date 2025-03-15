@@ -10,7 +10,7 @@ enum NavLocation: string
 	case PublicNavBar = 'public-nav-bar';
 	case AdminNavBar = 'admin-nav-bar';
 
-	public function items(): array
+	public function items(): Collection
 	{
 		return collect(match ($this) {
 			self::AdminNavBar,
@@ -23,7 +23,6 @@ enum NavLocation: string
 			))
 			->when(config('app.enable-projects'), fn (Collection $collection) => $collection->push(
 				new NavItemDTO('portfolio', 'Projects', 'heroicon-m-code-bracket')
-			))
-			->all();
+			));
 	}
 }

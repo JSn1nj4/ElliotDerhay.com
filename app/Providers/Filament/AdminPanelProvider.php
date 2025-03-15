@@ -2,13 +2,13 @@
 
 namespace App\Providers\Filament;
 
+use App\Enums\NavLocation;
 use App\Filament\Pages\Login;
 use App\Filament\Widgets;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Filament\Navigation\NavigationGroup;
-use Filament\Navigation\NavigationItem;
 use Filament\Pages;
 use Filament\Panel;
 use Filament\PanelProvider;
@@ -56,25 +56,6 @@ class AdminPanelProvider extends PanelProvider
 				NavigationGroup::make('Content'),
 				NavigationGroup::make('Administration'),
 			])
-			->navigationItems([
-				NavigationItem::make('Homepage')
-					->icon('heroicon-o-home')
-					->url('/')
-					->openUrlInNewTab()
-					->group('Frontend'),
-
-				NavigationItem::make('Blog')
-					->icon('heroicon-o-newspaper')
-					->url('/blog')
-					->openUrlInNewTab()
-					->group('Frontend'),
-
-				NavigationItem::make('Projects')
-					->icon('m-code-bracket')
-					->url('/projects')
-					->openUrlInNewTab()
-					->group('Frontend'),
-			])
 			->pages([
 				Pages\Dashboard::class,
 			])
@@ -96,6 +77,12 @@ class AdminPanelProvider extends PanelProvider
 			])
 			->authMiddleware([
 				Authenticate::class,
-			]);
+			])
+			->bootUsing(function (Panel $panel) {
+				$panel->navigationItems(NavLocation::AdminNavBar->items()
+					->map
+					->toNavigationItem(group: 'Frontend')
+					->all());
+			});
 	}
 }
