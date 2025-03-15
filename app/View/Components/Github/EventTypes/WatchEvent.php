@@ -15,7 +15,7 @@ class WatchEvent extends BaseComponent
 	{
 		parent::__construct(
 			$event->action ?? 'starred',
-			'fas fa-star',
+			'fas-star',
 			$event
 		);
 	}

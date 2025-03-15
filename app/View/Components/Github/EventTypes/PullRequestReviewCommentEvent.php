@@ -20,7 +20,7 @@ class PullRequestReviewCommentEvent extends BaseComponent
 	{
 		parent::__construct(
 			$event->action ?? 'commented on a review of',
-			'fas fa-comment-alt',
+			'fas-comment-alt',
 			$event
 		);
 

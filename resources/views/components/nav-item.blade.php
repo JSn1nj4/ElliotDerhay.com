@@ -1,5 +1,5 @@
 <a href="{{ $href }}" {{ $attributes->class([
-	'block',
+	'block' => !$inline,
 	'lg:inline-block' => $inline,
 	'px-4',
 	'py-6',
@@ -7,7 +7,18 @@
 	'active' => $isActive
 ]) }} {{ $livewire ? 'wire:navigate' : '' }}>
 	@if($icon)
-		<i class="{{$icon}}"></i>
+		<x-dynamic-component
+			:component='"heroicon-{$icon}"'
+			@class([
+				'w-auto',
+				'h-[1em]',
+				'-mt-1',
+				'inline',
+				'align-middle',
+				'stroke-caribbeanGreen-500' => $isActive,
+				'stroke-2' => $isActive,
+			])
+		/>
 	@endif
 	{{ $slot }}
 </a>

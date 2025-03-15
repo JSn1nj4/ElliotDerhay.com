@@ -15,7 +15,7 @@ class PublicEvent extends BaseComponent
 	{
 		parent::__construct(
 			$event->action ?? 'open sourced',
-			'fas fa-globe',
+			'fas-globe',
 			$event
 		);
 	}

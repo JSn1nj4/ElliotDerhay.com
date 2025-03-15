@@ -10,8 +10,7 @@
 	<meta name="description" content="@yield('meta-description', 'A simple guy who loves web development and design')">
 
 	@vite('resources/css/app.css')
-	<script src="https://kit.fontawesome.com/a9f488e9e4.js" crossorigin="anonymous"></script>
-
+	
 	<link rel="shortcut icon" href="{{ asset_url('favicon.png') }}">
 
 	@stack('head-extras')

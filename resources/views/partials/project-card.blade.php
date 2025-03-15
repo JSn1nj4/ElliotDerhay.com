@@ -18,7 +18,8 @@
 		<div class="relative flex-grow">
 			<p>
 				<x-project.link :href="$project->link" target="_blank" title="Open project repository">
-					Project <i class="fas fa-link inline"></i>
+					Project
+					<x-fas-link class='inline size-6' />
 				</x-project.link>
 			</p>
 		</div>
@@ -27,7 +28,8 @@
 			<div class="text-right relative">
 				<p>
 					<x-project.link :href="$project->demo_link" title="Open project demo">
-						Demo <i class="fas fa-laptop inline"></i>
+						Demo
+						<x-fas-laptop class='inline size-6' />
 					</x-project.link>
 				</p>
 			</div>

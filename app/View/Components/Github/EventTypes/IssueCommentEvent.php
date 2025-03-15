@@ -20,7 +20,7 @@ class IssueCommentEvent extends BaseComponent
 	{
 		parent::__construct(
 			$event->action ?? 'comment on',
-			'fas fa-comment',
+			'fas-comment',
 			$event
 		);
 
