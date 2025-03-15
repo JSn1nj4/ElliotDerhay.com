@@ -11,7 +11,8 @@ use App\Services\ImageService;
  * @param string $filename
  * @return string
  */
-function asset_url(string $filename): string {
+function asset_url(string $filename): string
+{
 	return ImageService::asset($filename);
 }
 
@@ -24,8 +25,20 @@ function asset_url(string $filename): string {
  * @param string $disk
  * @return string
  */
-function image_url(string $path, string $disk): string {
+function image_url(string $path, string $disk): string
+{
 	return ImageService::make()->url($path, $disk);
+}
+
+/**
+ * Resolve navigation item collection for specified menu
+ *
+ * @param \App\Enums\NavLocation $location
+ * @return \Illuminate\Support\Collection<\App\DataTransferObjects\NavItemDTO>
+ */
+function nav(\App\Enums\NavLocation $location): \Illuminate\Support\Collection
+{
+	return app(\App\Navigation\Registry::class)->locationItems($location);
 }
 
 /**
@@ -34,6 +47,7 @@ function image_url(string $path, string $disk): string {
  * Setting the value from there can be done with a few methods and then returned for use.
  * @return TtlDTO
  */
-function ttl(): TtlDTO {
+function ttl(): TtlDTO
+{
 	return new TtlDTO(0);
 }

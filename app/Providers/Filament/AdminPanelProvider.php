@@ -79,7 +79,7 @@ class AdminPanelProvider extends PanelProvider
 				Authenticate::class,
 			])
 			->bootUsing(function (Panel $panel) {
-				$panel->navigationItems(NavLocation::AdminNavBar->items()
+				$panel->navigationItems(nav(NavLocation::AdminNavBar)
 					->map->navigationItem()
 					->each->group('Frontend')
 					->each->openUrlInNewTab()

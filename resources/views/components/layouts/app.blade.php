@@ -20,7 +20,7 @@
 
 @component('partials.header')
 	<x-nav>
-		@foreach(\App\Enums\NavLocation::PublicNavBar->items() as $item)
+		@foreach(nav(\App\Enums\NavLocation::PublicNavBar) as $item)
 			<x-nav-item :route='$item->route' :icon='$item->icon' inline livewire>
 				{{ $item->label }}
 			</x-nav-item>
