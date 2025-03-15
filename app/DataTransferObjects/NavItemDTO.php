@@ -12,11 +12,10 @@ readonly class NavItemDTO
 		public string|null $icon = null,
 	) {}
 
-	public function toNavigationItem(string|null $group = null): NavigationItem
+	public function navigationItem(): NavigationItem
 	{
 		return NavigationItem::make($this->label)
 			->url(route($this->route))
-			->icon($this->icon)
-			->group($group);
+			->icon($this->icon);
 	}
 }

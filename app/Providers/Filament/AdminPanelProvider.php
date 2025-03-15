@@ -80,8 +80,9 @@ class AdminPanelProvider extends PanelProvider
 			])
 			->bootUsing(function (Panel $panel) {
 				$panel->navigationItems(NavLocation::AdminNavBar->items()
-					->map
-					->toNavigationItem(group: 'Frontend')
+					->map->navigationItem()
+					->each->group('Frontend')
+					->each->openUrlInNewTab()
 					->all());
 			});
 	}
