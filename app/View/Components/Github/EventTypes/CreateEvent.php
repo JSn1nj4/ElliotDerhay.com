@@ -20,7 +20,7 @@ class CreateEvent extends BaseComponent
 	{
 		parent::__construct(
 			$event->action ?? 'created',
-			'far fa-plus-square',
+			'far-plus-square',
 			$event
 		);
 

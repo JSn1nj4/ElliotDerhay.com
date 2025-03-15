@@ -20,7 +20,7 @@ class PullRequestReviewEvent extends BaseComponent
 	{
 		parent::__construct(
 			$event->action ?? 'reviewed',
-			'fas fa-edit',
+			'fas-edit',
 			$event
 		);
 

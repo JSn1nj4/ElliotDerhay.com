@@ -1,5 +1,5 @@
 <div class="flex flex-row relative">
-	<div class="text-neutral-800 dark:text-neutral-500 text-center flex-none {{ $icon }}" style="width: 2rem; font-size: 22px;"></div>
+	<x-github.event-icon :icon='$icon' />
 
 	<div class="pl-4 flex-grow relative">
 		<p class="text-neutral-800 dark:text-neutral-500">
@@ -14,7 +14,8 @@
 
 				{{ $action }}
 
-				<a href="{{ $repoUrl() }}/issues/{{ $event->source }}" target="_blank" class="text-caribbeanGreen-600 dark:text-caribbeanGreen-500">
+				<a href="{{ $repoUrl() }}/issues/{{ $event->source }}" target="_blank"
+					 class="text-caribbeanGreen-600 dark:text-caribbeanGreen-500">
 					{{ $issueNumberText }}
 				</a>
 

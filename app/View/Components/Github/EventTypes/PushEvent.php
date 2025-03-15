@@ -20,7 +20,7 @@ class PushEvent extends BaseComponent
 	{
 		parent::__construct(
 			$event->action ?? 'pushed to',
-			'far fa-arrow-alt-circle-up',
+			'far-arrow-alt-circle-up',
 			$event
 		);
 

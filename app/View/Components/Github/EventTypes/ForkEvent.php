@@ -18,7 +18,7 @@ class ForkEvent extends BaseComponent
 	{
 		parent::__construct(
 			$event->action ?? 'forked',
-			'fas fa-code-branch',
+			'fas-code-branch',
 			$event
 		);
 
