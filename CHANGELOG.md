@@ -10,7 +10,7 @@
 ### Changes
 
 - [Issue #149][is_149]: Twitter cleanup ([#235][pr_235])
-- JSN-291:
+- JSN-291: Standardize font handling ([#237][pr_237])
 
 [is_149]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/149
 
