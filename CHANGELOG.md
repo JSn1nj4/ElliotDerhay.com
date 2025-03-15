@@ -6,6 +6,7 @@
 
 - [Issue #216][is_216]: Migrate global scopes and observers to PHP attributes ([#233][pr_234])
 - [Issue #162][is_162]: Pennant feature management panel ([#236][pr_236])
+- JSN-291: Add public page shortcuts to admin panel ([#238][pr_238])
 
 ### Changes
 
@@ -28,7 +29,9 @@
 
 [pr_236]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/236
 
-[pr_237]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/237
+[pr_237]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/237
+
+[pr_238]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/238
 
 ## Version 2.11.3
 

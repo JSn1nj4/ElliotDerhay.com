@@ -8,7 +8,7 @@
 ]) }} {{ $livewire ? 'wire:navigate' : '' }}>
 	@if($icon)
 		<x-dynamic-component
-			:component='"heroicon-{$icon}"'
+			:component='$icon'
 			@class([
 				'w-auto',
 				'h-[1em]',
