@@ -12,15 +12,15 @@
 
 @section('status-footer')
 	<p>
-		<a class="text-black dark:text-white hover:text-caribbeanGreen-500" href="{{ route('home') }}"><i
-				class="text-caribbeanGreen-500 fa fa-caret-square-left"></i> Back to homepage</a>
+		<a class="text-black dark:text-white hover:text-caribbeanGreen-500" href="{{ route('home') }}">
+			<x-fas-caret-square-left class='text-caribbeanGreen-500 size-5 inline-block align-middle' />
+			<span class='align-middle'>Back to homepage</span>
+		</a>
 	</p>
 	<div class="pt-8 font-normal text-neutral-500">
 		@include('partials.copyright')
 	</div>
 	<div class="pt-4">
-		@include('partials.socials', [
-			'classes' => 'text-2xl'
-		])
+		@include('partials.socials')
 	</div>
 @endsection
