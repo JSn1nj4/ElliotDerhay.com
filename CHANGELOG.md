@@ -16,23 +16,27 @@
 
 [is_162]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/162
 
+[is_214]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/214
+
 [is_216]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/216
 
-[pr_234]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/234
+[pr_233]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/233
 
-[pr_235]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/235
+[pr_234]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/234
 
-[pr_236]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/236
+[pr_235]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/235
+
+[pr_236]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/236
 
 [pr_237]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/237
 
-### Changes
+## Version 2.11.3
 
-- [Issue #214][is_214]: Migrate global scopes and observers to PHP attributes ([#233][pr_233])
+### Fixes
 
-[is_214]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/214
-
-[pr_233]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/233
+- Update laravel/framework to supposedly fix a file validation bypass
+- Update livewire/volt to supposedly fix an RCE issue
+- Update filament/filament and pestphp/pest-plugin-livewire to allow updating Volt
 
 ## Version 2.11.2
 
@@ -45,9 +49,9 @@
 
 [is_230]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/230
 
-[pr_231]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/231
+[pr_231]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/231
 
-[pr_232]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/232
+[pr_232]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/232
 
 ## Version 2.11.1
 
@@ -62,7 +66,7 @@
 
 [is_227]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/227
 
-[pr_228]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/228
+[pr_228]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/228
 
 ## Version 2.11.0
 
