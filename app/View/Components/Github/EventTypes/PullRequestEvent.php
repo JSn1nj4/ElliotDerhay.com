@@ -20,7 +20,7 @@ class PullRequestEvent extends BaseComponent
 	{
 		parent::__construct(
 			$event->action ?? 'opened',
-			'fas fa-file-upload',
+			'fas-file-upload',
 			$event
 		);
 

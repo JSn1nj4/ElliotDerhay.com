@@ -19,13 +19,13 @@ class IssuesEvent extends BaseComponent
 	public function __construct(GithubEvent $event)
 	{
 		$icons = [
-			'opened' => 	'far fa-list-alt',
-			'closed' => 	'fas fa-lock',
-			'reopened' => 	'fas fa-unlock',
-			'assigned' => 	'fas fa-user-plus',
-			'unassigned' =>	'fas fa-user-minus',
-			'labeled' => 	'fas fa-tag',
-			'unlabeled' =>	'fas fa-tag',
+			'opened' => 'far-list-alt',
+			'closed' => 'fas-lock',
+			'reopened' => 'fas-unlock',
+			'assigned' => 'fas-user-plus',
+			'unassigned' => 'fas-user-minus',
+			'labeled' => 'fas-tag',
+			'unlabeled' => 'fas-tag',
 		];
 
 		parent::__construct(
