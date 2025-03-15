@@ -20,13 +20,11 @@
 
 @component('partials.header')
 	<x-nav>
-		<x-nav-item route="home" icon="m-home" inline livewire>Home</x-nav-item>
-		@if(config('app.enable-blog'))
-			<x-nav-item route="blog" inline livewire>Blog</x-nav-item>
-		@endif
-		@if(config('app.enable-projects'))
-			<x-nav-item route="portfolio" inline livewire>Projects</x-nav-item>
-		@endif
+		@foreach(\App\Enums\NavLocation::PublicNavBar->items() as $item)
+			<x-nav-item :route='$item->route' :icon='$item->icon' inline livewire>
+				{{ $item->label }}
+			</x-nav-item>
+		@endforeach
 	</x-nav>
 @endcomponent
 
