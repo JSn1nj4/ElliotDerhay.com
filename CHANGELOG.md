@@ -10,6 +10,7 @@
 ### Changes
 
 - [Issue #149][is_149]: Twitter cleanup ([#235][pr_235])
+- JSN-291:
 
 [is_149]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/149
 
@@ -22,6 +23,8 @@
 [pr_235]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/235
 
 [pr_236]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/236
+
+[pr_237]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/237
 
 ### Changes
 
