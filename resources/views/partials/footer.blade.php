@@ -4,9 +4,7 @@
 			@include('partials.copyright')
 		</div>
 		<div class="p-6 pt-0 text-center text-caribbeanGreen-900 dark:text-caribbeanGreen-500">
-			@include('partials.socials', [
-				'classes' => 'text-2xl'
-			])
+			@include('partials.socials')
 		</div>
 	</div>
 </footer>
