@@ -31,6 +31,14 @@
 
 [pr_233]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/233
 
+## Version 2.11.3
+
+### Fixes
+
+- Update laravel/framework to supposedly fix a file validation bypass
+- Update livewire/volt to supposedly fix an RCE issue
+- Update filament/filament and pestphp/pest-plugin-livewire to allow updating Volt
+
 ## Version 2.11.2
 
 ### Changes
