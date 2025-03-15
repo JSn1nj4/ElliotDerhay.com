@@ -21,7 +21,7 @@
 
 @component('partials.header')
 	<x-nav>
-		<x-nav-item route="home" icon="fas fa-home" inline livewire>Home</x-nav-item>
+		<x-nav-item route="home" icon="m-home" inline livewire>Home</x-nav-item>
 		@if(config('app.enable-blog'))
 			<x-nav-item route="blog" inline livewire>Blog</x-nav-item>
 		@endif
