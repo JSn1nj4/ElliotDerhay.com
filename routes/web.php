@@ -1,7 +1,10 @@
 <?php
 
+use App\Features\BlogIndex;
+use App\Features\ProjectsIndex;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
+use Laravel\Pennant\Feature;
 use Livewire\Volt\Volt;
 use Spatie\Sitemap\Sitemap;
 use Spatie\Sitemap\Tags\Url as SitemapUrl;
@@ -22,12 +25,17 @@ Volt::route('/', 'home')->name('home');
 
 Volt::route('/privacy', 'privacy')->name('privacy');
 
-Volt::route('/projects', 'projects.index')->name('portfolio');
-Route::prefix('/blog')
-	->group(static function () {
-		Volt::route('/', 'blog.index')->name('blog');
-		Volt::route('/{post:slug}', 'blog.post')->name('blog.show');
-	});
+Feature::when(ProjectsIndex::class, function () {
+	Volt::route('/projects', 'projects.index')->name('portfolio');
+});
+
+Feature::when(BlogIndex::class, function () {
+	Route::prefix('/blog')
+		->group(static function () {
+			Volt::route('/', 'blog.index')->name('blog');
+			Volt::route('/{post:slug}', 'blog.post')->name('blog.show');
+		});
+});
 
 Route::get('/sitemap.xml',
 	static fn (Request $request) => Cache::remember('sitemap',
@@ -45,7 +53,7 @@ Route::get('/sitemap.xml',
 					->setChangeFrequency(SitemapUrl::CHANGE_FREQUENCY_MONTHLY)
 					->setPriority(0.1));
 
-			if (\Laravel\Pennant\Feature::active(\App\Features\BlogIndex::class)) {
+			if (Feature::active(BlogIndex::class)) {
 				$sitemap->add(SitemapUrl::create(route('blog'))
 					->setLastModificationDate(Carbon::today())
 					->setChangeFrequency(SitemapUrl::CHANGE_FREQUENCY_WEEKLY)
@@ -53,7 +61,7 @@ Route::get('/sitemap.xml',
 					->add(\App\Models\Post::all());
 			}
 
-			if (\Laravel\Pennant\Feature::active(\App\Features\ProjectsIndex::class)) {
+			if (Feature::active(ProjectsIndex::class)) {
 				$sitemap->add(SitemapUrl::create(route('portfolio'))
 					->setLastModificationDate(Carbon::today())
 					->setChangeFrequency(SitemapUrl::CHANGE_FREQUENCY_MONTHLY)
