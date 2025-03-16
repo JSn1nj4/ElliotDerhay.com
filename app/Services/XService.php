@@ -39,30 +39,48 @@ class XService implements SocialMediaService
 	public function post(SocialPostDTO $postDTO): OperationResult
 	{
 		try {
-			// todo: implement caching
-			$result = $this->client
-				->tweet()
-				->create()
-				->performRequest(
-					postData: ['text' => $postDTO->stringify()],
-					withHeaders: true
-				);
+			$newPost = $postDTO;
+			$parentPostId = null;
 
-			if ($result?->data?->id && $result?->data?->text) {
-				$message = "Successfully posted to X!";
+			$attemps = 0;
+			$successes = 0;
 
-				\Log::info(sprintf(
-					"%s\n%s\n",
-					$message,
-					"https://x.com/{$this->username}/status/{$result->data->id}"
-				));
+			while ($newPost !== null) {
+				$attemps++;
 
-				// todo: remove once caching figured out
-				\Log::info("{$result->headers}\n");
+				// todo: implement caching
+				$result = $this->client
+					->tweet()
+					->create()
+					->performRequest(
+						postData: ['text' => $postDTO->stringify()],
+						withHeaders: true
+					);
 
+				if ($result?->data?->id && $result?->data?->text) {
+					$message = "Successfully posted to X!";
+
+					\Log::info(sprintf(
+						"%s\n%s\n",
+						$message,
+						"https://x.com/{$this->username}/status/{$result->data->id}"
+					));
+
+					// todo: remove once caching figured out
+					\Log::info("{$result->headers}\n");
+
+					$successes++;
+
+					$parentPostId = $result->data->id;
+					$newPost = $newPost->subpost;
+				}
+			}
+
+
+			if ($successes === $attemps) {
 				return new OperationResult(
 					succeeded: true,
-					message: __("Successfully posted to X!"),
+					message: __("Successfully posted all posts to X!"),
 				);
 			}
 
@@ -89,7 +107,7 @@ class XService implements SocialMediaService
 			);
 		}
 
-		$message = "Unable to post to X.";
+		$message = "Ran into problems posting to X.";
 
 		\Log::error($message);
 

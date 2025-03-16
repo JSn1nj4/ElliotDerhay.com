@@ -15,7 +15,7 @@ class CommitCommentEvent extends BaseComponent
 	{
 		parent::__construct(
 			action: $event->action,
-			icon: 'fas fa-comment',
+			icon: 'fas-comment',
 			event: $event,
 		);
 

@@ -8,9 +8,7 @@ use App\Actions\HashPassword;
 use App\Actions\LogCommandEvent;
 use App\Contracts\GitHostService;
 use App\DataTransferObjects\XApiCredentials;
-use App\Models\Token;
 use App\Services\Github\GithubService;
-use App\Services\Twitter\TwitterService;
 use App\Services\XService;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
@@ -25,7 +23,6 @@ class AppServiceProvider extends ServiceProvider
 		AddCategoryToPost::class => AddCategoryToPost::class,
 		AddTagToPost::class => AddTagToPost::class,
 		GitHostService::class => GithubService::class,
-		TwitterService::class => TwitterService::class,
 		HashPassword::class => HashPassword::class,
 	];
 
@@ -47,13 +44,6 @@ class AppServiceProvider extends ServiceProvider
 				bearer_token: config('services.x.bearer_token'),
 			),
 		);
-
-		$this->app->when(TwitterService::class)
-			->needs(Token::class)
-			->give(static fn () => Token::whereRaw("LOWER(service) LIKE '%twitter%'")
-				->latest()
-				->valid()
-				->first());
 
 		$this->app->singletonIf(
 			XService::class,

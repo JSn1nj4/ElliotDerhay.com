@@ -20,7 +20,7 @@ class DeleteEvent extends BaseComponent
 	{
 		parent::__construct(
 			$event->action ?? 'deleted',
-			'far fa-trash-alt',
+			'far-trash-alt',
 			$event
 		);
 

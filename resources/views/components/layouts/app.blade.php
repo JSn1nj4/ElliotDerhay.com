@@ -7,7 +7,6 @@
 	/>
 
 	@vite('resources/css/app.css')
-	<script src="https://kit.fontawesome.com/a9f488e9e4.js" crossorigin="anonymous"></script>
 
 	<link rel="shortcut icon" href="{{ asset_url('favicon.png') }}">
 
@@ -21,13 +20,11 @@
 
 @component('partials.header')
 	<x-nav>
-		<x-nav-item route="home" icon="fas fa-home" inline livewire>Home</x-nav-item>
-		@if(config('app.enable-blog'))
-			<x-nav-item route="blog" inline livewire>Blog</x-nav-item>
-		@endif
-		@if(config('app.enable-projects'))
-			<x-nav-item route="portfolio" inline livewire>Projects</x-nav-item>
-		@endif
+		@foreach(nav(\App\Enums\NavLocation::PublicNavBar) as $item)
+			<x-nav-item :route='$item->route' :icon='$item->icon' inline livewire>
+				{{ $item->label }}
+			</x-nav-item>
+		@endforeach
 	</x-nav>
 @endcomponent
 

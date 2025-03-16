@@ -10,12 +10,6 @@ use App\Events\CommandWasRunEvent;
 use App\Events\GithubEventsPruned;
 use App\Events\GithubEventsPulledEvent;
 use App\Events\GithubUsersUpdatedEvent;
-use App\Events\TokensPrunedEvent;
-use App\Events\TweetsPrunedEvent;
-use App\Events\TweetsPulledEvent;
-use App\Events\TwitterFeatureStatusEvent;
-use App\Events\TwitterToggleFeatureEvent;
-use App\Events\TwitterUsersUpdatedEvent;
 use App\Models\Command;
 use Illuminate\Events\Dispatcher;
 
@@ -40,12 +34,6 @@ class CommandLogSubscriber
 			GithubEventsPruned::class => 'updateCommandLog',
 			GithubEventsPulledEvent::class => 'updateCommandLog',
 			GithubUsersUpdatedEvent::class => 'updateCommandLog',
-			TokensPrunedEvent::class => 'updateCommandLog',
-			TweetsPrunedEvent::class => 'updateCommandLog',
-			TweetsPulledEvent::class => 'updateCommandLog',
-			TwitterFeatureStatusEvent::class => 'updateCommandLog',
-			TwitterToggleFeatureEvent::class => 'updateCommandLog',
-			TwitterUsersUpdatedEvent::class => 'updateCommandLog',
 		];
 	}
 }

@@ -1,11 +1,6 @@
 <?php
 
-use App\Console\Commands\{GithubEventPullCommand,
-	GithubUserUpdateCommand,
-	SendWeeklyReportCommand,
-	TokenPruneCommand,
-	TweetPullCommand,
-	TwitterUserUpdateCommand};
+use App\Console\Commands\{GithubEventPullCommand, GithubUserUpdateCommand, SendWeeklyReportCommand, TokenPruneCommand};
 use App\Jobs\{CleanTempStorageJob, PruneLoginActivityJob};
 use Illuminate\Queue\Console\WorkCommand;
 use Illuminate\Support\Facades\Schedule;
@@ -13,9 +8,6 @@ use Illuminate\Support\Facades\Schedule;
 Schedule::command(GithubEventPullCommand::class)->hourly();
 Schedule::command(GithubUserUpdateCommand::class)->weekly();
 Schedule::command(TokenPruneCommand::class)->daily();
-
-Schedule::command(TweetPullCommand::class)->hourly();
-Schedule::command(TwitterUserUpdateCommand::class)->weekly();
 
 Schedule::job(CleanTempStorageJob::class)->weekly();
 Schedule::job(PruneLoginActivityJob::class)->weekly();

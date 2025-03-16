@@ -1,5 +1,44 @@
 # Changelog
 
+## Version 2.12.0
+
+### new
+
+- [Issue #216][is_216]: Migrate global scopes and observers to PHP attributes ([#233][pr_234])
+- [Issue #162][is_162]: Pennant feature management panel ([#236][pr_236])
+- JSN-291: Add public page shortcuts to admin panel ([#238][pr_238])
+
+### Changes
+
+- [Issue #149][is_149]: Twitter cleanup ([#235][pr_235])
+- JSN-291: Standardize font handling ([#237][pr_237])
+- JSN-293: Migrate some env features to Pennant ([#239][pr_239])
+	- Blog on/off
+	- Projects page on/off
+	- Blog widgets for categories, tags, and GitHub feed
+
+[is_149]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/149
+
+[is_162]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/162
+
+[is_214]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/214
+
+[is_216]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/216
+
+[pr_233]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/233
+
+[pr_234]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/234
+
+[pr_235]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/235
+
+[pr_236]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/236
+
+[pr_237]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/237
+
+[pr_238]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/238
+
+[pr_239]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/239
+
 ## Version 2.11.3
 
 ### Fixes
@@ -19,9 +58,9 @@
 
 [is_230]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/230
 
-[pr_231]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/231
+[pr_231]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/231
 
-[pr_232]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/232
+[pr_232]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/232
 
 ## Version 2.11.1
 
@@ -36,7 +75,7 @@
 
 [is_227]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/227
 
-[pr_228]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/228
+[pr_228]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/228
 
 ## Version 2.11.0
 

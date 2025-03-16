@@ -20,7 +20,7 @@ class ReleaseEvent extends BaseComponent
 	{
 		parent::__construct(
 			action: $event->action,
-			icon: 'fas fa-tag',
+			icon: 'fas-tag',
 			event: $event,
 		);
 

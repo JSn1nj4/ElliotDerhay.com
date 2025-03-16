@@ -2,12 +2,14 @@
 
 namespace App\Features;
 
-class TwitterFeed
+use Illuminate\Support\Lottery;
+
+class BlogIndex
 {
     /**
      * Resolve the feature's initial value.
      */
-    public function resolve(null $scope): bool
+    public function resolve(mixed $scope): mixed
     {
         return false;
     }

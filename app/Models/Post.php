@@ -16,6 +16,7 @@ use App\States\Posts\PostPublished;
 use App\States\Posts\PostUnpublished;
 use App\Traits\Categorizeable;
 use App\Traits\SearchDisplayable;
+use Illuminate\Database\Eloquent\Attributes\ScopedBy;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -68,6 +69,7 @@ use Spatie\Sitemap\Tags\Url;
  * @method static Builder|Post wherePublishedAt($value)
  * @mixin \Eloquent
  */
+#[ScopedBy([PostPublishedScope::class])]
 class Post extends ImageableModel implements SearchDisplayableContract, CategorizeableContract, Sitemapable, XMetaContract, SocialPostable
 {
 	// TODO: Implement Taggable stuff too
@@ -90,11 +92,6 @@ class Post extends ImageableModel implements SearchDisplayableContract, Categori
 		'slug',
 		'title',
 	];
-
-	protected static function booted(): void
-	{
-		static::addGlobalScope(new PostPublishedScope());
-	}
 
 	public function excerpt(): Attribute
 	{

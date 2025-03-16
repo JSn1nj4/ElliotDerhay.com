@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use App\Enums\NavLocation;
 use App\Filament\Pages\Login;
 use App\Filament\Widgets;
 use Filament\Http\Middleware\Authenticate;
@@ -51,6 +52,7 @@ class AdminPanelProvider extends PanelProvider
 			->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
 			->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
 			->navigationGroups([
+				NavigationGroup::make('Frontend')->collapsed(),
 				NavigationGroup::make('Content'),
 				NavigationGroup::make('Administration'),
 			])
@@ -75,6 +77,13 @@ class AdminPanelProvider extends PanelProvider
 			])
 			->authMiddleware([
 				Authenticate::class,
-			]);
+			])
+			->bootUsing(function (Panel $panel) {
+				$panel->navigationItems(nav(NavLocation::AdminNavBar)
+					->map->navigationItem()
+					->each->group('Frontend')
+					->each->openUrlInNewTab()
+					->all());
+			});
 	}
 }

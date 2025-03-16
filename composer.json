@@ -20,6 +20,7 @@
 		"league/flysystem-path-prefixing": "^3.10",
 		"livewire/volt": "^1.7",
 		"noweh/twitter-api-v2-php": "^3.4",
+		"owenvoke/blade-fontawesome": "^2.9",
 		"sentry/sentry-laravel": "^4.3",
 		"spatie/laravel-markdown": "^2.5",
 		"spatie/laravel-sitemap": "^7.0"
