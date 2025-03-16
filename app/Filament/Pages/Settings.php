@@ -3,7 +3,9 @@
 namespace App\Filament\Pages;
 
 use App\Features\AdminLogin;
+use App\Features\BlogCategoriesWidget;
 use App\Features\BlogIndex;
+use App\Features\BlogTagsWidget;
 use App\Features\GithubFeed;
 use App\Features\ProjectsIndex;
 use App\Features\PublishPostToX;
@@ -27,29 +29,13 @@ class Settings extends Page
 	public function form(Forms\Form $form): Forms\Form
 	{
 		return $form->statePath('features')->schema([
-			Forms\Components\Section::make('Features')
+			Forms\Components\Section::make('General Features')
 				->schema([
 					Forms\Components\Toggle::make('admin_login')
 						->disabled()
 						->helperText('This should always appear "on". You wouldn\'t want to lock yourself out, right?')
 						->inlineLabel()
 						->label('Admin Login'),
-
-					Forms\Components\Toggle::make('blog_index')
-						->reactive()
-						->afterStateUpdated(static function (bool $state) {
-							match ($state) {
-								true => Feature::activate(BlogIndex::class),
-								false => feature::deactivate(BlogIndex::class),
-							};
-
-							Notification::make('blog_index_updated')
-								->title('Blog feature updated!')
-								->success()
-								->send();
-						})
-						->inlineLabel()
-						->label('Blog'),
 
 					Forms\Components\Toggle::make('projects_index')
 						->reactive()
@@ -98,7 +84,73 @@ class Settings extends Page
 						})
 						->inlineLabel()
 						->label('Publish Posts to X'),
-				])
+				]),
+
+			Forms\Components\Section::make('Blog Features')->schema([
+				Forms\Components\Toggle::make('blog_index')
+					->reactive()
+					->afterStateUpdated(static function (bool $state) {
+						match ($state) {
+							true => Feature::activate(BlogIndex::class),
+							false => feature::deactivate(BlogIndex::class),
+						};
+
+						Notification::make('blog_index_updated')
+							->title('Blog feature updated!')
+							->success()
+							->send();
+					})
+					->inlineLabel()
+					->label('Blog index & individual pages'),
+
+				Forms\Components\Toggle::make('blog_categories_widget')
+					->reactive()
+					->afterStateUpdated(static function (bool $state) {
+						match ($state) {
+							true => Feature::activate(BlogCategoriesWidget::class),
+							false => feature::deactivate(BlogCategoriesWidget::class),
+						};
+
+						Notification::make('blog_categories_widget_updated')
+							->title('Blog Categories Widget feature updated!')
+							->success()
+							->send();
+					})
+					->inlineLabel()
+					->label('Blog categories widget'),
+
+				Forms\Components\Toggle::make('blog_tags_widget')
+					->reactive()
+					->afterStateUpdated(static function (bool $state) {
+						match ($state) {
+							true => Feature::activate(BlogCategoriesWidget::class),
+							false => feature::deactivate(BlogCategoriesWidget::class),
+						};
+
+						Notification::make('blog_tags_widget_updated')
+							->title('Blog Tags Widget feature updated!')
+							->success()
+							->send();
+					})
+					->inlineLabel()
+					->label('Blog tags widget'),
+
+				Forms\Components\Toggle::make('blog_github_feed_widget')
+					->reactive()
+					->afterStateUpdated(static function (bool $state) {
+						match ($state) {
+							true => Feature::activate(BlogCategoriesWidget::class),
+							false => feature::deactivate(BlogCategoriesWidget::class),
+						};
+
+						Notification::make('blog_github_feed_widget_updated')
+							->title('Blog GitHub Feed Widget feature updated!')
+							->success()
+							->send();
+					})
+					->inlineLabel()
+					->label('Blog GitHub feed widget'),
+			])
 		]);
 	}
 
@@ -107,6 +159,9 @@ class Settings extends Page
 		$this->features = [
 			'admin_login' => Feature::active(AdminLogin::class),
 			'blog_index' => Feature::active(BlogIndex::class),
+			'blog_categories_widget' => Feature::active(BlogCategoriesWidget::class),
+			'blog_github_feed_widget' => Feature::active(BlogTagsWidget::class),
+			'blog_tags_widget' => Feature::active(BlogTagsWidget::class),
 			'projects_index' => Feature::active(ProjectsIndex::class),
 			'github_feed' => Feature::active(GithubFeed::class),
 			'publish_posts_to_x' => Feature::active(PublishPostToX::class),
