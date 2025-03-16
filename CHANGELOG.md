@@ -12,6 +12,10 @@
 
 - [Issue #149][is_149]: Twitter cleanup ([#235][pr_235])
 - JSN-291: Standardize font handling ([#237][pr_237])
+- JSN-293: Migrate some env features to Pennant ([#239][pr_239])
+	- Blog on/off
+	- Projects page on/off
+	- Blog widgets for categories, tags, and GitHub feed
 
 [is_149]: https://github.com/JSn1nj4/ElliotDerhay.com/issues/149
 
@@ -32,6 +36,8 @@
 [pr_237]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/237
 
 [pr_238]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/238
+
+[pr_239]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/239
 
 ## Version 2.11.3
 
