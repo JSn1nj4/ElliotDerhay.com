@@ -3,7 +3,9 @@
 namespace App\Filament\Pages;
 
 use App\Features\AdminLogin;
+use App\Features\BlogIndex;
 use App\Features\GithubFeed;
+use App\Features\ProjectsIndex;
 use App\Features\PublishPostToX;
 use Filament\Forms;
 use Filament\Notifications\Notification;
@@ -32,6 +34,38 @@ class Settings extends Page
 						->helperText('This should always appear "on". You wouldn\'t want to lock yourself out, right?')
 						->inlineLabel()
 						->label('Admin Login'),
+
+					Forms\Components\Toggle::make('blog_index')
+						->reactive()
+						->afterStateUpdated(static function (bool $state) {
+							match ($state) {
+								true => Feature::activate(BlogIndex::class),
+								false => feature::deactivate(BlogIndex::class),
+							};
+
+							Notification::make('blog_index_updated')
+								->title('Blog feature updated!')
+								->success()
+								->send();
+						})
+						->inlineLabel()
+						->label('Blog'),
+
+					Forms\Components\Toggle::make('projects_index')
+						->reactive()
+						->afterStateUpdated(static function (bool $state) {
+							match ($state) {
+								true => Feature::activate(ProjectsIndex::class),
+								false => feature::deactivate(ProjectsIndex::class),
+							};
+
+							Notification::make('projects_index_updated')
+								->title('Projects Page feature updated!')
+								->success()
+								->send();
+						})
+						->inlineLabel()
+						->label('Projects Page'),
 
 					Forms\Components\Toggle::make('github_feed')
 						->reactive()
@@ -72,6 +106,8 @@ class Settings extends Page
 	{
 		$this->features = [
 			'admin_login' => Feature::active(AdminLogin::class),
+			'blog_index' => Feature::active(BlogIndex::class),
+			'projects_index' => Feature::active(ProjectsIndex::class),
 			'github_feed' => Feature::active(GithubFeed::class),
 			'publish_posts_to_x' => Feature::active(PublishPostToX::class),
 		];
