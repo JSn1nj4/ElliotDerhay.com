@@ -63,12 +63,14 @@ new class extends Component {
 		</x-column>
 
 		<div class="block md:flex">
+			@feature(App\Features\BlogIndex::class)
 			<x-column class="block md:w-1/2">
 				<h2 class="content-title text-2xl pt-6 mt-4 text-center">Latest Blog Post</h2>
 				<section id="blog_feed-home">
 					<x-post.latest />
 				</section>
 			</x-column>
+			@endfeature
 
 			@feature(App\Features\GithubFeed::class)
 			<x-column class="block md:w-1/2">
