@@ -4,6 +4,7 @@ namespace App\Filament\Pages;
 
 use App\Features\AdminLogin;
 use App\Features\BlogCategoriesWidget;
+use App\Features\BlogGithubFeedWidget;
 use App\Features\BlogIndex;
 use App\Features\BlogTagsWidget;
 use App\Features\GithubFeed;
@@ -123,8 +124,8 @@ class Settings extends Page
 					->reactive()
 					->afterStateUpdated(static function (bool $state) {
 						match ($state) {
-							true => Feature::activate(BlogCategoriesWidget::class),
-							false => feature::deactivate(BlogCategoriesWidget::class),
+							true => Feature::activate(BlogTagsWidget::class),
+							false => feature::deactivate(BlogTagsWidget::class),
 						};
 
 						Notification::make('blog_tags_widget_updated')
@@ -139,8 +140,8 @@ class Settings extends Page
 					->reactive()
 					->afterStateUpdated(static function (bool $state) {
 						match ($state) {
-							true => Feature::activate(BlogCategoriesWidget::class),
-							false => feature::deactivate(BlogCategoriesWidget::class),
+							true => Feature::activate(BlogGithubFeedWidget::class),
+							false => feature::deactivate(BlogGithubFeedWidget::class),
 						};
 
 						Notification::make('blog_github_feed_widget_updated')
@@ -160,7 +161,7 @@ class Settings extends Page
 			'admin_login' => Feature::active(AdminLogin::class),
 			'blog_index' => Feature::active(BlogIndex::class),
 			'blog_categories_widget' => Feature::active(BlogCategoriesWidget::class),
-			'blog_github_feed_widget' => Feature::active(BlogTagsWidget::class),
+			'blog_github_feed_widget' => Feature::active(BlogGithubFeedWidget::class),
 			'blog_tags_widget' => Feature::active(BlogTagsWidget::class),
 			'projects_index' => Feature::active(ProjectsIndex::class),
 			'github_feed' => Feature::active(GithubFeed::class),
