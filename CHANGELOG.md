@@ -1,5 +1,11 @@
 # Changelog
 
+## Version 2.12.1
+
+### Fixes
+
+- Passing static closures to the `macro` method prevents macros from being usable
+
 ## Version 2.12.0
 
 ### new
