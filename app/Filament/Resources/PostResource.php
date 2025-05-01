@@ -22,9 +22,9 @@ class PostResource extends Resource
 {
 	use HasCountBadge;
 
-    protected static string|null $model = Post::class;
+	protected static string|null $model = Post::class;
 
-    protected static string|null $navigationIcon = 'm-document-text';
+	protected static string|null $navigationIcon = 'm-document-text';
 
 	protected static string|null $navigationGroup = 'Content';
 
@@ -32,11 +32,11 @@ class PostResource extends Resource
 
 	public int|null $image_id = null;
 
-    public static function form(Forms\Form $form): Forms\Form
-    {
-        return $form
+	public static function form(Forms\Form $form): Forms\Form
+	{
+		return $form
 			->columns(3)
-            ->schema([
+			->schema([
 				Forms\Components\Section::make('Content')
 					->columnSpan(2)
 					->schema([
@@ -62,7 +62,7 @@ class PostResource extends Resource
 							->reactive()
 							->debounce(500)
 							->afterStateUpdated(static function (Forms\Get $get, Forms\Set $set, string|null $state) {
-								$set('slug', Sanitizer::slug(match(trim($state)) {
+								$set('slug', Sanitizer::slug(match (trim($state)) {
 									null, '' => $get('title'),
 									default => $state
 								})->toString());
@@ -121,12 +121,12 @@ class PostResource extends Resource
 
 					Forms\Components\Section::make('Meta')
 						->collapsed(static fn (array $state) => collect($state)
-								->filter(static fn ($item, $key) => match($key) {
-									'search_title', 'search_description' => true,
-									default => false,
-								})
-								->whereNotNull()
-								->isEmpty())
+							->filter(static fn ($item, $key) => match ($key) {
+								'search_title', 'search_description' => true,
+								default => false,
+							})
+							->whereNotNull()
+							->isEmpty())
 						->relationship('searchMeta')
 						->schema([
 							Forms\Components\TextInput::make('search_title')
@@ -187,9 +187,9 @@ class PostResource extends Resource
 								]),
 						]),
 				])
-				->columnSpan(1),
-            ]);
-    }
+					->columnSpan(1),
+			]);
+	}
 
 	public static function getEloquentQuery(): Builder
 	{
@@ -203,12 +203,12 @@ class PostResource extends Resource
 			->schema([
 				Infolists\Components\Section::make('content')
 					->schema([
-							Infolists\Components\TextEntry::make('title')
-								->hiddenLabel()
-								->size(Infolists\Components\TextEntry\TextEntrySize::Large),
+						Infolists\Components\TextEntry::make('title')
+							->hiddenLabel()
+							->size(Infolists\Components\TextEntry\TextEntrySize::Large),
 
-							Infolists\Components\TextEntry::make('body')
-								->markdown(),
+						Infolists\Components\TextEntry::make('body')
+							->markdown(),
 					])
 					->columnSpan(2),
 
@@ -220,7 +220,10 @@ class PostResource extends Resource
 							->size('100%'),
 
 						Infolists\Components\RepeatableEntry::make('tags')
-							->hidden(static fn (Collection $state) => $state->isEmpty())
+							->hidden(static fn (Collection|null $state) => match ($state) {
+								null => true,
+								default => $state->isEmpty(),
+							})
 							->schema([
 								Infolists\Components\TextEntry::make('title')
 									->hiddenLabel(),
@@ -231,10 +234,10 @@ class PostResource extends Resource
 	}
 
 	public static function table(Tables\Table $table): Tables\Table
-    {
-        return $table
+	{
+		return $table
 			->defaultSort('created_at', 'desc')
-            ->columns([
+			->columns([
 				Tables\Columns\ImageColumn::make('image.url')
 					->disk(static fn (Image $image) => $image->disk)
 					->size('auto')->height(135),
@@ -259,45 +262,45 @@ class PostResource extends Resource
 					])
 					->iconPosition('after')
 					->label('Status'),
-                Tables\Columns\TextColumn::make('published_at')
-                    ->dateTime('M d, Y | H:i')
-                    ->sortable()
-                    ->toggleable(),
-                Tables\Columns\TextColumn::make('updated_at')
+				Tables\Columns\TextColumn::make('published_at')
 					->dateTime('M d, Y | H:i')
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-            ])
-            ->filters([
-                //
-            ])
-            ->actions([
+					->sortable()
+					->toggleable(),
+				Tables\Columns\TextColumn::make('updated_at')
+					->dateTime('M d, Y | H:i')
+					->sortable()
+					->toggleable(isToggledHiddenByDefault: true),
+			])
+			->filters([
+				//
+			])
+			->actions([
 				Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
+				Tables\Actions\EditAction::make(),
 				Tables\Actions\DeleteAction::make(),
-            ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
-            ])
-            ->emptyStateActions([
-                Tables\Actions\CreateAction::make(),
-            ]);
-    }
+			])
+			->bulkActions([
+				Tables\Actions\BulkActionGroup::make([
+					Tables\Actions\DeleteBulkAction::make(),
+				]),
+			])
+			->emptyStateActions([
+				Tables\Actions\CreateAction::make(),
+			]);
+	}
 
-    public static function getPages(): array
-    {
-        return [
-            'index' => Pages\ListPosts::route('/'),
-            'create' => Pages\CreatePost::route('/create'),
-            'edit' => Pages\EditPost::route('/{record}/edit'),
-        ];
-    }
+	public static function getPages(): array
+	{
+		return [
+			'index' => Pages\ListPosts::route('/'),
+			'create' => Pages\CreatePost::route('/create'),
+			'edit' => Pages\EditPost::route('/{record}/edit'),
+		];
+	}
 
 	public static function sanitize(string|null $state): string|null
 	{
-		return match($state) {
+		return match ($state) {
 			null => $state,
 			default => Sanitizer::sanitize($state),
 		};
@@ -305,7 +308,7 @@ class PostResource extends Resource
 
 	public static function sanitizeSlug(string|null $state): string|null
 	{
-		return match($state) {
+		return match ($state) {
 			null => $state,
 			default => Sanitizer::slug($state),
 		};
