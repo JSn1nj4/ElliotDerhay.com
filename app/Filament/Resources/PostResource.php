@@ -220,7 +220,10 @@ class PostResource extends Resource
 							->size('100%'),
 
 						Infolists\Components\RepeatableEntry::make('tags')
-							->hidden(static fn (Collection|null $state) => $state?->isEmpty() ?? true)
+							->hidden(static fn (Collection|null $state) => match ($state) {
+								null => true,
+								default => $state->isEmpty(),
+							})
 							->schema([
 								Infolists\Components\TextEntry::make('title')
 									->hiddenLabel(),
