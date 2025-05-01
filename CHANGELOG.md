@@ -1,5 +1,17 @@
 # Changelog
 
+## Version 2.12.2
+
+### Fixes
+
+- Avoid accidentally passing static closures that get bound later
+- Prevent `PostPolicy` from running extra queries on models that were already loaded
+- Allow `null` on `PostResource` infolist field for tags
+
+### Development
+
+- Start mailpit in IntelliJ task runner UI instead of terminal
+
 ## Version 2.12.1
 
 ### Fixes
