@@ -23,7 +23,9 @@ use Livewire\Livewire;
 use Livewire\Volt\Volt;
 use Pest\Expectation;
 
-uses(Tests\TestCase::class, RefreshDatabase::class)
+pest()
+	->extend(Tests\TestCase::class)
+	->use(RefreshDatabase::class)
 	->in('Feature');
 
 /*
