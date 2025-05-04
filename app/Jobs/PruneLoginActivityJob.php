@@ -37,6 +37,6 @@ class PruneLoginActivityJob implements ShouldQueue
 		$agedOutTotal = $this->baseQuery->clone()->count();
 
 		// ensure to only reduce the amount to remove if the 'old' count overlaps the minimum number
-		return $agedOutTotal - max($total - $agedOutTotal - $minimum, 0);
+		return $agedOutTotal + min($total - $minimum - $agedOutTotal, 0);
 	}
 }
