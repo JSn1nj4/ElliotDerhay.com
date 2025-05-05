@@ -5,12 +5,6 @@ use App\Models\LoginActivity;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 
 it('keeps all entries when below minimum number', function () {
-	/**
-	 * this can be tested simply by
-	 * - creating the minimum number of entries and making sure none get pruned, and
-	 * - creating less than the minimum and making sure none of them get pruned
-	 */
-
 	$minimum = config()->integer('auth.activity.min_entries');
 
 	$createdCount = LoginActivity::factory($minimum)->create()->count();
@@ -23,12 +17,6 @@ it('keeps all entries when below minimum number', function () {
 });
 
 it('keeps all entries younger than the max age', function () {
-	/**
-	 * this can be tested by simply
-	 * - creating more entries than the minimum number
-	 * - making sure none of them get pruned
-	 */
-
 	$minimum = config()->integer('auth.activity.min_entries');
 
 	$createdCount = LoginActivity::factory($minimum + 10)->create()->count();
@@ -74,12 +62,35 @@ it('prunes entries older than max age', function () {
 	expect(LoginActivity::count())
 		->toBeLessThan($createdCount)
 		->toEqual($createdCount - $countToRemove);
-})->wip();
+})->repeat(5);
 
 it('keeps minimum number of entries when \'minimum days worth\' rule won\'t retain enough', function () {
-	/**
-	 * this can be tested by doing 2 things
-	 * - creating slightly more entries than the minimum number
-	 * - setting half of the entries to older than the max age
-	 */
-})->wip();
+	$minimum = config()->integer('auth.activity.min_entries');
+
+	$testAmount = round($minimum * 1.5);
+	$now = now();
+	$oldAge = now()->startOfDay()->subDays(config()->integer('auth.activity.days_to_retain') + 1);
+
+	$createdCount = LoginActivity::factory($testAmount)
+		->state(new Sequence(
+			['created_at' => $now],
+			['created_at' => $oldAge],
+		))
+		->create()
+		->count();
+
+	expect(LoginActivity::count())
+		->toBeGreaterThan($minimum)
+		->toEqual($createdCount, "started with {$createdCount} entries");
+
+	$oldCount = LoginActivity::old()->count();
+
+	// matches the actual math the prune job needs to do to stay above the minimum
+	$adjustedOldCount = $oldCount + min($createdCount - $minimum - $oldCount, 0);
+
+	PruneLoginActivityJob::dispatchSync();
+
+	expect(LoginActivity::count())
+		->toBeLessThan($createdCount)
+		->toEqual($createdCount - $adjustedOldCount);
+})->repeat(5);
