@@ -1,5 +1,19 @@
 # Changelog
 
+## Version 2.12.3
+
+### Changes
+
+- Make Volt page components respond to their own features being active instead of wrapping their routes in feature
+  checks
+- Update Volt component tests
+- Include unpublished posts in Filament sidebar count
+
+### Fixes
+
+- Make `PruneLoginActivityJob` properly follow new requirements
+- Update `PruneLoginActivityJobTest`
+
 ## Version 2.12.2
 
 ### Fixes
