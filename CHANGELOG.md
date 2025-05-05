@@ -17,6 +17,7 @@
 ### Development
 
 - Add `build:clean` script to remove old build files
+- Add `composer test` script to automatically run frontend build, run tests, and clean build files
 
 ## Version 2.12.2
 

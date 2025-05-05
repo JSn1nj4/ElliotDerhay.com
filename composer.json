@@ -71,6 +71,11 @@
 		"post-update-cmd": [
 			"@php artisan vendor:publish --tag=laravel-assets --ansi --force",
 			"@php artisan filament:upgrade"
+		],
+		"test": [
+			"pnpm build",
+			"@php artisan test",
+			"pnpm build:clean"
 		]
 	},
 	"config": {
