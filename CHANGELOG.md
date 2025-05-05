@@ -14,6 +14,10 @@
 - Make `PruneLoginActivityJob` properly follow new requirements
 - Update `PruneLoginActivityJobTest`
 
+### Development
+
+- Add `build:clean` script to remove old build files
+
 ## Version 2.12.2
 
 ### Fixes

@@ -16,6 +16,7 @@
 	"scripts": {
 		"dev": "vite",
 		"build": "vite build",
+		"build:clean": "rm -rf public/build",
 		"prod": "pnpm run build"
 	},
 	"devDependencies": {
