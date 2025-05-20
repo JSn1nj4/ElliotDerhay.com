@@ -1,5 +1,11 @@
 # Changelog
 
+## Version 2.13.1
+
+### Fixes
+
+- Make `FencedCodeRenderer` resumable like other renderers
+
 ## Version 2.13.0
 
 ## New
