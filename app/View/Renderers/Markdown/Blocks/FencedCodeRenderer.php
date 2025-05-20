@@ -2,6 +2,7 @@
 
 namespace App\View\Renderers\Markdown\Blocks;
 
+use App\View\Renderers\Markdown\Traits\Resumeable;
 use League\CommonMark\Extension\CommonMark\Node\Block\FencedCode;
 use League\CommonMark\Node\Node;
 use League\CommonMark\Renderer\ChildNodeRendererInterface;
@@ -12,6 +13,8 @@ use Tempest\Highlight\Highlighter;
 
 class FencedCodeRenderer implements NodeRendererInterface, XmlNodeRendererInterface
 {
+	use Resumeable;
+
 	/**
 	 * @inheritDoc
 	 */
@@ -35,11 +38,11 @@ class FencedCodeRenderer implements NodeRendererInterface, XmlNodeRendererInterf
 
 	public function getXmlTagName(Node $node): string
 	{
-		// TODO: Implement getXmlTagName() method.
+		return 'fenced_code';
 	}
 
 	public function getXmlAttributes(Node $node): array
 	{
-		// TODO: Implement getXmlAttributes() method.
+		return [];
 	}
 }
