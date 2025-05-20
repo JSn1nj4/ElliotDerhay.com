@@ -1,9 +1,11 @@
 <?php
 
 use App\Enums\PerPage;
+use App\Features\BlogIndex;
 use App\Filters\{CategoryQueryParam, TagQueryParam};
 use App\Models\Post;
 use Livewire\Attributes\{Computed, Layout, Title, Url};
+use Laravel\Pennant\Feature;
 
 new
 class extends \Livewire\Volt\Component {
@@ -22,6 +24,13 @@ class extends \Livewire\Volt\Component {
 	public function hasPosts(): bool
 	{
 		return $this->with()['posts']->count() > 0;
+	}
+
+	public function boot()
+	{
+		if (Feature::active(BlogIndex::class)) return;
+
+		abort(404);
 	}
 
 	public function mount()

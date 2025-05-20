@@ -1,15 +1,24 @@
 <?php
 
 use App\Enums\PerPage;
+use App\Features\BlogIndex;
 use App\Filters\{CategoryQueryParam, TagQueryParam};
 use App\Models\Post;
 use Livewire\Attributes\{Computed, Layout, Title, Url};
+use Laravel\Pennant\Feature;
 
 new
 class extends \Livewire\Volt\Component {
 	use \Livewire\WithPagination;
 
 	public Post $post;
+
+	public function boot()
+	{
+		if (Feature::active(BlogIndex::class)) return;
+
+		abort(404);
+	}
 
 	public function mount(Post $post)
 	{

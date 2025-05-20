@@ -1,6 +1,6 @@
-@import "_variables.css";
 @import url('https://fonts.googleapis.com/css?family=Source+Code+Pro:200,400,700');
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;400;700&display=swap');
+@import "../../vendor/tempest/highlight/src/Themes/Css/andromeeda.css";
 
 /**
  * base styles
@@ -31,7 +31,11 @@ img {
 }
 
 button {
-	@mixin transitions color $default-speed|border-color $default-speed;
+	@apply transition-colors;
+}
+
+pre {
+	scrollbar-color: theme('colors.neutral.400') transparent;
 }
 
 ::selection {
@@ -70,10 +74,10 @@ p {
 }
 
 a {
-	@apply text-caribbeanGreen-600 trans-color;
+	@apply text-caribbeanGreen-600 transition-colors;
 
 	.dark & {
-		@apply text-caribbeanGreen-500 trans-color;
+		@apply text-caribbeanGreen-500 transition-colors;
 	}
 
 	&:hover,
@@ -87,11 +91,11 @@ a {
 	}
 
 	&.active {
-		@mixin textGlow 3, theme('colors.neutral.500');
+		text-shadow: 0 0 2px theme('colors.neutral.500'), 0 0 4px theme('colors.neutral.500'), 0 0 8px theme('colors.neutral.500');
 	}
 
 	.dark &.active {
-		@mixin textGlow 4;
+		text-shadow: 0 0 2px theme('colors.caribbeanGreen.500'), 0 0 4px theme('colors.caribbeanGreen.500'), 0 0 8px theme('colors.caribbeanGreen.500'), 0 0 16px theme('colors.caribbeanGreen.500');
 	}
 }
 
@@ -231,14 +235,6 @@ pre.shiki {
 
 .construction {
 	background-image: repeating-linear-gradient(45deg, transparent 0px, transparent 50px, rgba(69, 52, 17, 0.8) 50px, rgba(69, 52, 17, 0.8) 100px, transparent 100px);
-}
-
-.trans-color {
-	@mixin transitions color, $default-speed;
-}
-
-.trans-border-color {
-	@mixin transitions border-color, $default-speed;
 }
 
 .box-glow {

@@ -25,17 +25,13 @@ Volt::route('/', 'home')->name('home');
 
 Volt::route('/privacy', 'privacy')->name('privacy');
 
-Feature::when(ProjectsIndex::class, function () {
-	Volt::route('/projects', 'projects.index')->name('portfolio');
-});
+Volt::route('/projects', 'projects.index')->name('portfolio');
 
-Feature::when(BlogIndex::class, function () {
-	Route::prefix('/blog')
-		->group(static function () {
-			Volt::route('/', 'blog.index')->name('blog');
-			Volt::route('/{post:slug}', 'blog.post')->name('blog.show');
-		});
-});
+Route::prefix('/blog')
+	->group(static function () {
+		Volt::route('/', 'blog.index')->name('blog');
+		Volt::route('/{post:slug}', 'blog.post')->name('blog.show');
+	});
 
 Route::get('/sitemap.xml',
 	static fn (Request $request) => Cache::remember('sitemap',

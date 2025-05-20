@@ -1,7 +1,9 @@
 <?php
 
 use App\Enums\PerPage;
+use App\Features\ProjectsIndex;
 use App\Models\Project;
+use Laravel\Pennant\Feature;
 use Livewire\Volt\Component;
 
 new class extends Component {
@@ -11,6 +13,13 @@ new class extends Component {
 	public function hasProjects(): bool
 	{
 		return $this->with()['projects']->count() > 0;
+	}
+
+	public function boot()
+	{
+		if (Feature::active(ProjectsIndex::class)) return;
+
+		abort(404);
 	}
 
 	public function mount(): void

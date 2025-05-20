@@ -1,6 +1,10 @@
 <?php
 
+use App\Features\BlogIndex;
+use Laravel\Pennant\Feature;
 use function Pest\Laravel\get;
+
+beforeEach(fn () => Feature::define(BlogIndex::class, true));
 
 voltMountable('lightbox');
 

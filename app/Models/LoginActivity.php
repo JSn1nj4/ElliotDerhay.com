@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
 /**
  *
@@ -19,6 +20,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|LoginActivity failed()
  * @method static \Illuminate\Database\Eloquent\Builder|LoginActivity newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|LoginActivity newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|LoginActivity old(Carbon|null $maxAge = null)
  * @method static \Illuminate\Database\Eloquent\Builder|LoginActivity query()
  * @method static \Illuminate\Database\Eloquent\Builder|LoginActivity succeeded()
  * @method static \Illuminate\Database\Eloquent\Builder|LoginActivity whereCreatedAt($value)
@@ -56,5 +58,12 @@ class LoginActivity extends Model
 	public function scopeSucceeded(Builder $query): void
 	{
 		$query->where('succeeded', true);
+	}
+
+	public function scopeOld(Builder $query, Carbon|null $maxAge = null): void
+	{
+		$maxAge ??= now()->startOfDay()->subDays(config()->integer('auth.activity.days_to_retain'));
+
+		$query->whereDate('created_at', '<=', $maxAge);
 	}
 }

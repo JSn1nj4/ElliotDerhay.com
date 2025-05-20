@@ -1,5 +1,35 @@
 # Changelog
 
+## Version 2.13.0
+
+## New
+
+- Implement new fenced code syntax highlighting using `tempest/highlight`
+
+### Changes
+
+- Include unpublished posts in Filament sidebar count
+- Make Volt page components respond to their own features being active instead of wrapping their routes in feature
+  checks
+- Update Volt component tests
+- Upgrade to Laravel 12
+- Upgrade composer and node packages
+- Tweak source CSS
+- Remove some PostCSS packages
+- Disable Shiki syntax highlighting and remove Shiki package
+- Tweak scrollbar colors on `<pre>` element
+	- This is mostly for fenced code that may scroll horizontally
+
+### Fixes
+
+- Make `PruneLoginActivityJob` properly follow new requirements
+- Update `PruneLoginActivityJobTest`
+
+### Development
+
+- Add `build:clean` script to remove old build files
+- Add `composer test` script to automatically run frontend build, run tests, and clean build files
+
 ## Version 2.12.2
 
 ### Fixes

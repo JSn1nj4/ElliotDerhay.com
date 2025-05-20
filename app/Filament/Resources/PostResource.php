@@ -5,7 +5,6 @@ namespace App\Filament\Resources;
 use App\Actions\StoresImage;
 use App\Filament\Forms\Components\ImageViewField;
 use App\Filament\Resources\PostResource\Pages;
-use App\Filament\Traits\HasCountBadge;
 use App\Models\Image;
 use App\Models\Post;
 use App\Models\Scopes\PostPublishedScope;
@@ -20,8 +19,6 @@ use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 
 class PostResource extends Resource
 {
-	use HasCountBadge;
-
 	protected static string|null $model = Post::class;
 
 	protected static string|null $navigationIcon = 'm-document-text';
@@ -194,6 +191,12 @@ class PostResource extends Resource
 	public static function getEloquentQuery(): Builder
 	{
 		return parent::getEloquentQuery()->withoutGlobalScope(PostPublishedScope::class);
+	}
+
+	#[\Override]
+	public static function getNavigationBadge(): string|null
+	{
+		return self::getModel()::withoutGlobalScope(PostPublishedScope::class)->count();
 	}
 
 	public static function infolist(Infolists\Infolist $infolist): Infolists\Infolist
