@@ -222,6 +222,16 @@ class PostResource extends Resource
 							->hidden(static fn (string|null $state) => $state === null)
 							->size('100%'),
 
+						Infolists\Components\RepeatableEntry::make('categories')
+							->hidden(static fn (Collection|null $state) => match ($state) {
+								null => true,
+								default => $state->isEmpty(),
+							})
+							->schema([
+								Infolists\Components\TextEntry::make('title')
+									->hiddenLabel(),
+							]),
+
 						Infolists\Components\RepeatableEntry::make('tags')
 							->hidden(static fn (Collection|null $state) => match ($state) {
 								null => true,
