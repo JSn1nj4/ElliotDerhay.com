@@ -12,7 +12,7 @@ class CategoryPolicy
 	 */
 	public function viewAny(User $user): bool
 	{
-		return $user->exists;
+		return true;
 	}
 
 	/**
@@ -20,7 +20,7 @@ class CategoryPolicy
 	 */
 	public function view(User $user, Category $category): bool
 	{
-		return $user->exists && $category->exists;
+		return $category->exists;
 	}
 
 	/**
