@@ -20,8 +20,7 @@ class CommandEventPolicy
 	 */
 	public function view(User $user, CommandEvent $commandEvent): bool
 	{
-		// return $user->exists && $commandEvent->exists;
-		return false;
+		return $user->exists && $commandEvent->exists;
 	}
 
 	/**
@@ -37,7 +36,6 @@ class CommandEventPolicy
 	 */
 	public function update(User $user, CommandEvent $commandEvent): bool
 	{
-		// return $user->exists && $commandEvent->exists;
 		return false;
 	}
 
@@ -46,7 +44,6 @@ class CommandEventPolicy
 	 */
 	public function delete(User $user, CommandEvent $commandEvent): bool
 	{
-		// return $user->exists && $commandEvent->exists;
 		return false;
 	}
 
@@ -55,7 +52,6 @@ class CommandEventPolicy
 	 */
 	public function restore(User $user, CommandEvent $commandEvent): bool
 	{
-		// return $user->exists && $commandEvent->exists;
 		return false;
 	}
 
@@ -64,6 +60,6 @@ class CommandEventPolicy
 	 */
 	public function forceDelete(User $user, CommandEvent $commandEvent): bool
 	{
-		return $user->exists && $commandEvent->exists;
+		return false;
 	}
 }
