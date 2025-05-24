@@ -20,7 +20,7 @@ class CommandPolicy
 	 */
 	public function view(User $user, Command $command): bool
 	{
-		return $user->exists;
+		return $user->exists && $command->exists;
 	}
 
 	/**
