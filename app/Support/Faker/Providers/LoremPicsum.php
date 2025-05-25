@@ -14,11 +14,78 @@ class LoremPicsum extends Base
 	public const FORMAT_PNG = 'png';
 	public const FORMAT_WEBP = 'webp';
 
+	public static function image(
+		string|null $dir = null,
+		int         $width = 640,
+		int         $height = 480,
+		bool        $fullPath = true,
+		bool        $gray = false,
+		string      $format = 'png',
+		bool|null   $blur = null,
+	): false|string|\RuntimeException
+	{
+		$dir ??= sys_get_temp_dir();
+
+		// Validate directory path
+		if (!is_dir($dir) || !is_writable($dir)) {
+			throw new \InvalidArgumentException(sprintf('Cannot write to directory "%s"', $dir));
+		}
+
+		// Generate a random filename. Use the server address so that a file
+		// generated at the same time on a different server won't have a collision.
+		$name = md5(uniqid(empty($_SERVER['SERVER_ADDR']) ? '' : $_SERVER['SERVER_ADDR'], true));
+		$filename = strtr(':name.:format', [
+			':name' => $name,
+			':format' => $format,
+		]);
+		$filepath = $dir . DIRECTORY_SEPARATOR . $filename;
+
+		$url = static::imageUrl($width, $height, $gray, $format, $blur);
+
+		// save file route 1: curl_exec
+		if (function_exists('curl_exec')) {
+			// use cURL
+			$fp = fopen($filepath, 'w');
+			$ch = curl_init($url);
+			curl_setopt($ch, CURLOPT_FILE, $fp);
+			$success = curl_exec($ch) && curl_getinfo($ch, CURLINFO_HTTP_CODE) === 200;
+			fclose($fp);
+			curl_close($ch);
+
+			if (!$success) {
+				unlink($filepath);
+
+				// could not contact the distant URL or HTTP error - fail silently.
+				return false;
+			}
+
+			return match (true) {
+				$fullPath => $filepath,
+				default => $filename,
+			};
+		}
+
+		// save file route 1: allow_url_fopen
+		if (ini_get('allow_url_fopen')) {
+			// use remote fopen() via copy()
+			$success = copy($url, $filepath);
+
+			return match (true) {
+				!$success => false, // could not contact the distant URL or HTTP error - fail silently.
+				$fullPath => $filepath,
+				default => $filename,
+			};
+		}
+
+		// unable to contact remote server
+		return new \RuntimeException('The image formatter downloads an image from a remote HTTP server. Therefore, it requires that PHP can request remote hosts, either via cURL or fopen()');
+	}
+
 	public static function imageUrl(
-		$width = 640,
-		$height = 480,
-		$gray = false,
-		$format = 'png',
+		int      $width = 640,
+		int      $height = 480,
+		bool     $gray = false,
+		string   $format = 'png',
 		int|null $blur = null,
 	)
 	{
