@@ -3,6 +3,7 @@
 namespace App\Support\Faker\Providers;
 
 use App\DataTransferObjects\QueryParam;
+use App\DataTransferObjects\Result;
 use Faker\Provider\Base;
 use Illuminate\Support\Number;
 
@@ -13,6 +14,55 @@ class LoremPicsum extends Base
 	public const FORMAT_JPEG = 'jpeg';
 	public const FORMAT_WEBP = 'webp';
 
+	protected static function fetchImage(string $url, string $filepath, string|null $filename = null, bool $returnFullPath = false): Result
+	{
+		$filename ??= str($filepath)->afterLast(DIRECTORY_SEPARATOR);
+
+		// save file route 1: curl_exec
+		if (function_exists('curl_exec')) {
+			// use cURL
+			$fp = fopen($filepath, 'w');
+			$ch = curl_init($url);
+			curl_setopt($ch, CURLOPT_FILE, $fp);
+			curl_setopt($ch, CURLINFO_HEADER_OUT, true);
+
+			$success = curl_exec($ch) && curl_getinfo($ch, CURLINFO_HTTP_CODE) === 200;
+			$result = curl_getinfo($ch); // keep for connection debugging for now
+
+			fclose($fp);
+			curl_close($ch);
+
+			// need to follow redirect
+
+			if (!$success) {
+				unlink($filepath);
+
+				// could not contact the distant URL or HTTP error - fail silently.
+				return new Result(false, ['curlinfo' => $result]);
+			}
+
+			return new Result(true, ['path' => match (true) {
+				$returnFullPath => $filepath,
+				default => $filename,
+			}]);
+		}
+
+		// save file route 1: allow_url_fopen
+		if (ini_get('allow_url_fopen')) {
+			// use remote fopen() via copy()
+			$success = copy($url, $filepath);
+
+			return new Result($success, match (true) {
+				!$success => [], // could not contact the distant URL or HTTP error - fail silently.
+				$returnFullPath => ['path' => $filepath],
+				default => ['path' => $filename],
+			});
+		}
+
+		// unable to contact remote server
+		return new Result(false, errors: [new \RuntimeException('The image formatter downloads an image from a remote HTTP server. Therefore, it requires that PHP can request remote hosts, either via cURL or fopen()')]);
+	}
+
 	public static function image(
 		string|null $dir = null,
 		int         $width = 640,
@@ -21,7 +71,7 @@ class LoremPicsum extends Base
 		bool        $gray = false,
 		string      $format = 'png',
 		bool|null   $blur = null,
-	): false|string|\RuntimeException
+	): false|string|\Exception
 	{
 		$dir ??= sys_get_temp_dir();
 
@@ -41,43 +91,13 @@ class LoremPicsum extends Base
 
 		$url = static::imageUrl($width, $height, $gray, $format, $blur);
 
-		// save file route 1: curl_exec
-		if (function_exists('curl_exec')) {
-			// use cURL
-			$fp = fopen($filepath, 'w');
-			$ch = curl_init($url);
-			curl_setopt($ch, CURLOPT_FILE, $fp);
-			$success = curl_exec($ch) && curl_getinfo($ch, CURLINFO_HTTP_CODE) === 200;
-			fclose($fp);
-			curl_close($ch);
+		$result = static::fetchImage($url, $filepath, $filename, $fullPath);
 
-			if (!$success) {
-				unlink($filepath);
-
-				// could not contact the distant URL or HTTP error - fail silently.
-				return false;
-			}
-
-			return match (true) {
-				$fullPath => $filepath,
-				default => $filename,
-			};
+		if ($result->failed()) {
+			$result = static::maybeRetry($result, static fn ($retryUrl) => static::fetchImage($retryUrl, $filepath, $filename, $fullPath));
 		}
 
-		// save file route 1: allow_url_fopen
-		if (ini_get('allow_url_fopen')) {
-			// use remote fopen() via copy()
-			$success = copy($url, $filepath);
-
-			return match (true) {
-				!$success => false, // could not contact the distant URL or HTTP error - fail silently.
-				$fullPath => $filepath,
-				default => $filename,
-			};
-		}
-
-		// unable to contact remote server
-		return new \RuntimeException('The image formatter downloads an image from a remote HTTP server. Therefore, it requires that PHP can request remote hosts, either via cURL or fopen()');
+		return static::handleReturn($result);
 	}
 
 	public static function imageUrl(
@@ -138,5 +158,38 @@ class LoremPicsum extends Base
 			static::FORMAT_JPEG => constant('IMAGETYPE_JPEG'),
 			static::FORMAT_WEBP => constant('IMAGETYPE_WEBP'),
 		];
+	}
+
+	/**
+	 * @param \App\DataTransferObjects\Result $result
+	 * @return false|string|\Exception
+	 */
+	protected static function handleReturn(Result $result): false|string|\Exception
+	{
+		// always return the first error
+		if ($result->hasErrors()) return $result->errors[0];
+
+		if ($result->failed()) return false;
+
+		if (isset($result->data['path'])) return $result->data['path'];
+
+		throw new \RuntimeException('Unable to resolve return value.');
+	}
+
+	protected static function maybeRetry(Result $old_result, callable|\Closure $retry): Result
+	{
+		$curlinfo = $old_result->data['curlinfo'];
+
+		if ($curlinfo === null) return $old_result;
+
+		if ($curlinfo['http_code'] !== 302) return $old_result;
+
+		$redirect_url = $curlinfo['redirect_url'];
+
+		if ($redirect_url === null) return $old_result;
+
+		$matched = preg_match('/^https:\/\/(fastly\.)?picsum\.photos\/.*$/', $redirect_url);
+
+		return !!$matched ? $retry($redirect_url) : $old_result;
 	}
 }
