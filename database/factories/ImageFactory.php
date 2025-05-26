@@ -84,7 +84,7 @@ class ImageFactory extends Factory
 
 			$temp_path = fake()
 				->unique()
-				->image(storage_path('app/temp'));
+				->image(storage_path('app/temp'), format: 'jpeg');
 		}
 
 		$this->resetTimer();
