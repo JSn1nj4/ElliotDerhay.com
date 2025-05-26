@@ -11,7 +11,6 @@ class LoremPicsum extends Base
 	public const BASE_URL = 'https://picsum.photos';
 	public const FORMAT_JPG = 'jpg';
 	public const FORMAT_JPEG = 'jpeg';
-	public const FORMAT_PNG = 'png';
 	public const FORMAT_WEBP = 'webp';
 
 	public static function image(
@@ -100,11 +99,6 @@ class LoremPicsum extends Base
 			));
 		}
 
-		$size = strtr(':w/:h', [
-			':w' => $width,
-			':h' => $height,
-		]);
-
 		$params = [];
 
 		if ($gray === true) {
@@ -122,8 +116,12 @@ class LoremPicsum extends Base
 
 		return strtr(":url/:w/:h.:format:params", [
 			':url' => self::BASE_URL,
-			':size' => $size,
-			':format' => $format,
+			':w' => $width,
+			':h' => $height,
+			':format' => match ($format) {
+				'jpeg' => 'jpg',
+				default => $format,
+			},
 			':params' => count($params) > 0 ? '?' . build_query_string($params) : ''
 		]);
 	}
@@ -138,7 +136,6 @@ class LoremPicsum extends Base
 		return [
 			static::FORMAT_JPG => constant('IMAGETYPE_JPEG'),
 			static::FORMAT_JPEG => constant('IMAGETYPE_JPEG'),
-			static::FORMAT_PNG => constant('IMAGETYPE_PNG'),
 			static::FORMAT_WEBP => constant('IMAGETYPE_WEBP'),
 		];
 	}
