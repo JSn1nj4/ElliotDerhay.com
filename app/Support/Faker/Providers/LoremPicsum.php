@@ -136,8 +136,8 @@ class LoremPicsum extends Base
 
 		return strtr(":url/:w/:h.:format:params", [
 			':url' => self::BASE_URL,
-			':w' => $width,
-			':h' => $height,
+			':w' => Number::clamp($width, 1, 5000),
+			':h' => Number::clamp($height, 1, 5000),
 			':format' => match ($format) {
 				'jpeg' => 'jpg',
 				default => $format,
