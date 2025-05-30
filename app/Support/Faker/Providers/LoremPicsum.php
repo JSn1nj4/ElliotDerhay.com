@@ -69,7 +69,7 @@ class LoremPicsum extends Base
 		int         $height = 480,
 		bool        $fullPath = true,
 		bool        $gray = false,
-		string      $format = 'png',
+		string      $format = 'jpg',
 		bool|null   $blur = null,
 	): false|string|\Exception
 	{
