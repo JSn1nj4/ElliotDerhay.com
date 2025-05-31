@@ -95,6 +95,11 @@ it('fetches and stores a valid image', function (
 ) {
 	$disk = Storage::fake('temp');
 
+	/**
+	 * This one needed `fake()` so the underlying generator would be configured correctly.
+	 *
+	 * Type-hinting (for now) still thinks `image()` is the same method belonging to the deprecated Image provider, but it's actually the one belonging to the new LoremPicsum provider. So all arguments and named params end up being correct underneath.
+	 */
 	$imagePath = fake()->image($disk->path(''), $w, $h, gray: $gray, format: $format, blur: $blur);
 
 	expect($imagePath)
