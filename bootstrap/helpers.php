@@ -1,5 +1,6 @@
 <?php
 
+use App\DataTransferObjects\QueryParam;
 use App\DataTransferObjects\TtlDTO;
 use App\Services\ImageService;
 
@@ -14,6 +15,29 @@ use App\Services\ImageService;
 function asset_url(string $filename): string
 {
 	return ImageService::asset($filename);
+}
+
+/**
+ * Allows building query strings that have empty parameters
+ * @param \App\DataTransferObjects\QueryParam[] $parts
+ * @return string
+ */
+function build_query_string(array $parts): string
+{
+	$params = collect($parts)
+		->reduce(static function ($final, $part) {
+			$final[$part->field] = $part->value;
+
+			return $final;
+		}, []);
+
+	return collect($parts)
+		->filter(static fn (QueryParam $item) => $item->allow_empty)
+		->reduce(static function (string $final, QueryParam $item) {
+			$needle = http_build_query([$item->field => $item->value]);
+
+			return str_replace($needle, $item->field, $final);
+		}, http_build_query($params));
 }
 
 /**
