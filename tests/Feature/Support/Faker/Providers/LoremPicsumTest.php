@@ -98,7 +98,11 @@ it('fetches and stores a valid image', function (
 	/**
 	 * This one needed `fake()` so the underlying generator would be configured correctly.
 	 *
-	 * Type-hinting (for now) still thinks `image()` is the same method belonging to the deprecated Image provider, but it's actually the one belonging to the new LoremPicsum provider. So all arguments and named params end up being correct underneath.
+	 * Type-hinting might still think `image()` is the same method belonging to the deprecated Image provider. This is due to `\Faker\Generator` including the old `image()` signature in its PHPDoc.
+	 *
+	 * But in this application, `image()` is actually the one belonging to the new LoremPicsum provider. So all arguments and named params end up being correct underneath.
+	 *
+	 * The _ide_helper.php file has an entry for `\Faker\Generator` near the top to try to resolve this.
 	 */
 	$imagePath = fake()->image($disk->path(''), $w, $h, gray: $gray, format: $format, blur: $blur);
 
