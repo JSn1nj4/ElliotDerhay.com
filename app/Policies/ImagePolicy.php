@@ -12,7 +12,7 @@ class ImagePolicy
 	 */
 	public function viewAny(User $user): bool
 	{
-		return $user->exists;
+		return true;
 	}
 
 	/**
@@ -20,7 +20,7 @@ class ImagePolicy
 	 */
 	public function view(User $user, Image $image): bool
 	{
-		return $user->exists && $image->exists;
+		return $image->exists;
 	}
 
 	/**
