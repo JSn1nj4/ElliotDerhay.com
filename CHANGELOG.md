@@ -1,5 +1,19 @@
 # Changelog
 
+## Version 2.13.2
+
+### Changes
+
+- JSN-305: Replace Image provider for Faker ([#244][pr_244])
+	- This fixes everything that was using `fake()->image()` for getting placeholder images by providing an alternative
+	  to Faker's default Image provider.
+
+### Fixes
+
+- `ImageFactory` no longer fails to set up placeholder images ([#244][pr_244])
+
+[pr_244]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/244
+
 ## Version 2.13.1
 
 ### Fixes
