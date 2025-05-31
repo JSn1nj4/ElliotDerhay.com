@@ -33,11 +33,7 @@ class ImageFactory extends Factory
 		$this->disk = Storage::disk($this->diskName);
 	}
 
-	/**
-	 * Define the model's default state.
-	 *
-	 * @return array<string, mixed>
-	 */
+	#[\Override]
 	public function definition(): array
 	{
 		$collection = "images";
