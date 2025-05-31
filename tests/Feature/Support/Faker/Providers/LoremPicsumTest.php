@@ -6,21 +6,22 @@ use App\Support\Faker\Providers\LoremPicsum;
 $supported_image_formats = ['jpg', 'jpeg', 'webp'];
 $unsupported_image_formats = ['png', 'bmp', 'gif', 'tif', 'ico'];
 
-dataset('random_supported_image_format', function () use ($supported_image_formats) {
-	yield fake()->randomElement($supported_image_formats);
-});
+dataset('random_supported_image_format', [[
+	fn () => fake()->randomElement($supported_image_formats),
+]]);
 
 dataset('all_supported_image_formats', $supported_image_formats);
 
 dataset('all_unsupported_image_formats', $unsupported_image_formats);
 
-dataset('random_x_y_coordinates', function () {
-	yield fake()->randomElements(range(-5000, 10000), count: 2);
-});
+dataset('random_x_y_coordinates', [[
+	fn () => fake()->randomElement(range(-5000, 10000)),
+	fn () => fake()->randomElement(range(-5000, 10000)),
+]]);
 
-dataset('random_blur_value', function () {
-	yield fake()->randomElement([null, ...range(-50, 50)]);
-});
+dataset('random_blur_value', [[
+	fn () => fake()->randomElement([null, ...range(-50, 50)]),
+]]);
 
 it('returns the list of valid image format constants')
 	->expect(LoremPicsum::getFormatConstants())
@@ -64,9 +65,7 @@ it('provides a correctly-formatted image URL', function (
 		});
 })
 	->with('random_x_y_coordinates')
-	->with(function () {
-		yield fake()->boolean();
-	})
+	->with([fn () => fake()->boolean()]) // for grayscale
 	->with('random_supported_image_format')
 	->with('random_blur_value')
 	->repeat(15);
@@ -83,9 +82,7 @@ it('throws when given invalid image formats', function (
 })
 	->throws(\InvalidArgumentException::class)
 	->with('random_x_y_coordinates')
-	->with([
-		fake()->boolean(),
-	])
+	->with([fn () => fake()->boolean()]) // for grayscale
 	->with('all_unsupported_image_formats')
 	->with('random_blur_value');
 
@@ -107,6 +104,6 @@ it('fetches and stores a valid image', function (
 		->toBeIn(['image/jpeg', 'image/webp']);
 })
 	->with('random_x_y_coordinates')
-	->with([fake()->boolean()])
+	->with([fn () => fake()->boolean()]) // for grayscale
 	->with('all_supported_image_formats')
 	->with('random_blur_value');
