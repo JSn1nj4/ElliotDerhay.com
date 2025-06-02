@@ -20,7 +20,7 @@ class PostPolicy
 	 */
 	public function view(User $user, Post $post): bool
 	{
-		return $user->exists && $post->exists;
+		return $post->exists;
 	}
 
 	/**

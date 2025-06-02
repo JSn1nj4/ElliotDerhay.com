@@ -20,7 +20,7 @@ class SearchMetaPolicy
 	 */
 	public function view(User $user, SearchMeta $searchMeta): bool
 	{
-		return $user->exists && $searchMeta->exists;
+		return $searchMeta->exists;
 	}
 
 	/**

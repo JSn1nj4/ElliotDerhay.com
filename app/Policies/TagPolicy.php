@@ -20,7 +20,7 @@ class TagPolicy
 	 */
 	public function view(User $user, Tag $tag): bool
 	{
-		return $user->exists && $tag->exists;
+		return $tag->exists;
 	}
 
 	/**
