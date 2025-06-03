@@ -12,7 +12,7 @@ class TagPolicy
 	 */
 	public function viewAny(User $user): bool
 	{
-		return $user->exists;
+		return true;
 	}
 
 	/**
