@@ -33,6 +33,8 @@ class SearchMeta extends Model
 	protected $table = 'search_displayables';
 
 	protected $fillable = [
+		'search_displayable_id',
+		'search_displayable_type',
 		'search_title',
 		'search_description',
 	];

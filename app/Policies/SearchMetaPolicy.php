@@ -12,7 +12,7 @@ class SearchMetaPolicy
 	 */
 	public function viewAny(User $user): bool
 	{
-		return $user->exists;
+		return true;
 	}
 
 	/**
@@ -52,7 +52,7 @@ class SearchMetaPolicy
 	 */
 	public function restore(User $user, SearchMeta $searchMeta): bool
 	{
-		return $user->exists && $searchMeta->exist()();
+		return $user->exists && $searchMeta->exists;
 	}
 
 	/**
