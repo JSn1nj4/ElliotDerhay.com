@@ -12,7 +12,7 @@ class ProjectPolicy
 	 */
 	public function viewAny(User $user): bool
 	{
-		return $user->exists;
+		return true;
 	}
 
 	/**
@@ -20,7 +20,7 @@ class ProjectPolicy
 	 */
 	public function view(User $user, Project $project): bool
 	{
-		return $user->exists && $project->exists;
+		return $project->exists;
 	}
 
 	/**
