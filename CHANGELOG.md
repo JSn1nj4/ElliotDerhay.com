@@ -17,7 +17,13 @@
 - Add tests for policies
 - Fix replying to first post when auto-posting to X
 
+### Development
+
+- JSN-306: Clear view and config caches on file save ([#246][pr_246])
+
 [pr_244]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/244
+
+[pr_246]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/246
 
 ## Version 2.13.1
 
