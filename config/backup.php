@@ -148,9 +148,10 @@ return [
 			/*
 			 * The disk names on which the backups will be stored.
 			 */
-			'disks' => [
-				'local',
-			],
+			'disks' => array_values(array_filter([
+				env('BACKUP_DISK_PRIMARY', 'local-backups'),
+				env('BACKUP_DISK_SECONDARY'),
+			])),
 		],
 
 		/*
