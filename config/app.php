@@ -151,6 +151,7 @@ return [
 
 	'schedule' => [
 		'default' => [
+			'daily_time' => env('SCHEDULE_DEFAULT_DAILY_TIME', '0:0'),
 			'weekly_time' => env('SCHEDULE_DEFAULT_WEEKLY_TIME', '0:0'),
 		],
 	],
