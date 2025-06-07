@@ -1,6 +1,11 @@
 # Changelog
 
-## Version 2.13.2
+## Version 2.14.0
+
+### New
+
+- Add `ext-zip` to composer requirements
+- JSN-307: Set up Laravel Backup ([#248][pr_248])
 
 ### Changes
 
@@ -24,6 +29,8 @@
 [pr_244]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/244
 
 [pr_246]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/246
+
+[pr_248]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/248
 
 ## Version 2.13.1
 
