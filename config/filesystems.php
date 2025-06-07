@@ -42,6 +42,12 @@ return [
 			'prefix' => 'local-assets',
 		],
 
+		'local-backups' => [
+			'driver' => 'scoped',
+			'disk' => 'local',
+			'prefix' => 'local-backups',
+		],
+
 		'debug' => [
 			'driver' => 'local',
 			'root' => storage_path('app/debug'),
@@ -79,6 +85,12 @@ return [
 			'prefix' => 'assets',
 		],
 
+		's3-backups' => [
+			'driver' => 'scoped',
+			'disk' => 's3',
+			'prefix' => 'backups',
+		],
+
 		's3-uploads' => [
 			'driver' => 'scoped',
 			'disk' => 's3',
@@ -89,6 +101,12 @@ return [
 			'driver' => 'scoped',
 			'disk' => 'local',
 			'prefix' => 'temp',
+		],
+
+		'temp-backups' => [
+			'driver' => 'scoped',
+			'disk' => 'temp',
+			'prefix' => 'backups',
 		],
 
 	],

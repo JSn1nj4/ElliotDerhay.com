@@ -1,5 +1,20 @@
 # Laravel Defaults
-/.idea
+/.idea/**/dataSources/
+/.idea/**/dictionaries/
+/.idea/**/shelf/
+/.idea/**/aws.xml
+/.idea/**/contentModel.xml
+/.idea/**/dataSources.ids
+/.idea/**/dataSources.local.xml
+/.idea/**/dataSources.xml
+/.idea/**/dbnavigator.xml
+/.idea/**/dynamic.xml
+/.idea/**/tasks.xml
+/.idea/**/sqlDataSources.xml
+/.idea/**/uiDesigner.xml
+/.idea/**/usage.statistics.xml
+/.idea/**/workspace.xml
+/.idea/httpRequests
 /.phpunit.cache
 /node_modules
 /public/build
@@ -10,6 +25,7 @@
 .env
 .env.backup
 .phpunit.result.cache
+atlassian-ide-plugin.xml
 docker-compose.override.yml
 error.log
 Homestead.json

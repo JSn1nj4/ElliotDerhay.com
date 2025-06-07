@@ -1,5 +1,37 @@
 # Changelog
 
+## Version 2.14.0
+
+### New
+
+- Add `ext-zip` to composer requirements
+- JSN-307: Set up Laravel Backup ([#248][pr_248])
+
+### Changes
+
+- JSN-305: Replace Image provider for Faker ([#244][pr_244])
+	- This fixes everything that was using `fake()->image()` for getting placeholder images by providing an alternative
+	  to Faker's default Image provider.
+- Add Categories section to Post InfoList display.
+- Tweak `.env.testing`
+
+### Fixes
+
+- `ImageFactory` no longer fails to set up placeholder images ([#244][pr_244])
+- Fix a few issues across all policies
+- Add tests for policies
+- Fix replying to first post when auto-posting to X
+
+### Development
+
+- JSN-306: Clear view and config caches on file save ([#246][pr_246])
+
+[pr_244]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/244
+
+[pr_246]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/246
+
+[pr_248]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/248
+
 ## Version 2.13.1
 
 ### Fixes

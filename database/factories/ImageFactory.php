@@ -2,8 +2,8 @@
 
 namespace Database\Factories;
 
+use Illuminate\Contracts\Filesystem\Filesystem;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Filesystem\FilesystemAdapter;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Storage;
 class ImageFactory extends Factory
 {
 	protected string $diskName = 'public';
-	protected FilesystemAdapter $disk;
+	protected Filesystem $disk;
 	private int|null $timer = null;
 
 	public function __construct(
@@ -33,11 +33,7 @@ class ImageFactory extends Factory
 		$this->disk = Storage::disk($this->diskName);
 	}
 
-	/**
-	 * Define the model's default state.
-	 *
-	 * @return array<string, mixed>
-	 */
+	#[\Override]
 	public function definition(): array
 	{
 		$collection = "images";
@@ -84,7 +80,7 @@ class ImageFactory extends Factory
 
 			$temp_path = fake()
 				->unique()
-				->image(storage_path('app/temp'));
+				->image(storage_path('app/temp'), format: 'jpeg');
 		}
 
 		$this->resetTimer();
@@ -105,11 +101,11 @@ class ImageFactory extends Factory
 		$this->timer = null;
 	}
 
-	public function setDisk(string $name, FilesystemAdapter|null $disk = null): static
+	public function setDisk(string $name, Filesystem|null $disk = null): static
 	{
 		$this->diskName = $name;
 
-		$this->disk = is_null($disk) ? Storage::disk($this->diskName) : $disk;
+		$this->disk = $disk ?? Storage::disk($this->diskName);
 
 		return $this;
 	}

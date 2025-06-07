@@ -11,7 +11,12 @@
  * @author Barry vd. Heuvel <barryvdh@gmail.com>
  * @see https://github.com/barryvdh/laravel-ide-helper
  */
-
+    namespace Faker {
+      /**
+       * @method string image(string|null $dir = null, int $width = 640, int $height = 480, bool $fullPath = true, bool $gray = false, string $format = 'jpg', bool|null $blur = null)
+       */
+      class Generator {}
+    }
     namespace Illuminate\Support\Facades { 
             /**
      * 

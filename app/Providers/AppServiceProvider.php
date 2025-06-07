@@ -49,6 +49,11 @@ class AppServiceProvider extends ServiceProvider
 			XService::class,
 			static fn () => new XService(app(XApiCredentials::class)),
 		);
+
+		$this->app->singleton(
+			\Faker\Generator::class . ':' . config('app.faker_locale'),
+			static fn () => \App\Support\Faker\Factory::create(config('app.faker_locale')),
+		);
 	}
 
 	/**

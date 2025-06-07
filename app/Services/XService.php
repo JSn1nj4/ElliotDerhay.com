@@ -48,14 +48,18 @@ class XService implements SocialMediaService
 			while ($newPost !== null) {
 				$attemps++;
 
+				$postData = ['text' => $postDTO->stringify()];
+				if ($parentPostId !== null) {
+					$postData['reply'] ??= [];
+
+					$postData['reply']['in_reply_to_tweet_id'] = $parentPostId;
+				}
+
 				// todo: implement caching
 				$result = $this->client
 					->tweet()
 					->create()
-					->performRequest(
-						postData: ['text' => $postDTO->stringify()],
-						withHeaders: true
-					);
+					->performRequest(postData: $postData, withHeaders: true);
 
 				if ($result?->data?->id && $result?->data?->text) {
 					$message = "Successfully posted to X!";
