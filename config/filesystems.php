@@ -103,6 +103,12 @@ return [
 			'prefix' => 'temp',
 		],
 
+		'temp-backups' => [
+			'driver' => 'scoped',
+			'disk' => 'temp',
+			'prefix' => 'backups',
+		],
+
 	],
 
 	/*
