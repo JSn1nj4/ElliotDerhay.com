@@ -95,7 +95,7 @@ return [
 		/*
 		 * If specified, the database dumped file name will contain a timestamp (e.g.: 'Y-m-d-H-i-s').
 		 */
-		'database_dump_file_timestamp_format' => 'Y_m_d-H_i_s',
+		'database_dump_file_timestamp_format' => 'Y-m-d-H-i-s',
 
 		/*
 		 * The base of the dump filename, either 'database' or 'connection'
@@ -143,7 +143,7 @@ return [
 			/*
 			 * The filename prefix used for the backup zip file.
 			 */
-			'filename_prefix' => '',
+			'filename_prefix' => 'backup-',
 
 			/*
 			 * The disk names on which the backups will be stored.
