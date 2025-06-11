@@ -1,5 +1,11 @@
 # Changelog
 
+## Version 2.14.2
+
+### Changes
+
+- JSN-309: Cache embedded images in articles
+
 ## Version 2.14.1
 
 ### Changes
