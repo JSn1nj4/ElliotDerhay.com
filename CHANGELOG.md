@@ -1,5 +1,11 @@
 # Changelog
 
+## Version 2.14.3
+
+### Fixes
+
+- Uncached images in production will now be cached to disk locally like others
+
 ## Version 2.14.2
 
 ### Changes
