@@ -75,10 +75,17 @@ class CaptionableImageRenderer implements NodeRendererInterface
 		$uploadsDisk = config('app.uploads.disk');
 		$uploadsBase = Storage::disk($uploadsDisk)->url('');
 
+		/**
+		 * @note: if multiple storage paths begin similarly, put the more specific one first.
+		 *
+		 * Example: disk 'public' starts with '$APP_NAME/storage' and 'public-cache' starts with '$APP_NAME/storage/cache'.
+		 * If we check 'public' first, images in 'public-cache' will also match the rule for 'public'. This will cascade into
+		 * re-caching the same image at a deeper folder.
+		 */
 		return match (true) {
-			$stringable->startsWith($assetsBase) => asset_url($stringable->after($assetsBase)),
-			$stringable->startsWith($uploadsBase) => image_url($stringable->after($uploadsBase), $uploadsDisk),
 			$stringable->startsWith($publicCacheBase) => image_url($stringable->after($publicCacheBase), $publicCacheDisk),
+			$stringable->startsWith($uploadsBase) => image_url($stringable->after($uploadsBase), $uploadsDisk),
+			$stringable->startsWith($assetsBase) => asset_url($stringable->after($assetsBase)),
 			default => $url,
 		};
 	}
