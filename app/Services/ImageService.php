@@ -27,8 +27,6 @@ class ImageService
 
 	private function resolveCachedUrl(string $path, string $disk): string
 	{
-		if (app()->environment('production')) return Storage::disk($disk)->url($path);
-
 		self::ensureCached($path, $disk);
 
 		return Storage::disk('public-cache')->url($path);
