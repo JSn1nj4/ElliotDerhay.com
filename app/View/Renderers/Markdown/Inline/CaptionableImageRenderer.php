@@ -3,14 +3,13 @@
 namespace App\View\Renderers\Markdown\Inline;
 
 use App\View\Renderers\Markdown\Traits\Resumeable;
+use Illuminate\Support\Facades\Storage;
 use League\CommonMark\Extension\CommonMark\Node\Inline\Image;
-use League\CommonMark\Extension\CommonMark\Renderer\Inline\ImageRenderer;
 use League\CommonMark\Node\Inline\Text;
 use League\CommonMark\Node\Node;
 use League\CommonMark\Renderer\ChildNodeRendererInterface;
 use League\CommonMark\Renderer\NodeRendererInterface;
 use League\CommonMark\Util\HtmlElement;
-use Nette\Utils\Html;
 
 /**
  * This class also wraps the image in a <figure>
@@ -23,10 +22,14 @@ class CaptionableImageRenderer implements NodeRendererInterface
 	{
 		Image::assertInstanceOf($node);
 
+		/** @var Image $node */
 		$attrs = $node->data->get('attributes');
 
 		if ($title = $node->getTitle()) $attrs['title'] = $title;
-		if ($src = $node->getUrl()) $attrs['src'] = $src;
+
+		if (method_exists($node, 'getUrl')) {
+			$attrs['src'] = $this->resolveImageUrl($node->getUrl());
+		}
 
 		if ($node->hasChildren()) {
 			$attrs = $this->getAdditionalAttributes($node, $attrs);
@@ -52,11 +55,31 @@ class CaptionableImageRenderer implements NodeRendererInterface
 
 	private function maybePrepCaption(array $attrs): string
 	{
-		return match(isset($attrs['alt'])) {
+		return match (isset($attrs['alt'])) {
 			true => (string)new HtmlElement(tagName: 'figcaption', attributes: [
 				'class' => ''
 			], contents: $attrs['alt']),
 			default => '',
+		};
+	}
+
+	private function resolveImageUrl(string $url): string
+	{
+		$stringable = str($url);
+
+		$assetsBase = Storage::disk(config('filesystems.image_service.assets_disk'))->url('');
+
+		$publicCacheDisk = 'public-cache';
+		$publicCacheBase = Storage::disk($publicCacheDisk)->url('');
+
+		$uploadsDisk = config('app.uploads.disk');
+		$uploadsBase = Storage::disk($uploadsDisk)->url('');
+
+		return match (true) {
+			$stringable->startsWith($assetsBase) => asset_url($stringable->after($assetsBase)),
+			$stringable->startsWith($uploadsBase) => image_url($stringable->after($uploadsBase), $uploadsDisk),
+			$stringable->startsWith($publicCacheBase) => image_url($stringable->after($publicCacheBase), $publicCacheDisk),
+			default => $url,
 		};
 	}
 }
