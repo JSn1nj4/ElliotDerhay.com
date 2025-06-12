@@ -1,0 +1,59 @@
+# largely based on Laravel's own tests.yml workflow
+# Node + PNPM sections pulled from PNPM's CI docs: https://pnpm.io/continuous-integration#github-actions
+
+name: Tests
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: true
+      matrix:
+        php: [ 8.4 ]
+        node-version: [ 20 ]
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: curl, dom, libxml, mbstring, openssl, pcntl, pdo, sqlite, pdo_sqlite, readline, sodium, zip
+          coverage: none
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'pnpm'
+
+      - name: Install Composer dependencies
+        run: composer install --prefer-dist --no-interaction --no-progress
+
+      - name: Copy testing environment file
+        run: cp .env.testing .env
+
+      - name: Install PNPM dependencies
+        run: pnpm install
+
+      - name: Build vite dependencies
+        run: pnpm run prod
+
+      - name: Run tests
+        run: php artisan test
