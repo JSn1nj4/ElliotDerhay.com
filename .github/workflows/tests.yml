@@ -15,12 +15,6 @@ jobs:
   tests:
     runs-on: ubuntu-latest
 
-    strategy:
-      fail-fast: true
-      matrix:
-        php: [ 8.4 ]
-        node-version: [ 20 ]
-
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
@@ -28,7 +22,7 @@ jobs:
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: ${{ matrix.php }}
+          php-version: 8.4
           extensions: curl, dom, libxml, mbstring, openssl, pcntl, pdo, sqlite, pdo_sqlite, readline, sodium, zip
           coverage: none
 
@@ -37,10 +31,10 @@ jobs:
         with:
           version: 10
 
-      - name: Set up Node.js ${{ matrix.node-version }}
+      - name: Set up Node.js 20
         uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: 20
           cache: 'pnpm'
 
       - name: Install Composer dependencies
