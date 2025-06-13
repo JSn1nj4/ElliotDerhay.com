@@ -5,6 +5,7 @@
 ### Development
 
 - JSN-308: Implement test runners on repo ([#252][pr_252])
+- Only run deploy workflow if tests workflow passes
 
 [pr_252]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/252
 
