@@ -1,5 +1,13 @@
 # Changelog
 
+## Version 2.14.4
+
+### Development
+
+- JSN-308: Implement test runners on repo ([#252][pr_252])
+
+[pr_252]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/252
+
 ## Version 2.14.3
 
 ### Fixes
