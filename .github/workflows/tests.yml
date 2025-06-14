@@ -40,11 +40,11 @@ jobs:
       - name: Install Composer dependencies
         run: composer install --prefer-dist --no-interaction --no-progress
 
-#      - name: Copy testing environment file
-#        run: cp .env.testing .env
-#
-#      - name: Install PNPM dependencies
-#        run: pnpm install
-#
-#      - name: Run composer test script
-#        run: composer test
+      - name: Copy testing environment file
+        run: cp .env.testing .env
+
+      - name: Install PNPM dependencies
+        run: pnpm install
+
+      - name: Run composer test script
+        run: composer test
