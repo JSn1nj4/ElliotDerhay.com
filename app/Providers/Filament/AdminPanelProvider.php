@@ -48,7 +48,7 @@ class AdminPanelProvider extends PanelProvider
 				],
 				'danger' => Color::Rose,
 			])
-			->favicon(asset_url("avatar.png"))
+			->favicon(static fn () => asset_url("avatar.png"))
 			->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
 			->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
 			->navigationGroups([
