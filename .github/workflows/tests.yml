@@ -46,8 +46,5 @@ jobs:
       - name: Install PNPM dependencies
         run: pnpm install
 
-      - name: Build vite dependencies
-        run: pnpm run prod
-
-      - name: Run tests
-        run: php artisan test
+      - name: Run composer test script
+        run: composer test
