@@ -1,5 +1,13 @@
 # Changelog
 
+## Version 2.15.0
+
+### New
+
+- JSN-312: Add Mailjet support ([#255][pr_255])
+
+[pr_255]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/255
+
 ## Version 2.14.4
 
 ### Development
