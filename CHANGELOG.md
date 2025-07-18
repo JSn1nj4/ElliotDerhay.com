@@ -1,5 +1,21 @@
 # Changelog
 
+## Version 2.16.0
+
+### New
+
+- Add a `BaseFactory` that allows factories to add post-processing callbacks
+
+### Changes
+
+- Update `ImageFactory`
+	- Allow using fake data as image model data to avoid generating actual image files if desired
+	- Allow setting `exists = true` on image models in case models are needed for testing, but DB isn't
+
+### Fixes
+
+- Update `livewire/livewire` to resolve [CVE-2025-54068](https://github.com/advisories/GHSA-29cq-5w36-x7w3)
+
 ## Version 2.15.0
 
 ### New
