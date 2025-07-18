@@ -26,7 +26,9 @@ use Pest\Expectation;
 pest()
 	->extend(Tests\TestCase::class)
 	->use(RefreshDatabase::class)
-	->in('Feature');
+	->in('Feature')
+	->use(Tests\DuskTestCase::class)
+	->in('Browser');
 
 /*
 |--------------------------------------------------------------------------
