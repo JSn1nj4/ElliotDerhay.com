@@ -10,14 +10,10 @@ it('can be listed by any user', fn () => expect(new ImagePolicy())
 	->toBeTrue());
 
 it('can be viewed by any user', function () {
-	$diskName = 'public';
-	$disk = Storage::fake($diskName);
-
-	Storage::fake('temp');
-
 	expect(new ImagePolicy())
 		->view(makeUser(), Image::factory()
-			->setDisk($diskName, $disk)
+			->fakeFileInfo()
+			->exists()
 			->createOne())
 		->toBeTrue();
 });
@@ -31,53 +27,37 @@ it('can be created by a logged-in user', fn () => expect(new ImagePolicy())
 	->toBeTrue());
 
 it('cannot be updated by anonymous users', function () {
-	$diskName = 'public';
-	$disk = Storage::fake($diskName);
-
-	Storage::fake('temp');
-
 	expect(new ImagePolicy())
 		->update(makeUser(), Image::factory()
-			->setDisk($diskName, $disk)
+			->fakeFileInfo()
+			->exists()
 			->createOne())
 		->toBeFalse();
 });
 
 it('can be updated by a logged-in user', function () {
-	$diskName = 'public';
-	$disk = Storage::fake($diskName);
-
-	Storage::fake('temp');
-
 	expect(new ImagePolicy())
 		->update(createUser(), Image::factory()
-			->setDisk($diskName, $disk)
+			->fakeFileInfo()
+			->exists()
 			->createOne())
 		->toBeTrue();
 });
 
 it('cannot be deleted by anonymous users', function () {
-	$diskName = 'public';
-	$disk = Storage::fake($diskName);
-
-	Storage::fake('temp');
-
 	expect(new ImagePolicy())
 		->delete(makeUser(), Image::factory()
-			->setDisk($diskName, $disk)
+			->fakeFileInfo()
+			->exists()
 			->createOne())
 		->toBeFalse();
 });
 
 it('can be deleted by a logged-in user', function () {
-	$diskName = 'public';
-	$disk = Storage::fake($diskName);
-
-	Storage::fake('temp');
-
 	expect(new ImagePolicy())
 		->delete(createUser(), Image::factory()
-			->setDisk($diskName, $disk)
+			->fakeFileInfo()
+			->exists()
 			->createOne())
 		->toBeTrue();
 });
@@ -91,6 +71,8 @@ it('cannot be restored by anonymous users', function () {
 	expect(new ImagePolicy())
 		->restore(makeUser(), Image::factory()
 			->setDisk($diskName, $disk)
+			->fakeFileInfo()
+			->exists()
 			->createOne())
 		->toBeFalse();
 });
@@ -104,6 +86,8 @@ it('can be restored by a logged-in user', function () {
 	expect(new ImagePolicy())
 		->restore(createUser(), Image::factory()
 			->setDisk($diskName, $disk)
+			->fakeFileInfo()
+			->exists()
 			->createOne())
 		->toBeTrue();
 });
@@ -117,6 +101,8 @@ it('cannot be force-deleted by anonymous users', function () {
 	expect(new ImagePolicy())
 		->forceDelete(makeUser(), Image::factory()
 			->setDisk($diskName, $disk)
+			->fakeFileInfo()
+			->exists()
 			->createOne())
 		->toBeFalse();
 });
@@ -130,6 +116,8 @@ it('can be force-deleted by a logged-in user', function () {
 	expect(new ImagePolicy())
 		->forceDelete(createUser(), Image::factory()
 			->setDisk($diskName, $disk)
+			->fakeFileInfo()
+			->exists()
 			->createOne())
 		->toBeTrue();
 });
