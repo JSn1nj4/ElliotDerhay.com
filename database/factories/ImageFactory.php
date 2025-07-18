@@ -3,7 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Contracts\Filesystem\Filesystem;
-use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
@@ -11,11 +11,13 @@ use Illuminate\Support\Facades\Storage;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Image>
  */
-class ImageFactory extends Factory
+class ImageFactory extends BaseFactory
 {
 	protected string $diskName = 'public';
 	protected Filesystem $disk;
 	private int|null $timer = null;
+
+	protected bool $fakeFileInfo = false;
 
 	public function __construct(
 		$count = null,
@@ -37,6 +39,24 @@ class ImageFactory extends Factory
 	public function definition(): array
 	{
 		$collection = "images";
+
+		if ($this->fakeFileInfo) {
+			$filename = $this->filename(true);
+
+			return [
+				'name' => fake()->name(),
+				'file_name' => $filename->toString(),
+				'mime_type' => match ($filename->afterLast('.')->toString()) {
+					'jpg' => 'image/jpeg',
+					'webp' => 'image/webp',
+				},
+				'path' => $filename->prepend(storage_path('app/temp')),
+				'disk' => $this->diskName,
+				'file_hash' => hash(config('app.uploads.hash'), fake()->sentence()),
+				'collection' => $collection,
+				'size' => fake()->numberBetween(788, 32_000),
+			];
+		}
 
 		$this->ensureTempDirExists();
 
@@ -117,5 +137,26 @@ class ImageFactory extends Factory
 		if (now()->getTimestamp() >= $this->timer) {
 			throw new \Exception("Task did not complete in allotted time.");
 		}
+	}
+
+	/**
+	 * @return static
+	 */
+	public function fakeFileInfo(): static
+	{
+		$this->fakeFileInfo = true;
+
+		return $this;
+	}
+
+	public function exists(): static
+	{
+		$this->steps[] = static function (Model $model) {
+			$model->exists = true;
+
+			return $model;
+		};
+
+		return $this;
 	}
 }
