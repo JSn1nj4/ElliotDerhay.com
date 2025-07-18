@@ -19,6 +19,7 @@
 		"league/flysystem-aws-s3-v3": "^3.25",
 		"league/flysystem-path-prefixing": "^3.10",
 		"livewire/volt": "^1.7",
+		"mailjet/laravel-mailjet": "^3.1",
 		"noweh/twitter-api-v2-php": "^3.4",
 		"owenvoke/blade-fontawesome": "^2.9",
 		"sentry/sentry-laravel": "^4.3",
