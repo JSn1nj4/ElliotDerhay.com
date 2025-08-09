@@ -41,6 +41,7 @@ yarn-error.log
 .pnp.data.json
 .pnp.js
 .pnp.loader.mjs
+.pnpm-store
 
 # Custom configs
 /.vscode/*
