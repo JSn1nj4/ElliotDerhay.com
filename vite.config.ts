@@ -22,17 +22,66 @@ export default defineConfig(({mode}) => {
 
 		server: {
 			hmr: {
-				host: hmrHost(process.env?.VITE_SERVER_HMR_HOST),
+				host: hmrHost(process.env),
+				clientPort: hmrPort(process.env),
 			},
 			host: serverHost(process.env?.VITE_SERVER_HOST),
 			https: serverHttps(process.env),
 			port: serverPort(process.env?.VITE_SERVER_PORT),
+			strictPort: true,
+			origin: allowOrigin(process.env),
+			// whitelist origins for *.ddev.site, *.lndo.site, *.local, and *.test
+			cors: {
+				origin: /https?:\/\/([A-Za-z0-9\-.]+)?(\.((ddev|lndo)\.site)|test|local)(?::\d+)?$/,
+			},
 		},
 	}
 })
 
-function hmrHost(host?: string): string {
-	return !!host ? host : 'localhost'
+function allowOrigin(env: NodeJS.ProcessEnv): string | null {
+	if (!env?.VITE_SERVER_HMR_HOST) return null
+
+	const port = hmrPort(env)
+
+	if (typeof port !== 'number') return null
+
+	const origin = `${schemePrefix(env)}${hmrHost(env).replace(
+		/:\d+$/,
+		'',
+	)}:${port}`
+
+	console.log(`allowed origin: ${origin}`)
+
+	return origin
+}
+
+function hmrHost(env: NodeJS.ProcessEnv): string {
+	return typeof env?.VITE_SERVER_HMR_HOST === 'string'
+		? env?.VITE_SERVER_HMR_HOST
+		: 'localhost'
+}
+
+function hmrPort(env: NodeJS.ProcessEnv): number | undefined {
+	if (
+		!!env?.VITE_SERVER_HMR_CLIENTPORT &&
+		typeof env?.VITE_SERVER_HMR_CLIENTPORT === 'string'
+	) {
+		return parseInt(env?.VITE_SERVER_HMR_CLIENTPORT)
+	}
+
+	if (!!env?.VITE_SERVER_PORT && typeof env?.VITE_SERVER_PORT === 'string') {
+		return parseInt(env?.VITE_SERVER_PORT)
+	}
+
+	return undefined
+}
+
+function schemePrefix(env: NodeJS.ProcessEnv): string {
+	const httpsKeys = Object.keys(serverHttps(env))
+
+	return httpsKeys.includes('cert') && httpsKeys.includes('key')
+		? 'https://'
+		: 'http://'
 }
 
 function serverHost(host?: string): string | boolean {
@@ -57,5 +106,5 @@ function serverHttps(env: NodeJS.ProcessEnv): SecureServerOptions {
 }
 
 function serverPort(port?: string): number {
-	return port ? parseInt(port) : 24690
+	return port ? parseInt(port) : 5173
 }
