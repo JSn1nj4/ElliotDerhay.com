@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ProjectStartupSharedConfiguration">
     <configurations>
-      <configuration id="npm.dev" name="dev" />
-      <configuration id="Shell Script.start-mailpit" name="start-mailpit" />
+      <configuration id="Shell Script.start-frontend" name="start-frontend" />
     </configurations>
   </component>
 </project>
