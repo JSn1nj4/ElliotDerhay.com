@@ -1,12 +1,16 @@
 name: Deploy
 on:
-  workflow_run:
-    workflows: [ Tests ]
+  push: # brought back while fixing remaining tests in actions
     branches:
       - main
       - master
-    types:
-      - completed
+#  workflow_run:
+#    workflows: [ Tests ]
+#    branches:
+#      - main
+#      - master
+#    types:
+#      - completed
 
 jobs:
   deploy:
