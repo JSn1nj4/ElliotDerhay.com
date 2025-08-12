@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Actions\StoresImage;
 use App\Filament\Forms\Components\ImageViewField;
 use App\Filament\Resources\PostResource\Pages;
+use App\Filament\Resources\TagResource\RelationManagers;
 use App\Models\Image;
 use App\Models\Post;
 use App\Models\Scopes\PostPublishedScope;
@@ -181,6 +182,9 @@ class PostResource extends Resource
 									Forms\Components\Hidden::make('slug')
 										->alphaDash()
 										->mutateDehydratedStateUsing(static fn (string|null $state) => self::sanitizeSlug($state)),
+								])
+								->hiddenOn([
+									RelationManagers\PostsRelationManager::class,
 								]),
 						]),
 				])
@@ -249,7 +253,7 @@ class PostResource extends Resource
 	public static function table(Tables\Table $table): Tables\Table
 	{
 		return $table
-			->defaultSort('created_at', 'desc')
+			->defaultSort('posts.created_at', 'desc')
 			->columns([
 				Tables\Columns\ImageColumn::make('image.url')
 					->disk(static fn (Image $image) => $image->disk)
