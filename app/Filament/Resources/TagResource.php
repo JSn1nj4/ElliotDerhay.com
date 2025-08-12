@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\TagResource\Pages;
 use App\Filament\Resources\TagResource\RelationManagers;
 use App\Models\Tag;
+use App\Support\Sanitizer;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -23,12 +24,32 @@ class TagResource extends Resource
 	{
 		return $form
 			->schema([
-				Forms\Components\Textarea::make('title')
+				Forms\Components\TextInput::make('title')
 					->required()
-					->columnSpanFull(),
+					->maxLength(180)
+					->reactive()
+					->live(500)
+					->afterStateUpdated(static function (Forms\Get $get, Forms\Set $set, string|null $state) {
+						$slug = str($get('slug'))->trim();
+
+						if (!in_array($slug, [null, ''])) return;
+
+						$set('slug', Sanitizer::slug($state)->toString());
+					}),
+
 				Forms\Components\TextInput::make('slug')
 					->required()
-					->maxLength(255),
+					->unique(ignoreRecord: true)
+					->maxLength(255)
+					->alphaDash()
+					->reactive()
+					->live(500)
+					->afterStateUpdated(static function (Forms\Get $get, Forms\Set $set, string|null $state) {
+						$set('slug', Sanitizer::slug(match (trim($state)) {
+							null, '' => $get('title'),
+							default => $state
+						})->toString());
+					}),
 			]);
 	}
 
@@ -42,8 +63,13 @@ class TagResource extends Resource
 	{
 		return $table
 			->columns([
+				Tables\Columns\TextColumn::make('title')
+					->searchable(),
 				Tables\Columns\TextColumn::make('slug')
 					->searchable(),
+				Tables\Columns\TextColumn::make('posts_count')
+					->counts('posts')
+					->label('Tagged Posts'),
 				Tables\Columns\TextColumn::make('created_at')
 					->dateTime()
 					->sortable()
