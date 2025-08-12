@@ -253,7 +253,7 @@ class PostResource extends Resource
 	public static function table(Tables\Table $table): Tables\Table
 	{
 		return $table
-			->defaultSort('created_at', 'desc')
+			->defaultSort('posts.created_at', 'desc')
 			->columns([
 				Tables\Columns\ImageColumn::make('image.url')
 					->disk(static fn (Image $image) => $image->disk)
