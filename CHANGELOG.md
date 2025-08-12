@@ -1,5 +1,13 @@
 # Changelog
 
+## Version  2.17.0
+
+### New
+
+- JSN-212: Add Tag management UI ([#257][pr_257])
+
+[pr_257]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/257
+
 ## Version 2.16.0
 
 ### New
