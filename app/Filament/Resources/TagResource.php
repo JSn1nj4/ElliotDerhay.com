@@ -29,7 +29,6 @@ class TagResource extends Resource
 				Forms\Components\TextInput::make('title')
 					->required()
 					->maxLength(180)
-					->reactive()
 					->live(500)
 					->afterStateUpdated(static function (Forms\Get $get, Forms\Set $set, string|null $state) {
 						$slug = str($get('slug'))->trim();
@@ -44,7 +43,6 @@ class TagResource extends Resource
 					->unique(ignoreRecord: true)
 					->maxLength(255)
 					->alphaDash()
-					->reactive()
 					->live(500)
 					->afterStateUpdated(static function (Forms\Get $get, Forms\Set $set, string|null $state) {
 						$set('slug', Sanitizer::slug(match (trim($state)) {
