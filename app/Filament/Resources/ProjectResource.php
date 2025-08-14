@@ -17,20 +17,22 @@ class ProjectResource extends Resource
 {
 	use HasCountBadge;
 
-    protected static string|null $model = Project::class;
+	protected static string|null $model = Project::class;
 
-    protected static string|null $navigationIcon = 'm-code-bracket';
+	protected static string|null $navigationIcon = 'm-code-bracket';
 
 	protected static string|null $navigationGroup = 'Content';
 
 	protected static string|null $recordTitleAttribute = 'name';
 
+	protected static int|null $navigationSort = 0;
+
 	public int|null $image_id = null;
 
 	public static function form(Forms\Form $form): Forms\Form
 	{
-        return $form->columns(3)
-            ->schema([
+		return $form->columns(3)
+			->schema([
 				Forms\Components\Section::make('Image')
 					->columnSpan(1)
 					->schema([
@@ -86,47 +88,47 @@ class ProjectResource extends Resource
 
 						$project->images()->sync([$image_id]);
 					}),
-            ]);
-    }
+			]);
+	}
 
-    public static function table(Tables\Table $table): Tables\Table
+	public static function table(Tables\Table $table): Tables\Table
 	{
-        return $table
+		return $table
 			->defaultSort('created_at', 'desc')
-            ->columns([
+			->columns([
 				Tables\Columns\ImageColumn::make('image.url')
 					->disk(static fn (Image $image) => $image->disk)
 					->size('auto')->height(135),
-                Tables\Columns\TextColumn::make('name')
+				Tables\Columns\TextColumn::make('name')
 					->searchable(),
 				Tables\Columns\TextColumn::make('link'),
 				Tables\Columns\TextColumn::make('demo_link'),
-            ])
-            ->filters([
-                //
-            ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
+			])
+			->filters([
+				//
+			])
+			->actions([
+				Tables\Actions\EditAction::make(),
 				Tables\Actions\DeleteAction::make(),
-            ])
-            ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
-            ]);
-    }
+			])
+			->bulkActions([
+				Tables\Actions\DeleteBulkAction::make(),
+			]);
+	}
 
-    public static function getRelations(): array
-    {
-        return [
+	public static function getRelations(): array
+	{
+		return [
 			//
-        ];
-    }
+		];
+	}
 
-    public static function getPages(): array
-    {
-        return [
-            'index' => Pages\ListProjects::route('/'),
-            'create' => Pages\CreateProject::route('/create'),
-            'edit' => Pages\EditProject::route('/{record}/edit'),
-        ];
-    }
+	public static function getPages(): array
+	{
+		return [
+			'index' => Pages\ListProjects::route('/'),
+			'create' => Pages\CreateProject::route('/create'),
+			'edit' => Pages\EditProject::route('/{record}/edit'),
+		];
+	}
 }

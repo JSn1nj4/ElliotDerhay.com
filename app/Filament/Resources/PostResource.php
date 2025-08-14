@@ -27,6 +27,8 @@ class PostResource extends Resource
 
 	protected static string|null $navigationGroup = 'Content';
 
+	protected static int|null $navigationSort = 1;
+
 	protected static string|null $recordTitleAttribute = 'title';
 
 	public int|null $image_id = null;

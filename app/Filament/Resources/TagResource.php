@@ -20,6 +20,8 @@ class TagResource extends Resource
 
 	protected static string|null $navigationGroup = 'Content';
 
+	protected static int|null $navigationSort = 2;
+
 	public static function form(Form $form): Form
 	{
 		return $form
