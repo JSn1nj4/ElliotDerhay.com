@@ -1,5 +1,14 @@
 # Changelog
 
+## Version 2.18.0
+
+### Changes
+
+- JSN-299: Upgrade to Tailwind v4 ([#259][pr_259])
+- JSN-301: Migrate away from PostCSS ([#259][pr_259])
+
+[pr_259]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/259
+
 ## Version  2.17.0
 
 ### New
