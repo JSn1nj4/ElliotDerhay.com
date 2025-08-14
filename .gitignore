@@ -24,6 +24,7 @@
 /vendor
 .env
 .env.backup
+.env~
 .phpunit.result.cache
 atlassian-ide-plugin.xml
 docker-compose.override.yml
