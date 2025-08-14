@@ -11,6 +11,14 @@
 
 [pr_258]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/258
 
+### Changes
+
+- Sort content-related resources in navigation
+
+### Fixes
+
+- Fix weird post title and slug updating behavior
+
 ### Development
 
 - Update Laravel Idea config
