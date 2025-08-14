@@ -18,7 +18,7 @@ class ImageResource extends Resource
 
 	protected static string|null $navigationIcon = 'm-photo';
 
-	protected static int|null $navigationSort = 1;
+	protected static int|null $navigationSort = 3;
 
 	protected static string|null $navigationGroup = 'Content';
 

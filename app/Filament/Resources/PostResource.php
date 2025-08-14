@@ -4,7 +4,9 @@ namespace App\Filament\Resources;
 
 use App\Actions\StoresImage;
 use App\Filament\Forms\Components\ImageViewField;
+use App\Filament\Resources\CategoryResource\RelationManagers as CategoryRelationManagers;
 use App\Filament\Resources\PostResource\Pages;
+use App\Filament\Resources\TagResource\RelationManagers as TagRelationManagers;
 use App\Models\Image;
 use App\Models\Post;
 use App\Models\Scopes\PostPublishedScope;
@@ -25,6 +27,8 @@ class PostResource extends Resource
 
 	protected static string|null $navigationGroup = 'Content';
 
+	protected static int|null $navigationSort = 1;
+
 	protected static string|null $recordTitleAttribute = 'title';
 
 	public int|null $image_id = null;
@@ -40,8 +44,7 @@ class PostResource extends Resource
 						Forms\Components\TextInput::make('title')
 							->required()
 							->maxLength(180)
-							->reactive()
-							->debounce(500)
+							->live(500)
 							->afterStateUpdated(static function (Forms\Get $get, Forms\Set $set, string|null $state) {
 								$slug = str($get('slug'))->trim();
 
@@ -56,8 +59,7 @@ class PostResource extends Resource
 							->unique(ignoreRecord: true)
 							->maxLength(180)
 							->alphaDash()
-							->reactive()
-							->debounce(500)
+							->live(500)
 							->afterStateUpdated(static function (Forms\Get $get, Forms\Set $set, string|null $state) {
 								$set('slug', Sanitizer::slug(match (trim($state)) {
 									null, '' => $get('title'),
@@ -162,6 +164,9 @@ class PostResource extends Resource
 									Forms\Components\Hidden::make('slug')
 										->alphaDash()
 										->mutateDehydratedStateUsing(static fn (string|null $state) => self::sanitizeSlug($state)),
+								])
+								->hiddenOn([
+									CategoryRelationManagers\PostsRelationManager::class,
 								]),
 
 							Forms\Components\Select::make('tags')
@@ -181,6 +186,9 @@ class PostResource extends Resource
 									Forms\Components\Hidden::make('slug')
 										->alphaDash()
 										->mutateDehydratedStateUsing(static fn (string|null $state) => self::sanitizeSlug($state)),
+								])
+								->hiddenOn([
+									TagRelationManagers\PostsRelationManager::class,
 								]),
 						]),
 				])
@@ -249,7 +257,7 @@ class PostResource extends Resource
 	public static function table(Tables\Table $table): Tables\Table
 	{
 		return $table
-			->defaultSort('created_at', 'desc')
+			->defaultSort('posts.created_at', 'desc')
 			->columns([
 				Tables\Columns\ImageColumn::make('image.url')
 					->disk(static fn (Image $image) => $image->disk)

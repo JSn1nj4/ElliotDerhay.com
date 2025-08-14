@@ -1,5 +1,33 @@
 # Changelog
 
+## Version  2.17.0
+
+### New
+
+- JSN-212: Add Tag management UI ([#257][pr_257])
+- JSN-213: Add category management admin UI ([#258][pr_258])
+
+[pr_257]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/257
+
+[pr_258]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/258
+
+### Changes
+
+- Sort content-related resources in navigation
+
+### Fixes
+
+- Fix weird post title and slug updating behavior
+
+### Development
+
+- Update Laravel Idea config
+- Add DDEV support
+- Add several startup scripts
+- Ignore .pnpm-store
+- Update Vite config for DDEV
+- Switch back to automatic deploy without using tests workflow for now
+
 ## Version 2.16.0
 
 ### New

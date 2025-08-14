@@ -32,12 +32,19 @@ use Illuminate\Support\Str;
  */
 class Category extends Model
 {
-    use HasFactory;
+	use HasFactory;
 
 	protected $fillable = [
 		'title',
 		'slug',
 	];
+
+	protected static function booted(): void
+	{
+		static::deleting(static function (self $tag) {
+			$tag->posts()->detach();
+		});
+	}
 
 	public static function fromIds(array $IDs): Collection
 	{
