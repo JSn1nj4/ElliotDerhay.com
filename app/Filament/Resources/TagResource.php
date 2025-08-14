@@ -14,9 +14,9 @@ use Filament\Tables\Table;
 
 class TagResource extends Resource
 {
-	protected static ?string $model = Tag::class;
+	protected static string|null $model = Tag::class;
 
-	protected static ?string $navigationIcon = 'm-tag';
+	protected static string|null $navigationIcon = 'm-tag';
 
 	protected static string|null $navigationGroup = 'Content';
 
