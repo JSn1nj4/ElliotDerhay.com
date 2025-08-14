@@ -1,7 +1,7 @@
 <div class="flex flex-row relative">
 	<x-github.event-icon :icon='$icon' />
 
-	<div class="pl-4 flex-grow relative">
+	<div class="pl-4 grow relative">
 		<p class="text-neutral-800 dark:text-neutral-500">
 			{{ $timeElapsed }}
 		</p>
@@ -16,7 +16,7 @@
 
 				{{-- If there's no ref, it's assumed the repo was deleted --}}
 				@unless($refName === null)
-					<span class="text-caribbeanGreen-600 dark:text-caribbeanGreen-800">
+					<span class="text-caribbean-green-600 dark:text-caribbean-green-800">
 						{{ $refName }}
 					</span>
 

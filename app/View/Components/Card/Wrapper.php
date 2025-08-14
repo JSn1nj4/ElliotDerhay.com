@@ -17,7 +17,7 @@ class Wrapper extends Component
 	public string $type;
 
 	public array $typeClasses = [
-		'default' => 'rounded-lg border border-neutral-300 dark:border-neutral-600 transition-colors hover:border-caribbeanGreen-600 dark:hover:border-caribbeanGreen-500 bg-white dark:bg-neutral-950',
+		'default' => 'rounded-lg border border-neutral-300 dark:border-neutral-600 transition-colors hover:border-caribbean-green-600 dark:hover:border-caribbean-green-500 bg-white dark:bg-neutral-950',
 		'transparent' => ''
 	];
 

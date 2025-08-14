@@ -51,7 +51,7 @@ it('provides a correctly-formatted image URL', function (
 	preg_match($expression, $sampleUrl, $matches);
 
 	$blur_val = match (true) {
-		!empty($matches['blur']) => (int)$matches['blur'],
+		!empty($matches['blur-sm']) => (int)$matches['blur-sm'],
 		!empty($matches['blur_alt']) => (int)$matches['blur_alt'],
 		default => null,
 	};
