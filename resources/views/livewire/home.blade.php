@@ -7,7 +7,7 @@ new class extends Component {
 }; ?>
 
 <root>
-	<x-row id="about" overlay-classes="bg-caribbeanGreen-200 bg-opacity-50 dark:bg-caribbeanGreen-700 dark:bg-opacity-75"
+	<x-row id="about" overlay-classes="bg-caribbean-green-200 bg-opacity-50 dark:bg-caribbean-green-700 dark:bg-opacity-75"
 				 background-image="{{ asset_url('pexels-lukas-574073-scaled.jpg') }}">
 		<x-column class="flex md:order-2 md:w-1/2 lg:w-5/12 xl:w-1/3">
 			<img src="{{ asset_url("Elliot-head-on-square-color-medium.jpg") }}" title="Elliot Derhay"
@@ -49,7 +49,7 @@ new class extends Component {
 		</x-column>
 	</x-row>
 
-	<x-row :flex-class="null" class="bg-caribbeanGreen-200 dark:bg-caribbeanGreen-500 bg-opacity-40 dark:bg-opacity-25"
+	<x-row :flex-class="null" class="bg-caribbean-green-200 dark:bg-caribbean-green-500 bg-opacity-40 dark:bg-opacity-25"
 				 id="connect">
 		<x-column class="block w-full">
 			<h2 class="content-title text-4xl pt-6 mt-5 md:mt-0 md:pt-0">

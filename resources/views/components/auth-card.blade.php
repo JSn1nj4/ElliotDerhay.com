@@ -1,4 +1,4 @@
-<div class="flex flex-col flex-grow sm:justify-center items-center pt-6 sm:pt-0 border-caribbeanGreen-">
+<div class="flex flex-col grow sm:justify-center items-center pt-6 sm:pt-0 border-caribbeanGreen-">
 
 		@isset($logo)
 			<div>

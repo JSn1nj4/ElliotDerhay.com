@@ -13,45 +13,45 @@ $selectableColors = implode(' ', [
 	'bg-white',
 	'dark:bg-black',
 
-	'text-caribbeanGreen-700',
-	'dark:text-caribbeanGreen-300',
+	'text-caribbean-green-700',
+	'dark:text-caribbean-green-300',
 
-	'border-caribbeanGreen-700',
-	'dark:border-caribbeanGreen-300',
+	'border-caribbean-green-700',
+	'dark:border-caribbean-green-300',
 
-	'hover:text-caribbeanGreen-500',
-	'dark:hover:text-caribbeanGreen-400',
+	'hover:text-caribbean-green-500',
+	'dark:hover:text-caribbean-green-400',
 
-	'ring-caribbeanGreen-300',
-	'dark:ring-caribbeanGreen-700',
+	'ring-caribbean-green-300',
+	'dark:ring-caribbean-green-700',
 
-	'focus:border-caribbeanGreen-300',
-	'dark:focus:border-caribbeanGreen-700',
+	'focus:border-caribbean-green-300',
+	'dark:focus:border-caribbean-green-700',
 
-	'active:text-caribbeanGreen-700',
-	'dark:active:text-caribbeanGreen-300',
+	'active:text-caribbean-green-700',
+	'dark:active:text-caribbean-green-300',
 ]);
 
 $selectedColors = implode(' ', [
-	'bg-caribbeanGreen-500',
-	'dark:bg-caribbeanGreen-400',
+	'bg-caribbean-green-500',
+	'dark:bg-caribbean-green-400',
 
 	'text-white',
 	'dark:text-black',
 
-	'border-caribbeanGreen-500',
-	'dark:border-caribbeanGreen-400',
+	'border-caribbean-green-500',
+	'dark:border-caribbean-green-400',
 ]);
 
 $disabledColors = implode(' ', [
 	'bg-white',
 	'dark:bg-black',
 
-	'text-caribbeanGreen-300',
-	'dark:text-caribbeanGreen-700',
+	'text-caribbean-green-300',
+	'dark:text-caribbean-green-700',
 
-	'border-caribbeanGreen-300',
-	'dark:border-caribbeanGreen-700',
+	'border-caribbean-green-300',
+	'dark:border-caribbean-green-700',
 ]);
 @endphp
 
@@ -69,7 +69,7 @@ $disabledColors = implode(' ', [
 						<button type="button" wire:click.debounce="previousPage('{{ $paginator->getPageName() }}')"
 										x-on:click="{{ $scrollIntoViewJsSnippet }}" wire:loading.attr="disabled"
 										dusk="previousPage{{ $paginator->getPageName() == 'page' ? '' : '.' . $paginator->getPageName() }}.before"
-										class="relative inline-flex items-center px-4 py-2 text-sm font-medium border leading-5 rounded-md focus:outline-none focus:ring transition ease-in-out duration-150 {{ $selectableColors }}">
+										class="relative inline-flex items-center px-4 py-2 text-sm font-medium border leading-5 rounded-md focus:outline-hidden focus:ring-3 transition ease-in-out duration-150 {{ $selectableColors }}">
                             {!! __('pagination.previous') !!}
                         </button>
 					@endif
@@ -80,7 +80,7 @@ $disabledColors = implode(' ', [
 						<button type="button" wire:click.debounce="nextPage('{{ $paginator->getPageName() }}')"
 										x-on:click="{{ $scrollIntoViewJsSnippet }}" wire:loading.attr="disabled"
 										dusk="nextPage{{ $paginator->getPageName() == 'page' ? '' : '.' . $paginator->getPageName() }}.before"
-										class="relative inline-flex items-center px-4 py-2 ml-3 text-sm font-medium border leading-5 rounded-md focus:outline-none focus:ring transition ease-in-out duration-150 {{ $selectableColors }}">
+										class="relative inline-flex items-center px-4 py-2 ml-3 text-sm font-medium border leading-5 rounded-md focus:outline-hidden focus:ring-3 transition ease-in-out duration-150 {{ $selectableColors }}">
 							{!! __('pagination.next') !!}
 						</button>
 					@else
@@ -106,7 +106,7 @@ $disabledColors = implode(' ', [
 				</div>
 
 				<div>
-					<span class="relative z-0 inline-flex shadow-sm rounded-md">
+					<span class="relative z-0 inline-flex shadow-xs rounded-md">
 						<span>
 							{{-- Previous Page Link --}}
 							@if ($paginator->onFirstPage())
@@ -125,7 +125,7 @@ $disabledColors = implode(' ', [
 								<button type="button" wire:click.debounce="previousPage('{{ $paginator->getPageName() }}')"
 												x-on:click="{{ $scrollIntoViewJsSnippet }}"
 												dusk="previousPage{{ $paginator->getPageName() == 'page' ? '' : '.' . $paginator->getPageName() }}.after"
-												class="relative inline-flex items-center px-2 py-2 text-sm font-medium border rounded-l-md leading-5 focus:z-10 focus:outline-none focus:ring transition ease-in-out duration-150 {{ $selectableColors }}"
+												class="relative inline-flex items-center px-2 py-2 text-sm font-medium border rounded-l-md leading-5 focus:z-10 focus:outline-hidden focus:ring-3 transition ease-in-out duration-150 {{ $selectableColors }}"
 												aria-label="{{ __('pagination.previous') }}">
 									<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
 											<path fill-rule="evenodd"
@@ -159,7 +159,7 @@ $disabledColors = implode(' ', [
 											<button type="button"
 															wire:click.debounce="gotoPage({{ $page }}, '{{ $paginator->getPageName() }}')"
 															x-on:click="{{ $scrollIntoViewJsSnippet }}"
-															class="relative inline-flex items-center px-4 py-2 -ml-px text-sm font-medium border leading-5 focus:z-10 focus:outline-none focus:ring transition ease-in-out duration-150 {{ $selectableColors }}"
+															class="relative inline-flex items-center px-4 py-2 -ml-px text-sm font-medium border leading-5 focus:z-10 focus:outline-hidden focus:ring-3 transition ease-in-out duration-150 {{ $selectableColors }}"
 															aria-label="{{ __('Go to page :page', compact('page')) }}">
 													{{ $page }}
 											</button>
@@ -175,7 +175,7 @@ $disabledColors = implode(' ', [
 								<button type="button" wire:click.debounce="nextPage('{{ $paginator->getPageName() }}')"
 												x-on:click="{{ $scrollIntoViewJsSnippet }}"
 												dusk="nextPage{{ $paginator->getPageName() == 'page' ? '' : '.' . $paginator->getPageName() }}.after"
-												class="relative inline-flex items-center px-2 py-2 -ml-px text-sm font-medium border rounded-r-md leading-5 focus:z-10 focus:outline-none focus:ring transition ease-in-out duration-150 {{ $selectableColors }}"
+												class="relative inline-flex items-center px-2 py-2 -ml-px text-sm font-medium border rounded-r-md leading-5 focus:z-10 focus:outline-hidden focus:ring-3 transition ease-in-out duration-150 {{ $selectableColors }}"
 												aria-label="{{ __('pagination.next') }}">
 									<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
 											<path fill-rule="evenodd"

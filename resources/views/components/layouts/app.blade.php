@@ -29,7 +29,7 @@
 @endcomponent
 
 <!-- Page Content -->
-<main class="bg-white dark:bg-black layer-shadow flex flex-col flex-grow">
+<main class="bg-white dark:bg-black layer-shadow flex flex-col grow">
 	{{ $slot }}
 </main>
 
