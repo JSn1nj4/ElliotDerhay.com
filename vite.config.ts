@@ -3,6 +3,7 @@ import laravel, {refreshPaths} from 'laravel-vite-plugin'
 import vuePlugin from '@vitejs/plugin-vue'
 import * as fs from 'fs'
 import {SecureServerOptions} from 'node:http2'
+import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig(({mode}) => {
 	Object.assign(process.env, loadEnv(mode, process.cwd()))
@@ -18,6 +19,7 @@ export default defineConfig(({mode}) => {
 				],
 			}),
 			vuePlugin(),
+			tailwindcss(),
 		],
 
 		server: {
