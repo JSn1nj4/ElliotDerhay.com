@@ -44,8 +44,7 @@ class PostResource extends Resource
 						Forms\Components\TextInput::make('title')
 							->required()
 							->maxLength(180)
-							->reactive()
-							->debounce(500)
+							->live(500)
 							->afterStateUpdated(static function (Forms\Get $get, Forms\Set $set, string|null $state) {
 								$slug = str($get('slug'))->trim();
 
@@ -60,8 +59,7 @@ class PostResource extends Resource
 							->unique(ignoreRecord: true)
 							->maxLength(180)
 							->alphaDash()
-							->reactive()
-							->debounce(500)
+							->live(500)
 							->afterStateUpdated(static function (Forms\Get $get, Forms\Set $set, string|null $state) {
 								$set('slug', Sanitizer::slug(match (trim($state)) {
 									null, '' => $get('title'),
