@@ -11,7 +11,11 @@ export default defineConfig(({mode}) => {
 	return {
 		plugins: [
 			laravel({
-				input: ['resources/css/app.css', 'resources/js/app.ts'],
+				input: [
+					'resources/css/app.css',
+					'resources/js/app.ts',
+					'resources/css/filament/admin/theme.css',
+				],
 				refresh: [
 					{
 						paths: refreshPaths.concat(['app/View/Renderers/**']),
