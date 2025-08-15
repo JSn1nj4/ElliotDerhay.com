@@ -6,8 +6,11 @@
 
 - JSN-299: Upgrade to Tailwind v4 ([#259][pr_259])
 - JSN-301: Migrate away from PostCSS ([#259][pr_259])
+- JSN-315: Upgrade to Filament v4 ([#260][pr_260])
 
 [pr_259]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/259
+
+[pr_260]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/260
 
 ## Version  2.17.0
 
