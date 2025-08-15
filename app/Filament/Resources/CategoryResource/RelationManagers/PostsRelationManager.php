@@ -3,17 +3,17 @@
 namespace App\Filament\Resources\CategoryResource\RelationManagers;
 
 use App\Filament\Resources\PostResource;
-use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
+use Filament\Schemas\Schema;
 use Filament\Tables\Table;
 
 class PostsRelationManager extends RelationManager
 {
 	protected static string $relationship = 'posts';
 
-	public function form(Form $form): Form
+	public function form(Schema $schema): Schema
 	{
-		return PostResource::form($form);
+		return PostResource::form($schema);
 	}
 
 	public function table(Table $table): Table

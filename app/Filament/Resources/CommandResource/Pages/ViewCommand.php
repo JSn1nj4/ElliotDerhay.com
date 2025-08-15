@@ -4,9 +4,12 @@ namespace App\Filament\Resources\CommandResource\Pages;
 
 use App\Actions\LogCommandEvent;
 use App\Filament\Resources\CommandResource;
+use App\Filament\Resources\CommandResource\Widgets\CommandLog;
 use App\Models\Command;
 use App\Support\Sanitizer;
-use Filament\Actions;
+use Exception;
+use Filament\Actions\Action;
+use Filament\Actions\EditAction;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\ViewRecord;
 use Filament\Support\Enums\IconPosition;
@@ -14,7 +17,7 @@ use Illuminate\Support\Facades\Artisan;
 
 class ViewCommand extends ViewRecord
 {
-    protected static string $resource = CommandResource::class;
+	protected static string $resource = CommandResource::class;
 
 	protected function commandFailed(string $title, string|null $body): void
 	{
@@ -36,10 +39,10 @@ class ViewCommand extends ViewRecord
 		$notification->success()->send();
 	}
 
-    protected function getActions(): array
-    {
-        return [
-			Actions\Action::make('Run')
+	protected function getActions(): array
+	{
+		return [
+			Action::make('Run')
 				->icon('o-command-line')
 				->iconPosition(IconPosition::After)
 				->color('warning')
@@ -75,7 +78,7 @@ class ViewCommand extends ViewRecord
 							'Command succeeded!',
 							sprintf('The command "%s" was run successfully!', $signature),
 						);
-					} catch (\Exception $exception) {
+					} catch (Exception $exception) {
 						LogCommandEvent::execute($record, false, $exception->getMessage());
 
 						$this->commandFailed(
@@ -85,20 +88,20 @@ class ViewCommand extends ViewRecord
 					}
 				}),
 
-			Actions\EditAction::make()
+			EditAction::make()
 				->icon('o-pencil-square')
 				->iconPosition(IconPosition::After),
-        ];
-    }
+		];
+	}
 
 	protected function getFooterWidgets(): array
 	{
 		return [
-			CommandResource\Widgets\CommandLog::class,
+			CommandLog::class,
 		];
 	}
 
-	public function getFooterWidgetsColumns(): int|string|array
+	public function getFooterWidgetsColumns(): int|array
 	{
 		return [
 			'md' => 1,

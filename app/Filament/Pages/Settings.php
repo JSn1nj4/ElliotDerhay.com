@@ -10,35 +10,37 @@ use App\Features\BlogTagsWidget;
 use App\Features\GithubFeed;
 use App\Features\ProjectsIndex;
 use App\Features\PublishPostToX;
-use Filament\Forms;
+use Filament\Forms\Components\Toggle;
 use Filament\Notifications\Notification;
 use Filament\Pages\Page;
+use Filament\Schemas\Components\Section;
+use Filament\Schemas\Schema;
 use Laravel\Pennant\Feature;
 
 class Settings extends Page
 {
-	protected static string|null $navigationIcon = 'heroicon-o-cog';
+	protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-cog';
 
-	protected static string $view = 'filament.pages.settings';
+	protected string $view = 'filament.pages.settings';
 
-	protected static string|null $navigationGroup = 'Administration';
+	protected static string|\UnitEnum|null $navigationGroup = 'Administration';
 
 	protected static string|null $navigationLabel = 'Settings';
 
 	public array $features = [];
 
-	public function form(Forms\Form $form): Forms\Form
+	public function form(Schema $schema): Schema
 	{
-		return $form->statePath('features')->schema([
-			Forms\Components\Section::make('General Features')
+		return $schema->statePath('features')->components([
+			Section::make('General Features')
 				->schema([
-					Forms\Components\Toggle::make('admin_login')
+					Toggle::make('admin_login')
 						->disabled()
 						->helperText('This should always appear "on". You wouldn\'t want to lock yourself out, right?')
 						->inlineLabel()
 						->label('Admin Login'),
 
-					Forms\Components\Toggle::make('projects_index')
+					Toggle::make('projects_index')
 						->reactive()
 						->afterStateUpdated(static function (bool $state) {
 							match ($state) {
@@ -54,7 +56,7 @@ class Settings extends Page
 						->inlineLabel()
 						->label('Projects Page'),
 
-					Forms\Components\Toggle::make('github_feed')
+					Toggle::make('github_feed')
 						->reactive()
 						->afterStateUpdated(static function (bool $state) {
 							match ($state) {
@@ -70,7 +72,7 @@ class Settings extends Page
 						->inlineLabel()
 						->label('GitHub Activity Feed'),
 
-					Forms\Components\Toggle::make('publish_posts_to_x')
+					Toggle::make('publish_posts_to_x')
 						->reactive()
 						->afterStateUpdated(static function (bool $state) {
 							match ($state) {
@@ -87,8 +89,8 @@ class Settings extends Page
 						->label('Publish Posts to X'),
 				]),
 
-			Forms\Components\Section::make('Blog Features')->schema([
-				Forms\Components\Toggle::make('blog_index')
+			Section::make('Blog Features')->schema([
+				Toggle::make('blog_index')
 					->reactive()
 					->afterStateUpdated(static function (bool $state) {
 						match ($state) {
@@ -104,7 +106,7 @@ class Settings extends Page
 					->inlineLabel()
 					->label('Blog index & individual pages'),
 
-				Forms\Components\Toggle::make('blog_categories_widget')
+				Toggle::make('blog_categories_widget')
 					->reactive()
 					->afterStateUpdated(static function (bool $state) {
 						match ($state) {
@@ -120,7 +122,7 @@ class Settings extends Page
 					->inlineLabel()
 					->label('Blog categories widget'),
 
-				Forms\Components\Toggle::make('blog_tags_widget')
+				Toggle::make('blog_tags_widget')
 					->reactive()
 					->afterStateUpdated(static function (bool $state) {
 						match ($state) {
@@ -136,7 +138,7 @@ class Settings extends Page
 					->inlineLabel()
 					->label('Blog tags widget'),
 
-				Forms\Components\Toggle::make('blog_github_feed_widget')
+				Toggle::make('blog_github_feed_widget')
 					->reactive()
 					->afterStateUpdated(static function (bool $state) {
 						match ($state) {

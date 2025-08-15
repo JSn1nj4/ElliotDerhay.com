@@ -2,64 +2,67 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\CommandEventResource\Pages;
+use App\Filament\Resources\CommandEventResource\Pages\ListCommandEvents;
 use App\Models\CommandEvent;
 use Filament\Resources\Resource;
-use Filament\Tables;
+use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\TernaryFilter;
+use Filament\Tables\Table;
 
 class CommandEventResource extends Resource
 {
-    protected static string|null $model = CommandEvent::class;
+	protected static string|null $model = CommandEvent::class;
 
-    protected static string|null $navigationIcon = 'm-clipboard-document-list';
+	protected static string|\BackedEnum|null $navigationIcon = 'm-clipboard-document-list';
 
 	protected static string|null $navigationLabel = 'Command Log';
 
 	protected static int|null $navigationSort = 1;
 
-	protected static string|null $navigationGroup = 'Administration';
+	protected static string|\UnitEnum|null $navigationGroup = 'Administration';
 
-    public static function table(Tables\Table $table): Tables\Table
+	public static function table(Table $table): Table
 	{
-        return $table
+		return $table
 			->defaultSort('created_at', 'desc')
-            ->columns([
-                Tables\Columns\IconColumn::make('succeeded')
+			->columns([
+				IconColumn::make('succeeded')
 					->boolean()
 					->true('s-check', 'primary')
-					->false('s-x-mark','danger')
+					->false('s-x-mark', 'danger')
 					->label('Status'),
-				Tables\Columns\TextColumn::make('command.signature')
+				TextColumn::make('command.signature')
 					->searchable()
 					->label('Command'),
-				Tables\Columns\TextColumn::make('message')
+				TextColumn::make('message')
 					->searchable(),
-				Tables\Columns\TextColumn::make('created_at')
+				TextColumn::make('created_at')
 					->dateTime()
 					->sortable()
 					->label('Date'),
-            ])
-            ->filters([
-				Tables\Filters\TernaryFilter::make('succeeded')
+			])
+			->filters([
+				TernaryFilter::make('succeeded')
 					->trueLabel('Succeeded')
 					->falseLabel('Failed')
 					->label('Status'),
-            ])
-            ->bulkActions([
-            ]);
-    }
+			])
+			->toolbarActions([
+			]);
+	}
 
-    public static function getRelations(): array
-    {
-        return [
+	public static function getRelations(): array
+	{
+		return [
 			//
-        ];
-    }
+		];
+	}
 
-    public static function getPages(): array
-    {
-        return [
-            'index' => Pages\ListCommandEvents::route('/'),
-        ];
-    }
+	public static function getPages(): array
+	{
+		return [
+			'index' => ListCommandEvents::route('/'),
+		];
+	}
 }

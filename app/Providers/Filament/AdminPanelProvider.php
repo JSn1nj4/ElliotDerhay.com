@@ -4,12 +4,14 @@ namespace App\Providers\Filament;
 
 use App\Enums\NavLocation;
 use App\Filament\Pages\Login;
-use App\Filament\Widgets;
+use App\Filament\Widgets\CommandLog;
+use App\Filament\Widgets\LastLoginWidget;
+use App\Filament\Widgets\LatestPosts;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Filament\Navigation\NavigationGroup;
-use Filament\Pages;
+use Filament\Pages\Dashboard;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
@@ -57,12 +59,12 @@ class AdminPanelProvider extends PanelProvider
 				NavigationGroup::make('Administration'),
 			])
 			->pages([
-				Pages\Dashboard::class,
+				Dashboard::class,
 			])
 			->widgets([
-				Widgets\LastLoginWidget::class,
-				Widgets\LatestPosts::class,
-				Widgets\CommandLog::class,
+				LastLoginWidget::class,
+				LatestPosts::class,
+				CommandLog::class,
 			])
 			->middleware([
 				EncryptCookies::class,

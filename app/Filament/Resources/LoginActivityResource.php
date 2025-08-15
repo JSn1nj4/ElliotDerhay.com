@@ -2,8 +2,7 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\LoginActivityResource\Pages;
-use App\Filament\Resources\LoginActivityResource\RelationManagers;
+use App\Filament\Resources\LoginActivityResource\Pages\ListLoginActivities;
 use App\Models\LoginActivity;
 use Filament\Facades\Filament;
 use Filament\Resources\Resource;
@@ -17,9 +16,9 @@ class LoginActivityResource extends Resource
 {
 	protected static string|null $model = LoginActivity::class;
 
-	protected static string|null $navigationGroup = 'Administration';
+	protected static string|\UnitEnum|null $navigationGroup = 'Administration';
 
-	protected static string|null $navigationIcon = 'm-clipboard-document-list';
+	protected static string|\BackedEnum|null $navigationIcon = 'm-clipboard-document-list';
 
 	protected static string|null $navigationLabel = 'Login Activity';
 
@@ -58,8 +57,8 @@ class LoginActivityResource extends Resource
 						false => 'Failed',
 					]),
 			])
-			->actions([])
-			->bulkActions([]);
+			->recordActions([])
+			->toolbarActions([]);
 	}
 
 	public static function getRelations(): array
@@ -70,7 +69,7 @@ class LoginActivityResource extends Resource
 	public static function getPages(): array
 	{
 		return [
-			'index' => Pages\ListLoginActivities::route('/'),
+			'index' => ListLoginActivities::route('/'),
 		];
 	}
 }

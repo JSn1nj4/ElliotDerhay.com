@@ -4,13 +4,27 @@ namespace App\Filament\Resources;
 
 use App\Actions\StoresImage;
 use App\Filament\Forms\Components\ImageViewField;
-use App\Filament\Resources\ProjectResource\Pages;
+use App\Filament\Resources\ProjectResource\Pages\CreateProject;
+use App\Filament\Resources\ProjectResource\Pages\EditProject;
+use App\Filament\Resources\ProjectResource\Pages\ListProjects;
 use App\Filament\Traits\HasCountBadge;
 use App\Models\Image;
 use App\Models\Project;
-use Filament\Forms;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Hidden;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
 use Filament\Resources\Resource;
-use Filament\Tables;
+use Filament\Schemas\Components\Section;
+use Filament\Schemas\Components\Utilities\Get;
+use Filament\Schemas\Components\Utilities\Set;
+use Filament\Schemas\Schema;
+use Filament\Tables\Columns\ImageColumn;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Table;
 use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 
 class ProjectResource extends Resource
@@ -19,9 +33,9 @@ class ProjectResource extends Resource
 
 	protected static string|null $model = Project::class;
 
-	protected static string|null $navigationIcon = 'm-code-bracket';
+	protected static string|\BackedEnum|null $navigationIcon = 'm-code-bracket';
 
-	protected static string|null $navigationGroup = 'Content';
+	protected static string|\UnitEnum|null $navigationGroup = 'Content';
 
 	protected static string|null $recordTitleAttribute = 'name';
 
@@ -29,21 +43,21 @@ class ProjectResource extends Resource
 
 	public int|null $image_id = null;
 
-	public static function form(Forms\Form $form): Forms\Form
+	public static function form(Schema $schema): Schema
 	{
-		return $form->columns(3)
-			->schema([
-				Forms\Components\Section::make('Image')
+		return $schema->columns(3)
+			->components([
+				Section::make('Image')
 					->columnSpan(1)
 					->schema([
 						ImageViewField::make('image')
 							->hiddenOn('create')
 							->hiddenLabel(),
 
-						Forms\Components\FileUpload::make('upload')
+						FileUpload::make('upload')
 							->image()
 							->maxSize(5 * 1024)
-							->afterStateUpdated(static function (Forms\Set $set, TemporaryUploadedFile $state) {
+							->afterStateUpdated(static function (Set $set, TemporaryUploadedFile $state) {
 								$image = StoresImage::execute($state);
 
 								$set('image_id', $image->id);
@@ -51,35 +65,35 @@ class ProjectResource extends Resource
 							->reactive()
 							->hiddenLabel(),
 
-						Forms\Components\Hidden::make('image_id'),
+						Hidden::make('image_id'),
 					]),
 
-				Forms\Components\Section::make('Info')
+				Section::make('Info')
 					->columnSpan(2)
 					->columns()
 					->schema([
-						Forms\Components\TextInput::make('name')
+						TextInput::make('name')
 							->columnSpanFull()
 							->required()
 							->maxLength(255),
 
-						Forms\Components\TextInput::make('link')
+						TextInput::make('link')
 							->required()
 							->url()
 							->maxLength(255)
 							->unique(ignoreRecord: true)
 							->label('Project link'),
 
-						Forms\Components\TextInput::make('demo_link')
+						TextInput::make('demo_link')
 							->url()
 							->maxLength(255),
 
-						Forms\Components\Textarea::make('short_desc')
+						Textarea::make('short_desc')
 							->columnSpanFull()
 							->required()
 							->maxLength(255),
 					])
-					->saveRelationshipsUsing(static function (Project $project, Forms\Get $get) {
+					->saveRelationshipsUsing(static function (Project $project, Get $get) {
 						$image_id = $get('image_id');
 
 						if ($image_id === null) return;
@@ -91,28 +105,28 @@ class ProjectResource extends Resource
 			]);
 	}
 
-	public static function table(Tables\Table $table): Tables\Table
+	public static function table(Table $table): Table
 	{
 		return $table
 			->defaultSort('created_at', 'desc')
 			->columns([
-				Tables\Columns\ImageColumn::make('image.url')
+				ImageColumn::make('image.url')
 					->disk(static fn (Image $image) => $image->disk)
 					->size('auto')->height(135),
-				Tables\Columns\TextColumn::make('name')
+				TextColumn::make('name')
 					->searchable(),
-				Tables\Columns\TextColumn::make('link'),
-				Tables\Columns\TextColumn::make('demo_link'),
+				TextColumn::make('link'),
+				TextColumn::make('demo_link'),
 			])
 			->filters([
 				//
 			])
-			->actions([
-				Tables\Actions\EditAction::make(),
-				Tables\Actions\DeleteAction::make(),
+			->recordActions([
+				EditAction::make(),
+				DeleteAction::make(),
 			])
-			->bulkActions([
-				Tables\Actions\DeleteBulkAction::make(),
+			->toolbarActions([
+				DeleteBulkAction::make(),
 			]);
 	}
 
@@ -126,9 +140,9 @@ class ProjectResource extends Resource
 	public static function getPages(): array
 	{
 		return [
-			'index' => Pages\ListProjects::route('/'),
-			'create' => Pages\CreateProject::route('/create'),
-			'edit' => Pages\EditProject::route('/{record}/edit'),
+			'index' => ListProjects::route('/'),
+			'create' => CreateProject::route('/create'),
+			'edit' => EditProject::route('/{record}/edit'),
 		];
 	}
 }

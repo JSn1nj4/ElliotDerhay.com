@@ -3,7 +3,7 @@
 namespace App\Filament\Resources\CategoryResource\Pages;
 
 use App\Filament\Resources\CategoryResource;
-use Filament\Actions;
+use Filament\Actions\DeleteAction;
 use Filament\Resources\Pages\EditRecord;
 
 class EditCategory extends EditRecord
@@ -13,7 +13,7 @@ class EditCategory extends EditRecord
 	protected function getHeaderActions(): array
 	{
 		return [
-			Actions\DeleteAction::make()
+			DeleteAction::make()
 				->requiresConfirmation()
 				->modalDescription('This will remove the category from all attached items. Are you sure you want to continue?')
 				->databaseTransaction(),

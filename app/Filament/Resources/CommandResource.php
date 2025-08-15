@@ -2,76 +2,84 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\CommandResource\Pages;
+use App\Filament\Resources\CommandResource\Pages\CreateCommand;
+use App\Filament\Resources\CommandResource\Pages\EditCommand;
+use App\Filament\Resources\CommandResource\Pages\ListCommands;
+use App\Filament\Resources\CommandResource\Pages\ViewCommand;
 use App\Filament\Traits\HasCountBadge;
 use App\Models\Command;
-use Filament\Forms;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\EditAction;
+use Filament\Actions\ViewAction;
+use Filament\Forms\Components\TextInput;
 use Filament\Resources\Resource;
-use Filament\Tables;
+use Filament\Schemas\Schema;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Table;
 
 class CommandResource extends Resource
 {
 	use HasCountBadge;
 
-    protected static string|null $model = Command::class;
+	protected static string|null $model = Command::class;
 
-    protected static string|null $navigationIcon = 'm-command-line';
+	protected static string|\BackedEnum|null $navigationIcon = 'm-command-line';
 
-	protected static string|null $navigationGroup = 'Administration';
+	protected static string|\UnitEnum|null $navigationGroup = 'Administration';
 
 	protected static string|null $recordTitleAttribute = 'signature';
 
-    public static function form(Forms\Form $form): Forms\Form
-    {
-        return $form
-            ->schema([
-                Forms\Components\TextInput::make('signature')
-                    ->required()
+	public static function form(Schema $schema): Schema
+	{
+		return $schema
+			->components([
+				TextInput::make('signature')
+					->required()
 					->string()
-                    ->maxLength(255)
+					->maxLength(255)
 					->unique(ignoreRecord: true),
-                Forms\Components\TextInput::make('description')
-                    ->required()
+				TextInput::make('description')
+					->required()
 					->string()
-                    ->maxLength(255),
-            ]);
-    }
+					->maxLength(255),
+			]);
+	}
 
-    public static function table(Tables\Table $table): Tables\Table
-    {
-        return $table
-            ->columns([
-                Tables\Columns\TextColumn::make('signature')
+	public static function table(Table $table): Table
+	{
+		return $table
+			->columns([
+				TextColumn::make('signature')
 					->searchable(),
-                Tables\Columns\TextColumn::make('description')
+				TextColumn::make('description')
 					->searchable(),
-            ])
-            ->filters([
-                //
-            ])
-            ->actions([
-                Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
-				Tables\Actions\DeleteAction::make(),
-            ])
-            ->bulkActions([
-            ]);
-    }
+			])
+			->filters([
+				//
+			])
+			->recordActions([
+				ViewAction::make(),
+				EditAction::make(),
+				DeleteAction::make(),
+			])
+			->toolbarActions([
+			]);
+	}
 
-    public static function getRelations(): array
-    {
-        return [
-            //
-        ];
-    }
+	public static function getRelations(): array
+	{
+		return [
+			//
+		];
+	}
 
-    public static function getPages(): array
-    {
-        return [
-            'index' => Pages\ListCommands::route('/'),
-            'create' => Pages\CreateCommand::route('/create'),
-            'view' => Pages\ViewCommand::route('/{record}'),
-            'edit' => Pages\EditCommand::route('/{record}/edit'),
-        ];
-    }
+	public static function getPages(): array
+	{
+		return [
+			'index' => ListCommands::route('/'),
+			'create' => CreateCommand::route('/create'),
+			'view' => ViewCommand::route('/{record}'),
+			'edit' => EditCommand::route('/{record}/edit'),
+		];
+	}
 }

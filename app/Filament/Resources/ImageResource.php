@@ -3,12 +3,26 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Forms\Components\ImageViewField;
-use App\Filament\Resources\ImageResource\Pages;
+use App\Filament\Resources\ImageResource\Pages\EditImage;
+use App\Filament\Resources\ImageResource\Pages\ListImages;
+use App\Filament\Resources\ImageResource\Pages\UploadImage;
+use App\Filament\Resources\ImageResource\Pages\ViewImage;
 use App\Filament\Traits\HasCountBadge;
 use App\Models\Image;
-use Filament\Forms;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
+use Filament\Actions\ViewAction;
+use Filament\Forms\Components\Hidden;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
 use Filament\Resources\Resource;
-use Filament\Tables;
+use Filament\Schemas\Components\Group;
+use Filament\Schemas\Components\Section;
+use Filament\Schemas\Schema;
+use Filament\Tables\Columns\ImageColumn;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Table;
 
 class ImageResource extends Resource
 {
@@ -16,11 +30,11 @@ class ImageResource extends Resource
 
 	protected static string|null $model = Image::class;
 
-	protected static string|null $navigationIcon = 'm-photo';
+	protected static string|\BackedEnum|null $navigationIcon = 'm-photo';
 
 	protected static int|null $navigationSort = 3;
 
-	protected static string|null $navigationGroup = 'Content';
+	protected static string|\UnitEnum|null $navigationGroup = 'Content';
 
 	protected static string|null $navigationLabel = 'Image Gallery';
 
@@ -29,13 +43,13 @@ class ImageResource extends Resource
 	public array|null $image = [];
 	public string|null $name = null;
 
-	public static function form(Forms\Form $form): Forms\Form
+	public static function form(Schema $schema): Schema
 	{
-		return $form
+		return $schema
 			->columns(1)
-			->schema([
-				Forms\Components\Group::make([
-					Forms\Components\Section::make('Preview')
+			->components([
+				Group::make([
+					Section::make('Preview')
 						->columnSpan(1)
 						->schema([
 							ImageViewField::make('image')
@@ -43,41 +57,41 @@ class ImageResource extends Resource
 								->hiddenLabel(),
 						]),
 
-					Forms\Components\Section::make('Info')
+					Section::make('Info')
 						->columnSpan(2)
 						->columns(3)
 						->schema([
-							Forms\Components\TextInput::make('name')
+							TextInput::make('name')
 								->columnSpan(2)
 								->required()
 								->maxLength(255),
 
-							Forms\Components\TextInput::make('file_name')
+							TextInput::make('file_name')
 								->columnSpan(1)
 								->disabled(),
 
-							Forms\Components\Textarea::make('caption')
+							Textarea::make('caption')
 								->columnSpanFull()
 								->maxLength(255),
 
-							Forms\Components\TextInput::make('collection')
+							TextInput::make('collection')
 								->disabled(),
 
-							Forms\Components\TextInput::make('mime_type')
+							TextInput::make('mime_type')
 								->disabled(),
 
-							Forms\Components\TextInput::make('size')
+							TextInput::make('size')
 								->numeric()
 								->disabled(),
 
-							Forms\Components\TextInput::make('disk')
+							TextInput::make('disk')
 								->disabled(),
 
-							Forms\Components\TextInput::make('path')
+							TextInput::make('path')
 								->columnSpan(2)
 								->disabled(),
 
-							Forms\Components\Hidden::make('file_hash')
+							Hidden::make('file_hash')
 								->unique(ignoreRecord: true)
 								->disabled(),
 						]),
@@ -86,37 +100,37 @@ class ImageResource extends Resource
 			]);
 	}
 
-	public static function table(Tables\Table $table): Tables\Table
+	public static function table(Table $table): Table
 	{
 		return $table
 			->defaultSort('created_at', 'desc')
 			->columns([
-				Tables\Columns\ImageColumn::make('url')
+				ImageColumn::make('url')
 					->disk(static fn (Image $image) => $image->disk)
 					->size('auto')->height(135)
 					->label('Preview'),
-				Tables\Columns\TextColumn::make('name')
+				TextColumn::make('name')
 					->searchable(),
-				Tables\Columns\TextColumn::make('file_name')
+				TextColumn::make('file_name')
 					->searchable()
 					->toggleable()
 					->label('Filename'),
-				Tables\Columns\TextColumn::make('mime_type')
+				TextColumn::make('mime_type')
 					->toggleable(isToggledHiddenByDefault: true)
 					->label('File type'),
-				Tables\Columns\TextColumn::make('disk')
+				TextColumn::make('disk')
 					->toggleable(),
 			])
 			->filters([
 				//
 			])
-			->actions([
-				Tables\Actions\ViewAction::make(),
-				Tables\Actions\EditAction::make(),
-				Tables\Actions\DeleteAction::make(),
+			->recordActions([
+				ViewAction::make(),
+				EditAction::make(),
+				DeleteAction::make(),
 			])
-			->bulkActions([
-				Tables\Actions\DeleteBulkAction::make(),
+			->toolbarActions([
+				DeleteBulkAction::make(),
 			]);
 	}
 
@@ -130,10 +144,10 @@ class ImageResource extends Resource
 	public static function getPages(): array
 	{
 		return [
-			'index' => Pages\ListImages::route('/'),
-			'create' => Pages\UploadImage::route('/create'),
-			'view' => Pages\ViewImage::route('/{record}'),
-			'edit' => Pages\EditImage::route('/{record}/edit'),
+			'index' => ListImages::route('/'),
+			'create' => UploadImage::route('/create'),
+			'view' => ViewImage::route('/{record}'),
+			'edit' => EditImage::route('/{record}/edit'),
 		];
 	}
 }

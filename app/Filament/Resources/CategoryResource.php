@@ -2,35 +2,42 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\CategoryResource\Pages;
-use App\Filament\Resources\CategoryResource\RelationManagers;
+use App\Filament\Resources\CategoryResource\Pages\CreateCategory;
+use App\Filament\Resources\CategoryResource\Pages\EditCategory;
+use App\Filament\Resources\CategoryResource\Pages\ListCategories;
+use App\Filament\Resources\CategoryResource\RelationManagers\PostsRelationManager;
 use App\Models\Category;
 use App\Support\Sanitizer;
-use Filament\Forms;
-use Filament\Forms\Form;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
+use Filament\Forms\Components\TextInput;
 use Filament\Resources\Resource;
-use Filament\Tables;
+use Filament\Schemas\Components\Utilities\Get;
+use Filament\Schemas\Components\Utilities\Set;
+use Filament\Schemas\Schema;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
 class CategoryResource extends Resource
 {
 	protected static string|null $model = Category::class;
 
-	protected static string|null $navigationIcon = 'heroicon-o-rectangle-stack';
+	protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-rectangle-stack';
 
-	protected static string|null $navigationGroup = 'Content';
+	protected static string|\UnitEnum|null $navigationGroup = 'Content';
 
 	protected static int|null $navigationSort = 2;
 
-	public static function form(Form $form): Form
+	public static function form(Schema $schema): Schema
 	{
-		return $form
-			->schema([
-				Forms\Components\TextInput::make('title')
+		return $schema
+			->components([
+				TextInput::make('title')
 					->required()
 					->maxLength(180)
 					->live(500)
-					->afterStateUpdated(static function (Forms\Get $get, Forms\Set $set, string|null $state) {
+					->afterStateUpdated(static function (Get $get, Set $set, string|null $state) {
 						$slug = str($get('slug'))->trim();
 
 						if (!in_array($slug, [null, ''])) return;
@@ -38,13 +45,13 @@ class CategoryResource extends Resource
 						$set('slug', Sanitizer::slug($state)->toString());
 					}),
 
-				Forms\Components\TextInput::make('slug')
+				TextInput::make('slug')
 					->required()
 					->unique(ignoreRecord: true)
 					->maxLength(255)
 					->alphaDash()
 					->live(500)
-					->afterStateUpdated(static function (Forms\Get $get, Forms\Set $set, string|null $state) {
+					->afterStateUpdated(static function (Get $get, Set $set, string|null $state) {
 						$set('slug', Sanitizer::slug(match (trim($state)) {
 							null, '' => $get('title'),
 							default => $state
@@ -62,18 +69,18 @@ class CategoryResource extends Resource
 	{
 		return $table
 			->columns([
-				Tables\Columns\TextColumn::make('title')
+				TextColumn::make('title')
 					->searchable(),
-				Tables\Columns\TextColumn::make('slug')
+				TextColumn::make('slug')
 					->searchable(),
-				Tables\Columns\TextColumn::make('posts_count')
+				TextColumn::make('posts_count')
 					->counts('posts')
 					->label('Categorized Posts'),
-				Tables\Columns\TextColumn::make('created_at')
+				TextColumn::make('created_at')
 					->dateTime()
 					->sortable()
 					->toggleable(isToggledHiddenByDefault: true),
-				Tables\Columns\TextColumn::make('updated_at')
+				TextColumn::make('updated_at')
 					->dateTime()
 					->sortable()
 					->toggleable(isToggledHiddenByDefault: true),
@@ -81,12 +88,12 @@ class CategoryResource extends Resource
 			->filters([
 				//
 			])
-			->actions([
-				Tables\Actions\EditAction::make(),
+			->recordActions([
+				EditAction::make(),
 			])
-			->bulkActions([
-				Tables\Actions\BulkActionGroup::make([
-					Tables\Actions\DeleteBulkAction::make(),
+			->toolbarActions([
+				BulkActionGroup::make([
+					DeleteBulkAction::make(),
 				]),
 			]);
 	}
@@ -94,16 +101,16 @@ class CategoryResource extends Resource
 	public static function getRelations(): array
 	{
 		return [
-			RelationManagers\PostsRelationManager::class,
+			PostsRelationManager::class,
 		];
 	}
 
 	public static function getPages(): array
 	{
 		return [
-			'index' => Pages\ListCategories::route('/'),
-			'create' => Pages\CreateCategory::route('/create'),
-			'edit' => Pages\EditCategory::route('/{record}/edit'),
+			'index' => ListCategories::route('/'),
+			'create' => CreateCategory::route('/create'),
+			'edit' => EditCategory::route('/{record}/edit'),
 		];
 	}
 }

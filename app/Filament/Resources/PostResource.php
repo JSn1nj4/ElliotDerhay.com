@@ -5,27 +5,51 @@ namespace App\Filament\Resources;
 use App\Actions\StoresImage;
 use App\Filament\Forms\Components\ImageViewField;
 use App\Filament\Resources\CategoryResource\RelationManagers as CategoryRelationManagers;
-use App\Filament\Resources\PostResource\Pages;
+use App\Filament\Resources\PostResource\Pages\CreatePost;
+use App\Filament\Resources\PostResource\Pages\EditPost;
+use App\Filament\Resources\PostResource\Pages\ListPosts;
 use App\Filament\Resources\TagResource\RelationManagers as TagRelationManagers;
 use App\Models\Image;
 use App\Models\Post;
 use App\Models\Scopes\PostPublishedScope;
 use App\Support\Sanitizer;
-use Filament\Forms;
-use Filament\Infolists;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\CreateAction;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
+use Filament\Actions\ViewAction;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Hidden;
+use Filament\Forms\Components\MarkdownEditor;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
+use Filament\Infolists\Components\ImageEntry;
+use Filament\Infolists\Components\RepeatableEntry;
+use Filament\Infolists\Components\TextEntry;
 use Filament\Resources\Resource;
-use Filament\Tables;
+use Filament\Schemas\Components\Group;
+use Filament\Schemas\Components\Section;
+use Filament\Schemas\Components\Utilities\Get;
+use Filament\Schemas\Components\Utilities\Set;
+use Filament\Schemas\Schema;
+use Filament\Support\Enums\TextSize;
+use Filament\Tables\Columns\ImageColumn;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
 use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
+use Override;
 
 class PostResource extends Resource
 {
 	protected static string|null $model = Post::class;
 
-	protected static string|null $navigationIcon = 'm-document-text';
+	protected static string|\BackedEnum|null $navigationIcon = 'm-document-text';
 
-	protected static string|null $navigationGroup = 'Content';
+	protected static string|\UnitEnum|null $navigationGroup = 'Content';
 
 	protected static int|null $navigationSort = 1;
 
@@ -33,19 +57,19 @@ class PostResource extends Resource
 
 	public int|null $image_id = null;
 
-	public static function form(Forms\Form $form): Forms\Form
+	public static function form(Schema $schema): Schema
 	{
-		return $form
+		return $schema
 			->columns(3)
-			->schema([
-				Forms\Components\Section::make('Content')
+			->components([
+				Section::make('Content')
 					->columnSpan(2)
 					->schema([
-						Forms\Components\TextInput::make('title')
+						TextInput::make('title')
 							->required()
 							->maxLength(180)
 							->live(500)
-							->afterStateUpdated(static function (Forms\Get $get, Forms\Set $set, string|null $state) {
+							->afterStateUpdated(static function (Get $get, Set $set, string|null $state) {
 								$slug = str($get('slug'))->trim();
 
 								if (!in_array($slug, [null, ''])) return;
@@ -54,20 +78,20 @@ class PostResource extends Resource
 							})
 							->columnSpanFull(),
 
-						Forms\Components\TextInput::make('slug')
+						TextInput::make('slug')
 							->required()
 							->unique(ignoreRecord: true)
 							->maxLength(180)
 							->alphaDash()
 							->live(500)
-							->afterStateUpdated(static function (Forms\Get $get, Forms\Set $set, string|null $state) {
+							->afterStateUpdated(static function (Get $get, Set $set, string|null $state) {
 								$set('slug', Sanitizer::slug(match (trim($state)) {
 									null, '' => $get('title'),
 									default => $state
 								})->toString());
 							})
 							->columnSpanFull(),
-						Forms\Components\MarkdownEditor::make('body')
+						MarkdownEditor::make('body')
 							// TODO: Implement native file uploads using separate image collection - 'content' instead of 'images'?
 							->toolbarButtons([
 								'bold',
@@ -87,28 +111,28 @@ class PostResource extends Resource
 							->columnSpanFull(),
 					]),
 
-				Forms\Components\Group::make([
-					Forms\Components\Section::make('Image')
+				Group::make([
+					Section::make('Image')
 						->schema([
 							ImageViewField::make('image')
 								->hiddenLabel()
 								->hiddenOn('create')
 								->visible(static fn (Image $image) => $image->exists()),
 
-							Forms\Components\FileUpload::make('upload')
+							FileUpload::make('upload')
 								->hiddenLabel()
 								->image()
 								->maxSize(5 * 1024)
-								->afterStateUpdated(static function (Forms\Set $set, TemporaryUploadedFile $state) {
+								->afterStateUpdated(static function (Set $set, TemporaryUploadedFile $state) {
 									$image = StoresImage::execute($state);
 
 									$set('image_id', $image->id);
 								})
 								->reactive(),
 
-							Forms\Components\Hidden::make('image_id'),
+							Hidden::make('image_id'),
 						])
-						->saveRelationshipsUsing(static function (Post $post, Forms\Get $get) {
+						->saveRelationshipsUsing(static function (Post $post, Get $get) {
 							$image_id = $get('image_id');
 
 							if ($image_id === null) return;
@@ -118,7 +142,7 @@ class PostResource extends Resource
 							$post->images()->sync([$image_id]);
 						}),
 
-					Forms\Components\Section::make('Meta')
+					Section::make('Meta')
 						->collapsed(static fn (array $state) => collect($state)
 							->filter(static fn ($item, $key) => match ($key) {
 								'search_title', 'search_description' => true,
@@ -128,40 +152,40 @@ class PostResource extends Resource
 							->isEmpty())
 						->relationship('searchMeta')
 						->schema([
-							Forms\Components\TextInput::make('search_title')
+							TextInput::make('search_title')
 								->string()
 								->maxLength('180')
 								->mutateDehydratedStateUsing(static fn (string|null $state) => self::sanitize($state))
 								->label('Custom Search Title'),
 
-							Forms\Components\Textarea::make('search_description')
+							Textarea::make('search_description')
 								->string()
 								->maxLength('250')
 								->mutateDehydratedStateUsing(static fn (string|null $state) => self::sanitize($state))
 								->label('Custom Search Description'),
 						]),
 
-					Forms\Components\Section::make('Taxonomies')
+					Section::make('Taxonomies')
 						->collapsed(static fn ($state) => empty([
 							...$state['categories'],
 							...$state['tags']
 						]))
 						->schema([
-							Forms\Components\Select::make('categories')
+							Select::make('categories')
 								->relationship('categories', 'title')
 								->multiple()
 								->createOptionForm([
-									Forms\Components\TextInput::make('title')
+									TextInput::make('title')
 										->live(debounce: 500)
 										->string()
 										->maxLength(255)
-										->afterStateUpdated(static function (Forms\Set $set, $state) {
+										->afterStateUpdated(static function (Set $set, $state) {
 											if ($state === null || strlen($state) === 0) return;
 
 											$set('slug', Sanitizer::slug($state)->toString());
 										})
 										->mutateDehydratedStateUsing(static fn (string|null $state) => self::sanitize($state)),
-									Forms\Components\Hidden::make('slug')
+									Hidden::make('slug')
 										->alphaDash()
 										->mutateDehydratedStateUsing(static fn (string|null $state) => self::sanitizeSlug($state)),
 								])
@@ -169,21 +193,21 @@ class PostResource extends Resource
 									CategoryRelationManagers\PostsRelationManager::class,
 								]),
 
-							Forms\Components\Select::make('tags')
+							Select::make('tags')
 								->relationship('tags', 'title')
 								->multiple()
 								->createOptionForm([
-									Forms\Components\TextInput::make('title')
+									TextInput::make('title')
 										->live(debounce: 500)
 										->string()
 										->maxLength(255)
-										->afterStateUpdated(static function (Forms\Set $set, $state) {
+										->afterStateUpdated(static function (Set $set, $state) {
 											if ($state === null || strlen($state) === 0) return;
 
 											$set('slug', Sanitizer::slug($state)->toString());
 										})
 										->mutateDehydratedStateUsing(static fn (string|null $state) => self::sanitize($state)),
-									Forms\Components\Hidden::make('slug')
+									Hidden::make('slug')
 										->alphaDash()
 										->mutateDehydratedStateUsing(static fn (string|null $state) => self::sanitizeSlug($state)),
 								])
@@ -201,52 +225,52 @@ class PostResource extends Resource
 		return parent::getEloquentQuery()->withoutGlobalScope(PostPublishedScope::class);
 	}
 
-	#[\Override]
+	#[Override]
 	public static function getNavigationBadge(): string|null
 	{
 		return self::getModel()::withoutGlobalScope(PostPublishedScope::class)->count();
 	}
 
-	public static function infolist(Infolists\Infolist $infolist): Infolists\Infolist
+	public static function infolist(Schema $schema): Schema
 	{
-		return $infolist
+		return $schema
 			->columns(3)
-			->schema([
-				Infolists\Components\Section::make('content')
+			->components([
+				Section::make('content')
 					->schema([
-						Infolists\Components\TextEntry::make('title')
+						TextEntry::make('title')
 							->hiddenLabel()
-							->size(Infolists\Components\TextEntry\TextEntrySize::Large),
+							->size(TextSize::Large),
 
-						Infolists\Components\TextEntry::make('body')
+						TextEntry::make('body')
 							->markdown(),
 					])
 					->columnSpan(2),
 
-				Infolists\Components\Section::make('meta')
+				Section::make('meta')
 					->schema([
-						Infolists\Components\ImageEntry::make('image.url')
+						ImageEntry::make('image.url')
 							->hiddenLabel()
 							->hidden(static fn (string|null $state) => $state === null)
 							->size('100%'),
 
-						Infolists\Components\RepeatableEntry::make('categories')
+						RepeatableEntry::make('categories')
 							->hidden(static fn (Collection|null $state) => match ($state) {
 								null => true,
 								default => $state->isEmpty(),
 							})
 							->schema([
-								Infolists\Components\TextEntry::make('title')
+								TextEntry::make('title')
 									->hiddenLabel(),
 							]),
 
-						Infolists\Components\RepeatableEntry::make('tags')
+						RepeatableEntry::make('tags')
 							->hidden(static fn (Collection|null $state) => match ($state) {
 								null => true,
 								default => $state->isEmpty(),
 							})
 							->schema([
-								Infolists\Components\TextEntry::make('title')
+								TextEntry::make('title')
 									->hiddenLabel(),
 							]),
 					])
@@ -254,23 +278,23 @@ class PostResource extends Resource
 			]);
 	}
 
-	public static function table(Tables\Table $table): Tables\Table
+	public static function table(Table $table): Table
 	{
 		return $table
 			->defaultSort('posts.created_at', 'desc')
 			->columns([
-				Tables\Columns\ImageColumn::make('image.url')
+				ImageColumn::make('image.url')
 					->disk(static fn (Image $image) => $image->disk)
 					->size('auto')->height(135),
-				Tables\Columns\TextColumn::make('title')
+				TextColumn::make('title')
 					->wrap(true)
 					->searchable()
 					->sortable(),
-				Tables\Columns\TextColumn::make('slug')
+				TextColumn::make('slug')
 					->toggleable(isToggledHiddenByDefault: true)
 					->limit('30')
 					->searchable(),
-				Tables\Columns\TextColumn::make('published')
+				TextColumn::make('published')
 					->formatStateUsing(static fn (bool $state) => $state ? 'Published' : 'Draft')
 					->badge()
 					->colors([
@@ -283,11 +307,11 @@ class PostResource extends Resource
 					])
 					->iconPosition('after')
 					->label('Status'),
-				Tables\Columns\TextColumn::make('published_at')
+				TextColumn::make('published_at')
 					->dateTime('M d, Y | H:i')
 					->sortable()
 					->toggleable(),
-				Tables\Columns\TextColumn::make('updated_at')
+				TextColumn::make('updated_at')
 					->dateTime('M d, Y | H:i')
 					->sortable()
 					->toggleable(isToggledHiddenByDefault: true),
@@ -295,27 +319,27 @@ class PostResource extends Resource
 			->filters([
 				//
 			])
-			->actions([
-				Tables\Actions\ViewAction::make(),
-				Tables\Actions\EditAction::make(),
-				Tables\Actions\DeleteAction::make(),
+			->recordActions([
+				ViewAction::make(),
+				EditAction::make(),
+				DeleteAction::make(),
 			])
-			->bulkActions([
-				Tables\Actions\BulkActionGroup::make([
-					Tables\Actions\DeleteBulkAction::make(),
+			->toolbarActions([
+				BulkActionGroup::make([
+					DeleteBulkAction::make(),
 				]),
 			])
 			->emptyStateActions([
-				Tables\Actions\CreateAction::make(),
+				CreateAction::make(),
 			]);
 	}
 
 	public static function getPages(): array
 	{
 		return [
-			'index' => Pages\ListPosts::route('/'),
-			'create' => Pages\CreatePost::route('/create'),
-			'edit' => Pages\EditPost::route('/{record}/edit'),
+			'index' => ListPosts::route('/'),
+			'create' => CreatePost::route('/create'),
+			'edit' => EditPost::route('/{record}/edit'),
 		];
 	}
 

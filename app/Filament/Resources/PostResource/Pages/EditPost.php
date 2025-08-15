@@ -3,8 +3,11 @@
 namespace App\Filament\Resources\PostResource\Pages;
 
 use App\Filament\Resources\PostResource;
+use App\Filament\Resources\PostResource\Traits\PreparesForValidation;
 use App\Models\Post;
+use Exception;
 use Filament\Actions;
+use Filament\Actions\DeleteAction;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\EditRecord;
 use Filament\Support\Enums\IconPosition;
@@ -12,12 +15,12 @@ use Illuminate\Notifications\Action;
 
 class EditPost extends EditRecord
 {
-	use PostResource\Traits\PreparesForValidation;
+	use PreparesForValidation;
 
-    protected static string $resource = PostResource::class;
+	protected static string $resource = PostResource::class;
 
-    protected function getHeaderActions(): array
-    {
+	protected function getHeaderActions(): array
+	{
 		return [
 			Actions\Action::make('View Live')
 				->visible(static fn (Post $record) => $record->published)
@@ -30,11 +33,11 @@ class EditPost extends EditRecord
 
 			...$this->publishActions(),
 
-			Actions\DeleteAction::make()
+			DeleteAction::make()
 				->icon('o-trash')
 				->iconPosition(IconPosition::After),
 		];
-    }
+	}
 
 	protected function publishActions(): array
 	{
@@ -56,14 +59,14 @@ class EditPost extends EditRecord
 						Notification::make()
 							->title(__('Post published!'))
 							->actions([
-								\Filament\Notifications\Actions\Action::make('View Live')
+								\Filament\Actions\Action::make('View Live')
 									->url(route('blog.show', ['post' => $record]))
 									->openUrlInNewTab()
 									->color('success'),
 							])
 							->success()
 							->send();
-					} catch (\Exception $e) {
+					} catch (Exception $e) {
 						Notification::make()
 							->title($e->getMessage())
 							->danger()
@@ -90,7 +93,7 @@ class EditPost extends EditRecord
 							->title(__('Post unpublished!'))
 							->success()
 							->send();
-					} catch (\Exception $e) {
+					} catch (Exception $e) {
 						Notification::make()
 							->title($e->getMessage())
 							->danger()
@@ -115,7 +118,7 @@ class EditPost extends EditRecord
 
 			...$this->publishActions(),
 
-			Actions\DeleteAction::make()
+			DeleteAction::make()
 				->icon('o-trash')
 				->iconPosition(IconPosition::After),
 		];

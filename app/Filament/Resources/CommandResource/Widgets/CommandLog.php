@@ -4,7 +4,8 @@ namespace App\Filament\Resources\CommandResource\Widgets;
 
 use App\Models\Command;
 use App\Models\CommandEvent;
-use Filament\Tables;
+use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Widgets\TableWidget;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\Relation;
@@ -32,15 +33,15 @@ class CommandLog extends TableWidget
 	protected function getTableColumns(): array
 	{
 		return [
-			Tables\Columns\IconColumn::make('succeeded')
+			IconColumn::make('succeeded')
 				->label('Status')
 				->boolean()
 				->true('s-check', 'primary')
-				->false('s-x-mark','danger'),
-			Tables\Columns\TextColumn::make('command.signature')
+				->false('s-x-mark', 'danger'),
+			TextColumn::make('command.signature')
 				->label('Command'),
-			Tables\Columns\TextColumn::make('message'),
-			Tables\Columns\TextColumn::make('created_at')
+			TextColumn::make('message'),
+			TextColumn::make('created_at')
 				->dateTime()
 				->label('Date'),
 		];

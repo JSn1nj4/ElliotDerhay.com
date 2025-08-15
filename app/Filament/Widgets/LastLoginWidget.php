@@ -10,7 +10,7 @@ class LastLoginWidget extends Widget
 {
 	protected int|string|array $columnSpan = 2;
 
-	protected static string $view = 'filament.widgets.last-login-widget';
+	protected string $view = 'filament.widgets.last-login-widget';
 
 	public readonly Carbon $time;
 	public readonly string $ip_address;
