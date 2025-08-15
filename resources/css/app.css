@@ -1130,9 +1130,7 @@
 	::file-selector-button {
 		border-color: currentColor;
 	}
-}
 
-@layer base {
 	html {
 		height: 100%;
 		line-height: 1.15;
@@ -1171,12 +1169,12 @@
 			@apply text-black bg-slate-400;
 		}
 	}
-
-	/**
-   * components
-   */
 }
 
+
+/**
+* components
+*/
 @layer components {
 	h1,
 	h2,
@@ -1352,11 +1350,11 @@
 			height: 37.5vw;
 		}
 	}
-
-	/**
-   * custom utilities
-   */
 }
+
+/**
+* custom utilities
+*/
 
 @layer base {
 	:root {
