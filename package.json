@@ -28,7 +28,7 @@
 		"axios": "^1.9.0",
 		"dotenv": "^16.5.0",
 		"laravel-vite-plugin": "^1.2.0",
-		"tailwindcss": "^4.1.11",
+		"tailwindcss": "^4.1.12",
 		"tippy.js": "^6.3.7",
 		"typescript": "^5.8.3",
 		"vite": "^6.3.5",
