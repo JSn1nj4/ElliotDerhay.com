@@ -53,19 +53,19 @@
 				 class="fixed bottom-0 left-0 z-30 border-solid border-t border-neutral-500 dark:border-none bg-neutral-200 dark:bg-neutral-900 w-full p-4 text-xl md:text-base"
 				 ref="dntBox">
 			<div class="flex flex-col md:flex-row container mx-auto">
-				<div class="flex flex-grow md:h-full">
+				<div class="flex grow md:h-full">
 					<p class="pb-2 md:p-2">Please confirm whether you would like to allow tracking cookies on this
 						website, in accordance with its <a href="/privacy">privacy policy</a>.</p>
 				</div>
 				<div class="flex md:w-48 gap-4">
 					<button
-						class="bg-caribbeanGreen-500 dark:bg-caribbeanGreen-600 text-neutral-100 dark:text-neutral-900"
+						class="bg-caribbean-green-500 dark:bg-caribbean-green-600 text-neutral-100 dark:text-neutral-900"
 						:class='btnClasses'
 						@click="enableTracking">
 						Allow
 					</button>
 					<button
-						class="bg-neutral-400 dark:bg-neutral-800 text-caribbeanGreen-600 dark:text-caribbeanGreen-500"
+						class="bg-neutral-400 dark:bg-neutral-800 text-caribbean-green-600 dark:text-caribbean-green-500"
 						:class='btnClasses'
 						@click="disableTracking">
 						Deny

@@ -22,6 +22,6 @@
         <option name="defaultPath" value="lang" />
       </LaravelTranslation>
     </option>
-    <option name="userClassName" value="App\Models\User" />
+    <option name="userClassName" value="\App\Models\User" />
   </component>
 </project>

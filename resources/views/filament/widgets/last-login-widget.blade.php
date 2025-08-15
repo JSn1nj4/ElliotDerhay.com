@@ -1,7 +1,7 @@
 <x-filament-widgets::widget>
 	<x-filament::section>
 		<div class='flex items-center'>
-			<h2 class='flex-grow text-2xl'>Last Login</h2>
+			<h2 class='grow text-2xl'>Last Login</h2>
 			<table>
 				<tbody>
 				<tr>

@@ -3,6 +3,7 @@ import laravel, {refreshPaths} from 'laravel-vite-plugin'
 import vuePlugin from '@vitejs/plugin-vue'
 import * as fs from 'fs'
 import {SecureServerOptions} from 'node:http2'
+import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig(({mode}) => {
 	Object.assign(process.env, loadEnv(mode, process.cwd()))
@@ -10,7 +11,11 @@ export default defineConfig(({mode}) => {
 	return {
 		plugins: [
 			laravel({
-				input: ['resources/css/app.css', 'resources/js/app.ts'],
+				input: [
+					'resources/css/app.css',
+					'resources/js/app.ts',
+					'resources/css/filament/admin/theme.css',
+				],
 				refresh: [
 					{
 						paths: refreshPaths.concat(['app/View/Renderers/**']),
@@ -18,6 +23,7 @@ export default defineConfig(({mode}) => {
 				],
 			}),
 			vuePlugin(),
+			tailwindcss(),
 		],
 
 		server: {
