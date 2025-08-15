@@ -4,11 +4,11 @@ namespace App\Filament\Resources\Posts;
 
 use App\Actions\StoresImage;
 use App\Filament\Forms\Components\ImageViewField;
-use App\Filament\Resources\CategoryResource\RelationManagers as CategoryRelationManagers;
+use App\Filament\Resources\Categories\RelationManagers\PostsRelationManager as CategoryPostsRelationManager;
 use App\Filament\Resources\Posts\Pages\CreatePost;
 use App\Filament\Resources\Posts\Pages\EditPost;
 use App\Filament\Resources\Posts\Pages\ListPosts;
-use App\Filament\Resources\TagResource\RelationManagers as TagRelationManagers;
+use App\Filament\Resources\Tags\RelationManagers\PostsRelationManager as TagPostsRelationManager;
 use App\Models\Image;
 use App\Models\Post;
 use App\Models\Scopes\PostPublishedScope;
@@ -117,7 +117,7 @@ class PostResource extends Resource
 							ImageViewField::make('image')
 								->hiddenLabel()
 								->hiddenOn('create')
-								->visible(static fn (Image $image) => $image->exists()),
+								->visible(static fn (Post $record) => $record->image !== null),
 
 							FileUpload::make('upload')
 								->hiddenLabel()
@@ -190,7 +190,7 @@ class PostResource extends Resource
 										->mutateDehydratedStateUsing(static fn (string|null $state) => self::sanitizeSlug($state)),
 								])
 								->hiddenOn([
-									CategoryRelationManagers\PostsRelationManager::class,
+									CategoryPostsRelationManager::class,
 								]),
 
 							Select::make('tags')
@@ -212,7 +212,7 @@ class PostResource extends Resource
 										->mutateDehydratedStateUsing(static fn (string|null $state) => self::sanitizeSlug($state)),
 								])
 								->hiddenOn([
-									TagRelationManagers\PostsRelationManager::class,
+									TagPostsRelationManager::class,
 								]),
 						]),
 				])
