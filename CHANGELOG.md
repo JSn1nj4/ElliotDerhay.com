@@ -1,5 +1,11 @@
 # Changelog
 
+## Version 2.18.1
+
+### Fixes
+
+- Escape `@context` in Schema markup
+
 ## Version 2.18.0
 
 ### Changes
