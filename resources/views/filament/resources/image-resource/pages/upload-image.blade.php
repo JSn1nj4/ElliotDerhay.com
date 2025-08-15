@@ -1,9 +1,9 @@
 <x-filament-panels::page>
-	<x-filament-panels::form wire:submit="create">
+	<form wire:submit="create">
 		{{ $this->form }}
 
-		<x-filament::button type="submit" icon="o-arrow-up-tray" icon-position="after">
+		<x-filament::button type="submit" icon="o-arrow-up-tray" icon-position="after" class="mt-6 w-full">
 			Upload
 		</x-filament::button>
-	</x-filament-panels::form>
+	</form>
 </x-filament-panels::page>
