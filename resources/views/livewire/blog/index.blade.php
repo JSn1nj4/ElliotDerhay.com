@@ -2,7 +2,7 @@
 
 use App\Enums\PerPage;
 use App\Features\BlogIndex;
-use App\Filters\{CategoryQueryParam, TagQueryParam};
+use App\Filters\{CategoryQueryParam, SearchParam, TagQueryParam};
 use App\Models\Post;
 use Livewire\Attributes\{Computed, Layout, Title, Url};
 use Laravel\Pennant\Feature;
@@ -16,6 +16,9 @@ class extends \Livewire\Volt\Component {
 
 	#[Url(history: true)]
 	public int|string|null $per_page = 10;
+
+	#[Url(history: true)]
+	public string|null $search = null;
 
 	#[Url(history: true)]
 	public int|string|null $tag = null;
@@ -37,16 +40,18 @@ class extends \Livewire\Volt\Component {
 	{
 		$this->category = CategoryQueryParam::filter($this->category);
 		$this->per_page = PerPage::filter($this->per_page);
+		$this->search = SearchParam::filter($this->search);
 		$this->tag = TagQueryParam::filter($this->tag);
 	}
 
 	public function updating($property, $value): void
 	{
-		if (!in_array($property, ['category', 'per_page', 'tag'])) return;
+		if (!in_array($property, ['category', 'per_page', 'search', 'tag'])) return;
 
 		$this->$property = match ($property) {
 			'category' => CategoryQueryParam::filter($value),
 			'per_page' => PerPage::filter($value),
+			'search' => SearchParam::filter($value),
 			'tag' => TagQueryParam::filter($value),
 		};
 	}
@@ -54,7 +59,7 @@ class extends \Livewire\Volt\Component {
 	public function with(): array
 	{
 		return [
-			'posts' => Post::paged($this->per_page, $this->category, $this->tag),
+			'posts' => Post::paged($this->per_page, $this->category, $this->tag, $this->search),
 		];
 	}
 }; ?>
