@@ -1,5 +1,23 @@
 # Changelog
 
+## Version 2.19.0
+
+### New
+
+- JSN-216: Add blog search ([#262][pr_262])
+
+### Changes
+
+- Support full text search on `posts`
+- Update Post and LoginActivity helper PHPDocs
+
+### Development
+
+- Sync Laravel Idea config
+- Sync DDEV config
+
+[pr_262]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/262
+
 ## Version 2.18.1
 
 ### Fixes
