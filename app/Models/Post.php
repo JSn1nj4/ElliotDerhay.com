@@ -205,7 +205,7 @@ class Post extends ImageableModel implements SearchDisplayableContract, Categori
 
 	public function scopeSearch(Builder $query, string|null $search): void
 	{
-		if ($search === null) return;
+		if (in_array($search, [null, ''])) return;
 
 		$query->whereFullText(['title', 'body'], $search);
 	}
