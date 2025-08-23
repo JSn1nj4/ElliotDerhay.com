@@ -11,6 +11,7 @@ use App\DataTransferObjects\SocialPostDTO;
 use App\DataTransferObjects\XMetaDTO;
 use App\Enums\PerPage;
 use App\Enums\XMetaCardType;
+use App\Filters\SearchParam;
 use App\Models\Scopes\PostPublishedScope;
 use App\States\Posts\PostPublished;
 use App\States\Posts\PostUnpublished;
@@ -44,6 +45,12 @@ use Spatie\Sitemap\Tags\Url;
  * @property Carbon $created_at
  * @property Carbon $updated_at
  * @property Carbon|null $published_at
+ * @property string $page_title
+ * @property string $meta_description
+ * @property \App\Models\SearchMeta $searchMeta
+ * @method static Builder|Post publishedRecently()
+ * @method static Builder|Post wherePublished($value)
+ * @method static Builder|Post wherePublishedAt($value)
  * @property-read int|null $categories_count
  * @property-read int|null $tags_count
  * @method static \Database\Factories\PostFactory factory(...$parameters)
@@ -61,12 +68,7 @@ use Spatie\Sitemap\Tags\Url;
  * @method static \Illuminate\Database\Eloquent\Builder|Post published()
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Image[] $images
  * @property-read int|null $images_count
- * @property string $page_title
- * @property string $meta_description
- * @property \App\Models\SearchMeta $searchMeta
- * @method static Builder|Post publishedRecently()
- * @method static Builder|Post wherePublished($value)
- * @method static Builder|Post wherePublishedAt($value)
+ * @method static Builder<static>|Post search(string $search)
  * @mixin \Eloquent
  */
 #[ScopedBy([PostPublishedScope::class])]
@@ -133,6 +135,7 @@ class Post extends ImageableModel implements SearchDisplayableContract, Categori
 			->when($request?->get('tag'), static function ($query, $tag_id): void {
 				$query->whereRelation('tags', 'tag_id', $tag_id);
 			})
+			->search(SearchParam::filter($request?->get('search')))
 			->latest('published_at')
 			->paginate(PerPage::filter(
 				$request?->get('per_page')
@@ -159,7 +162,7 @@ class Post extends ImageableModel implements SearchDisplayableContract, Categori
 		);
 	}
 
-	public static function paged(int $per_page = 10, int|string|null $category = null, int|string|null $tag = null): AbstractPaginator
+	public static function paged(int $per_page = 10, int|string|null $category = null, int|string|null $tag = null, string|null $search = null): AbstractPaginator
 	{
 		return self::when($category, static function ($query, $category_id): void {
 			$query->whereRelation('categories', 'category_id', $category_id);
@@ -167,6 +170,7 @@ class Post extends ImageableModel implements SearchDisplayableContract, Categori
 			->when($tag, static function ($query, $tag_id): void {
 				$query->whereRelation('tags', 'tag_id', $tag_id);
 			})
+			->search($search)
 			->latest('published_at')
 			->paginate($per_page)
 			->withQueryString();
@@ -197,6 +201,13 @@ class Post extends ImageableModel implements SearchDisplayableContract, Categori
 	public function scopePublishedRecently(Builder $query): Builder|Model|null
 	{
 		return $query->whereDate('published_at', '>=', today()->subWeek()->toDateString());
+	}
+
+	public function scopeSearch(Builder $query, string|null $search): void
+	{
+		if (in_array($search, [null, ''])) return;
+
+		$query->whereFullText(['title', 'body'], $search);
 	}
 
 	/**
