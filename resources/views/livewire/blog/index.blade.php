@@ -4,7 +4,7 @@ use App\Enums\PerPage;
 use App\Features\BlogIndex;
 use App\Filters\{CategoryQueryParam, SearchParam, TagQueryParam};
 use App\Models\Post;
-use Livewire\Attributes\{Computed, Layout, Title, Url};
+use Livewire\Attributes\{Computed, Layout, On, Title, Url};
 use Laravel\Pennant\Feature;
 
 new
@@ -17,8 +17,8 @@ class extends \Livewire\Volt\Component {
 	#[Url(history: true)]
 	public int|string|null $per_page = 10;
 
-	#[Url(history: true)]
-	public string|null $search = null;
+	#[Url(history: true, except: '')]
+	public string|null $search = '';
 
 	#[Url(history: true)]
 	public int|string|null $tag = null;
@@ -42,6 +42,12 @@ class extends \Livewire\Volt\Component {
 		$this->per_page = PerPage::filter($this->per_page);
 		$this->search = SearchParam::filter($this->search);
 		$this->tag = TagQueryParam::filter($this->tag);
+	}
+
+	#[On('blog-search')]
+	public function refreshBlog($search): void
+	{
+		$this->search = SearchParam::filter($search);
 	}
 
 	public function updating($property, $value): void
