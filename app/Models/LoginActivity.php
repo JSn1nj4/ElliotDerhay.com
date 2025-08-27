@@ -8,8 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 
 /**
- *
- *
  * @property int $id
  * @property string $email
  * @property int $succeeded
@@ -30,6 +28,7 @@ use Illuminate\Support\Carbon;
  * @method static \Illuminate\Database\Eloquent\Builder|LoginActivity whereIpAddress($value)
  * @method static \Illuminate\Database\Eloquent\Builder|LoginActivity whereSucceeded($value)
  * @method static \Illuminate\Database\Eloquent\Builder|LoginActivity whereUpdatedAt($value)
+ * @method static \Database\Factories\LoginActivityFactory factory($count = null, $state = [])
  * @mixin \Eloquent
  */
 class LoginActivity extends Model

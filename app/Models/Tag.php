@@ -32,12 +32,19 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  */
 class Tag extends Model
 {
-    use HasFactory;
+	use HasFactory;
 
 	protected $fillable = [
 		'title',
 		'slug',
 	];
+
+	protected static function booted(): void
+	{
+		static::deleting(static function (self $tag) {
+			$tag->posts()->detach();
+		});
+	}
 
 	public function posts(): MorphToMany
 	{

@@ -5,13 +5,13 @@ namespace App\Filament\Pages;
 use App\Features\AdminLogin;
 use App\Jobs\LoginFailed;
 use App\Jobs\LoginSucceeded;
-use Filament\Http\Responses\Auth\Contracts\LoginResponse;
+use Filament\Auth\Http\Responses\Contracts\LoginResponse;
 use Filament\Notifications\Notification;
-use Filament\Pages\Auth\Login as BaseLoginPage;
 use Illuminate\Support\Facades\Request;
 use Laravel\Pennant\Feature;
+use Throwable;
 
-class Login extends BaseLoginPage
+class Login extends \Filament\Auth\Pages\Login
 {
 	public function authenticate(): LoginResponse|null
 	{
@@ -42,7 +42,7 @@ class Login extends BaseLoginPage
 			}
 
 			return $response;
-		} catch (\Throwable $exception) {
+		} catch (Throwable $exception) {
 			LoginFailed::dispatch(
 				$this->getCredentialsFromFormData($this->form->getState())['email'],
 				$exception->getMessage(),

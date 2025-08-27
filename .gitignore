@@ -24,6 +24,7 @@
 /vendor
 .env
 .env.backup
+.env~
 .phpunit.result.cache
 atlassian-ide-plugin.xml
 docker-compose.override.yml
@@ -41,6 +42,7 @@ yarn-error.log
 .pnp.data.json
 .pnp.js
 .pnp.loader.mjs
+.pnpm-store
 
 # Custom configs
 /.vscode/*

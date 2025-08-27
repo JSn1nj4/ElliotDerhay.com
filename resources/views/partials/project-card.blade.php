@@ -15,7 +15,7 @@
 	</div>
 
 	<div class="flex flex-row pb-4">
-		<div class="relative flex-grow">
+		<div class="relative grow">
 			<p>
 				<x-project.link :href="$project->link" target="_blank" title="Open project repository">
 					Project
