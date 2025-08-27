@@ -33,10 +33,10 @@
 		"barryvdh/laravel-ide-helper": "^3.0",
 		"fakerphp/faker": "^1.23",
 		"filament/upgrade": "^4.0",
-		"laravel/dusk": "^8.3",
 		"mockery/mockery": "^1.6",
 		"nunomaduro/collision": "^8.0",
 		"pestphp/pest": "^v4.0",
+		"pestphp/pest-plugin-browser": "^4.0",
 		"pestphp/pest-plugin-laravel": "^4.0",
 		"pestphp/pest-plugin-livewire": "^4.0"
 	},
