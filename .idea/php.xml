@@ -122,7 +122,6 @@
       <path value="$PROJECT_DIR$/vendor/pestphp/pest" />
       <path value="$PROJECT_DIR$/vendor/pestphp/pest-plugin" />
       <path value="$PROJECT_DIR$/vendor/pestphp/pest-plugin-arch" />
-      <path value="$PROJECT_DIR$/vendor/pestphp/pest-plugin-faker" />
       <path value="$PROJECT_DIR$/vendor/pestphp/pest-plugin-laravel" />
       <path value="$PROJECT_DIR$/vendor/pestphp/pest-plugin-livewire" />
       <path value="$PROJECT_DIR$/vendor/pestphp/pest-plugin-mutate" />
@@ -160,8 +159,6 @@
       <path value="$PROJECT_DIR$/vendor/ryangjchandler/blade-capture-directive" />
       <path value="$PROJECT_DIR$/vendor/scrivo/highlight.php" />
       <path value="$PROJECT_DIR$/vendor/sebastian/cli-parser" />
-      <path value="$PROJECT_DIR$/vendor/sebastian/code-unit" />
-      <path value="$PROJECT_DIR$/vendor/sebastian/code-unit-reverse-lookup" />
       <path value="$PROJECT_DIR$/vendor/sebastian/comparator" />
       <path value="$PROJECT_DIR$/vendor/sebastian/complexity" />
       <path value="$PROJECT_DIR$/vendor/sebastian/diff" />
@@ -242,6 +239,7 @@
       <path value="$PROJECT_DIR$/vendor/vlucas/phpdotenv" />
       <path value="$PROJECT_DIR$/vendor/voku/portable-ascii" />
       <path value="$PROJECT_DIR$/vendor/webmozart/assert" />
+      <path value="$PROJECT_DIR$/vendor/pestphp/pest-plugin-profanity" />
     </include_path>
   </component>
   <component name="PhpInterpreters">

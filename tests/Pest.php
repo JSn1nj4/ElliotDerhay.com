@@ -17,6 +17,8 @@ use App\Models\Post;
 use App\Models\Project;
 use App\Models\User;
 use Carbon\Carbon;
+use Faker\Factory;
+use Faker\Generator;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
@@ -58,6 +60,11 @@ expect()->extend('toBeOne', function () {
 | global functions to help you to reduce the number of lines of code in your test files.
 |
 */
+
+function fake(string $locale = Factory::DEFAULT_LOCALE): Generator
+{
+	return Factory::create($locale);
+}
 
 function expectPostPublished(Post $post): Expectation
 {
