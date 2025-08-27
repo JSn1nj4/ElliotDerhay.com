@@ -10,6 +10,8 @@
 
 - Support full text search on `posts`
 - Update Post and LoginActivity helper PHPDocs
+- JSN-311: Upgrade to Pest v4 ([#263][pr_263])
+- Replace Dusk with Playwright for browser testing
 
 ### Development
 
@@ -17,6 +19,8 @@
 - Sync DDEV config
 
 [pr_262]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/262
+
+[pr_263]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/263
 
 ## Version 2.18.1
 
