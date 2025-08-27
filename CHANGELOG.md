@@ -10,7 +10,7 @@
 
 - Support full text search on `posts`
 - Update Post and LoginActivity helper PHPDocs
-- JSN-311: Upgrade to Pest v4 ([#263][pr_263])
+- JSN-319: Upgrade to Pest v4 ([#263][pr_263])
 - Replace Dusk with Playwright for browser testing
 
 ### Development
