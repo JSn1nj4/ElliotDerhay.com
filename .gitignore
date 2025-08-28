@@ -1,5 +1,6 @@
 # Laravel Defaults
 .idea/*
+!.idea/.gitignore
 !.idea/codeStyles
 !.idea/dictionaries
 !.idea/runConfigurations
