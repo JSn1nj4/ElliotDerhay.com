@@ -4,6 +4,10 @@
 !.idea/dictionaries
 !.idea/runConfigurations
 !.idea/jsLibraryMappings.xml
+!.idea/blade.xml
+!.idea/laravel-idea.xml
+!.idea/laravel-plugin.xml
+!.idea/laravel-query-settings.xml
 !.idea/misc.xml
 !.idea/modules.xml
 !.idea/vcs.xml
