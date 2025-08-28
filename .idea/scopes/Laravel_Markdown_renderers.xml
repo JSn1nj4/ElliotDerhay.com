@@ -1,3 +1,0 @@
-<component name="DependencyValidationManager">
-  <scope name="Laravel Markdown renderers" pattern="file[elliotderhay]:app/View/Renderers//*||file:config/markdown.php" />
-</component>
