@@ -14,39 +14,43 @@ new class extends Component {
 
 ?>
 <div>
-	<script async src="https://www.googletagmanager.com/gtag/js?id={{ $googleAnalyticsId }}"></script>
-	<script type="application/javascript">
-		// Enable or disable GA tracking
-		function googleAnalyticsTrack({detail}) {
-			let dnt = !detail.allow ? 'DNT=1' : 'DNT=0'
+	@production
+		<script async src="https://www.googletagmanager.com/gtag/js?id={{ $googleAnalyticsId }}"></script>
+		<script type="application/javascript">
+			// Enable or disable GA tracking
+			function googleAnalyticsTrack({detail}) {
+				let dnt = !detail.allow ? 'DNT=1' : 'DNT=0'
 
-			if (!!detail.time) dnt += ';expires=' + detail.time.toUTCString()
+				if (!!detail.time) dnt += ';expires=' + detail.time.toUTCString()
 
-			// only good for when the user interacts with this mess
-			document.cookie = dnt
-			window['ga-disable-{{ $googleAnalyticsId }}'] = !detail.allow
-		}
+				// only good for when the user interacts with this mess
+				document.cookie = dnt
+				window['ga-disable-{{ $googleAnalyticsId }}'] = !detail.allow
+			}
 
-		document.addEventListener('allow_tracking', googleAnalyticsTrack)
+			document.addEventListener('allow_tracking', googleAnalyticsTrack)
 
-		if (
-			// make sure the DNT cookie hasn't already been set
-			document.cookie.indexOf('DNT=') === -1
-			// make sure the navigator DNT setting hasn't already been set
-			&& navigator.doNotTrack !== '1'
-		) {
-			googleAnalyticsTrack({detail: {allow: false}})
-		}
+			if (
+				// make sure the DNT cookie hasn't already been set
+				document.cookie.indexOf('DNT=') === -1
+				// make sure the navigator DNT setting hasn't already been set
+				&& navigator.doNotTrack !== '1'
+			) {
+				googleAnalyticsTrack({detail: {allow: false}})
+			}
 
-		// tracking configuration
-		window.dataLayer = window.dataLayer || []
+			// tracking configuration
+			window.dataLayer = window.dataLayer || []
 
-		function gtag() {
-			dataLayer.push(arguments)
-		}
+			function gtag() {
+				dataLayer.push(arguments)
+			}
 
-		gtag('js', new Date())
+			gtag('js', new Date())
 
-		gtag('config', '{{ $googleAnalyticsId }}')
-	</script>
+			gtag('config', '{{ $googleAnalyticsId }}')
+		</script>
+	@else
+		<!-- Google Analytics component mounted -->
+	@endproduction
 </div>
