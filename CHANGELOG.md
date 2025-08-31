@@ -16,11 +16,13 @@
 ### Fixes
 
 - JSN-311: Fix tests workflow ([#266][pr_266])
+- Change `xdebug.start_with_request` to prevent running on `composer` calls
 
 ### Development
 
 - Sync Laravel Idea config
 - Sync DDEV config
+- Make deploy workflow depend on tests again
 
 [pr_262]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/262
 
