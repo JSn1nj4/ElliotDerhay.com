@@ -13,6 +13,9 @@ return new class extends Migration {
 		Schema::table('posts', function (Blueprint $table) {
 			if (!Schema::hasColumns($table->getTable(), ['title', 'body'])) return;
 
+			/** @todo revisit if it turns out full-text-specific stuff needs testing */
+			if (DB::getDriverName() === 'sqlite') return;
+
 			$table->fullText(['title', 'body']);
 		});
 	}
@@ -24,6 +27,9 @@ return new class extends Migration {
 	{
 		Schema::table('posts', function (Blueprint $table) {
 			if (!Schema::hasColumns($table->getTable(), ['title', 'body'])) return;
+			
+			/** @todo revisit if it turns out full-text-specific stuff needs testing */
+			if (DB::getDriverName() === 'sqlite') return;
 
 			$table->dropFullText(['title', 'body']);
 		});
