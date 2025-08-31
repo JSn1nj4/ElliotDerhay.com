@@ -13,6 +13,10 @@
 - JSN-319: Upgrade to Pest v4 ([#263][pr_263])
 - Replace Dusk with Playwright for browser testing
 
+### Fixes
+
+- JSN-311: Fix tests workflow ([#266][pr_266])
+
 ### Development
 
 - Sync Laravel Idea config
@@ -21,6 +25,8 @@
 [pr_262]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/262
 
 [pr_263]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/263
+
+[pr_266]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/266
 
 ## Version 2.18.1
 
