@@ -1,12 +1,17 @@
 # Laravel Defaults
 .idea/*
+!.idea/.gitignore
 !.idea/codeStyles
 !.idea/dictionaries
 !.idea/runConfigurations
-!.idea/vcs.xml
+!.idea/jsLibraryMappings.xml
+!.idea/blade.xml
+!.idea/laravel-idea.xml
+!.idea/laravel-plugin.xml
+!.idea/laravel-query-settings.xml
 !.idea/misc.xml
 !.idea/modules.xml
-!.idea/jsLibraryMappings.xml
+!.idea/vcs.xml
 /.phpunit.cache
 /node_modules
 /public/build

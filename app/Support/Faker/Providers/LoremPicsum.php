@@ -129,8 +129,8 @@ class LoremPicsum extends Base
 			$blur = Number::clamp($blur, 1, 10);
 
 			$params[] = match (true) {
-				$blur > 1 => new QueryParam('blur-sm', $blur),
-				default => new QueryParam('blur-sm', allow_empty: true),
+				$blur > 1 => new QueryParam('blur', $blur),
+				default => new QueryParam('blur', allow_empty: true),
 			};
 		}
 
