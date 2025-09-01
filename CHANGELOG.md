@@ -1,5 +1,35 @@
 # Changelog
 
+## Version 2.19.0
+
+### New
+
+- JSN-216: Add blog search ([#262][pr_262])
+
+### Changes
+
+- Support full text search on `posts`
+- Update Post and LoginActivity helper PHPDocs
+- JSN-319: Upgrade to Pest v4 ([#263][pr_263])
+- Replace Dusk with Playwright for browser testing
+
+### Fixes
+
+- JSN-311: Fix tests workflow ([#266][pr_266])
+- Change `xdebug.start_with_request` to prevent running on `composer` calls
+
+### Development
+
+- Sync Laravel Idea config
+- Sync DDEV config
+- Make deploy workflow depend on tests again
+
+[pr_262]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/262
+
+[pr_263]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/263
+
+[pr_266]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/266
+
 ## Version 2.18.1
 
 ### Fixes

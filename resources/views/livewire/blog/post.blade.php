@@ -4,7 +4,7 @@ use App\Enums\PerPage;
 use App\Features\BlogIndex;
 use App\Filters\{CategoryQueryParam, TagQueryParam};
 use App\Models\Post;
-use Livewire\Attributes\{Computed, Layout, Title, Url};
+use Livewire\Attributes\{Computed, Layout, On, Title, Url};
 use Laravel\Pennant\Feature;
 
 new
@@ -23,6 +23,12 @@ class extends \Livewire\Volt\Component {
 	public function mount(Post $post)
 	{
 		$this->post = $post;
+	}
+
+	#[On('blog-search')]
+	public function searchBlog($search): void
+	{
+		$this->redirectRoute('blog', compact('search'), navigate: true);
 	}
 };
 /** @var Post $post */
