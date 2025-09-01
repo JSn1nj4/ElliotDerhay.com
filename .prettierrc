@@ -13,6 +13,8 @@
 			"files": [
 				"*.js",
 				"*.blade.php",
+				"*.ts",
+				"*.html",
 				"*.vue"
 			],
 			"options": {
