@@ -2,6 +2,10 @@
 
 ## Version 2.19.1
 
+### Changes
+
+- Allow manually triggering the tests workflow
+
 ### Development
 
 - Update Prettier rules
