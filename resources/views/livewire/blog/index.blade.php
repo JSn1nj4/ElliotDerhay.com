@@ -79,7 +79,7 @@ class extends \Livewire\Volt\Component {
 <article>
 	<x-blog.wrapper>
 		<section class="block w-full pb-6 px-2">
-			<h1 class="content-title text-4xl pt-6 mt-4 md:pt-0 md:mt-0">
+			<h1 class="content-title text-4xl pt-6 mt-4 md:pt-0 md:mt-0 uppercase">
 				Elliot's Tech Blog
 			</h1>
 		</section>

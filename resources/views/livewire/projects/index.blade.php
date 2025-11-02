@@ -48,7 +48,7 @@ new class extends Component {
 
 		<div class="w-full pb-6 text-center">
 			<div class="px-2">
-				<h1 class="content-title text-4xl pt-6 mt-4 md:pt-0 md:mt-0">
+				<h1 class="content-title text-4xl pt-6 mt-4 md:pt-0 md:mt-0 uppercase">
 					Projects
 				</h1>
 				<p class="mb-4">
