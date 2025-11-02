@@ -50,7 +50,7 @@
 <div x-data='googleAnalytics'>
 	<div class="w-full bg-neutral-200 dark:bg-neutral-900" :class='displayClass'>
 		<div id="dnt-box"
-				 class="fixed bottom-0 left-0 z-30 border-solid border-t border-neutral-500 dark:border-none bg-neutral-200 dark:bg-neutral-900 w-full p-4 text-xl md:text-base"
+				 class="fixed bottom-0 left-0 z-30 border-solid border-t border-slate-500 dark:border-none bg-neutral-200 dark:bg-neutral-900 w-full p-4 text-xl md:text-base"
 				 ref="dntBox">
 			<div class="flex flex-col md:flex-row container mx-auto">
 				<div class="flex grow md:h-full">
@@ -59,7 +59,7 @@
 				</div>
 				<div class="flex md:w-48 gap-4">
 					<button
-						class="bg-bright-turquoise-500 dark:bg-bright-turquoise-600 text-neutral-100 dark:text-neutral-900"
+						class="bg-bright-turquoise-500 dark:bg-bright-turquoise-600 text-neutral-100 dark:text-slate-900"
 						:class='btnClasses'
 						@click="enableTracking">
 						Allow

@@ -16,7 +16,8 @@
 
 	<livewire:google-analytics />
 </head>
-<body class="bg-white dark:bg-black text-black dark:text-white font-sans flex flex-col {{ $bodyClasses ?? '' }}">
+<body
+	class="bg-big-stone-100 dark:bg-big-stone-950 text-black dark:text-white font-sans flex flex-col {{ $bodyClasses ?? '' }}">
 
 @component('partials.header')
 	<x-nav>
@@ -29,7 +30,7 @@
 @endcomponent
 
 <!-- Page Content -->
-<main class="bg-white dark:bg-black layer-shadow flex flex-col grow">
+<main class="bg-big-stone-100 dark:bg-black/60 layer-shadow flex flex-col grow">
 	{{ $slot }}
 </main>
 

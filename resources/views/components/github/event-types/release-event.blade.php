@@ -2,7 +2,7 @@
 	<x-github.event-icon :icon='$icon' />
 
 	<div class="pl-4 grow relative">
-		<p class="text-neutral-800 dark:text-neutral-500">
+		<p class="text-neutral-800 dark:text-slate-500">
 			{{ $timeElapsed }}
 		</p>
 
