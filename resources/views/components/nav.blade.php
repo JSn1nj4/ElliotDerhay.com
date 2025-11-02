@@ -2,7 +2,8 @@
 
 	<div class="flex items-center grow lg:shrink-0 text-white">
 		<a href="/" class="text-black dark:text-white p-2">
-			<img src="{{ asset_url("avatar.png") }}" width="60" height="60" alt="ElliotDerhay.com logo" title="Elliot Derhay"
+			<img src="{{ asset_url("avatar-2026-crop.png") }}" width="60" height="60" alt="ElliotDerhay.com logo"
+					 title="Elliot Derhay"
 					 class="inline border-solid border border-black dark:border-white rounded-xl align-middle">
 			<span class="text-xl sm:text-3xl tracking-tighter py-px2 pl-2 align-middle uppercase">
 				{{ $title ?? "Elliot Derhay" }}

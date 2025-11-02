@@ -11,7 +11,7 @@
 
 	@vite('resources/css/app.css')
 
-	<link rel="shortcut icon" href="{{ asset_url('favicon.png') }}">
+	<link rel="shortcut icon" href="{{ asset_url('favicon-2026.png') }}">
 
 	@stack('head-extras')
 </head>

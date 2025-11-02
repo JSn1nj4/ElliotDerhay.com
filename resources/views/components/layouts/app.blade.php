@@ -8,7 +8,7 @@
 
 	@vite('resources/css/app.css')
 
-	<link rel="shortcut icon" href="{{ asset_url('favicon.png') }}">
+	<link rel="shortcut icon" href="{{ asset_url('favicon-2026.png') }}">
 
 	@isset($headExtras)
 		{{ $headExtras }}
@@ -65,7 +65,7 @@
 
 	var anchors = document.querySelectorAll('.heading-anchor')
 
-	anchors.forEach(function (elem) {
+	anchors.forEach(function(elem) {
 		elem.addEventListener('click', copyOnClick, {capture: true})
 	})
 </script>
