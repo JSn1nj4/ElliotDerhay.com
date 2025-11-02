@@ -13,45 +13,45 @@ $selectableColors = implode(' ', [
 	'bg-white',
 	'dark:bg-black',
 
-	'text-caribbean-green-700',
-	'dark:text-caribbean-green-300',
+	'text-bright-turquoise-700',
+	'dark:text-bright-turquoise-300',
 
-	'border-caribbean-green-700',
-	'dark:border-caribbean-green-300',
+	'border-bright-turquoise-700',
+	'dark:border-bright-turquoise-300',
 
-	'hover:text-caribbean-green-500',
-	'dark:hover:text-caribbean-green-400',
+	'hover:text-bright-turquoise-500',
+	'dark:hover:text-bright-turquoise-400',
 
-	'ring-caribbean-green-300',
-	'dark:ring-caribbean-green-700',
+	'ring-bright-turquoise-300',
+	'dark:ring-bright-turquoise-700',
 
-	'focus:border-caribbean-green-300',
-	'dark:focus:border-caribbean-green-700',
+	'focus:border-bright-turquoise-300',
+	'dark:focus:border-bright-turquoise-700',
 
-	'active:text-caribbean-green-700',
-	'dark:active:text-caribbean-green-300',
+	'active:text-bright-turquoise-700',
+	'dark:active:text-bright-turquoise-300',
 ]);
 
 $selectedColors = implode(' ', [
-	'bg-caribbean-green-500',
-	'dark:bg-caribbean-green-400',
+	'bg-bright-turquoise-500',
+	'dark:bg-bright-turquoise-400',
 
 	'text-white',
 	'dark:text-black',
 
-	'border-caribbean-green-500',
-	'dark:border-caribbean-green-400',
+	'border-bright-turquoise-500',
+	'dark:border-bright-turquoise-400',
 ]);
 
 $disabledColors = implode(' ', [
 	'bg-white',
 	'dark:bg-black',
 
-	'text-caribbean-green-300',
-	'dark:text-caribbean-green-700',
+	'text-bright-turquoise-300',
+	'dark:text-bright-turquoise-700',
 
-	'border-caribbean-green-300',
-	'dark:border-caribbean-green-700',
+	'border-bright-turquoise-300',
+	'dark:border-bright-turquoise-700',
 ]);
 @endphp
 

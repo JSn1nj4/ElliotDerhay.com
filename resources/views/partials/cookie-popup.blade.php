@@ -59,13 +59,13 @@
 				</div>
 				<div class="flex md:w-48 gap-4">
 					<button
-						class="bg-caribbean-green-500 dark:bg-caribbean-green-600 text-neutral-100 dark:text-neutral-900"
+						class="bg-bright-turquoise-500 dark:bg-bright-turquoise-600 text-neutral-100 dark:text-neutral-900"
 						:class='btnClasses'
 						@click="enableTracking">
 						Allow
 					</button>
 					<button
-						class="bg-neutral-400 dark:bg-neutral-800 text-caribbean-green-600 dark:text-caribbean-green-500"
+						class="bg-neutral-400 dark:bg-neutral-800 text-bright-turquoise-600 dark:text-bright-turquoise-500"
 						:class='btnClasses'
 						@click="disableTracking">
 						Deny

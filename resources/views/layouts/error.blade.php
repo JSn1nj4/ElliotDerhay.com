@@ -10,7 +10,7 @@
 	<meta name="description" content="@yield('meta-description', 'A simple guy who loves web development and design')">
 
 	@vite('resources/css/app.css')
-	
+
 	<link rel="shortcut icon" href="{{ asset_url('favicon.png') }}">
 
 	@stack('head-extras')
@@ -21,7 +21,7 @@
 		<h1 class="text-xl sm:text-4xl">
 			<span class="align-middle text-3xl sm:text-6xl font-extralight">{{ $errorCode }}</span>
 			<span
-				class="inline-block align-middle w-0 h-10 sm:h-16 border-solid border-r-2 border-caribbean-green-500">&nbsp;</span>
+				class="inline-block align-middle w-0 h-10 sm:h-16 border-solid border-r-2 border-bright-turquoise-500">&nbsp;</span>
 			<span class="align-middle leading-none">{{ $errorTitle }}</span>
 		</h1>
 

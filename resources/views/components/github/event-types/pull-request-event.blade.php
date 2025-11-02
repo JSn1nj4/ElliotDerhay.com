@@ -15,7 +15,7 @@
 				{{ $action }}
 
 				<a href="{{ $repoUrl() }}/pull/{{ $event->source }}" target="_blank"
-					 class="text-caribbean-green-600 dark:text-caribbean-green-500">
+					 class="text-bright-turquoise-600 dark:text-bright-turquoise-500">
 					{{ $pullRequestNumberText }}
 				</a>
 

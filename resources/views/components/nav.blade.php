@@ -12,7 +12,7 @@
 
 	<div class="block lg:hidden mr-4">
 		<label for="menu-toggle"
-					 class="flex items-center text-caribbean-green-900 dark:text-caribbean-green-500 hover:text-caribbean-green-600 dark:hover:text-white transition-colors duration-300">
+					 class="flex items-center text-bright-turquoise-900 dark:text-bright-turquoise-500 hover:text-bright-turquoise-600 dark:hover:text-white transition-colors duration-300">
 			<svg class="fill-current h-8 w-8" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title>
 				<path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
 			</svg>
@@ -30,10 +30,10 @@
 		</div>
 	</div>
 
-	<div class="block mr-3 border-l-2 border-solid border-caribbean-green-600 dark:border-caribbean-green-800 pl-3"
+	<div class="block mr-3 border-l-2 border-solid border-bright-turquoise-600 dark:border-bright-turquoise-800 pl-3"
 			 id="theme-toggle-button">
 		<button
-			class="flex items-center text-caribbean-green-800 dark:text-caribbean-green-500 hover:text-neutral-700 dark:hover:text-neutral-500 transition-colors duration-300"
+			class="flex items-center text-bright-turquoise-800 dark:text-bright-turquoise-500 hover:text-neutral-700 dark:hover:text-neutral-500 transition-colors duration-300"
 			onclick="toDarkMode()" title="Switch to dark theme">
 			<svg xmlns="http://www.w3.org/2000/svg" class="system-icon h-8 w-8" fill="none" viewBox="0 0 24 24"
 					 stroke="currentColor">
@@ -43,7 +43,7 @@
 		</button>
 
 		<button
-			class="flex items-center text-caribbean-green-800 dark:text-caribbean-green-500 hover:text-neutral-700 dark:hover:text-neutral-500 transition-colors duration-300"
+			class="flex items-center text-bright-turquoise-800 dark:text-bright-turquoise-500 hover:text-neutral-700 dark:hover:text-neutral-500 transition-colors duration-300"
 			onclick="toLightMode()" title="Switch to light theme">
 			<svg xmlns="http://www.w3.org/2000/svg" class="dark-mode-icon h-8 w-8" fill="none" viewBox="0 0 24 24"
 					 stroke="currentColor">
@@ -53,7 +53,7 @@
 		</button>
 
 		<button
-			class="flex items-center text-caribbean-green-800 dark:text-caribbean-green-500 hover:text-neutral-700 dark:hover:text-neutral-500 transition-colors duration-300"
+			class="flex items-center text-bright-turquoise-800 dark:text-bright-turquoise-500 hover:text-neutral-700 dark:hover:text-neutral-500 transition-colors duration-300"
 			onclick="toSystemMode()" title="Switch to system default theme">
 			<svg xmlns="http://www.w3.org/2000/svg" class="light-mode-icon h-8 w-8" fill="none" viewBox="0 0 24 24"
 					 stroke="currentColor">

@@ -15,7 +15,7 @@
 				'-mt-1',
 				'inline',
 				'align-middle',
-				'stroke-caribbean-green-500' => $isActive,
+				'stroke-bright-turquoise-500' => $isActive,
 				'stroke-2' => $isActive,
 			])
 		/>

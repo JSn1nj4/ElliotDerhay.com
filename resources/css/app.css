@@ -1053,6 +1053,18 @@
 	--color-black: #000000;
 	--color-white: #ffffff;
 
+	--color-bright-turquoise-50: oklch(98.51% 0.016 182.73);
+	--color-bright-turquoise-100: oklch(95.91% 0.058 180.17);
+	--color-bright-turquoise-200: oklch(92.56% 0.106 179.98);
+	--color-bright-turquoise-300: oklch(87.71% 0.143 179.97);
+	--color-bright-turquoise-400: oklch(82.02% 0.144 180.77);
+	--color-bright-turquoise-500: oklch(74.17% 0.133 181.61);
+	--color-bright-turquoise-600: oklch(63.13% 0.112 183.93);
+	--color-bright-turquoise-700: oklch(53.70% 0.093 185.17);
+	--color-bright-turquoise-800: oklch(45.51% 0.076 188.69);
+	--color-bright-turquoise-900: oklch(40.08% 0.065 187.47);
+	--color-bright-turquoise-950: oklch(28.98% 0.050 190.57);
+
 	--color-caribbean-green-50: #eafff7;
 	--color-caribbean-green-100: #cdfeeb;
 	--color-caribbean-green-200: #a0fadc;
@@ -1101,17 +1113,17 @@
 	--color-warning-900: #713f12;
 	--color-warning-950: #422006;
 
-	--color-primary-50: #eafff7;
-	--color-primary-100: #cdfeeb;
-	--color-primary-200: #a0fadc;
-	--color-primary-300: #63f2ca;
-	--color-primary-400: #25e2b3;
-	--color-primary-500: #00c49a;
-	--color-primary-600: #00a481;
-	--color-primary-700: #00836b;
-	--color-primary-800: #006756;
-	--color-primary-900: #005548;
-	--color-primary-950: #00302a;
+	--color-primary-50: oklch(98.51% 0.016 182.73);
+	--color-primary-100: oklch(95.91% 0.058 180.17);
+	--color-primary-200: oklch(92.56% 0.106 179.98);
+	--color-primary-300: oklch(87.71% 0.143 179.97);
+	--color-primary-400: oklch(82.02% 0.144 180.77);
+	--color-primary-500: oklch(74.17% 0.133 181.61);
+	--color-primary-600: oklch(63.13% 0.112 183.93);
+	--color-primary-700: oklch(53.70% 0.093 185.17);
+	--color-primary-800: oklch(45.51% 0.076 188.69);
+	--color-primary-900: oklch(40.08% 0.065 187.47);
+	--color-primary-950: oklch(28.98% 0.050 190.57);
 }
 
 /*
@@ -1204,15 +1216,15 @@
 	}
 
 	a {
-		@apply text-caribbean-green-600 transition-colors;
+		@apply text-bright-turquoise-600 transition-colors;
 
 		.dark & {
-			@apply text-caribbean-green-500 transition-colors;
+			@apply text-bright-turquoise-500 transition-colors;
 		}
 
 		&:hover,
 		&.active {
-			@apply text-caribbean-green-800;
+			@apply text-bright-turquoise-800;
 		}
 
 		.dark &:hover,
@@ -1227,10 +1239,10 @@
 		}
 
 		.dark &.active {
-			text-shadow: 0 0 2px var(--color-caribbean-green-500),
-			0 0 4px var(--color-caribbean-green-500),
-			0 0 8px var(--color-caribbean-green-500),
-			0 0 16px var(--color-caribbean-green-500);
+			text-shadow: 0 0 2px var(--color-bright-turquoise-500),
+			0 0 4px var(--color-bright-turquoise-500),
+			0 0 8px var(--color-bright-turquoise-500),
+			0 0 16px var(--color-bright-turquoise-500);
 		}
 	}
 
@@ -1294,7 +1306,7 @@
 	}
 
 	.lightbox-trigger {
-		@apply cursor-pointer transition-all duration-300 ease-linear outline-solid outline-1 rounded-lg mt-1 outline-black hover:bg-caribbean-green-600 dark:hover:bg-caribbean-green-200 hover:outline-caribbean-green-600 dark:hover:outline-caribbean-green-200;
+		@apply cursor-pointer transition-all duration-300 ease-linear outline-solid outline-1 rounded-lg mt-1 outline-black hover:bg-bright-turquoise-600 dark:hover:bg-bright-turquoise-200 hover:outline-bright-turquoise-600 dark:hover:outline-bright-turquoise-200;
 
 		img {
 			@apply rounded-lg;
@@ -1358,7 +1370,7 @@
 
 @layer base {
 	:root {
-		--color-primary: var(--color-caribbean-green-500);
+		--color-primary: var(--color-bright-turquoise-500);
 	}
 }
 

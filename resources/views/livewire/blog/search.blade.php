@@ -16,9 +16,9 @@ new class extends Component {
 	<form wire:submit="send" class='w-full flex flex-wrap'>
 		<label for='search' class='w-full text-2xl'>Search</label>
 		<input type='text' id='search' wire:model="search"
-					 class='flex-grow border-y border-l border-caribbean-green-600 rounded-l p-2 text-lg'>
+					 class='flex-grow border-y border-l border-bright-turquoise-600 rounded-l p-2 text-lg'>
 		<button type='submit'
-						class='border transition-colors border-caribbean-green-600 dark:hover:border-gray-300 dark:active:border-white rounded-r px-4 py-2 text-md uppercase'
+						class='border transition-colors border-bright-turquoise-600 dark:hover:border-gray-300 dark:active:border-white rounded-r px-4 py-2 text-md uppercase'
 						title='Submit Search'>
 			<x-fas-search class='w-auto h-[1em] inline align-middle stroke-white' />
 		</button>

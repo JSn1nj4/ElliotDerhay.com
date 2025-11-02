@@ -16,7 +16,7 @@
 
 				{{-- no refUrl assumes it was deleted --}}
 				@if($refUrl === null)
-					<span class="text-caribbean-green-600 dark:text-caribbean-green-800">
+					<span class="text-bright-turquoise-600 dark:text-bright-turquoise-800">
 						{{ $refName }}
 					</span>
 				@else

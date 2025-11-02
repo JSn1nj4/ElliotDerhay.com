@@ -20,7 +20,7 @@
 
 				{{ $preposition }}
 
-				<a href="{{ $repoUrl() }}" target="_blank" class="text-caribbean-green-600 dark:text-caribbean-green-500">
+				<a href="{{ $repoUrl() }}" target="_blank" class="text-bright-turquoise-600 dark:text-bright-turquoise-500">
 					{{ $event->repo }}
 				</a>
 			</strong>

@@ -11,8 +11,8 @@
 
 @section('status-footer')
 	<p>
-		<a class="text-black dark:text-white hover:text-caribbean-green-500" href="{{ route('home') }}">
-			<x-fas-caret-square-left class='text-caribbean-green-500 size-5 inline-block align-middle' />
+		<a class="text-black dark:text-white hover:text-bright-turquoise-500" href="{{ route('home') }}">
+			<x-fas-caret-square-left class='text-bright-turquoise-500 size-5 inline-block align-middle' />
 			<span class='align-middle'>Back to homepage</span>
 		</a>
 	</p>
