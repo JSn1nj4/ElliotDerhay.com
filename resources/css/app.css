@@ -1250,22 +1250,13 @@
 			@apply text-bright-turquoise-800;
 		}
 
+		&.active {
+			@apply font-bold;
+		}
+
 		.dark &:hover,
 		.dark &.active {
 			@apply text-white;
-		}
-
-		&.active {
-			text-shadow: 0 0 2px var(--color-neutral-500),
-			0 0 4px var(--color-neutral-500),
-			0 0 8px var(--color-neutral-500);
-		}
-
-		.dark &.active {
-			text-shadow: 0 0 2px var(--color-bright-turquoise-500),
-			0 0 4px var(--color-bright-turquoise-500),
-			0 0 8px var(--color-bright-turquoise-500),
-			0 0 16px var(--color-bright-turquoise-500);
 		}
 	}
 

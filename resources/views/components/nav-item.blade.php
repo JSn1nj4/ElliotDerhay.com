@@ -4,7 +4,7 @@
 	'px-4',
 	'py-6',
 	'uppercase',
-	'active' => $isActive
+	'active' => $isActive,
 ]) }} {{ $livewire ? 'wire:navigate' : '' }}>
 	@if($icon)
 		<x-dynamic-component
@@ -15,8 +15,7 @@
 				'-mt-1',
 				'inline',
 				'align-middle',
-				'stroke-bright-turquoise-500' => $isActive,
-				'stroke-2' => $isActive,
+				'active' => $isActive,
 			])
 		/>
 	@endif
