@@ -1,4 +1,4 @@
-<nav class="flex items-center justify-between flex-wrap bg-white dark:bg-black/60 relative">
+<nav class="flex items-center justify-between flex-wrap relative">
 
 	<div class="flex items-center grow lg:shrink-0 text-white">
 		<a href="/" class="text-black dark:text-white p-2">
