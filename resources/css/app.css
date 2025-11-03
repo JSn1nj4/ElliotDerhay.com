@@ -11,6 +11,8 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@custom-variant fun (&:is(.fun *));
+
 @theme {
 	--spacing-*: initial;
 	--spacing-0: 0;
@@ -1279,7 +1281,8 @@
 	#theme-toggle-button {
 		.system-icon,
 		.light-mode-icon,
-		.dark-mode-icon {
+		.dark-mode-icon,
+		.fun-mode-icon {
 			display: none;
 		}
 
@@ -1292,6 +1295,10 @@
 		}
 
 		html[color-theme='dark'] & .dark-mode-icon {
+			display: block;
+		}
+
+		html[color-theme='fun'] & .fun-mode-icon {
 			display: block;
 		}
 	}

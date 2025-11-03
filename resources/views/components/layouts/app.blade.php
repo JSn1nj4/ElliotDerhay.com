@@ -71,6 +71,6 @@
 	})
 </script>
 
-@include('partials.dark-mode')
+@include('partials.theme')
 </body>
 </html>
