@@ -11,13 +11,17 @@
 
 $selectableColors = implode(' ', [
 	'bg-white',
-	'dark:bg-black',
+	'hover:bg-big-stone-200',
+	'dark:bg-neutral-950',
+	'dark:hover:bg-bright-turquoise-950',
 
 	'text-bright-turquoise-700',
 	'dark:text-bright-turquoise-300',
 
 	'border-bright-turquoise-700',
+	'hover:border-bright-turquoise-600',
 	'dark:border-bright-turquoise-300',
+	'dark:hover:border-bright-turquoise-500',
 
 	'hover:text-bright-turquoise-500',
 	'dark:hover:text-bright-turquoise-400',
@@ -37,7 +41,7 @@ $selectedColors = implode(' ', [
 	'dark:bg-bright-turquoise-400',
 
 	'text-white',
-	'dark:text-black',
+	'dark:text-slate-700',
 
 	'border-bright-turquoise-500',
 	'dark:border-bright-turquoise-400',
@@ -45,13 +49,13 @@ $selectedColors = implode(' ', [
 
 $disabledColors = implode(' ', [
 	'bg-white',
-	'dark:bg-black',
+	'dark:bg-neutral-950',
 
-	'text-bright-turquoise-300',
-	'dark:text-bright-turquoise-700',
+	'text-slate-300',
+	'dark:text-slate-700',
 
-	'border-bright-turquoise-300',
-	'dark:border-bright-turquoise-700',
+	'border-slate-300',
+	'dark:border-slate-700',
 ]);
 @endphp
 
@@ -94,7 +98,7 @@ $disabledColors = implode(' ', [
 
 			<div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
 				<div>
-					<p class="text-sm text-slate-700 dark:text-gray-500 leading-5">
+					<p class="text-sm text-slate-700 dark:text-slate-500 leading-5">
 						<span>{!! __('Showing') !!}</span>
 						<span class="font-medium">{{ $paginator->firstItem() }}</span>
 						<span>{!! __('to') !!}</span>
