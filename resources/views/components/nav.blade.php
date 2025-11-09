@@ -31,6 +31,22 @@
 		</div>
 	</div>
 
-	<x-nav.options />
+	<x-nav.dropdown>
+		<x-slot:toggle>
+			<label
+				for='options_toggle'
+				class="flex items-center text-bright-turquoise-800 dark:text-bright-turquoise-500 hover:text-neutral-700 dark:hover:text-white transition-colors duration-300 dark:peer-checked:text-white">
+				<x-fas-gear class='size-5' />
+			</label>
+			<input type='checkbox' name='options_toggle' id='options_toggle' class='absolute invisible -z-10 menu-toggle'
+						 onchange='console.log("checkbox")'>
+		</x-slot:toggle>
+
+		<p>item x</p>
+		<p>item y</p>
+		<p>item z</p>
+	</x-nav.dropdown>
+
+	{{--	<x-nav.options />--}}
 
 </nav>
