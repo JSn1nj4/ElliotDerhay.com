@@ -1,4 +1,4 @@
-<div class="block" id="theme-toggle-button">
+<div class="block" id="theme-toggle-wrapper">
 	<button
 		class="system-button justify-items-start place-items-center gap-2 text-left text-black dark:text-white transition-colors duration-300"
 		onclick="toLightMode()" title="Switch to light theme">
