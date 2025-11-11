@@ -47,9 +47,7 @@
 			</label>
 		</x-slot:toggle>
 
-		<p>item x</p>
-		<p>item y</p>
-		<p>item z</p>
+		<x-nav.options />
 	</x-nav.dropdown>
 
 	{{--	<x-nav.options />--}}

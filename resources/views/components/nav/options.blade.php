@@ -1,5 +1,4 @@
-<div class="block mr-3 border-l-2 border-solid border-bright-turquoise-600 dark:border-bright-turquoise-800 pl-3"
-		 id="theme-toggle-button">
+<div class="block" id="theme-toggle-button">
 	<button
 		class="flex items-center text-bright-turquoise-800 dark:text-bright-turquoise-500 hover:text-neutral-700 dark:hover:text-white transition-colors duration-300"
 		onclick="toLightMode()" title="Switch to light theme">
@@ -31,9 +30,7 @@
 	</button>
 </div>
 
-<div
-	id="fun-theme-button"
-	class='hidden dark:block mr-3 border-l-2 border-solid border-bright-turquoise-600 dark:border-bright-turquoise-800 pl-3'>
+<div id="fun-theme-button" class='hidden dark:block'>
 	<button
 		class="flex items-center text-bright-turquoise-800 dark:text-bright-turquoise-500  hover:text-neutral-700 dark:hover:text-white transition-colors duration-300"
 		onclick="toggleFunMode()" title="Enable Fun theme">
