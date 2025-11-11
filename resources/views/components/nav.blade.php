@@ -38,7 +38,6 @@
 				name='options_toggle'
 				id='options_toggle'
 				class='absolute invisible -z-10 menu-toggle peer'
-				checked {{-- todo: remove once dropdown design done --}}
 			>
 			<label
 				for='options_toggle'
