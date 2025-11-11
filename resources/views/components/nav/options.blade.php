@@ -41,11 +41,12 @@
 
 <div id="fun-theme-wrapper" class='hidden dark:block'>
 	<button
-		class="fun-mode-button justify-items-start place-items-center gap-2 text-left text-bright-turquoise-800 dark:text-bright-turquoise-500  hover:text-neutral-700 dark:hover:text-white transition-colors duration-300"
+		class="fun-mode-button justify-items-start place-items-center gap-2 text-left text-black dark:text-white transition-colors duration-300"
 		onclick="toggleFunMode()" title="Enable Fun theme">
-		<svg class='fun-mode-icon size-8 fill-current'
-				 xmlns="http://www.w3.org/2000/svg"
-				 viewBox="0 0 400 580">
+		<svg
+			class='fun-mode-icon size-8 fill-current text-bright-turquoise-800 dark:text-bright-turquoise-500  hover:text-neutral-700 dark:hover:text-white'
+			xmlns="http://www.w3.org/2000/svg"
+			viewBox="0 0 400 580">
 			<!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. -->
 			<path
 				d="M349.4 44.6c5.9-13.7 1.5-29.7-10.6-38.5s-28.6-8-39.9 1.8l-256 224c-10 8.8-13.6 22.9-8.9 35.3S50.7 288 64 288l111.5 0L98.6 467.4c-5.9 13.7-1.5 29.7 10.6 38.5s28.6 8 39.9-1.8l256-224c10-8.8 13.6-22.9 8.9-35.3s-16.6-20.7-30-20.7l-111.5 0L349.4 44.6z" />
