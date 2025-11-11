@@ -5,22 +5,43 @@
 	- Modified to add an extra dark theme
 -->
 <script>
+	function captureOldTheme() {
+		localStorage.oldTheme = localStorage.theme
+	}
+
+	function popOldTheme() {
+		let old = localStorage.oldTheme
+
+		delete localStorage.oldTheme
+
+		return old
+	}
+
 	function toDarkMode() {
+		popOldTheme()
 		localStorage.theme = 'dark'
 		window.updateTheme()
 	}
 
 	function toggleFunMode() {
-		localStorage.theme = 'fun'
+		if (localStorage.theme !== 'fun') {
+			captureOldTheme()
+			localStorage.theme = 'fun'
+		} else {
+			localStorage.theme = popOldTheme()
+		}
+
 		window.updateTheme()
 	}
 
 	function toLightMode() {
+		popOldTheme()
 		localStorage.theme = 'light'
 		window.updateTheme()
 	}
 
 	function toSystemMode() {
+		popOldTheme()
 		localStorage.theme = 'system'
 		window.updateTheme()
 	}
@@ -62,7 +83,9 @@
 				break
 
 			case 'fun':
-				document.documentElement.classList.add('fun')
+				document.documentElement.classList.contains('fun')
+					? document.documentElement.classList.remove('fun')
+					: document.documentElement.classList.add('fun')
 				break
 
 			case 'light':
