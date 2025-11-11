@@ -48,7 +48,7 @@
 				for='options_toggle'
 				class="flex items-center text-bright-turquoise-800 dark:text-bright-turquoise-500 hover:text-neutral-700 dark:hover:text-white transition-colors duration-300 peer-checked:text-neutral-700 dark:peer-checked:text-white"
 			>
-				<x-fas-gear class='size-5' />
+				<x-fas-gear class='size-8' title='Options' />
 			</label>
 		</x-slot:toggle>
 
