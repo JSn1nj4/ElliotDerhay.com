@@ -18,9 +18,7 @@
 			<label
 				for="menu-toggle"
 				class="flex items-center text-bright-turquoise-800 dark:text-bright-turquoise-500 hover:text-neutral-700 dark:hover:text-white transition-colors duration-300 peer-checked:text-neutral-700 dark:peer-checked:text-white">
-				<svg class="fill-current size-8" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title>
-					<path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
-				</svg>
+				<x-fas-list-ul class='size-8' options='Menu' />
 			</label>
 		</x-slot:toggle>
 
