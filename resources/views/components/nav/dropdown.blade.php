@@ -4,7 +4,7 @@
 		{!! $toggle !!}
 		<div
 			class='absolute -left-32 top-10 -z-50 opacity-0 border-2 border-solid border-bright-turquoise-900 dark:border-bright-turquoise-500 rounded-xl w-48 bg-big-stone-100 dark:bg-big-stone-950 toggle-submenu peer-checked:opacity-100 peer-checked:z-50 transition-opacity'>
-			<div class='relative block rounded-xl dark:bg-black/60 w-full h-full p-3'>
+			<div class='relative flex flex-col gap-3 rounded-xl dark:bg-black/60 w-full h-full p-3'>
 				<div class='absolute -top-7 right-4 h-7 w-10'>
 					<div class='relative h-full w-full'>
 						<div
