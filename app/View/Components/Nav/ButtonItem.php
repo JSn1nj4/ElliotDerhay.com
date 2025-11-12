@@ -5,7 +5,7 @@ namespace App\View\Components\Nav;
 use Closure;
 use Illuminate\Contracts\View\View;
 
-class ButtonItem extends Item
+class ButtonItem extends ItemBase
 {
 	public function __construct(
 		public string      $class,
