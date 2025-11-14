@@ -13,7 +13,7 @@
 						<div
 							class='absolute bottom-0 left-[0.23rem] border-solid border-b-[1.2rem] border-b-big-stone-100 dark:border-b-big-stone-950 fun:border-b-big-stone-950 border-x-[0.85rem] border-x-transparent'></div>
 						<div
-							class='absolute bottom-0 left-[0.23rem] border-solid border-b-[1.2rem] border-b-transparent dark:border-b-black/60 fun:border-b-transparent border-x-[0.85rem] border-x-transparent'></div>
+							class='absolute bottom-0 left-[0.23rem] border-solid border-b-[1.2rem] border-b-transparent dark:border-b-black/50 fun:border-b-transparent border-x-[0.85rem] border-x-transparent'></div>
 					</div>
 				</div>
 				{!! $slot !!}

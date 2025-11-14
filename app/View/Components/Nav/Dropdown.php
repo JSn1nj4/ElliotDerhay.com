@@ -67,6 +67,8 @@ class Dropdown extends Component
 			'rounded-xl' => true,
 			'md:rounded-none' => $this->mobileCondense,
 			'dark:bg-black/50' => true,
+			'fun:md:bg-black/50' => $this->mobileCondense,
+			'fun:bg-transparent' => true,
 			'w-full' => true,
 			'h-full' => true,
 			'p-3' => true,
