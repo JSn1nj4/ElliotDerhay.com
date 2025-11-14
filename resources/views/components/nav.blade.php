@@ -4,7 +4,7 @@
 		<a href="/" class="text-black dark:text-white p-2">
 			<img src="{{ asset_url("avatar-2026-crop.png") }}" width="60" height="60" alt="ElliotDerhay.com logo"
 					 title="Elliot Derhay"
-					 class="inline border-solid border border-black dark:border-white rounded-xl align-middle">
+					 class="inline border-solid border border-black dark:border-white rounded-xl align-middle size-12 sm:size-[60px]">
 			<span class="text-xl sm:text-3xl tracking-tighter py-px2 pl-2 align-middle uppercase">
 				{{ $title ?? "Elliot Derhay" }}
 			</span>
@@ -19,12 +19,16 @@
 				<label
 					for="menu-toggle"
 					class="flex items-center text-bright-turquoise-800 dark:text-bright-turquoise-500 hover:text-neutral-700 dark:hover:text-white transition-colors duration-300 peer-checked:text-neutral-700 dark:peer-checked:text-white">
-					<x-fas-list-ul class='size-8' options='Menu' />
+					<x-fas-list-ul class='size-7 md:size-8' options='Menu' />
 				</label>
 			</x-slot:toggle>
 
 			{{ $slot }}
 		</x-nav.dropdown>
+
+		<div class='block'>
+			<x-nav.divider-item />
+		</div>
 
 		<x-nav.dropdown>
 			<x-slot:toggle>
@@ -38,7 +42,7 @@
 					for='options_toggle'
 					class="flex items-center text-bright-turquoise-800 dark:text-bright-turquoise-500 hover:text-neutral-700 dark:hover:text-white transition-colors duration-300 peer-checked:text-neutral-700 dark:peer-checked:text-white"
 				>
-					<x-fas-gear class='size-8' title='Options' />
+					<x-fas-gear class='size-7 md:size-8' title='Options' />
 				</label>
 			</x-slot:toggle>
 
