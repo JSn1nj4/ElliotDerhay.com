@@ -73,6 +73,7 @@ class Dropdown extends Component
 			'h-full' => true,
 			'p-3' => true,
 			'md:p-0' => $this->mobileCondense,
+			'text-xl' => true,
 		])));
 
 		$this->triangleWrapperClasses = implode(" ", array_keys(array_filter([
