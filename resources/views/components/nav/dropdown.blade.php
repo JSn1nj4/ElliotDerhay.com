@@ -1,6 +1,6 @@
 <div class='relative z-10'>
 	<div
-		class="relative block mr-3 border-l-2 border-solid border-bright-turquoise-600 dark:border-bright-turquoise-800 pl-3">
+		class="relative block">
 		<div class='peer'>{!! $toggle !!}</div>
 		<div
 			class='absolute -right-7 top-20 -z-50 opacity-0 border-2 border-solid border-bright-turquoise-900 dark:border-bright-turquoise-500 fun:border-slate-900 rounded-xl w-48 bg-big-stone-100 dark:bg-big-stone-950  toggle-submenu peer-has-checked:opacity-100 peer-has-checked:z-50 transition-opacity'>
