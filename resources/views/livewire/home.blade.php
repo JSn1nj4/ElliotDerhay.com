@@ -27,18 +27,18 @@ new class extends Component {
 
 				<p class="text-xl">
 					I'm a web developer. I work primarily with WordPress and squeeze in a Laravel project whenever I can. I also
+					tend to
 					dream up more ideas than I have time to actually work on.
 				</p>
 
 				<p class="text-xl">
-					I also love blogging — the part where I hammer out words before remembering that tech blogging needs
-					supporting
-					examples.
+					I love blogging — and by blogging, I mean hammering out words and eventually remembering that tech blogs
+					needs lots of supporting examples.
 				</p>
 
 				<p class="text-xl">
-					You can find also find me on Twitter/X sometimes Tweeting/Xeeting/posting into the Ether, and reading about
-					what's going on in tech and the broader world. I also used to blog on dev.to occasionally.
+					You can also find me on Twitter/X sometimes Tweeting/Xeeting/posting into the Ether, and reading about
+					what's going on in tech and the broader world. I also used to write on dev.to occasionally.
 				</p>
 
 				<p class="text-xl">
