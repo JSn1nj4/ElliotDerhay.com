@@ -1,11 +1,12 @@
 <div class='relative z-10'>
 	<div
 		class="relative block">
-		<div class='peer'>{!! $toggle !!}</div>
+		<div class='peer md:hidden'>{!! $toggle !!}</div>
 		<div
-			class='absolute -right-7 top-20 -z-50 opacity-0 border-2 border-solid border-bright-turquoise-900 dark:border-bright-turquoise-500 fun:border-slate-900 rounded-xl w-48 bg-big-stone-100 dark:bg-big-stone-950  toggle-submenu peer-has-checked:opacity-100 peer-has-checked:z-50 transition-opacity'>
-			<div class='relative flex flex-col gap-3 rounded-xl dark:bg-black/60 fun:bg-transparent w-full h-full p-3'>
-				<div class='absolute -top-7 right-4 h-7 w-10'>
+			class='absolute md:relative -right-7 md:right-0 top-20 md:top-0 -z-50 md:z-0 opacity-0 md:opacity-100 border-2 md:border-none border-solid border-bright-turquoise-900 dark:border-bright-turquoise-500 fun:border-slate-900 rounded-xl md:rounded-none w-48 w-auto bg-big-stone-100 dark:bg-big-stone-950 md:bg-none toggle-submenu peer-has-checked:opacity-100 peer-has-checked:z-50 transition-opacity'>
+			<div
+				class='relative flex flex-col md:flex-row gap-3 rounded-xl md:rounded-none dark:bg-black/60 fun:bg-transparent md:bg-none w-full h-full p-3 md:p-0'>
+				<div class='absolute -top-7 right-4 h-7 w-10 md:hidden md:-z-50'>
 					<div class='relative h-full w-full'>
 						<div
 							class='absolute bottom-0 border-solid border-b-[1.5rem] border-b-bright-turquoise-900 dark:border-b-bright-turquoise-500 fun:border-b-slate-900 border-x-[1rem] border-x-transparent'></div>
