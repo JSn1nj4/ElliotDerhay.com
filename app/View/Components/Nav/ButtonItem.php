@@ -15,6 +15,8 @@ class ButtonItem extends ItemBase
 	)
 	{
 		parent::__construct($text);
+
+		$this->baseClasses .= ' py-1 px-2';
 	}
 
 	/**

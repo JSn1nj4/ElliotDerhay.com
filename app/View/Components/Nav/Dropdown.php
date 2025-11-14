@@ -31,7 +31,7 @@ class Dropdown extends Component
 		$this->wrapperClasses = implode(" ", array_keys(array_filter([
 			'absolute' => true,
 			'md:relative' => $this->mobileCondense,
-			'-right-7' => true,
+			'-right-3' => true,
 			'md:right-0' => $this->mobileCondense,
 			'top-20' => true,
 			'md:top-0' => $this->mobileCondense,
@@ -47,7 +47,7 @@ class Dropdown extends Component
 			'fun:border-slate-900' => true,
 			'rounded-xl' => true,
 			'md:rounded-none' => $this->mobileCondense,
-			'w-48' => true,
+			'w-56' => true,
 			'md:w-auto' => $this->mobileCondense,
 			'bg-big-stone-100' => true,
 			'dark:bg-big-stone-950' => true,
@@ -73,13 +73,13 @@ class Dropdown extends Component
 			'h-full' => true,
 			'p-3' => true,
 			'md:p-0' => $this->mobileCondense,
-			'text-xl' => true,
+			'text-lg' => true,
 		])));
 
 		$this->triangleWrapperClasses = implode(" ", array_keys(array_filter([
 			'absolute' => true,
 			'-top-7' => true,
-			'right-4' => true,
+			'right-1' => true,
 			'h-7' => true,
 			'w-10' => true,
 			'md:hidden' => $this->mobileCondense,
