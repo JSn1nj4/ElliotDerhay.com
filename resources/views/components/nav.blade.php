@@ -12,7 +12,7 @@
 	</div>
 
 	<div class='flex items-center gap-3'>
-		<x-nav.dropdown class='block lg:hidden mr-4'>
+		<x-nav.dropdown mobile-condense>
 			<x-slot:toggle>
 				<input type="checkbox" id="menu-toggle" name="menu-toggle" class="hidden absolute top-0 left-0 -z-50">
 
