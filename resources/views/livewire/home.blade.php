@@ -33,17 +33,12 @@ new class extends Component {
 
 				<p class="text-xl">
 					I love blogging — and by blogging, I mean hammering out words and eventually remembering that tech blogs
-					needs lots of supporting examples.
+					needs lots of supporting examples. One day I want to answer the eternal question: is my small amount of
+					spare time better spent blogging or building...?
 				</p>
 
 				<p class="text-xl">
-					You can also find me on Twitter/X sometimes Tweeting/Xeeting/posting into the Ether, and reading about
-					what's going on in tech and the broader world. I also used to write on dev.to occasionally.
-				</p>
-
-				<p class="text-xl">
-					I'm also a Bible-believing Christian, husband, and father. And I love playing board and card games when time
-					allows.
+					Lastly, I'm a Bible-believing Christian, husband, and father who sometimes plays card and board games.
 				</p>
 			</div>
 		</x-column>
