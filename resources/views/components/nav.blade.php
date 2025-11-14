@@ -40,7 +40,7 @@
 				type='checkbox'
 				name='options_toggle'
 				id='options_toggle'
-				class='absolute invisible -z-10 menu-toggle peer'
+				class='absolute invisible -z-10 menu-toggle'
 			>
 			<label
 				for='options_toggle'
