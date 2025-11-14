@@ -11,9 +11,10 @@
 		</a>
 	</div>
 
-	<x-nav.dropdown class='block lg:hidden mr-4'>
-		<x-slot:toggle>
-			<input type="checkbox" id="menu-toggle" name="menu-toggle" class="hidden absolute top-0 left-0 -z-50 peer">
+	<div class='flex items-center gap-3'>
+		<x-nav.dropdown class='block lg:hidden mr-4'>
+			<x-slot:toggle>
+				<input type="checkbox" id="menu-toggle" name="menu-toggle" class="hidden absolute top-0 left-0 -z-50">
 
 			<label
 				for="menu-toggle"
@@ -50,9 +51,8 @@
 			</label>
 		</x-slot:toggle>
 
-		<x-nav.options />
-	</x-nav.dropdown>
-
-	{{--	<x-nav.options />--}}
+			<x-nav.options />
+		</x-nav.dropdown>
+	</div>
 
 </nav>
