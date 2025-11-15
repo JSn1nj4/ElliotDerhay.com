@@ -42,24 +42,24 @@
 	}
 
 	function toDarkMode() {
-		localStorage.theme = 'dark'
+		localStorage.setItem('theme', 'dark')
 		updateTheme()
 	}
 
 	function toLightMode() {
-		localStorage.theme = 'light'
+		localStorage.setItem('theme', 'light')
 		updateTheme()
 	}
 
 	function toSystemMode() {
-		localStorage.theme = 'system'
+		localStorage.setItem('theme', 'system')
 		updateTheme()
 	}
 
 	window
 		.matchMedia('(prefers-color-scheme: dark)')
 		.addEventListener('change', e => {
-			if (localStorage.theme !== 'system') return
+			if (localStorage.getItem('theme') !== 'system') return
 
 			if (e.matches) {
 				document.documentElement.classList.add('dark')
@@ -71,10 +71,10 @@
 
 	function updateTheme() {
 		if (!('theme' in localStorage)) {
-			localStorage.theme = 'system'
+			localStorage.setItem('theme', 'system')
 		}
 
-		switch (localStorage.theme) {
+		switch (localStorage.getItem('theme')) {
 			case 'system':
 				document.documentElement.setAttribute('color-theme', 'system')
 
