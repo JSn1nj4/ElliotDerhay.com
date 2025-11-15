@@ -5,57 +5,68 @@
 	- Modified to add an extra dark theme
 -->
 <script>
-	function captureOldTheme() {
-		localStorage.oldTheme = localStorage.theme
+	function inTheDark() {
+		return document.documentElement.classList.contains('dark')
 	}
 
-	function popOldTheme() {
-		let old = localStorage.oldTheme
+	function funThemeEnabled() {
+		return localStorage.funMode === true
+			|| document.documentElement.classList.contains('fun')
+	}
 
-		delete localStorage.oldTheme
+	function canEnableFunTheme() {
+		return inTheDark()
+	}
 
-		return old
+	function maybeEnableFunTheme() {
+		if (!inTheDark()) return
+
+		localStorage.funMode = true
+		document.documentElement.classList.add('fun')
+	}
+
+	function disableFunTheme() {
+		if (!funThemeEnabled()) return
+
+		localStorage.funMode = false
+		document.documentElement.classList.remove('fun')
+	}
+
+	function toggleFunTheme() {
+		if (funThemeEnabled()) {
+			disableFunTheme()
+			return
+		}
+
+		maybeEnableFunTheme()
 	}
 
 	function toDarkMode() {
-		popOldTheme()
 		localStorage.theme = 'dark'
-		window.updateTheme()
-	}
-
-	function toggleFunMode() {
-		if (localStorage.theme !== 'fun') {
-			captureOldTheme()
-			localStorage.theme = 'fun'
-		} else {
-			localStorage.theme = popOldTheme()
-		}
-
-		window.updateTheme()
+		updateTheme()
 	}
 
 	function toLightMode() {
-		popOldTheme()
 		localStorage.theme = 'light'
-		window.updateTheme()
+		updateTheme()
 	}
 
 	function toSystemMode() {
-		popOldTheme()
 		localStorage.theme = 'system'
-		window.updateTheme()
+		updateTheme()
 	}
 
 	window
 		.matchMedia('(prefers-color-scheme: dark)')
 		.addEventListener('change', e => {
-			if (localStorage.theme === 'system') {
-				if (e.matches) {
-					document.documentElement.classList.add('dark')
-				} else {
-					document.documentElement.classList.remove('dark')
-				}
+			if (localStorage.theme !== 'system') return
+
+			if (e.matches) {
+				document.documentElement.classList.add('dark')
+				return
 			}
+
+			document.documentElement.classList.remove('dark')
 		})
 
 	function updateTheme() {
@@ -65,32 +76,37 @@
 
 		switch (localStorage.theme) {
 			case 'system':
-				document.documentElement.classList.remove('fun')
+				document.documentElement.setAttribute('color-theme', 'system')
 
-				if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-					document.documentElement.classList.add('dark')
-				} else {
+				if (!window.matchMedia('(prefers-color-scheme: dark)').matches) {
 					document.documentElement.classList.remove('dark')
+					disableFunTheme()
+					return
 				}
 
-				document.documentElement.setAttribute('color-theme', 'system')
+				document.documentElement.classList.add('dark')
+
+				// this seems redundant, but there are 2 pieces to the 'fun' theme and it's possible for 1 to be set without the other
+				if (funThemeEnabled()) {
+					maybeEnableFunTheme()
+				}
 
 				break
 
 			case 'dark':
 				document.documentElement.classList.add('dark')
 				document.documentElement.setAttribute('color-theme', 'dark')
-				break
 
-			case 'fun':
-				document.documentElement.classList.contains('fun')
-					? document.documentElement.classList.remove('fun')
-					: document.documentElement.classList.add('fun')
+				// this seems redundant, but there are 2 pieces to the 'fun' theme and it's possible for 1 to be set without the other
+				if (funThemeEnabled()) {
+					maybeEnableFunTheme()
+				}
+
 				break
 
 			case 'light':
 				document.documentElement.classList.remove('dark')
-				document.documentElement.classList.remove('fun')
+				disableFunTheme()
 				document.documentElement.setAttribute('color-theme', 'light')
 				break
 		}

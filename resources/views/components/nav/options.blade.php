@@ -36,7 +36,7 @@
 <div id="fun-theme-wrapper" class='hidden dark:block'>
 	<x-nav.button-item
 		class="fun-mode-button"
-		onclick="toggleFunMode()"
+		onclick="toggleFunTheme()"
 		text='Fun Mode'
 		button-text="Toggle Fun Mode"
 	>
