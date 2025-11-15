@@ -48,28 +48,30 @@
 </script>
 
 <div x-data='googleAnalytics'>
-	<div class="w-full bg-neutral-200 dark:bg-neutral-900" :class='displayClass'>
+	<div class="w-full bg-big-stone-200 dark:bg-big-stone-950" :class='displayClass'>
 		<div id="dnt-box"
-				 class="fixed bottom-0 left-0 z-30 border-solid border-t border-slate-500 dark:border-none bg-neutral-200 dark:bg-neutral-900 w-full p-4 text-xl md:text-base"
+				 class="fixed bottom-0 left-0 z-30 border-solid border-t border-slate-500 dark:border-bright-turquoise-700 fun:border-slate-800 bg-big-stone-200 dark:bg-big-stone-950 fun:bg-slate-800 w-full text-xl md:text-base"
 				 ref="dntBox">
-			<div class="flex flex-col md:flex-row container mx-auto">
-				<div class="flex grow md:h-full">
-					<p class="pb-2 md:p-2">Please confirm whether you would like to allow tracking cookies on this
-						website, in accordance with its <a href="/privacy">privacy policy</a>.</p>
-				</div>
-				<div class="flex md:w-48 gap-4">
-					<button
-						class="bg-bright-turquoise-500 dark:bg-bright-turquoise-600 text-neutral-100 dark:text-slate-900"
-						:class='btnClasses'
-						@click="enableTracking">
-						Allow
-					</button>
-					<button
-						class="bg-neutral-400 dark:bg-neutral-800 text-bright-turquoise-600 dark:text-bright-turquoise-500"
-						:class='btnClasses'
-						@click="disableTracking">
-						Deny
-					</button>
+			<div class='w-full h-full dark:bg-black/70 fun:bg-transparent p-4'>
+				<div class="flex flex-col md:flex-row container mx-auto">
+					<div class="flex grow md:h-full">
+						<p class="pb-2 md:p-2">Please confirm whether you would like to allow tracking cookies on this
+							website, in accordance with its <a href="/privacy">privacy policy</a>.</p>
+					</div>
+					<div class="flex md:w-48 gap-4">
+						<button
+							class="bg-bright-turquoise-500 dark:bg-bright-turquoise-600 text-big-stone-100 dark:text-slate-950"
+							:class='btnClasses'
+							@click="enableTracking">
+							Allow
+						</button>
+						<button
+							class="bg-slate-100 dark:bg-slate-800 fun:bg-slate-700 text-bright-turquoise-600 dark:text-bright-turquoise-500"
+							:class='btnClasses'
+							@click="disableTracking">
+							Deny
+						</button>
+					</div>
 				</div>
 			</div>
 		</div>
