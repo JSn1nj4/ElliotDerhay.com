@@ -10,7 +10,7 @@
 	}
 
 	function funThemeEnabled() {
-		return localStorage.funMode === true
+		return localStorage.getItem('funMode') === 'true'
 			|| document.documentElement.classList.contains('fun')
 	}
 
@@ -21,14 +21,14 @@
 	function maybeEnableFunTheme() {
 		if (!inTheDark()) return
 
-		localStorage.funMode = true
+		localStorage.setItem('funMode', 'true')
 		document.documentElement.classList.add('fun')
 	}
 
 	function disableFunTheme() {
 		if (!funThemeEnabled()) return
 
-		localStorage.funMode = false
+		localStorage.setItem('funMode', 'false')
 		document.documentElement.classList.remove('fun')
 	}
 
