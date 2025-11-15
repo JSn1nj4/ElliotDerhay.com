@@ -14,7 +14,6 @@ use Filament\Navigation\NavigationGroup;
 use Filament\Pages\Dashboard;
 use Filament\Panel;
 use Filament\PanelProvider;
-use Filament\Support\Colors\Color;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
@@ -49,7 +48,19 @@ class AdminPanelProvider extends PanelProvider
 					900 => '#0e534e',
 					950 => '#003331',
 				],
-				'danger' => Color::Rose,
+				'info' => [
+					50 => '#f4f7fb',
+					100 => '#e9eef5',
+					200 => '#cddcea',
+					300 => '#a2bed7',
+					400 => '#6f9cc1',
+					500 => '#4d7faa',
+					600 => '#3b668e',
+					700 => '#305274',
+					800 => '#2b4661',
+					900 => '#283d52',
+					950 => '#1e2c3d',
+				],
 			])
 			->favicon(static fn () => asset_url("favicon-2026.png"))
 			->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
