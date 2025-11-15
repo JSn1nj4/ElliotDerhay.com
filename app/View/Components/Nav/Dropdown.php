@@ -49,7 +49,7 @@ class Dropdown extends Component
 			'md:rounded-none' => $this->mobileCondense,
 			'w-56' => true,
 			'md:w-auto' => $this->mobileCondense,
-			'bg-big-stone-100' => true,
+			'bg-big-stone-200' => true,
 			'dark:bg-big-stone-950' => true,
 			'md:bg-none' => $this->mobileCondense,
 			'toggle-submenu' => true,
