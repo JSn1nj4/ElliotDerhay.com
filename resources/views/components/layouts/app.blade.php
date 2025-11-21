@@ -17,7 +17,7 @@
 	<livewire:google-analytics />
 </head>
 <body
-	class="bg-big-stone-100 dark:bg-big-stone-950 text-black dark:text-white font-sans flex flex-col {{ $bodyClasses ?? '' }}">
+	class="relative bg-big-stone-100 dark:bg-big-stone-950 text-black dark:text-white font-sans flex flex-col {{ $bodyClasses ?? '' }}">
 
 @component('partials.header')
 	<x-nav>
@@ -43,6 +43,8 @@
 @isset($footerExtras)
 	{{ $footerExtras }}
 @endisset
+
+<x-scroller.frame />
 
 <livewire:lightbox />
 
