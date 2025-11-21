@@ -44,9 +44,21 @@
 	{{ $footerExtras }}
 @endisset
 
-<x-scroller.frame />
+<x-scroller.track />
 
 <livewire:lightbox />
+
+<script type='application/javascript'>
+	function getWindowHeight() {
+		document
+			.documentElement
+			.setProperty('--body-height', `${document.documentElement.scrollHeight}px`)
+	}
+
+	window.addEventListener('resize', getWindowHeight)
+
+	getWindowHeight()
+</script>
 
 <script>
 	// todo: organize one-off scripts within bundled JS
