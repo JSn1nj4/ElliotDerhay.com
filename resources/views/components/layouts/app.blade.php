@@ -45,6 +45,7 @@
 @endisset
 
 <x-scroller.track />
+<x-scroller.track mirror />
 
 <livewire:lightbox />
 

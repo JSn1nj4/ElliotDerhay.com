@@ -8,19 +8,18 @@ use Illuminate\View\Component;
 
 class Track extends Component
 {
-    /**
-     * Create a new component instance.
-     */
-    public function __construct()
-    {
-        //
-    }
+	/**
+	 * Create a new component instance.
+	 */
+	public function __construct(
+		public bool $mirror = false
+	) {}
 
-    /**
-     * Get the view / contents that represent the component.
-     */
-    public function render(): View|Closure|string
-    {
-        return view('components.scroller.track');
-    }
+	/**
+	 * Get the view / contents that represent the component.
+	 */
+	public function render(): View|Closure|string
+	{
+		return view('components.scroller.track');
+	}
 }
