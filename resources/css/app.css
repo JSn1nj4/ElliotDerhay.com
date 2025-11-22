@@ -1342,6 +1342,16 @@
 		}
 	}
 
+	.sidebar-track .teeth {
+		background: repeating-linear-gradient(
+			to bottom,
+			var(--background-color-slate-400) 0,
+			var(--background-color-slate-400) calc(var(--spacing-1) * 0.5),
+			var(--background-color-black) calc(var(--spacing-1) * 0.5),
+			var(--background-color-black) calc(var(--spacing-1) * 2)
+		);
+	}
+
 	/* took too long trying to customize via spatie/laravel-markdown */
 	pre.shiki {
 		@apply my-4 p-4 overflow-x-auto;

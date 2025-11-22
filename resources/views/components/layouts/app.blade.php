@@ -44,8 +44,8 @@
 	{{ $footerExtras }}
 @endisset
 
-<x-scroller.track />
-<x-scroller.track mirror />
+<x-scroller.housing />
+<x-scroller.housing mirror />
 
 <livewire:lightbox />
 
