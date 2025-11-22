@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class Track extends Component
+class Wheel extends Component
 {
 	/**
 	 * Create a new component instance.
@@ -20,6 +20,6 @@ class Track extends Component
 	 */
 	public function render(): View|Closure|string
 	{
-		return view('components.scroller.track');
+		return view('components.scroller.wheel');
 	}
 }
