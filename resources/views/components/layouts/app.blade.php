@@ -53,6 +53,7 @@
 	function getWindowHeight() {
 		document
 			.documentElement
+			.style
 			.setProperty('--body-height', `${document.documentElement.scrollHeight}px`)
 	}
 
