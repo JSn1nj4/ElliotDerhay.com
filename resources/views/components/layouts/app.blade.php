@@ -47,6 +47,28 @@
 <x-scroller.housing />
 <x-scroller.housing mirror />
 
+<script type='application/javascript'>
+	window.addEventListener('scroll', () => {
+
+		const scrollableDistance = document.documentElement.scrollHeight - document.documentElement.clientHeight
+
+		document.documentElement.style.setProperty(
+			'--scrollable-distance-legacy',
+
+			/* basically: document - viewport */
+			scrollableDistance.toString(),
+		)
+
+		document.documentElement.style.setProperty(
+			'--scroll-percent-legacy',
+
+			/* basically: scroll position / (document - viewport) */
+			(document.documentElement.scrollTop / scrollableDistance).toString(),
+		)
+
+	})
+</script>
+
 <livewire:lightbox />
 
 <script type='application/javascript'>

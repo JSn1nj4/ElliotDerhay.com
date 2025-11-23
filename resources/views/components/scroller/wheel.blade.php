@@ -14,25 +14,3 @@
 	'z-10',
 	'-scale-x-100' => $mirror,
 ])></div>
-
-<script type='application/javascript'>
-	window.addEventListener('scroll', () => {
-
-		const scrollableDistance = document.documentElement.scrollHeight - document.documentElement.clientHeight
-
-		document.documentElement.style.setProperty(
-			'--scrollable-distance-legacy',
-
-			/* basically: document - viewport */
-			scrollableDistance.toString(),
-		)
-
-		document.documentElement.style.setProperty(
-			'--scroll-percent-legacy',
-
-			/* basically: scroll position / (document - viewport) */
-			(document.documentElement.scrollTop / scrollableDistance).toString(),
-		)
-
-	})
-</script>
