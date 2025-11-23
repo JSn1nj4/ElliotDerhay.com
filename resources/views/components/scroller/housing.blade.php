@@ -1,5 +1,6 @@
 <div @class([
 	'scroller-housing',
+	'mirrored' => $mirror,
 	'absolute',
 	'h-full',
 	'top-0',

@@ -1163,7 +1163,13 @@
 	:root {
 		--body-height: 100%;
 		--scroll-distance: calc(var(--body-height) - 100vh);
-		--size-multiplier: 16;
+		/* originally came from wheel "size" minus "left/right" amount, but now I'm not sure what the correct amount is... Not sure why this number works yet. */
+		--size-multiplier: 180;
+
+		--scrollable-distance-legacy: 0;
+		--scroll-percent-legacy: 0;
+
+		--spacing-multiplier: 0.25;
 	}
 
 	*,
@@ -1376,6 +1382,22 @@
 		}
 	}
 	*/
+	/* legacy solution */
+	.scroller-housing {
+		--wheel-circumference: calc(2 * calc(pi) * (var(--spacing-multiplier) * var(--size-multiplier) / 2));
+		--turn-multiplier: 1turn;
+
+		--rotations: calc(var(--scrollable-distance-legacy) / var(--wheel-circumference) * var(--turn-multiplier));
+
+		&.mirrored {
+			--turn-multiplier: -1turn;
+		}
+
+		.wheel {
+			rotate: calc(var(--rotations) * var(--scroll-percent-legacy));
+		}
+	}
+
 	/* took too long trying to customize via spatie/laravel-markdown */
 	pre.shiki {
 		@apply my-4 p-4 overflow-x-auto;
