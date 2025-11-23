@@ -1161,15 +1161,13 @@
 */
 @layer base {
 	:root {
-		--body-height: 100%;
-		--scroll-distance: calc(var(--body-height) - 100vh);
-		/* originally came from wheel "size" minus "left/right" amount, but now I'm not sure what the correct amount is... Not sure why this number works yet. */
-		--size-multiplier: 180;
+		--body-height: 0;
+		--roller-size: 20;
+		--size-inset: 3;
+		--size-multiplier: calc(var(--roller-size) - var(--size-inset));
 
-		--scrollable-distance-legacy: 0;
-		--scroll-percent-legacy: 0;
-
-		--spacing-multiplier: 0.25;
+		--scroll-percent: 0;
+		--scrollable-distance: 0;
 	}
 
 	*,
@@ -1384,17 +1382,17 @@
 	*/
 	/* legacy solution */
 	.scroller-housing {
-		--wheel-circumference: calc(2 * calc(pi) * (var(--spacing-multiplier) * var(--size-multiplier) / 2));
+		--wheel-circumference: calc(2 * calc(pi) * (var(--size-multiplier) / 2));
 		--turn-multiplier: 1turn;
 
-		--rotations: calc(var(--scrollable-distance-legacy) / var(--wheel-circumference) * var(--turn-multiplier));
+		--rotations: calc(var(--scrollable-distance) / var(--wheel-circumference) * var(--turn-multiplier));
 
 		&.mirrored {
 			--turn-multiplier: -1turn;
 		}
 
 		.wheel {
-			rotate: calc(var(--rotations) * var(--scroll-percent-legacy));
+			rotate: calc(var(--rotations) * var(--scroll-percent));
 		}
 	}
 

@@ -48,24 +48,31 @@
 <x-scroller.housing mirror />
 
 <script type='application/javascript'>
-	window.addEventListener('scroll', () => {
+	function scrollableDistance() {
+		return document.documentElement.scrollHeight - document.documentElement.clientHeight
+	}
 
-		const scrollableDistance = document.documentElement.scrollHeight - document.documentElement.clientHeight
+	function setStaticMeasurements() {
+		document.documentElement.style.setProperty('--body-height', document.documentElement.scrollHeight.toString())
+		document.documentElement.style.setProperty('--scrollable-distance', scrollableDistance().toString())
+	}
 
+	window.addEventListener('resize', setStaticMeasurements)
+
+	function setScrollPercent() {
 		document.documentElement.style.setProperty(
-			'--scrollable-distance-legacy',
-
-			/* basically: document - viewport */
-			scrollableDistance.toString(),
-		)
-
-		document.documentElement.style.setProperty(
-			'--scroll-percent-legacy',
+			'--scroll-percent',
 
 			/* basically: scroll position / (document - viewport) */
-			(document.documentElement.scrollTop / scrollableDistance).toString(),
+			(document.documentElement.scrollTop / scrollableDistance()).toString(),
 		)
+	}
 
+	window.addEventListener('scroll', setScrollPercent)
+
+	window.addEventListener('load', () => {
+		setStaticMeasurements()
+		setScrollPercent()
 	})
 </script>
 
