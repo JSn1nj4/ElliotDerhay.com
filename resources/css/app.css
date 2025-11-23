@@ -1160,6 +1160,12 @@
   color utility to any element that depends on these defaults.
 */
 @layer base {
+	:root {
+		--body-height: 100%;
+		--scroll-distance: calc(var(--body-height) - 100vh);
+		--size-multiplier: 16;
+	}
+
 	*,
 	::after,
 	::before,
@@ -1352,6 +1358,24 @@
 		);
 	}
 
+	/* saving for a later date. Not widely available at time of first attempt. */
+	/*
+	.scroller-housing .wheel {
+		animation-timeline: scroll(root);
+		rotate: 0turn;
+		&:not(.mirrored) {
+			animation: rolling linear;
+		}
+		&.mirrored {
+			animation: rolling-reverse linear;
+		}
+	}
+	@keyframes rolling {
+		to {
+			rotate: calc(var(--scroll-distance) / calc(2 * calc(pi) * calc(var(--spacing-1) * var(--size-multiplier) / 2)) * 1turn);
+		}
+	}
+	*/
 	/* took too long trying to customize via spatie/laravel-markdown */
 	pre.shiki {
 		@apply my-4 p-4 overflow-x-auto;

@@ -1,4 +1,5 @@
 <div @class([
+	'scroller-housing',
 	'absolute',
 	'h-full',
 	'top-0',
