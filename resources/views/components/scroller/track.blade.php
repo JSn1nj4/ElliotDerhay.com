@@ -1,5 +1,6 @@
 <div @class([
 	'sidebar-track',
+	'relative',
 	'h-full',
 	'flex',
 	'-scale-x-100' => $mirror,
@@ -13,4 +14,9 @@
 			class='w-full h-full bg-gradient-to-r from-black from-50% via-slate-600  via-50% to-slate-500'></div>
 	</div>
 	<div class='teeth relative w-0.5 h-full'></div>
+	<div
+		class='fixed left-5 bottom-0 w-3 h-full opacity-0 scroll:opacity-100 transition-opacity duration-700'>
+		<div
+			class='-ml-px2 w-3/5 h-full bg-gradient-to-t from-bright-turquoise-100 via-bright-turquoise-500/70 via-10% to-transparent to-50%'></div>
+	</div>
 </div>
