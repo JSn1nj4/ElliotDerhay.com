@@ -83,6 +83,7 @@
 	window.addEventListener('load', () => {
 		setStaticMeasurements()
 		setScrollPercent()
+		disableScrollEffects()
 	})
 </script>
 
