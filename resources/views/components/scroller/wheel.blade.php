@@ -344,9 +344,9 @@
 					fit-margin-left="0"
 					fit-margin-right="0"
 					fit-margin-bottom="0"
-					inkscape:zoom="0.84645441"
-					inkscape:cx="255.18208"
-					inkscape:cy="281.17285"
+					inkscape:zoom="0.92363881"
+					inkscape:cx="400.58949"
+					inkscape:cy="188.38533"
 					inkscape:window-width="1920"
 					inkscape:window-height="1043"
 					inkscape:window-x="1080"
@@ -359,6 +359,18 @@
 					inkscape:object-paths="true" />
 				<defs
 					id="defs2">
+					<linearGradient
+						inkscape:collect="always"
+						id="linearGradient1199">
+						<stop
+							style="stop-color:#20e2c9;stop-opacity:1"
+							offset="0"
+							id="stop1195" />
+						<stop
+							style="stop-color:#20e2c9;stop-opacity:1"
+							offset="1"
+							id="stop1197" />
+					</linearGradient>
 					<linearGradient
 						inkscape:collect="always"
 						id="linearGradient37334">
@@ -387,11 +399,11 @@
 							offset="0"
 							id="stop28011" />
 						<stop
-							style="stop-color:#25e2b3;stop-opacity:0.77045363"
+							style="stop-color:#20e2c9;stop-opacity:0.7686516"
 							offset="0.49359661"
 							id="stop28013" />
 						<stop
-							style="stop-color:#25e2b3;stop-opacity:0"
+							style="stop-color:#20e2c9;stop-opacity:0"
 							offset="1"
 							id="stop28015" />
 					</linearGradient>
@@ -443,7 +455,7 @@
 					</mask>
 					<radialGradient
 						inkscape:collect="always"
-						xlink:href="#linearGradient37334"
+						xlink:href="#linearGradient1199"
 						id="radialGradient37336"
 						cx="67.67131"
 						cy="67.673164"
@@ -451,19 +463,6 @@
 						fy="67.673164"
 						r="67.058807"
 						gradientUnits="userSpaceOnUse" />
-					<filter
-						inkscape:collect="always"
-						style="color-interpolation-filters:sRGB"
-						id="filter37944"
-						x="-0.011776245"
-						y="-0.011776245"
-						width="1.0235525"
-						height="1.0235525">
-						<feGaussianBlur
-							inkscape:collect="always"
-							stdDeviation="0.24140838"
-							id="feGaussianBlur37946" />
-					</filter>
 					<mask
 						maskUnits="userSpaceOnUse"
 						id="mask39262">
@@ -623,6 +622,19 @@
 								r="67.058807" />
 						</g>
 					</mask>
+					<filter
+						inkscape:collect="always"
+						style="color-interpolation-filters:sRGB"
+						id="filter1515"
+						x="-0.032010372"
+						y="-0.032018712"
+						width="1.064065"
+						height="1.064065">
+						<feGaussianBlur
+							inkscape:collect="always"
+							stdDeviation="1.7896407"
+							id="feGaussianBlur1517" />
+					</filter>
 				</defs>
 				<g
 					inkscape:groupmode="layer"
@@ -636,7 +648,7 @@
 						inkscape:label="glow effect"
 						style="display:inline;mix-blend-mode:normal">
 						<circle
-							style="display:inline;mix-blend-mode:normal;fill:#25e2b3;fill-opacity:1;stroke:none;stroke-width:3.80799;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;filter:url(#filter44666)"
+							style="display:inline;mix-blend-mode:normal;fill:#20e2c9;fill-opacity:1;stroke:none;stroke-width:3.80799;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;filter:url(#filter44666)"
 							id="circle27010"
 							cy="67.670395"
 							cx="67.670395"
@@ -663,7 +675,7 @@
 						<g
 							id="g23499-9"
 							transform="matrix(-1,0,0,1,135.34171,-0.00276947)"
-							style="display:inline;mix-blend-mode:normal;stroke:url(#radialGradient37336);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter37944)"
+							style="display:inline;mix-blend-mode:normal;stroke:url(#radialGradient37336);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
 							mask="url(#mask27006-8)">
 							<path
 								style="fill:none;stroke:url(#radialGradient39985);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
@@ -704,6 +716,58 @@
 								style="display:inline;fill:none;stroke:url(#radialGradient39999);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
 								d="m 67.675197,67.669239 c 0,0 -33.679186,-7.589985 -43.217297,-20.337922 C 18.985527,40.017326 20.260889,20.25069 20.260889,20.25069"
 								id="path22320-6-7-5-3-5-6-2-9"
+								sodipodi:nodetypes="cac" />
+						</g>
+					</g>
+					<g
+						inkscape:groupmode="layer"
+						id="g1513"
+						inkscape:label="grooves overlay copy"
+						style="display:inline;filter:url(#filter1515)">
+						<g
+							id="g1511"
+							transform="matrix(-1,0,0,1,135.34171,-0.00276947)"
+							style="display:inline;mix-blend-mode:normal;stroke:url(#radialGradient37336);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+							mask="url(#mask27006-8)">
+							<path
+								style="fill:none;stroke:url(#radialGradient39985);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+								d="m 67.670393,67.670393 c 0,0 -18.44785,-29.18172 -16.178154,-44.940321 C 52.794455,13.688725 67.673393,0.61343346 67.673393,0.61343346"
+								id="path1495"
+								sodipodi:nodetypes="cac" />
+							<path
+								style="display:inline;fill:none;stroke:url(#radialGradient39987);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+								d="m 67.673355,67.672241 c 0,0 7.589992,-33.679192 20.337923,-43.217288 7.314003,-5.472392 27.080632,-4.197022 27.080632,-4.197022"
+								id="path1497"
+								sodipodi:nodetypes="cac" />
+							<path
+								style="display:inline;fill:none;stroke:url(#radialGradient39989);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+								d="m 67.675197,67.669239 c 0,0 29.18172,-18.44785 44.940323,-16.178154 9.04134,1.302217 22.11664,16.181156 22.11664,16.181156"
+								id="path1499"
+								sodipodi:nodetypes="cac" />
+							<path
+								style="display:inline;fill:none;stroke:url(#radialGradient39991);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+								d="m 67.670393,67.670393 c 0,0 33.679187,7.589991 43.217297,20.337928 5.47237,7.313992 4.19701,27.080619 4.19701,27.080619"
+								id="path1501"
+								sodipodi:nodetypes="cac" />
+							<path
+								style="display:inline;fill:none;stroke:url(#radialGradient39993);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+								d="m 67.673355,67.672241 c 0,0 18.44785,29.181717 16.17816,44.940329 -1.30222,9.04133 -16.18116,22.11663 -16.18116,22.11663"
+								id="path1503"
+								sodipodi:nodetypes="cac" />
+							<path
+								style="display:inline;fill:none;stroke:url(#radialGradient39995);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+								d="m 67.675197,67.669239 c 0,0 -7.589992,33.679191 -20.337929,43.217301 -7.313994,5.47237 -27.080627,4.19701 -27.080627,4.19701"
+								id="path1505"
+								sodipodi:nodetypes="cac" />
+							<path
+								style="display:inline;fill:none;stroke:url(#radialGradient39997);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+								d="m 67.673356,67.672241 c 0,0 -29.181712,18.44785 -44.940327,16.17816 C 13.691704,82.548181 0.61639855,67.669241 0.61639855,67.669241"
+								id="path1507"
+								sodipodi:nodetypes="cac" />
+							<path
+								style="display:inline;fill:none;stroke:url(#radialGradient39999);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+								d="m 67.675197,67.669239 c 0,0 -33.679186,-7.589985 -43.217297,-20.337922 C 18.985527,40.017326 20.260889,20.25069 20.260889,20.25069"
+								id="path1509"
 								sodipodi:nodetypes="cac" />
 						</g>
 					</g>
