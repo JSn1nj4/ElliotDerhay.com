@@ -13,6 +13,8 @@
 
 @custom-variant fun (&:is(.fun *));
 
+@custom-variant scroll (&:is(.scroll *));
+
 @theme {
 	--spacing-*: initial;
 	--spacing-0: 0;

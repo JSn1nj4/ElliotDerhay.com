@@ -68,7 +68,17 @@
 		)
 	}
 
+	function enableScrollEffects() {
+		document.documentElement.classList.add('scroll')
+	}
+
+	function disableScrollEffects() {
+		document.documentElement.classList.remove('scroll')
+	}
+
 	window.addEventListener('scroll', setScrollPercent)
+	window.addEventListener('scroll', enableScrollEffects)
+	window.addEventListener('scrollend', disableScrollEffects)
 
 	window.addEventListener('load', () => {
 		setStaticMeasurements()

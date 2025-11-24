@@ -316,7 +316,7 @@
 				</g>
 			</svg>
 		</div>
-		<div class='absolute top-0 left-0 opacity-0 scroll:opacity-100 transition-opacity duration-500 w-full h-full'>
+		<div class='absolute top-0 left-0 opacity-0 scroll:opacity-100 transition-opacity duration-700 w-full h-full'>
 			<svg
 				width='10rem'
 				height='10rem'
