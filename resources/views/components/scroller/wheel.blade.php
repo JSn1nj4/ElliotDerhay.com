@@ -9,6 +9,10 @@
 	'-bottom-16',
 	'z-10',
 	'-scale-x-100' => $mirror,
+	'-translate-x-32' => !$mirror,
+	'translate-x-32' => $mirror,
+	'fun:sm:translate-x-0',
+	'transition-transform',
 ])>
 	<div class='relative w-full h-full'>
 		<div class='absolute top-0 left-0 h-full w-full'>
@@ -316,7 +320,8 @@
 				</g>
 			</svg>
 		</div>
-		<div class='absolute top-0 left-0 opacity-0 scroll:opacity-100 transition-opacity duration-700 w-full h-full'>
+		<div
+			class='absolute top-0 left-0 opacity-0 scroll:opacity-100 transition-opacity duration-700 ease-in-out w-full h-full'>
 			<svg
 				width='8rem'
 				height='8rem'
