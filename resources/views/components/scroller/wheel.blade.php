@@ -2,19 +2,19 @@
 	'wheel',
 	'mirrored' => $mirror,
 	'fixed',
-	'w-40',
-	'h-40',
-	'-left-5' => !$mirror,
-	'-right-5' => $mirror,
-	'-bottom-20',
+	'w-32',
+	'h-32',
+	'-left-3' => !$mirror,
+	'-right-3' => $mirror,
+	'-bottom-16',
 	'z-10',
 	'-scale-x-100' => $mirror,
 ])>
 	<div class='relative w-full h-full'>
 		<div class='absolute top-0 left-0 h-full w-full'>
 			<svg
-				width='10rem'
-				height='10rem'
+				width='8rem'
+				height='8rem'
 				viewBox='0 0 187.82237 187.82237'
 				version='1.1'
 				id='svg5'
@@ -318,8 +318,8 @@
 		</div>
 		<div class='absolute top-0 left-0 opacity-0 scroll:opacity-100 transition-opacity duration-700 w-full h-full'>
 			<svg
-				width='10rem'
-				height='10rem'
+				width='8rem'
+				height='8rem'
 				viewBox='0 0 187.82237 187.82237'
 				version='1.1'
 				id='svg5'
