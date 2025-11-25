@@ -29,6 +29,9 @@ class Dropdown extends Component
 		])));
 
 		$this->wrapperClasses = implode(" ", array_keys(array_filter([
+			'hidden' => true,
+			'md:block' => $this->mobileCondense,
+			'peer-has-checked:block' => true,
 			'absolute' => true,
 			'md:relative' => $this->mobileCondense,
 			'-right-3' => true,
