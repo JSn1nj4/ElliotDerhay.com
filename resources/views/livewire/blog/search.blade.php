@@ -16,11 +16,12 @@ new class extends Component {
 	<form wire:submit="send" class='w-full flex flex-wrap'>
 		<label for='search' class='w-full text-2xl'>Search</label>
 		<input type='text' id='search' wire:model="search"
-					 class='flex-grow bg-white dark:bg-neutral-950 border-y border-l border-bright-turquoise-600 rounded-l p-2 text-lg'>
+					 class='flex-grow bg-white dark:bg-neutral-950 border -margin-r-px border-slate-600 dark:hover:border-bright-turquoise-400 rounded-l p-2 text-lg'>
 		<button type='submit'
-						class='border bg-white dark:bg-neutral-950 transition-colors border-bright-turquoise-600 dark:hover:border-slate-300 dark:active:border-white rounded-r px-4 py-2 text-md uppercase'
+						class='border bg-white dark:bg-neutral-950 transition-colors border-slate-600 dark:hover:border-bright-turquoise-400 dark:active:border-white rounded-r px-4 py-2 text-md uppercase text-bright-turquoise-800 hover:text-bright-turquoise-400 dark:text-bright-turquoise-400 dark:hover:text-bright-turquoise-50'
 						title='Submit Search'>
-			<x-fas-search class='w-auto h-[1em] inline align-middle stroke-white' />
+			<x-fas-search
+				class='w-auto h-[1em] inline align-middle' />
 		</button>
 	</form>
 </x-widget.wrapper>
