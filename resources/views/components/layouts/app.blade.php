@@ -76,14 +76,19 @@
 		document.documentElement.classList.remove('scroll')
 	}
 
+	function scrollEffectInit() {
+		setStaticMeasurements()
+		setScrollPercent()
+		disableScrollEffects()
+	}
+
 	window.addEventListener('scroll', setScrollPercent)
 	window.addEventListener('scroll', enableScrollEffects)
 	window.addEventListener('scrollend', disableScrollEffects)
 
 	window.addEventListener('load', () => {
-		setStaticMeasurements()
-		setScrollPercent()
-		disableScrollEffects()
+		window.addEventListener('livewire:navigated', scrollEffectInit)
+		scrollEffectInit()
 	})
 </script>
 
