@@ -1452,7 +1452,7 @@
 }
 
 .backlight {
-	background-image: linear-gradient(to top, #00A87E, rgba(0, 168, 126, 0.26666666666666666) 5px, transparent 75%);
+	background-image: linear-gradient(to top, var(--color-bright-turquoise-500), rgb(from var(--color-bright-turquoise-500) r g b / 0.26) 5px, transparent 75%);
 }
 
 .construction {
