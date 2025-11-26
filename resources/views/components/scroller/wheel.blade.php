@@ -13,6 +13,7 @@
 	'translate-x-32' => $mirror,
 	'fun:sm:translate-x-0',
 	'transition-transform',
+	'overflow-x-clip',
 ])>
 	<div class='relative w-full h-full'>
 		<div class='absolute top-0 left-0 h-full w-full'>

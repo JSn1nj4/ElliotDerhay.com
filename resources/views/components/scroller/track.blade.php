@@ -1,4 +1,4 @@
-<div class='sidebar-track relative h-full'>
+<div class='sidebar-track relative h-full w-6 overflow-x-clip'>
 	<div
 		class='relative h-full flex{{ $mirror ? ' -scale-x-100' : '' }} {{ $mirror ? 'translate-x-32' : '-translate-x-32' }} fun:sm:translate-x-0 transition-transform'>
 		<div class='relative w-5'>
