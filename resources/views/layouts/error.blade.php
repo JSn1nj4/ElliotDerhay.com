@@ -27,7 +27,7 @@
 				<span class="align-middle leading-none">{{ $errorTitle }}</span>
 			</h1>
 
-			<div class="pt-4 text-md sm:text-lg leading-normal font-extralight">
+			<div class="pt-4 text-md sm:text-lg leading-normal font-normal">
 				@yield('status-body')
 			</div>
 
