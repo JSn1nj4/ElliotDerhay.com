@@ -50,9 +50,9 @@
 <div x-data='googleAnalytics'>
 	<div class="w-full bg-big-stone-200 dark:bg-big-stone-950" :class='displayClass'>
 		<div id="dnt-box"
-				 class="fixed bottom-0 left-0 z-30 border-solid border-t border-slate-500 dark:border-bright-turquoise-700 fun:border-slate-800 bg-big-stone-200 dark:bg-big-stone-950 fun:bg-slate-800 w-full text-xl md:text-base"
+				 class="fixed bottom-0 left-0 z-30 border-solid border-t border-slate-500 dark:border-bright-turquoise-700 dark2:border-slate-800 bg-big-stone-200 dark:bg-big-stone-950 dark2:bg-slate-800 w-full text-xl md:text-base"
 				 ref="dntBox">
-			<div class='w-full h-full dark:bg-black/70 fun:bg-transparent p-4'>
+			<div class='w-full h-full dark:bg-black/70 dark2:bg-transparent p-4'>
 				<div class="flex flex-col md:flex-row container mx-auto">
 					<div class="flex grow md:h-full">
 						<p class="pb-2 md:p-2">Please confirm whether you would like to allow tracking cookies on this
@@ -66,7 +66,7 @@
 							Allow
 						</button>
 						<button
-							class="bg-slate-100 dark:bg-slate-800 fun:bg-slate-700 text-bright-turquoise-600 dark:text-bright-turquoise-500"
+							class="bg-slate-100 dark:bg-slate-800 dark2:bg-slate-700 text-bright-turquoise-600 dark:text-bright-turquoise-500"
 							:class='btnClasses'
 							@click="disableTracking">
 							Deny

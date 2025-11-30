@@ -11,7 +11,7 @@
 	'-scale-x-100' => $mirror,
 	'-translate-x-32' => !$mirror,
 	'translate-x-32' => $mirror,
-	'fun:sm:translate-x-0',
+	'dark2:sm:translate-x-0',
 	'transition-transform',
 	'overflow-x-clip',
 ])>

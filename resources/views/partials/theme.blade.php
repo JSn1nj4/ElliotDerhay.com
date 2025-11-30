@@ -11,7 +11,7 @@
 
 	function funThemeEnabled() {
 		return localStorage.getItem('funMode') === 'true'
-			|| document.documentElement.classList.contains('fun')
+			|| document.documentElement.classList.contains('dark2')
 	}
 
 	function canEnableFunTheme() {
@@ -22,14 +22,14 @@
 		if (!inTheDark()) return
 
 		localStorage.setItem('funMode', 'true')
-		document.documentElement.classList.add('fun')
+		document.documentElement.classList.add('dark2')
 	}
 
 	function disableFunTheme() {
 		if (!funThemeEnabled()) return
 
 		localStorage.setItem('funMode', 'false')
-		document.documentElement.classList.remove('fun')
+		document.documentElement.classList.remove('dark2')
 	}
 
 	function toggleFunTheme() {
@@ -86,7 +86,7 @@
 
 				document.documentElement.classList.add('dark')
 
-				// this seems redundant, but there are 2 pieces to the 'fun' theme and it's possible for 1 to be set without the other
+				// this seems redundant, but there are 2 pieces to the 'dark2' theme and it's possible for 1 to be set without the other
 				if (funThemeEnabled()) {
 					maybeEnableFunTheme()
 				}
@@ -97,7 +97,7 @@
 				document.documentElement.classList.add('dark')
 				document.documentElement.setAttribute('color-theme', 'dark')
 
-				// this seems redundant, but there are 2 pieces to the 'fun' theme and it's possible for 1 to be set without the other
+				// this seems redundant, but there are 2 pieces to the 'dark2' theme and it's possible for 1 to be set without the other
 				if (funThemeEnabled()) {
 					maybeEnableFunTheme()
 				}

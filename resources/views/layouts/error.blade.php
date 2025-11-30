@@ -16,7 +16,7 @@
 	@stack('head-extras')
 </head>
 <body class="bg-white dark:bg-big-stone-950 text-black dark:text-white font-sans status-page w-full h-full">
-<div class='bg-big-stone-200 dark:bg-black fun:bg-black/60 flex flex-col w-full h-full backlight'>
+<div class='bg-big-stone-200 dark:bg-black dark2:bg-black/60 flex flex-col w-full h-full backlight'>
 
 	<div class="flex flex-col mx-auto container px-4 py-6 pt-16 sm:pt-32 md:pt-48 xl:pt-56 justify-center">
 		<div class="pb-4 w-full max-w-md mx-auto">

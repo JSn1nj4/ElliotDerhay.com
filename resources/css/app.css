@@ -11,7 +11,7 @@
 
 @custom-variant dark (&:is(.dark *));
 
-@custom-variant fun (&:is(.fun *));
+@custom-variant fun (&:is(.dark2 *));
 
 @custom-variant scroll (&:is(.scroll *));
 
@@ -1311,11 +1311,11 @@
 	}
 
 	#fun-theme-wrapper {
-		.fun-mode-button {
+		.dark2-mode-button {
 			display: none;
 		}
 
-		html.dark & .fun-mode-button {
+		html.dark & .dark2-mode-button {
 			display: flex;
 		}
 	}
