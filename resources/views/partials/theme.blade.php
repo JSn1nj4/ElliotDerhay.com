@@ -234,6 +234,9 @@
 	class CyberneticTheme extends DisplayTheme {
 		init() {
 			this.updateStorage('dark')
+
+			document.documentElement.classList.add('dark')
+			document.documentElement.classList.remove('dark2')
 		}
 
 		resolve() {
@@ -249,6 +252,9 @@
 	class IndustrialTheme extends DisplayTheme {
 		init() {
 			this.updateStorage('dark2')
+
+			document.documentElement.classList.add('dark')
+			document.documentElement.classList.add('dark2')
 		}
 
 		resolve() {
