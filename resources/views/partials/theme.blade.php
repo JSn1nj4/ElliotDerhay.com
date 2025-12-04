@@ -291,6 +291,36 @@
 
 			DisplayMode.resolve().init()
 		}
+
+		updateMode(mode) {
+			if (mode === storageKeyId || !(mode in displayModes)) {
+				console.warn(`Invalid mode: ${mode}`)
+				return
+			}
+
+			const current = DisplayMode.resolve()
+
+			if (mode === 'system') current.toSystemDefault()
+
+			if (mode === 'light') current.toLightMode()
+
+			if (mode === 'dark') current.toDarkMode()
+		}
+
+		updateTheme(theme) {
+			if (theme === storageKeyId || !(theme in displayThemes)) {
+				console.warn(`Invalid theme: ${theme}`)
+				return
+			}
+
+			const current = DisplayTheme.resolve()
+
+			if (theme === 'light') current.toLightMetallicTheme()
+
+			if (theme === 'dark') current.toCyberneticTheme()
+
+			if (theme === 'dark2') current.toIndustrialTheme()
+		}
 	}
 
 	const controller = new DisplayController()
