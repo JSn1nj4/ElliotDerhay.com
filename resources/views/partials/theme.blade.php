@@ -44,16 +44,14 @@
 			console.info('Display mode updating to system default.')
 
 			const displayTheme = DisplayTheme.resolve()
-			
+
 			let step = () => {
 			}
 
 			if (!this.constructor.prefersDark()) {
 				// this just pushes it to light metallic theme if darkness is not preferred and in case it currently is 'dark'
 				step = () => displayTheme.toLightMetallicTheme()
-			}
-
-			if (displayTheme instanceof LightMetallicTheme) {
+			} else if (displayTheme instanceof LightMetallicTheme) {
 				// this just pushes it to the Cybernetic theme if darkness is preferred and it's currently light
 				step = () => displayTheme.toCyberneticTheme()
 			}
@@ -361,13 +359,17 @@
 				return
 			}
 
-			const current = DisplayTheme.resolve()
+			const currentTheme = DisplayTheme.resolve()
+			const currentMode = DisplayMode.resolve()
+			const prefersDark = DisplayMode.prefersDark()
 
-			if (theme === 'light') current.toLightMetallicTheme()
+			if (theme === 'light') prefersDark
+				? currentMode.toLightMode()
+				: currentMode.toSystemDefault()
 
-			if (theme === 'dark') current.toCyberneticTheme()
+			if (theme === 'dark') currentTheme.toCyberneticTheme()
 
-			if (theme === 'dark2') current.toIndustrialTheme()
+			if (theme === 'dark2') currentTheme.toIndustrialTheme()
 		}
 	}
 
