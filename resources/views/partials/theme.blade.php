@@ -331,7 +331,12 @@
 
 			document.addEventListener('display_mode.update', this.updateMode.bind(this))
 			document.addEventListener('display_theme.update', this.updateTheme.bind(this))
+			document.addEventListener('livewire:navigated', this.initDisplay.bind(this))
 
+			this.initDisplay()
+		}
+
+		initDisplay() {
 			DisplayMode.resolve().init()
 		}
 
