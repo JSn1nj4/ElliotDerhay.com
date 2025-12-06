@@ -6,6 +6,8 @@
 			document.dispatchEvent(new CustomEvent('display_mode.updated', {
 				detail: {mode: value},
 			}))
+
+			return this
 		}
 
 		init() {
@@ -42,18 +44,21 @@
 			console.info('Display mode updating to system default.')
 
 			const displayTheme = DisplayTheme.resolve()
+			
+			let step = () => {
+			}
 
 			if (!this.constructor.prefersDark()) {
 				// this just pushes it to light metallic theme if darkness is not preferred and in case it currently is 'dark'
-				displayTheme.toLightMetallicTheme()
-				return this
+				step = () => displayTheme.toLightMetallicTheme()
 			}
 
 			if (displayTheme instanceof LightMetallicTheme) {
 				// this just pushes it to the Cybernetic theme if darkness is preferred and it's currently light
-				displayTheme.toCyberneticTheme()
-				return this
+				step = () => displayTheme.toCyberneticTheme()
 			}
+
+			step()
 
 			return displayModes.system
 				.updateStorage('system')
@@ -156,6 +161,8 @@
 			document.dispatchEvent(new CustomEvent('display_theme.updated', {
 				detail: {theme: value},
 			}))
+
+			return this
 		}
 
 		static resolve() {
