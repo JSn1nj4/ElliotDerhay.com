@@ -1,9 +1,3 @@
-<!--
-	Lazily copied from Laravel.com...
-	- Mode functions: https://github.com/laravel/laravel.com-next/blob/a2a98ffe47761f15903f7a1e80e2bf948771ea03/resources/js/components/theme.js
-	- Most of the inline script below: https://github.com/laravel/laravel.com-next/blob/a2a98ffe47761f15903f7a1e80e2bf948771ea03/resources/views/partials/layout.blade.php
-	- Modified to add an extra dark theme
--->
 <script>
 	const storageKeyId = 'storageKey'
 
