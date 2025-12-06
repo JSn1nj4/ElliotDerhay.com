@@ -41,6 +41,7 @@
 		}
 
 		toSystemDefault() {
+			/** @todo clean up */
 			console.info('Display mode updating to system default.')
 
 			const displayTheme = DisplayTheme.resolve()
@@ -64,6 +65,7 @@
 		}
 
 		toLightMode() {
+			/** @todo clean up */
 			console.info('Display mode updating to light mode.')
 
 			DisplayTheme.resolve().toLightMetallicTheme()
@@ -73,6 +75,7 @@
 		}
 
 		toDarkMode() {
+			/** @todo clean up */
 			console.info('Display mode updating to dark mode.')
 
 			const displayTheme = DisplayTheme.resolve()
@@ -186,6 +189,7 @@
 		}
 
 		toLightMetallicTheme() {
+			/** @todo clean up */
 			console.info('Display theme updating to light: metallic.')
 
 			const root = document.documentElement
@@ -199,6 +203,7 @@
 		}
 
 		toCyberneticTheme() {
+			/** @todo clean up */
 			console.info('Display theme updating to dark 1: cybernetic.')
 
 			const root = document.documentElement
@@ -212,6 +217,7 @@
 		}
 
 		toIndustrialTheme() {
+			/** @todo clean up */
 			console.info('Display theme updating to dark 2: industrial.')
 
 			if (DisplayMode.resolve() instanceof LightDisplayMode || !DisplayMode.prefersDark()) {

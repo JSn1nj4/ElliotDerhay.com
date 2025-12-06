@@ -47,6 +47,7 @@
 					detail: {[this.key]: this.value},
 				}))
 
+				/** @todo clean up */
 				console.log('sent change: ' + this.value)
 			},
 
@@ -59,6 +60,7 @@
 					return
 				}
 
+				/** @todo clean up */
 				console.log('received change: ' + value)
 
 				this.value = value
