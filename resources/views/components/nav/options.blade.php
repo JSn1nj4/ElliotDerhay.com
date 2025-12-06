@@ -14,14 +14,16 @@
 </div>
 
 <div id="fun-theme-wrapper" class='hidden dark:block'>
-	<x-nav.button-item
-		class="fun-mode-button"
-		onclick="toggleFunTheme()"
-		text='Fun Mode'
-		button-text="Toggle Fun Mode"
+	<x-nav.select-item
+		id='display_theme'
+		name='display_theme'
+		event-key='theme'
+		dispatch='display_theme.update'
+		listen='display_theme.updated'
 	>
-		<x-slot:icon>
-			<x-icons.bolt />
-		</x-slot:icon>
-	</x-nav.button-item>
+		<x-slot:label>Display Theme</x-slot:label>
+		<option value='light'>Light Metallic</option>
+		<option value='dark'>Cybernetic</option>
+		<option value='dark2'>Industrial</option>
+	</x-nav.select-item>
 </div>
