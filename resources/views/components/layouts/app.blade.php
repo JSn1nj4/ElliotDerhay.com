@@ -18,6 +18,8 @@
 </head>
 <body
 	class="relative bg-big-stone-100 dark:bg-big-stone-950 text-black dark:text-white font-sans flex flex-col {{ $bodyClasses ?? '' }} max-w-screen overflow-x-clip">
+<div class='absolute top-0 left-0 w-full h-full invisible dark2:visible'
+		 style='background: url({{ asset_url('blue-grunge-stone-texture-background-2-tiled.jpg') }})'></div>
 
 @component('partials.header')
 	<x-nav>
@@ -30,7 +32,7 @@
 @endcomponent
 
 <!-- Page Content -->
-<main class="bg-big-stone-100 dark:bg-black/60 flex flex-col grow z-0">
+<main class="bg-big-stone-100 dark:bg-black/60 dark2:bg-transparent flex flex-col grow z-0">
 	{{ $slot }}
 </main>
 
