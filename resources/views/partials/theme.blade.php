@@ -99,6 +99,7 @@
 	class SystemDisplayMode extends DisplayMode {
 		init() {
 			this.updateStorage('system')
+				.broadcast('system')
 
 			super.init()
 		}
@@ -116,6 +117,7 @@
 	class LightDisplayMode extends DisplayMode {
 		init() {
 			this.updateStorage('light')
+				.broadcast('light')
 
 			super.init()
 		}
@@ -133,6 +135,7 @@
 	class DarkDisplayMode extends DisplayMode {
 		init() {
 			this.updateStorage('dark')
+				.broadcast('dark')
 
 			super.init()
 		}
@@ -242,6 +245,7 @@
 	class LightMetallicTheme extends DisplayTheme {
 		init() {
 			this.updateStorage('light')
+				.broadcast('light')
 
 			document.documentElement.classList.remove('dark')
 			document.documentElement.classList.remove('dark2')
@@ -260,6 +264,7 @@
 	class CyberneticTheme extends DisplayTheme {
 		init() {
 			this.updateStorage('dark')
+				.broadcast('dark')
 
 			document.documentElement.classList.add('dark')
 			document.documentElement.classList.remove('dark2')
@@ -278,6 +283,7 @@
 	class IndustrialTheme extends DisplayTheme {
 		init() {
 			this.updateStorage('dark2')
+				.broadcast('dark2')
 
 			document.documentElement.classList.add('dark')
 			document.documentElement.classList.add('dark2')
