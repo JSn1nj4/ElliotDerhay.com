@@ -1,4 +1,4 @@
-<div class="block" id="theme-toggle-wrapper">
+<div class="block" id="mode-switch-wrapper">
 	<x-nav.select-item
 		id='display_mode'
 		name='display_mode'
@@ -13,7 +13,7 @@
 	</x-nav.select-item>
 </div>
 
-<div id="fun-theme-wrapper" class='hidden dark:block'>
+<div id="theme-switch-wrapper" class='hidden dark:block'>
 	<x-nav.select-item
 		id='display_theme'
 		name='display_theme'

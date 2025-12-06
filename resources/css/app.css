@@ -11,7 +11,7 @@
 
 @custom-variant dark (&:is(.dark *));
 
-@custom-variant fun (&:is(.dark2 *));
+@custom-variant dark2 (&:is(.dark2 *));
 
 @custom-variant scroll (&:is(.scroll *));
 
@@ -1290,7 +1290,7 @@
 		}
 	}
 
-	#theme-toggle-wrapper {
+	#mode-switch-wrapper {
 		.system-button,
 		.light-mode-button,
 		.dark-mode-button {
@@ -1310,7 +1310,7 @@
 		}
 	}
 
-	#fun-theme-wrapper {
+	#theme-switch-wrapper {
 		.dark2-mode-button {
 			display: none;
 		}

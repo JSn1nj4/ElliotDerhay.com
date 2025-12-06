@@ -219,9 +219,12 @@
 				return this
 			}
 
-			const root = document.documentElement
-			if (!root.classList.contains('dark')) root.classList.add('dark')
-			if (!root.classList.contains('dark2')) root.classList.add('dark2')
+			if (!document.documentElement.classList.contains('dark')) {
+				document.documentElement.classList.add('dark')
+			}
+			if (!document.documentElement.classList.contains('dark2')) {
+				document.documentElement.classList.add('dark2')
+			}
 
 			return displayThemes.dark2
 				.updateStorage('dark2')
