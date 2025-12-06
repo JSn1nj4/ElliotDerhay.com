@@ -364,6 +364,8 @@
 		}
 	}
 
-	const controller = new DisplayController()
-	controller.init()
+	window.addEventListener('load', function() {
+		const controller = new DisplayController()
+		controller.init()
+	})
 </script>
