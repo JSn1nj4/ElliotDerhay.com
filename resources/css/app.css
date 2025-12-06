@@ -1278,48 +1278,6 @@
 		max-width: 1600px;
 	}
 
-	.mobile-menu {
-		top: 100%;
-		z-index: 50;
-		visibility: hidden;
-		opacity: 0;
-
-		#menu-toggle:checked + & {
-			visibility: visible;
-			opacity: 1;
-		}
-	}
-
-	#mode-switch-wrapper {
-		.system-button,
-		.light-mode-button,
-		.dark-mode-button {
-			display: none;
-		}
-
-		html[color-theme='system'] & .system-button {
-			display: flex;
-		}
-
-		html[color-theme='light'] & .light-mode-button {
-			display: flex;
-		}
-
-		html[color-theme='dark'] & .dark-mode-button {
-			display: flex;
-		}
-	}
-
-	#theme-switch-wrapper {
-		.dark2-mode-button {
-			display: none;
-		}
-
-		html.dark & .dark2-mode-button {
-			display: flex;
-		}
-	}
-
 	.banner-section {
 		background-size: cover;
 		background-position: center top;
@@ -1421,14 +1379,6 @@
 	}
 
 	@media only screen and (min-width: 992px) {
-		.mobile-menu {
-			top: auto;
-			@apply bg-transparent h-auto;
-			z-index: 10;
-			visibility: visible;
-			opacity: 1;
-		}
-
 		.banner-section {
 			height: 46.875vw;
 		}
