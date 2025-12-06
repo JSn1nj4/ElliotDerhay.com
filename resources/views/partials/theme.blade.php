@@ -8,6 +8,12 @@
 	const storageKeyId = 'storageKey'
 
 	class DisplayMode {
+		broadcast(value) {
+			document.dispatchEvent(new CustomEvent('display_mode.updated', {
+				detail: {mode: value},
+			}))
+		}
+
 		init() {
 			DisplayTheme.resolve().init()
 		}
@@ -55,14 +61,18 @@
 				return this
 			}
 
-			return displayModes.system.updateStorage('system')
+			return displayModes.system
+				.updateStorage('system')
+				.broadcast('system')
 		}
 
 		toLightMode() {
 			console.info('Display mode updating to light mode.')
 
 			DisplayTheme.resolve().toLightMetallicTheme()
-			return displayModes.light.updateStorage('light')
+			return displayModes.light
+				.updateStorage('light')
+				.broadcast('light')
 		}
 
 		toDarkMode() {
@@ -74,7 +84,9 @@
 				displayTheme.toCyberneticTheme()
 			}
 
-			return displayModes.dark.updateStorage('dark')
+			return displayModes.dark
+				.updateStorage('dark')
+				.broadcast('dark')
 		}
 
 		updateStorage(value) {
@@ -143,6 +155,12 @@
 	}
 
 	class DisplayTheme {
+		broadcast(value) {
+			document.dispatchEvent(new CustomEvent('display_theme.updated', {
+				detail: {theme: value},
+			}))
+		}
+
 		static resolve() {
 			const displayTheme = localStorage.getItem(displayThemes.storageKey)
 
@@ -172,7 +190,10 @@
 			root.classList.remove('dark')
 			root.classList.remove('dark2')
 
-			return displayThemes.light.updateDocAttribute('light').updateStorage('light')
+			return displayThemes.light
+				.updateDocAttribute('light')
+				.updateStorage('light')
+				.broadcast('light')
 		}
 
 		toCyberneticTheme() {
@@ -182,7 +203,10 @@
 			if (root.classList.contains('dark2')) root.classList.remove('dark2')
 			if (!root.classList.contains('dark')) root.classList.add('dark')
 
-			return displayThemes.dark.updateDocAttribute('dark').updateStorage('dark')
+			return displayThemes.dark
+				.updateDocAttribute('dark')
+				.updateStorage('dark')
+				.broadcast('dark')
 		}
 
 		toIndustrialTheme() {
@@ -197,7 +221,9 @@
 			if (!root.classList.contains('dark')) root.classList.add('dark')
 			if (!root.classList.contains('dark2')) root.classList.add('dark2')
 
-			return displayThemes.dark2.updateStorage('dark2')
+			return displayThemes.dark2
+				.updateStorage('dark2')
+				.broadcast('dark2')
 		}
 
 		updateDocAttribute(value) {
@@ -289,11 +315,20 @@
 					DisplayMode.resolve().toLightMode()
 				})
 
+			document.addEventListener('display_mode.update', this.updateMode.bind(this))
+			document.addEventListener('display_theme.update', this.updateTheme.bind(this))
+
 			DisplayMode.resolve().init()
 		}
 
-		updateMode(mode) {
-			if (mode === storageKeyId || !(mode in displayModes)) {
+		updateMode(event) {
+			const mode = event?.detail?.mode
+
+			if (
+				typeof mode !== 'string'
+				|| mode === storageKeyId
+				|| !(mode in displayModes)
+			) {
 				console.warn(`Invalid mode: ${mode}`)
 				return
 			}
@@ -307,8 +342,14 @@
 			if (mode === 'dark') current.toDarkMode()
 		}
 
-		updateTheme(theme) {
-			if (theme === storageKeyId || !(theme in displayThemes)) {
+		updateTheme(event) {
+			const theme = event?.detail?.theme
+
+			if (
+				typeof theme !== 'string'
+				|| theme === storageKeyId
+				|| !(theme in displayThemes)
+			) {
 				console.warn(`Invalid theme: ${theme}`)
 				return
 			}
