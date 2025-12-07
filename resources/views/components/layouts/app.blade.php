@@ -32,7 +32,7 @@
 @endcomponent
 
 <!-- Page Content -->
-<main class="bg-big-stone-100 dark:bg-black/60 dark2:bg-transparent flex flex-col grow z-0">
+<main class="bg-big-stone-100 dark:bg-black/60 dark2:bg-transparent flex flex-col grow z-10">
 	{{ $slot }}
 </main>
 
