@@ -17,8 +17,8 @@
 	<livewire:google-analytics />
 </head>
 <body
-	class="relative bg-big-stone-100 dark:bg-big-stone-950 text-black dark:text-white font-sans flex flex-col {{ $bodyClasses ?? '' }} max-w-screen overflow-x-clip">
-<div class='absolute top-0 left-0 w-full h-full opacity-0 dark2:opacity-100 blur-sm'
+	class="relative bg-big-stone-100 dark:bg-big-stone-950 text-black dark:text-white font-sans flex flex-col {{ $bodyClasses ?? '' }} max-w-screen overflow-x-clip transition-colors duration-300">
+<div class='absolute top-0 left-0 w-full h-full opacity-0 dark2:opacity-100 blur-sm transition-opacity'
 		 style='background: url({{ asset_url('blue-grunge-stone-texture-background-2-tiled.jpg') }})'></div>
 
 @component('partials.header')
@@ -45,6 +45,9 @@
 @isset($footerExtras)
 	{{ $footerExtras }}
 @endisset
+
+<x-page-trim />
+<x-page-trim mirror />
 
 <x-scroller.housing />
 <x-scroller.housing mirror />

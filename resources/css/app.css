@@ -1151,6 +1151,22 @@
 	--color-primary-800: oklch(45.51% 0.076 188.69);
 	--color-primary-900: oklch(40.08% 0.065 187.47);
 	--color-primary-950: oklch(28.98% 0.050 190.57);
+
+	--animate-pulse-100: pulse-100 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+
+	@keyframes pulse-100 {
+		0% {
+			opacity: 0;
+		}
+
+		50% {
+			opacity: 100;
+		}
+
+		100% {
+			opacity: 0;
+		}
+	}
 }
 
 /*
