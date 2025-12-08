@@ -6,7 +6,7 @@
 	'top-0',
 	'left-0' => !$mirror,
 	'right-0' => $mirror,
-	'z-10',
+	'z-20',
 ])>
 	<div class='relative h-full w-full'>
 		<x-scroller.track :mirror='$mirror' />
