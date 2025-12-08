@@ -1152,9 +1152,9 @@
 	--color-primary-900: oklch(40.08% 0.065 187.47);
 	--color-primary-950: oklch(28.98% 0.050 190.57);
 
-	--animate-pulse-100: pulse-100 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+	--animate-neon-pulse: neon-pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 
-	@keyframes pulse-100 {
+	@keyframes neon-pulse {
 		0% {
 			opacity: 0;
 		}
@@ -1288,6 +1288,10 @@
 		.dark &.active {
 			@apply text-white;
 		}
+	}
+
+	.container-flexible {
+		max-width: 1440px;
 	}
 
 	.container-flexible-large {
