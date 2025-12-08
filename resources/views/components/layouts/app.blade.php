@@ -33,7 +33,11 @@
 
 <!-- Page Content -->
 <main class="bg-big-stone-100 dark:bg-black/60 dark2:bg-transparent flex flex-col grow z-10">
-	{{ $slot }}
+	<div class='flex flex-col z-20'>
+		{{ $slot }}
+	</div>
+	<x-page-trim />
+	<x-page-trim mirror />
 </main>
 
 @include('partials.footer')
@@ -45,9 +49,6 @@
 @isset($footerExtras)
 	{{ $footerExtras }}
 @endisset
-
-<x-page-trim />
-<x-page-trim mirror />
 
 <x-scroller.housing />
 <x-scroller.housing mirror />

@@ -43,7 +43,7 @@ new class extends Component {
 	}
 }; ?>
 
-<article class="container mx-auto px-4 pt-6">
+<article class="container-flexible mx-auto px-4 sm:px-8 md:px-16 lg:px-32 pt-6">
 	<section class="block">
 
 		<div class="w-full pb-6 text-center">
