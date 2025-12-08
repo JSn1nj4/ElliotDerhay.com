@@ -25,7 +25,7 @@
 			'relative' => true,
 			'w-full' => true,
 			'h-full' => true,
-			'opacity-100' => true,
+			'opacity-0' => true,
 			'dark:animate-pulse-100' => true,
 			'dark2:md:animate-none' => true,
 			'bg-repeat-y' => true,
