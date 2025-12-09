@@ -7,7 +7,7 @@ new class extends Component {
 }; ?>
 
 <root>
-	<x-row id="about" class="my-10" flex-class="flex flex-col md:flex-row gap-10">
+	<x-row id="about" class="my-12" flex-class="flex flex-col md:flex-row gap-12">
 		<x-column class="md:w-1/2 lg:w-5/12 xl:w-1/3">
 			<img src="{{ asset_url("Elliot-head-on-square-color-medium.jpg") }}" title="Elliot Derhay"
 					 alt="Photo of Elliot Derhay"
@@ -46,7 +46,7 @@ new class extends Component {
 		</x-column>
 	</x-row>
 
-	<x-row class="my-10" flex-class="flex flex-col md:flex-row gap-10">
+	<x-row class="my-12" flex-class="flex flex-col md:flex-row gap-12">
 		@feature(App\Features\BlogIndex::class)
 		<x-column class="block md:w-1/2">
 			<h2 class="content-title text-2xl uppercase">
