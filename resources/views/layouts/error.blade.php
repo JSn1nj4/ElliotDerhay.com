@@ -16,9 +16,9 @@
 	@stack('head-extras')
 </head>
 <body class="bg-white dark:bg-big-stone-950 text-black dark:text-white font-sans status-page w-full h-full">
-<div class='bg-big-stone-200 dark:bg-black dark2:bg-black/60 flex flex-col w-full h-full backlight'>
+<div class='bg-big-stone-200 dark:bg-black/60 flex flex-col w-full h-full'>
 
-	<div class="flex flex-col mx-auto container px-4 py-6 pt-16 sm:pt-32 md:pt-48 xl:pt-56 justify-center">
+	<div class="flex flex-col mx-auto container px-4 py-6 pt-16 sm:pt-32 md:pt-48 xl:pt-56 justify-center z-10">
 		<div class="pb-4 w-full max-w-md mx-auto">
 			<h1 class="text-xl sm:text-4xl">
 				<span class="align-middle text-3xl sm:text-6xl font-extralight">{{ $errorCode }}</span>
@@ -36,6 +36,12 @@
 			</div>
 		</div>
 	</div>
+
+	<div class='absolute top-0 left-0 w-full h-full opacity-0 dark2:opacity-100 blur-sm transition-opacity'
+			 style='background: url({{ asset_url('blue-grunge-stone-texture-background-2-tiled.jpg') }})'></div>
+
+	<x-page-trim />
+	<x-page-trim mirror />
 </div>
 
 @stack('footer-extras')
