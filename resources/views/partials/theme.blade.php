@@ -151,7 +151,7 @@
 	}
 
 	const displayModes = {
-		[storageKeyId]: 'displayMode',
+		[storageKeyId]: 'theme', // needs to be this, not displayMode, for cross-compatibility
 		'system': new SystemDisplayMode(),
 		'light': new LightDisplayMode(),
 		'dark': new DarkDisplayMode(),
