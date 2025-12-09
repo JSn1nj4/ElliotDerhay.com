@@ -14,7 +14,6 @@ class Dropdown extends Component
 	public string $toggleClasses;
 	public string $wrapperClasses;
 	public string $containerClasses;
-	public string $triangleWrapperClasses;
 
 	/**
 	 * Create a new component instance.
@@ -36,7 +35,8 @@ class Dropdown extends Component
 			'md:relative' => $this->mobileCondense,
 			'-right-3' => true,
 			'md:right-0' => $this->mobileCondense,
-			'top-20' => true,
+			'top-12' => true,
+			'md:top-[3.50rem]' => !$this->mobileCondense,
 			'md:top-0' => $this->mobileCondense,
 			'-z-50' => true,
 			'md:z-0' => $this->mobileCondense,
@@ -48,7 +48,8 @@ class Dropdown extends Component
 			'border-bright-turquoise-900' => true,
 			'dark:border-bright-turquoise-500' => true,
 			'dark2:border-slate-900' => true,
-			'rounded-xl' => true,
+			'dark2:border-t-big-stone-950' => true,
+			'rounded-b-xl' => true,
 			'md:rounded-none' => $this->mobileCondense,
 			'w-56' => true,
 			'md:w-auto' => $this->mobileCondense,
@@ -78,16 +79,6 @@ class Dropdown extends Component
 			'p-3' => true,
 			'md:p-0' => $this->mobileCondense,
 			'text-lg' => true,
-		])));
-
-		$this->triangleWrapperClasses = implode(" ", array_keys(array_filter([
-			'absolute' => true,
-			'-top-7' => true,
-			'right-1' => true,
-			'h-7' => true,
-			'w-10' => true,
-			'md:hidden' => $this->mobileCondense,
-			'md:-z-50' => $this->mobileCondense,
 		])));
 	}
 
