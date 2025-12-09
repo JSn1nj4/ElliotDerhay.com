@@ -43,30 +43,26 @@ new class extends Component {
 	}
 }; ?>
 
-<article class="container-flexible mx-auto px-4 sm:px-8 md:px-16 lg:px-32 pt-6">
+<article class="container-flexible flex flex-col gap-12 mx-auto px-4 sm:px-8 md:px-16 lg:px-32 my-12">
 	<section class="block">
-
-		<div class="w-full pb-6 text-center">
-			<div class="px-2">
-				<h1 class="content-title text-4xl pt-6 mt-4 md:pt-0 md:mt-0 uppercase">
+		<div class="w-full text-center">
+			<div>
+				<h1 class="content-title text-4xl uppercase">
 					Projects
 				</h1>
-				<p class="mb-4">
+				<p>
 					Below are projects that I've either built myself or contributed directly to. Some will also have links to
 					demos.
 				</p>
 			</div>
 		</div>
-
 	</section>
 
 	<section class="block w-full md:flex">
-
-		<div class="w-full pb-8 px-2 pt-6 mt-4 md:pt-0 md:mt-0">
+		<div class="w-full">
 			<div id="main-projects-list-wrapper">
 				@include('partials.projects-list', compact('projects'))
 			</div>
 		</div>
-
 	</section>
 </article>

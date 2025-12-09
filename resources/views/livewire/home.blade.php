@@ -7,17 +7,19 @@ new class extends Component {
 }; ?>
 
 <root>
-	<x-row id="about" flex-class="flex flex-row flex-wrap">
-		<x-column class="flex md:w-1/2 lg:w-5/12 xl:w-1/3">
+	<x-row id="about" class="my-10" flex-class="flex flex-col md:flex-row gap-10">
+		<x-column class="md:w-1/2 lg:w-5/12 xl:w-1/3">
 			<img src="{{ asset_url("Elliot-head-on-square-color-medium.jpg") }}" title="Elliot Derhay"
 					 alt="Photo of Elliot Derhay"
 					 class="border-black dark:border-white border-2 border-opacity-40 rounded-3xl">
 		</x-column>
 
-		<x-column class="md:order-first md:w-1/2 lg:w-7/12 xl:w-2/3">
-			<div class='flex flex-col gap-4'>
+		<x-column
+			class="md:order-first md:w-1/2 lg:w-7/12 xl:w-2/3">
+			<div
+				class='flex flex-col gap-4 md:bg-none rounded-3xl dark:border dark:border-slate-600 dark:hover:border-bright-turquoise-500 md:border-none dark:bg-neutral-950 dark:md:bg-transparent p-4 md:p-0'>
 				<h1
-					class="text-2xl pt-6 mt-4 md:mt-0 md:pt-0 uppercase">
+					class="text-2xl uppercase">
 					About me
 				</h1>
 
@@ -42,10 +44,12 @@ new class extends Component {
 				</p>
 			</div>
 		</x-column>
+	</x-row>
 
+	<x-row class="my-10" flex-class="flex flex-col md:flex-row gap-10">
 		@feature(App\Features\BlogIndex::class)
 		<x-column class="block md:w-1/2">
-			<h2 class="content-title text-2xl pt-6 mt-4 uppercase">
+			<h2 class="content-title text-2xl uppercase">
 				Latest Blog Post</h2>
 			<section id="blog_feed-home">
 				<x-post.latest />
@@ -55,7 +59,7 @@ new class extends Component {
 
 		@feature(App\Features\GithubFeed::class)
 		<x-column class="block md:w-1/2">
-			<h2 class="content-title text-2xl pt-6 mt-4 uppercase">
+			<h2 class="content-title text-2xl uppercase">
 				GitHub Activity</h2>
 			<section id="github_events_feed-home" class="font-mono">
 				<x-github.events-feed padding="px-4 py-6" count="5" />
