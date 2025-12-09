@@ -93,9 +93,10 @@ class extends \Livewire\Volt\Component {
 				Categories:
 				@foreach($post->categories as $cat_i => $category)
 					@unless($cat_i === 0)
-						,
+						<span class='hidden lg:last:hidden'>,</span>
 					@endunless
-					<a href="{{ route('blog', compact('category')) }}">{{ $category->title }}</a>
+					<a href="{{ route('blog', compact('category')) }}"
+						 class='inline-block lg:inline m-1 lg:m-0 border border-slate-600 lg:border-0 rounded lg:rounded-none bg-neutral-950 lg:bg-transparent px-2 py-1 lg:p-0'>{{ $category->title }}</a>
 				@endforeach
 			</p>
 		@endif
@@ -105,9 +106,10 @@ class extends \Livewire\Volt\Component {
 				Tags:
 				@foreach($post->tags as $tag_i => $tag)
 					@unless($tag_i === 0)
-						,
+						<span class='hidden lg:last:hidden'>,</span>
 					@endunless
-					<a href="{{ route('blog', compact('tag')) }}">#{{ $tag->title }}</a>
+					<a href="{{ route('blog', compact('tag')) }}"
+						 class='inline-block lg:inline m-1 lg:m-0 border border-slate-600 lg:border-0 rounded lg:rounded-none bg-neutral-950 lg:bg-transparent px-2 py-1 lg:p-0'>#{{ $tag->title }}</a>
 				@endforeach
 			</p>
 		@endif
