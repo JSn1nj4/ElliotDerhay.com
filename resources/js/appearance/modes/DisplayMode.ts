@@ -1,9 +1,6 @@
 import {DisplayTheme} from '../themes/DisplayTheme'
-import {SystemDisplayMode} from './SystemDisplayMode'
 import {displayModes, storageKeyId} from '../registry'
 import {LightMetallicTheme} from '../themes/LightMetallicTheme'
-import {LightDisplayMode} from './LightDisplayMode'
-import {DarkDisplayMode} from './DarkDisplayMode'
 
 export class DisplayMode {
 	broadcast(value: string): DisplayMode {
@@ -56,18 +53,18 @@ export class DisplayMode {
 
 	syncTheme(currentTheme: DisplayTheme): void {}
 
-	toSystemDefault(): SystemDisplayMode {
+	toSystemDefault(): DisplayMode {
 		/** @todo clean up */
 		console.info('Display mode updating to system default.')
 
 		const displayTheme = DisplayTheme.resolve()
 
-		let step = () => {}
+		let step = () => displayTheme
 
 		if (!DisplayMode.prefersDark()) {
 			// this just pushes it to light metallic theme if darkness is not preferred and in case it currently is 'dark'
 			step = () => displayTheme.toLightMetallicTheme()
-		} else if (displayTheme instanceof LightMetallicTheme) {
+		} else if (!displayTheme.isDark()) {
 			// this just pushes it to the Cybernetic theme if darkness is preferred and it's currently light
 			step = () => displayTheme.toCyberneticTheme()
 		}
@@ -77,7 +74,7 @@ export class DisplayMode {
 		return displayModes.system.updateStorage('system').broadcast('system')
 	}
 
-	toLightMode(): LightDisplayMode {
+	toLightMode(): DisplayMode {
 		/** @todo clean up */
 		console.info('Display mode updating to light mode.')
 
@@ -85,7 +82,7 @@ export class DisplayMode {
 		return displayModes.light.updateStorage('light').broadcast('light')
 	}
 
-	toDarkMode(): DarkDisplayMode {
+	toDarkMode(): DisplayMode {
 		/** @todo clean up */
 		console.info('Display mode updating to dark mode.')
 

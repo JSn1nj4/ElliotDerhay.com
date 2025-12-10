@@ -8,7 +8,7 @@ export class LightDisplayMode extends DisplayMode {
 		super.init()
 	}
 
-	resolve(): DisplayMode {
+	resolve(): LightDisplayMode {
 		return this
 	}
 

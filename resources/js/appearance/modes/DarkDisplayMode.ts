@@ -2,6 +2,10 @@ import {DisplayMode} from './DisplayMode'
 import {DisplayTheme} from '../themes/DisplayTheme'
 
 export class DarkDisplayMode extends DisplayMode {
+	constructor() {
+		super()
+	}
+
 	init() {
 		this.updateStorage('dark').broadcast('dark')
 

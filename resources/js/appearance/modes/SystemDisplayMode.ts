@@ -2,13 +2,13 @@ import {DisplayMode} from './DisplayMode'
 import {DisplayTheme} from '../themes/DisplayTheme'
 
 export class SystemDisplayMode extends DisplayMode {
-	init() {
+	init(): void {
 		this.updateStorage('system').broadcast('system')
 
 		super.init()
 	}
 
-	resolve() {
+	resolve(): SystemDisplayMode {
 		return this
 	}
 
@@ -16,7 +16,7 @@ export class SystemDisplayMode extends DisplayMode {
 		currentTheme.toSystemAppropriate()
 	}
 
-	toSystemDefault() {
+	toSystemDefault(): SystemDisplayMode {
 		console.warn('Display mode is already system default. Doing nothing.')
 		return this
 	}

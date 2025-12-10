@@ -3,7 +3,7 @@ import {DisplayMode} from '../modes/DisplayMode'
 import {LightDisplayMode} from '../modes/LightDisplayMode'
 
 export class DisplayTheme {
-	broadcast(value) {
+	broadcast(value: string): DisplayTheme {
 		document.dispatchEvent(
 			new CustomEvent('display_theme.updated', {
 				detail: {theme: value},
@@ -13,11 +13,13 @@ export class DisplayTheme {
 		return this
 	}
 
-	isDark() {
+	init(): void {}
+
+	isDark(): boolean {
 		return false
 	}
 
-	static resolve() {
+	static resolve(): DisplayTheme {
 		const displayTheme = localStorage.getItem(displayThemes.storageKey)
 
 		if (displayTheme === null || displayTheme === undefined) {
@@ -35,11 +37,11 @@ export class DisplayTheme {
 		return displayThemes[displayTheme]
 	}
 
-	resolve() {
+	resolve(): DisplayTheme {
 		return DisplayTheme.resolve()
 	}
 
-	toLightMetallicTheme() {
+	toLightMetallicTheme(): DisplayTheme {
 		/** @todo clean up */
 		console.info('Display theme updating to light: metallic.')
 
@@ -53,7 +55,7 @@ export class DisplayTheme {
 			.broadcast('light')
 	}
 
-	toCyberneticTheme() {
+	toCyberneticTheme(): DisplayTheme {
 		/** @todo clean up */
 		console.info('Display theme updating to dark 1: cybernetic.')
 
@@ -67,7 +69,7 @@ export class DisplayTheme {
 			.broadcast('dark')
 	}
 
-	toIndustrialTheme() {
+	toIndustrialTheme(): DisplayTheme {
 		/** @todo clean up */
 		console.info('Display theme updating to dark 2: industrial.')
 
@@ -89,19 +91,19 @@ export class DisplayTheme {
 		return displayThemes.dark2.updateStorage('dark2').broadcast('dark2')
 	}
 
-	toSystemAppropriate() {
+	toSystemAppropriate(): DisplayTheme {
 		if (!DisplayMode.prefersDark()) return this.toLightMetallicTheme()
 
 		if (!this.isDark()) return this.toCyberneticTheme()
 	}
 
-	updateDocAttribute(value) {
+	updateDocAttribute(value: string): DisplayTheme {
 		document.documentElement.setAttribute('color-theme', value)
 
 		return this
 	}
 
-	updateStorage(value) {
+	updateStorage(value: string): DisplayTheme {
 		localStorage.setItem(displayThemes.storageKey, value)
 
 		return this

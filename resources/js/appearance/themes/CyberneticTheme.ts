@@ -1,22 +1,22 @@
 import {DisplayTheme} from './DisplayTheme'
 
 export class CyberneticTheme extends DisplayTheme {
-	init() {
+	init(): void {
 		this.updateStorage('dark').broadcast('dark')
 
 		document.documentElement.classList.add('dark')
 		document.documentElement.classList.remove('dark2')
 	}
 
-	isDark() {
+	isDark(): boolean {
 		return true
 	}
 
-	resolve() {
+	resolve(): CyberneticTheme {
 		return this
 	}
 
-	toCyberneticTheme() {
+	toCyberneticTheme(): CyberneticTheme {
 		console.warn('Display theme is already cybernetic. Doing nothing.')
 		return this
 	}

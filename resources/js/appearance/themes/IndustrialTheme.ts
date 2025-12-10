@@ -1,22 +1,22 @@
 import {DisplayTheme} from './DisplayTheme'
 
 export class IndustrialTheme extends DisplayTheme {
-	init() {
+	init(): void {
 		this.updateStorage('dark2').broadcast('dark2')
 
 		document.documentElement.classList.add('dark')
 		document.documentElement.classList.add('dark2')
 	}
 
-	isDark() {
+	isDark(): boolean {
 		return true
 	}
 
-	resolve() {
+	resolve(): IndustrialTheme {
 		return this
 	}
 
-	toIndustrialTheme() {
+	toIndustrialTheme(): IndustrialTheme {
 		console.warn('Display theme is already industrial. Doing nothing.')
 		return this
 	}

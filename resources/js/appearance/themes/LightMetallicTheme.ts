@@ -1,18 +1,18 @@
 import {DisplayTheme} from './DisplayTheme'
 
 export class LightMetallicTheme extends DisplayTheme {
-	init() {
+	init(): void {
 		this.updateStorage('light').broadcast('light')
 
 		document.documentElement.classList.remove('dark')
 		document.documentElement.classList.remove('dark2')
 	}
 
-	resolve() {
+	resolve(): LightMetallicTheme {
 		return this
 	}
 
-	toLightMetallicTheme() {
+	toLightMetallicTheme(): LightMetallicTheme {
 		console.warn('Display theme is already light metallic. Doing nothing.')
 		return this
 	}
