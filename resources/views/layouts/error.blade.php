@@ -44,8 +44,8 @@
 	<x-page-trim mirror />
 </div>
 
-@stack('footer-extras')
+@vite('resources/js/app.ts')
 
-@include('partials.theme')
+@stack('footer-extras')
 </body>
 </html>

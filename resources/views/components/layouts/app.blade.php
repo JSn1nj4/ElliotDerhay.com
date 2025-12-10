@@ -138,6 +138,6 @@
 	})
 </script>
 
-@include('partials.theme')
+@vite('resources/js/app.ts')
 </body>
 </html>
