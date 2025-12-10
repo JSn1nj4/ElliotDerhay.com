@@ -11,7 +11,25 @@
 		}
 
 		init() {
-			DisplayTheme.resolve().init()
+			const currentTheme = DisplayTheme.resolve()
+
+			currentTheme.init()
+
+			if (this instanceof LightDisplayMode) {
+				currentTheme.toLightMetallicTheme()
+
+				return
+			}
+
+			if (this instanceof SystemDisplayMode) {
+				currentTheme.toSystemAppropriate()
+
+				return
+			}
+
+			if (!currentTheme.isDark()) {
+				currentTheme.toCyberneticTheme()
+			}
 		}
 
 		static prefersDark() {
@@ -166,6 +184,10 @@
 			return this
 		}
 
+		isDark() {
+			return false
+		}
+
 		static resolve() {
 			const displayTheme = localStorage.getItem(displayThemes.storageKey)
 
@@ -237,6 +259,12 @@
 				.broadcast('dark2')
 		}
 
+		toSystemAppropriate() {
+			if (!DisplayMode.prefersDark()) return this.toLightMetallicTheme()
+
+			if (!this.isDark()) return this.toCyberneticTheme()
+		}
+
 		updateDocAttribute(value) {
 			document.documentElement.setAttribute('color-theme', value)
 
@@ -278,6 +306,10 @@
 			document.documentElement.classList.remove('dark2')
 		}
 
+		isDark() {
+			return true
+		}
+
 		resolve() {
 			return this
 		}
@@ -295,6 +327,10 @@
 
 			document.documentElement.classList.add('dark')
 			document.documentElement.classList.add('dark2')
+		}
+
+		isDark() {
+			return true
 		}
 
 		resolve() {
