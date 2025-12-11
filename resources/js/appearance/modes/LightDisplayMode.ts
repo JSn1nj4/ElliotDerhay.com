@@ -1,15 +1,9 @@
 import {DisplayMode} from './DisplayMode'
-import {DisplayTheme} from '../themes/DisplayTheme'
+import type {DisplayTheme} from '../themes/DisplayTheme'
 
 export class LightDisplayMode extends DisplayMode {
-	init(): void {
-		this.updateStorage('light').broadcast('light')
-
-		super.init()
-	}
-
-	resolve(): LightDisplayMode {
-		return this
+	get id() {
+		return 'light'
 	}
 
 	syncTheme(currentTheme: DisplayTheme): void {

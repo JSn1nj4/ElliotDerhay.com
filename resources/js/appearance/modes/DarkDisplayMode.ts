@@ -1,19 +1,9 @@
 import {DisplayMode} from './DisplayMode'
-import {DisplayTheme} from '../themes/DisplayTheme'
+import type {DisplayTheme} from '../themes/DisplayTheme'
 
 export class DarkDisplayMode extends DisplayMode {
-	constructor() {
-		super()
-	}
-
-	init() {
-		this.updateStorage('dark').broadcast('dark')
-
-		super.init()
-	}
-
-	resolve() {
-		return this
+	get id() {
+		return 'dark'
 	}
 
 	syncTheme(currentTheme: DisplayTheme): void {

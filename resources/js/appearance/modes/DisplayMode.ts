@@ -1,8 +1,13 @@
 import {DisplayTheme} from '../themes/DisplayTheme'
-import {displayModes, storageKeyId} from '../registry'
 import {LightMetallicTheme} from '../themes/LightMetallicTheme'
+import {DisplayThemeResolver} from '../resolvers/DisplayThemeResolver'
+import {DisplayModeResolver} from '../resolvers/DisplayModeResolver'
 
 export class DisplayMode {
+	get id() {
+		return 'system'
+	}
+
 	broadcast(value: string): DisplayMode {
 		document.dispatchEvent(
 			new CustomEvent('display_mode.updated', {
@@ -13,55 +18,17 @@ export class DisplayMode {
 		return this
 	}
 
-	init(): void {
-		const currentTheme = DisplayTheme.resolve()
-
-		currentTheme.init()
-
-		this.syncTheme(currentTheme)
-	}
-
-	static prefersDark(): boolean {
-		return window.matchMedia('(prefers-color-scheme: dark)').matches
-	}
-
-	static resolve(): DisplayMode {
-		const displayMode = localStorage.getItem(displayModes.storageKey)
-
-		if (displayMode === null || displayMode === undefined) {
-			return displayModes.system
-		}
-
-		if (displayMode === storageKeyId) {
-			return displayModes.system
-		}
-
-		if (
-			!displayModes.hasOwnProperty(
-				localStorage.getItem(displayModes.storageKey),
-			)
-		) {
-			return displayModes.system
-		}
-
-		return displayModes[displayMode]
-	}
-
-	resolve(): DisplayMode {
-		return DisplayMode.resolve()
-	}
-
 	syncTheme(currentTheme: DisplayTheme): void {}
 
 	toSystemDefault(): DisplayMode {
 		/** @todo clean up */
 		console.info('Display mode updating to system default.')
 
-		const displayTheme = DisplayTheme.resolve()
+		const displayTheme = DisplayThemeResolver.resolve()
 
 		let step = () => displayTheme
 
-		if (!DisplayMode.prefersDark()) {
+		if (!DisplayModeResolver.prefersDark()) {
 			// this just pushes it to light metallic theme if darkness is not preferred and in case it currently is 'dark'
 			step = () => displayTheme.toLightMetallicTheme()
 		} else if (!displayTheme.isDark()) {
@@ -71,32 +38,34 @@ export class DisplayMode {
 
 		step()
 
-		return displayModes.system.updateStorage('system').broadcast('system')
+		return DisplayModeResolver.system()
+			.updateStorage('system')
+			.broadcast('system')
 	}
 
 	toLightMode(): DisplayMode {
 		/** @todo clean up */
 		console.info('Display mode updating to light mode.')
 
-		DisplayTheme.resolve().toLightMetallicTheme()
-		return displayModes.light.updateStorage('light').broadcast('light')
+		DisplayThemeResolver.resolve().toLightMetallicTheme()
+		return DisplayModeResolver.light().updateStorage('light').broadcast('light')
 	}
 
 	toDarkMode(): DisplayMode {
 		/** @todo clean up */
 		console.info('Display mode updating to dark mode.')
 
-		const displayTheme = DisplayTheme.resolve()
+		const displayTheme = DisplayThemeResolver.resolve()
 
 		if (displayTheme instanceof LightMetallicTheme) {
 			displayTheme.toCyberneticTheme()
 		}
 
-		return displayModes.dark.updateStorage('dark').broadcast('dark')
+		return DisplayModeResolver.dark().updateStorage('dark').broadcast('dark')
 	}
 
 	updateStorage(value: string): DisplayMode {
-		localStorage.setItem(displayModes.storageKey, value)
+		localStorage.setItem(DisplayModeResolver.storageKey, value)
 
 		return this
 	}

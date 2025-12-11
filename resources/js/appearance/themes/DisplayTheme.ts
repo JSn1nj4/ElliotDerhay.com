@@ -1,6 +1,6 @@
-import {displayThemes, storageKeyId} from '../registry'
-import {DisplayMode} from '../modes/DisplayMode'
 import {LightDisplayMode} from '../modes/LightDisplayMode'
+import {DisplayThemeResolver} from '../resolvers/DisplayThemeResolver'
+import {DisplayModeResolver} from '../resolvers/DisplayModeResolver'
 
 export class DisplayTheme {
 	broadcast(value: string): DisplayTheme {
@@ -19,28 +19,6 @@ export class DisplayTheme {
 		return false
 	}
 
-	static resolve(): DisplayTheme {
-		const displayTheme = localStorage.getItem(displayThemes.storageKey)
-
-		if (displayTheme === null || displayTheme === undefined) {
-			return displayThemes.light
-		}
-
-		if (!displayThemes.hasOwnProperty(displayTheme)) {
-			return displayThemes.light
-		}
-
-		if (displayTheme === storageKeyId) {
-			return displayThemes.light
-		}
-
-		return displayThemes[displayTheme]
-	}
-
-	resolve(): DisplayTheme {
-		return DisplayTheme.resolve()
-	}
-
 	toLightMetallicTheme(): DisplayTheme {
 		/** @todo clean up */
 		console.info('Display theme updating to light: metallic.')
@@ -49,7 +27,7 @@ export class DisplayTheme {
 		root.classList.remove('dark')
 		root.classList.remove('dark2')
 
-		return displayThemes.light
+		return DisplayThemeResolver.light()
 			.updateDocAttribute('light')
 			.updateStorage('light')
 			.broadcast('light')
@@ -63,7 +41,7 @@ export class DisplayTheme {
 		if (root.classList.contains('dark2')) root.classList.remove('dark2')
 		if (!root.classList.contains('dark')) root.classList.add('dark')
 
-		return displayThemes.dark
+		return DisplayThemeResolver.dark()
 			.updateDocAttribute('dark')
 			.updateStorage('dark')
 			.broadcast('dark')
@@ -74,8 +52,8 @@ export class DisplayTheme {
 		console.info('Display theme updating to dark 2: industrial.')
 
 		if (
-			DisplayMode.resolve() instanceof LightDisplayMode ||
-			!DisplayMode.prefersDark()
+			DisplayModeResolver.resolve() instanceof LightDisplayMode ||
+			!DisplayModeResolver.prefersDark()
 		) {
 			console.warn('Industrial theme is not supported in light mode.')
 			return this
@@ -88,11 +66,13 @@ export class DisplayTheme {
 			document.documentElement.classList.add('dark2')
 		}
 
-		return displayThemes.dark2.updateStorage('dark2').broadcast('dark2')
+		return DisplayThemeResolver.dark2()
+			.updateStorage('dark2')
+			.broadcast('dark2')
 	}
 
 	toSystemAppropriate(): DisplayTheme {
-		if (!DisplayMode.prefersDark()) return this.toLightMetallicTheme()
+		if (!DisplayModeResolver.prefersDark()) return this.toLightMetallicTheme()
 
 		if (!this.isDark()) return this.toCyberneticTheme()
 	}
@@ -104,7 +84,7 @@ export class DisplayTheme {
 	}
 
 	updateStorage(value: string): DisplayTheme {
-		localStorage.setItem(displayThemes.storageKey, value)
+		localStorage.setItem(DisplayThemeResolver.storageKey, value)
 
 		return this
 	}

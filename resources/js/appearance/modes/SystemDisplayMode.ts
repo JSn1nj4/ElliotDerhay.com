@@ -1,17 +1,7 @@
 import {DisplayMode} from './DisplayMode'
-import {DisplayTheme} from '../themes/DisplayTheme'
+import type {DisplayTheme} from '../themes/DisplayTheme'
 
 export class SystemDisplayMode extends DisplayMode {
-	init(): void {
-		this.updateStorage('system').broadcast('system')
-
-		super.init()
-	}
-
-	resolve(): SystemDisplayMode {
-		return this
-	}
-
 	syncTheme(currentTheme: DisplayTheme): void {
 		currentTheme.toSystemAppropriate()
 	}
