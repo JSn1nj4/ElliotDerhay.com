@@ -1,4 +1,4 @@
-import {CyberneticTheme, DisplayTheme, IndustrialTheme, LightMetallicTheme,} from '../DisplayThemes'
+import {CyberneticTheme, DisplayTheme, IndustrialTheme, LightMetallicTheme} from '../DisplayThemes'
 
 export const ThemeIds = ['light', 'dark', 'dark2']
 
