@@ -1,5 +1,11 @@
 # Changelog
 
+## Version 3.0.1
+
+### Changes
+
+- JSN-323: Go back to single posts for X
+
 ## Version 3.0.0
 
 ### Changes
