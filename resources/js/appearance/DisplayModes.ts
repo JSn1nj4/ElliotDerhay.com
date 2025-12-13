@@ -1,7 +1,6 @@
-import {DisplayTheme} from '../themes/DisplayTheme'
-import {LightMetallicTheme} from '../themes/LightMetallicTheme'
-import {DisplayThemeResolver} from '../resolvers/DisplayThemeResolver'
-import {DisplayModeResolver} from '../resolvers/DisplayModeResolver'
+import {DisplayTheme, LightMetallicTheme} from './DisplayThemes'
+import {DisplayThemeResolver} from './resolvers/DisplayThemeResolver'
+import {DisplayModeResolver} from './resolvers/DisplayModeResolver'
 
 export class DisplayMode {
 	get id() {
@@ -20,7 +19,7 @@ export class DisplayMode {
 
 	syncTheme(currentTheme: DisplayTheme): void {}
 
-	toSystemDefault(): DisplayMode {
+	toSystemDefault(): SystemDisplayMode {
 		/** @todo clean up */
 		console.info('Display mode updating to system default.')
 
@@ -43,15 +42,16 @@ export class DisplayMode {
 			.broadcast('system')
 	}
 
-	toLightMode(): DisplayMode {
+	toLightMode(): LightDisplayMode {
 		/** @todo clean up */
 		console.info('Display mode updating to light mode.')
 
 		DisplayThemeResolver.resolve().toLightMetallicTheme()
+
 		return DisplayModeResolver.light().updateStorage('light').broadcast('light')
 	}
 
-	toDarkMode(): DisplayMode {
+	toDarkMode(): DarkDisplayMode {
 		/** @todo clean up */
 		console.info('Display mode updating to dark mode.')
 
@@ -64,9 +64,52 @@ export class DisplayMode {
 		return DisplayModeResolver.dark().updateStorage('dark').broadcast('dark')
 	}
 
-	updateStorage(value: string): DisplayMode {
+	updateStorage(value: string): this {
 		localStorage.setItem(DisplayModeResolver.storageKey, value)
 
+		return this
+	}
+}
+
+export class SystemDisplayMode extends DisplayMode {
+	syncTheme(currentTheme: DisplayTheme): void {
+		currentTheme.toSystemAppropriate()
+	}
+
+	toSystemDefault(): this {
+		console.warn('Display mode is already system default. Doing nothing.')
+		return this
+	}
+}
+
+export class LightDisplayMode extends DisplayMode {
+	get id() {
+		return 'light'
+	}
+
+	syncTheme(currentTheme: DisplayTheme): void {
+		currentTheme.toLightMetallicTheme()
+	}
+
+	toLightMode(): this {
+		console.warn('Display mode is already light mode. Doing nothing.')
+		return this
+	}
+}
+
+export class DarkDisplayMode extends DisplayMode {
+	get id() {
+		return 'dark'
+	}
+
+	syncTheme(currentTheme: DisplayTheme): void {
+		if (currentTheme.isDark()) return
+
+		currentTheme.toCyberneticTheme()
+	}
+
+	toDarkMode(): this {
+		console.warn('Display mode is already dark mode. Doing nothing.')
 		return this
 	}
 }

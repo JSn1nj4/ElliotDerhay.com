@@ -1,9 +1,13 @@
-import {LightDisplayMode} from '../modes/LightDisplayMode'
-import {DisplayThemeResolver} from '../resolvers/DisplayThemeResolver'
-import {DisplayModeResolver} from '../resolvers/DisplayModeResolver'
+import {DisplayThemeResolver} from './resolvers/DisplayThemeResolver'
+import {DisplayModeResolver} from './resolvers/DisplayModeResolver'
+import {LightDisplayMode} from './DisplayModes'
 
 export class DisplayTheme {
-	broadcast(value: string): DisplayTheme {
+	get id(): string {
+		return 'light'
+	}
+
+	broadcast(value: string): this {
 		document.dispatchEvent(
 			new CustomEvent('display_theme.updated', {
 				detail: {theme: value},
@@ -19,7 +23,7 @@ export class DisplayTheme {
 		return false
 	}
 
-	toLightMetallicTheme(): DisplayTheme {
+	toLightMetallicTheme(): LightMetallicTheme {
 		/** @todo clean up */
 		console.info('Display theme updating to light: metallic.')
 
@@ -86,6 +90,68 @@ export class DisplayTheme {
 	updateStorage(value: string): DisplayTheme {
 		localStorage.setItem(DisplayThemeResolver.storageKey, value)
 
+		return this
+	}
+}
+
+export class LightMetallicTheme extends DisplayTheme {
+	init(): void {
+		this.updateStorage('light').broadcast('light')
+
+		document.documentElement.classList.remove('dark')
+		document.documentElement.classList.remove('dark2')
+	}
+
+	resolve(): LightMetallicTheme {
+		return this
+	}
+
+	toLightMetallicTheme(): LightMetallicTheme {
+		console.warn('Display theme is already light metallic. Doing nothing.')
+		return this
+	}
+}
+
+export class CyberneticTheme extends DisplayTheme {
+	init(): void {
+		this.updateStorage('dark').broadcast('dark')
+
+		document.documentElement.classList.add('dark')
+		document.documentElement.classList.remove('dark2')
+	}
+
+	isDark(): boolean {
+		return true
+	}
+
+	resolve(): CyberneticTheme {
+		return this
+	}
+
+	toCyberneticTheme(): CyberneticTheme {
+		console.warn('Display theme is already cybernetic. Doing nothing.')
+		return this
+	}
+}
+
+export class IndustrialTheme extends DisplayTheme {
+	init(): void {
+		this.updateStorage('dark2').broadcast('dark2')
+
+		document.documentElement.classList.add('dark')
+		document.documentElement.classList.add('dark2')
+	}
+
+	isDark(): boolean {
+		return true
+	}
+
+	resolve(): IndustrialTheme {
+		return this
+	}
+
+	toIndustrialTheme(): IndustrialTheme {
+		console.warn('Display theme is already industrial. Doing nothing.')
 		return this
 	}
 }

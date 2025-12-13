@@ -1,7 +1,9 @@
-import {SystemDisplayMode} from '../modes/SystemDisplayMode'
-import {LightDisplayMode} from '../modes/LightDisplayMode'
-import {DarkDisplayMode} from '../modes/DarkDisplayMode'
-import type {DisplayMode} from '../modes/DisplayMode'
+import {
+	DarkDisplayMode,
+	DisplayMode,
+	LightDisplayMode,
+	SystemDisplayMode,
+} from '../DisplayModes'
 
 export const DisplayIds = ['system', 'light', 'dark']
 
