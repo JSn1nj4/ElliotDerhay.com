@@ -42,8 +42,6 @@
 
 @include('partials.footer')
 
-@vite('resources/js/app.ts')
-
 @include('partials.cookie-popup')
 
 @isset($footerExtras)
