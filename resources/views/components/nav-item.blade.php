@@ -1,10 +1,12 @@
 <a href="{{ $href }}" {{ $attributes->class([
 	'block' => !$inline,
 	'lg:inline-block' => $inline,
-	'px-4',
-	'py-6',
+	'px-2',
+	'md:px-4',
+	'py-3',
+	'md:py-6',
 	'uppercase',
-	'active' => $isActive
+	'active' => $isActive,
 ]) }} {{ $livewire ? 'wire:navigate' : '' }}>
 	@if($icon)
 		<x-dynamic-component
@@ -15,8 +17,7 @@
 				'-mt-1',
 				'inline',
 				'align-middle',
-				'stroke-caribbean-green-500' => $isActive,
-				'stroke-2' => $isActive,
+				'active' => $isActive,
 			])
 		/>
 	@endif

@@ -1,5 +1,13 @@
 # Changelog
 
+## Version 3.0.0
+
+### Changes
+
+- JSN-322: Design v3 (#269)
+
+[pr_269]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/269
+
 ## Version 2.19.1
 
 ### Changes

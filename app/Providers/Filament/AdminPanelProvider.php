@@ -14,7 +14,6 @@ use Filament\Navigation\NavigationGroup;
 use Filament\Pages\Dashboard;
 use Filament\Panel;
 use Filament\PanelProvider;
-use Filament\Support\Colors\Color;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
@@ -37,21 +36,33 @@ class AdminPanelProvider extends PanelProvider
 			->maxContentWidth('full')
 			->colors([
 				'primary' => [
-					50 => '#eafff7',
-					100 => '#cdfeeb',
-					200 => '#a0fadc',
-					300 => '#63f2ca',
-					400 => '#25e2b3',
-					500 => '#00c49a',
-					600 => '#00a481',
-					700 => '#00836b',
-					800 => '#006756',
-					900 => '#005548',
-					950 => '#00302a',
+					50 => '#effefb',
+					100 => '#c8fff3',
+					200 => '#91fee9',
+					300 => '#47f5da',
+					400 => '#1fe2c9',
+					500 => '#06c6b1',
+					600 => '#029f91',
+					700 => '#067f75',
+					800 => '#0b645f',
+					900 => '#0e534e',
+					950 => '#003331',
 				],
-				'danger' => Color::Rose,
+				'info' => [
+					50 => '#f4f7fb',
+					100 => '#e9eef5',
+					200 => '#cddcea',
+					300 => '#a2bed7',
+					400 => '#6f9cc1',
+					500 => '#4d7faa',
+					600 => '#3b668e',
+					700 => '#305274',
+					800 => '#2b4661',
+					900 => '#283d52',
+					950 => '#1e2c3d',
+				],
 			])
-			->favicon(static fn () => asset_url("avatar.png"))
+			->favicon(static fn () => asset_url("favicon-2026.png"))
 			->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
 			->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
 			->navigationGroups([

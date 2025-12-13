@@ -2,7 +2,7 @@
 	<x-github.event-icon :icon='$icon' />
 
 	<div class="pl-4 grow relative">
-		<p class="text-neutral-800 dark:text-neutral-500">
+		<p class="text-neutral-800 dark:text-slate-500">
 			{{ $timeElapsed }}
 		</p>
 
@@ -15,7 +15,7 @@
 				{{ $action }}
 
 				<a href="{{ $repoUrl() }}/pull/{{ $event->source }}" target="_blank"
-					 class="text-caribbean-green-600 dark:text-caribbean-green-500">
+					 class="text-bright-turquoise-600 dark:text-bright-turquoise-500">
 					{{ $pullRequestNumberText }}
 				</a>
 

@@ -11,6 +11,10 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@custom-variant dark2 (&:is(.dark2 *));
+
+@custom-variant scroll (&:is(.scroll *));
+
 @theme {
 	--spacing-*: initial;
 	--spacing-0: 0;
@@ -1053,6 +1057,41 @@
 	--color-black: #000000;
 	--color-white: #ffffff;
 
+	--color-big-stone-50: oklch(97.50% 0.006 255.47);
+	--color-big-stone-100: oklch(94.73% 0.011 256.70);
+	--color-big-stone-200: oklch(88.74% 0.025 246.23);
+	--color-big-stone-300: oklch(78.89% 0.047 245.39);
+	--color-big-stone-400: oklch(67.44% 0.074 243.98);
+	--color-big-stone-500: oklch(57.94% 0.086 245.94);
+	--color-big-stone-600: oklch(49.70% 0.080 248.08);
+	--color-big-stone-700: oklch(42.86% 0.069 249.73);
+	--color-big-stone-800: oklch(38.52% 0.057 249.50);
+	--color-big-stone-900: oklch(35.21% 0.046 249.23);
+	--color-big-stone-950: oklch(28.87% 0.037 253.75);
+	/* original hex variants */
+	/*--color-big-stone-50: #f4f7fb;*/
+	/*--color-big-stone-100: #e9eef5;*/
+	/*--color-big-stone-200: #cddcea;*/
+	/*--color-big-stone-300: #a2bed7;*/
+	/*--color-big-stone-400: #6f9cc1;*/
+	/*--color-big-stone-500: #4d7faa;*/
+	/*--color-big-stone-600: #3b668e;*/
+	/*--color-big-stone-700: #305274;*/
+	/*--color-big-stone-800: #2b4661;*/
+	/*--color-big-stone-900: #283d52;*/
+	/*--color-big-stone-950: #1e2c3d;*/
+	--color-bright-turquoise-50: oklch(98.51% 0.016 182.73);
+	--color-bright-turquoise-100: oklch(95.91% 0.058 180.17);
+	--color-bright-turquoise-200: oklch(92.56% 0.106 179.98);
+	--color-bright-turquoise-300: oklch(87.71% 0.143 179.97);
+	--color-bright-turquoise-400: oklch(82.02% 0.144 180.77);
+	--color-bright-turquoise-500: oklch(74.17% 0.133 181.61);
+	--color-bright-turquoise-600: oklch(63.13% 0.112 183.93);
+	--color-bright-turquoise-700: oklch(53.70% 0.093 185.17);
+	--color-bright-turquoise-800: oklch(45.51% 0.076 188.69);
+	--color-bright-turquoise-900: oklch(40.08% 0.065 187.47);
+	--color-bright-turquoise-950: oklch(28.98% 0.050 190.57);
+
 	--color-caribbean-green-50: #eafff7;
 	--color-caribbean-green-100: #cdfeeb;
 	--color-caribbean-green-200: #a0fadc;
@@ -1101,17 +1140,33 @@
 	--color-warning-900: #713f12;
 	--color-warning-950: #422006;
 
-	--color-primary-50: #eafff7;
-	--color-primary-100: #cdfeeb;
-	--color-primary-200: #a0fadc;
-	--color-primary-300: #63f2ca;
-	--color-primary-400: #25e2b3;
-	--color-primary-500: #00c49a;
-	--color-primary-600: #00a481;
-	--color-primary-700: #00836b;
-	--color-primary-800: #006756;
-	--color-primary-900: #005548;
-	--color-primary-950: #00302a;
+	--color-primary-50: oklch(98.51% 0.016 182.73);
+	--color-primary-100: oklch(95.91% 0.058 180.17);
+	--color-primary-200: oklch(92.56% 0.106 179.98);
+	--color-primary-300: oklch(87.71% 0.143 179.97);
+	--color-primary-400: oklch(82.02% 0.144 180.77);
+	--color-primary-500: oklch(74.17% 0.133 181.61);
+	--color-primary-600: oklch(63.13% 0.112 183.93);
+	--color-primary-700: oklch(53.70% 0.093 185.17);
+	--color-primary-800: oklch(45.51% 0.076 188.69);
+	--color-primary-900: oklch(40.08% 0.065 187.47);
+	--color-primary-950: oklch(28.98% 0.050 190.57);
+
+	--animate-neon-pulse: neon-pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+
+	@keyframes neon-pulse {
+		0% {
+			opacity: 0;
+		}
+
+		50% {
+			opacity: 100%;
+		}
+
+		100% {
+			opacity: 0;
+		}
+	}
 }
 
 /*
@@ -1123,6 +1178,16 @@
   color utility to any element that depends on these defaults.
 */
 @layer base {
+	:root {
+		--body-height: 0;
+		--roller-size: 20;
+		--size-inset: 3;
+		--size-multiplier: calc(var(--roller-size) - var(--size-inset));
+
+		--scroll-percent: 0;
+		--scrollable-distance: 0;
+	}
+
 	*,
 	::after,
 	::before,
@@ -1204,75 +1269,33 @@
 	}
 
 	a {
-		@apply text-caribbean-green-600 transition-colors;
+		@apply text-bright-turquoise-600 transition-colors;
 
 		.dark & {
-			@apply text-caribbean-green-500 transition-colors;
+			@apply text-bright-turquoise-500 transition-colors;
 		}
 
 		&:hover,
 		&.active {
-			@apply text-caribbean-green-800;
+			@apply text-bright-turquoise-800;
+		}
+
+		&.active {
+			@apply font-bold;
 		}
 
 		.dark &:hover,
 		.dark &.active {
 			@apply text-white;
 		}
+	}
 
-		&.active {
-			text-shadow: 0 0 2px var(--color-neutral-500),
-			0 0 4px var(--color-neutral-500),
-			0 0 8px var(--color-neutral-500);
-		}
-
-		.dark &.active {
-			text-shadow: 0 0 2px var(--color-caribbean-green-500),
-			0 0 4px var(--color-caribbean-green-500),
-			0 0 8px var(--color-caribbean-green-500),
-			0 0 16px var(--color-caribbean-green-500);
-		}
+	.container-flexible {
+		max-width: 1440px;
 	}
 
 	.container-flexible-large {
 		max-width: 1600px;
-	}
-
-	.mobile-menu {
-		top: 100%;
-		@apply bg-white;
-		z-index: 50;
-		visibility: hidden;
-		opacity: 0;
-
-		.dark & {
-			@apply bg-black;
-		}
-
-		#menu-toggle:checked + & {
-			visibility: visible;
-			opacity: 1;
-		}
-	}
-
-	#theme-toggle-button {
-		.system-icon,
-		.light-mode-icon,
-		.dark-mode-icon {
-			display: none;
-		}
-
-		html[color-theme='system'] & .system-icon {
-			display: block;
-		}
-
-		html[color-theme='light'] & .light-mode-icon {
-			display: block;
-		}
-
-		html[color-theme='dark'] & .dark-mode-icon {
-			display: block;
-		}
 	}
 
 	.banner-section {
@@ -1294,7 +1317,7 @@
 	}
 
 	.lightbox-trigger {
-		@apply cursor-pointer transition-all duration-300 ease-linear outline-solid outline-1 rounded-lg mt-1 outline-black hover:bg-caribbean-green-600 dark:hover:bg-caribbean-green-200 hover:outline-caribbean-green-600 dark:hover:outline-caribbean-green-200;
+		@apply cursor-pointer transition-all duration-300 ease-linear outline-solid outline-1 rounded-lg mt-1 outline-black hover:bg-bright-turquoise-600 dark:hover:bg-bright-turquoise-200 hover:outline-bright-turquoise-600 dark:hover:outline-bright-turquoise-200;
 
 		img {
 			@apply rounded-lg;
@@ -1306,6 +1329,50 @@
 
 		&:hover figcaption {
 			@apply dark:text-black;
+		}
+	}
+
+	.sidebar-track .teeth {
+		background: repeating-linear-gradient(
+			to bottom,
+			var(--background-color-slate-400) 0,
+			var(--background-color-slate-400) calc(var(--spacing-1) * 0.5),
+			var(--background-color-black) calc(var(--spacing-1) * 0.5),
+			var(--background-color-black) calc(var(--spacing-1) * 2)
+		);
+	}
+
+	/* saving for a later date. Not widely available at time of first attempt. */
+	/*
+	.scroller-housing .wheel {
+		animation-timeline: scroll(root);
+		rotate: 0turn;
+		&:not(.mirrored) {
+			animation: rolling linear;
+		}
+		&.mirrored {
+			animation: rolling-reverse linear;
+		}
+	}
+	@keyframes rolling {
+		to {
+			rotate: calc(var(--scroll-distance) / calc(2 * calc(pi) * calc(var(--spacing-1) * var(--size-multiplier) / 2)) * 1turn);
+		}
+	}
+	*/
+	/* legacy solution */
+	.scroller-housing {
+		--wheel-circumference: calc(2 * calc(pi) * (var(--size-multiplier) / 2));
+		--turn-multiplier: 1turn;
+
+		--rotations: calc(var(--scrollable-distance) / var(--wheel-circumference) * var(--turn-multiplier));
+
+		&.mirrored {
+			--turn-multiplier: -1turn;
+		}
+
+		.wheel {
+			rotate: calc(var(--rotations) * var(--scroll-percent));
 		}
 	}
 
@@ -1332,14 +1399,6 @@
 	}
 
 	@media only screen and (min-width: 992px) {
-		.mobile-menu {
-			top: auto;
-			@apply bg-transparent h-auto;
-			z-index: 10;
-			visibility: visible;
-			opacity: 1;
-		}
-
 		.banner-section {
 			height: 46.875vw;
 		}
@@ -1358,12 +1417,12 @@
 
 @layer base {
 	:root {
-		--color-primary: var(--color-caribbean-green-500);
+		--color-primary: var(--color-bright-turquoise-500);
 	}
 }
 
-.backlight {
-	background-image: linear-gradient(to top, #00A87E, rgba(0, 168, 126, 0.26666666666666666) 5px, transparent 75%);
+.dark .backlight {
+	background-image: linear-gradient(to top, var(--color-bright-turquoise-500), rgb(from var(--color-bright-turquoise-500) r g b / 0.26) 5px, transparent 75%);
 }
 
 .construction {
@@ -1372,8 +1431,4 @@
 
 .box-glow {
 	box-shadow: 0 0 20px 0 #fff;
-}
-
-.layer-shadow {
-	box-shadow: 0 2px 4px #000;
 }
