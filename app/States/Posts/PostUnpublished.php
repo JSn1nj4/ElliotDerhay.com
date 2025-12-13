@@ -10,8 +10,8 @@ use Laravel\Pennant\Feature;
 class PostUnpublished extends PostState
 {
 	/**
-	 * @return bool
 	 * @throws \Exception
+	 * @return bool
 	 */
 	public function publish(): bool
 	{
@@ -24,12 +24,12 @@ class PostUnpublished extends PostState
 
 			PostToXJob::dispatchIf(
 				Feature::active(PublishPostToX::class),
-
-				// reformatted especially for non-external-link-friendly platforms 🫠
+				
 				new SocialPostDTO(
-					"{$postable->text}\n(Link in replies 🔗)",
+					$postable->text,
+					links: $postable->links,
 					tags: $postable->tags,
-					subpost: new SocialPostDTO(links: $postable->links)),
+				),
 			);
 		}
 
