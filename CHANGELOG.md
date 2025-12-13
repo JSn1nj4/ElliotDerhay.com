@@ -5,6 +5,7 @@
 ### Changes
 
 - JSN-322: Design v3 (#269)
+- JSN-323: Go back to single posts for X
 
 [pr_269]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/269
 
