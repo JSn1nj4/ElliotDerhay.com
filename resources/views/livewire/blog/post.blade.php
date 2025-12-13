@@ -96,7 +96,7 @@ class extends \Livewire\Volt\Component {
 						<span class='hidden lg:last:hidden'>,</span>
 					@endunless
 					<a href="{{ route('blog', compact('category')) }}"
-						 class='inline-block lg:inline m-1 lg:m-0 border border-slate-300 dark:border-slate-600 lg:border-0 rounded lg:rounded-none bg-white dark:bg-neutral-950 lg:bg-transparent px-2 py-1 lg:p-0'>{{ $category->title }}</a>
+						 class='inline-block lg:inline m-1 lg:m-0 border border-slate-300 dark:border-slate-600 lg:border-0 rounded lg:rounded-none bg-white dark:bg-neutral-950 lg:bg-transparent dark:lg:bg-transparent px-2 py-1 lg:p-0'>{{ $category->title }}</a>
 				@endforeach
 			</p>
 		@endif
@@ -109,7 +109,7 @@ class extends \Livewire\Volt\Component {
 						<span class='hidden lg:last:hidden'>,</span>
 					@endunless
 					<a href="{{ route('blog', compact('tag')) }}"
-						 class='inline-block lg:inline m-1 lg:m-0 border border-slate-300 dark:border-slate-600 lg:border-0 rounded lg:rounded-none bg-white dark:bg-neutral-950 lg:bg-transparent px-2 py-1 lg:p-0'>#{{ $tag->title }}</a>
+						 class='inline-block lg:inline m-1 lg:m-0 border border-slate-300 dark:border-slate-600 lg:border-0 rounded lg:rounded-none bg-white dark:bg-neutral-950 lg:bg-transparent dark:lg:bg-transparent px-2 py-1 lg:p-0'>#{{ $tag->title }}</a>
 				@endforeach
 			</p>
 		@endif
