@@ -71,20 +71,20 @@ class extends \Livewire\Volt\Component {
 }; ?>
 
 
-<x-slot:title>Elliot's Tech Blog - ElliotDerhay.com</x-slot:title>
+<x-slot:title>Blog - ElliotDerhay.com</x-slot:title>
 @if($this->hasPosts())
 	<x-slot:meta-description>Latest post: {{$posts->first()->title}}</x-slot:meta-description>
 @endif
 
-<article>
+<article class='py-12'>
 	<x-blog.wrapper>
-		<section class="block w-full pb-6 px-2">
-			<h1 class="content-title text-4xl pt-6 mt-4 md:pt-0 md:mt-0">
-				Elliot's Tech Blog
+		<section class="block w-full">
+			<h1 class="content-title text-4xl uppercase">
+				Blog
 			</h1>
 		</section>
 
-		<section>
+		<section class='flex flex-col gap-12'>
 			@if($this->hasPosts())
 				@foreach($posts as $post)
 					<x-post.card
@@ -92,14 +92,16 @@ class extends \Livewire\Volt\Component {
 						:post="$post"
 						size="none"
 						padding="p-0"
-						margin="mb-12 last:mb-0"
+						margin="m-0"
 						livewire
 					/>
 				@endforeach
 				{{ $posts->links() }}
 			@else
-				<h1 class="text-4xl text-center mb-4">Sorry, no posts to display.</h1>
-				<p class="text-2xl text-center">Check back soon!</p>
+				<div>
+					<h2 class="text-2xl">Sorry, no posts to display.</h2>
+					<p class="text-lg">Check back soon!</p>
+				</div>
 			@endif
 		</section>
 

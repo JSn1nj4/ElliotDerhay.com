@@ -11,47 +11,51 @@
 
 $selectableColors = implode(' ', [
 	'bg-white',
-	'dark:bg-black',
+	'hover:bg-big-stone-200',
+	'dark:bg-neutral-950',
+	'dark:hover:bg-bright-turquoise-950',
 
-	'text-caribbean-green-700',
-	'dark:text-caribbean-green-300',
+	'text-bright-turquoise-700',
+	'dark:text-bright-turquoise-300',
 
-	'border-caribbean-green-700',
-	'dark:border-caribbean-green-300',
+	'border-bright-turquoise-700',
+	'hover:border-bright-turquoise-600',
+	'dark:border-bright-turquoise-300',
+	'dark:hover:border-bright-turquoise-500',
 
-	'hover:text-caribbean-green-500',
-	'dark:hover:text-caribbean-green-400',
+	'hover:text-bright-turquoise-500',
+	'dark:hover:text-bright-turquoise-400',
 
-	'ring-caribbean-green-300',
-	'dark:ring-caribbean-green-700',
+	'ring-bright-turquoise-300',
+	'dark:ring-bright-turquoise-700',
 
-	'focus:border-caribbean-green-300',
-	'dark:focus:border-caribbean-green-700',
+	'focus:border-bright-turquoise-300',
+	'dark:focus:border-bright-turquoise-700',
 
-	'active:text-caribbean-green-700',
-	'dark:active:text-caribbean-green-300',
+	'active:text-bright-turquoise-700',
+	'dark:active:text-bright-turquoise-300',
 ]);
 
 $selectedColors = implode(' ', [
-	'bg-caribbean-green-500',
-	'dark:bg-caribbean-green-400',
+	'bg-bright-turquoise-500',
+	'dark:bg-bright-turquoise-400',
 
 	'text-white',
-	'dark:text-black',
+	'dark:text-slate-700',
 
-	'border-caribbean-green-500',
-	'dark:border-caribbean-green-400',
+	'border-bright-turquoise-500',
+	'dark:border-bright-turquoise-400',
 ]);
 
 $disabledColors = implode(' ', [
 	'bg-white',
-	'dark:bg-black',
+	'dark:bg-neutral-950',
 
-	'text-caribbean-green-300',
-	'dark:text-caribbean-green-700',
+	'text-slate-300',
+	'dark:text-slate-700',
 
-	'border-caribbean-green-300',
-	'dark:border-caribbean-green-700',
+	'border-slate-300',
+	'dark:border-slate-700',
 ]);
 @endphp
 
@@ -94,7 +98,7 @@ $disabledColors = implode(' ', [
 
 			<div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
 				<div>
-					<p class="text-sm text-slate-700 dark:text-gray-500 leading-5">
+					<p class="text-sm text-slate-700 dark:text-slate-500 leading-5">
 						<span>{!! __('Showing') !!}</span>
 						<span class="font-medium">{{ $paginator->firstItem() }}</span>
 						<span>{!! __('to') !!}</span>

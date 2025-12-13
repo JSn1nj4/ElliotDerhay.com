@@ -17,7 +17,7 @@
                 {{-- Previous Page Link --}}
 							@if ($paginator->onFirstPage())
 								<span
-									class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-neutral-500 bg-white dark:bg-black border border-neutral-300 cursor-default leading-5 rounded-md">
+									class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-neutral-500 bg-white dark:bg-black border border-slate-300 cursor-default leading-5 rounded-md">
                         {!! __('pagination.previous') !!}
                     </span>
 							@else
@@ -26,7 +26,7 @@
 													wire:key="cursor-{{ $paginator->getCursorName() }}-{{ $paginator->previousCursor()->encode() }}"
 													wire:click="setPage('{{$paginator->previousCursor()->encode()}}','{{ $paginator->getCursorName() }}')"
 													x-on:click="{{ $scrollIntoViewJsSnippet }}" wire:loading.attr="disabled"
-													class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-neutral-700 bg-white dark:bg-black border border-neutral-300 leading-5 rounded-md hover:text-neutral-500 focus:outline-hidden focus:ring-3 ring-neutral-300 focus:border-blue-300 active:text-neutral-700 transition ease-in-out duration-150">
+													class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-neutral-700 bg-white dark:bg-black border border-slate-300 leading-5 rounded-md hover:text-neutral-500 focus:outline-hidden focus:ring-3 ring-neutral-300 focus:border-blue-300 active:text-neutral-700 transition ease-in-out duration-150">
                                 {!! __('pagination.previous') !!}
                         </button>
 								@else
@@ -34,7 +34,7 @@
 										type="button" wire:click="previousPage('{{ $paginator->getPageName() }}')"
 										x-on:click="{{ $scrollIntoViewJsSnippet }}" wire:loading.attr="disabled"
 										dusk="previousPage{{ $paginator->getPageName() == 'page' ? '' : '.' . $paginator->getPageName() }}"
-										class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-neutral-700 bg-white dark:bg-black border border-neutral-300 leading-5 rounded-md hover:text-neutral-500 focus:outline-hidden focus:ring-3 ring-neutral-300 focus:border-blue-300 active:text-neutral-700 transition ease-in-out duration-150">
+										class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-neutral-700 bg-white dark:bg-black border border-slate-300 leading-5 rounded-md hover:text-neutral-500 focus:outline-hidden focus:ring-3 ring-neutral-300 focus:border-blue-300 active:text-neutral-700 transition ease-in-out duration-150">
                                 {!! __('pagination.previous') !!}
                         </button>
 								@endif
@@ -49,20 +49,20 @@
 										wire:key="cursor-{{ $paginator->getCursorName() }}-{{ $paginator->nextCursor()->encode() }}"
 										wire:click="setPage('{{$paginator->nextCursor()->encode()}}','{{ $paginator->getCursorName() }}')"
 										x-on:click="{{ $scrollIntoViewJsSnippet }}" wire:loading.attr="disabled"
-										class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-neutral-700 bg-white dark:bg-black border border-neutral-300 leading-5 rounded-md hover:text-neutral-500 focus:outline-hidden focus:ring-3 ring-neutral-300 focus:border-blue-300 active:text-neutral-700 transition ease-in-out duration-150">
+										class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-neutral-700 bg-white dark:bg-black border border-slate-300 leading-5 rounded-md hover:text-neutral-500 focus:outline-hidden focus:ring-3 ring-neutral-300 focus:border-blue-300 active:text-neutral-700 transition ease-in-out duration-150">
                                 {!! __('pagination.next') !!}
                         </button>
 					@else
 						<button type="button" wire:click="nextPage('{{ $paginator->getPageName() }}')"
 										x-on:click="{{ $scrollIntoViewJsSnippet }}" wire:loading.attr="disabled"
 										dusk="nextPage{{ $paginator->getPageName() == 'page' ? '' : '.' . $paginator->getPageName() }}"
-										class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-neutral-700 bg-white dark:bg-black border border-neutral-300 leading-5 rounded-md hover:text-neutral-500 focus:outline-hidden focus:ring-3 ring-neutral-300 focus:border-blue-300 active:text-neutral-700 transition ease-in-out duration-150">
+										class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-neutral-700 bg-white dark:bg-black border border-slate-300 leading-5 rounded-md hover:text-neutral-500 focus:outline-hidden focus:ring-3 ring-neutral-300 focus:border-blue-300 active:text-neutral-700 transition ease-in-out duration-150">
                                 {!! __('pagination.next') !!}
                         </button>
 					@endif
 				@else
 					<span
-						class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-neutral-500 bg-white dark:bg-black border border-neutral-300 cursor-default leading-5 rounded-md">
+						class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-neutral-500 bg-white dark:bg-black border border-slate-300 cursor-default leading-5 rounded-md">
                         {!! __('pagination.next') !!}
                     </span>
 				@endif

@@ -64,58 +64,62 @@ class extends \Livewire\Volt\Component {
 	])
 </x-slot:head-extras>
 
-<x-blog.wrapper>
-	@if($post->image)
-		<figure class="lightbox-trigger inline-block">
-			<img src="{{ $post->image->url }}" class="block rounded-lg" alt="">
-			@if($post->image->caption)
-				<figcaption class='my-2 italic'>{{ $post->image->caption }}</figcaption>
-			@endif
-		</figure>
-	@endif
+<article class='my-12'>
+	<x-blog.wrapper>
+		@if($post->image)
+			<figure class="lightbox-trigger inline-block">
+				<img src="{{ $post->image->url }}" class="block rounded-lg" alt="">
+				@if($post->image->caption)
+					<figcaption class='my-2 italic'>{{ $post->image->caption }}</figcaption>
+				@endif
+			</figure>
+		@endif
 
-	<div class="flex flex-row pt-3 mt-2 gap-4">
-		<time datetime="{{ $post->published_at->toIso8601ZuluString('millisecond') }}">
-			Published {{ $post->published_at->toFormattedDateString() }}
-		</time>
-		@unless($post->published_at->unix() === $post->updated_at->unix())
-			<p class="flex-grow-1">
-				Last Updated {{ $post->updated_at->toFormattedDateString() }}
+		<div class="flex flex-row pt-3 mt-2 gap-4">
+			<time datetime="{{ $post->published_at->toIso8601ZuluString('millisecond') }}">
+				Published {{ $post->published_at->toFormattedDateString() }}
+			</time>
+			@unless($post->published_at->unix() === $post->updated_at->unix())
+				<p class="flex-grow-1">
+					Last Updated {{ $post->updated_at->toFormattedDateString() }}
+				</p>
+			@endunless
+		</div>
+
+		<h1 class="content-title text-4xl pt-2 mt-1">{{ $post->title }}</h1>
+
+		@if($post->categories->count() > 0)
+			<p class="my-1 text-lg">
+				Categories:
+				@foreach($post->categories as $cat_i => $category)
+					@unless($cat_i === 0)
+						<span class='hidden lg:last:hidden'>,</span>
+					@endunless
+					<a href="{{ route('blog', compact('category')) }}"
+						 class='inline-block lg:inline m-1 lg:m-0 border border-slate-300 dark:border-slate-600 lg:border-0 rounded lg:rounded-none bg-white dark:bg-neutral-950 lg:bg-transparent dark:lg:bg-transparent px-2 py-1 lg:p-0'>{{ $category->title }}</a>
+				@endforeach
 			</p>
-		@endunless
-	</div>
+		@endif
 
-	<h1 class="content-title text-4xl pt-2 mt-1">{{ $post->title }}</h1>
+		@if($post->tags->count() > 0)
+			<p class="my-1 text-lg">
+				Tags:
+				@foreach($post->tags as $tag_i => $tag)
+					@unless($tag_i === 0)
+						<span class='hidden lg:last:hidden'>,</span>
+					@endunless
+					<a href="{{ route('blog', compact('tag')) }}"
+						 class='inline-block lg:inline m-1 lg:m-0 border border-slate-300 dark:border-slate-600 lg:border-0 rounded lg:rounded-none bg-white dark:bg-neutral-950 lg:bg-transparent dark:lg:bg-transparent px-2 py-1 lg:p-0'>#{{ $tag->title }}</a>
+				@endforeach
+			</p>
+		@endif
 
-	@if($post->categories->count() > 0)
-		<p class="my-1 text-lg">
-			Categories:
-			@foreach($post->categories as $cat_i => $category)
-				@unless($cat_i === 0)
-					,
-				@endunless
-				<a href="{{ route('blog', compact('category')) }}">{{ $category->title }}</a>
-			@endforeach
-		</p>
-	@endif
+		<x-markdown class="mb-4 mt-3">
+			{!! $post->body !!}
+		</x-markdown>
 
-	@if($post->tags->count() > 0)
-		<p class="my-1 text-lg">
-			Tags:
-			@foreach($post->tags as $tag_i => $tag)
-				@unless($tag_i === 0)
-					,
-				@endunless
-				<a href="{{ route('blog', compact('tag')) }}">#{{ $tag->title }}</a>
-			@endforeach
-		</p>
-	@endif
-
-	<x-markdown class="mb-4 mt-3">
-		{!! $post->body !!}
-	</x-markdown>
-
-	<x-slot:sidebar>
-		@include('partials.blog-sidebar')
-	</x-slot:sidebar>
-</x-blog.wrapper>
+		<x-slot:sidebar>
+			@include('partials.blog-sidebar')
+		</x-slot:sidebar>
+	</x-blog.wrapper>
+</article>
