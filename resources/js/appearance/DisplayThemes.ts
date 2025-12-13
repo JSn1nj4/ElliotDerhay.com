@@ -27,9 +27,6 @@ export class DisplayTheme {
 	}
 
 	toLightGreyTheme(): LightGreyTheme {
-		/** @todo clean up */
-		console.info('Display theme updating to light: grey.')
-
 		const root = document.documentElement
 		root.classList.remove('dark')
 		root.classList.remove('dark2')
@@ -41,9 +38,6 @@ export class DisplayTheme {
 	}
 
 	toCyberneticTheme(): DisplayTheme {
-		/** @todo clean up */
-		console.info('Display theme updating to dark 1: cybernetic.')
-
 		const root = document.documentElement
 		if (root.classList.contains('dark2')) root.classList.remove('dark2')
 		if (!root.classList.contains('dark')) root.classList.add('dark')
@@ -55,14 +49,10 @@ export class DisplayTheme {
 	}
 
 	toIndustrialTheme(): DisplayTheme {
-		/** @todo clean up */
-		console.info('Display theme updating to dark 2: industrial.')
-
 		if (
 			DisplayModeResolver.resolve() instanceof LightDisplayMode ||
 			!DisplayModeResolver.prefersDark()
 		) {
-			console.warn('Industrial theme is not supported in light mode.')
 			return this
 		}
 
@@ -102,7 +92,6 @@ export class LightGreyTheme extends DisplayTheme {
 	}
 
 	toLightGreyTheme(): LightGreyTheme {
-		console.warn('Display theme is already light grey. Doing nothing.')
 		return this
 	}
 }
@@ -120,7 +109,6 @@ export class CyberneticTheme extends DisplayTheme {
 	}
 
 	toCyberneticTheme(): CyberneticTheme {
-		console.warn('Display theme is already cybernetic. Doing nothing.')
 		return this
 	}
 }
@@ -138,7 +126,6 @@ export class IndustrialTheme extends DisplayTheme {
 	}
 
 	toIndustrialTheme(): IndustrialTheme {
-		console.warn('Display theme is already industrial. Doing nothing.')
 		return this
 	}
 }
