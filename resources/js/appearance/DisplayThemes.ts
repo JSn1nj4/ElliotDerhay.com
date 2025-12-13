@@ -63,12 +63,8 @@ export class DisplayTheme {
 			return this
 		}
 
-		if (!document.documentElement.classList.contains('dark')) {
-			document.documentElement.classList.add('dark')
-		}
-		if (!document.documentElement.classList.contains('dark2')) {
-			document.documentElement.classList.add('dark2')
-		}
+		document.documentElement.classList.add('dark')
+		document.documentElement.classList.add('dark2')
 
 		return DisplayThemeResolver.dark2()
 			.updateStorage('dark2')
@@ -102,10 +98,6 @@ export class LightMetallicTheme extends DisplayTheme {
 		document.documentElement.classList.remove('dark2')
 	}
 
-	resolve(): LightMetallicTheme {
-		return this
-	}
-
 	toLightMetallicTheme(): LightMetallicTheme {
 		console.warn('Display theme is already light metallic. Doing nothing.')
 		return this
@@ -124,10 +116,6 @@ export class CyberneticTheme extends DisplayTheme {
 		return true
 	}
 
-	resolve(): CyberneticTheme {
-		return this
-	}
-
 	toCyberneticTheme(): CyberneticTheme {
 		console.warn('Display theme is already cybernetic. Doing nothing.')
 		return this
@@ -144,10 +132,6 @@ export class IndustrialTheme extends DisplayTheme {
 
 	isDark(): boolean {
 		return true
-	}
-
-	resolve(): IndustrialTheme {
-		return this
 	}
 
 	toIndustrialTheme(): IndustrialTheme {
