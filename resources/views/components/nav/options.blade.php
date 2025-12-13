@@ -22,7 +22,7 @@
 		listen='display_theme.updated'
 	>
 		<x-slot:label>Display Theme</x-slot:label>
-		<option value='light'>Light Metallic</option>
+		<option value='light'>Light Grey</option>
 		<option value='dark'>Cybernetic</option>
 		<option value='dark2'>Industrial</option>
 	</x-nav.select-item>

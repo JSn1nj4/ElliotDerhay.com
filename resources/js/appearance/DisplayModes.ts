@@ -1,4 +1,4 @@
-import {DisplayTheme, LightMetallicTheme} from './DisplayThemes'
+import {DisplayTheme, LightGreyTheme} from './DisplayThemes'
 import {DisplayThemeResolver} from './resolvers/DisplayThemeResolver'
 import {
 	DisplayModeResolver,
@@ -31,8 +31,8 @@ export class DisplayMode {
 		let step = () => displayTheme
 
 		if (!DisplayModeResolver.prefersDark()) {
-			// this just pushes it to light metallic theme if darkness is not preferred and in case it currently is 'dark'
-			step = () => displayTheme.toLightMetallicTheme()
+			// this just pushes it to light grey theme if darkness is not preferred and in case it currently is 'dark'
+			step = () => displayTheme.toLightGreyTheme()
 		} else if (!displayTheme.isDark()) {
 			// this just pushes it to the Cybernetic theme if darkness is preferred and it's currently light
 			step = () => displayTheme.toCyberneticTheme()
@@ -49,7 +49,7 @@ export class DisplayMode {
 		/** @todo clean up */
 		console.info('Display mode updating to light mode.')
 
-		DisplayThemeResolver.resolve().toLightMetallicTheme()
+		DisplayThemeResolver.resolve().toLightGreyTheme()
 
 		return DisplayModeResolver.light().updateStorage('light').broadcast('light')
 	}
@@ -60,7 +60,7 @@ export class DisplayMode {
 
 		const displayTheme = DisplayThemeResolver.resolve()
 
-		if (displayTheme instanceof LightMetallicTheme) {
+		if (displayTheme instanceof LightGreyTheme) {
 			displayTheme.toCyberneticTheme()
 		}
 
@@ -91,7 +91,7 @@ export class LightDisplayMode extends DisplayMode {
 	}
 
 	syncTheme(currentTheme: DisplayTheme): void {
-		currentTheme.toLightMetallicTheme()
+		currentTheme.toLightGreyTheme()
 	}
 
 	toLightMode(): this {

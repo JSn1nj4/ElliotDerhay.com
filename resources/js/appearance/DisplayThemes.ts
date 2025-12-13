@@ -26,9 +26,9 @@ export class DisplayTheme {
 		return false
 	}
 
-	toLightMetallicTheme(): LightMetallicTheme {
+	toLightGreyTheme(): LightGreyTheme {
 		/** @todo clean up */
-		console.info('Display theme updating to light: metallic.')
+		console.info('Display theme updating to light: grey.')
 
 		const root = document.documentElement
 		root.classList.remove('dark')
@@ -75,7 +75,7 @@ export class DisplayTheme {
 	}
 
 	toSystemAppropriate(): DisplayTheme {
-		if (!DisplayModeResolver.prefersDark()) return this.toLightMetallicTheme()
+		if (!DisplayModeResolver.prefersDark()) return this.toLightGreyTheme()
 
 		if (!this.isDark()) return this.toCyberneticTheme()
 	}
@@ -93,7 +93,7 @@ export class DisplayTheme {
 	}
 }
 
-export class LightMetallicTheme extends DisplayTheme {
+export class LightGreyTheme extends DisplayTheme {
 	init(): void {
 		this.updateStorage('light').broadcast('light')
 
@@ -101,8 +101,8 @@ export class LightMetallicTheme extends DisplayTheme {
 		document.documentElement.classList.remove('dark2')
 	}
 
-	toLightMetallicTheme(): LightMetallicTheme {
-		console.warn('Display theme is already light metallic. Doing nothing.')
+	toLightGreyTheme(): LightGreyTheme {
+		console.warn('Display theme is already light grey. Doing nothing.')
 		return this
 	}
 }

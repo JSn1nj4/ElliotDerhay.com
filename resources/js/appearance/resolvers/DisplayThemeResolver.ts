@@ -2,7 +2,7 @@ import {
 	CyberneticTheme,
 	DisplayTheme,
 	IndustrialTheme,
-	LightMetallicTheme,
+	LightGreyTheme,
 } from '../DisplayThemes'
 
 export const ThemeIds = ['light', 'dark', 'dark2']
@@ -25,7 +25,7 @@ export class DisplayThemeResolver {
 	}
 
 	static light() {
-		return new LightMetallicTheme()
+		return new LightGreyTheme()
 	}
 
 	static dark() {
