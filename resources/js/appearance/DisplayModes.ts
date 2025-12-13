@@ -23,9 +23,6 @@ export class DisplayMode {
 	syncTheme(currentTheme: DisplayTheme): void {}
 
 	toSystemDefault(): SystemDisplayMode {
-		/** @todo clean up */
-		console.info('Display mode updating to system default.')
-
 		const displayTheme = DisplayThemeResolver.resolve()
 
 		let step = () => displayTheme
@@ -46,18 +43,12 @@ export class DisplayMode {
 	}
 
 	toLightMode(): LightDisplayMode {
-		/** @todo clean up */
-		console.info('Display mode updating to light mode.')
-
 		DisplayThemeResolver.resolve().toLightGreyTheme()
 
 		return DisplayModeResolver.light().updateStorage('light').broadcast('light')
 	}
 
 	toDarkMode(): DarkDisplayMode {
-		/** @todo clean up */
-		console.info('Display mode updating to dark mode.')
-
 		const displayTheme = DisplayThemeResolver.resolve()
 
 		if (displayTheme instanceof LightGreyTheme) {
@@ -80,7 +71,6 @@ export class SystemDisplayMode extends DisplayMode {
 	}
 
 	toSystemDefault(): this {
-		console.warn('Display mode is already system default. Doing nothing.')
 		return this
 	}
 }
@@ -95,7 +85,6 @@ export class LightDisplayMode extends DisplayMode {
 	}
 
 	toLightMode(): this {
-		console.warn('Display mode is already light mode. Doing nothing.')
 		return this
 	}
 }
@@ -112,7 +101,6 @@ export class DarkDisplayMode extends DisplayMode {
 	}
 
 	toDarkMode(): this {
-		console.warn('Display mode is already dark mode. Doing nothing.')
 		return this
 	}
 }

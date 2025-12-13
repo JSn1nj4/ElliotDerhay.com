@@ -48,9 +48,6 @@
 				document.dispatchEvent(new CustomEvent(this.dispatch, {
 					detail: {[this.key]: this.value},
 				}))
-
-				/** @todo clean up */
-				console.log('sent change: ' + this.value)
 			},
 
 			receive(event) {
@@ -61,9 +58,6 @@
 				if (typeof value !== 'string' || value.length === 0) {
 					return
 				}
-
-				/** @todo clean up */
-				console.log('received change: ' + value)
 
 				this.value = value
 			},

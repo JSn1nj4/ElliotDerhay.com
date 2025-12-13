@@ -1,5 +1,11 @@
 # Changelog
 
+## Version 3.0.2
+
+### Housekeeping
+
+- Clean up leftover console logging
+
 ## Version 3.0.1
 
 ### Changes
