@@ -1,4 +1,7 @@
-import {DisplayThemeResolver} from './resolvers/DisplayThemeResolver'
+import {
+	DisplayThemeResolver,
+	themeStorageKey,
+} from './resolvers/DisplayThemeResolver'
 import {DisplayModeResolver} from './resolvers/DisplayModeResolver'
 import {LightDisplayMode} from './DisplayModes'
 
@@ -84,7 +87,7 @@ export class DisplayTheme {
 	}
 
 	updateStorage(value: string): DisplayTheme {
-		localStorage.setItem(DisplayThemeResolver.storageKey, value)
+		localStorage.setItem(themeStorageKey, value)
 
 		return this
 	}

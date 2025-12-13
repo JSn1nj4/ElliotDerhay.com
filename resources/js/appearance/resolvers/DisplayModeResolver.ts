@@ -9,11 +9,11 @@ export const DisplayIds = ['system', 'light', 'dark']
 
 type DisplayId = typeof DisplayIds[number]
 
-export class DisplayModeResolver {
-	static storageKey: 'theme'
+export const modeStorageKey: string = 'theme'
 
+export class DisplayModeResolver {
 	static currentId(): DisplayId {
-		const displayMode = localStorage.getItem(DisplayModeResolver.storageKey)
+		const displayMode = localStorage.getItem(modeStorageKey)
 
 		if (!DisplayIds.includes(displayMode)) return 'system'
 

@@ -1,4 +1,4 @@
-import {DisplayIds, DisplayModeResolver} from './resolvers/DisplayModeResolver'
+import {DisplayIds, DisplayModeResolver, modeStorageKey,} from './resolvers/DisplayModeResolver'
 import {DisplayThemeResolver} from './resolvers/DisplayThemeResolver'
 import {DisplayThemeController} from './DisplayThemeController'
 
@@ -10,8 +10,7 @@ export class DisplayModeController {
 		window
 			.matchMedia('(prefers-color-scheme: dark)')
 			.addEventListener('change', e => {
-				if (localStorage.getItem(DisplayModeResolver.storageKey) !== 'system')
-					return
+				if (localStorage.getItem(modeStorageKey) !== 'system') return
 
 				if (e.matches) {
 					DisplayModeResolver.resolve().toDarkMode()

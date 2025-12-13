@@ -1,14 +1,19 @@
-import {CyberneticTheme, DisplayTheme, IndustrialTheme, LightMetallicTheme} from '../DisplayThemes'
+import {
+	CyberneticTheme,
+	DisplayTheme,
+	IndustrialTheme,
+	LightMetallicTheme,
+} from '../DisplayThemes'
 
 export const ThemeIds = ['light', 'dark', 'dark2']
 
 type ThemeId = typeof ThemeIds[number]
 
-export class DisplayThemeResolver {
-	static storageKey: 'displayTheme'
+export const themeStorageKey: string = 'displayTheme'
 
+export class DisplayThemeResolver {
 	static currentId(): ThemeId {
-		const displayTheme = localStorage.getItem(DisplayThemeResolver.storageKey)
+		const displayTheme = localStorage.getItem(themeStorageKey)
 
 		if (!ThemeIds.includes(displayTheme)) return 'light'
 

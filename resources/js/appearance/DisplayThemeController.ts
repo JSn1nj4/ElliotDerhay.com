@@ -26,6 +26,8 @@ export class DisplayThemeController {
 		const currentTheme = DisplayThemeResolver.resolve()
 		const prefersDark = DisplayModeResolver.prefersDark()
 
+		console.info(`current theme: ${currentTheme.id}`)
+
 		if (theme === 'light') {
 			document.dispatchEvent(
 				new CustomEvent('display_mode.update', {

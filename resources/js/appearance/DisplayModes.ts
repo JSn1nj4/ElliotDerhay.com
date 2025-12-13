@@ -1,6 +1,9 @@
 import {DisplayTheme, LightMetallicTheme} from './DisplayThemes'
 import {DisplayThemeResolver} from './resolvers/DisplayThemeResolver'
-import {DisplayModeResolver} from './resolvers/DisplayModeResolver'
+import {
+	DisplayModeResolver,
+	modeStorageKey,
+} from './resolvers/DisplayModeResolver'
 
 export class DisplayMode {
 	get id() {
@@ -65,7 +68,7 @@ export class DisplayMode {
 	}
 
 	updateStorage(value: string): this {
-		localStorage.setItem(DisplayModeResolver.storageKey, value)
+		localStorage.setItem(modeStorageKey, value)
 
 		return this
 	}
