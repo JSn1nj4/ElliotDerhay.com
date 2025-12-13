@@ -71,7 +71,7 @@ class extends \Livewire\Volt\Component {
 }; ?>
 
 
-<x-slot:title>Elliot's Tech Blog - ElliotDerhay.com</x-slot:title>
+<x-slot:title>Blog - ElliotDerhay.com</x-slot:title>
 @if($this->hasPosts())
 	<x-slot:meta-description>Latest post: {{$posts->first()->title}}</x-slot:meta-description>
 @endif
@@ -80,7 +80,7 @@ class extends \Livewire\Volt\Component {
 	<x-blog.wrapper>
 		<section class="block w-full">
 			<h1 class="content-title text-4xl uppercase">
-				Elliot's Tech Blog
+				Blog
 			</h1>
 		</section>
 
