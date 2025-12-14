@@ -11,6 +11,7 @@
 ### Development
 
 - Tweak TS config
+- Tweak .idea/Project.xml
 
 ## Version 3.0.2
 
