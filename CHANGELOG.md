@@ -1,5 +1,18 @@
 # Changelog
 
+## Version 3.0.3
+
+### Fixes
+
+- Homepage content spacing in light mode on mobile
+- URL for this website on privacy policy page
+- Spacing for Privacy Policy content
+
+### Development
+
+- Tweak TS config
+- Tweak .idea/Project.xml
+
 ## Version 3.0.2
 
 ### Housekeeping
