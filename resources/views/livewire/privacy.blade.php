@@ -19,7 +19,7 @@ new class extends Component {
 			<p class="font-bold mb-4">Last updated August 18, 2020</p>
 
 			<h2 class="content-title text-3xl pt-6">What this policy covers</h2>
-			<p class="mb-4">This privacy policy applies to this Website (<a href="/">http://elliotderhay.com</a>) and its
+			<p class="mb-4">This privacy policy applies to this Website (<a href="/">https://elliotderhay.com</a>) and its
 				collection of information. This policy does not cover how third-party websites linked to from this Website use
 				personally-identifiable information. If this Website contains links to any third-party websites, please see the
 				privacy policies provided by those websites to learn how they store and/or process personally-identifiable
