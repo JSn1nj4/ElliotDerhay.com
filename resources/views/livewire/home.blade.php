@@ -17,7 +17,7 @@ new class extends Component {
 		<x-column
 			class="md:order-first md:w-1/2 lg:w-7/12 xl:w-2/3">
 			<div
-				class='flex flex-col gap-4 md:bg-none rounded-3xl dark:border dark:border-slate-600 dark:hover:border-bright-turquoise-500 md:border-none dark:bg-neutral-950 dark:md:bg-transparent p-4 md:p-0'>
+				class='flex flex-col gap-4 md:bg-none dark:rounded-3xl dark:border dark:border-slate-600 dark:hover:border-bright-turquoise-500 dark:md:border-none dark:bg-neutral-950 dark:md:bg-transparent dark:p-4 dark:md:p-0'>
 				<h1
 					class="text-2xl uppercase">
 					About me
