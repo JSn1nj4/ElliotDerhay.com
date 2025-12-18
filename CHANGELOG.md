@@ -1,5 +1,11 @@
 # Changelog
 
+## Version 3.0.4
+
+### Development
+
+- Add Redis to DDEV config
+
 ## Version 3.0.3
 
 ### Fixes
