@@ -1,6 +1,7 @@
 import {DisplayThemeResolver, ThemeIds} from './resolvers/DisplayThemeResolver'
 import {DisplayModeResolver} from './resolvers/DisplayModeResolver'
 import {DisplayModeUpdateRequested} from '../events/DisplayModeUpdateRequested'
+import {DisplayThemeUpdateRequested} from '../events/DisplayThemeUpdateRequested'
 
 export class DisplayThemeController {
 	static init() {
@@ -11,7 +12,7 @@ export class DisplayThemeController {
 
 	init() {
 		document.addEventListener(
-			'display_theme.update',
+			DisplayThemeUpdateRequested.name,
 			this.updateTheme.bind(this),
 		)
 	}

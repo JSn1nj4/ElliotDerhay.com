@@ -18,7 +18,7 @@
 		id='display_theme'
 		name='display_theme'
 		event-key='theme'
-		dispatch='display_theme.update'
+		dispatch='display_theme.update_requested'
 		listen='display_theme.updated'
 	>
 		<x-slot:label>Display Theme</x-slot:label>
