@@ -7,7 +7,7 @@ import {
 
 export const ModeIds = ['system', 'light', 'dark']
 
-type ModeId = typeof ModeIds[number]
+export type ModeId = typeof ModeIds[number]
 
 export const modeStorageKey: string = 'theme'
 
