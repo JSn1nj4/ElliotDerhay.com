@@ -1,4 +1,8 @@
-import {DisplayIds, DisplayModeResolver, modeStorageKey,} from './resolvers/DisplayModeResolver'
+import {
+	DisplayModeResolver,
+	ModeIds,
+	modeStorageKey,
+} from './resolvers/DisplayModeResolver'
 import {DisplayThemeResolver} from './resolvers/DisplayThemeResolver'
 import {DisplayThemeController} from './DisplayThemeController'
 
@@ -41,7 +45,7 @@ export class DisplayModeController {
 	updateMode(event: CustomEvent): void {
 		const mode = event?.detail?.mode
 
-		if (!DisplayIds.includes(mode)) {
+		if (!ModeIds.includes(mode)) {
 			console.warn(`Invalid mode: ${mode}`)
 			return
 		}
