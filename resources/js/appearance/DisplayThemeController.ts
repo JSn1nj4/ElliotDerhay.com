@@ -17,8 +17,8 @@ export class DisplayThemeController {
 		)
 	}
 
-	updateTheme(event: CustomEvent) {
-		const theme = event?.detail?.theme
+	updateTheme(event: DisplayThemeUpdateRequested) {
+		const theme = event.theme
 
 		if (!ThemeIds.includes(theme)) {
 			console.warn(`Invalid theme: ${theme}`)

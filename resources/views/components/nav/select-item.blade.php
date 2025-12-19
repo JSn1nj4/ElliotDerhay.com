@@ -44,16 +44,16 @@
 				) {
 					return
 				}
-
-				document.dispatchEvent(new CustomEvent(this.dispatch, {
-					detail: {[this.key]: this.value},
+				
+				document.dispatchEvent(new Event(this.dispatch, {
+					[this.key]: this.value,
 				}))
 			},
 
 			receive(event) {
 				if (this.key.length === 0) return
 
-				const value = event?.detail?.[this.key]
+				const value = event?.[this.key]
 
 				if (typeof value !== 'string' || value.length === 0) {
 					return

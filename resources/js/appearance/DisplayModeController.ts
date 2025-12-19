@@ -46,8 +46,8 @@ export class DisplayModeController {
 			.syncTheme(currentTheme)
 	}
 
-	updateMode(event: CustomEvent): void {
-		const mode = event?.detail?.mode
+	updateMode(event: DisplayModeUpdateRequested): void {
+		const mode = event.mode
 
 		if (!ModeIds.includes(mode)) {
 			console.warn(`Invalid mode: ${mode}`)
