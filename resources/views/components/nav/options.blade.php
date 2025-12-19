@@ -3,7 +3,7 @@
 		id='display_mode'
 		name='display_mode'
 		event-key='mode'
-		dispatch='display_mode.update'
+		dispatch='display_mode.update_requested'
 		listen='display_mode.updated'
 	>
 		<x-slot:label>Display Mode</x-slot:label>

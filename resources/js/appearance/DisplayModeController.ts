@@ -5,6 +5,7 @@ import {
 } from './resolvers/DisplayModeResolver'
 import {DisplayThemeResolver} from './resolvers/DisplayThemeResolver'
 import {DisplayThemeController} from './DisplayThemeController'
+import {DisplayModeUpdateRequested} from '../events/DisplayModeUpdateRequested'
 
 export class DisplayModeController {
 	init() {
@@ -24,7 +25,10 @@ export class DisplayModeController {
 				DisplayModeResolver.resolve().toLightMode()
 			})
 
-		document.addEventListener('display_mode.update', this.updateMode.bind(this))
+		document.addEventListener(
+			DisplayModeUpdateRequested.name,
+			this.updateMode.bind(this),
+		)
 		document.addEventListener('livewire:navigated', this.initDisplay.bind(this))
 
 		this.initDisplay()

@@ -1,5 +1,6 @@
 import {DisplayThemeResolver, ThemeIds} from './resolvers/DisplayThemeResolver'
 import {DisplayModeResolver} from './resolvers/DisplayModeResolver'
+import {DisplayModeUpdateRequested} from '../events/DisplayModeUpdateRequested'
 
 export class DisplayThemeController {
 	static init() {
@@ -30,9 +31,7 @@ export class DisplayThemeController {
 
 		if (theme === 'light') {
 			document.dispatchEvent(
-				new CustomEvent('display_mode.update', {
-					detail: {mode: prefersDark ? 'light' : 'system'},
-				}),
+				new DisplayModeUpdateRequested(prefersDark ? 'light' : 'system'),
 			)
 		}
 
