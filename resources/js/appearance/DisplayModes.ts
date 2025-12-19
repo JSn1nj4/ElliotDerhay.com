@@ -4,6 +4,7 @@ import {
 	DisplayModeResolver,
 	modeStorageKey,
 } from './resolvers/DisplayModeResolver'
+import {DisplayModeUpdated} from '../events/DisplayModeUpdated'
 
 export class DisplayMode {
 	get id() {
@@ -11,11 +12,7 @@ export class DisplayMode {
 	}
 
 	broadcast(value: string): DisplayMode {
-		document.dispatchEvent(
-			new CustomEvent('display_mode.updated', {
-				detail: {mode: value},
-			}),
-		)
+		document.dispatchEvent(new DisplayModeUpdated(value))
 
 		return this
 	}
