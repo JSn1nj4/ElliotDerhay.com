@@ -1,5 +1,5 @@
 <div class="block" id="mode-switch-wrapper">
-	<x-nav.select-item
+	<x-nav.select-list-nav-item
 		id='display_mode'
 		name='display_mode'
 		event-key='mode'
@@ -10,11 +10,11 @@
 		<option value='system'>System Default</option>
 		<option value='light'>Light Mode</option>
 		<option value='dark'>Dark Mode</option>
-	</x-nav.select-item>
+	</x-nav.select-list-nav-item>
 </div>
 
 <div id="theme-switch-wrapper" class='hidden dark:block'>
-	<x-nav.select-item
+	<x-nav.select-list-nav-item
 		id='display_theme'
 		name='display_theme'
 		event-key='theme'
@@ -25,5 +25,5 @@
 		<option value='light'>Light Grey</option>
 		<option value='dark'>Cybernetic</option>
 		<option value='dark2'>Industrial</option>
-	</x-nav.select-item>
+	</x-nav.select-list-nav-item>
 </div>

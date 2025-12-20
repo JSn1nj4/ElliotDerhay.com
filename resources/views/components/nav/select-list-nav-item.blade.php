@@ -20,4 +20,4 @@
 	</select>
 	<x-fas-caret-down class="absolute top-3 right-4 h-full size-3 pointer-events-none" />
 </div>
-@vite('resources/js/blade-components/nav/select-item.ts')
+@vite('resources/js/blade-components/nav/select-list-nav-item.ts')
