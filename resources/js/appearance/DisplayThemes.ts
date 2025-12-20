@@ -4,6 +4,7 @@ import {
 } from './resolvers/DisplayThemeResolver'
 import {DisplayModeResolver} from './resolvers/DisplayModeResolver'
 import {LightDisplayMode} from './DisplayModes'
+import {DisplayThemeUpdated} from '../events/DisplayThemeUpdated'
 
 export class DisplayTheme {
 	get id(): string {
@@ -11,11 +12,7 @@ export class DisplayTheme {
 	}
 
 	broadcast(value: string): this {
-		document.dispatchEvent(
-			new CustomEvent('display_theme.updated', {
-				detail: {theme: value},
-			}),
-		)
+		document.dispatchEvent(new DisplayThemeUpdated(value))
 
 		return this
 	}

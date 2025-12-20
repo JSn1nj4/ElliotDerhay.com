@@ -15,6 +15,8 @@ export default defineConfig(({mode}) => {
 					'resources/css/app.css',
 					'resources/js/app.ts',
 					'resources/css/filament/admin/theme.css',
+					// component-specific resources
+					'resources/js/blade-components/nav/select-list-nav-item.ts',
 				],
 				refresh: [
 					{
@@ -38,7 +40,8 @@ export default defineConfig(({mode}) => {
 			origin: allowOrigin(process.env),
 			// whitelist origins for *.ddev.site, *.lndo.site, *.local, and *.test
 			cors: {
-				origin: /https?:\/\/([A-Za-z0-9\-.]+)?(\.((ddev|lndo)\.site)|test|local)(?::\d+)?$/,
+				origin:
+					/https?:\/\/([A-Za-z0-9\-.]+)?(\.((ddev|lndo)\.site)|test|local)(?::\d+)?$/,
 			},
 		},
 	}
