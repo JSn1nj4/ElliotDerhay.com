@@ -21,9 +21,4 @@ class SelectItem extends Component
 	{
 		return view('components.nav.select-item');
 	}
-
-	public function dataLabel(): string
-	{
-		return "{$this->id}_selector";
-	}
 }
