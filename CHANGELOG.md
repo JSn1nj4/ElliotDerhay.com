@@ -2,9 +2,15 @@
 
 ## Version 3.0.4
 
+### Housekeeping
+
+- JSN-324: Replace `CustomEvent` usage with specific events ([#271][pr_271])
+
 ### Development
 
 - Add Redis to DDEV config
+
+[pr_271]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/271
 
 ## Version 3.0.3
 
