@@ -1,5 +1,5 @@
 <div x-data='googleAnalytics'>
-	<div class="w-full bg-big-stone-200 dark:bg-big-stone-950 flex-1 p-2 font-bold">
+	<div class="w-full bg-big-stone-200 dark:bg-big-stone-950" :class='displayClass'>
 		<div id="dnt-box"
 				 class="fixed bottom-0 left-0 z-30 border-solid border-t border-slate-500 dark:border-bright-turquoise-700 dark2:border-slate-800 bg-big-stone-200 dark:bg-big-stone-950 dark2:bg-slate-800 w-full text-xl md:text-base"
 				 ref="dntBox">
