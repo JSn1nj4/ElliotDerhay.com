@@ -1,11 +1,17 @@
-import {Alpine} from '../../../../vendor/livewire/livewire/dist/livewire.esm'
 import {
 	DisplayEvent,
 	DisplayEventsRegistry,
 	EventName,
 } from '../../events/DisplayEventsRegistry'
 
-Alpine.data(
+// hack to make TS ok with using global Alpine loaded by Livewire
+declare global {
+	interface Window {
+		Alpine: any
+	}
+}
+
+window.Alpine.data(
 	'selectList',
 	(key: 'mode' | 'theme', dispatch: EventName, listen: EventName) => ({
 		key: key,
@@ -48,5 +54,3 @@ Alpine.data(
 		},
 	}),
 )
-
-Alpine.start()
