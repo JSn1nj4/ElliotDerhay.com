@@ -8,7 +8,6 @@ declare global {
 }
 
 window.Alpine.data('googleAnalytics', () => ({
-	btnClasses: 'flex-1 p-2 font-bold',
 	displayClass: 'block',
 
 	disableTracking(e) {
