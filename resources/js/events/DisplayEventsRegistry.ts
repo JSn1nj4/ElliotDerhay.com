@@ -20,7 +20,7 @@ type DisplayEventList = {
 	[key in EventName]: (value: ModeId | ThemeId) => DisplayEvent
 }
 
-export class EventsRegistry {
+export class DisplayEventsRegistry {
 	list: DisplayEventList
 
 	constructor() {
@@ -37,7 +37,7 @@ export class EventsRegistry {
 	}
 
 	static resolve(key: EventName): (value: string) => DisplayEvent {
-		const registry = new EventsRegistry()
+		const registry = new DisplayEventsRegistry()
 
 		return registry.resolve(key)
 	}

@@ -1,9 +1,9 @@
 import {Alpine} from '../../../../vendor/livewire/livewire/dist/livewire.esm'
 import {
 	DisplayEvent,
+	DisplayEventsRegistry,
 	EventName,
-	EventsRegistry,
-} from '../../events/EventsRegistry'
+} from '../../events/DisplayEventsRegistry'
 
 Alpine.data(
 	'selectList',
@@ -30,7 +30,9 @@ Alpine.data(
 				return
 			}
 
-			document.dispatchEvent(EventsRegistry.resolve(this.dispatch)(this.value))
+			document.dispatchEvent(
+				DisplayEventsRegistry.resolve(this.dispatch)(this.value),
+			)
 		},
 
 		receive(event: DisplayEvent) {
