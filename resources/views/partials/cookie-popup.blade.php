@@ -1,54 +1,5 @@
-<script type='application/javascript'>
-	document.addEventListener('alpine:init', () => {
-		Alpine.data('googleAnalytics', () => ({
-			btnClasses: 'flex-1 p-2 font-bold',
-			displayClass: 'block',
-
-			disableTracking(e) {
-				this.allowTracker(false)
-			},
-
-			enableTracking(e) {
-				this.allowTracker(true)
-			},
-
-			allowTracker(allow) {
-				if (typeof allow !== 'boolean') allow = false
-
-				let now = new Date()
-				now.setTime(now.getTime() + 1000 * 60 * 60 * 24 * 400)
-
-				document.dispatchEvent(
-					new CustomEvent('allow_tracking', {
-						detail: {
-							allow,
-							time: now,
-						},
-					}),
-				)
-
-				document.cookie = 'GA_POPUP_INTERACTION=1;expires=' + now.toUTCString()
-				this.hide()
-			},
-
-			hide() {
-				this.displayClass = 'hidden'
-			},
-
-			init() {
-				// Popup has been interacted with
-				if (document.cookie.indexOf('GA_POPUP_INTERACTION=1') !== -1)
-					this.hide()
-
-				// "Do Not Track" enabled
-				if (navigator.doNotTrack === '1') this.hide()
-			},
-		}))
-	})
-</script>
-
 <div x-data='googleAnalytics'>
-	<div class="w-full bg-big-stone-200 dark:bg-big-stone-950" :class='displayClass'>
+	<div class="w-full bg-big-stone-200 dark:bg-big-stone-950 flex-1 p-2 font-bold">
 		<div id="dnt-box"
 				 class="fixed bottom-0 left-0 z-30 border-solid border-t border-slate-500 dark:border-bright-turquoise-700 dark2:border-slate-800 bg-big-stone-200 dark:bg-big-stone-950 dark2:bg-slate-800 w-full text-xl md:text-base"
 				 ref="dntBox">
@@ -60,14 +11,12 @@
 					</div>
 					<div class="flex md:w-48 gap-4">
 						<button
-							class="bg-bright-turquoise-500 dark:bg-bright-turquoise-600 text-big-stone-100 dark:text-slate-950"
-							:class='btnClasses'
+							class="bg-bright-turquoise-500 dark:bg-bright-turquoise-600 text-big-stone-100 dark:text-slate-950 flex-1 p-2 font-bold"
 							@click="enableTracking">
 							Allow
 						</button>
 						<button
-							class="bg-slate-100 dark:bg-slate-800 dark2:bg-slate-700 text-bright-turquoise-600 dark:text-bright-turquoise-500"
-							:class='btnClasses'
+							class="bg-slate-100 dark:bg-slate-800 dark2:bg-slate-700 text-bright-turquoise-600 dark:text-bright-turquoise-500 flex-1 p-2 font-bold"
 							@click="disableTracking">
 							Deny
 						</button>
@@ -77,3 +26,4 @@
 		</div>
 	</div>
 </div>
+@vite('resources/js/blade-components/cookie-popup.ts')

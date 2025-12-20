@@ -16,6 +16,7 @@ export default defineConfig(({mode}) => {
 					'resources/js/app.ts',
 					'resources/css/filament/admin/theme.css',
 					// component-specific resources
+					'resources/js/blade-components/cookie-popup.ts',
 					'resources/js/blade-components/nav/select-list-nav-item.ts',
 				],
 				refresh: [
