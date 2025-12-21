@@ -1,5 +1,5 @@
 export class UserTrackingToggled extends Event {
-	static readonly name: string = 'allow_tracking'
+	static readonly name: string = 'user_tracking.toggled'
 
 	allow: boolean
 

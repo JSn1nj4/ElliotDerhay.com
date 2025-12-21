@@ -28,7 +28,7 @@ new class extends Component {
 				window['ga-disable-{{ $googleAnalyticsId }}'] = !allow
 			}
 
-			document.addEventListener('allow_tracking', googleAnalyticsTrack)
+			document.addEventListener('user_tracking.toggled', googleAnalyticsTrack)
 
 			if (
 				// make sure the DNT cookie hasn't already been set
