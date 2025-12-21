@@ -51,65 +51,7 @@
 <x-scroller.housing />
 <x-scroller.housing mirror />
 
-<script type='application/javascript'>
-	function scrollableDistance() {
-		return document.documentElement.scrollHeight - document.documentElement.clientHeight
-	}
-
-	function setStaticMeasurements() {
-		document.documentElement.style.setProperty('--body-height', document.documentElement.scrollHeight.toString())
-		document.documentElement.style.setProperty('--scrollable-distance', scrollableDistance().toString())
-	}
-
-	window.addEventListener('resize', setStaticMeasurements)
-
-	function setScrollPercent() {
-		document.documentElement.style.setProperty(
-			'--scroll-percent',
-
-			/* basically: scroll position / (document - viewport) */
-			(document.documentElement.scrollTop / scrollableDistance()).toString(),
-		)
-	}
-
-	function enableScrollEffects() {
-		document.documentElement.classList.add('scroll')
-	}
-
-	function disableScrollEffects() {
-		document.documentElement.classList.remove('scroll')
-	}
-
-	function scrollEffectInit() {
-		setStaticMeasurements()
-		setScrollPercent()
-		disableScrollEffects()
-	}
-
-	window.addEventListener('scroll', setScrollPercent)
-	window.addEventListener('scroll', enableScrollEffects)
-	window.addEventListener('scrollend', disableScrollEffects)
-
-	window.addEventListener('load', () => {
-		window.addEventListener('livewire:navigated', scrollEffectInit)
-		scrollEffectInit()
-	})
-</script>
-
 <livewire:lightbox />
-
-<script type='application/javascript'>
-	function getWindowHeight() {
-		document
-			.documentElement
-			.style
-			.setProperty('--body-height', `${document.documentElement.scrollHeight}px`)
-	}
-
-	window.addEventListener('resize', getWindowHeight)
-
-	getWindowHeight()
-</script>
 
 @vite('resources/js/app.ts')
 </body>
