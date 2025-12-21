@@ -15,119 +15,8 @@ new class extends Component {
 }; ?>
 
 <div>
-	<script>
-		document.addEventListener('alpine:init', function() {
-
-			Alpine.data('lightbox', () => ({
-				defaultData: {
-					alt: null,
-					caption: null,
-					src: '',
-					srcset: null,
-					title: null,
-				},
-
-				front: false,
-				image: null,
-
-				speed: {{ $speed }},
-				visible: false,
-
-				init() {
-					this.image = this.defaultData
-
-					document.addEventListener('lightbox.show', this.receiveImage.bind(this))
-
-					const lightboxTriggers = document.querySelectorAll('figure.lightbox-trigger')
-
-					lightboxTriggers.forEach((trigger) => {
-						trigger.addEventListener('click', this.triggerPopup.bind(this))
-					})
-				},
-
-				maybeClose() {
-					if (this.front === false) return
-
-					this.visible = false
-
-					setTimeout(() => {
-						this.front = false
-
-						this.triggerUpdate(this.defaultData)
-					}, this.speed)
-				},
-
-				maybeOpen() {
-					if (this.visible === true) return
-
-					this.front = true
-					this.visible = true
-				},
-
-				receiveImage(e) {
-					this.triggerUpdate(e.detail)
-					this.maybeOpen()
-				},
-
-				triggerUpdate(data) {
-					this.image = data
-				},
-
-				getNodeType(elem) {
-					return elem.type || elem.nodeName.toLowerCase()
-				},
-
-				getLightboxSource(elem) {
-					// the target should be a `<figure>` containing an `<img>`
-					// the target might contain a `<figcaption>`
-					if (this.getNodeType(elem) === 'img') elem = elem.parentElement
-
-					return elem
-				},
-
-				getChildNodes(parent) {
-					const nodes = {}
-
-					parent.childNodes.forEach((node) => {
-						let type = this.getNodeType(node)
-
-						if (!['img', 'figcaption'].includes(type)) return
-
-						nodes[type] = node
-					})
-
-					return nodes
-				},
-
-				getLightboxData(elem) {
-					const {img, figcaption} = this.getChildNodes(elem)
-
-					const data = {
-						src: img.src,
-					}
-
-					if (img?.alt) data.alt = img.alt
-					if (img?.srcset) data.srcset = img.srcset
-					if (img?.title) data.title = img.title
-
-					if (figcaption !== undefined) data.caption = figcaption.textContent
-
-					return data
-				},
-
-				triggerPopup(e) {
-					const elem = this.getLightboxSource(e.target)
-
-					const lightboxData = this.getLightboxData(elem)
-
-					const event = new CustomEvent('lightbox.show', {detail: lightboxData})
-					document.dispatchEvent(event)
-				},
-			}))
-		})
-	</script>
 	<section
-		x-data="lightbox"
+		x-data="lightbox({{ $speed }})"
 		class="lightbox overlay fixed transition-opacity bg-black/50 w-full h-screen top-0"
 		:class="{
 			'z-50': front,
@@ -159,4 +48,5 @@ new class extends Component {
 			{{--	END: captionable image	--}}
 		</div>
 	</section>
+	@vite('resources/js/livewire-components/lightbox.ts')
 </div>
