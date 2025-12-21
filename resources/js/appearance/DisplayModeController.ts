@@ -8,6 +8,11 @@ import {DisplayThemeController} from './DisplayThemeController'
 import {DisplayModeUpdateRequested} from '../events/DisplayModeUpdateRequested'
 
 export class DisplayModeController {
+	static init() {
+		const controller = new DisplayModeController()
+		controller.init()
+	}
+
 	init() {
 		DisplayThemeController.init()
 
