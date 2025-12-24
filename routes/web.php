@@ -23,6 +23,8 @@ use Spatie\Sitemap\Tags\Url as SitemapUrl;
 // standard views
 Volt::route('/', 'home')->name('home');
 
+Volt::route('/credits', 'credits')->name('credits');
+
 Volt::route('/privacy', 'privacy')->name('privacy');
 
 Volt::route('/projects', 'projects.index')->name('portfolio');
@@ -45,6 +47,10 @@ Route::get('/sitemap.xml',
 					->setChangeFrequency(SitemapUrl::CHANGE_FREQUENCY_WEEKLY)
 					->setPriority(0.1))
 				->add(SitemapUrl::create(route('privacy'))
+					->setLastModificationDate(Carbon::today())
+					->setChangeFrequency(SitemapUrl::CHANGE_FREQUENCY_MONTHLY)
+					->setPriority(0.1))
+				->add(SitemapUrl::create(route('credits'))
 					->setLastModificationDate(Carbon::today())
 					->setChangeFrequency(SitemapUrl::CHANGE_FREQUENCY_MONTHLY)
 					->setPriority(0.1));

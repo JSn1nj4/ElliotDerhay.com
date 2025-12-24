@@ -7,7 +7,7 @@ import {
 
 export const ThemeIds = ['light', 'dark', 'dark2']
 
-type ThemeId = typeof ThemeIds[number]
+export type ThemeId = typeof ThemeIds[number]
 
 export const themeStorageKey: string = 'displayTheme'
 

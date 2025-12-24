@@ -1,7 +1,7 @@
 <nav class="flex items-center justify-between flex-wrap relative">
 
 	<div class="flex items-center grow lg:shrink-0 text-white">
-		<a href="/" class="text-black dark:text-white p-2">
+		<a href="/" class="text-black dark:text-white p-2" wire:navigate>
 			<img src="{{ asset_url("avatar-2026-crop.png") }}" width="60" height="60" alt="ElliotDerhay.com logo"
 					 title="Elliot Derhay"
 					 class="inline border-solid border border-black dark:border-white rounded-xl align-middle size-12 sm:size-[60px]">

@@ -18,17 +18,17 @@ new class extends Component {
 		<script async src="https://www.googletagmanager.com/gtag/js?id={{ $googleAnalyticsId }}"></script>
 		<script type="application/javascript">
 			// Enable or disable GA tracking
-			function googleAnalyticsTrack({detail}) {
-				let dnt = !detail.allow ? 'DNT=1' : 'DNT=0'
+			function googleAnalyticsTrack({allow, time}) {
+				let dnt = !allow ? 'DNT=1' : 'DNT=0'
 
-				if (!!detail.time) dnt += ';expires=' + detail.time.toUTCString()
+				if (!!time) dnt += ';expires=' + time.toUTCString()
 
 				// only good for when the user interacts with this mess
 				document.cookie = dnt
-				window['ga-disable-{{ $googleAnalyticsId }}'] = !detail.allow
+				window['ga-disable-{{ $googleAnalyticsId }}'] = !allow
 			}
 
-			document.addEventListener('allow_tracking', googleAnalyticsTrack)
+			document.addEventListener('user_tracking.toggled', googleAnalyticsTrack)
 
 			if (
 				// make sure the DNT cookie hasn't already been set
@@ -36,7 +36,7 @@ new class extends Component {
 				// make sure the navigator DNT setting hasn't already been set
 				&& navigator.doNotTrack !== '1'
 			) {
-				googleAnalyticsTrack({detail: {allow: false}})
+				googleAnalyticsTrack({allow: false})
 			}
 
 			// tracking configuration
@@ -50,7 +50,7 @@ new class extends Component {
 
 			gtag('config', '{{ $googleAnalyticsId }}')
 		</script>
-	@else
-		<!-- Google Analytics component mounted -->
-	@endproduction
+		@else
+			<!-- Google Analytics component mounted -->
+			@endproduction
 </div>

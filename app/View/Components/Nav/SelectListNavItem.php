@@ -5,7 +5,7 @@ namespace App\View\Components\Nav;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class SelectItem extends Component
+class SelectListNavItem extends Component
 {
 	/** @noinspection ParameterDefaultsNullInspection */
 	public function __construct(
@@ -19,11 +19,6 @@ class SelectItem extends Component
 	#[\Override]
 	public function render(): View
 	{
-		return view('components.nav.select-item');
-	}
-
-	public function dataLabel(): string
-	{
-		return "{$this->id}_selector";
+		return view('components.nav.select-list-nav-item');
 	}
 }

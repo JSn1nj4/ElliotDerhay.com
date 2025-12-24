@@ -1,5 +1,7 @@
 import {DisplayThemeResolver, ThemeIds} from './resolvers/DisplayThemeResolver'
 import {DisplayModeResolver} from './resolvers/DisplayModeResolver'
+import {DisplayModeUpdateRequested} from '../events/DisplayModeUpdateRequested'
+import {DisplayThemeUpdateRequested} from '../events/DisplayThemeUpdateRequested'
 
 export class DisplayThemeController {
 	static init() {
@@ -10,13 +12,13 @@ export class DisplayThemeController {
 
 	init() {
 		document.addEventListener(
-			'display_theme.update',
+			DisplayThemeUpdateRequested.name,
 			this.updateTheme.bind(this),
 		)
 	}
 
-	updateTheme(event: CustomEvent) {
-		const theme = event?.detail?.theme
+	updateTheme(event: DisplayThemeUpdateRequested) {
+		const theme = event.theme
 
 		if (!ThemeIds.includes(theme)) {
 			console.warn(`Invalid theme: ${theme}`)
@@ -30,9 +32,7 @@ export class DisplayThemeController {
 
 		if (theme === 'light') {
 			document.dispatchEvent(
-				new CustomEvent('display_mode.update', {
-					detail: {mode: prefersDark ? 'light' : 'system'},
-				}),
+				new DisplayModeUpdateRequested(prefersDark ? 'light' : 'system'),
 			)
 		}
 

@@ -5,17 +5,17 @@ import {
 	SystemDisplayMode,
 } from '../DisplayModes'
 
-export const DisplayIds = ['system', 'light', 'dark']
+export const ModeIds = ['system', 'light', 'dark']
 
-type DisplayId = typeof DisplayIds[number]
+export type ModeId = typeof ModeIds[number]
 
 export const modeStorageKey: string = 'theme'
 
 export class DisplayModeResolver {
-	static currentId(): DisplayId {
+	static currentId(): ModeId {
 		const displayMode = localStorage.getItem(modeStorageKey)
 
-		if (!DisplayIds.includes(displayMode)) return 'system'
+		if (!ModeIds.includes(displayMode)) return 'system'
 
 		return displayMode
 	}

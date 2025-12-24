@@ -1,5 +1,32 @@
 # Changelog
 
+## Version 3.0.4
+
+### New
+
+- Create Credits page to credit artists for their work
+- Convert lightbox/caption image on blog posts to reusable `CaptionableImage` component
+
+### Fixes
+
+- JSN-325: Fix heading links ([#274][pr_274])
+
+### Housekeeping
+
+- JSN-324: Replace `CustomEvent` usage with specific events ([#271][pr_271])
+- Move several one-off JS scripts to dedicated TS modules
+- Add missing caption to homepage photo
+- Add missing `wire:navigate` to a few links
+- Migrate captionable image styling responsibility to new component
+
+### Development
+
+- Add Redis to DDEV config
+
+[pr_271]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/271
+
+[pr_274]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/274
+
 ## Version 3.0.3
 
 ### Fixes

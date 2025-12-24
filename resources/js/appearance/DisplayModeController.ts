@@ -1,8 +1,18 @@
-import {DisplayIds, DisplayModeResolver, modeStorageKey,} from './resolvers/DisplayModeResolver'
+import {
+	DisplayModeResolver,
+	ModeIds,
+	modeStorageKey,
+} from './resolvers/DisplayModeResolver'
 import {DisplayThemeResolver} from './resolvers/DisplayThemeResolver'
 import {DisplayThemeController} from './DisplayThemeController'
+import {DisplayModeUpdateRequested} from '../events/DisplayModeUpdateRequested'
 
 export class DisplayModeController {
+	static init() {
+		const controller = new DisplayModeController()
+		controller.init()
+	}
+
 	init() {
 		DisplayThemeController.init()
 
@@ -20,7 +30,10 @@ export class DisplayModeController {
 				DisplayModeResolver.resolve().toLightMode()
 			})
 
-		document.addEventListener('display_mode.update', this.updateMode.bind(this))
+		document.addEventListener(
+			DisplayModeUpdateRequested.name,
+			this.updateMode.bind(this),
+		)
 		document.addEventListener('livewire:navigated', this.initDisplay.bind(this))
 
 		this.initDisplay()
@@ -38,10 +51,10 @@ export class DisplayModeController {
 			.syncTheme(currentTheme)
 	}
 
-	updateMode(event: CustomEvent): void {
-		const mode = event?.detail?.mode
+	updateMode(event: DisplayModeUpdateRequested): void {
+		const mode = event.mode
 
-		if (!DisplayIds.includes(mode)) {
+		if (!ModeIds.includes(mode)) {
 			console.warn(`Invalid mode: ${mode}`)
 			return
 		}
