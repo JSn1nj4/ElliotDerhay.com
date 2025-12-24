@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class Lightboxable extends Component
+class CaptionableImage extends Component
 {
 	/**
 	 * Create a new component instance.
@@ -15,6 +15,7 @@ class Lightboxable extends Component
 		public string      $src,
 		public string|null $title = null,
 		public string|null $alt = null,
+		public bool        $lightbox = false,
 	) {}
 
 	/**
@@ -22,6 +23,6 @@ class Lightboxable extends Component
 	 */
 	public function render(): View|Closure|string
 	{
-		return view('components.media.lightboxable');
+		return view('components.media.captionable-image');
 	}
 }

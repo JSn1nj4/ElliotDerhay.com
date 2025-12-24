@@ -25,12 +25,12 @@ new class extends Component {
 	<x-row class="my-12" flex-class="flex flex-col md:flex-row gap-6">
 		<x-column class='w-1/3 flex flex-col gap-6'>
 			<section class='w-full flex flex-col gap-2 text-center'>
-				<x-media.lightboxable :src="asset_url('credits/OQRDHC0-sized.jpg')">
+				<x-media.captionable-image :src="asset_url('credits/OQRDHC0-sized.jpg')">
 					<x-slot:caption>
 						<a href="https://www.freepik.com" target='freepik'>Designed by Ajipebriana /
 							Freepik</a>
 					</x-slot:caption>
-				</x-media.lightboxable>
+				</x-media.captionable-image>
 			</section>
 			<section class='w-full flex flex-col gap-2 text-center'>
 				<h2 class='text-2xl'>Technology background design</h2>
@@ -43,13 +43,13 @@ new class extends Component {
 
 		<x-column class='w-1/3 flex flex-col gap-6'>
 			<section class='w-full flex flex-col gap-2 text-center'>
-				<x-media.lightboxable :src="asset_url('credits/grunge-stone-texture-background-sized.jpg')">
+				<x-media.captionable-image :src="asset_url('credits/grunge-stone-texture-background-sized.jpg')">
 					<x-slot:caption>
 						<a href="https://www.freepik.com" target='freepik'>Designed by
 							kjpargeter /
 							Freepik</a>
 					</x-slot:caption>
-				</x-media.lightboxable>
+				</x-media.captionable-image>
 			</section>
 			<section class='w-full flex flex-col gap-2 text-center'>
 				<h2 class='text-2xl'>Grunge stone texture background</h2>
