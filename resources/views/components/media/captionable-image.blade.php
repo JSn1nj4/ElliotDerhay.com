@@ -11,7 +11,7 @@
 	'outline-slate-300' => true,
 	'dark:outline-big-stone-700' => true,
 	'bg-white' => true,
-	'dark:bg-black/60' => true,
+	'dark:bg-neutral-950' => true,
 	'hover:outline-bright-turquoise-600' => $lightbox,
 	'dark:hover:outline-bright-turquoise-200' => $lightbox,
 ]) class="lightbox-trigger inline-block">

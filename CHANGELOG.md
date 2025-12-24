@@ -1,5 +1,14 @@
 # Changelog
 
+## Version 3.0.6
+
+### Fixes
+
+- Use correct dark background for captioned images
+- JSN-327: Fix lightbox size on mobile (#276)
+- Make tiny footer menu look a bit better on mobile
+- Make Credits layout responsive
+
 ## Version 3.0.5
 
 ### Fixes
