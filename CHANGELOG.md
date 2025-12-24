@@ -1,5 +1,11 @@
 # Changelog
 
+## Version 3.0.6
+
+### Fixes
+
+- JSN-327: Fix lightbox size on mobile (#276)
+
 ## Version 3.0.5
 
 ### Fixes
