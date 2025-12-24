@@ -11,7 +11,7 @@ new class extends Component {
 	This page exists to credit others whose work I on my site.
 </x-slot:meta-description>
 <root>
-	<x-row class="my-12" flex-class="flex flex-col md:flex-row gap-12">
+	<x-row class="my-12" flex-class="flex-none">
 		<x-column class="w-full flex flex-col gap-8">
 			<section class='w-full flex flex-col gap-2'>
 				<h1 class='text-4xl'>Additional Credits</h1>
@@ -22,8 +22,8 @@ new class extends Component {
 		</x-column>
 	</x-row>
 
-	<x-row class="my-12" flex-class="flex flex-col md:flex-row gap-6">
-		<x-column class='w-1/3 flex flex-col gap-6'>
+	<x-row class="my-12" flex-class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+		<x-column class='flex flex-col gap-6'>
 			<section class='w-full flex flex-col gap-2 text-center'>
 				<x-media.captionable-image :src="asset_url('credits/OQRDHC0-sized.jpg')">
 					<x-slot:caption>
@@ -41,7 +41,7 @@ new class extends Component {
 			</section>
 		</x-column>
 
-		<x-column class='w-1/3 flex flex-col gap-6'>
+		<x-column class='flex flex-col gap-6'>
 			<section class='w-full flex flex-col gap-2 text-center'>
 				<x-media.captionable-image :src="asset_url('credits/grunge-stone-texture-background-sized.jpg')">
 					<x-slot:caption>
