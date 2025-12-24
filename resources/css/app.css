@@ -1317,7 +1317,7 @@
 	}
 
 	.lightbox-trigger {
-		@apply cursor-pointer transition-all duration-300 ease-linear outline-solid outline-1 rounded-lg mt-1 outline-black hover:bg-bright-turquoise-600 dark:hover:bg-bright-turquoise-200 hover:outline-bright-turquoise-600 dark:hover:outline-bright-turquoise-200;
+		@apply cursor-pointer transition-all duration-300 ease-linear outline-solid outline-1 rounded-lg mt-1 outline-slate-300 dark:outline-big-stone-700 bg-white dark:bg-black/60 hover:outline-bright-turquoise-600 dark:hover:outline-bright-turquoise-200;
 
 		img {
 			@apply rounded-lg;
@@ -1325,10 +1325,6 @@
 
 		figcaption {
 			@apply px-4 py-2 mb-4 italic text-center transition-colors duration-300 ease-linear;
-		}
-
-		&:hover figcaption {
-			@apply dark:text-black;
 		}
 	}
 
