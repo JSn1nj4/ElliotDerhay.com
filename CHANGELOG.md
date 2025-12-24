@@ -1,5 +1,11 @@
 # Changelog
 
+## Version 3.0.5
+
+### Fixes
+
+- Add Lightbox TS component to Vite config
+
 ## Version 3.0.4
 
 ### New

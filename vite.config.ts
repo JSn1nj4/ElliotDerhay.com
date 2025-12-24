@@ -18,6 +18,7 @@ export default defineConfig(({mode}) => {
 					// component-specific resources
 					'resources/js/blade-components/cookie-popup.ts',
 					'resources/js/blade-components/nav/select-list-nav-item.ts',
+					'resources/js/livewire-components/lightbox.ts',
 				],
 				refresh: [
 					{
