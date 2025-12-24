@@ -4,6 +4,7 @@
 
 ### Fixes
 
+- Use correct dark background for captioned images
 - JSN-327: Fix lightbox size on mobile (#276)
 
 ## Version 3.0.5
