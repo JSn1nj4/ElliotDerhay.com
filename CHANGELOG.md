@@ -6,6 +6,7 @@
 
 - Use correct dark background for captioned images
 - JSN-327: Fix lightbox size on mobile (#276)
+- Make tiny footer menu look a bit better on mobile
 
 ## Version 3.0.5
 
