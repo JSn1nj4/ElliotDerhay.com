@@ -1252,7 +1252,7 @@
 		}
 
 		&:hover .heading-anchor {
-			visibility: visible;
+			visibility: visible !important;
 		}
 	}
 
