@@ -29,9 +29,9 @@ new class extends Component {
 		}"
 	>
 		<button @click="maybeClose()" class="absolute top-2 right-4 text-4xl text-white z-50">&times;</button>
-		<div class="relative h-screen object-contain flex flex-col items-center px-16 py-8">
+		<div class="relative h-screen object-contain flex flex-col items-center px-12 md:px-16 py-12 md:py-8">
 			{{--	START: captionable image	--}}
-			<figure class="relative block overflow-hidden rounded-lg object-contain w-fit h-full">
+			<figure class="relative block overflow-hidden rounded-lg object-contain w-fit max-w-full h-full">
 				<img
 					class="relative mx-auto object-contain w-full h-full"
 					:src="image.src"
