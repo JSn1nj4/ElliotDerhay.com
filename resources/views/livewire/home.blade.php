@@ -9,9 +9,15 @@ new class extends Component {
 <root>
 	<x-row id="about" class="my-12" flex-class="flex flex-col md:flex-row gap-12">
 		<x-column class="md:w-1/2 lg:w-5/12 xl:w-1/3">
-			<img src="{{ asset_url("Elliot-head-on-square-color-medium.jpg") }}" title="Elliot Derhay"
-					 alt="Photo of Elliot Derhay"
-					 class="border-black dark:border-white border-2 border-opacity-40 rounded-3xl">
+			<x-media.lightboxable
+				:src='asset_url("Elliot-head-on-square-color-medium.jpg")' title='Elliot Derhay'
+				alt="Photo of Elliot Derhay"
+			>
+				<x-slot:caption>
+					<a href='https://www.derhaydesign.com/' target='derhay-design'>Photo by Katie Derhay /
+						DerhayDesign.com</a>
+				</x-slot:caption>
+			</x-media.lightboxable>
 		</x-column>
 
 		<x-column
