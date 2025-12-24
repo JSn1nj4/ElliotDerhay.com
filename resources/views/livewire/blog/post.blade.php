@@ -67,12 +67,13 @@ class extends \Livewire\Volt\Component {
 <article class='my-12'>
 	<x-blog.wrapper>
 		@if($post->image)
-			<figure class="lightbox-trigger inline-block">
-				<img src="{{ $post->image->url }}" class="block rounded-lg" alt="">
+			<x-media.lightboxable :src="$post->image->url">
 				@if($post->image->caption)
-					<figcaption class='my-2 italic'>{{ $post->image->caption }}</figcaption>
+					<x-slot:caption>
+						{{ $post->image->caption }}
+					</x-slot:caption>
 				@endif
-			</figure>
+			</x-media.lightboxable>
 		@endif
 
 		<div class="flex flex-row pt-3 mt-2 gap-4">
