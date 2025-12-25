@@ -1,5 +1,11 @@
 # Changelog
 
+## Version 3.0.7
+
+### Fixes
+
+- JSN-328: Fix lightbox flash on page load (#280)
+
 ## Version 3.0.6
 
 ### Fixes
