@@ -16,6 +16,7 @@ new class extends Component {
 
 <div>
 	<section
+		x-cloak
 		x-data="lightbox({{ $speed }})"
 		class="lightbox overlay fixed transition-opacity bg-black/50 w-full h-screen top-0"
 		:class="{

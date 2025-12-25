@@ -1405,6 +1405,10 @@
 	}
 }
 
+[x-cloak] {
+	display: none !important;
+}
+
 .dark .backlight {
 	background-image: linear-gradient(to top, var(--color-bright-turquoise-500), rgb(from var(--color-bright-turquoise-500) r g b / 0.26) 5px, transparent 75%);
 }
