@@ -6,7 +6,13 @@
 
 - JSN-328: Fix lightbox flash on page load ([#280][pr_280])
 
+### Housekeeping
+
+- JSN-332: Remove social post prefix ([#284][pr_284])
+
 [pr_280]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/280
+
+[pr_284]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/284
 
 ## Version 3.0.6
 
