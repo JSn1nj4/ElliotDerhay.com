@@ -8,11 +8,11 @@
 
 ### Housekeeping
 
-- JSN-332: Remove social post prefix (#283)
+- JSN-332: Remove social post prefix ([#284][pr_284])
 
 [pr_280]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/280
 
-[pr_283]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/283
+[pr_284]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/284
 
 ## Version 3.0.6
 
