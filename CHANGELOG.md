@@ -5,6 +5,9 @@
 ### Fixes
 
 - Fix file attachment uploads by using correct method `saveUploadedFilesUsing()`
+- JSN-329: Fix overflow caused by long inline code snippets in content ([#285][pr_285])
+
+[pr_285]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/285
 
 ## Version 3.0.7
 
