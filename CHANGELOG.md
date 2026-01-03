@@ -1,13 +1,30 @@
 # Changelog
 
+## Version 3.0.7
+
+### Fixes
+
+- JSN-328: Fix lightbox flash on page load ([#280][pr_280])
+
+### Housekeeping
+
+- JSN-332: Remove social post prefix ([#284][pr_284])
+- Switch to highlight-dark-lite theme for code highlighting
+
+[pr_280]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/280
+
+[pr_284]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/284
+
 ## Version 3.0.6
 
 ### Fixes
 
 - Use correct dark background for captioned images
-- JSN-327: Fix lightbox size on mobile (#276)
+- JSN-327: Fix lightbox size on mobile ([#276][pr_276])
 - Make tiny footer menu look a bit better on mobile
 - Make Credits layout responsive
+
+[pr_276]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/276
 
 ## Version 3.0.5
 
