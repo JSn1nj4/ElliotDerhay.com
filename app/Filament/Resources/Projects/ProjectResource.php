@@ -57,7 +57,7 @@ class ProjectResource extends Resource
 						FileUpload::make('upload')
 							->image()
 							->maxSize(5 * 1024)
-							->afterStateUpdated(static function (Set $set, TemporaryUploadedFile $state) {
+							->saveUploadedFileUsing(static function (Set $set, TemporaryUploadedFile $state) {
 								$image = StoresImage::execute($state);
 
 								$set('image_id', $image->id);

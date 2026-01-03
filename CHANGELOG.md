@@ -1,5 +1,11 @@
 # Changelog
 
+## Version 3.0.8
+
+### Fixes
+
+- Fix file attachment uploads by using correct method `saveUploadedFilesUsing()`
+
 ## Version 3.0.7
 
 ### Fixes
