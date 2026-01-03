@@ -9,6 +9,7 @@
 ### Housekeeping
 
 - JSN-332: Remove social post prefix ([#284][pr_284])
+- Switch to highlight-dark-lite theme for code highlighting
 
 [pr_280]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/280
 
