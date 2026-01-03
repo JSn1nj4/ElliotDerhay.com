@@ -15,19 +15,19 @@ class CodeRenderer implements NodeRendererInterface, XmlNodeRendererInterface
 {
 	use Resumeable;
 
-    /**
+	/**
 	 * @param Code $node
 	 *
-     * @inheritDoc
-     */
-    public function render(Node $node, ChildNodeRendererInterface $childRenderer): HtmlElement
-    {
+	 * @inheritDoc
+	 */
+	public function render(Node $node, ChildNodeRendererInterface $childRenderer): HtmlElement
+	{
 		Code::assertInstanceOf($node);
 
-		$attrs = array_merge($node->data->get('attributes'), ['class' => 'text-yellow-800/70 dark:text-yellow-400 bg-neutral-400/40 dark:bg-neutral-800 px-1']);
+		$attrs = array_merge($node->data->get('attributes'), ['class' => 'text-yellow-800/70 dark:text-yellow-400 bg-neutral-400/40 dark:bg-neutral-800 px-1 wrap-break-word']);
 
-        return new HtmlElement('code', $attrs, Xml::escape($node->getLiteral()));
-    }
+		return new HtmlElement('code', $attrs, Xml::escape($node->getLiteral()));
+	}
 
 	public function getXmlTagName(Node $node): string
 	{
