@@ -1,5 +1,15 @@
 # Changelog
 
+## Version 3.0.8
+
+### Fixes
+
+- Fix file attachment uploads by using correct method `saveUploadedFilesUsing()`
+- JSN-329: Fix overflow caused by long inline code snippets in content ([#285][pr_285])
+- Add black container to blog content for better reading on mobile in dark mode
+
+[pr_285]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/285
+
 ## Version 3.0.7
 
 ### Fixes
