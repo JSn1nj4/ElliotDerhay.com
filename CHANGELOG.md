@@ -1,5 +1,11 @@
 # Changelog
 
+## Version 3.0.9
+
+### Housekeeping
+
+- Add a little more spacing above blog content headings
+
 ## Version 3.0.8
 
 ### Fixes
