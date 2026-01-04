@@ -5,7 +5,7 @@
 	"type": "module",
 	"license": "MIT",
 	"engines": {
-		"node": "^20.2.x",
+		"node": "^22.21.x",
 		"pnpm": "^10.0.x"
 	},
 	"repository": {
@@ -20,23 +20,23 @@
 		"prod": "pnpm run build"
 	},
 	"devDependencies": {
-		"@tailwindcss/forms": "^0.5.4",
-		"@tailwindcss/typography": "^0.5.9",
-		"@tailwindcss/vite": "^4.1.11",
-		"@types/node": "^22.15.18",
-		"@vitejs/plugin-vue": "^5.2.4",
-		"axios": "^1.9.0",
-		"dotenv": "^16.5.0",
-		"laravel-vite-plugin": "^1.2.0",
-		"playwright": "^1.55.0",
-		"tailwindcss": "^4.1.12",
+		"@tailwindcss/forms": "^0.5.11",
+		"@tailwindcss/typography": "^0.5.19",
+		"@tailwindcss/vite": "^4.1.18",
+		"@types/node": "^25.0.3",
+		"@vitejs/plugin-vue": "^6.0.3",
+		"axios": "^1.13.2",
+		"dotenv": "^17.2.3",
+		"laravel-vite-plugin": "^2.0.1",
+		"playwright": "^1.57.0",
+		"tailwindcss": "^4.1.18",
 		"tippy.js": "^6.3.7",
-		"typescript": "^5.8.3",
-		"vite": "^6.3.5",
-		"vue": "^3.5.14"
+		"typescript": "^5.9.3",
+		"vite": "^7.3.0",
+		"vue": "^3.5.26"
 	},
 	"dependencies": {
-		"@alpinejs/csp": "^3.14.9",
+		"@alpinejs/csp": "^3.15.3",
 		"date-fns": "^4.1.0"
 	},
 	"peerDependencies": {
