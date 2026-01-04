@@ -21,7 +21,7 @@
 		"livewire/volt": "^1.7",
 		"mailjet/laravel-mailjet": "^3.1",
 		"noweh/twitter-api-v2-php": "^3.4",
-		"owenvoke/blade-fontawesome": "^2.9",
+		"owenvoke/blade-fontawesome": "^3.0",
 		"sentry/sentry-laravel": "^4.3",
 		"spatie/laravel-backup": "^9.3",
 		"spatie/laravel-ignition": "^2.9",
