@@ -28,7 +28,7 @@ class HeadingRenderer implements NodeRendererInterface, XmlNodeRendererInterface
 
 		$sharedClasses = join(' ', [
 			'relative',
-			'mt-6',
+			'mt-8',
 			'sm:-ml-8',
 			'first:mt-0',
 			'sm:pl-8',
