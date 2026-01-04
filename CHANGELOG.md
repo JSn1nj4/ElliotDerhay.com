@@ -5,6 +5,10 @@
 ### Housekeeping
 
 - Add a little more spacing above blog content headings
+- Track WOFF2 fonts with Git LFS
+- Upgrade all Composer dependencies
+- Upgrade all Node dependencies
+- Update Node engine version
 
 ## Version 3.0.8
 
