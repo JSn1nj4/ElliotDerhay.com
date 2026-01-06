@@ -11,13 +11,6 @@ export class PageMeasurementsModel {
 		this.setScrollPercent()
 	}
 
-	recordBodyHeight() {
-		document.documentElement.style.setProperty(
-			'--body-height',
-			`${document.documentElement.scrollHeight}px`,
-		)
-	}
-
 	static register() {
 		const model = new PageMeasurementsModel()
 		model.register()
@@ -35,15 +28,14 @@ export class PageMeasurementsModel {
 		})
 
 		window.addEventListener('resize', this.setStaticMeasurements.bind(this))
-		window.addEventListener('resize', this.recordBodyHeight.bind(this))
 
-		this.recordBodyHeight()
+		this.setStaticMeasurements()
 	}
 
 	setStaticMeasurements() {
 		document.documentElement.style.setProperty(
 			'--body-height',
-			document.documentElement.scrollHeight.toString(),
+			`${document.documentElement.scrollHeight}px`,
 		)
 		document.documentElement.style.setProperty(
 			'--scrollable-distance',

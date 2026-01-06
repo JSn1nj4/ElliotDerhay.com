@@ -1,5 +1,18 @@
 # Changelog
 
+## Version 3.0.10
+
+### Fixes
+
+- Remove transition from wheel rotation
+- Remove redundant `--body-height` recording from `PageMeasurementsModel` class
+
+### Development
+
+- Update ASDF tool versions:
+	- Node 22.21.0
+	- pnpm 10.27.0
+
 ## Version 3.0.9
 
 ### Housekeeping

@@ -12,7 +12,7 @@
 	'-translate-x-32' => !$mirror,
 	'translate-x-32' => $mirror,
 	'dark2:sm:translate-x-0',
-	'transition-transform',
+	'transition-[transform,translate,scale]',
 	'overflow-x-clip',
 ])>
 	<div class='relative w-full h-full'>
