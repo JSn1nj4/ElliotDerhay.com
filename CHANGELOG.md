@@ -1,5 +1,17 @@
 # Changelog
 
+## Version 3.0.10
+
+### Tweaks
+
+- Remove transition from wheel rotation
+
+### Development
+
+- Update ASDF tool versions:
+	- Node 22.21.0
+	- pnpm 10.27.0
+
 ## Version 3.0.9
 
 ### Housekeeping
