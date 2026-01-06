@@ -2,9 +2,10 @@
 
 ## Version 3.0.10
 
-### Tweaks
+### Fixes
 
 - Remove transition from wheel rotation
+- Remove redundant `--body-height` recording from `PageMeasurementsModel` class
 
 ### Development
 
