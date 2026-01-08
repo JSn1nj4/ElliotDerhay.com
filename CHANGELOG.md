@@ -1,5 +1,11 @@
 # Changelog
 
+## Version 3.0.11
+
+### Fixes
+
+- Fix rotation speed by getting pixel radius of wheel
+
 ## Version 3.0.10
 
 ### Fixes

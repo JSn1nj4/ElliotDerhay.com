@@ -2,9 +2,11 @@ import {DisplayModeController} from './appearance/DisplayModeController'
 import {AnchorLinkController} from './controllers/AnchorLinkController'
 import {PageMeasurementsModel} from './models/PageMeasurementsModel'
 import {ScrollEffectsController} from './controllers/ScrollEffectsController'
+import {WheelSizeModel} from './models/WheelSizeModel'
 
 // these have many of their own page registrations to worry about, including page load
 PageMeasurementsModel.register()
+WheelSizeModel.register() // added as a backup in case of base font size being changed
 ScrollEffectsController.init()
 
 window.addEventListener('load', function () {
