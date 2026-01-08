@@ -15,8 +15,11 @@ export class WheelSizeModel {
 	register() {
 		this.wheel = document.querySelector<HTMLElement>('.scroller-housing .wheel')
 
+		window.addEventListener('load', this.recordWheelSize.bind(this))
 		window.addEventListener('resize', this.recordWheelSize.bind(this))
-
-		this.recordWheelSize()
+		window.addEventListener(
+			'livewire:navigated',
+			this.recordWheelSize.bind(this),
+		)
 	}
 }
