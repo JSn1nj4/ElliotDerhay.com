@@ -5,6 +5,9 @@
 ### Fixes
 
 - Fix rotation speed by getting pixel radius of wheel
+- JSN-330: Fix lightbox caption positioning on mobile ([#287][pr_287])
+
+[pr_287]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/287
 
 ## Version 3.0.10
 
