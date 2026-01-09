@@ -6,8 +6,7 @@ interface MaybeAnchorElement extends EventTarget {
 
 export class AnchorLinkController {
 	static init() {
-		const controller = new AnchorLinkController()
-		controller.init()
+		new AnchorLinkController().init()
 	}
 
 	init() {
