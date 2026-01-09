@@ -12,8 +12,7 @@ export class PageMeasurementsModel {
 	}
 
 	static register() {
-		const model = new PageMeasurementsModel()
-		model.register()
+		new PageMeasurementsModel().register()
 	}
 
 	register() {

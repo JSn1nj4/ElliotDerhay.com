@@ -1180,9 +1180,10 @@
 @layer base {
 	:root {
 		--body-height: 0;
-		--roller-size: 20;
-		--size-inset: 3;
-		--size-multiplier: calc(var(--roller-size) - var(--size-inset));
+		/* I think this is being interpreted as pixel size, so treating it that way */
+		--wheel-outer-radius: 64;
+		--size-inset: calc(var(--wheel-outer-radius) / 2);
+		--inner-radius: calc(var(--wheel-outer-radius) - var(--size-inset));
 
 		--scroll-percent: 0;
 		--scrollable-distance: 0;
@@ -1340,23 +1341,24 @@
 	}
 	@keyframes rolling {
 		to {
-			rotate: calc(var(--scroll-distance) / calc(2 * calc(pi) * calc(var(--spacing-1) * var(--size-multiplier) / 2)) * 1turn);
+			rotate: calc(var(--scroll-distance) / calc(2 * calc(pi) * calc(var(--spacing-1) * var(--inner-radius) / 2)) * 1turn);
 		}
 	}
 	*/
 	/* legacy solution */
 	.scroller-housing {
-		--wheel-circumference: calc(2 * calc(pi) * (var(--size-multiplier) / 2));
+		--wheel-circumference: calc(2 * calc(pi) * var(--inner-radius));
 		--turn-multiplier: 1turn;
 
-		--rotations: calc(var(--scrollable-distance) / var(--wheel-circumference) * var(--turn-multiplier));
+		--rotations: calc(var(--scrollable-distance) / var(--wheel-circumference));
 
 		&.mirrored {
 			--turn-multiplier: -1turn;
 		}
 
 		.wheel {
-			rotate: calc(var(--rotations) * var(--scroll-percent));
+			/* --turn-multiplier is necessary to tell it how many turns to make */
+			rotate: calc(var(--rotations) * var(--scroll-percent) * var(--turn-multiplier));
 		}
 	}
 
