@@ -13,14 +13,16 @@ class Latest extends Component
 	/**
 	 * Create a new component instance.
 	 */
-	public function __construct() {
-		$this->post = Post::latest()->first();
+	public function __construct()
+	{
+		$this->post = Post::latest('published_at')->first();
 	}
 
 	/**
 	 * Get the view / contents that represent the component.
 	 */
-	public function render(): View {
+	public function render(): View
+	{
 		return view('components.post.latest');
 	}
 }

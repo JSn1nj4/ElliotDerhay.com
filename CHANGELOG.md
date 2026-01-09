@@ -1,5 +1,11 @@
 # Changelog
 
+## Version 3.0.13
+
+### Fixes
+
+- On homepage, find `latest` by 'published_at' so the homepage always shows the post most-recently published
+
 ## Version 3.0.12
 
 ### Tweaks
