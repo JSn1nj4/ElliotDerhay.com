@@ -1,5 +1,11 @@
 # Changelog
 
+## Version 3.0.12
+
+### Tweaks
+
+- Shorten `queue:work` interval
+
 ## Version 3.0.11
 
 ### Fixes

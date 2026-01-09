@@ -13,7 +13,7 @@ Schedule::command(TokenPruneCommand::class)->daily();
 
 Schedule::job(CleanTempStorageJob::class)->weekly();
 Schedule::job(PruneLoginActivityJob::class)->weekly();
-Schedule::command(WorkCommand::class, ['--stop-when-empty'])->hourly();
+Schedule::command(WorkCommand::class, ['--stop-when-empty'])->everyTenMinutes();
 
 // backup scheduling
 Schedule::command(BackupCommand::class, ['--only-db'])
