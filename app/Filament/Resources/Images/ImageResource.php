@@ -66,7 +66,6 @@ class ImageResource extends Resource
 									return "![](" . ImageService::make()
 											->url($record->path, $record->disk) . ")";
 								})
-								->suffixIconColor('#06c6b1')
 								->label('Markdown Link'),
 						]),
 
