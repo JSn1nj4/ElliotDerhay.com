@@ -1,5 +1,13 @@
 # Changelog
 
+## Version 3.0.14
+
+### New
+
+- JSN-331: Add Copy Markdown Link button to images in gallery ([#288][pr_288])
+
+[pr_288]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/288
+
 ## Version 3.0.13
 
 ### Fixes
