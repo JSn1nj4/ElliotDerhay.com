@@ -13,13 +13,16 @@ export class WheelSizeModel {
 	}
 
 	register() {
+		window.addEventListener('load', this.setUpWheel.bind(this))
+		window.addEventListener('livewire:navigated', this.setUpWheel.bind(this))
+		window.addEventListener('resize', this.recordWheelSize.bind(this))
+	}
+
+	setUpWheel() {
+		if (!!this.wheel) return
+
 		this.wheel = document.querySelector<HTMLElement>('.scroller-housing .wheel')
 
-		window.addEventListener('load', this.recordWheelSize.bind(this))
-		window.addEventListener('resize', this.recordWheelSize.bind(this))
-		window.addEventListener(
-			'livewire:navigated',
-			this.recordWheelSize.bind(this),
-		)
+		this.recordWheelSize()
 	}
 }

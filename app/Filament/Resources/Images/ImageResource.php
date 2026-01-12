@@ -9,6 +9,7 @@ use App\Filament\Resources\Images\Pages\UploadImage;
 use App\Filament\Resources\Images\Pages\ViewImage;
 use App\Filament\Traits\HasCountBadge;
 use App\Models\Image;
+use App\Services\ImageService;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -55,6 +56,17 @@ class ImageResource extends Resource
 							ImageViewField::make('image')
 								->dehydrated(false)
 								->hiddenLabel(),
+
+							TextInput::make('markdown_link')
+								->disabled()
+								->copyable()
+								->formatStateUsing(static function (Image|null $record) {
+									if ($record === null) return '';
+
+									return "![](" . ImageService::make()
+											->url($record->path, $record->disk) . ")";
+								})
+								->label('Markdown Link'),
 						]),
 
 					Section::make('Info')
