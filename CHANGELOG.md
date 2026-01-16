@@ -1,5 +1,11 @@
 # Changelog
 
+## Version 3.0.15
+
+### Fixes
+
+- JSN-333: Cookie banner not working in some browsers (#290)
+
 ## Version 3.0.14
 
 ### New
