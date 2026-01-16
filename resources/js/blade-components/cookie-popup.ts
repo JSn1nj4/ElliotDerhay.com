@@ -8,7 +8,7 @@ declare global {
 }
 
 window.Alpine.data('googleAnalytics', () => ({
-	displayClass: 'block',
+	displayClass: 'hidden',
 
 	disableTracking(e) {
 		this.allowTracker(false)
@@ -36,9 +36,15 @@ window.Alpine.data('googleAnalytics', () => ({
 
 	init() {
 		// Popup has been interacted with
-		if (document.cookie.indexOf('GA_POPUP_INTERACTION=1') !== -1) this.hide()
+		if (document.cookie.indexOf('GA_POPUP_INTERACTION=1') !== -1) return
 
 		// "Do Not Track" enabled
-		if (navigator.doNotTrack === '1') this.hide()
+		if (navigator.doNotTrack === '1') return
+
+		this.show()
+	},
+
+	show() {
+		this.displayClass = 'block'
 	},
 }))
