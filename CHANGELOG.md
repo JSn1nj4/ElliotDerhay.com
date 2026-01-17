@@ -1,5 +1,12 @@
 # Changelog
 
+## Version 3.0.16
+
+### Development
+
+- Make `tests` workflow reusable
+- Make `deploy` workflow run `tests` as 1 of its jobs
+
 ## Version 3.0.15
 
 ### Fixes
