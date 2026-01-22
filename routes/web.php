@@ -5,7 +5,6 @@ use App\Features\ProjectsIndex;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
 use Laravel\Pennant\Feature;
-use Livewire\Volt\Volt;
 use Spatie\Sitemap\Sitemap;
 use Spatie\Sitemap\Tags\Url as SitemapUrl;
 
@@ -21,18 +20,18 @@ use Spatie\Sitemap\Tags\Url as SitemapUrl;
 */
 
 // standard views
-Volt::route('/', 'home')->name('home');
+Route::livewire('/', 'home')->name('home');
 
-Volt::route('/credits', 'credits')->name('credits');
+Route::livewire('/credits', 'credits')->name('credits');
 
-Volt::route('/privacy', 'privacy')->name('privacy');
+Route::livewire('/privacy', 'privacy')->name('privacy');
 
-Volt::route('/projects', 'projects.index')->name('portfolio');
+Route::livewire('/projects', 'projects.index')->name('portfolio');
 
 Route::prefix('/blog')
 	->group(static function () {
-		Volt::route('/', 'blog.index')->name('blog');
-		Volt::route('/{post:slug}', 'blog.post')->name('blog.show');
+		Route::livewire('/', 'blog.index')->name('blog');
+		Route::livewire('/{post:slug}', 'blog.post')->name('blog.show');
 	});
 
 Route::get('/sitemap.xml',

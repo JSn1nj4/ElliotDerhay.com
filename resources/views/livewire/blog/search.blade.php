@@ -1,7 +1,7 @@
 <?php
 
 use Livewire\Attributes\Url;
-use Livewire\Volt\Component;
+use Livewire\Component;
 
 new class extends Component {
 	public string|null $search = null;
