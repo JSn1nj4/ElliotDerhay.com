@@ -11,7 +11,7 @@ return new class extends Migration {
 	public function up(): void
 	{
 		Schema::whenTableDoesntHaveColumn('posts', 'status', function (Blueprint $table) {
-			$table->tinyText('status')->default('draft');
+			$table->string('status')->default('draft');
 		});
 
 		Schema::whenTableDoesntHaveColumn('posts', 'scheduled_for', function (Blueprint $table) {
