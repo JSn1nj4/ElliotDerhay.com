@@ -9,6 +9,16 @@ PageMeasurementsModel.register()
 WheelSizeModel.register() // added as a backup in case of base font size being changed
 ScrollEffectsController.init()
 
+// helpers to prevent flashing
+document.addEventListener('livewire:navigate', () => {
+	document.body.classList.add('navigating')
+})
+document.addEventListener('livewire:navigated', () => {
+	setTimeout(() => {
+		document.body.classList.remove('navigating')
+	}, 300)
+})
+
 window.addEventListener('load', function () {
 	// these must run after the other effects stuff is registered
 	DisplayModeController.init()
