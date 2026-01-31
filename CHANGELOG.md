@@ -15,11 +15,17 @@
 - Convert Vue-based Atom loading spinner to a Blade component
 - Remove Vue dependencies
 
+### Fixes
+
+- JSN-326: Prevent flash when transitioning between livewire pages ([#291][pr_291])
+
 ### Development
 
 - Make `tests` workflow reusable
 - Make `deploy` workflow run `tests` as 1 of its jobs
 - Convert Volt-based tests to only Livewire
+
+[pr_291]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/291
 
 ## Version 3.0.15
 
