@@ -57,7 +57,7 @@ class ImageResource extends Resource
 								->dehydrated(false)
 								->hiddenLabel(),
 
-							TextInput::make('markdown_link')
+							TextInput::make('markdown_embed')
 								->disabled()
 								->copyable()
 								->formatStateUsing(static function (Image|null $record) {
@@ -66,7 +66,7 @@ class ImageResource extends Resource
 									return "![](" . ImageService::make()
 											->url($record->path, $record->disk) . ")";
 								})
-								->label('Markdown Link'),
+								->label('Markdown Embed'),
 						]),
 
 					Section::make('Info')
