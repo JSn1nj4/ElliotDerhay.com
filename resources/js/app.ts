@@ -11,11 +11,11 @@ ScrollEffectsController.init()
 
 // helpers to prevent flashing
 document.addEventListener('livewire:navigate', () => {
-	document.body.classList.add('navigating')
+	document.documentElement.classList.add('navigating')
 })
 document.addEventListener('livewire:navigated', () => {
 	setTimeout(() => {
-		document.body.classList.remove('navigating')
+		document.documentElement.classList.remove('navigating')
 	}, 300)
 })
 

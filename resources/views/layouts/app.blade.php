@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" color-theme="system">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" color-theme="system" class='navigating'>
 <head>
 	<x-head-meta
 		:title="$title ?? config('app.name', 'Laravel')"
@@ -17,9 +17,10 @@
 	<livewire:google-analytics />
 </head>
 <body
-	class="relative bg-big-stone-100 dark:bg-big-stone-950 text-black dark:text-white font-sans flex flex-col {{ $bodyClasses ?? '' }} max-w-screen overflow-x-clip transition-colors duration-300 navigating">
-<div class='absolute top-0 left-0 w-full h-full opacity-0 dark2:opacity-100 blur-sm transition-opacity'
-		 style='background: url({{ asset_url('blue-grunge-stone-texture-background-2-tiled.jpg') }})'></div>
+	class="relative bg-big-stone-100 dark:bg-big-stone-950 text-black dark:text-white font-sans flex flex-col {{ $bodyClasses ?? '' }} max-w-screen overflow-x-clip transition-colors navigating:transition-none duration-300">
+<div
+	class='absolute top-0 left-0 w-full h-full opacity-0 dark2:opacity-100 blur-sm transition-opacity'
+	style='background: url({{ asset_url('blue-grunge-stone-texture-background-2-tiled.jpg') }})'></div>
 
 @component('partials.header')
 	<x-nav>
