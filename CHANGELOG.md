@@ -12,6 +12,8 @@
 ### Housekeeping
 
 - Reorganize Livewire's view and config files
+- Convert Vue-based Atom loading spinner to a Blade component
+- Remove Vue dependencies
 
 ### Development
 
