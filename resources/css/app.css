@@ -1465,3 +1465,8 @@
 .box-glow {
 	box-shadow: 0 0 20px 0 #fff;
 }
+
+.prevent-transition,
+.prevent-transition * {
+	transition: none !important;
+}
