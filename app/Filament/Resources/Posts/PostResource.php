@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Posts;
 
 use App\Actions\StoresImage;
+use App\Enums\PostStatus;
 use App\Filament\Forms\Components\ImageViewField;
 use App\Filament\Resources\Categories\RelationManagers\PostsRelationManager as CategoryPostsRelationManager;
 use App\Filament\Resources\Posts\Pages\CreatePost;
@@ -37,6 +38,7 @@ use Filament\Schemas\Schema;
 use Filament\Support\Enums\TextSize;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
@@ -254,6 +256,9 @@ class PostResource extends Resource
 							->hidden(static fn (string|null $state) => $state === null)
 							->size('100%'),
 
+						TextEntry::make('status')
+							->badge(),
+
 						RepeatableEntry::make('categories')
 							->hidden(static fn (Collection|null $state) => match ($state) {
 								null => true,
@@ -285,28 +290,24 @@ class PostResource extends Resource
 			->columns([
 				ImageColumn::make('image.url')
 					->disk(static fn (Image $image) => $image->disk)
-					->size('auto')->height(135),
+					->imageSize('auto')
+					->imageHeight(135),
 				TextColumn::make('title')
-					->wrap(true)
+					->wrap()
 					->searchable()
 					->sortable(),
 				TextColumn::make('slug')
 					->toggleable(isToggledHiddenByDefault: true)
 					->limit('30')
 					->searchable(),
-				TextColumn::make('published')
-					->formatStateUsing(static fn (bool $state) => $state ? 'Published' : 'Draft')
+				TextColumn::make('status')
 					->badge()
-					->colors([
-						'success' => true,
-						'gray' => false,
-					])
-					->icons([
-						'o-check-badge' => true,
-						'o-pencil-square' => false,
-					])
 					->iconPosition('after')
 					->label('Status'),
+				TextColumn::make('scheduled_for')
+					->dateTime('M d, Y | H:i')
+					->sortable()
+					->toggleable(),
 				TextColumn::make('published_at')
 					->dateTime('M d, Y | H:i')
 					->sortable()
@@ -317,7 +318,8 @@ class PostResource extends Resource
 					->toggleable(isToggledHiddenByDefault: true),
 			])
 			->filters([
-				//
+				SelectFilter::make('status')
+					->options(PostStatus::class),
 			])
 			->recordActions([
 				ViewAction::make(),
