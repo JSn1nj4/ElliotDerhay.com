@@ -2,16 +2,19 @@
 
 namespace App\States\Posts;
 
+use App\Enums\PostStatus;
+
 class PostPublished extends PostState
 {
 	/**
-	 * @return bool
 	 * @throws \Exception
+	 * @return bool
 	 */
-	public function unpublish(): bool
+	#[\Override]
+	public function draft(): bool
 	{
-		$this->post->published = false;
+		$this->post->status = PostStatus::Draft;
 
-		return $this->post->save() || parent::unpublish();
+		return $this->post->save() || parent::draft();
 	}
 }

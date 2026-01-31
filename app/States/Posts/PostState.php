@@ -15,6 +15,17 @@ abstract class PostState implements PostStateContract
 	 * @returns bool
 	 * @throws \Exception
 	 */
+	public function draft(): bool
+	{
+		throw new \Exception(__("Post ':post' cannot be unpublished.", [
+			'post' => $this->post->id,
+		]));
+	}
+
+	/**
+	 * @returns bool
+	 * @throws \Exception
+	 */
 	public function publish(): bool
 	{
 		throw new \Exception(__("Post ':post' cannot be published.", [
@@ -26,9 +37,9 @@ abstract class PostState implements PostStateContract
 	 * @returns bool
 	 * @throws \Exception
 	 */
-	public function unpublish(): bool
+	public function schedule(): bool
 	{
-		throw new \Exception(__("Post ':post' cannot be unpublished.", [
+		throw new \Exception(__("Post ':post' cannot be scheduled.", [
 			'post' => $this->post->id,
 		]));
 	}
