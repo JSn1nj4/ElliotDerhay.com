@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Posts\Pages;
 
+use App\Enums\PostStatus;
 use App\Filament\Resources\Posts\PostResource;
 use App\Filament\Resources\Posts\Traits\PreparesForValidation;
 use App\Models\Post;
@@ -23,7 +24,7 @@ class EditPost extends EditRecord
 	{
 		return [
 			Actions\Action::make('View Live')
-				->visible(static fn (Post $record) => $record->published)
+				->visible(static fn (Post $record) => $record->status === PostStatus::Published)
 				->color('info')
 				->outlined()
 				->icon('o-arrow-top-right-on-square')
@@ -43,7 +44,7 @@ class EditPost extends EditRecord
 	{
 		return [
 			Actions\Action::make('Publish')
-				->hidden(static fn (Post $record) => $record->published)
+				->hidden(static fn (Post $record) => $record->status === PostStatus::Published)
 				->color('warning')
 				->icon('o-globe-alt')
 				->iconPosition(IconPosition::After)
@@ -75,7 +76,7 @@ class EditPost extends EditRecord
 				}),
 
 			Actions\Action::make('Unpublish')
-				->visible(static fn (Post $record) => $record->published)
+				->visible(static fn (Post $record) => $record->status === PostStatus::Published)
 				->outlined()
 				->color('warning')
 				->icon('o-lock-closed')
@@ -87,7 +88,7 @@ class EditPost extends EditRecord
 				->modalSubmitActionLabel('Yes')
 				->action(static function (Post $record): void {
 					try {
-						$record->state()->unpublish();
+						$record->state()->draft();
 
 						Notification::make()
 							->title(__('Post unpublished!'))
