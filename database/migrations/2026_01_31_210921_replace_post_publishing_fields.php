@@ -14,10 +14,6 @@ return new class extends Migration {
 			$table->string('status')->default('draft');
 		});
 
-		Schema::whenTableDoesntHaveColumn('posts', 'scheduled_for', function (Blueprint $table) {
-			$table->timestamp('scheduled_for')->nullable();
-		});
-
 		DB::transaction(function () {
 			DB::table('posts')
 				->select('*')
@@ -25,8 +21,34 @@ return new class extends Migration {
 				->update(['status' => 'published']);
 		});
 
+		Schema::whenTableDoesntHaveColumn('posts', 'scheduled_for', function (Blueprint $table) {
+			$table->timestamp('scheduled_for')->nullable();
+		});
+
 		Schema::whenTableHasColumn('posts', 'published', function (Blueprint $table) {
-			$table->removeColumn('published');
+			$table->dropColumn('published');
+		});
+	}
+
+	public function down(): void
+	{
+		Schema::whenTableDoesntHaveColumn('posts', 'published', function (Blueprint $table) {
+			$table->boolean('published')->default(false);
+		});
+
+		DB::transaction(function () {
+			DB::table('posts')
+				->select('*')
+				->where('status', \App\Enums\PostStatus::Published->value)
+				->update(['published' => true]);
+		});
+
+		Schema::whenTableHasColumn('posts', 'scheduled_for', function (Blueprint $table) {
+			$table->dropColumn('scheduled_for');
+		});
+
+		Schema::whenTableHasColumn('posts', 'status', function (Blueprint $table) {
+			$table->dropColumn('status');
 		});
 	}
 };
