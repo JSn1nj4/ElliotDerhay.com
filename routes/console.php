@@ -1,12 +1,17 @@
 <?php
 
-use App\Console\Commands\{GithubEventPullCommand, GithubUserUpdateCommand, SendWeeklyReportCommand, TokenPruneCommand};
+use App\Console\Commands\{GithubEventPullCommand,
+	GithubUserUpdateCommand,
+	PublishScheduledPostsCommand,
+	SendWeeklyReportCommand,
+	TokenPruneCommand};
 use App\Jobs\{CleanTempStorageJob, PruneLoginActivityJob};
 use Illuminate\Queue\Console\WorkCommand;
 use Illuminate\Support\Facades\Schedule;
 use Spatie\Backup\Commands\BackupCommand;
 use Spatie\Backup\Commands\CleanupCommand;
 
+Schedule::command(PublishScheduledPostsCommand::class)->everyTenMinutes();
 Schedule::command(GithubEventPullCommand::class)->hourly();
 Schedule::command(GithubUserUpdateCommand::class)->weekly();
 Schedule::command(TokenPruneCommand::class)->daily();
