@@ -6,6 +6,7 @@ use App\DataTransferObjects\SocialPostDTO;
 use App\Enums\PostStatus;
 use App\Features\PublishPostToX;
 use App\Jobs\PostToXJob;
+use Carbon\Carbon;
 use Laravel\Pennant\Feature;
 
 class PostDraft extends PostState
@@ -41,8 +42,12 @@ class PostDraft extends PostState
 	}
 
 	#[\Override]
-	public function schedule(): bool
+	public function schedule(Carbon|\DateTime|string $time): bool
 	{
-		return false;
+		$this->post->status = PostStatus::Scheduled;
+
+		$this->post->scheduled_for = Carbon::make($time);
+
+		return $this->post->save() || parent::schedule($time);
 	}
 }
