@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Posts;
 
 use App\Actions\StoresImage;
+use App\Enums\PostStatus;
 use App\Filament\Forms\Components\ImageViewField;
 use App\Filament\Resources\Categories\RelationManagers\PostsRelationManager as CategoryPostsRelationManager;
 use App\Filament\Resources\Posts\Pages\CreatePost;
@@ -13,12 +14,15 @@ use App\Models\Image;
 use App\Models\Post;
 use App\Models\Scopes\PostPublishedScope;
 use App\Support\Sanitizer;
+use Carbon\Carbon;
+use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\CreateAction;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
+use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\MarkdownEditor;
@@ -28,15 +32,19 @@ use Filament\Forms\Components\TextInput;
 use Filament\Infolists\Components\ImageEntry;
 use Filament\Infolists\Components\RepeatableEntry;
 use Filament\Infolists\Components\TextEntry;
+use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Schemas\Components\Group;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Schema;
+use Filament\Support\Colors\Color;
 use Filament\Support\Enums\TextSize;
+use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
@@ -56,6 +64,8 @@ class PostResource extends Resource
 	protected static string|null $recordTitleAttribute = 'title';
 
 	public int|null $image_id = null;
+
+	public string|null $schedule_at = null;
 
 	public static function form(Schema $schema): Schema
 	{
@@ -141,6 +151,76 @@ class PostResource extends Resource
 
 							$post->images()->sync([$image_id]);
 						}),
+
+					Section::make('Schedule')
+						->columns(3)
+						->hiddenOn([CreatePost::class])
+						->schema([
+							DateTimePicker::make('schedule_at')
+								->columnSpanFull()
+								->hiddenLabel()
+								->seconds(false)
+								->disabled(static fn ($record) => $record?->status === PostStatus::Published)
+								->formatStateUsing(static function ($record) {
+									if (!$record instanceof Post) return null;
+
+									if ($record->scheduled_for === null) return null;
+
+									return $record->scheduled_for;
+								})
+								->live()
+								->suffixActions([
+									Action::make('Reset')
+										->disabled(static fn ($record) => $record?->status === PostStatus::Published)
+										->icon(Heroicon::ArrowUturnLeft)
+										->action(static fn (Set $set) => $set('schedule_at', null)),
+
+									Action::make('Schedule')
+										->disabled(static fn ($record) => $record?->status === PostStatus::Published)
+										->icon(Heroicon::Clock)
+										->color(Color::Amber)
+										->action(static function ($state, $record) {
+											if (!$record instanceof Post) {
+												Notification::make('Schedule')
+													->title('Scheduling failed')
+													->body('Post has not been created.')
+													->danger()
+													->send();
+
+												return;
+											}
+
+											if ($state === null) {
+												Notification::make('Schedule')
+													->title('Scheduling failed')
+													->body('You must choose a date and time before scheduling.')
+													->danger()
+													->send();
+
+												return;
+											}
+
+											try {
+												$time = Carbon::make($state);
+											} catch (\Throwable $exception) {
+												Notification::make('Schedule')
+													->title('Scheduling failed')
+													->body($exception->getMessage())
+													->danger()
+													->send();
+
+												return;
+											}
+
+											$record->state()->schedule($time);
+
+											Notification::make('Schedule')
+												->title('Post Scheduled')
+												->success()
+												->send();
+										}),
+								]),
+						]),
 
 					Section::make('Meta')
 						->collapsed(static fn (array $state) => collect($state)
@@ -254,6 +334,9 @@ class PostResource extends Resource
 							->hidden(static fn (string|null $state) => $state === null)
 							->size('100%'),
 
+						TextEntry::make('status')
+							->badge(),
+
 						RepeatableEntry::make('categories')
 							->hidden(static fn (Collection|null $state) => match ($state) {
 								null => true,
@@ -285,28 +368,24 @@ class PostResource extends Resource
 			->columns([
 				ImageColumn::make('image.url')
 					->disk(static fn (Image $image) => $image->disk)
-					->size('auto')->height(135),
+					->imageSize('auto')
+					->imageHeight(135),
 				TextColumn::make('title')
-					->wrap(true)
+					->wrap()
 					->searchable()
 					->sortable(),
 				TextColumn::make('slug')
 					->toggleable(isToggledHiddenByDefault: true)
 					->limit('30')
 					->searchable(),
-				TextColumn::make('published')
-					->formatStateUsing(static fn (bool $state) => $state ? 'Published' : 'Draft')
+				TextColumn::make('status')
 					->badge()
-					->colors([
-						'success' => true,
-						'gray' => false,
-					])
-					->icons([
-						'o-check-badge' => true,
-						'o-pencil-square' => false,
-					])
 					->iconPosition('after')
 					->label('Status'),
+				TextColumn::make('scheduled_for')
+					->dateTime('M d, Y | H:i')
+					->sortable()
+					->toggleable(),
 				TextColumn::make('published_at')
 					->dateTime('M d, Y | H:i')
 					->sortable()
@@ -317,7 +396,8 @@ class PostResource extends Resource
 					->toggleable(isToggledHiddenByDefault: true),
 			])
 			->filters([
-				//
+				SelectFilter::make('status')
+					->options(PostStatus::class),
 			])
 			->recordActions([
 				ViewAction::make(),

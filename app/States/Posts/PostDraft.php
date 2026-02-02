@@ -3,19 +3,22 @@
 namespace App\States\Posts;
 
 use App\DataTransferObjects\SocialPostDTO;
+use App\Enums\PostStatus;
 use App\Features\PublishPostToX;
 use App\Jobs\PostToXJob;
+use Carbon\Carbon;
 use Laravel\Pennant\Feature;
 
-class PostUnpublished extends PostState
+class PostDraft extends PostState
 {
 	/**
 	 * @throws \Exception
 	 * @return bool
 	 */
+	#[\Override]
 	public function publish(): bool
 	{
-		$this->post->published = true;
+		$this->post->status = PostStatus::Published;
 
 		if (!$this->post->published_at) {
 			$this->post->published_at = now();
@@ -24,7 +27,7 @@ class PostUnpublished extends PostState
 
 			PostToXJob::dispatchIf(
 				Feature::active(PublishPostToX::class),
-				
+
 				new SocialPostDTO(
 					$postable->text,
 					links: $postable->links,
@@ -33,6 +36,18 @@ class PostUnpublished extends PostState
 			);
 		}
 
+		$this->post->scheduled_for = null;
+
 		return $this->post->save() || parent::publish();
+	}
+
+	#[\Override]
+	public function schedule(Carbon|\DateTime|string $time): bool
+	{
+		$this->post->status = PostStatus::Scheduled;
+
+		$this->post->scheduled_for = Carbon::make($time);
+
+		return $this->post->save() || parent::schedule($time);
 	}
 }

@@ -2,6 +2,10 @@
 
 ## Version 3.1.0
 
+### New
+
+- JSN-304: Implement post scheduling ([#292][pr_292])
+
 ### Updates
 
 - Upgrade Filament to v5
@@ -27,6 +31,8 @@
 - Convert Volt-based tests to only Livewire
 
 [pr_291]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/291
+
+[pr_292]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/292
 
 ## Version 3.0.15
 
