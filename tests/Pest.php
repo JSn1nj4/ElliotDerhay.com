@@ -33,7 +33,6 @@ namespace {
 	use Illuminate\Database\Eloquent\Collection;
 	use Illuminate\Foundation\Testing\RefreshDatabase;
 	use Livewire\Livewire;
-	use Livewire\Volt\Volt;
 	use Pest\Expectation;
 
 	pest()
@@ -149,17 +148,10 @@ namespace {
 
 // borrowed from Ryan Chandler:
 // https://x.com/ryangjchandler/status/1808796458260341189
-	function livewireMountable(string $class, Closure|null $params = null): void
-	{
-		it('can be mounted', function () use ($class, $params) {
-			Livewire::test($class, is_callable($params) ? $params() : [])->assertOk();
-		});
-	}
-
-	function voltMountable(string $component, Closure|null $params = null): void
+	function livewireMountable(string $component, Closure|null $params = null): void
 	{
 		it('can be mounted', function () use ($component, $params) {
-			Volt::test($component, is_callable($params) ? $params() : [])->assertOk();
+			Livewire::test($component, is_callable($params) ? $params() : [])->assertOk();
 		});
 	}
 }

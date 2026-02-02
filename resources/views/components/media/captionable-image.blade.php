@@ -2,6 +2,7 @@
 	'lightbox-trigger' => $lightbox,
 	'inline-block' => true,
 	'transition-all' => true,
+	'navigating:transition-none' => true,
 	'duration-300' => true,
 	'ease-linear' => true,
 	'outline-solid' => true,

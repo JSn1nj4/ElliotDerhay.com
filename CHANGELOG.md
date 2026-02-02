@@ -1,5 +1,39 @@
 # Changelog
 
+## Version 3.1.0
+
+### New
+
+- JSN-304: Implement post scheduling ([#292][pr_292])
+
+### Updates
+
+- Upgrade Filament to v5
+- Upgrade Livewire to v4
+- Convert old Volt components and routes to Livewire only
+- Remove `livewire/volt` package
+
+### Housekeeping
+
+- Reorganize Livewire's view and config files
+- Convert Vue-based Atom loading spinner to a Blade component
+- Remove Vue dependencies
+- Rename "Markdown Link" to "Markdown Embed"
+
+### Fixes
+
+- JSN-326: Prevent flash when transitioning between livewire pages ([#291][pr_291])
+
+### Development
+
+- Make `tests` workflow reusable
+- Make `deploy` workflow run `tests` as 1 of its jobs
+- Convert Volt-based tests to only Livewire
+
+[pr_291]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/291
+
+[pr_292]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/292
+
 ## Version 3.0.15
 
 ### Fixes

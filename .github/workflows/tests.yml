@@ -4,9 +4,7 @@
 name: Tests
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - master
+  workflow_call:
 
 permissions:
   contents: read
@@ -29,10 +27,10 @@ jobs:
       - name: Install pnpm
         uses: pnpm/action-setup@v4
 
-      - name: Set up Node.js 20
+      - name: Set up Node.js 22
         uses: actions/setup-node@v4
         with:
-          node-version: "^20.2.x"
+          node-version: "^22.21.x"
           cache: 'pnpm'
 
       - name: Install Composer dependencies

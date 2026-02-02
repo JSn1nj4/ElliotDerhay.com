@@ -2,7 +2,6 @@
 
 use App\Features\BlogIndex;
 use Laravel\Pennant\Feature;
-use Livewire\Volt\Volt;
 use function Pest\Laravel\get;
 
 beforeEach(fn () => Feature::define(BlogIndex::class, true));
@@ -12,7 +11,7 @@ it('can be mounted', function () {
 
 	expectPostPublished($post);
 
-	Volt::test('blog.post', compact('post'))->assertOk();
+	Livewire::test('blog.post', compact('post'))->assertOk();
 });
 
 describe('blog post page', function () {
@@ -21,7 +20,7 @@ describe('blog post page', function () {
 
 		get("/blog/{$post->slug}")
 			->assertOk()
-			->assertSeeVolt('blog.post');
+			->assertSeeLivewire('blog.post');
 	});
 
 	test('shows the 404 page for an unpublished post', function () {
@@ -31,7 +30,7 @@ describe('blog post page', function () {
 			->assertNotFound()
 			->assertSee('No query results for model')
 			->assertSee("[App\\Models\\Post] {$post->slug}")
-			->assertDontSeeVolt('blog.post');
+			->assertDontSeeLivewire('blog.post');
 
 		Config::set('app.env', 'production');
 
@@ -40,7 +39,7 @@ describe('blog post page', function () {
 			->assertSee('Not Found')
 			->assertDontSee('No query results for model')
 			->assertDontSee("[App\\Models\\Post] {$post->slug}")
-			->assertDontSeeVolt('blog.post');
+			->assertDontSeeLivewire('blog.post');
 	});
 });
 
@@ -48,7 +47,7 @@ describe('blog post component', function () {
 	test('renders a published post', function () {
 		$post = createPost(true);
 
-		Volt::test('blog.post', compact('post'))
+		Livewire::test('blog.post', compact('post'))
 			->assertOk()
 			->assertSee($post->title);
 	});
@@ -56,6 +55,6 @@ describe('blog post component', function () {
 	test('throws when given an unpublished post', function () {
 		$post = createPost();
 
-		Volt::test('blog.post', compact('post'));
+		Livewire::test('blog.post', compact('post'));
 	})->throws(\Illuminate\View\ViewException::class);
 });

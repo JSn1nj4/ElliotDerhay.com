@@ -10,11 +10,13 @@ use App\Contracts\XMetaContract;
 use App\DataTransferObjects\SocialPostDTO;
 use App\DataTransferObjects\XMetaDTO;
 use App\Enums\PerPage;
+use App\Enums\PostStatus;
 use App\Enums\XMetaCardType;
 use App\Filters\SearchParam;
 use App\Models\Scopes\PostPublishedScope;
+use App\States\Posts\PostDraft;
 use App\States\Posts\PostPublished;
-use App\States\Posts\PostUnpublished;
+use App\States\Posts\PostScheduled;
 use App\Traits\Categorizeable;
 use App\Traits\SearchDisplayable;
 use Illuminate\Database\Eloquent\Attributes\ScopedBy;
@@ -41,10 +43,11 @@ use Spatie\Sitemap\Tags\Url;
  * @property Image|null $image
  * @property \Illuminate\Database\Eloquent\Collection|Category[] $categories
  * @property \Illuminate\Database\Eloquent\Collection|Tag[] $tags
- * @property boolean $published
+ * @property PostStatus $status
  * @property Carbon $created_at
  * @property Carbon $updated_at
  * @property Carbon|null $published_at
+ * @property Carbon|null $scheduled_for
  * @property string $page_title
  * @property string $meta_description
  * @property \App\Models\SearchMeta $searchMeta
@@ -81,8 +84,9 @@ class Post extends ImageableModel implements SearchDisplayableContract, Categori
 		SearchDisplayable;
 
 	protected $casts = [
-		'published' => 'boolean',
 		'published_at' => 'datetime',
+		'scheduled_for' => 'datetime',
+		'status' => PostStatus::class,
 	];
 
 	/**
@@ -238,10 +242,11 @@ class Post extends ImageableModel implements SearchDisplayableContract, Categori
 	 */
 	public function state(): PostStateContract
 	{
-		return match ($this->published) {
-			true => new PostPublished($this),
-			false => new PostUnpublished($this),
-			default => throw new \Exception("Unresolvable `\$post->published` state. Expected: `true` or `false`. Actual: '{$this->published}'."),
+		return match ($this->status) {
+			PostStatus::Draft => new PostDraft($this),
+			PostStatus::Scheduled => new PostScheduled($this),
+			PostStatus::Published => new PostPublished($this),
+			default => throw new \Exception("Unresolvable `\$post->status` state. Expected: 'draft', 'scheduled' or 'published'. Actual: '{$this->status}'."),
 		};
 	}
 

@@ -8,7 +8,7 @@ use Livewire\Attributes\{Computed, Layout, On, Title, Url};
 use Laravel\Pennant\Feature;
 
 new
-class extends \Livewire\Volt\Component {
+class extends \Livewire\Component {
 	use \Livewire\WithPagination;
 
 	#[Url(history: true, except: null)]

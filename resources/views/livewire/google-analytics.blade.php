@@ -1,7 +1,6 @@
 <?php
 
-use \Livewire\Volt\Component;
-use function Livewire\Volt\{state};
+use Livewire\Component;
 
 new class extends Component {
 	public readonly string $googleAnalyticsId;

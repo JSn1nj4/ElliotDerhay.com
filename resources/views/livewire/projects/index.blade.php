@@ -4,7 +4,7 @@ use App\Enums\PerPage;
 use App\Features\ProjectsIndex;
 use App\Models\Project;
 use Laravel\Pennant\Feature;
-use Livewire\Volt\Component;
+use Livewire\Component;
 
 new class extends Component {
 	#[\Livewire\Attributes\Url(history: true)]

@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\PostStatus;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -27,18 +28,16 @@ class PostFactory extends Factory
 
 	public function maybePublished(int $chancePercent = 50): static
 	{
-		$published = fake()->boolean($chancePercent);
-
-		return $this->state([
-			'published' => $published,
-			'published_at' => $published ? fake()->dateTime() : null,
-		]);
+		return match (fake()->boolean($chancePercent)) {
+			true => $this->published(),
+			default => $this,
+		};
 	}
 
 	public function published(): static
 	{
 		return $this->state([
-			'published' => true,
+			'status' => PostStatus::Published->value,
 			'published_at' => fake()->dateTime(),
 		]);
 	}

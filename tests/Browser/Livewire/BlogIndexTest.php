@@ -2,12 +2,11 @@
 
 use App\Features\BlogIndex;
 use Laravel\Pennant\Feature;
-use Livewire\Volt\Volt;
 use function Pest\Laravel\get;
 
 beforeEach(fn () => Feature::define(BlogIndex::class, true));
 
-voltMountable('blog.index');
+livewireMountable('blog.index');
 
 test('blog page renders the volt component', function () {
 	get(route('blog'))
@@ -21,7 +20,7 @@ describe('post index component', function () {
 
 		$posts->each(fn ($post) => expectPostPublished($post));
 
-		Volt::test('blog.index')
+		Livewire::test('blog.index')
 			->assertOk()
 			->assertSee($posts->get('title'))
 			->assertSee($posts->get('excerpt'))
@@ -33,7 +32,7 @@ describe('post index component', function () {
 
 		$posts->each(fn ($post) => expectPostNotPublished($post));
 
-		Volt::test('blog.index')
+		Livewire::test('blog.index')
 			->assertOk()
 			->assertDontSee($posts->get('title'))
 			->assertDontSee($posts->get('excerpt'))
