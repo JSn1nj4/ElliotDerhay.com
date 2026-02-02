@@ -4,35 +4,33 @@ use App\Enums\PostStatus;
 use App\Features\PublishPostToX;
 use Carbon\Carbon;
 
+beforeEach(function () {
+	$this->record = createPost()->refresh();
+});
+
 describe('a post with draft status', function () {
 	test('cannot transition to draft status', function () {
-		$post = createPost()->refresh();
+		expect($this->record->status)->toEqual(PostStatus::Draft);
 
-		expect($post->status)->toEqual(PostStatus::Draft);
-
-		$post->state()->draft();
+		$this->record->state()->draft();
 	})->throws(Exception::class, 'cannot be set to draft');
 
 	test('can transition to scheduled status', function () {
-		$post = createPost()->refresh();
-
-		$result = $post->state()->schedule(now());
+		$result = $this->record->state()->schedule(now());
 
 		expect($result)->toBeTrue()
-			->and($post->status)->toEqual(PostStatus::Scheduled)
-			->and($post->scheduled_for)->toBeInstanceOf(Carbon::class);
+			->and($this->record->status)->toEqual(PostStatus::Scheduled)
+			->and($this->record->scheduled_for)->toBeInstanceOf(Carbon::class);
 	});
 
 	test('can transition to published status', function () {
-		$post = createPost()->refresh();
-
 		// this is just for assurance
 		Feature::deactivate(PublishPostToX::class);
 
-		$result = $post->state()->publish();
+		$result = $this->record->state()->publish();
 
 		expect($result)->toBeTrue()
-			->and($post->status)->toEqual(PostStatus::Published)
-			->and($post->scheduled_for)->toBeNull();
+			->and($this->record->status)->toEqual(PostStatus::Published)
+			->and($this->record->scheduled_for)->toBeNull();
 	});
 });

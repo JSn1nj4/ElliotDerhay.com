@@ -10,7 +10,7 @@ beforeEach(function () {
 	$this->record->save();
 });
 
-describe('a post with draft status', function () {
+describe('a post with scheduled status', function () {
 	test('can transition to draft status', function () {
 		expect($this->record->status)->toEqual(PostStatus::Scheduled);
 
