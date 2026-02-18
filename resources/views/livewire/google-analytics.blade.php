@@ -13,7 +13,8 @@ new class extends Component {
 
 ?>
 <div>
-	@production
+	@if(\Filament\Facades\Filament::auth()->check())
+	@elseif(app()->isProduction())
 		<script async src="https://www.googletagmanager.com/gtag/js?id={{ $googleAnalyticsId }}"></script>
 		<script type="application/javascript">
 			// Enable or disable GA tracking
@@ -49,7 +50,7 @@ new class extends Component {
 
 			gtag('config', '{{ $googleAnalyticsId }}')
 		</script>
-		@else
-			<!-- Google Analytics component mounted -->
-			@endproduction
+	@else
+		<!-- Google Analytics component mounted -->
+	@endif
 </div>

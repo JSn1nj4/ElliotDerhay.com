@@ -1,5 +1,11 @@
 # Changelog
 
+## Version 3.1.1
+
+### Updates
+
+- Prevent Google Analytics component from loading for auth'd users
+
 ## Version 3.1.0
 
 ### New
