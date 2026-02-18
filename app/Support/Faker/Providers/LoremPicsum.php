@@ -5,6 +5,7 @@ namespace App\Support\Faker\Providers;
 use App\DataTransferObjects\QueryParam;
 use App\DataTransferObjects\Result;
 use Faker\Provider\Base;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Number;
 
 class LoremPicsum extends Base
@@ -18,49 +19,20 @@ class LoremPicsum extends Base
 	{
 		$filename ??= str($filepath)->afterLast(DIRECTORY_SEPARATOR);
 
-		// save file route 1: curl_exec
-		if (function_exists('curl_exec')) {
-			// use cURL
-			$fp = fopen($filepath, 'w');
-			$ch = curl_init($url);
-			curl_setopt($ch, CURLOPT_FILE, $fp);
-			curl_setopt($ch, CURLINFO_HEADER_OUT, true);
-
-			$success = curl_exec($ch) && curl_getinfo($ch, CURLINFO_HTTP_CODE) === 200;
-			$result = curl_getinfo($ch); // keep for connection debugging for now
-
-			fclose($fp);
-			curl_close($ch);
-
-			// need to follow redirect
-
-			if (!$success) {
-				unlink($filepath);
-
-				// could not contact the distant URL or HTTP error - fail silently.
-				return new Result(false, ['curlinfo' => $result]);
-			}
-
-			return new Result(true, ['path' => match (true) {
-				$returnFullPath => $filepath,
-				default => $filename,
-			}]);
+		try {
+			$result = Http::sink($filepath)->get($url);
+		} catch (\Throwable $exception) {
+			return new Result(false, errors: [$exception]);
 		}
+		
+		if ($result->successful()) return new Result(true, ['path' => match (true) {
+			$returnFullPath => $filepath,
+			default => $filename,
+		}]);
 
-		// save file route 1: allow_url_fopen
-		if (ini_get('allow_url_fopen')) {
-			// use remote fopen() via copy()
-			$success = copy($url, $filepath);
+		unlink($filename);
 
-			return new Result($success, match (true) {
-				!$success => [], // could not contact the distant URL or HTTP error - fail silently.
-				$returnFullPath => ['path' => $filepath],
-				default => ['path' => $filename],
-			});
-		}
-
-		// unable to contact remote server
-		return new Result(false, errors: [new \RuntimeException('The image formatter downloads an image from a remote HTTP server. Therefore, it requires that PHP can request remote hosts, either via cURL or fopen()')]);
+		return new Result(false, errors: [$result->toException()]);
 	}
 
 	public static function image(
