@@ -1,5 +1,11 @@
 # Changelog
 
+## Version 3.1.2
+
+### New
+
+- Add unschedule button to Post UI
+
 ## Version 3.1.1
 
 ### Updates

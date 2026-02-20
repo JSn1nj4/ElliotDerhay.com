@@ -171,12 +171,51 @@ class PostResource extends Resource
 								->live()
 								->suffixActions([
 									Action::make('Reset')
+										->disabled(static fn ($record) => $record?->status !== PostStatus::Draft)
+										->hidden(static fn ($record) => $record?->status !== PostStatus::Draft)
 										->disabled(static fn ($record) => $record?->status === PostStatus::Published)
 										->icon(Heroicon::ArrowUturnLeft)
 										->action(static fn (Set $set) => $set('schedule_at', null)),
 
+									Action::make('Unschedule')
+										->disabled(static fn ($record) => $record?->status !== PostStatus::Scheduled)
+										->hidden(static fn ($record) => $record?->status !== PostStatus::Scheduled)
+										->icon(Heroicon::OutlinedClock)
+										->color(Color::Slate)
+										->action(static function ($state, $record, Set $set) {
+											if (!$record instanceof Post) {
+												Notification::make('Unschedule')
+													->title('Unscheduling failed')
+													->body('Post has not been created.')
+													->danger()
+													->send();
+
+												return;
+											}
+
+											if ($state === null) {
+												Notification::make('Unschedule')
+													->title('Unscheduling failed')
+													->body('Cannot unschedule a post that has not been scheduled.')
+													->danger()
+													->send();
+
+												return;
+											}
+
+											$record->state()->draft();
+
+											$set('schedule_at', null);
+
+											Notification::make('Unschedule')
+												->title('Post Unscheduled')
+												->success()
+												->send();
+										}),
+
 									Action::make('Schedule')
 										->disabled(static fn ($record) => $record?->status === PostStatus::Published)
+										->hidden(static fn ($record) => $record?->status === PostStatus::Published)
 										->icon(Heroicon::Clock)
 										->color(Color::Amber)
 										->action(static function ($state, $record) {
