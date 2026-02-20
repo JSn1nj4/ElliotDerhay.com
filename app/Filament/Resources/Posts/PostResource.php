@@ -173,7 +173,6 @@ class PostResource extends Resource
 									Action::make('Reset')
 										->disabled(static fn ($record) => $record?->status !== PostStatus::Draft)
 										->hidden(static fn ($record) => $record?->status !== PostStatus::Draft)
-										->disabled(static fn ($record) => $record?->status === PostStatus::Published)
 										->icon(Heroicon::ArrowUturnLeft)
 										->action(static fn (Set $set) => $set('schedule_at', null)),
 
