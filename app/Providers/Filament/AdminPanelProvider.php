@@ -3,6 +3,7 @@
 namespace App\Providers\Filament;
 
 use App\Enums\NavLocation;
+use App\Filament\Pages\EditProfile;
 use App\Filament\Pages\Login;
 use App\Filament\Widgets\CommandLog;
 use App\Filament\Widgets\LastLoginWidget;
@@ -32,6 +33,7 @@ class AdminPanelProvider extends PanelProvider
 			->id('admin')
 			->path(config()->string('filament.admin.path'))
 			->login(Login::class)
+			->profile(EditProfile::class)
 			->globalSearchKeyBindings(['command+k', 'ctrl+k'])
 			->maxContentWidth('full')
 			->colors([

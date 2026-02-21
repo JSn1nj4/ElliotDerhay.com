@@ -22,6 +22,7 @@ use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
+use Filament\Facades\Filament;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Hidden;
@@ -160,6 +161,7 @@ class PostResource extends Resource
 								->columnSpanFull()
 								->hiddenLabel()
 								->seconds(false)
+								->timezone(Filament::auth()?->user()?->timezone ?? 'UTC')
 								->disabled(static fn ($record) => $record?->status === PostStatus::Published)
 								->formatStateUsing(static function ($record) {
 									if (!$record instanceof Post) return null;
