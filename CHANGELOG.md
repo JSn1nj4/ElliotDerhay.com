@@ -1,5 +1,17 @@
 # Changelog
 
+## Version 3.1.2
+
+### New
+
+- Add unschedule button to Post UI
+- Profile editing screen
+- Allow user to set preferred timezone
+
+### Changes
+
+- Use user's preferred timezone for schedule date picker
+
 ## Version 3.1.1
 
 ### Updates
