@@ -36,6 +36,13 @@ return [
 		],
 	],
 
+	'telegram' => [
+		'default-recipient' => env('TELEGRAM_DEFAULT_RECIPIENT'),
+		'recipients' => [
+			'default-user' => env('TELEGRAM_CHAT_ID'),
+		],
+	],
+
 	'telegram-bot-api' => [
 		'token' => env('TELEGRAM_BOT_TOKEN'),
 	],
