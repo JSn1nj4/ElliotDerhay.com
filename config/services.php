@@ -37,9 +37,9 @@ return [
 	],
 
 	'telegram' => [
-		'default-recipient' => env('TELEGRAM_DEFAULT_RECIPIENT'),
+		'default-recipient' => env('TELEGRAM_DEFAULT_RECIPIENT', 'default-chat'),
 		'recipients' => [
-			'default-user' => env('TELEGRAM_CHAT_ID'),
+			'default-chat' => env('TELEGRAM_CHAT_ID'),
 		],
 	],
 
