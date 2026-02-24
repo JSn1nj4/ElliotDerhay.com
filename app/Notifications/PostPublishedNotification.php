@@ -23,8 +23,8 @@ class PostPublishedNotification extends Notification implements ShouldQueue
 	{
 		return TelegramMessage::create()
 			->to($notifiable->telegram_chat_id)
-			->content($this->post->title)
-			->line("Your post has been published!")
+			->content("*Your post has been published!*")
+			->line($this->post->title)
 			->button('View Post', route('blog.show', ['post' => $this->post]));
 	}
 }
