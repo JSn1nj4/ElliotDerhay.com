@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Events\PostPublishedEvent;
 use App\Listeners\CommandLogSubscriber;
+use App\Listeners\SendPostPublishedNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider
@@ -12,7 +14,11 @@ class EventServiceProvider extends ServiceProvider
 	 *
 	 * @var array
 	 */
-	protected $listen = [];
+	protected $listen = [
+		PostPublishedEvent::class => [
+			SendPostPublishedNotification::class,
+		],
+	];
 
 	/**
 	 * Subscribers to handle multiple related events
