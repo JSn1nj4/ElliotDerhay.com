@@ -4,6 +4,7 @@ namespace App\States\Posts;
 
 use App\DataTransferObjects\SocialPostDTO;
 use App\Enums\PostStatus;
+use App\Events\PostPublishedEvent;
 use App\Features\PublishPostToX;
 use App\Jobs\PostToXJob;
 use Carbon\Carbon;
@@ -52,6 +53,8 @@ class PostScheduled extends PostState
 				),
 			);
 		}
+
+		PostPublishedEvent::dispatch($this->post);
 
 		return true;
 	}
