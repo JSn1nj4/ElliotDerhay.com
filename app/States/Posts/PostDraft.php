@@ -18,11 +18,18 @@ class PostDraft extends PostState
 	#[\Override]
 	public function publish(): bool
 	{
+		$previouslyPublished = $this->post->published_at !== null;
+
+		if (!$previouslyPublished) $this->post->published_at = now();
+
 		$this->post->status = PostStatus::Published;
+		$this->post->scheduled_for = null;
 
-		if (!$this->post->published_at) {
-			$this->post->published_at = now();
+		$published = $this->post->save() || parent::publish();
 
+		if (!$published) return false;
+
+		if (!$previouslyPublished) {
 			$postable = $this->post->getPostable();
 
 			PostToXJob::dispatchIf(
@@ -36,9 +43,7 @@ class PostDraft extends PostState
 			);
 		}
 
-		$this->post->scheduled_for = null;
-
-		return $this->post->save() || parent::publish();
+		return true;
 	}
 
 	#[\Override]
