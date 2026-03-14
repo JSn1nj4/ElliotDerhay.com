@@ -22,6 +22,9 @@ use Spatie\Sitemap\Tags\Url as SitemapUrl;
 // standard views
 Route::livewire('/', 'home')->name('home');
 
+Route::get('/content-preview/{previewRef}', [\App\Http\Controllers\PostPreviewController::class, 'show'])
+	->name('content-preview');
+
 Route::livewire('/credits', 'credits')->name('credits');
 
 Route::livewire('/privacy', 'privacy')->name('privacy');

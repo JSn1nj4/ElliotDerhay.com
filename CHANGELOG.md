@@ -1,5 +1,13 @@
 # Changelog
 
+## Version 3.2.0
+
+### New
+
+- JSN-209: Add markdown preview to editor ([#293][pr_293])
+
+[pr_293]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/293
+
 ## Version 3.1.2
 
 ### New

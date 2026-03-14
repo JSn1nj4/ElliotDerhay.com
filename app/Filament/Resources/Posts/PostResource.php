@@ -4,6 +4,7 @@ namespace App\Filament\Resources\Posts;
 
 use App\Actions\StoresImage;
 use App\Enums\PostStatus;
+use App\Filament\Forms\Components\ContentPreview;
 use App\Filament\Forms\Components\ImageViewField;
 use App\Filament\Resources\Categories\RelationManagers\PostsRelationManager as CategoryPostsRelationManager;
 use App\Filament\Resources\Posts\Pages\CreatePost;
@@ -49,6 +50,7 @@ use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Cache;
 use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 use Override;
 
@@ -68,13 +70,25 @@ class PostResource extends Resource
 
 	public string|null $schedule_at = null;
 
+	public static function cacheContentPreview($state, Set $set, $record = null): void
+	{
+		$cache_ref = match (true) {
+			$record instanceof Post => "preview-post_{$record->id}",
+			default => "preview-post_new",
+		};
+
+		Cache::set($cache_ref, $state, ttl()->minutes(15)->get());
+
+		$set('preview_ref', $cache_ref);
+	}
+
 	public static function form(Schema $schema): Schema
 	{
 		return $schema
-			->columns(3)
+			->columns(2)
 			->components([
 				Section::make('Content')
-					->columnSpan(2)
+					->columnSpan(1)
 					->schema([
 						TextInput::make('title')
 							->required()
@@ -102,6 +116,7 @@ class PostResource extends Resource
 								})->toString());
 							})
 							->columnSpanFull(),
+
 						MarkdownEditor::make('body')
 							// TODO: Implement native file uploads using separate image collection - 'content' instead of 'images'?
 							->toolbarButtons([
@@ -119,11 +134,13 @@ class PostResource extends Resource
 								'redo',
 							])
 							->required()
+							->live()
 							->columnSpanFull(),
 					]),
 
 				Group::make([
 					Section::make('Image')
+						->collapsible()
 						->schema([
 							ImageViewField::make('image')
 								->hiddenLabel()
@@ -156,6 +173,7 @@ class PostResource extends Resource
 					Section::make('Schedule')
 						->columns(3)
 						->hiddenOn([CreatePost::class])
+						->collapsible()
 						->schema([
 							DateTimePicker::make('schedule_at')
 								->columnSpanFull()
@@ -260,6 +278,15 @@ class PostResource extends Resource
 												->send();
 										}),
 								]),
+						]),
+
+					Section::make('Preview')
+						->collapsible()
+						->schema([
+							ContentPreview::make('preview_content')
+								->sourceField('body')
+								->hiddenLabel()
+								->live(),
 						]),
 
 					Section::make('Meta')
