@@ -103,6 +103,7 @@ class PostResource extends Resource
 								})->toString());
 							})
 							->columnSpanFull(),
+
 						MarkdownEditor::make('body')
 							// TODO: Implement native file uploads using separate image collection - 'content' instead of 'images'?
 							->toolbarButtons([
@@ -120,6 +121,13 @@ class PostResource extends Resource
 								'redo',
 							])
 							->required()
+							->afterStateHydrated(static function (Set $set, $state) {
+								$set('body_preview', $state);
+							})
+							->afterStateUpdated(static function (Set $set, $state) {
+								$set('body_preview', $state);
+							})
+							->live()
 							->columnSpanFull(),
 					]),
 
