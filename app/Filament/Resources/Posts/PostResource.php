@@ -4,6 +4,7 @@ namespace App\Filament\Resources\Posts;
 
 use App\Actions\StoresImage;
 use App\Enums\PostStatus;
+use App\Filament\Forms\Components\ContentPreview;
 use App\Filament\Forms\Components\ImageViewField;
 use App\Filament\Resources\Categories\RelationManagers\PostsRelationManager as CategoryPostsRelationManager;
 use App\Filament\Resources\Posts\Pages\CreatePost;
@@ -71,10 +72,10 @@ class PostResource extends Resource
 	public static function form(Schema $schema): Schema
 	{
 		return $schema
-			->columns(3)
+			->columns(2)
 			->components([
 				Section::make('Content')
-					->columnSpan(2)
+					->columnSpan(1)
 					->schema([
 						TextInput::make('title')
 							->required()
@@ -124,6 +125,7 @@ class PostResource extends Resource
 
 				Group::make([
 					Section::make('Image')
+						->collapsible()
 						->schema([
 							ImageViewField::make('image')
 								->hiddenLabel()
@@ -156,6 +158,7 @@ class PostResource extends Resource
 					Section::make('Schedule')
 						->columns(3)
 						->hiddenOn([CreatePost::class])
+						->collapsible()
 						->schema([
 							DateTimePicker::make('schedule_at')
 								->columnSpanFull()
@@ -260,6 +263,15 @@ class PostResource extends Resource
 												->send();
 										}),
 								]),
+						]),
+
+					Section::make('Preview')
+						->collapsible()
+						->schema([
+							ContentPreview::make('body_preview')
+								->disabled()
+								->hiddenLabel()
+								->live(),
 						]),
 
 					Section::make('Meta')
