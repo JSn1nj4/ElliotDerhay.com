@@ -50,6 +50,7 @@ use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Cache;
 use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 use Override;
 
@@ -68,6 +69,18 @@ class PostResource extends Resource
 	public int|null $image_id = null;
 
 	public string|null $schedule_at = null;
+
+	public static function cacheContentPreview($state, Set $set, $record = null): void
+	{
+		$cache_ref = match (true) {
+			$record instanceof Post => "preview-post_{$record->id}",
+			default => "preview-post_new",
+		};
+
+		Cache::set($cache_ref, $state, ttl()->minutes(15)->get());
+
+		$set('preview_ref', $cache_ref);
+	}
 
 	public static function form(Schema $schema): Schema
 	{
@@ -121,12 +134,8 @@ class PostResource extends Resource
 								'redo',
 							])
 							->required()
-							->afterStateHydrated(static function (Set $set, $state) {
-								$set('body_preview', $state);
-							})
-							->afterStateUpdated(static function (Set $set, $state) {
-								$set('body_preview', $state);
-							})
+							->afterStateHydrated(self::cacheContentPreview(...))
+							->afterStateUpdated(self::cacheContentPreview(...))
 							->live()
 							->columnSpanFull(),
 					]),
@@ -276,7 +285,7 @@ class PostResource extends Resource
 					Section::make('Preview')
 						->collapsible()
 						->schema([
-							ContentPreview::make('body_preview')
+							ContentPreview::make('preview_ref')
 								->disabled()
 								->hiddenLabel()
 								->live(),
