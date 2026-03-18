@@ -8,7 +8,7 @@ class ContentPreview extends Field
 {
 	protected string $view = 'filament.forms.components.content-preview';
 
-	public function getContent(): string
+	public function getContentPreview(): string
 	{
 		return $this->getState();
 	}

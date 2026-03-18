@@ -6,6 +6,6 @@
 		x-data="{ state: $wire.$entangle(@js($getStatePath())) }"
 		{{ $getExtraAttributeBag() }}
 	>
-		<x-markdown>{!! $getContent() !!}</x-markdown>
+		<iframe src='{{ route('content_preview', ['preview_ref' => $getPreviewRef()]) }}' class='w-full h-128]'></iframe>
 	</div>
 </x-dynamic-component>
