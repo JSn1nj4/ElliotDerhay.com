@@ -134,8 +134,6 @@ class PostResource extends Resource
 								'redo',
 							])
 							->required()
-							// ->afterStateHydrated(fn ($state, Set $set) => $set('preview_content', $state))
-							// ->afterStateUpdated(fn ($state, Set $set) => $set('preview_content', $state))
 							->live()
 							->columnSpanFull(),
 					]),
