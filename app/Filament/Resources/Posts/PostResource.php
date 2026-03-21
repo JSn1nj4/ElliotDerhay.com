@@ -134,8 +134,8 @@ class PostResource extends Resource
 								'redo',
 							])
 							->required()
-							->afterStateHydrated(self::cacheContentPreview(...))
-							->afterStateUpdated(self::cacheContentPreview(...))
+							// ->afterStateHydrated(fn ($state, Set $set) => $set('preview_content', $state))
+							// ->afterStateUpdated(fn ($state, Set $set) => $set('preview_content', $state))
 							->live()
 							->columnSpanFull(),
 					]),
@@ -285,8 +285,8 @@ class PostResource extends Resource
 					Section::make('Preview')
 						->collapsible()
 						->schema([
-							ContentPreview::make('preview_ref')
-								->disabled()
+							ContentPreview::make('preview_content')
+								->sourceField('body')
 								->hiddenLabel()
 								->live(),
 						]),
