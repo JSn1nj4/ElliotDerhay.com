@@ -10,7 +10,13 @@
 
 - Redo post editor layout
 
+### Fixes
+
+- JSN-335: Refresh View Live button URL ([#295][pr_295])
+
 [pr_293]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/293
+
+[pr_295]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/295
 
 ## Version 3.1.2
 
