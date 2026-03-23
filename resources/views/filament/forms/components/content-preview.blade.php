@@ -9,7 +9,10 @@
 		class='h-full'
 		{{ $getExtraAttributeBag() }}
 	>
-		<iframe src="{{ $getRoute() }}" class='w-full min-h-128 h-full'></iframe>
+		<iframe
+			src="{{ $getRoute() }}"
+			class='w-full min-h-128 h-full rounded-lg ring-1 ring-black/20 dark:ring-white/20'
+		></iframe>
 	</div>
 	@php $purgeStalePreview() @endphp
 </x-dynamic-component>
