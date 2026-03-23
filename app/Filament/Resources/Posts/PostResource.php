@@ -4,6 +4,7 @@ namespace App\Filament\Resources\Posts;
 
 use App\Actions\StoresImage;
 use App\Enums\PostStatus;
+use App\Filament\Forms\Components\ContentPreview;
 use App\Filament\Forms\Components\ImageViewField;
 use App\Filament\Resources\Categories\RelationManagers\PostsRelationManager as CategoryPostsRelationManager;
 use App\Filament\Resources\Posts\Pages\CreatePost;
@@ -49,6 +50,7 @@ use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Cache;
 use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 use Override;
 
@@ -68,101 +70,60 @@ class PostResource extends Resource
 
 	public string|null $schedule_at = null;
 
+	public static function cacheContentPreview($state, Set $set, $record = null): void
+	{
+		$cache_ref = match (true) {
+			$record instanceof Post => "preview-post_{$record->id}",
+			default => "preview-post_new",
+		};
+
+		Cache::set($cache_ref, $state, ttl()->minutes(15)->get());
+
+		$set('preview_ref', $cache_ref);
+	}
+
 	public static function form(Schema $schema): Schema
 	{
 		return $schema
-			->columns(3)
+			->columns(['sm' => 1, 'lg' => 2])
 			->components([
-				Section::make('Content')
-					->columnSpan(2)
+				Section::make('Setup')
+					->columnSpanFull()
+					->columns(['sm' => 1, 'lg' => 2])
+					->collapsible()
 					->schema([
-						TextInput::make('title')
-							->required()
-							->maxLength(180)
-							->live(500)
-							->afterStateUpdated(static function (Get $get, Set $set, string|null $state) {
-								$slug = str($get('slug'))->trim();
+						Group::make([
+							TextInput::make('title')
+								->required()
+								->maxLength(180)
+								->live(500)
+								->afterStateUpdated(static function (Get $get, Set $set, string|null $state) {
+									$slug = str($get('slug'))->trim();
 
-								if (!in_array($slug, [null, ''])) return;
+									if (!in_array($slug, [null, ''])) return;
 
-								$set('slug', Sanitizer::slug($state)->toString());
-							})
-							->columnSpanFull(),
+									$set('slug', Sanitizer::slug($state)->toString());
+								}),
 
-						TextInput::make('slug')
-							->required()
-							->unique(ignoreRecord: true)
-							->maxLength(180)
-							->alphaDash()
-							->live(500)
-							->afterStateUpdated(static function (Get $get, Set $set, string|null $state) {
-								$set('slug', Sanitizer::slug(match (trim($state)) {
-									null, '' => $get('title'),
-									default => $state
-								})->toString());
-							})
-							->columnSpanFull(),
-						MarkdownEditor::make('body')
-							// TODO: Implement native file uploads using separate image collection - 'content' instead of 'images'?
-							->toolbarButtons([
-								'bold',
-								'italic',
-								'strike',
-								'link',
-								'heading',
-								'blockquote',
-								'codeBlock',
-								'bulletList',
-								'orderedList',
-								'table',
-								'undo',
-								'redo',
-							])
-							->required()
-							->columnSpanFull(),
-					]),
+							TextInput::make('slug')
+								->required()
+								->unique(ignoreRecord: true)
+								->maxLength(180)
+								->alphaDash()
+								->live(500)
+								->afterStateUpdated(static function (Get $get, Set $set, string|null $state) {
+									$set('slug', Sanitizer::slug(match (trim($state)) {
+										null, '' => $get('title'),
+										default => $state
+									})->toString());
+								}),
 
-				Group::make([
-					Section::make('Image')
-						->schema([
-							ImageViewField::make('image')
-								->hiddenLabel()
-								->hiddenOn('create')
-								->visible(static fn (Post $record) => $record->image !== null),
-
-							FileUpload::make('upload')
-								->hiddenLabel()
-								->image()
-								->maxSize(5 * 1024)
-								->saveUploadedFileUsing(static function (Set $set, TemporaryUploadedFile $state) {
-									$image = StoresImage::execute($state);
-
-									$set('image_id', $image->id);
-								})
-								->reactive(),
-
-							Hidden::make('image_id'),
-						])
-						->saveRelationshipsUsing(static function (Post $post, Get $get) {
-							$image_id = $get('image_id');
-
-							if ($image_id === null) return;
-
-							if (Image::whereId($image_id)->doesntExist()) return;
-
-							$post->images()->sync([$image_id]);
-						}),
-
-					Section::make('Schedule')
-						->columns(3)
-						->hiddenOn([CreatePost::class])
-						->schema([
 							DateTimePicker::make('schedule_at')
-								->columnSpanFull()
-								->hiddenLabel()
+								->label('Schedule')
 								->seconds(false)
 								->timezone(Filament::auth()?->user()?->timezone ?? 'UTC')
 								->disabled(static fn ($record) => $record?->status === PostStatus::Published)
+								->hiddenOn([CreatePost::class])
 								->formatStateUsing(static function ($record) {
 									if (!$record instanceof Post) return null;
 
@@ -260,83 +221,136 @@ class PostResource extends Resource
 												->send();
 										}),
 								]),
-						]),
+						])->columnSpan(1),
 
-					Section::make('Meta')
-						->collapsed(static fn (array $state) => collect($state)
-							->filter(static fn ($item, $key) => match ($key) {
-								'search_title', 'search_description' => true,
-								default => false,
-							})
-							->whereNotNull()
-							->isEmpty())
-						->relationship('searchMeta')
-						->schema([
-							TextInput::make('search_title')
-								->string()
-								->maxLength('180')
-								->mutateDehydratedStateUsing(static fn (string|null $state) => self::sanitize($state))
-								->label('Custom Search Title'),
+						Group::make([
+							ImageViewField::make('image')
+								->label('Current header image')
+								->hiddenOn('create')
+								->visible(static fn (Post $record) => $record->image !== null),
 
-							Textarea::make('search_description')
-								->string()
-								->maxLength('250')
-								->mutateDehydratedStateUsing(static fn (string|null $state) => self::sanitize($state))
-								->label('Custom Search Description'),
-						]),
+							FileUpload::make('upload')
+								->image()
+								->maxSize(5 * 1024)
+								->saveUploadedFileUsing(static function (Set $set, TemporaryUploadedFile $state) {
+									$image = StoresImage::execute($state);
 
-					Section::make('Taxonomies')
-						->collapsed(static fn ($state) => empty([
-							...$state['categories'],
-							...$state['tags']
-						]))
-						->schema([
-							Select::make('categories')
-								->relationship('categories', 'title')
-								->multiple()
-								->createOptionForm([
-									TextInput::make('title')
-										->live(debounce: 500)
-										->string()
-										->maxLength(255)
-										->afterStateUpdated(static function (Set $set, $state) {
-											if ($state === null || strlen($state) === 0) return;
+									$set('image_id', $image->id);
+								})
+								->reactive(),
 
-											$set('slug', Sanitizer::slug($state)->toString());
-										})
-										->mutateDehydratedStateUsing(static fn (string|null $state) => self::sanitize($state)),
-									Hidden::make('slug')
-										->alphaDash()
-										->mutateDehydratedStateUsing(static fn (string|null $state) => self::sanitizeSlug($state)),
-								])
-								->hiddenOn([
-									CategoryPostsRelationManager::class,
-								]),
+							Hidden::make('image_id'),
+						])
+							->columnSpan(1)
+							->saveRelationshipsUsing(static function (Post $post, Get $get) {
+								$image_id = $get('image_id');
 
-							Select::make('tags')
-								->relationship('tags', 'title')
-								->multiple()
-								->createOptionForm([
-									TextInput::make('title')
-										->live(debounce: 500)
-										->string()
-										->maxLength(255)
-										->afterStateUpdated(static function (Set $set, $state) {
-											if ($state === null || strlen($state) === 0) return;
+								if ($image_id === null) return;
 
-											$set('slug', Sanitizer::slug($state)->toString());
-										})
-										->mutateDehydratedStateUsing(static fn (string|null $state) => self::sanitize($state)),
-									Hidden::make('slug')
-										->alphaDash()
-										->mutateDehydratedStateUsing(static fn (string|null $state) => self::sanitizeSlug($state)),
-								])
-								->hiddenOn([
-									TagPostsRelationManager::class,
-								]),
-						]),
-				])
-					->columnSpan(1),
+								if (Image::whereId($image_id)->doesntExist()) return;
+
+								$post->images()->sync([$image_id]);
+							}),
+					]),
+
+				Section::make('Meta')
+					->relationship('searchMeta')
+					->columnSpan(1)
+					->collapsible()
+					->schema([
+						TextInput::make('search_title')
+							->string()
+							->maxLength('180')
+							->mutateDehydratedStateUsing(static fn (string|null $state) => self::sanitize($state))
+							->label('Custom Search Title'),
+
+						Textarea::make('search_description')
+							->string()
+							->maxLength('250')
+							->mutateDehydratedStateUsing(static fn (string|null $state) => self::sanitize($state))
+							->label('Custom Search Description'),
+					]),
+
+				Section::make('Taxonomies')
+					->columnSpan(1)
+					->collapsible()
+					->schema([
+						Select::make('categories')
+							->relationship('categories', 'title')
+							->multiple()
+							->createOptionForm([
+								TextInput::make('title')
+									->live(debounce: 500)
+									->string()
+									->maxLength(255)
+									->afterStateUpdated(static function (Set $set, $state) {
+										if ($state === null || strlen($state) === 0) return;
+
+										$set('slug', Sanitizer::slug($state)->toString());
+									})
+									->mutateDehydratedStateUsing(static fn (string|null $state) => self::sanitize($state)),
+								Hidden::make('slug')
+									->alphaDash()
+									->mutateDehydratedStateUsing(static fn (string|null $state) => self::sanitizeSlug($state)),
+							])
+							->hiddenOn([
+								CategoryPostsRelationManager::class,
+							]),
+
+						Select::make('tags')
+							->relationship('tags', 'title')
+							->multiple()
+							->createOptionForm([
+								TextInput::make('title')
+									->live(debounce: 500)
+									->string()
+									->maxLength(255)
+									->afterStateUpdated(static function (Set $set, $state) {
+										if ($state === null || strlen($state) === 0) return;
+
+										$set('slug', Sanitizer::slug($state)->toString());
+									})
+									->mutateDehydratedStateUsing(static fn (string|null $state) => self::sanitize($state)),
+								Hidden::make('slug')
+									->alphaDash()
+									->mutateDehydratedStateUsing(static fn (string|null $state) => self::sanitizeSlug($state)),
+							])
+							->hiddenOn([
+								TagPostsRelationManager::class,
+							]),
+					]),
+
+				Section::make('Content')
+					->columnSpanFull()
+					->columns(['sm' => 1, 'lg' => 2])
+					->collapsible()
+					->schema([
+						MarkdownEditor::make('body')
+							// TODO: Implement native file uploads using separate image collection - 'content' instead of 'images'?
+							->toolbarButtons([
+								'bold',
+								'italic',
+								'strike',
+								'link',
+								'heading',
+								'blockquote',
+								'codeBlock',
+								'bulletList',
+								'orderedList',
+								'table',
+								'undo',
+								'redo',
+							])
+							->columnSpan(1)
+							->required()
+							->live(),
+
+						ContentPreview::make('preview_content')
+							->sourceField('body')
+							->columnSpan(1)
+							->label('Preview')
+							->live(),
+					]),
 			]);
 	}
 
