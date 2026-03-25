@@ -3,6 +3,7 @@
 use App\View\Renderers\Markdown\Blocks\BlockQuoteRenderer;
 use App\View\Renderers\Markdown\Blocks\FencedCodeRenderer;
 use App\View\Renderers\Markdown\Blocks\HeadingRenderer;
+use App\View\Renderers\Markdown\Blocks\ListBlockRenderer;
 use App\View\Renderers\Markdown\Blocks\ListItemRenderer;
 use App\View\Renderers\Markdown\Blocks\ParagraphRenderer;
 use App\View\Renderers\Markdown\Blocks\ThematicBreakRenderer;
@@ -12,6 +13,7 @@ use App\View\Renderers\Markdown\Inline\LinkRenderer;
 use League\CommonMark\Extension\CommonMark\Node\Block\BlockQuote;
 use League\CommonMark\Extension\CommonMark\Node\Block\FencedCode;
 use League\CommonMark\Extension\CommonMark\Node\Block\Heading;
+use League\CommonMark\Extension\CommonMark\Node\Block\ListBlock;
 use League\CommonMark\Extension\CommonMark\Node\Block\ListItem;
 use League\CommonMark\Extension\CommonMark\Node\Block\ThematicBreak;
 use League\CommonMark\Extension\CommonMark\Node\Inline\Code;
@@ -90,6 +92,7 @@ return [
 	'block_renderers' => [
 		['class' => BlockQuote::class, 'renderer' => new BlockQuoteRenderer(), 'priority' => 1],
 		['class' => Heading::class, 'renderer' => new HeadingRenderer(), 'priority' => 1],
+		['class' => ListBlock::class, 'renderer' => new ListBlockRenderer(), 'priority' => 1],
 		['class' => ListItem::class, 'renderer' => new ListItemRenderer(), 'priority' => 1],
 		['class' => Paragraph::class, 'renderer' => new ParagraphRenderer(), 'priority' => 1],
 		['class' => ThematicBreak::class, 'renderer' => new ThematicBreakRenderer(), 'priority' => 1],
