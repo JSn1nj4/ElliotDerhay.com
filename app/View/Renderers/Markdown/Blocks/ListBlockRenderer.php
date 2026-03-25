@@ -23,7 +23,7 @@ class ListBlockRenderer implements NodeRendererInterface, XmlNodeRendererInterfa
 
 		$attrs = array_merge($node->data->get('attributes'), match (true) {
 			$node->parent() instanceof ListItem => [],
-			default => ['class' => 'mb-8'],
+			default => ['class' => 'not-last:mb-8'],
 		});
 
 		return new HtmlElement(match ($node->getListData()->type) {
