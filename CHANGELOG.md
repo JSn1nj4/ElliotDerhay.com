@@ -1,5 +1,11 @@
 # Changelog
 
+## Version 3.2.1
+
+### Changes
+
+- Add margin at end of markdown list
+
 ## Version 3.2.0
 
 ### New
