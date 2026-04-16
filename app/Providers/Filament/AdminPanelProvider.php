@@ -8,6 +8,7 @@ use App\Filament\Pages\Login;
 use App\Filament\Widgets\CommandLog;
 use App\Filament\Widgets\LastLoginWidget;
 use App\Filament\Widgets\LatestPosts;
+use Croustibat\FilamentJobsMonitor\FilamentJobsMonitorPlugin;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
@@ -94,6 +95,10 @@ class AdminPanelProvider extends PanelProvider
 			])
 			->authMiddleware([
 				Authenticate::class,
+			])
+			->plugins([
+				FilamentJobsMonitorPlugin::make()
+					->navigationGroup('Administration'),
 			])
 			->bootUsing(function (Panel $panel) {
 				$panel->navigationItems(nav(NavLocation::AdminNavBar)

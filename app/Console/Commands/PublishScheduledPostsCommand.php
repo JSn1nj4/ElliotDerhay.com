@@ -2,10 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Enums\PostStatus;
 use App\Jobs\PublishScheduledPostsJob;
-use App\Models\Post;
-use App\Models\Scopes\PostPublishedScope;
 use Illuminate\Console\Command;
 
 class PublishScheduledPostsCommand extends Command
@@ -16,23 +13,9 @@ class PublishScheduledPostsCommand extends Command
 
 	public function handle(): int
 	{
-		$this->info("Checking for scheduled posts...");
-
 		$time = now();
 
-		$this->line("The time is currently: {$time}");
-
-		$count = Post::withoutGlobalScope(PostPublishedScope::class)
-			->where('status', PostStatus::Scheduled)
-			->where('scheduled_for', '<=', $time)
-			->count();
-
-		$this->line("Found {$count} scheduled jobs ready to publish.");
-
-		if ($count === 0) {
-			$this->info("Aborting...");
-			return self::SUCCESS;
-		}
+		$this->line("{$time}: Prepareing to process scheduled posts.");
 
 		if ($this->option('skip-queue')) {
 			$this->info("Processing scheduled jobs now...");
