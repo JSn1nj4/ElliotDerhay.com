@@ -1,5 +1,13 @@
 # Changelog
 
+## Version 3.3.0
+
+### Fixes
+
+- Remove duplicate post scheduling check
+	- Remove this responsibility from command; command now only dispatches job
+	- Prevent post scheduling job overlapping
+
 ## Version 3.2.1
 
 ### Changes

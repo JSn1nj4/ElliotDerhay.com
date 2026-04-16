@@ -7,6 +7,7 @@ use App\Models\Post;
 use App\Models\Scopes\PostPublishedScope;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Queue\Middleware\WithoutOverlapping;
 
 class PublishScheduledPostsJob extends BaseQueueableJob
 {
@@ -35,5 +36,12 @@ class PublishScheduledPostsJob extends BaseQueueableJob
 				/** @var Post $post */
 				foreach ($posts as $post) $post->state()->publish();
 			});
+	}
+
+	public function middleware(): array
+	{
+		return [
+			new WithoutOverlapping(),
+		];
 	}
 }
