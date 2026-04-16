@@ -2,6 +2,10 @@
 
 ## Version 3.3.0
 
+### New
+
+- Add Job monitoring to admin panel
+
 ### Fixes
 
 - Remove duplicate post scheduling check
