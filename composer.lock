@@ -743,16 +743,16 @@
         },
         {
             "name": "croustibat/filament-jobs-monitor",
-            "version": "v4.4.0",
+            "version": "v4.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ultraviolettes/filament-jobs-monitor.git",
-                "reference": "e3dcf7f5d6d8c72aafc8f01c536ddf541382ff87"
+                "reference": "a077f03dc5d6fd6dde7e87ec19d5a3c65e199190"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ultraviolettes/filament-jobs-monitor/zipball/e3dcf7f5d6d8c72aafc8f01c536ddf541382ff87",
-                "reference": "e3dcf7f5d6d8c72aafc8f01c536ddf541382ff87",
+                "url": "https://api.github.com/repos/ultraviolettes/filament-jobs-monitor/zipball/a077f03dc5d6fd6dde7e87ec19d5a3c65e199190",
+                "reference": "a077f03dc5d6fd6dde7e87ec19d5a3c65e199190",
                 "shasum": ""
             },
             "require": {
@@ -807,7 +807,7 @@
             ],
             "support": {
                 "issues": "https://github.com/ultraviolettes/filament-jobs-monitor/issues",
-                "source": "https://github.com/ultraviolettes/filament-jobs-monitor/tree/v4.4.0"
+                "source": "https://github.com/ultraviolettes/filament-jobs-monitor/tree/v4.4.1"
             },
             "funding": [
                 {
@@ -815,7 +815,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-04-13T11:28:23+00:00"
+            "time": "2026-04-20T12:39:32+00:00"
         },
         {
             "name": "danharrin/date-format-converter",
