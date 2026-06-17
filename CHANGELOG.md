@@ -1,5 +1,16 @@
 # Changelog
 
+## Version 3.4.0
+
+### New
+
+- Replace Mailjet with Resend
+
+### Updates
+
+- Update to Laravel 13
+- Composer packages and Node packages
+
 ## Version 3.3.0
 
 ### New

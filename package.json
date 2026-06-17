@@ -5,7 +5,7 @@
 	"type": "module",
 	"license": "MIT",
 	"engines": {
-		"node": "^22.21.x",
+		"node": "^24.15.x",
 		"pnpm": "^10.0.x"
 	},
 	"repository": {
@@ -21,21 +21,21 @@
 	},
 	"devDependencies": {
 		"@tailwindcss/forms": "^0.5.11",
-		"@tailwindcss/typography": "^0.5.19",
-		"@tailwindcss/vite": "^4.1.18",
-		"@types/node": "^25.0.3",
-		"axios": "^1.13.2",
-		"dotenv": "^17.2.3",
-		"laravel-vite-plugin": "^2.0.1",
-		"playwright": "^1.57.0",
-		"tailwindcss": "^4.1.18",
+		"@tailwindcss/typography": "^0.5.20",
+		"@tailwindcss/vite": "^4.3.2",
+		"@types/node": "^25.9.4",
+		"axios": "^1.18.1",
+		"dotenv": "^17.4.2",
+		"laravel-vite-plugin": "^2.1.0",
+		"playwright": "^1.61.1",
+		"tailwindcss": "^4.3.2",
 		"tippy.js": "^6.3.7",
 		"typescript": "^5.9.3",
-		"vite": "^7.3.0"
+		"vite": "^7.3.6"
 	},
 	"dependencies": {
-		"@alpinejs/csp": "^3.15.3",
-		"date-fns": "^4.1.0"
+		"@alpinejs/csp": "^3.15.12",
+		"date-fns": "^4.4.0"
 	},
 	"peerDependencies": {
 		"@babel/core": "^7.15.8",

@@ -7,5 +7,5 @@ return [
 	App\Providers\FeatureServiceProvider::class,
 	App\Providers\Filament\AdminPanelProvider::class,
 	App\Providers\NavigationProvider::class,
-	\Mailjet\LaravelMailjet\MailjetServiceProvider::class,
+	\Resend\Laravel\ResendServiceProvider::class,
 ];
