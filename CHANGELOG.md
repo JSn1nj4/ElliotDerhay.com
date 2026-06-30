@@ -1,5 +1,11 @@
 # Changelog
 
+## Version 3.4.1
+
+### Development
+
+- Fix changelog entries
+
 ## Version 3.4.0
 
 ### New
@@ -10,6 +16,14 @@
 
 - Update to Laravel 13
 - Composer packages and Node packages
+
+### Fixes
+
+- Jobs monitor details popup errors out
+
+### Development
+
+- Increase `pnpm` minimum release age
 
 ## Version 3.3.0
 
