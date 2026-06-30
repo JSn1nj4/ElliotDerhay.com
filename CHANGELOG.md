@@ -1,5 +1,12 @@
 # Changelog
 
+## Version 3.4.2
+
+### Fix
+
+- Remove a leftover alias for a Mailjet class
+- Explicitly mark some classes that may be cached
+
 ## Version 3.4.1
 
 ### Development
