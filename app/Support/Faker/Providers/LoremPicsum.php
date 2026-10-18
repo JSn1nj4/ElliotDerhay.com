@@ -20,7 +20,9 @@ class LoremPicsum extends Base
 		$filename ??= str($filepath)->afterLast(DIRECTORY_SEPARATOR);
 
 		try {
-			$result = Http::sink($filepath)->get($url);
+			$result = Http::sink($filepath)
+				->withoutRedirecting()
+				->get($url);
 		} catch (\Throwable $exception) {
 			return new Result(false, errors: [$exception]);
 		}
@@ -30,9 +32,15 @@ class LoremPicsum extends Base
 			default => $filename,
 		}]);
 
-		unlink($filepath);
+		if (file_exists($filepath)) {
+			unlink($filepath);
+		}
 
-		return new Result(false, errors: [$result->toException()]);
+		return new Result(false, [
+			'status' => $result->status(),
+			'location' => $result->header('Location'),
+			'response' => $result,
+		], errors: [$result->toException()]);
 	}
 
 	public static function image(
@@ -148,20 +156,16 @@ class LoremPicsum extends Base
 		throw new \RuntimeException('Unable to resolve return value.');
 	}
 
-	protected static function maybeRetry(Result $old_result, callable|\Closure $retry): Result
+	protected static function maybeRetry(Result $oldResult, callable|\Closure $retry): Result
 	{
-		$curlinfo = $old_result->data['curlinfo'];
+		if (($oldResult->data['status'] ?? null) !== 302) return $oldResult;
 
-		if ($curlinfo === null) return $old_result;
+		$redirectUrl = $oldResult->data['location'] ?? null;
 
-		if ($curlinfo['http_code'] !== 302) return $old_result;
+		if (!is_string($redirectUrl) || $redirectUrl === '') return $oldResult;
 
-		$redirect_url = $curlinfo['redirect_url'];
+		$matched = preg_match('/^https:\/\/(fastly\.)?picsum\.photos\/.*$/', $redirectUrl);
 
-		if ($redirect_url === null) return $old_result;
-
-		$matched = preg_match('/^https:\/\/(fastly\.)?picsum\.photos\/.*$/', $redirect_url);
-
-		return !!$matched ? $retry($redirect_url) : $old_result;
+		return !!$matched ? $retry($redirectUrl) : $oldResult;
 	}
 }
