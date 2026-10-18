@@ -104,4 +104,18 @@ return [
 
 	'prefix' => env('CACHE_PREFIX', Str::slug(env('APP_NAME', 'laravel'), '_') . '_cache_'),
 
+	// explicitly serializable objects
+	'serializable_classes' => [
+		\App\View\Renderers\Markdown\Blocks\BlockQuoteRenderer::class,
+		\App\View\Renderers\Markdown\Blocks\FencedCodeRenderer::class,
+		\App\View\Renderers\Markdown\Blocks\HeadingRenderer::class,
+		\App\View\Renderers\Markdown\Blocks\ListBlockRenderer::class,
+		\App\View\Renderers\Markdown\Blocks\ListItemRenderer::class,
+		\App\View\Renderers\Markdown\Blocks\ParagraphRenderer::class,
+		\App\View\Renderers\Markdown\Blocks\ThematicBreakRenderer::class,
+		\App\View\Renderers\Markdown\Inline\CaptionableImageRenderer::class,
+		\App\View\Renderers\Markdown\Inline\CodeRenderer::class,
+		\App\View\Renderers\Markdown\Inline\LinkRenderer::class,
+	],
+
 ];

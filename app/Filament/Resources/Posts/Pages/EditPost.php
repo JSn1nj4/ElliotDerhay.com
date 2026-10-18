@@ -29,7 +29,7 @@ class EditPost extends EditRecord
 				->outlined()
 				->icon('o-arrow-top-right-on-square')
 				->iconPosition(IconPosition::After)
-				->url(route('blog.show', ['post' => $this->getRecord()]))
+				->url(fn () => route('blog.show', ['post' => $this->getRecord()]))
 				->openUrlInNewTab(),
 
 			...$this->publishActions(),

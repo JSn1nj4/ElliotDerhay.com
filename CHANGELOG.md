@@ -1,5 +1,85 @@
 # Changelog
 
+## Version 3.4.2
+
+### Fix
+
+- Remove a leftover alias for a Mailjet class
+- Explicitly mark some classes that may be cached
+
+## Version 3.4.1
+
+### Development
+
+- Fix changelog entries
+
+## Version 3.4.0
+
+### New
+
+- Replace Mailjet with Resend
+
+### Updates
+
+- Update to Laravel 13
+- Composer packages and Node packages
+
+### Fixes
+
+- Jobs monitor details popup errors out
+
+### Development
+
+- Increase `pnpm` minimum release age
+
+## Version 3.3.0
+
+### New
+
+- Add Job monitoring to admin panel
+
+### Fixes
+
+- Remove duplicate post scheduling check
+	- Remove this responsibility from command; command now only dispatches job
+	- Prevent post scheduling job overlapping
+
+## Version 3.2.1
+
+### Changes
+
+- Add margin at end of markdown list
+
+## Version 3.2.0
+
+### New
+
+- JSN-209: Add markdown preview to editor ([#293][pr_293])
+
+### Changes
+
+- Redo post editor layout
+
+### Fixes
+
+- JSN-335: Refresh View Live button URL ([#295][pr_295])
+
+[pr_293]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/293
+
+[pr_295]: https://github.com/JSn1nj4/ElliotDerhay.com/pull/295
+
+## Version 3.1.2
+
+### New
+
+- Add unschedule button to Post UI
+- Profile editing screen
+- Allow user to set preferred timezone
+
+### Changes
+
+- Use user's preferred timezone for schedule date picker
+
 ## Version 3.1.1
 
 ### Updates

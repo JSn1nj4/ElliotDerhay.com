@@ -180,8 +180,4 @@ return [
 	| the aliases are "lazy" loaded so they don't hinder performance.
 	|
 	*/
-
-	'aliases' => \Illuminate\Support\Facades\Facade::defaultAliases()->merge([
-		'Mailjet' => \Mailjet\LaravelMailjet\Facades\Mailjet::class,
-	])->toArray(),
 ];

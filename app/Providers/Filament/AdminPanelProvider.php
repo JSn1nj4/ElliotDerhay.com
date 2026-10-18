@@ -3,10 +3,12 @@
 namespace App\Providers\Filament;
 
 use App\Enums\NavLocation;
+use App\Filament\Pages\EditProfile;
 use App\Filament\Pages\Login;
 use App\Filament\Widgets\CommandLog;
 use App\Filament\Widgets\LastLoginWidget;
 use App\Filament\Widgets\LatestPosts;
+use Croustibat\FilamentJobsMonitor\FilamentJobsMonitorPlugin;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
@@ -32,6 +34,7 @@ class AdminPanelProvider extends PanelProvider
 			->id('admin')
 			->path(config()->string('filament.admin.path'))
 			->login(Login::class)
+			->profile(EditProfile::class)
 			->globalSearchKeyBindings(['command+k', 'ctrl+k'])
 			->maxContentWidth('full')
 			->colors([
@@ -63,6 +66,7 @@ class AdminPanelProvider extends PanelProvider
 				],
 			])
 			->favicon(static fn () => asset_url("favicon-2026.png"))
+			->sidebarCollapsibleOnDesktop()
 			->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
 			->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
 			->navigationGroups([
@@ -91,6 +95,10 @@ class AdminPanelProvider extends PanelProvider
 			])
 			->authMiddleware([
 				Authenticate::class,
+			])
+			->plugins([
+				FilamentJobsMonitorPlugin::make()
+					->navigationGroup('Administration'),
 			])
 			->bootUsing(function (Panel $panel) {
 				$panel->navigationItems(nav(NavLocation::AdminNavBar)

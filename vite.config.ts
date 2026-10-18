@@ -13,6 +13,7 @@ export default defineConfig(({mode}) => {
 				input: [
 					'resources/css/app.css',
 					'resources/js/app.ts',
+					'resources/js/preview.ts',
 					'resources/css/filament/admin/theme.css',
 					// component-specific resources
 					'resources/js/blade-components/cookie-popup.ts',
