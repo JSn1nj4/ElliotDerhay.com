@@ -24,13 +24,13 @@ class LoremPicsum extends Base
 		} catch (\Throwable $exception) {
 			return new Result(false, errors: [$exception]);
 		}
-		
+
 		if ($result->successful()) return new Result(true, ['path' => match (true) {
 			$returnFullPath => $filepath,
 			default => $filename,
 		}]);
 
-		unlink($filename);
+		unlink($filepath);
 
 		return new Result(false, errors: [$result->toException()]);
 	}
